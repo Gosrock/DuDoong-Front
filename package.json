@@ -1,0 +1,31 @@
+{
+  "name": "gosrock-front",
+  "packageManager": "yarn@3.3.0",
+  "workspaces": [
+    "apps/*",
+    "shared/*"
+  ],
+  "scripts": {
+    "admin": "yarn workspace admin dev ",
+    "ticket": "yarn workspace ticket dev "
+  },
+  "devDependencies": {
+    "@types/eslint": "^8",
+    "@types/node": "^18.11.16",
+    "@types/react": "^18.0.26",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "^8.30.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "latest",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "resolutions": {
+    "webpack": "5",
+    "@storybook/core-common/webpack": "^5",
+    "@storybook/core-server/webpack": "^5",
+    "@storybook/react/webpack": "^5"
+  }
+}

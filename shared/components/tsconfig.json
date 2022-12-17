@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "inlineSources": false,
+    "sourceMap": false,
+    "outDir": "./dist",
+    "noUncheckedIndexedAccess": true,
+    "jsx": "react-jsx",
+
+    "composite": true,
+    "declaration": true
+  },
+  "include": ["src"]
+}
