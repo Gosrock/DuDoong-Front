@@ -7,7 +7,8 @@
   ],
   "scripts": {
     "admin": "yarn workspace admin dev ",
-    "ticket": "yarn workspace ticket dev "
+    "ticket": "yarn workspace ticket dev ",
+    "storybook": "yarn workspace @gosrock/components storybook"
   },
   "devDependencies": {
     "@types/eslint": "^8",
