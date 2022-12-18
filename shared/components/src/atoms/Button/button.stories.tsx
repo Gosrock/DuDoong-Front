@@ -11,4 +11,4 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const _default = Template.bind({});
-_default.args = {};
+_default.args = { children: 'button' };
