@@ -2,7 +2,7 @@ name: Build & Deploy Storybook
 on:
   push:
     branches: [dev]
-    paths: ['shared/components/src/**']
+    # paths: ['shared/components/src/**']
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
         # This needs an Acces Token stored as "GH_TOKEN" 👇
         run: |
           cd shared/components
-          npm install
-          npm run deploy-storybook -- --ci
+          yarn install
+          yarn run deploy-storybook -- --ci
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
