@@ -9,7 +9,7 @@ COPY yarn.lock ./
 # Installs all node packages
 # RUN npm ci 
 RUN npm install yarn --global --force
-RUN yarn install --frozen-lockfile
+RUN yarn install --immutable --immutable-cache --check-cache
 
 
 # Copies everything over to Docker environment
