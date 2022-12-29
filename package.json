@@ -8,6 +8,9 @@
   "scripts": {
     "admin": "yarn workspace admin dev ",
     "ticket": "yarn workspace ticket dev ",
+    "admin:build": "yarn workspace admin build",
+    "ticket:build": "yarn workspace ticket build",
+    "ticket:start": "yarn workspace ticket start",
     "storybook": "yarn workspace @gosrock/components storybook"
   },
   "devDependencies": {

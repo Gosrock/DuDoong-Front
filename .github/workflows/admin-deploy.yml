@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/admin/Dockerfile.prod
+          file: ./Dockerfile.admin
           platforms: linux/amd64
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
