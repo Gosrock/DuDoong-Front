@@ -29,7 +29,7 @@ COPY ./nginx/admin.conf /etc/nginx/conf.d/default.conf
 # Remove default nginx static resources
 RUN rm -rf ./usr/share/nginx/html/*
 # Copies static resources from builder stage
-COPY --from=builder /app/build /usr/share/nginx/html/
+COPY --from=builder /app/apps/admin/dist /usr/share/nginx/html/
 # Containers run nginx with global directives and daemon off
 EXPOSE 3100
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
