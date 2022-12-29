@@ -1,8 +1,8 @@
 name: Docker
 on:
   push:
-    #branches: [dev]
-    # paths: ['apps/ticket/src/**']
+    branches: [dev]
+    paths: ['apps/admin/src/**']
     # Publish semver tags as releases.
     tags: ['v*.*.*']
 
@@ -23,7 +23,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: david0218/dudung-front
+          images: david0218/dudung-ticket
           tag-semver: |
             {{version}}
             {{major}}.{{minor}}
@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./apps/ticket/Dockerfile.prod
+          file: ./Dockerfile.ticket
           platforms: linux/amd64
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
