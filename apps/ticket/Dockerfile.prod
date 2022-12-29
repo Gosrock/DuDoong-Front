@@ -24,7 +24,7 @@ FROM nginx:1.19.0
 #copies React to the container directory
 # Set working directory to nginx resources directory
 # WORKDIR /usr/share/nginx/html
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./apps/ticket/nginx/default.conf /etc/nginx/conf.d/default.conf
 # Remove default nginx static resources
 RUN rm -rf ./usr/share/nginx/html/*
 # Copies static resources from builder stage
