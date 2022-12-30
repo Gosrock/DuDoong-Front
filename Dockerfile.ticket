@@ -8,13 +8,17 @@ COPY package.json ./
 COPY yarn.lock ./
 
 RUN mkdir -p apps/ticket
+RUN mkdir -p shared/components
 COPY ./apps/ticket/package.json ./apps/ticket/
+COPY ./shared/components/package.json ./shared/components
+
 # Installs all node packages
 # RUN npm ci 
 RUN npm install yarn --global --force
 RUN yarn install --immutable --immutable-cache --check-cache
 
 COPY ./apps/ticket ./apps/ticket/
+COPY ./shared/components ./shared/components
 
 # Copies everything over to Docker environment
 # RUN npm run build
