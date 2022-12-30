@@ -9,14 +9,14 @@ COPY yarn.lock ./
 # Installs all node packages
 # RUN npm ci 
 RUN npm install yarn --global --force
-RUN yarn install --immutable --immutable-cache --check-cache --production
+RUN yarn install --immutable --immutable-cache --check-cache
 
 
 # Copies everything over to Docker environment
 COPY . ./
 RUN rm -rf apps/admin
 
-RUN yarn install --production
+RUN yarn install
 # RUN npm run build
 RUN yarn ticket:build
 RUN rm -rf apps/ticket/.next/cache
