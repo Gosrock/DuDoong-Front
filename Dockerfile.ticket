@@ -14,7 +14,7 @@ RUN yarn install --immutable --immutable-cache --check-cache
 
 # Copies everything over to Docker environment
 COPY . ./
-RUN rm -lf apps/admin
+RUN rm -rf apps/admin
 
 RUN yarn install --immutable
 # RUN npm run build
