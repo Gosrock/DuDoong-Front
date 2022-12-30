@@ -29,7 +29,6 @@ RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
 COPY --from=builder /app/yarn.lock ./
-COPY --from=builder /app/apps/ticket/yarn.lock ./apps/ticket
 COPY --from=builder /app/apps/ticket/public ./apps/ticket/
 COPY --from=builder /app/apps/ticket/next.config.js ./apps/ticket
 
