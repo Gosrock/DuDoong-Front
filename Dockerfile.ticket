@@ -17,7 +17,7 @@ COPY ./shared/components/package.json ./shared/components
 # RUN npm ci 
 RUN npm install yarn --global --forc
 RUN yarn set version berry
-RUN yarn install --immutable --immutable-cache --check-cache
+RUN yarn install --immutable
 
 COPY ./apps/ticket ./apps/ticket/
 COPY ./shared/components ./shared/components
