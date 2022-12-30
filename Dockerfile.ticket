@@ -1,4 +1,4 @@
-FROM node:16 AS builder
+FROM node:16-alpine AS builder
 # set working directory
 WORKDIR /app
 # install app dependencies
@@ -9,17 +9,17 @@ COPY yarn.lock ./
 # Installs all node packages
 # RUN npm ci 
 RUN npm install yarn --global --force
-RUN yarn install --immutable --immutable-cache --check-cache
+RUN yarn install --immutable --immutable-cache --check-cache --production
 
 
 # Copies everything over to Docker environment
 COPY . ./
 RUN rm -rf apps/admin
 
-RUN yarn install
+RUN yarn install --production
 # RUN npm run build
 RUN yarn ticket:build
-RUN rm -rf ./.next/cache
+RUN rm -rf apps/ticket/.next/cache
 
 #Stage 2
 #######################################
