@@ -21,22 +21,6 @@ RUN yarn install
 RUN yarn ticket:build
 RUN rm -rf apps/ticket/.next/cache
 
-FROM node:16-alpine
-WORKDIR /app
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-USER nextjs
-
-COPY --from=builder /app/yarn.lock ./
-COPY --from=builder /app/apps/ticket/public ./apps/ticket/
-COPY --from=builder /app/apps/ticket/next.config.js ./apps/ticket
-
-# Set mode "standalone" in file "next.config.js"
-COPY --from=builder /app/apps/ticket/.next/standalone ./apps/ticket
-COPY --from=builder /app/apps/ticket/.next/static ./apps/ticket/.next/static
-
-
 #Stage 2
 #######################################
 #pull the official nginx:1.19.0 base image
