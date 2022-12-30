@@ -6,7 +6,7 @@ WORKDIR /app
 # COPY package-lock.json ./
 COPY package.json ./
 COPY yarn.lock ./
-COPY .yarn ./.yarn
+COPY .yarn ./
 
 RUN mkdir -p apps/ticket
 RUN mkdir -p shared/components
