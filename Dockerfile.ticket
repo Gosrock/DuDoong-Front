@@ -6,15 +6,15 @@ WORKDIR /app
 # COPY package-lock.json ./
 COPY package.json ./
 COPY yarn.lock ./
+COPY ./apps/ticket/package.json ./apps/ticket
 # Installs all node packages
 # RUN npm ci 
 RUN npm install yarn --global --force
 RUN yarn install --immutable --immutable-cache --check-cache
 
+COPY ./apps/ticket ./apps/ticket
 
 # Copies everything over to Docker environment
-COPY . ./
-RUN yarn install --immutable
 # RUN npm run build
 RUN yarn ticket:build
 
