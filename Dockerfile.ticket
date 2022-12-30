@@ -28,14 +28,14 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
-COPY --from=BUILD /app/yarn.lock ./
-COPY --from=BUILD /app/apps/ticket/yarn.lock ./apps/ticket
-COPY --from=BUILD /app/apps/ticket/public ./apps/ticket/public
-COPY --from=BUILD /app/apps/ticket/next.config.js ./apps/ticket
+COPY --from=builder /app/yarn.lock ./
+COPY --from=builder /app/apps/ticket/yarn.lock ./apps/ticket
+COPY --from=builder /app/apps/ticket/public ./apps/ticket/
+COPY --from=builder /app/apps/ticket/next.config.js ./apps/ticket
 
 # Set mode "standalone" in file "next.config.js"
-COPY --from=BUILD /app/apps/ticket/.next/standalone ./apps/ticket
-COPY --from=BUILD /app/apps/ticket/.next/static ./apps/ticket/.next/static
+COPY --from=builder /app/apps/ticket/.next/standalone ./apps/ticket
+COPY --from=builder /app/apps/ticket/.next/static ./apps/ticket/.next/static
 
 
 #Stage 2
