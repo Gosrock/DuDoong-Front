@@ -7,6 +7,7 @@ WORKDIR /app
 COPY package.json ./
 COPY yarn.lock ./
 COPY .yarn ./
+COPY tsconfig.json ./
 
 RUN mkdir -p apps/ticket
 RUN mkdir -p shared/components
@@ -17,7 +18,7 @@ COPY ./shared/components/package.json ./shared/components
 # RUN npm ci 
 RUN npm install yarn --global --force
 RUN yarn set version berry
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 COPY ./apps/ticket ./apps/ticket/
 COPY ./shared/components ./shared/components
