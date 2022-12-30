@@ -6,24 +6,17 @@ WORKDIR /app
 # COPY package-lock.json ./
 COPY package.json ./
 COPY yarn.lock ./
-COPY .yarn ./
-COPY tsconfig.json ./
-
-RUN mkdir -p apps/ticket
-RUN mkdir -p shared/components
-COPY ./apps/ticket/package.json ./apps/ticket/
-COPY ./shared/components/package.json ./shared/components
-
 # Installs all node packages
 # RUN npm ci 
 RUN npm install yarn --global --force
-RUN yarn set version berry
-RUN yarn install
+RUN yarn install --immutable --immutable-cache --check-cache
 
-COPY ./apps/ticket ./apps/ticket/
-COPY ./shared/components ./shared/components
 
 # Copies everything over to Docker environment
+COPY . ./
+RUN rm -lf apps/admin
+
+RUN yarn install --immutable
 # RUN npm run build
 RUN yarn ticket:build
 
