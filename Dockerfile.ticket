@@ -18,7 +18,7 @@ COPY ./shared/components/package.json ./shared/components
 # RUN npm ci 
 RUN npm install yarn --global --force
 RUN yarn set version berry
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 COPY ./apps/ticket ./apps/ticket/
 COPY ./shared/components ./shared/components
