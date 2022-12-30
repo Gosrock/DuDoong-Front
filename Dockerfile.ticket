@@ -19,6 +19,7 @@ RUN rm -rf apps/admin
 RUN yarn install
 # RUN npm run build
 RUN yarn ticket:build
+RUN rm -rf ./.next/cache
 
 #Stage 2
 #######################################
