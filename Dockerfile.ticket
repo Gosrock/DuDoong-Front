@@ -6,6 +6,7 @@ WORKDIR /app
 # COPY package-lock.json ./
 COPY package.json ./
 COPY yarn.lock ./
+COPY .yarn ./.yarn
 
 RUN mkdir -p apps/ticket
 RUN mkdir -p shared/components
@@ -14,7 +15,8 @@ COPY ./shared/components/package.json ./shared/components
 
 # Installs all node packages
 # RUN npm ci 
-RUN npm install yarn --global --force
+RUN npm install yarn --global --forc
+RUN yarn set version berry
 RUN yarn install --immutable --immutable-cache --check-cache
 
 COPY ./apps/ticket ./apps/ticket/
