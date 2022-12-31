@@ -1,3 +1,3 @@
 # 두둥!
 
-https://gosrock.github.io/DuDung-Front
+https://gosrock.github.io/DuDoong-Front
