@@ -11,7 +11,7 @@ jobs:
       - name: Install and Build 🔧
         # This needs an Acces Token stored as "GH_TOKEN" 👇
         run: |
-          cd shared/components
+          cd shared/ui
           yarn install
           yarn run deploy-storybook -- --ci
         env:
