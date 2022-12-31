@@ -1,5 +1,4 @@
-import { Button } from '@dudung/components';
-import globalStyle from '@dudung/components/src/theme/global';
+import { Button, globalStyle } from '@dudoong/ui';
 import { Global } from '@emotion/react';
 
 function App() {

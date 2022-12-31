@@ -1,4 +1,4 @@
-import globalStyle from '@dudung/components/src/theme/global';
+import { globalStyle } from '@dudoong/ui';
 import { Global } from '@emotion/react';
 import { Html, Head, Main, NextScript } from 'next/document';
 

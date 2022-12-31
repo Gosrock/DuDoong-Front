@@ -1,5 +1,5 @@
 {
-  "name": "@dudung/components",
+  "name": "@dudoong/ui",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "version": "0.1.0",

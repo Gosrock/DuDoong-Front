@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@dudung/components": "workspace:shared/components",
+    "@dudoong/ui": "workspace:shared/ui",
     "@next/font": "13.0.7",
     "@types/node": "18.11.16",
     "@types/react": "18.0.26",

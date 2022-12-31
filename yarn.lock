@@ -1946,9 +1946,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dudung/components@workspace:shared/components":
+"@dudoong/ui@workspace:shared/ui":
   version: 0.0.0-use.local
-  resolution: "@dudung/components@workspace:shared/components"
+  resolution: "@dudoong/ui@workspace:shared/ui"
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
@@ -5618,7 +5618,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "admin@workspace:apps/admin"
   dependencies:
-    "@dudung/components": "workspace:shared/components"
+    "@dudoong/ui": "workspace:shared/ui"
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@vitejs/plugin-react": ^3.0.0
@@ -8342,9 +8342,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dudung-front@workspace:.":
+"dudoong-front@workspace:.":
   version: 0.0.0-use.local
-  resolution: "dudung-front@workspace:."
+  resolution: "dudoong-front@workspace:."
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
@@ -17815,7 +17815,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ticket@workspace:apps/ticket"
   dependencies:
-    "@dudung/components": "workspace:shared/components"
+    "@dudoong/ui": "workspace:shared/ui"
     "@emotion/babel-plugin": ^11.10.5
     "@next/font": 13.0.7
     "@types/node": 18.11.16
