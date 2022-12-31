@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { HTMLAttributes } from 'react';
 
@@ -10,6 +11,6 @@ export const Button = ({ children, ...props }: ButtonProps) => {
 };
 
 const StyledButton = styled.button`
-  height: 50px;
+  height: 100px;
   width: 100%;
 `;

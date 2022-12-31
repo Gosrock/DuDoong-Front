@@ -2,7 +2,7 @@ name: Docker
 on:
   push:
     branches: [dev]
-    #paths: ['apps/ticket/src/**']
+    paths: ['apps/ticket/src/**']
     # Publish semver tags as releases.
     tags: ['v*.*.*']
 
