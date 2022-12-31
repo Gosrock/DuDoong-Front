@@ -1,5 +1,5 @@
 {
-  "name": "gosrock-front",
+  "name": "dudung-front",
   "packageManager": "yarn@3.3.0",
   "private": true,
   "workspaces": [
@@ -12,7 +12,7 @@
     "admin:build": "yarn workspace admin build",
     "ticket:build": "yarn workspace ticket build",
     "ticket:start": "yarn workspace ticket start",
-    "storybook": "yarn workspace @gosrock/components storybook"
+    "storybook": "yarn workspace @dudung/components storybook"
   },
   "devDependencies": {
     "@types/eslint": "^8",

@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@gosrock/components": "workspace:shared/components",
+    "@dudung/components": "workspace:shared/components",
     "@next/font": "13.0.7",
     "@types/node": "18.11.16",
     "@types/react": "18.0.26",

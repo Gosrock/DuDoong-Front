@@ -1946,6 +1946,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dudung/components@workspace:shared/components":
+  version: 0.0.0-use.local
+  resolution: "@dudung/components@workspace:shared/components"
+  dependencies:
+    "@emotion/react": ^11.10.5
+    "@emotion/styled": ^11.10.5
+    "@mdx-js/react": ^1.6.22
+    "@storybook/addon-actions": ^6.5.14
+    "@storybook/addon-docs": ^6.5.14
+    "@storybook/addon-essentials": ^6.5.14
+    "@storybook/addon-interactions": ^6.5.14
+    "@storybook/addon-links": ^6.5.14
+    "@storybook/builder-webpack5": ^6.5.14
+    "@storybook/manager-webpack5": ^6.5.14
+    "@storybook/node-logger": ^6.5.14
+    "@storybook/preset-create-react-app": ^4.1.2
+    "@storybook/react": ^6.5.14
+    "@storybook/storybook-deployer": ^2.8.16
+    "@storybook/testing-library": ^0.0.13
+    "@types/prop-types": ^15
+    "@types/react": 18.0.26
+    "@types/react-dom": 18.0.9
+    babel-plugin-named-exports-order: ^0.0.2
+    prop-types: ^15.8.1
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    react-scripts: 5.0.1
+    webpack: ^5.75.0
+  languageName: unknown
+  linkType: soft
+
 "@emotion/babel-plugin@npm:^11.10.5":
   version: 11.10.5
   resolution: "@emotion/babel-plugin@npm:11.10.5"
@@ -2278,37 +2309,6 @@ __metadata:
   checksum: 4059f790e2d07bf3c3ff3e0fec0daa8144fe35c1f6e0111c9921bd32106adaa97a4ab096ad7dab1e28ee6a9060083c4d1a4ada42a7f5f3f7a96b8812e2b757c1
   languageName: node
   linkType: hard
-
-"@gosrock/components@workspace:shared/components":
-  version: 0.0.0-use.local
-  resolution: "@gosrock/components@workspace:shared/components"
-  dependencies:
-    "@emotion/react": ^11.10.5
-    "@emotion/styled": ^11.10.5
-    "@mdx-js/react": ^1.6.22
-    "@storybook/addon-actions": ^6.5.14
-    "@storybook/addon-docs": ^6.5.14
-    "@storybook/addon-essentials": ^6.5.14
-    "@storybook/addon-interactions": ^6.5.14
-    "@storybook/addon-links": ^6.5.14
-    "@storybook/builder-webpack5": ^6.5.14
-    "@storybook/manager-webpack5": ^6.5.14
-    "@storybook/node-logger": ^6.5.14
-    "@storybook/preset-create-react-app": ^4.1.2
-    "@storybook/react": ^6.5.14
-    "@storybook/storybook-deployer": ^2.8.16
-    "@storybook/testing-library": ^0.0.13
-    "@types/prop-types": ^15
-    "@types/react": 18.0.26
-    "@types/react-dom": 18.0.9
-    babel-plugin-named-exports-order: ^0.0.2
-    prop-types: ^15.8.1
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    react-scripts: 5.0.1
-    webpack: ^5.75.0
-  languageName: unknown
-  linkType: soft
 
 "@humanwhocodes/config-array@npm:^0.11.8":
   version: 0.11.8
@@ -5617,7 +5617,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "admin@workspace:apps/admin"
   dependencies:
-    "@gosrock/components": "workspace:shared/components"
+    "@dudung/components": "workspace:shared/components"
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@vitejs/plugin-react": ^3.0.0
@@ -8341,6 +8341,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dudung-front@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "dudung-front@workspace:."
+  dependencies:
+    "@types/eslint": ^8
+    "@types/node": ^18.11.16
+    "@types/react": ^18.0.26
+    "@typescript-eslint/eslint-plugin": latest
+    "@typescript-eslint/parser": latest
+    eslint: ^8.30.0
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-react: latest
+    prettier: ^2.8.1
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "duplexer@npm:^0.1.2":
   version: 0.1.2
   resolution: "duplexer@npm:0.1.2"
@@ -10087,24 +10105,6 @@ __metadata:
   checksum: a5ccfb8806e0917a94e0b3de2af2ea4979c1da920bc381667c260e00e7cafdbe844e2cb9c5bcfef4e5412e8bf73bab837285bc35c7ba73aaaf0134d4583393a6
   languageName: node
   linkType: hard
-
-"gosrock-front@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "gosrock-front@workspace:."
-  dependencies:
-    "@types/eslint": ^8
-    "@types/node": ^18.11.16
-    "@types/react": ^18.0.26
-    "@typescript-eslint/eslint-plugin": latest
-    "@typescript-eslint/parser": latest
-    eslint: ^8.30.0
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-react: latest
-    prettier: ^2.8.1
-    typescript: ^4.9.4
-  languageName: unknown
-  linkType: soft
 
 "graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6, graceful-fs@npm:^4.2.9":
   version: 4.2.10
@@ -17803,7 +17803,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ticket@workspace:apps/ticket"
   dependencies:
-    "@gosrock/components": "workspace:shared/components"
+    "@dudung/components": "workspace:shared/components"
     "@next/font": 13.0.7
     "@types/node": 18.11.16
     "@types/react": 18.0.26

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
-import { Button } from '@gosrock/components';
+import { Button } from '@dudung/components';
 
 function App() {
   const [count, setCount] = useState(0);

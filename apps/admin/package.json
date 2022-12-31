@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@gosrock/components": "workspace:shared/components",
+    "@dudung/components": "workspace:shared/components",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

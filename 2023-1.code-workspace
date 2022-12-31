@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "apps/admin"
+    },
+    {
+      "path": "apps/ticket"
+    },
+    {
+      "path": "shared"
+    }
+  ]
+}

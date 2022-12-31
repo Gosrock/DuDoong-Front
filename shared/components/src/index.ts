@@ -1,1 +1,1 @@
-export * from './atoms';
+export * from './ui';
