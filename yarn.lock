@@ -1978,6 +1978,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@dudoong/utils@workspace:shared/utils":
+  version: 0.0.0-use.local
+  resolution: "@dudoong/utils@workspace:shared/utils"
+  dependencies:
+    "@types/react": 18.0.26
+    "@types/react-dom": 18.0.9
+    cra-template-typescript: 1.2.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    react-scripts: 5.0.1
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@emotion/babel-plugin@npm:^11.10.5":
   version: 11.10.5
   resolution: "@emotion/babel-plugin@npm:11.10.5"
@@ -5619,6 +5633,7 @@ __metadata:
   resolution: "admin@workspace:apps/admin"
   dependencies:
     "@dudoong/ui": "workspace:shared/ui"
+    "@dudoong/utils": "workspace:shared/utils"
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@vitejs/plugin-react": ^3.0.0
@@ -7491,6 +7506,13 @@ __metadata:
     p-filter: ^2.1.0
     p-map: ^3.0.0
   checksum: e121f13f2b6af4a7c00de17984086a45b67eaaeeb0286a5cf67f2fdaf18d8ce6c2a9fe4ccfa37953e6982f55772f384f040f45f1961530655838c2b7486788a7
+  languageName: node
+  linkType: hard
+
+"cra-template-typescript@npm:1.2.0":
+  version: 1.2.0
+  resolution: "cra-template-typescript@npm:1.2.0"
+  checksum: ab10999bf9ebb71c83e4c958a57e49614b4715fe410c87b581217817c3a5e28a900130ee09e2ff95968930e8da1c0fc71d63095a5af9388df692d6cde8fc4325
   languageName: node
   linkType: hard
 
@@ -17816,6 +17838,7 @@ __metadata:
   resolution: "ticket@workspace:apps/ticket"
   dependencies:
     "@dudoong/ui": "workspace:shared/ui"
+    "@dudoong/utils": "workspace:shared/utils"
     "@emotion/babel-plugin": ^11.10.5
     "@next/font": 13.0.7
     "@types/node": 18.11.16

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@dudoong/ui": "workspace:shared/ui",
+    "@dudoong/utils": "workspace:shared/utils",
     "@next/font": "13.0.7",
     "@types/node": "18.11.16",
     "@types/react": "18.0.26",

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@dudoong/ui": "workspace:shared/ui",
+    "@dudoong/utils": "workspace:shared/utils",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
