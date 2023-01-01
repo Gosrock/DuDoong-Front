@@ -18009,6 +18009,8 @@ __metadata:
     "@dudoong/ui": "workspace:shared/ui"
     "@dudoong/utils": "workspace:shared/utils"
     "@emotion/babel-plugin": ^11.10.5
+    "@emotion/react": ^11.10.5
+    "@emotion/styled": ^11.10.5
     "@next/font": 13.0.7
     "@tanstack/react-query": ^4.20.4
     "@tanstack/react-query-devtools": ^4.20.4
