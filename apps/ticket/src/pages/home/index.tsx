@@ -1,25 +1,6 @@
-import { authState } from '@store/auth';
 import Head from 'next/head';
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD:apps/ticket/src/pages/index.tsx
-import { Button } from '@dudoong/ui';
-import useSample from '@lib/hooks/useSample';
-import { useRouter } from 'next/router';
-
-const LandingPage = () => {
-  const a = useSample();
-  const router = useRouter();
-=======
->>>>>>> 063ebb69fddd847a3cd56de3b0a400154246fa22
-import { useRecoilState } from 'recoil';
 
 const HomePage = () => {
-  const [value] = useRecoilState(authState);
-<<<<<<< HEAD
-=======
->>>>>>> 063ebb69fddd847a3cd56de3b0a400154246fa22:apps/ticket/src/pages/home/index.tsx
->>>>>>> 063ebb69fddd847a3cd56de3b0a400154246fa22
   return (
     <>
       <Head>
@@ -28,34 +9,9 @@ const HomePage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-<<<<<<< HEAD
-      homepage
-=======
-<<<<<<< HEAD:apps/ticket/src/pages/index.tsx
-      <main>
-        티켓 레포 보일러플레이트
-        <Button
-          onClick={() => {
-            router.push('/home');
-          }}
-        >
-          홈으로
-        </Button>
-      </main>
-=======
-      homepage
->>>>>>> 063ebb69fddd847a3cd56de3b0a400154246fa22:apps/ticket/src/pages/home/index.tsx
->>>>>>> 063ebb69fddd847a3cd56de3b0a400154246fa22
+      <main>티켓 홈</main>
     </>
   );
 };
 
-<<<<<<< HEAD
 export default HomePage;
-=======
-<<<<<<< HEAD:apps/ticket/src/pages/index.tsx
-export default LandingPage;
-=======
-export default HomePage;
->>>>>>> 063ebb69fddd847a3cd56de3b0a400154246fa22:apps/ticket/src/pages/home/index.tsx
->>>>>>> 063ebb69fddd847a3cd56de3b0a400154246fa22
