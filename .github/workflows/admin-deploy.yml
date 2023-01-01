@@ -2,7 +2,7 @@ name: Build & Docker Push - Admin
 on:
   push:
     branches: [dev]
-    paths: ['apps/admin/src/**']
+    # paths: ['apps/admin/src/**']
     # Publish semver tags as releases.
     tags: ['v*.*.*']
 
