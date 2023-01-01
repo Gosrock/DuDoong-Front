@@ -16,7 +16,13 @@
     "jsx": "preserve",
     "incremental": true,
     "composite": true,
-    "declaration": true
+    "declaration": true,
+    // 절대경로
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@hooks/*": ["src/hooks/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../../**/*.d.ts"],
   "exclude": ["node_modules"]

@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { Button } from '@dudoong/ui';
 import styled from '@emotion/styled';
+import useSample from '@src/hooks/useSample';
 
 export default function Home() {
+  const a = useSample();
   return (
     <>
       <Head>
