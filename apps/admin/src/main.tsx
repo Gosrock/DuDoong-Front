@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import { globalStyle, theme } from '@dudoong/ui';
 import { Global, ThemeProvider } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

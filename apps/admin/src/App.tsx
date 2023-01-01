@@ -1,4 +1,4 @@
-import Sample from '@pages/Sample';
+import Sample from './pages/Sample';
 
 function App() {
   return (
