@@ -2,10 +2,15 @@
   "name": "dudoong-front",
   "packageManager": "yarn@3.3.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "shared/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "shared/*"
+    ],
+    "nohoist": [
+      "**/@emotion-react/**"
+    ]
+  },
   "scripts": {
     "admin": "yarn workspace admin dev ",
     "ticket": "yarn workspace ticket dev ",

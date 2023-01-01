@@ -1,9 +1,6 @@
-import { authState } from '@store/auth';
 import Head from 'next/head';
-import { useRecoilState } from 'recoil';
 
 const HomePage = () => {
-  const [value] = useRecoilState(authState);
   return (
     <>
       <Head>
@@ -12,7 +9,7 @@ const HomePage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      homepage
+      <main>티켓 홈</main>
     </>
   );
 };

@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Button } from '.';
 
 export default {
-  title: 'common/ButtonSet',
+  title: 'Button',
   component: Button,
   argTypes: {},
 } as ComponentMeta<typeof Button>;
@@ -11,4 +11,4 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const _default = Template.bind({});
-_default.args = { children: 'button' };
+_default.args = { children: '다음', disabled: false };

@@ -1950,8 +1950,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dudoong/ui@workspace:shared/ui"
   dependencies:
-    "@emotion/react": ^11.10.5
-    "@emotion/styled": ^11.10.5
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.5.14
     "@storybook/addon-docs": ^6.5.14
@@ -1970,6 +1968,7 @@ __metadata:
     "@types/react-dom": 18.0.9
     babel-plugin-named-exports-order: ^0.0.2
     emotion-reset: ^3.0.1
+    polished: ^4.2.2
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
