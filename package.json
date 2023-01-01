@@ -34,5 +34,9 @@
     "@storybook/core-common/webpack": "^5",
     "@storybook/core-server/webpack": "^5",
     "@storybook/react/webpack": "^5"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5"
   }
 }
