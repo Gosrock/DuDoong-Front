@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { Inter } from '@next/font/google';
 import { Button } from '@dudoong/ui';
 
 export default function Home() {

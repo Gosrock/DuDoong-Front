@@ -1,16 +1,12 @@
-import { Button, globalStyle } from '@dudoong/ui';
-import { useInputs } from '@dudoong/utils';
-import { Global } from '@emotion/react';
+import { theme } from '@dudoong/ui';
+import styled from '@emotion/styled';
 
 function App() {
-  const [value, onChange] = useInputs('hook 테스트');
-  return (
-    <div className="App">
-      <Global styles={globalStyle} />
-      <div>{value}</div>
-      <Button>두둥 어드민 보일러플레이트</Button>
-    </div>
-  );
+  return <div className="App"></div>;
 }
 
 export default App;
+
+const Btt = styled.div`
+  color: ${(props) => props.theme.palette.main_100};
+`;
