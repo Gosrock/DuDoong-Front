@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Button } from '@dudoong/ui';
+import styled from '@emotion/styled';
 
 export default function Home() {
   return (
@@ -11,7 +12,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Button>두둥 티켓 보일러플레이트</Button>
+        <Button css={{ backgroundColor: 'yellow' }}>
+          두둥 티켓 보일러플레이트
+        </Button>
       </main>
     </>
   );
