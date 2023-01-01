@@ -20,8 +20,10 @@
     // 절대경로
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@pages/*": ["src/pages/*"],
+      "@blocks/*": ["src/blocks/*"],
+      "@lib/*": ["src/lib/*"],
+      "@store/*": ["src/store/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../../**/*.d.ts"],

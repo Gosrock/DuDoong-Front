@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import { Button } from '@dudoong/ui';
-import styled from '@emotion/styled';
-import useSample from '@src/hooks/useSample';
+import useSample from '@lib/hooks/useSample';
+import { useRouter } from 'next/router';
 
-export default function Home() {
+const LandingPage = () => {
   const a = useSample();
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -14,10 +15,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Button css={{ backgroundColor: 'yellow' }}>
-          두둥 티켓 보일러플레이트
+        티켓 레포 보일러플레이트
+        <Button
+          css={{ backgroundColor: 'yellow' }}
+          onClick={() => {
+            router.push('/home');
+          }}
+        >
+          홈으로
         </Button>
       </main>
     </>
   );
-}
+};
+
+export default LandingPage;
