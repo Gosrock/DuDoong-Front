@@ -19,8 +19,8 @@
     //절대경로
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["src/components/pages/*"],
-      "@blocks/*": ["src/components/blocks/*"],
+      "@pages/*": ["src/pages/*"],
+      "@blocks/*": ["src/blocks/*"],
       "@lib/*": ["src/lib/*"],
       "@store/*": ["src/store/*"]
     }

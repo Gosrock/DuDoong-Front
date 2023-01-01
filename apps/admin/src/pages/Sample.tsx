@@ -1,8 +1,7 @@
-import useSample from 'src/lib/hooks/useSample';
 import { authState } from '@store/auth';
 import { useRecoilState } from 'recoil';
-import { useQuery } from '@tanstack/react-query';
 import { Button } from '@dudoong/ui';
+import useSample from '@lib/hooks/useSample';
 
 const Sample = () => {
   const a = useSample();
