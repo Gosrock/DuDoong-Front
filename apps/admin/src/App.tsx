@@ -1,6 +1,4 @@
-import { Button } from '@dudoong/ui';
-import styled from '@emotion/styled';
-import Sample from '@pages/Sample';
+import Sample from 'src/components/pages/Sample';
 
 function App() {
   return (

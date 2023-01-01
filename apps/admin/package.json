@@ -11,8 +11,12 @@
   "dependencies": {
     "@dudoong/ui": "workspace:shared/ui",
     "@dudoong/utils": "workspace:shared/utils",
+    "@tanstack/react-query": "^4.20.4",
+    "@tanstack/react-query-devtools": "^4.20.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.1",
+    "recoil": "^0.7.6"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
