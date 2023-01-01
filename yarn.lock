@@ -8450,8 +8450,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "dudoong-front@workspace:."
   dependencies:
-    "@emotion/react": ^11.10.5
-    "@emotion/styled": ^11.10.5
     "@types/eslint": ^8
     "@types/node": ^18.11.16
     "@types/react": ^18.0.26

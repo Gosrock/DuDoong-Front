@@ -13,4 +13,5 @@ export const Button = ({ children, ...props }: ButtonProps) => {
 const StyledButton = styled.button`
   height: 100px;
   width: 100%;
+  background-color: lightgray;
 `;
