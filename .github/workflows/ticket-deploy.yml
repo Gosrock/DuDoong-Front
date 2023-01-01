@@ -2,7 +2,7 @@ name: Build & Docker Push - Ticket
 on:
   push:
     branches: [dev]
-    paths: ['apps/ticket/pages/**']
+    # paths: ['apps/ticket/pages/**']
     # Publish semver tags as releases.
     tags: ['v*.*.*']
 
