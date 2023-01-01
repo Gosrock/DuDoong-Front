@@ -15,7 +15,7 @@ const LandingPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        티켓 레포 보일러플레이트
+        두둥 티켓 레포 보일러플레이트
         <Button
           onClick={() => {
             router.push('/home');

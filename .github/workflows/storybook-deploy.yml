@@ -2,7 +2,7 @@ name: Build & Deploy Storybook
 on:
   push:
     branches: [dev]
-    # paths: ['shared/ui/src/**']
+    paths: ['shared/ui/src/**']
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -13,6 +13,6 @@ jobs:
         run: |
           cd shared/ui
           yarn install
-          yarn run deploy-storybook
+          yarn run deploy-storybook -- --ci
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
