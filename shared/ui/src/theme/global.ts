@@ -9,4 +9,19 @@ export const globalStyle = css`
       'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   }
+  button {
+    background: inherit;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: visible;
+    cursor: pointer;
+  }
+  button:focus {
+    outline: none;
+  }
+  input:focus {
+    outline: none;
+  }
 `;

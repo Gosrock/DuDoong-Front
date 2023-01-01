@@ -15,8 +15,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    //절대경로
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@blocks/*": ["src/blocks/*"],
+      "@lib/*": ["src/lib/*"],
+      "@store/*": ["src/store/*"]
+    }
   },
-  "include": ["src", "custom.d.ts", "../../**/*.d.ts"],
+  "include": ["src", "**/*.ts", "**/*.tsx", "custom.d.ts", "../../**/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
