@@ -6,9 +6,6 @@
     "packages": [
       "apps/*",
       "shared/*"
-    ],
-    "nohoist": [
-      "**/@emotion-react/**"
     ]
   },
   "scripts": {
