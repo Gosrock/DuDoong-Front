@@ -17,7 +17,6 @@ const LandingPage = () => {
       <main>
         티켓 레포 보일러플레이트
         <Button
-          css={{ backgroundColor: 'yellow' }}
           onClick={() => {
             router.push('/home');
           }}

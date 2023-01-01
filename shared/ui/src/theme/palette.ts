@@ -1,7 +1,7 @@
 export const palette = {
   main: {
     violet_100: '#F3F1FD',
-    violet_200: '#E8E8EA',
+    violet_200: '#E8E8FA',
     violet_300: '#B6A6F3',
     violet_400: '#8262EC',
     violet_500: '#6234DD',
@@ -19,5 +19,9 @@ export const palette = {
     gray_400: '#A8A8AB',
     gray_500: '#515354',
     black: '#121212',
+  },
+  gradient: {
+    linear_white:
+      'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 20.83%);',
   },
 };
