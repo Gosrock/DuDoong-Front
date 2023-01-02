@@ -2,13 +2,15 @@ import { css } from '@emotion/react';
 import { CSSProperties } from '@emotion/serialize';
 /** @jsxImportSource @emotion/react */
 
-interface FlexBoxProps {
+export interface FlexBoxProps {
   align: CSSProperties['alignItems'];
   justify?: CSSProperties['justifyContent'];
   direction?: CSSProperties['flexDirection'];
   gap?: CSSProperties['gap'];
   children: JSX.Element | JSX.Element[];
 }
+
+export type flexboxPropsKey = 'align' | 'justify' | 'direction' | 'gap';
 /**
  *
  * @param align : align-items 속성 (기본값 : center)
@@ -19,7 +21,7 @@ interface FlexBoxProps {
 export const FlexBox = ({
   align = 'center',
   justify = 'center',
-  direction,
+  direction = 'column',
   gap,
   children,
 }: FlexBoxProps) => {
@@ -29,8 +31,9 @@ export const FlexBox = ({
         display: flex;
         align-items: ${align};
         justify-content: ${justify};
-        direction: ${direction};
+        flex-direction: ${direction};
         gap: ${gap}px;
+        width: 100%;
       `}
     >
       {children}
