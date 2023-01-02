@@ -14,4 +14,4 @@ export const primary = Template.bind({});
 primary.args = { children: '다음', disabled: false };
 
 export const secondary = Template.bind({});
-secondary.args = { children: '다음', types: 'secondary', disabled: false };
+secondary.args = { children: '다음', varient: 'secondary', disabled: false };
