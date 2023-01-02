@@ -17,7 +17,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "composite": true,
-    "declaration": true
+    "declaration": true,
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["src"]
 }

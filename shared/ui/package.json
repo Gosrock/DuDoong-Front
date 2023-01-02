@@ -63,6 +63,7 @@
     "@types/prop-types": "^15",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
+    "storybook-addon-paddings": "^4.3.0",
     "webpack": "^5.75.0"
   }
 }
