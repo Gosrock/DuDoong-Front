@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Padding, PaddingProps, PaddingSize } from '../../layout';
+import { Padding, PaddingSize } from '../../layout';
 
 export interface ButtonSetProps {
   children: JSX.Element;
