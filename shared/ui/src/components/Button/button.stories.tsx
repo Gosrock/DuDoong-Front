@@ -10,5 +10,8 @@ export default {
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const _default = Template.bind({});
-_default.args = { children: '다음', disabled: false };
+export const primary = Template.bind({});
+primary.args = { children: '다음', disabled: false };
+
+export const secondary = Template.bind({});
+secondary.args = { children: '다음', types: 'secondary', disabled: false };

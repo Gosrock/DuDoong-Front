@@ -1,6 +1,5 @@
 import { axiosPrivate } from '@dudoong/utils';
 import { atom } from 'recoil';
-
 export interface IAuthType {
   isAuthenticated: boolean;
   registerToken: string | null;
