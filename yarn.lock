@@ -1973,6 +1973,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: 5.0.1
+    storybook-addon-paddings: ^4.3.0
     webpack: ^5.75.0
   languageName: unknown
   linkType: soft
@@ -3460,7 +3461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addons@npm:6.5.15":
+"@storybook/addons@npm:6.5.15, @storybook/addons@npm:^6.2.0":
   version: 6.5.15
   resolution: "@storybook/addons@npm:6.5.15"
   dependencies:
@@ -3482,7 +3483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/api@npm:6.5.15":
+"@storybook/api@npm:6.5.15, @storybook/api@npm:^6.2.0":
   version: 6.5.15
   resolution: "@storybook/api@npm:6.5.15"
   dependencies:
@@ -3703,7 +3704,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/components@npm:6.5.15":
+"@storybook/components@npm:6.5.15, @storybook/components@npm:^6.2.0":
   version: 6.5.15
   resolution: "@storybook/components@npm:6.5.15"
   dependencies:
@@ -4385,7 +4386,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:6.5.15":
+"@storybook/theming@npm:6.5.15, @storybook/theming@npm:^6.2.0":
   version: 6.5.15
   resolution: "@storybook/theming@npm:6.5.15"
   dependencies:
@@ -7523,7 +7524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.0.4, core-js@npm:^3.19.2, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
+"core-js@npm:^3.0.4, core-js@npm:^3.12.0, core-js@npm:^3.19.2, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
   version: 3.27.1
   resolution: "core-js@npm:3.27.1"
   checksum: d50b5f88aea4302512ad9446c18e90f4d35dea1e6d8d3f87337690677061565ff11a670f1e0c87de57aa6074375fbb25ed5784076c040d3c4de8b4bce7d2ebeb
@@ -13019,7 +13020,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memoizerific@npm:^1.11.3":
+"memoizerific@npm:^1.11.0, memoizerific@npm:^1.11.3":
   version: 1.11.3
   resolution: "memoizerific@npm:1.11.3"
   dependencies:
@@ -17364,6 +17365,28 @@ __metadata:
   version: 2.14.2
   resolution: "store2@npm:2.14.2"
   checksum: 6f270fc5bab99b63f45fcc7bd8b99c2714b4adf880f557ed7ffb5ed3987131251165bccde425a00928aaf044870aee79ddeef548576d093c68703ed2edec45d7
+  languageName: node
+  linkType: hard
+
+"storybook-addon-paddings@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "storybook-addon-paddings@npm:4.3.0"
+  dependencies:
+    "@storybook/addons": ^6.2.0
+    "@storybook/api": ^6.2.0
+    "@storybook/components": ^6.2.0
+    "@storybook/theming": ^6.2.0
+    core-js: ^3.12.0
+    memoizerific: ^1.11.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 33c9210f68f16e6bb1b411cf712e65aa084b9878c5815f9d5bcd399e612eb448622c3eb5b3596d49668c783a6d8c2af5cfc8b2219979ca683287a4f0c961a622
   languageName: node
   linkType: hard
 

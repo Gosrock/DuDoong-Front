@@ -13,6 +13,10 @@ type ButtonType =
   | 'alert'
   | 'kakao';
 
+/**
+ * @param types 버튼의 종류 :  'primary' | 'secondary' | 'selected' | 'unselected' | 'alert' | 'kakao';
+ * @param size 버튼의 사이즈 : 화면에 꽉차게 / 크기 고정
+ */
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   types?: ButtonType;
