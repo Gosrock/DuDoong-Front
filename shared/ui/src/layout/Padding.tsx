@@ -1,12 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-interface PaddingProps {
+export interface PaddingProps {
   children: JSX.Element;
   size: PaddingSize;
 }
 
-type PaddingSize = number | [number, number] | [number, number, number, number];
+export type PaddingSize =
+  | number
+  | [number, number]
+  | [number, number, number, number];
 
 export const Padding = ({ children, size }: PaddingProps) => {
   return (
