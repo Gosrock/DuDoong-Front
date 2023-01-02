@@ -5,7 +5,7 @@ import { ButtonHTMLAttributes } from 'react';
 import { theme } from '../../theme';
 
 type ButtonSize = 'fill' | 'fixed';
-type ButtonType =
+type ButtonVarient =
   | 'primary'
   | 'secondary'
   | 'selected'
@@ -19,7 +19,7 @@ type ButtonType =
  */
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
-  types?: ButtonType;
+  varient?: ButtonVarient;
   size?: ButtonSize;
 }
 
@@ -71,41 +71,45 @@ const BUTTON_COLOR = {
 
 export const Button = ({
   children,
-  types = 'primary',
+  varient = 'primary',
   size = 'fill',
   ...props
 }: ButtonProps) => {
   return (
-    <StyledButton types={types} size={size} {...props}>
+    <StyledButton varient={varient} size={size} {...props}>
       {children}
     </StyledButton>
   );
 };
 
-const StyledButton = styled.button<{ types: ButtonType; size: ButtonSize }>`
+const StyledButton = styled.button<{
+  varient: ButtonVarient;
+  size: ButtonSize;
+}>`
   height: 56px;
   border-radius: 16px;
   width: ${({ size }) => (size === 'fill' ? '100%' : '158px')};
   ${({ theme }) => theme.typo.Text.Text_18}
 
-  background-color : ${({ types }) => BUTTON_COLOR.normal[types]};
-  ${({ theme, types }) =>
-    types === 'unselected' &&
+  background-color : ${({ varient }) => BUTTON_COLOR.normal[varient]};
+  ${({ theme, varient }) =>
+    varient === 'unselected' &&
     css`
       border: 2px solid ${theme.palette.main.violet_300};
     `}
 
-  color: ${({ types }) => TEXT_COLOR.normal[types]};
+  color: ${({ varient }) => TEXT_COLOR.normal[varient]};
 
   &:hover {
-    background-color: ${({ types }) => BUTTON_COLOR.hover[types]};
+    background-color: ${({ varient }) => BUTTON_COLOR.hover[varient]};
   }
   &:active {
-    background-color: ${({ types }) => BUTTON_COLOR.active[types]};
+    background-color: ${({ varient }) => BUTTON_COLOR.active[varient]};
   }
   &:disabled {
     color: ${({ theme }) => theme.palette.mono.white} !important;
-    background-color: ${({ types }) => BUTTON_COLOR.disabled[types]} !important;
+    background-color: ${({ varient }) =>
+      BUTTON_COLOR.disabled[varient]} !important;
     border: none;
   }
 `;
