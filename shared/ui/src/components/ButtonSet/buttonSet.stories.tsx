@@ -22,5 +22,4 @@ _default.args = {
       <Button>다음</Button>
     </FlexBox>
   ),
-  size: [24, 20],
 };

@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
-import { Padding, PaddingSize } from '../../layout';
+import { Padding } from '../../layout';
 
 export interface ButtonSetProps {
   children: JSX.Element;
-  size: PaddingSize;
 }
 
-export const ButtonSet = ({ children, size }: ButtonSetProps) => {
+export const ButtonSet = ({ children }: ButtonSetProps) => {
   return (
     <Wrapper>
-      <Padding size={size}>{children}</Padding>
+      <Padding size={[40, 24, 20, 24]}>{children}</Padding>
     </Wrapper>
   );
 };
