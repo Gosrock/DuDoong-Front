@@ -82,5 +82,5 @@ description.args = {
       </p>
     </>
   ),
-  varient: 'horizontal',
+  varient: 'description',
 };
