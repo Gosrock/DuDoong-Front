@@ -10,6 +10,13 @@ export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
   children: string;
 }
 
+export type TextPropsKey = 'typo' | 'color';
+/**
+ *
+ * @param typo: align-items 속성 (기본값 : center)
+ * @param color : justify-content 속성 (기본값 : center)
+ */
+
 export const Text = ({
   typo,
   as = 'span',
