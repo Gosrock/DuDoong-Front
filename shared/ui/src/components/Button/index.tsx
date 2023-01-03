@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { darken } from 'polished';
 import { ButtonHTMLAttributes } from 'react';
 import { theme } from '../../theme';
+import { Text } from '../Text';
 
 type ButtonSize = 'fill' | 'fixed';
 type ButtonVarient =
@@ -77,7 +78,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <StyledButton varient={varient} size={size} {...props}>
-      {children}
+      <Text typo={'Text_18'}>{children}</Text>
     </StyledButton>
   );
 };
@@ -89,9 +90,8 @@ const StyledButton = styled.button<{
   height: 56px;
   border-radius: 16px;
   width: ${({ size }) => (size === 'fill' ? '100%' : '158px')};
-  ${({ theme }) => theme.typo.Text.Text_18}
 
-  background-color : ${({ varient }) => BUTTON_COLOR.normal[varient]};
+  background-color: ${({ varient }) => BUTTON_COLOR.normal[varient]};
   ${({ theme, varient }) =>
     varient === 'unselected' &&
     css`
