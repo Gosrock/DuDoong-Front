@@ -4,6 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ButtonSet } from '.';
 import { theme } from '../../theme';
 import { Button } from '../Button';
+import { Text } from '../Text';
 
 export default {
   title: 'ButtonSet',
@@ -31,14 +32,13 @@ sub.args = {
       <Button>다음</Button>
       <button
         css={css`
-          ${theme.typo.Text.Text_16}
-          color : ${theme.palette.mono.gray_300};
+          color: ${theme.palette.mono.gray_300};
           &:hover {
             text-decoration: underline;
           }
         `}
       >
-        다음에 할래요
+        <Text typo={'Text_16'}>두번째 버튼</Text>
       </button>
     </>
   ),
@@ -72,14 +72,14 @@ description.args = {
   children: (
     <>
       <Button varient="secondary">취소</Button>
-      <p
+      <Text
+        typo="Text_14"
         css={css`
-          ${theme.typo.Text.Text_14}
-          color : ${theme.palette.mono.gray_300};
+          color: ${theme.palette.mono.gray_300};
         `}
       >
         어쩌구저쩌구 설명
-      </p>
+      </Text>
     </>
   ),
   varient: 'description',
