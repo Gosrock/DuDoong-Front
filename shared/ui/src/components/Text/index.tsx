@@ -1,17 +1,34 @@
-import { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { KeyOfTypo } from '../../theme';
+import { HTMLAttributes } from 'react';
+import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
-interface TextProps {
+export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
+  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   typo: KeyOfTypo;
+  color?: KeyOfPalette;
   children: string;
-  css?: SerializedStyles;
 }
 
-export const Text = ({ typo, children }: TextProps) => {
-  return <StyledText typo={typo}>{children}</StyledText>;
+export const Text = ({
+  typo,
+  as = 'span',
+  color = undefined,
+  children,
+  ...props
+}: TextProps) => {
+  return (
+    <StyledText typoKey={typo} colorKey={color} as={as} {...props}>
+      {children}
+    </StyledText>
+  );
 };
 
-const StyledText = styled.span<{ typo: KeyOfTypo }>`
-  ${({ typo }) => typo}
+const StyledText = styled.span<{ typoKey: KeyOfTypo; colorKey?: KeyOfPalette }>`
+  ${({ typoKey, theme }) => theme.typo[typoKey]}
+  ${({ colorKey, theme }) =>
+    colorKey &&
+    css`
+      color: ${theme.palette[colorKey]};
+    `}
 `;

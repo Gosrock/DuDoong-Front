@@ -32,7 +32,7 @@ sub.args = {
       <Button>다음</Button>
       <button
         css={css`
-          color: ${theme.palette.mono.gray_300};
+          color: ${theme.palette.gray_300};
           &:hover {
             text-decoration: underline;
           }
@@ -75,7 +75,7 @@ description.args = {
       <Text
         typo="Text_14"
         css={css`
-          color: ${theme.palette.mono.gray_300};
+          color: ${theme.palette.gray_300};
         `}
       >
         어쩌구저쩌구 설명

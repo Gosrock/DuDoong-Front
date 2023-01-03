@@ -7,7 +7,9 @@ export const theme: Theme = {
   typo,
 };
 
-export type KeyOfPalette = typeof palette;
+export type TypeOfPalette = typeof palette;
+export type KeyOfPalette = keyof typeof palette;
+
 export type KeyofTheme = keyof typeof theme;
 
 export type TypeOfTypo = typeof typo;
