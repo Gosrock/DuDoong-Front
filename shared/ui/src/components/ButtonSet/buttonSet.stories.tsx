@@ -18,11 +18,7 @@ const Template: ComponentStory<typeof ButtonSet> = (args) => (
 
 export const mono = Template.bind({});
 mono.args = {
-  children: (
-    <>
-      <Button>다음</Button>
-    </>
-  ),
+  children: <Button>다음</Button>,
 };
 
 export const sub = Template.bind({});

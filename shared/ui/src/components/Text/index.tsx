@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
 export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
@@ -13,7 +13,7 @@ export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
 export const Text = ({
   typo,
   as = 'span',
-  color = undefined,
+  color = 'gray_500',
   children,
   ...props
 }: TextProps) => {
