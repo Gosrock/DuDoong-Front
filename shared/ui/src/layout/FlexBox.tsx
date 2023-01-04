@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { CSSProperties } from '@emotion/serialize';
+import { ReactNode } from 'react';
 /** @jsxImportSource @emotion/react */
 
 export interface FlexBoxProps {
@@ -7,7 +8,7 @@ export interface FlexBoxProps {
   justify?: CSSProperties['justifyContent'];
   direction?: CSSProperties['flexDirection'];
   gap?: CSSProperties['gap'];
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
 }
 
 export type flexboxPropsKey = 'align' | 'justify' | 'direction' | 'gap';

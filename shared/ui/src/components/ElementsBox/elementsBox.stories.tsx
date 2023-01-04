@@ -12,70 +12,62 @@ const Template: ComponentStory<typeof ElementsBox> = (args) => (
   <ElementsBox {...args} />
 );
 
-const cel1 = () => <El1 />;
-const cel2 = () => <El2 />;
-const cel3 = () => <El3 />;
+const Cel = () => <El />;
 
-export const element3 = Template.bind({});
-element3.args = {
+export const Text1 = Template.bind({});
+Text1.args = {
   paddingSize: 20,
-  justify: 'space-between',
-  leftElement: cel1,
-  rightElement: cel2,
-  midElement: cel3,
+  text: 'text',
 };
 
-export const element2Start = Template.bind({});
-element2Start.args = {
+export const Text2 = Template.bind({});
+Text2.args = {
   paddingSize: 20,
-  justify: 'start',
-  leftElement: cel1,
-  rightElement: cel2,
+  text: 'text',
+  subtext: 'text2',
 };
 
-export const element2SpaceBetween = Template.bind({});
-element2SpaceBetween.args = {
+export const RightEl = Template.bind({});
+RightEl.args = {
   paddingSize: 20,
-  justify: 'space-between',
-  leftElement: cel1,
-  rightElement: cel2,
+  rightElement: <Cel />,
 };
 
-export const element1Right = Template.bind({});
-element1Right.args = {
+export const Text1RightEl = Template.bind({});
+Text1RightEl.args = {
   paddingSize: 20,
-  justify: 'start',
-  leftElement: cel1,
+  text: 'text',
+  rightElement: <Cel />,
+};
+export const Text1ImageRightEl = Template.bind({});
+Text1ImageRightEl.args = {
+  paddingSize: 20,
+  text: 'text',
+  imageURL:
+    'https://blog.kakaocdn.net/dn/dQgYtU/btqVe8WNkSr/18o2eEG2sXHkZR3T2TZl81/img.png',
+  rightElement: <Cel />,
 };
 
-export const element1Left = Template.bind({});
-element1Left.args = {
+export const Text2RightEl = Template.bind({});
+Text2RightEl.args = {
   paddingSize: 20,
-  justify: 'end',
-  leftElement: cel1,
+  text: 'text',
+  subtext: 'text2',
+  rightElement: <Cel />,
 };
 
-export const element1Mid = Template.bind({});
-element1Mid.args = {
+export const Text2ImageRightEl = Template.bind({});
+Text2ImageRightEl.args = {
   paddingSize: 20,
-  justify: 'center',
-  leftElement: cel1,
+  text: 'text',
+  subtext: 'text2',
+  imageURL:
+    'https://blog.kakaocdn.net/dn/dQgYtU/btqVe8WNkSr/18o2eEG2sXHkZR3T2TZl81/img.png',
+  rightElement: <Cel />,
 };
 
-const El1 = styled.div`
+const El = styled.div`
   width: 20px;
   height: 20px;
   background-color: aqua;
-`;
-
-const El2 = styled.div`
-  width: 30px;
-  height: 10px;
-  background-color: darkblue;
-`;
-
-const El3 = styled.div`
-  width: 10px;
-  height: 30px;
-  background-color: #7a4f00;
 `;
