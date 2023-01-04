@@ -1,13 +1,14 @@
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { CSSProperties } from '@emotion/serialize';
-/** @jsxImportSource @emotion/react */
+import { ReactNode } from 'react';
 
 export interface FlexBoxProps {
   align: CSSProperties['alignItems'];
   justify?: CSSProperties['justifyContent'];
   direction?: CSSProperties['flexDirection'];
   gap?: CSSProperties['gap'];
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
 }
 
 export type flexboxPropsKey = 'align' | 'justify' | 'direction' | 'gap';
@@ -19,10 +20,10 @@ export type flexboxPropsKey = 'align' | 'justify' | 'direction' | 'gap';
  * @param gap : gap 속성
  */
 export const FlexBox = ({
-  align = 'center',
+  align,
   justify = 'center',
-  direction = 'column',
-  gap,
+  direction = 'row',
+  gap = 0,
   children,
 }: FlexBoxProps) => {
   return (
@@ -33,7 +34,6 @@ export const FlexBox = ({
         justify-content: ${justify};
         flex-direction: ${direction};
         gap: ${gap}px;
-        width: 100%;
       `}
     >
       {children}

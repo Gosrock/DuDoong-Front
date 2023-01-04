@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
 export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
@@ -10,10 +10,16 @@ export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
   children: string;
 }
 
+/**
+ *
+ * @param as Text 컴포넌트의 태그 (기본값 span)
+ * @param typo Typo theme 선택
+ * @param color Palette theme 선택
+ */
 export const Text = ({
   typo,
   as = 'span',
-  color = undefined,
+  color,
   children,
   ...props
 }: TextProps) => {
