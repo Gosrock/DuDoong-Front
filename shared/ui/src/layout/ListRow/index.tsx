@@ -3,23 +3,6 @@ import { ReactNode } from 'react';
 import { Text } from '../../components/Text';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
-/**
- * @paddingSize 버튼 셋의 패딩
- * number : 상하좌우 패딩
- * [number,number] : 상하, 좌우
- * [number,number,number,number] : 상, 우, 하, 좌
- * @param text : 컴포넌트에 들어갈 text (기본값 : '')
- * @param subtext : text 밑에 위치할 subtext (기본값 : '')
- * @param texttypo : text 글자 크기 (기본값 : ['Text_18', 'Text_16'])
- * [KeyOfTypo] : text typo
- * [KeyOfTypo, KeyOfTypo] : text typo, subtext typo
- * @param textcolor : text 글자 크기 (기본값 : ['black', 'gray_400'])
- * [KeyOfPalette] : text color
- * [KeyOfPalette, KeyOfPalette] : text color, subtext color
- * @param imageURL : 왼쪽에 들어갈 이미지 URL (기본값 : '')
- * @param rightElement : 오른쪽에 위치시킬 element (기본값 : <></>)
- */
-
 export type TextTypo = KeyOfTypo | [KeyOfTypo, KeyOfTypo];
 export type TextColor = KeyOfPalette | [KeyOfPalette, KeyOfPalette];
 
@@ -33,6 +16,22 @@ export interface ListRowProps {
   rightElement?: ReactNode;
 }
 
+/**
+ * @paddingSize 패딩
+ * number : 상하좌우 패딩
+ * [number,number] : 상하, 좌우
+ * [number,number,number,number] : 상, 우, 하, 좌
+ * @param text : 메인 text
+ * @param subtext : 서브 text
+ * @param textTypo : text 글자 크기 (기본값 : ['Text_18', 'Text_16'])
+ * @param textColor : text 글자 크기 (기본값 : ['gray_500', 'gray_400'])
+ * @param leftImage : 왼쪽에 들어갈 element
+ * @param rightElement : 오른쪽에 위치시킬 element (기본값 : <></>)
+ * --------------------
+ * text와 subText에는 string 또는 <Text/> 컴포넌트가 들어갈 수 있습니다.
+ * string으로 넘길때에는 textTypo와 textColor props를 함께 넘겨줍니다.
+ * textTypo와 textColor에는 keyof@@ 또는 [keyof@@, keyof@@] 타입을 사용합니다.
+ */
 export const ListRow = ({
   paddingSize,
   text,

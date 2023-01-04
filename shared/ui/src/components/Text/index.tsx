@@ -10,10 +10,16 @@ export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
   children: string;
 }
 
+/**
+ *
+ * @param as Text 컴포넌트의 태그 (기본값 span)
+ * @param typo Typo theme 선택
+ * @param color Palette theme 선택
+ */
 export const Text = ({
   typo,
   as = 'span',
-  color = 'gray_500',
+  color,
   children,
   ...props
 }: TextProps) => {
