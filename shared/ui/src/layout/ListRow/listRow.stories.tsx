@@ -14,12 +14,12 @@ const Template: ComponentStory<typeof ListRow> = (args) => (
   <ListRow {...args} />
 );
 
-const ImageMock = () => {
+export const ImageMock = ({ size }: { size: number }) => {
   return (
     <div
       css={css`
-        width: 49px;
-        height: 49px;
+        width: ${size}px;
+        height: ${size}px;
         border-radius: 50%;
         background-color: gray;
       `}
@@ -32,8 +32,8 @@ Full.args = {
   paddingSize: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <ImageMock />,
-  leftImage: <ImageMock />,
+  rightElement: <ImageMock size={49} />,
+  leftImage: <ImageMock size={20} />,
 };
 
 export const NoImage = Template.bind({});
@@ -41,7 +41,7 @@ NoImage.args = {
   paddingSize: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <ImageMock />,
+  rightElement: <ImageMock size={20} />,
 };
 
 export const LeftText = Template.bind({});
