@@ -1,16 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { PaddingSize, } from '../../layout';
-import { KeyOfPalette, KeyOfTypo } from '../../theme';
 import { Padding, FlexBox } from '../../layout';
-import { CSSProperties } from 'react';
-import { css } from '@emotion/react';
-import { ReactNode } from 'react';
 import { Text } from '../Text';
 import { TextPropsKey } from '../Text';
-import { TextProps } from './../Text/index';
-import { typo } from '../../theme/typo';
-import { theme } from '../../theme';
+
 
 export interface ListHeaderProps {
     title:string,
