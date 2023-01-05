@@ -28,21 +28,4 @@ export const listHeader_28 = Template.bind({});
 listHeader_28.args = {
 };
 
-// export const headerWithDescript = Template.bind({});
-// headerWithDescript.args = {
-//   children: (
-//     <>
-//         <Padding size = {[20, 0]}>
-//             <Text 
-//                 typo="Text_16"
-//                 color = "gray_500"
-//             >
-//                 제목에 대한 설명이 들어가는 자리입니다. 두 줄로 작성이 가능합니다.
-//             </Text>
-//       </Padding>
-//     </>
-//   ),
-//   varient: 'headerWithDescript',
-// };
-
 
