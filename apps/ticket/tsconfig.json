@@ -20,8 +20,8 @@
     // 절대경로
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["src/pages/*"],
-      "@blocks/*": ["src/blocks/*"],
+      "@pages/*": ["pages/*"],
+      "@components/*": ["src/components/*"],
       "@lib/*": ["src/lib/*"],
       "@store/*": ["src/store/*"]
     }

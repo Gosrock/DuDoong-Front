@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { CSSProperties } from '@emotion/serialize';
 import styled from '@emotion/styled';
+import { ReactNode } from 'react';
 import { FlexBox, flexboxPropsKey, Padding, PaddingSize } from '../../layout';
 
 export interface ButtonSetProps {
-  children: JSX.Element;
+  children: ReactNode;
   varient?: ButtonSetVarient;
   paddingSize?: PaddingSize;
 }
