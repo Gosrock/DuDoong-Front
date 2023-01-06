@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ListRow } from '.';
 import { Text } from '../../components/Text';
 import { ProfileImage } from '../../components/Profile/ProfileImage';
+import { Tag } from '../../components';
 
 export default {
   title: 'ListRow',
@@ -19,7 +20,7 @@ Full.args = {
   padding: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <ProfileImage size={20} />,
+  rightElement: <Tag text="예시 태그" color="red" />,
   leftImage: <ProfileImage size={49} />,
 };
 
@@ -28,7 +29,7 @@ NoImage.args = {
   padding: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <ProfileImage size={20} />,
+  rightElement: <Tag text="예시 태그" color="main" />,
 };
 
 export const LeftText = Template.bind({});
