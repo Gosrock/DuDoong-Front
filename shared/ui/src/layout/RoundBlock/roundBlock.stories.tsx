@@ -44,7 +44,7 @@ ListRowElement.args = {
       leftImage={<ImageMock />}
     ></ListRow>
   ),
-  paddingSize: 0,
+  padding: 0,
   color: 'black',
 };
 
@@ -53,6 +53,6 @@ profileElement.args = {
   children: (
     <Profile size={'big'} name={'한규진'} subText={'010 - 1234 - 5678'} />
   ),
-  paddingSize: 10,
+  padding: 10,
   color: 'gray_200',
 };
