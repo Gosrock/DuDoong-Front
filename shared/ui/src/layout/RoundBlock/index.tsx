@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { CSSProperties } from '@emotion/serialize';
 
 /**
- * @param paddingSize 패딩
+ * @param padding 패딩
  * number : 상하좌우 패딩
  * [number,number] : 상하, 좌우
  * [number,number,number,number] : 상, 우, 하, 좌
@@ -15,18 +15,18 @@ import { CSSProperties } from '@emotion/serialize';
 export interface RoundBlockProps {
   children: JSX.Element;
   color?: KeyOfPalette;
-  paddingSize?: PaddingSize;
+  padding?: PaddingSize;
   radius?: CSSProperties['borderRadius'];
 }
 
 export const RoundBlock = ({
   children,
   color = 'white',
-  paddingSize = [20, 20],
+  padding = [20, 20],
   radius = 16,
 }: RoundBlockProps) => {
   return (
-    <RoundWrapper radius={radius} colorKey={color} size={paddingSize}>
+    <RoundWrapper radius={radius} colorKey={color} size={padding}>
       {children}
     </RoundWrapper>
   );
