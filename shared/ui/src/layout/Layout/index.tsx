@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Header } from '../../components';
-import { MockProfile } from '../../components/Header/header.stories';
+import { Profile } from '../../components/Profile/Profile';
 import { FlexBox } from '../FlexBox';
 import { useResponsive } from './useResponsive';
 
@@ -17,7 +17,7 @@ export const Layout = ({ children }: LayoutProps) => {
 const PCLayout = ({ children }: { children: JSX.Element }) => {
   return (
     <>
-      <Header rightElement={<MockProfile />} />
+      <Header rightElement={<Profile size={'small'} name={'한규진'} />} />
       <FlexBox
         align={'center'}
         css={css`
