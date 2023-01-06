@@ -10,8 +10,8 @@ export default {
 
 const Template: ComponentStory<typeof Text> = (args) => <Text {...args} />;
 
-export const example = Template.bind({});
-example.args = {
+export const text = Template.bind({});
+text.args = {
   children: '두둥!',
   typo: 'Text_18',
   as: 'h5',
