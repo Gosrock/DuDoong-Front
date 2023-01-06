@@ -7,7 +7,7 @@ export type TextTypo = KeyOfTypo | [KeyOfTypo, KeyOfTypo];
 export type TextColor = KeyOfPalette | [KeyOfPalette, KeyOfPalette];
 
 export interface ListRowProps {
-  paddingSize: PaddingSize;
+  padding: PaddingSize;
   text: JSX.Element | string;
   subText?: JSX.Element | string;
   textTypo?: TextTypo;
@@ -33,7 +33,7 @@ export interface ListRowProps {
  * textTypo와 textColor에는 keyof@@ 또는 [keyof@@, keyof@@] 타입을 사용합니다.
  */
 export const ListRow = ({
-  paddingSize,
+  padding,
   text,
   subText,
   textTypo = ['Text_18', 'Text_16'],
@@ -42,7 +42,7 @@ export const ListRow = ({
   rightElement = <></>,
 }: ListRowProps) => {
   return (
-    <Padding size={paddingSize}>
+    <Padding size={padding}>
       <FlexBox align={'center'} justify={'space-between'}>
         <FlexBox align="center" justify={'flex-start'} gap={16}>
           {leftImage}
