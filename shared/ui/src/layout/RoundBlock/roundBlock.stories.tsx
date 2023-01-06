@@ -2,7 +2,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { RoundBlock } from '.';
 import { css } from '@emotion/react';
-import { Text } from '../../components';
+import { Profile, Text } from '../../components';
 import { ListRow } from '../ListRow';
 
 const ImageMock = () => {
@@ -28,31 +28,31 @@ const Template: ComponentStory<typeof RoundBlock> = (args) => (
   <RoundBlock {...args} />
 );
 
-export const OnlyText = Template.bind({});
-OnlyText.args = {
-  content: 'asd',
-  color: 'red_300',
-  paddingSize: [4, 12],
-  radius: 8,
-  textType: 'Text_12',
-  textColor: 'gray_500',
-};
-
 export const TextElement = Template.bind({});
 TextElement.args = {
-  content: <Text typo="Text_16">제목</Text>,
+  children: <Text typo="Text_16">제목</Text>,
 };
 
 export const ListRowElement = Template.bind({});
 ListRowElement.args = {
-  content: (
+  children: (
     <ListRow
-      paddingSize={[0, 0]}
+      padding={[0, 0]}
       text="text"
       subText="sub"
       rightElement={<ImageMock />}
       leftImage={<ImageMock />}
     ></ListRow>
   ),
+  paddingSize: 0,
   color: 'black',
+};
+
+export const profileElement = Template.bind({});
+profileElement.args = {
+  children: (
+    <Profile size={'big'} name={'한규진'} subText={'010 - 1234 - 5678'} />
+  ),
+  paddingSize: 10,
+  color: 'gray_200',
 };
