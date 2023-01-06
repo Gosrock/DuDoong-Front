@@ -36,6 +36,7 @@ export const Padding = ({
           ? `${size[0]}px ${size[1]}px`
           : `${size[0]}px ${size[1]}px ${size[2]}px ${size[3]}px`};
         ${fill && 'width : 100%;'}
+        box-sizing:border-box;
       `}
       {...props}
     >

@@ -1,5 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Header } from '.';
+import { ListRow } from '../../layout';
+import { ImageMock } from '../../layout/ListRow/listRow.stories';
+import { Text } from '../Text';
 
 export default {
   title: 'Header',
@@ -9,11 +12,21 @@ export default {
 
 const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
+export const MockProfile = () => {
+  return (
+    <ListRow
+      leftImage={<ImageMock size={32} />}
+      text={<Text typo="Text_16">한규진</Text>}
+      paddingSize={0}
+    />
+  );
+};
+
 export const user = Template.bind({});
-user.args = { profile: { name: '한규진', host: '고스락' } };
+user.args = { rightElement: <MockProfile /> };
 
 export const admin = Template.bind({});
 admin.args = {
-  profile: { name: '한규진', host: '고스락' },
+  rightElement: <MockProfile />,
   title: '고스락 23번째 정기공연',
 };

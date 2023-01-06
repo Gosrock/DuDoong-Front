@@ -32,8 +32,8 @@ Full.args = {
   paddingSize: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <ImageMock size={49} />,
-  leftImage: <ImageMock size={20} />,
+  rightElement: <ImageMock size={20} />,
+  leftImage: <ImageMock size={49} />,
 };
 
 export const NoImage = Template.bind({});

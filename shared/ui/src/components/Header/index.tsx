@@ -1,27 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { HTMLAttributes } from 'react';
-import { FlexBox, ListRow, Padding } from '../../layout';
-import { ImageMock } from '../../layout/ListRow/listRow.stories';
+import { HTMLAttributes, ReactNode } from 'react';
+import { FlexBox, Padding } from '../../layout';
 import { Text } from '../Text';
 
 export interface PCHeaderProps extends HTMLAttributes<HTMLDivElement> {
-  profile: { name: string; host: string };
+  rightElement: ReactNode;
   title?: string;
 }
 
-export const Header = ({ profile, title }: PCHeaderProps) => {
+export const Header = ({ rightElement, title }: PCHeaderProps) => {
   return (
     <Wrapper align={'center'}>
       <Padding size={[0, 56, 0, 24]} fill>
         <FlexBox justify={'space-between'} align={'center'}>
           <LogoMock />
-          <ListRow
-            leftImage={<ImageMock size={32} />}
-            text={<Text typo="Text_16">한규진</Text>}
-            paddingSize={0}
-          />
+          {rightElement}
         </FlexBox>
       </Padding>
       {title && (
@@ -43,6 +38,11 @@ export const Header = ({ profile, title }: PCHeaderProps) => {
 const Wrapper = styled(FlexBox)`
   height: 72px;
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_200};
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.palette.white};
 `;
 
 const LogoMock = styled.div`
