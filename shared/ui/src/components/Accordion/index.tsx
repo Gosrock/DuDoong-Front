@@ -2,13 +2,15 @@ import styled from '@emotion/styled';
 import { ReactNode, useCallback, useRef, useState } from 'react';
 import { ReactComponent as Down } from '../../assets/icons/down.svg';
 import { ReactComponent as Up } from '../../assets/icons/up.svg';
-import { Padding, PaddingSize } from '../../layout';
-
+import { FlexBox, Padding, PaddingSize } from '../../layout';
+import { KeyOfTypo } from '../../theme';
+import { Text } from '../Text';
 export interface AccordionProps {
   title?: string;
-  children: ReactNode;
   titlepaddingSize: PaddingSize;
   contents: string;
+  titleAs: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  titleTypo: KeyOfTypo;
 }
 
 /**
@@ -26,72 +28,46 @@ export interface AccordionProps {
 
 export const Accordion = ({
   title = '공연장안내',
-  children,
+  titleAs = 'p',
+  titleTypo = 'Text_12',
   titlepaddingSize = [20, 10],
   contents,
 }: AccordionProps) => {
-  const parentRef = useRef<HTMLDivElement>(null);
-  const childRef = useRef<HTMLDivElement>(null);
   const [isCollapse, setIsCollapse] = useState(false);
-
-  const handleButtonClick = useCallback(
-    (e: { stopPropagation: () => void }) => {
-      e.stopPropagation();
-      if (parentRef.current === null || childRef.current === null) {
-        return;
-      }
-      if (parentRef.current.clientHeight > 0) {
-        parentRef.current.style.height = '0';
-        parentRef.current.style.background = 'white';
-      } else {
-        parentRef.current.style.height = `${childRef.current.clientHeight}px`;
-      }
-      setIsCollapse(!isCollapse);
-    },
-    [isCollapse],
-  );
-
-  const parentRefHeight = parentRef.current?.style.height ?? '0px';
 
   return (
     <>
       <Container>
-        <Header onClick={handleButtonClick}>
+        <div onClick={() => setIsCollapse((prev) => !prev)}>
           <Padding size={titlepaddingSize}>
-            <TitleText>{title}</TitleText>
+            <FlexBox align="any" direction="row" justify="space-between">
+              <Text as={titleAs} typo={titleTypo}>
+                {title}
+              </Text>
+              {!isCollapse ? <Down /> : <Up />}
+            </FlexBox>
           </Padding>
-          <Icon>{parentRefHeight === '0px' ? <Down /> : <Up />} </Icon>
-        </Header>
-        <ContentsWrapper ref={parentRef}>
-          <Contents ref={childRef}>
-            {children}
-            {contents}
-          </Contents>
+        </div>
+        <ContentsWrapper isOpen={isCollapse} childRef>
+          <Contents isOpen={isCollapse}>{contents}</Contents>
         </ContentsWrapper>
       </Container>
     </>
   );
 };
-const ContentsWrapper = styled.div`
-  height: 0;
-  overflow: hidden;
-  transition: height 0.3s ease;
+const ContentsWrapper = styled.div<{ isOpen: boolean; childRef: any }>`
+  height: ${(props) => (props.isOpen === false ? '0' : `${props.childRef}px`)};
+  overflow: ${(props) => (props.isOpen === false ? 'hidden' : 'none')};
 `;
-const Contents = styled.div`
+const Contents = styled.div<{ isOpen: boolean }>`
   padding: 4px 8px;
-`;
-const Icon = styled.div`
-  font-size: 40px;
-  margin-left: 330px;
-  position: fixed;
-`;
-const TitleText = styled.a``;
-const Header = styled.div`
+  position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
+  border: 1px solid black;
 `;
