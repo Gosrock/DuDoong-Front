@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ListRow } from '.';
-import { css } from '@emotion/react';
-import { Text } from '../../components';
+import { Text } from '../../components/Text';
+import { ProfileImage } from '../../components/Profile/ProfileImage';
+import { Tag } from '../../components';
 
 export default {
   title: 'ListRow',
@@ -14,45 +15,32 @@ const Template: ComponentStory<typeof ListRow> = (args) => (
   <ListRow {...args} />
 );
 
-const ImageMock = () => {
-  return (
-    <div
-      css={css`
-        width: 49px;
-        height: 49px;
-        border-radius: 50%;
-        background-color: gray;
-      `}
-    />
-  );
-};
-
 export const Full = Template.bind({});
 Full.args = {
-  paddingSize: [20, 24],
+  padding: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <ImageMock />,
-  leftImage: <ImageMock />,
+  rightElement: <Tag text="예시 태그" color="red" />,
+  leftImage: <ProfileImage size={49} />,
 };
 
 export const NoImage = Template.bind({});
 NoImage.args = {
-  paddingSize: [20, 24],
+  padding: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <ImageMock />,
+  rightElement: <Tag text="예시 태그" color="main" />,
 };
 
 export const LeftText = Template.bind({});
 LeftText.args = {
-  paddingSize: [20, 24],
+  padding: [20, 24],
   text: <Text typo="Text_16">제목</Text>,
 };
 
 export const LeftRightText = Template.bind({});
 LeftRightText.args = {
-  paddingSize: [20, 24],
+  padding: [20, 24],
   text: <Text typo="Text_16">제목</Text>,
   rightElement: <Text typo="Text_16_SB">예시</Text>,
 };
