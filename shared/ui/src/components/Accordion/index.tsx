@@ -10,16 +10,14 @@ export interface AccordionProps
   content: ReactNode;
 }
 /**
- * @titlepaddingSize 제목 패딩 기본:[20,10]
+ * @param padding 제목 패딩 기본:[20,10]
  * number: 상하좌우 패딩
  * [num,num]:상하, 좌우
  * [num,num,num,num]:상,우,하,좌
  * @param title : 제목
  * @param content: 내용물, 눈으로 확인해 볼 수 있게 일단 string으로 해놓았는데 기본 요소 무엇으로 해놓아야할지 정하지 x
- * --------------------
- * contents는 listRow요소를 써서 listRow에 맞게 써주세요
- * 아이콘과 접었다 폈다는 고정시켜서 props가 많이 x 오히려 안에 있는 요소들을 신경써야할듯
- * contents wrapper부분이 고정되어야 하는 이유는 높이에 맞게 접었다 폈다를 구현했기 때문에 설정해놓은 패딩값이 변하면 x
+ * @param textTypo
+ * @param textColor
  */
 
 export const Accordion = ({
