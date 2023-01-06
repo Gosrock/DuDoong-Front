@@ -1,23 +1,25 @@
 import { FlexBox, Padding, PaddingSize } from '..';
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { Text } from '../../components/Text';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
 export type TextTypo = KeyOfTypo | [KeyOfTypo, KeyOfTypo];
 export type TextColor = KeyOfPalette | [KeyOfPalette, KeyOfPalette];
 
-export interface ListRowProps {
-  padding: PaddingSize;
+export interface ListRowProps extends HTMLAttributes<HTMLDivElement> {
+  padding?: PaddingSize;
   text: JSX.Element | string;
   subText?: JSX.Element | string;
   textTypo?: TextTypo;
   textColor?: TextColor;
   leftImage?: ReactNode;
   rightElement?: ReactNode;
+  gap?: number;
+  fill?: boolean;
 }
 
 /**
- * @paddingSize 패딩
+ * @param padding 패딩
  * number : 상하좌우 패딩
  * [number,number] : 상하, 좌우
  * [number,number,number,number] : 상, 우, 하, 좌
@@ -27,26 +29,31 @@ export interface ListRowProps {
  * @param textColor : text 글자 크기 (기본값 : ['gray_500', 'gray_400'])
  * @param leftImage : 왼쪽에 들어갈 element
  * @param rightElement : 오른쪽에 위치시킬 element (기본값 : <></>)
+ * @param gap : text와 subtext 사이 gap
+ * @param fill : width 100% 필요할때
  * --------------------
  * text와 subText에는 string 또는 <Text/> 컴포넌트가 들어갈 수 있습니다.
  * string으로 넘길때에는 textTypo와 textColor props를 함께 넘겨줍니다.
  * textTypo와 textColor에는 keyof@@ 또는 [keyof@@, keyof@@] 타입을 사용합니다.
  */
 export const ListRow = ({
-  padding,
+  padding = 16,
   text,
   subText,
   textTypo = ['Text_18', 'Text_16'],
   textColor = ['gray_500', 'gray_400'],
   leftImage,
   rightElement = <></>,
+  fill = false,
+  gap = 0,
+  ...props
 }: ListRowProps) => {
   return (
-    <Padding size={padding}>
-      <FlexBox align={'center'} justify={'space-between'}>
-        <FlexBox align="center" justify={'flex-start'} gap={16}>
+    <Padding size={padding} fill={fill} {...props}>
+      <FlexBox id="container" align={'center'} justify={'space-between'}>
+        <FlexBox id="left" align="center" justify={'flex-start'} gap={16}>
           {leftImage}
-          <FlexBox direction={'column'} align={'left'}>
+          <FlexBox id="text" direction={'column'} align={'left'} gap={gap}>
             <>
               <CustomText
                 text={text}
