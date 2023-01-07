@@ -12,7 +12,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   errorMessage?: string;
-  messageColor?: KeyOfPalette;
+  errorMessageColor?: KeyOfPalette;
 }
 
 /**
@@ -29,7 +29,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const Input = ({
   value,
   height = 56,
-  messageColor = 'red_200',
+  errorMessageColor = 'red_200',
   ...props
 }: InputProps) => {
   return (
@@ -45,13 +45,13 @@ export const Input = ({
         {props.rightIcon}
       </InputWrapper>
 
-      <TextWrapper errorMessage={props.errorMessage}>
+      <MessageWrapper errorMessage={props.errorMessage}>
         {props.errorMessage && (
-          <Text typo={'Text_12'} color={messageColor}>
+          <Text typo={'Text_12'} color={errorMessageColor}>
             {props.errorMessage}
           </Text>
         )}
-      </TextWrapper>
+      </MessageWrapper>
     </FlexBox>
   );
 };
@@ -100,7 +100,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const TextWrapper = styled.div<{
+const MessageWrapper = styled.div<{
   errorMessage?: string;
 }>`
   padding-left: 16px;
