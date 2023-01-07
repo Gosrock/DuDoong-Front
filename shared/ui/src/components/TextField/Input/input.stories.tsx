@@ -14,6 +14,5 @@ export const text = Template.bind({});
 text.args = {
   type: 'text',
   disabled: false,
-  value: '',
   placeholder: '최대 N글자까지 쓸 수 있어요',
 };

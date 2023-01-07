@@ -6,6 +6,7 @@ import { calcRem } from '../../../theme/typo';
 import { Text } from '../../Text';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  value?: string;
   width?: number;
   height?: number;
   leftIcon?: ReactNode;
@@ -15,6 +16,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 /**
+ * @default: input (input 태그 속성 그대로)
+ *
  * @param width: number (기본값: 100%)
  * @param height: number (기본값: 56px)
  * @param leftImage: 왼쪽에 들어갈 수 있는 element
@@ -24,6 +27,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 
 export const Input = ({
+  value,
   height = 56,
   messageColor = 'red_200',
   ...props
