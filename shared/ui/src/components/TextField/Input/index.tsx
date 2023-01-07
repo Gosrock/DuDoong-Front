@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { InputHTMLAttributes, ReactNode } from 'react';
 import { FlexBox } from '../../../layout';
+import { KeyOfPalette } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Text } from '../../Text';
 
@@ -10,6 +11,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   errorMessage?: string;
+  messageColor?: KeyOfPalette;
 }
 
 /**
@@ -18,9 +20,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param leftImage: 왼쪽에 들어갈 수 있는 element
  * @param rightImage: 오른쪽에 들어갈 수 있는 element
  * @param errorMessage: string
+ * @param messageColor: KeyOfPalette
  */
 
-export const Input = ({ height = 56, ...props }: InputProps) => {
+export const Input = ({
+  height = 56,
+  messageColor = 'red_200',
+  ...props
+}: InputProps) => {
   return (
     <FlexBox
       align={'flex-start'}
@@ -36,7 +43,7 @@ export const Input = ({ height = 56, ...props }: InputProps) => {
 
       <TextWrapper errorMessage={props.errorMessage}>
         {props.errorMessage && (
-          <Text typo={'Text_12'} color={'red_200'}>
+          <Text typo={'Text_12'} color={messageColor}>
             {props.errorMessage}
           </Text>
         )}
@@ -56,7 +63,7 @@ const InputWrapper = styled.div<{
   padding: 16px;
   gap: 10px;
 
-  height: ${({ height }) => (height ? `${height}px` : `100px`)};
+  height: ${({ height }) => (height ? `${height}px` : `56px`)};
   width: ${({ width }) => (width ? `${width}px` : '100%')};
 
   // ㅡ.ㅡ
