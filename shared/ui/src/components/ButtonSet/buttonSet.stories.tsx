@@ -68,12 +68,7 @@ description.args = {
   children: (
     <>
       <Button varient="secondary">취소</Button>
-      <Text
-        typo="Text_14"
-        css={css`
-          color: ${theme.palette.gray_300};
-        `}
-      >
+      <Text typo="Text_14" color="gray_300">
         어쩌구저쩌구 설명
       </Text>
     </>
