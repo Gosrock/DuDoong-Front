@@ -17,7 +17,7 @@ export interface AccordionProps
  * @param title : 제목
  * @param content: 내용물, 눈으로 확인해 볼 수 있게 일단 string으로 해놓았는데 기본 요소 무엇으로 해놓아야할지 정하지 x
  * @param textTypo
- * @param textColor
+ * @param textColors
  */
 
 export const Accordion = ({
