@@ -7,6 +7,8 @@ import { Text } from '../Text';
 import React, { useState } from 'react';
 import { useRef } from 'react';
 import { element, number } from 'prop-types';
+import { useEffect } from '@storybook/addons';
+import { inferControls } from '@storybook/store';
 
 /**
  * @param menus menu 항목
@@ -25,6 +27,7 @@ export interface MenuBarProps {
 export const MenuBar = ({ menus, padding = [8, 24] }: MenuBarProps) => {
   const contentRef = useRef<HTMLDivElement[]>([]);
   const indicatorRef = useRef<HTMLDivElement>(null);
+  const [selected, setSelected] = useState<number>(0);
   // [left position, width]
   const [indicatorPositionAndWidth, setIndicatorPositionAndWidth] = useState<
     [number, number]
@@ -32,6 +35,12 @@ export const MenuBar = ({ menus, padding = [8, 24] }: MenuBarProps) => {
 
   const addRef = (element: HTMLDivElement) => {
     contentRef.current?.push(element);
+    if (indicatorPositionAndWidth[1] === 0) {
+      setIndicatorPositionAndWidth([
+        0,
+        contentRef.current[0].getBoundingClientRect().width,
+      ]);
+    }
   };
 
   const menuIndicatorHandler = (
@@ -44,8 +53,7 @@ export const MenuBar = ({ menus, padding = [8, 24] }: MenuBarProps) => {
       contentRef.current[index].getBoundingClientRect().left - leftPadding;
     const indicatorWidth =
       contentRef.current[index].getBoundingClientRect().width;
-
-    console.log(indicatorPosition, indicatorWidth);
+    setSelected(index);
     setIndicatorPositionAndWidth([indicatorPosition, indicatorWidth]);
   };
 
@@ -60,7 +68,7 @@ export const MenuBar = ({ menus, padding = [8, 24] }: MenuBarProps) => {
               <Content size={[12, 11, 10, 11]} key={index}>
                 <Text
                   typo="Navbar_17"
-                  color="gray_500"
+                  color={selected === index ? 'black' : 'gray_300'}
                   onClick={(e: React.MouseEvent) =>
                     menuIndicatorHandler(index, convertedPadding[3], e)
                   }
