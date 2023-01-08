@@ -47,6 +47,7 @@ listHeader_20.args = {
 
 export const listHeader_24 = Template.bind({});
 listHeader_24.args = {
+    title:'큰글씨 24px',
   rightElement: <Tag text="태그" color="mono" />,
 };
 

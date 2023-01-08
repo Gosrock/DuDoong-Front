@@ -6,19 +6,15 @@ import { KeyOfPalette, KeyOfTypo } from '../../theme';
 import { PaddingSize } from '../../layout';
 import { ReactNode } from 'react';
 
-type TextTypo = KeyOfTypo | [KeyOfTypo, KeyOfTypo];
-type TextColor = KeyOfPalette | [KeyOfPalette, KeyOfPalette];
-
 export interface ListHeaderProps {
   title: JSX.Element | string;
   description?: JSX.Element | string;
   variant?: ListHeaderTypo;
-  descTypo?: TextTypo;
-  descColor?: TextColor;
+  descTypo?: KeyOfTypo;
+  descColor?: KeyOfPalette;
   padding?: PaddingSize;
   rightElement?: ReactNode;
   gap?: number;
-  tag?: boolean;
 }
 
 type ListHeaderTypo =
@@ -74,8 +70,8 @@ export const ListHeader = ({
   description,
   variant = 'listHeader_24',
   title,
-  descColor = [listHeaderText[variant].textProp.color, 'gray_500'],
-  descTypo = [listHeaderText[variant].textProp.typo, 'Text_16'],
+  descColor = "gray_500",
+  descTypo = "Text_16",
   padding = listHeaderText[variant].padding,
   rightElement = <></>,
   gap,
@@ -89,39 +85,19 @@ export const ListHeader = ({
         direction="column"
       >
         <FlexBox id="title" align="center" justify={'space-between'}>
-          <CustomText
-            text={title}
-            typo={getTextTypo(descTypo, 0)}
-            color={getTextColor(descColor, 0)}
-          />
+        <Text typo = {listHeaderText[variant].textProp.typo} color = {listHeaderText[variant].textProp.color}>{title}</Text>
           {rightElement}
         </FlexBox>
         {description && (
           <CustomText
             text={description}
-            typo={getTextTypo(descTypo, 1)}
-            color={getTextColor(descColor, 1)}
+            typo={descTypo}
+            color={descColor}
           />
         )}
       </FlexBox>
     </Padding>
   );
-};
-
-const getTextTypo = (arg: TextTypo, index: 0 | 1): KeyOfTypo => {
-  if (arg.length === 2) {
-    return arg[index] as KeyOfTypo;
-  } else {
-    return arg as KeyOfTypo;
-  }
-};
-
-const getTextColor = (arg: TextColor, index: 0 | 1): KeyOfPalette => {
-  if (arg.length === 2) {
-    return arg[index] as KeyOfPalette;
-  } else {
-    return arg as KeyOfPalette;
-  }
 };
 
 const isString = (text: any): text is string => {
