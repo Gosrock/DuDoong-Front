@@ -9,7 +9,7 @@ import { ReactNode } from 'react';
 export interface ListHeaderProps {
   title: JSX.Element | string;
   description?: JSX.Element | string;
-  variant?: ListHeaderTypo;
+  size?: ListHeaderTypo;
   descTypo?: KeyOfTypo;
   descColor?: KeyOfPalette;
   padding?: PaddingSize;
@@ -68,11 +68,11 @@ const listHeaderText: ListHeaderTextType = {
 
 export const ListHeader = ({
   description,
-  variant = 'listHeader_24',
+  size = 'listHeader_24',
   title,
-  descColor = "gray_500",
-  descTypo = "Text_16",
-  padding = listHeaderText[variant].padding,
+  descColor = 'gray_500',
+  descTypo = 'Text_16',
+  padding = listHeaderText[size].padding,
   rightElement = <></>,
   gap,
 }: ListHeaderProps) => {
@@ -80,20 +80,21 @@ export const ListHeader = ({
     <Padding size={padding}>
       <FlexBox
         align="left"
-        gap={variant ? listHeaderText[variant].gap : gap}
+        gap={size ? listHeaderText[size].gap : gap}
         justify="center"
         direction="column"
       >
         <FlexBox id="title" align="center" justify={'space-between'}>
-        <Text typo = {listHeaderText[variant].textProp.typo} color = {listHeaderText[variant].textProp.color}>{title}</Text>
+          <Text
+            typo={listHeaderText[size].textProp.typo}
+            color={listHeaderText[size].textProp.color}
+          >
+            {title}
+          </Text>
           {rightElement}
         </FlexBox>
         {description && (
-          <CustomText
-            text={description}
-            typo={descTypo}
-            color={descColor}
-          />
+          <CustomText text={description} typo={descTypo} color={descColor} />
         )}
       </FlexBox>
     </Padding>
