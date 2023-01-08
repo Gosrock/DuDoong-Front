@@ -2,6 +2,7 @@ export * from './Button';
 export * from './ButtonSet';
 export * from './Text';
 export * from './ListHeader'
+export * from './TextField/Input';
 export * from './Header';
 export * from './Tag';
 export * from './TagButton';
