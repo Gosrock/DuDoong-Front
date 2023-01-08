@@ -43,4 +43,4 @@ jobs:
           file: ./Dockerfile.admin
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.get_version.outputs.VERSION }}
+          tags: david0218/dudoong-admin:${{ steps.get_version.outputs.VERSION }}

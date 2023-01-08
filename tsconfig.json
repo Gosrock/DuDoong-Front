@@ -31,6 +31,6 @@
       "path": "shared/utils"
     }
   ],
-  "include": ["src", "custom.d.ts"],
+  "include": [],
   "exclude": ["apps/**/dist/**"]
 }
