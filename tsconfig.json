@@ -17,7 +17,20 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react"
   },
-
-  "include": ["src", "custom.d.ts"],
+  "references": [
+    {
+      "path": "apps/ticket"
+    },
+    {
+      "path": "apps/admin"
+    },
+    {
+      "path": "shared/ui"
+    },
+    {
+      "path": "shared/utils"
+    }
+  ],
+  "include": [],
   "exclude": ["apps/**/dist/**"]
 }
