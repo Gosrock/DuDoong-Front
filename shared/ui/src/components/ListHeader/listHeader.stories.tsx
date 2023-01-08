@@ -19,7 +19,7 @@ export const listHeader_18 = Template.bind({});
 listHeader_18.args = {
   title: '작은글씨 18px',
   description: '설명설명',
-  variant: 'listHeader_18',
+  size: 'listHeader_18',
 };
 
 export const listHeader_18_Custom = Template.bind({});
@@ -47,7 +47,7 @@ listHeader_20.args = {
 
 export const listHeader_24 = Template.bind({});
 listHeader_24.args = {
-    title:'큰글씨 24px',
+  title: '큰글씨 24px',
   rightElement: <Tag text="태그" color="mono" />,
 };
 
