@@ -75,4 +75,10 @@ export const typo = {
     line-height: 150%;
     font-weight: 500;
   `,
+  Navbar_17: css`
+    font-family: 'Pretendard';
+    font-size: ${calcRem(17)};
+    line-height: 150%;
+    font-weight: 500;
+  `,
 } as const;
