@@ -1,13 +1,8 @@
 name: Build & Docker Push - Admin
 on:
   push:
-<<<<<<< HEAD
-    branches: [dev]
-    paths: ['apps/admin/src/**']
-=======
     # branches: [fix/admin-deploy]
     # paths: ['apps/admin/src/**']
->>>>>>> 45fd1a2 (fix(ci) : env 이름, 도커 버저닝 수정)
     # Publish semver tags as releases.
     tags:
       - Api-v*.*.*
