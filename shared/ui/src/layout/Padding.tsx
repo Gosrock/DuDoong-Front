@@ -4,7 +4,7 @@ import { HTMLAttributes } from 'react';
 
 interface PaddingProps extends HTMLAttributes<HTMLDivElement> {
   children: JSX.Element;
-  size: PaddingSize;
+  size?: PaddingSize;
   fill?: boolean;
 }
 
@@ -23,7 +23,7 @@ export type PaddingSize =
  */
 export const Padding = ({
   children,
-  size,
+  size = [0, 24],
   fill = false,
   ...props
 }: PaddingProps) => {
