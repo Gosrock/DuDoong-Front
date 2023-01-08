@@ -19,4 +19,5 @@ export default defineConfig({
       { find: '@store', replacement: '/src/store' },
     ],
   },
+  base: '/admin/',
 });

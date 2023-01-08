@@ -1,10 +1,11 @@
 name: Build & Docker Push - Ticket
 on:
   push:
-    branches: [dev]
-    paths: ['apps/ticket/src/**']
+    # branches: [dev]
+    # paths: ['apps/ticket/pages/**']
     # Publish semver tags as releases.
-    tags: ['v*.*.*']
+    tags:
+      - Ticket-v*.*.*
 
 jobs:
   build:
@@ -17,16 +18,13 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo "${{ secrets.ENV_VARS }}" >> .env
+          echo "${{ secrets.ENV_VARS_TICKET }}" >> .env
       # 도커 메타데이터 가져오기
-      - name: Docker meta
-        id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v1
-        with:
-          images: david0218/dudoong-ticket
-          tag-semver: |
-            {{version}}
-            {{major}}.{{minor}}
+      - name: Get the version
+        id: get_version
+        run: |
+          RELEASE_VERSION_WITHOUT_V="$(cut -d'v' -f2 <<< ${GITHUB_REF#refs/*/})"
+          echo ::set-output name=VERSION::$RELEASE_VERSION_WITHOUT_V
 
       # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
@@ -45,5 +43,4 @@ jobs:
           file: ./Dockerfile.ticket
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          tags: david0218/dudoong-ticket:${{ steps.get_version.outputs.VERSION }}
