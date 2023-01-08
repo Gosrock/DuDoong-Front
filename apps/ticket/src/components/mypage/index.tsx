@@ -17,6 +17,7 @@ const Mypage = () => {
           <Profile size="big" name="한규진" subText="010-5536-4937" />
         </Padding>
         <Divider />
+        <ListHeader title={'바로가기'} />
       </LayoutContainer>
     </>
   );
