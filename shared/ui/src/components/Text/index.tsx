@@ -7,9 +7,10 @@ export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
   as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   typo: KeyOfTypo;
   color?: KeyOfPalette;
-  children: string;
+  children: any;
 }
 
+export type TextPropsKey = 'typo' | 'color';
 /**
  *
  * @param as Text 컴포넌트의 태그 (기본값 span)
