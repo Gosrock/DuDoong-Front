@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import { Header } from '../../components';
 import { Profile } from '../../components/Profile/Profile';
-import { FlexBox } from '../FlexBox';
+import { media } from '../../theme';
 import { useResponsive } from './useResponsive';
 export interface LayoutProps {
   children: ReactNode;
@@ -18,14 +19,21 @@ const PCLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header rightElement={<Profile size={'small'} name={'한규진'} />} />
-      <FlexBox
-        align={'center'}
+      <div
         css={css`
           margin-top: 73px;
         `}
       >
         {children}
-      </FlexBox>
+      </div>
     </>
   );
 };
+
+export const LayoutContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  ${media.pc} {
+    max-width: 500px;
+  }
+`;
