@@ -43,4 +43,4 @@ jobs:
           file: ./Dockerfile.ticket
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.get_version.outputs.tags }}
+          tags: ${{ steps.get_version.outputs.VERSION }}
