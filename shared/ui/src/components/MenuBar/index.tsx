@@ -1,14 +1,8 @@
 import { FlexBox, Padding, PaddingSize } from '../../layout';
-import { KeyOfPalette } from '../../theme';
 import styled from '@emotion/styled';
-import { CSSProperties } from '@emotion/serialize';
-import { theme } from '../../theme';
 import { Text } from '../Text';
 import React, { useState } from 'react';
 import { useRef } from 'react';
-import { element, number } from 'prop-types';
-import { useEffect } from '@storybook/addons';
-import { inferControls } from '@storybook/store';
 
 /**
  * @param menus menu 항목
@@ -17,17 +11,26 @@ import { inferControls } from '@storybook/store';
  * [number,number] : 상하, 좌우
  * [number,number,number,number] : 상, 우, 하, 좌
  * * 아랫쪽 패딩은 0으로 고정입니다.
+ * @param curActiveMenu 현재 메뉴
+ * 첫번째 메뉴부터 0 1 2 .... 이런식으로 지정하면 됩니다.
+ * @param setCurActiveMenu 메뉴 변경
  */
 
 export interface MenuBarProps {
   menus: Array<string>;
+  curActiveMenu: number;
+  setCurActiveMenu: (nextMenu: number) => void;
   padding?: PaddingSize;
 }
 
-export const MenuBar = ({ menus, padding = [8, 24] }: MenuBarProps) => {
+export const MenuBar = ({
+  menus,
+  curActiveMenu,
+  setCurActiveMenu,
+  padding = [8, 24],
+}: MenuBarProps) => {
   const contentRef = useRef<HTMLDivElement[]>([]);
   const indicatorRef = useRef<HTMLDivElement>(null);
-  const [selected, setSelected] = useState<number>(0);
   // [left position, width]
   const [indicatorPositionAndWidth, setIndicatorPositionAndWidth] = useState<
     [number, number]
@@ -53,7 +56,7 @@ export const MenuBar = ({ menus, padding = [8, 24] }: MenuBarProps) => {
       contentRef.current[index].getBoundingClientRect().left - leftPadding;
     const indicatorWidth =
       contentRef.current[index].getBoundingClientRect().width;
-    setSelected(index);
+    setCurActiveMenu(index);
     setIndicatorPositionAndWidth([indicatorPosition, indicatorWidth]);
   };
 
@@ -65,10 +68,10 @@ export const MenuBar = ({ menus, padding = [8, 24] }: MenuBarProps) => {
         <FlexBox align="center" justify="start">
           {menus.map((menu, index) => (
             <div ref={(el: HTMLDivElement) => addRef(el)}>
-              <Content size={[12, 11, 10, 11]} key={index}>
+              <Content size={[12, 11, 9, 11]} key={index}>
                 <Text
                   typo="Navbar_17"
-                  color={selected === index ? 'black' : 'gray_300'}
+                  color={curActiveMenu === index ? 'black' : 'gray_300'}
                   onClick={(e: React.MouseEvent) =>
                     menuIndicatorHandler(index, convertedPadding[3], e)
                   }
@@ -114,6 +117,7 @@ const MenuBarWrapper = styled(Padding)`
 const Content = styled(Padding)`
   & > span:hover {
     color: ${({ theme }) => theme.palette.black};
+    cursor: pointer;
   }
 `;
 
@@ -127,5 +131,6 @@ const Indicator = styled.div<IndicatorProps>`
   background: ${({ theme }) => theme.palette.black};
   left: ${({ leftAndWidth }) => `${leftAndWidth[0]}px`};
   width: ${({ leftAndWidth }) => `${leftAndWidth[1]}px`};
-  transition: all 500ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  margin-bottom: -1px;
 `;
