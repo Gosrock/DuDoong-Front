@@ -30,7 +30,6 @@ export const MenuBar = ({
   padding = [8, 24],
 }: MenuBarProps) => {
   const contentRef = useRef<HTMLDivElement[]>([]);
-  const indicatorRef = useRef<HTMLDivElement>(null);
   // [left position, width]
   const [indicatorPositionAndWidth, setIndicatorPositionAndWidth] = useState<
     [number, number]
@@ -82,10 +81,7 @@ export const MenuBar = ({
             </div>
           ))}
         </FlexBox>
-        <Indicator
-          ref={indicatorRef}
-          leftAndWidth={indicatorPositionAndWidth}
-        />
+        <Indicator leftAndWidth={indicatorPositionAndWidth} />
       </>
     </MenuBarWrapper>
   );
