@@ -5,7 +5,7 @@ on:
     # paths: ['apps/admin/src/**']
     # Publish semver tags as releases.
     tags:
-      - Api-v*.*.*
+      - Admin-v*.*.*
 
 jobs:
   build:
