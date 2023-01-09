@@ -15,7 +15,7 @@ export interface AccordionProps
  * [num,num]:상하, 좌우
  * [num,num,num,num]:상,우,하,좌
  * @param title : 제목
- * @param content: 내용물, 눈으로 확인해 볼 수 있게 일단 string으로 해놓았는데 기본 요소 무엇으로 해놓아야할지 정하지 x
+ * @param content:
  * @param textTypo
  * @param textColor
  */
