@@ -9,6 +9,7 @@ import { ReactComponent as Option } from '../../assets/icons/option.svg';
 import { ReactComponent as Qr } from '../../assets/icons/qr.svg';
 import { ReactComponent as Reservationist } from '../../assets/icons/reservationist.svg';
 import { ReactComponent as Ticket } from '../../assets/icons/ticket.svg';
+import { ReactComponent as Slack } from '../../assets/icons/slack.svg';
 
 /**
  * @param type menu 종류
@@ -29,7 +30,10 @@ export type MenuItemSetTypeKey =
   | 'ticket'
   | 'option'
   | 'reservationist'
-  | 'qr';
+  | 'qr'
+  | 'hostInfo'
+  | 'hostMember'
+  | 'slack';
 
 type MenuItemSetType = {
   [key in MenuItemSetTypeKey]: {
@@ -66,6 +70,18 @@ const menuItemSet: MenuItemSetType = {
   qr: {
     text: 'QR 체크인',
     icon: <Qr />,
+  },
+  hostInfo: {
+    text: '호스트 정보',
+    icon: <BasicInfo />,
+  },
+  hostMember: {
+    text: '호스트 멤버',
+    icon: <Reservationist />,
+  },
+  slack: {
+    text: '슬랙 알림 등록',
+    icon: <Slack />,
   },
 };
 

@@ -11,12 +11,26 @@ export default {
 const Template: ComponentStory<typeof MenuItem> = (args) => {
   const [menu, setMenu] = useState<number>(0);
   return (
-    <MenuItem
-      {...args}
-      menuItemKey={3}
-      curActiveMenu={menu}
-      setCurActiveMenu={setMenu}
-    />
+    <>
+      <MenuItem
+        {...args}
+        menuItemKey={0}
+        curActiveMenu={menu}
+        setCurActiveMenu={setMenu}
+      />
+      <MenuItem
+        {...args}
+        menuItemKey={1}
+        curActiveMenu={menu}
+        setCurActiveMenu={setMenu}
+      />
+      <MenuItem
+        {...args}
+        menuItemKey={2}
+        curActiveMenu={menu}
+        setCurActiveMenu={setMenu}
+      />
+    </>
   );
 };
 
@@ -40,3 +54,12 @@ reservationist.args = { type: 'reservationist' };
 
 export const qr = Template.bind({});
 qr.args = { type: 'qr' };
+
+export const hostInfo = Template.bind({});
+hostInfo.args = { type: 'hostInfo' };
+
+export const hostMember = Template.bind({});
+hostMember.args = { type: 'hostMember' };
+
+export const slack = Template.bind({});
+slack.args = { type: 'slack' };
