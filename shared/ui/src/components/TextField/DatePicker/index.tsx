@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { theme } from '../../../theme';
@@ -7,7 +7,7 @@ import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 import { ReactComponent as Calender } from '../../../assets/icons/calender.svg';
 import { ko } from 'date-fns/esm/locale';
-export interface DatePickerProps {
+export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   placeholder?: string;
 }
@@ -30,7 +30,7 @@ export const DatePicker = ({ width, placeholder }: DatePickerProps) => {
         locale={ko}
         placeholderText={placeholder}
         customInput={
-          <Input width={width} value={startDate} leftIcon={<Calender />} />
+          <Input width={width} value={startDate} rightIcon={<Calender />} />
         }
       />
     </DatePickerStyles>
