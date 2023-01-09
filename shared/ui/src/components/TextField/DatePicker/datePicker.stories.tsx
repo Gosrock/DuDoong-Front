@@ -14,5 +14,5 @@ const Template: ComponentStory<typeof DatePicker> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   width: 242,
-  placeholder: 'Select Date',
+  placeholder: '날짜를 선택해 주세요',
 };
