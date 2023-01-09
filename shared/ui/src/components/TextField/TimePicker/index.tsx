@@ -24,7 +24,7 @@ export const TimePicker = ({ width, placeholder }: DatePickerProps) => {
         disabledKeyboardNavigation
         showTimeSelect
         showTimeSelectOnly
-        timeFormat="aa HH:mm"
+        timeFormat="hh:mm aa"
         timeIntervals={30}
         timeCaption="time"
         placeholderText={placeholder}
@@ -38,8 +38,8 @@ export const TimePicker = ({ width, placeholder }: DatePickerProps) => {
 
 const TimePickerStyles = styled.div`
   .react-datepicker {
-    margin-left: 16px;
     background-color: ${theme.palette.white};
+    color: ${theme.palette.gray_500};
 
     ${theme.typo.Text_18};
 
@@ -98,6 +98,7 @@ const TimePickerStyles = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 150px !important;
   }
 
   .react-datepicker__time {
@@ -108,9 +109,13 @@ const TimePickerStyles = styled.div`
   }
   .react-datepicker__time-box {
     margin: 0 !important;
-    width: 110px !important;
+    width: 100% !important;
     display: flex;
     justify-content: center;
+  }
+
+  .react-datepicker__time-list {
+    width: 100%;
   }
 
   .react-datepicker__time-list::-webkit-scrollbar {
@@ -122,5 +127,21 @@ const TimePickerStyles = styled.div`
     background: ${theme.palette.gray_200};
 
     border-radius: 16px;
+  }
+  .react-datepicker__time-list-item {
+    border-radius: 8px;
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .react-datepicker__time-list-item:hover {
+    border-radius: 8px;
+    margin: 15px;
+    padding: 5px 20px 5px 20px !important;
+    display: flex;
+    text-align: center;
+    justify-content: center;
   }
 `;
