@@ -7,7 +7,7 @@ import { FlexBox, flexboxPropsKey, Padding, PaddingSize } from '../../layout';
 export interface ButtonSetProps {
   children: ReactNode;
   varient?: ButtonSetVarient;
-  paddingSize?: PaddingSize;
+  padding?: PaddingSize;
 }
 
 type ButtonSetVarient =
@@ -66,11 +66,11 @@ const buttonSetFlex: buttonSetFlexType = {
 export const ButtonSet = ({
   children,
   varient = 'mono',
-  paddingSize = [40, 24, 20, 24],
+  padding = [40, 24, 20, 24],
 }: ButtonSetProps) => {
   return (
     <Wrapper>
-      <Padding size={paddingSize}>
+      <Padding size={padding}>
         <FlexBox
           align={buttonSetFlex[varient].align}
           gap={buttonSetFlex[varient].gap}
