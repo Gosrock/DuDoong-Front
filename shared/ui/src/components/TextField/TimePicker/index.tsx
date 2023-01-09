@@ -110,12 +110,17 @@ const TimePickerStyles = styled.div`
   .react-datepicker__time-box {
     margin: 0 !important;
     width: 100% !important;
+
     display: flex;
     justify-content: center;
   }
 
   .react-datepicker__time-list {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0px 15px !important;
   }
 
   .react-datepicker__time-list::-webkit-scrollbar {
@@ -139,13 +144,13 @@ const TimePickerStyles = styled.div`
     border-radius: 8px;
     background-color: ${theme.palette.main_200} !important;
     color: ${theme.palette.black}!important;
-    margin: 15px;
+    padding: 7px 20px 7px 20px !important;
   }
 
   .react-datepicker__time-list-item:hover {
     border-radius: 8px;
-    margin: 15px;
-    padding: 5px 20px 5px 20px !important;
+    padding: 7px 20px 7px 20px !important;
+
     display: flex;
     text-align: center;
     justify-content: center;
