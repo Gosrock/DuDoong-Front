@@ -1,17 +1,23 @@
+import { useResponsive } from '@dudoong/utils';
 import { overlayState, OverlayStateType } from '@store/globalOverlay';
 import { useRecoilState } from 'recoil';
 
 const useGlobalOverlay = () => {
   const [overlay, setOverlay] = useRecoilState(overlayState);
+  const { isPC } = useResponsive();
   const openOverlay = ({ content, props, isOpen = true }: OverlayStateType) => {
     setOverlay({ content, props, isOpen });
   };
 
   const closeOverlay = () => {
     setOverlay({ ...overlay!, isOpen: false });
-    setTimeout(() => {
+    if (isPC) {
       setOverlay(null);
-    }, 400);
+    } else {
+      setTimeout(() => {
+        setOverlay(null);
+      }, 400);
+    }
   };
 
   const isOpen = overlay?.isOpen || false;

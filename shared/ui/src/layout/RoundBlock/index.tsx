@@ -2,6 +2,7 @@ import { Padding, PaddingSize } from '..';
 import { KeyOfPalette } from '../../theme';
 import styled from '@emotion/styled';
 import { CSSProperties } from '@emotion/serialize';
+import { HTMLAttributes, ReactNode } from 'react';
 
 /**
  * @param padding 패딩
@@ -12,8 +13,8 @@ import { CSSProperties } from '@emotion/serialize';
  * @param radius : border-radius 값
  */
 
-export interface RoundBlockProps {
-  children: JSX.Element;
+export interface RoundBlockProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
   color?: KeyOfPalette;
   padding?: PaddingSize;
   radius?: CSSProperties['borderRadius'];
@@ -24,9 +25,10 @@ export const RoundBlock = ({
   color = 'white',
   padding = [20, 20],
   radius = 16,
+  ...props
 }: RoundBlockProps) => {
   return (
-    <RoundWrapper radius={radius} colorKey={color} size={padding}>
+    <RoundWrapper radius={radius} colorKey={color} size={padding} {...props}>
       {children}
     </RoundWrapper>
   );

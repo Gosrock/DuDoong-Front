@@ -1,4 +1,4 @@
-import { GlobalSheetContentKey } from '@components/shared/bottomSheet/GlobalSheet';
+import { GlobalSheetContentKey } from '@components/shared/overlay/GlobalOverlay';
 import { atom } from 'recoil';
 
 export interface OverlayStateType {
