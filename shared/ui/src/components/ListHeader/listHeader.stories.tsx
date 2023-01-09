@@ -24,6 +24,7 @@ listHeader_18.args = {
 
 export const listHeader_18_Custom = Template.bind({});
 listHeader_18_Custom.args = {
+  size: 'listHeader_18',
   title: (
     <Text typo="Text_18_SB" color="main_500">
       작은글씨 18px 커스텀
@@ -41,17 +42,21 @@ listHeader_18_Custom.args = {
 
 export const listHeader_20 = Template.bind({});
 listHeader_20.args = {
+  size: 'listHeader_20',
   title: '202020',
   rightElement: <Tag text="태그" color="mono" />,
 };
 
 export const listHeader_24 = Template.bind({});
 listHeader_24.args = {
+  size: 'listHeader_24',
   title: '큰글씨 24px',
   rightElement: <Tag text="태그" color="mono" />,
 };
 
 export const listHeader_28 = Template.bind({});
 listHeader_28.args = {
+  size: 'listHeader_28',
+  title: ' 큰글씨 28',
   rightElement: <Tag text="태그" color="mono" />,
 };
