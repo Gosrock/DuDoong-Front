@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { NavBar } from '.';
 
@@ -9,5 +10,12 @@ export default {
 
 const Template: ComponentStory<typeof NavBar> = (args) => <NavBar {...args} />;
 
-const Title = Template.bind({});
-Title.args = { title: '예매페이지' };
+const TestFunc = () => {
+  return action('alert');
+};
+
+export const Title = Template.bind({});
+Title.args = { label: '예매페이지', onClick: TestFunc() };
+
+export const NoTitle = Template.bind({});
+NoTitle.args = { onClick: TestFunc() };
