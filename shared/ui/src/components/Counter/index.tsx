@@ -18,8 +18,6 @@ export interface CounterProps {
     fixed?: boolean;
   }
 
-  
-
 export const Counter = ({
     price = 4000,
     typo = 'Text_16',
