@@ -5,15 +5,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { theme } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
-
+import { ReactComponent as Calender } from '../../../assets/icons/calender.svg';
 export interface DatePickerProps {
   width?: number;
   placeholder?: string;
 }
 
 /**
- * @default: input (input 태그 속성 그대로)
- *
  * @param width: number (기본값: 100%)
  * @param placeholder: string
  */
@@ -29,7 +27,9 @@ export const DatePicker = ({ width, placeholder }: DatePickerProps) => {
         disabledKeyboardNavigation
         dateFormat="yyyy-MM-dd"
         placeholderText={placeholder}
-        customInput={<Input width={width} value={startDate} />}
+        customInput={
+          <Input width={width} value={startDate} leftIcon={<Calender />} />
+        }
       />
     </DatePickerStyles>
   );
