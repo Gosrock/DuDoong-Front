@@ -8,6 +8,8 @@ export interface AccordionProps
   title?: string;
   padding?: PaddingSize;
   content: ReactNode;
+  onAccordionOpened?: () => {};
+  onAccordionClosed?: () => {};
 }
 /**
  * @param padding 제목 패딩 기본:[20,10]
@@ -26,12 +28,24 @@ export const Accordion = ({
   content,
   textTypo = 'Text_16',
   textColor = 'gray_500',
+  onAccordionOpened,
+  onAccordionClosed,
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleAccordion = () => {
+    if (isOpen) {
+      setIsOpen((prev) => !prev);
+      onAccordionClosed && onAccordionClosed();
+    } else {
+      setIsOpen((prev) => !prev);
+      onAccordionOpened && onAccordionOpened();
+    }
+  };
+
   return (
     <div>
-      <AccordianHeader onClick={() => setIsOpen((prev) => !prev)}>
+      <AccordianHeader onClick={handleAccordion}>
         <FlexBox align="center" justify="space-between">
           <ListRow
             text={title}
