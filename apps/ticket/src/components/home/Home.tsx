@@ -3,7 +3,7 @@ const Home = () => {
   return (
     <>
       <DDHead title="두둥! | 홈" />
-      <main>티켓 홈</main>
+      <main>홈</main>
     </>
   );
 };
