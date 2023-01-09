@@ -6,7 +6,19 @@ import { theme } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 
-export const DatePicker = () => {
+export interface DatePickerProps {
+  width?: number;
+  placeholder?: string;
+}
+
+/**
+ * @default: input (input 태그 속성 그대로)
+ *
+ * @param width: number (기본값: 100%)
+ * @param placeholder: string
+ */
+
+export const DatePicker = ({ width, placeholder }: DatePickerProps) => {
   const [startDate, setStartDate] = useState();
 
   return (
@@ -16,8 +28,8 @@ export const DatePicker = () => {
         onChange={(date: any) => setStartDate(date)}
         disabledKeyboardNavigation
         dateFormat="yyyy-MM-dd"
-        placeholderText="Select date"
-        customInput={<Input width={242} value={startDate} />}
+        placeholderText={placeholder}
+        customInput={<Input width={width} value={startDate} />}
       />
     </DatePickerStyles>
   );

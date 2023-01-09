@@ -7,12 +7,12 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof DatePicker>;
 
-const Template: ComponentStory<typeof DatePicker> = () => <DatePicker />;
+const Template: ComponentStory<typeof DatePicker> = (args) => (
+  <DatePicker {...args} />
+);
 
-export const text = Template.bind({});
-// // text.args = {
-// //   type: 'text',
-// //   disabled: false,
-// //   value: '',
-// //   placeholder: '최대 N글자까지 쓸 수 있어요',
-// // };
+export const Default = Template.bind({});
+Default.args = {
+  width: 242,
+  placeholder: 'Select Date',
+};

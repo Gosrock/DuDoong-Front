@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import { FlexBox } from '../../../layout';
 import { KeyOfPalette } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
@@ -26,35 +26,40 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param messageColor: KeyOfPalette
  */
 
-export const Input = ({
-  value,
-  height = 56,
-  errorMessageColor = 'red_200',
-  ...props
-}: InputProps) => {
-  return (
-    <FlexBox
-      align={'flex-start'}
-      justify={'center'}
-      direction={'column'}
-      gap={10}
-    >
-      <InputWrapper width={props.width} height={height}>
-        {props.leftIcon}
-        <StyledInput {...props} />
-        {props.rightIcon}
-      </InputWrapper>
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    { value, height = 56, errorMessageColor = 'red_200', ...props }: InputProps,
+    ref,
+  ) => {
+    return (
+      <FlexBox
+        align={'flex-start'}
+        justify={'center'}
+        direction={'column'}
+        gap={10}
+      >
+        <InputWrapper width={props.width} height={height}>
+          {props.leftIcon}
+          <StyledInput
+            value={value}
+            ref={ref}
+            onClick={props.onClick}
+            {...props}
+          />
+          {props.rightIcon}
+        </InputWrapper>
 
-      <MessageWrapper errorMessage={props.errorMessage}>
-        {props.errorMessage && (
-          <Text typo={'Text_12'} color={errorMessageColor}>
-            {props.errorMessage}
-          </Text>
-        )}
-      </MessageWrapper>
-    </FlexBox>
-  );
-};
+        <MessageWrapper errorMessage={props.errorMessage}>
+          {props.errorMessage && (
+            <Text typo={'Text_12'} color={errorMessageColor}>
+              {props.errorMessage}
+            </Text>
+          )}
+        </MessageWrapper>
+      </FlexBox>
+    );
+  },
+);
 
 const InputWrapper = styled.div<{
   width?: number;
