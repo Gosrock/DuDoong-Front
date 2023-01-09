@@ -37,7 +37,11 @@ export interface ListRowProps extends HTMLAttributes<HTMLDivElement> {
  * textTypo와 textColor에는 keyof@@ 또는 [keyof@@, keyof@@] 타입을 사용합니다.
  */
 export const ListRow = ({
+<<<<<<< HEAD
   padding = 16,
+=======
+  padding = [16, 24],
+>>>>>>> fb33d8f10ad8f6c2cb0b2245ba677c7aab0de5b0
   text,
   subText,
   textTypo = ['Text_18', 'Text_16'],
