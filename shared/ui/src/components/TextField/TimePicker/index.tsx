@@ -6,7 +6,7 @@ import { theme } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 import { ReactComponent as Clock } from '../../../assets/icons/clock.svg';
-import { DatePickerProps } from '../DatePicker';
+import { DatePicker, DatePickerProps } from '../DatePicker';
 
 /**
  * @param width: number (기본값: 100%)
@@ -20,13 +20,13 @@ export const TimePicker = ({ width, placeholder }: DatePickerProps) => {
     <TimePickerStyles>
       <ReactDatePicker
         selected={startTime}
-        onChange={(time: any) => setStartTime(startTime)}
+        onChange={(time: any) => setStartTime(time)}
         disabledKeyboardNavigation
         showTimeSelect
         showTimeSelectOnly
-        timeFormat="hh:mm aa"
+        dateFormat="hh:mm aa"
         timeIntervals={30}
-        timeCaption="time"
+        timeCaption="Time"
         placeholderText={placeholder}
         customInput={
           <Input width={width} value={startTime} rightIcon={<Clock />} />
@@ -134,6 +134,12 @@ const TimePickerStyles = styled.div`
     display: flex;
     text-align: center;
     justify-content: center;
+  }
+  .react-datepicker__time-list-item--selected {
+    border-radius: 8px;
+    background-color: ${theme.palette.main_200} !important;
+    color: ${theme.palette.black}!important;
+    margin: 15px;
   }
 
   .react-datepicker__time-list-item:hover {

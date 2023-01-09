@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { theme } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 import { ReactComponent as Calender } from '../../../assets/icons/calender.svg';
-export interface DatePickerProps {
+import { ko } from 'date-fns/esm/locale';
+export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   placeholder?: string;
 }
@@ -25,10 +26,11 @@ export const DatePicker = ({ width, placeholder }: DatePickerProps) => {
         selected={startDate}
         onChange={(date: any) => setStartDate(date)}
         disabledKeyboardNavigation
-        dateFormat="yyyy-MM-dd"
+        dateFormat="yyyy년 MM월 dd일"
+        locale={ko}
         placeholderText={placeholder}
         customInput={
-          <Input width={width} value={startDate} leftIcon={<Calender />} />
+          <Input width={width} value={startDate} rightIcon={<Calender />} />
         }
       />
     </DatePickerStyles>

@@ -9,7 +9,7 @@ import { ReactNode } from 'react';
 export interface ListHeaderProps {
   title: JSX.Element | string;
   description?: JSX.Element | string;
-  size?: ListHeaderTypo;
+  size: ListHeaderTypo;
   descTypo?: KeyOfTypo;
   descColor?: KeyOfPalette;
   padding?: PaddingSize;
@@ -26,6 +26,7 @@ type ListHeaderTypo =
 type ListHeaderTextType = {
   [key in ListHeaderTypo]: {
     textProp: TextType;
+    subTextProp: TextType;
     padding: PaddingSize;
     gap: number;
   };
@@ -37,6 +38,10 @@ const listHeaderText: ListHeaderTextType = {
       typo: 'Text_18_SB',
       color: 'black',
     },
+    subTextProp: {
+      typo: 'Text_14',
+      color: 'gray_400',
+    },
     padding: [32, 24, 12, 24],
     gap: 10,
   },
@@ -44,6 +49,10 @@ const listHeaderText: ListHeaderTextType = {
     textProp: {
       typo: 'Header_20',
       color: 'black',
+    },
+    subTextProp: {
+      typo: 'Text_14',
+      color: 'gray_400',
     },
     padding: [32, 24, 16, 24],
     gap: 20,
@@ -53,6 +62,10 @@ const listHeaderText: ListHeaderTextType = {
       typo: 'Header_24',
       color: 'black',
     },
+    subTextProp: {
+      typo: 'Text_14',
+      color: 'gray_400',
+    },
     padding: [32, 24, 16, 24],
     gap: 20,
   },
@@ -60,6 +73,10 @@ const listHeaderText: ListHeaderTextType = {
     textProp: {
       typo: 'Header_28',
       color: 'black',
+    },
+    subTextProp: {
+      typo: 'Text_16',
+      color: 'gray_400',
     },
     padding: [32, 24, 20, 24],
     gap: 20,
@@ -70,8 +87,8 @@ export const ListHeader = ({
   description,
   size = 'listHeader_24',
   title,
-  descColor = 'gray_500',
-  descTypo = 'Text_16',
+  descColor,
+  descTypo,
   padding = listHeaderText[size].padding,
   rightElement = <></>,
   gap,
@@ -94,7 +111,11 @@ export const ListHeader = ({
           {rightElement}
         </FlexBox>
         {description && (
-          <CustomText text={description} typo={descTypo} color={descColor} />
+          <CustomText
+            text={description}
+            typo={descTypo || listHeaderText[size].subTextProp.typo}
+            color={descColor || listHeaderText[size].subTextProp.color}
+          />
         )}
       </FlexBox>
     </Padding>
