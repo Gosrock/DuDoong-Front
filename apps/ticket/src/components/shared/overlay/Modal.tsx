@@ -23,7 +23,11 @@ const Wrapper = styled.div`
       opacity: 1;
     }
   }
+<<<<<<< HEAD
   animation: 0.1s ease-in forwards fadeIn;
+=======
+  animation: 0.1s forwards fadeIn;
+>>>>>>> 77cef6b71ddb5e81757f722cf8af0636b449bccc
   position: fixed;
   top: 0;
   left: 0;
@@ -37,8 +41,11 @@ const Wrapper = styled.div`
 
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
+<<<<<<< HEAD
   /* -webkit-backdrop-filter: blur(5px);
 backdrop-filter: blur(5px); */
+=======
+>>>>>>> 77cef6b71ddb5e81757f722cf8af0636b449bccc
   position: absolute;
   width: 100%;
   height: 100%;
