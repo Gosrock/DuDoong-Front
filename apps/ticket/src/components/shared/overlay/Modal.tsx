@@ -23,7 +23,7 @@ const Wrapper = styled.div`
       opacity: 1;
     }
   }
-  animation: 0.1s ease-in forwards fadeIn;
+  animation: 0.1s forwards fadeIn;
   position: fixed;
   top: 0;
   left: 0;
@@ -37,8 +37,6 @@ const Wrapper = styled.div`
 
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
-  /* -webkit-backdrop-filter: blur(5px);
-backdrop-filter: blur(5px); */
   position: absolute;
   width: 100%;
   height: 100%;
