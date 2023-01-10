@@ -10,3 +10,5 @@ export * from './Profile/Profile';
 export * from './Profile/ProfileImage';
 export * from './Spacing';
 export * from './Divider';
+export * from './Counter';
+export * from './TicketCount';
