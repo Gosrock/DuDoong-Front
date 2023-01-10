@@ -19,5 +19,5 @@
     "composite": true,
     "declaration": true
   },
-  "include": ["src"]
+  "include": ["src", "src/http/axios.ts"]
 }
