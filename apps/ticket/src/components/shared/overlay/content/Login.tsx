@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 const Login = () => {
   const onLogin = async () => {
     const data = await AuthApi.OAUTH_LINK();
-    window.location.href = data.data.link;
+    window.location.href = data.link;
   };
   return (
     <>
@@ -15,16 +15,6 @@ const Login = () => {
           <Button varient="kakao" onClick={onLogin}>
             카카오로 로그인하기
           </Button>
-          <button
-            css={css`
-              color: ${theme.palette.gray_300};
-              &:hover {
-                text-decoration: underline;
-              }
-            `}
-          >
-            <Text typo={'Text_16'}>또는, 회원가입하기</Text>
-          </button>
         </>
       </ButtonSet>
     </>

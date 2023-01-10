@@ -1,20 +1,25 @@
-import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import useAuthMutate from './useAuthMutate';
 
+export interface CallbackDataType {
+  idToken: string;
+  accessToken: string;
+  refreshToken: string;
+}
+
+//카카오 로그인 리다이렉트 페이지
 const Callback = () => {
   const router = useRouter();
-  const { idToken, accessToken, refreshToken } = router.query;
-  const { openOverlay } = useGlobalOverlay();
-  console.log(idToken);
-  const openLoginTest = () => {
-    idToken && openOverlay({ content: 'register', props: { idToken } });
-  };
+  const queryParams = router.query as unknown as CallbackDataType;
+  const { oauthValidMutation } = useAuthMutate(queryParams);
 
   useEffect(() => {
-    localStorage.setItem('accessToken', accessToken as string);
-    openLoginTest();
-  }, []);
+    if (queryParams.idToken) {
+      oauthValidMutation.mutate(queryParams.idToken);
+    }
+  }, [queryParams]);
+
   return <>로그인중</>;
 };
 
