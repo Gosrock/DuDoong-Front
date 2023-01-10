@@ -5,9 +5,10 @@ import { ReactNode } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useRecoilValue } from 'recoil';
 import Login from './content/Login';
+import Register from './content/Register';
 import Modal from './Modal';
 
-export type GlobalSheetContentKey = 'login';
+export type GlobalSheetContentKey = 'login' | 'register';
 
 export type GlobalSheetContentType = {
   [key in GlobalSheetContentKey]: ReactNode;
@@ -15,6 +16,7 @@ export type GlobalSheetContentType = {
 
 const globalSheetContent = {
   login: Login,
+  register: Register,
 };
 
 const GlobalOverlay = () => {
