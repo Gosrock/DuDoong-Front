@@ -31,7 +31,7 @@ const TEXT_COLOR = {
     selected: `${theme.palette.white}`,
     unselected: `${theme.palette.main_500}`,
     alert: `${theme.palette.white}`,
-    kakao: `${theme.palette.gray_500}`,
+    kakao: `${theme.palette.black}`,
   },
 };
 
