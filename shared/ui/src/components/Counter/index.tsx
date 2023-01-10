@@ -3,68 +3,67 @@ import { FlexBox } from "../../layout";
 import { Padding } from "../../layout";
 import { KeyOfTypo } from "../../theme";
 import { KeyOfPalette } from "../../theme";
-import { useState, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Text } from "../Text";
 import styled from "@emotion/styled";
 import dash from "../../assets/icons/minus.svg";
 import plus from "../../assets/icons/plus.svg";
+import { PaddingSize } from "../../layout";
 
 export interface CounterProps {
     price: number;
     typo: KeyOfTypo;
     color?: KeyOfPalette;
     rightElement?: ReactNode;
-    count?: number;
-    fixed?: boolean;
+    count: number;
+    padding:PaddingSize;
+    fixed: boolean;
+    setTicketPrice: (price: number) => void;
+    setTicketNum: (ticketNum: number) => void;
   }
 
 export const Counter = ({
-    price = 4000,
+    price,
     typo = 'Text_16',
     color = 'main_500',
-    count = 1,
-    rightElement =<></>,
-    fixed = true,
+    count,
+    fixed,
+    rightElement = <></>,
+    setTicketNum,
+    setTicketPrice,
     } : CounterProps) => {
-    const [ticketNum, setTicketNum] = useState<number>(count)
-    const [ticketPrice, setTicketPrice] = useState<number>(price);
-
-    const thousandNum = ticketPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    const thousandNum = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     const handlePlusClick = () => {
-        setTicketNum(ticketNum + 1);
-        setTicketPrice(ticketPrice + 4000);
+        setTicketNum(count + 1);
+        setTicketPrice(price + 4000);
     }
-
     const handleMinusClick = ()=> {
-        if(ticketNum === 1)
+        if(count === 1)
             return
-        setTicketNum(ticketNum - 1);
-        setTicketPrice(ticketPrice - 4000);
+        setTicketNum(count - 1);
+        setTicketPrice(price - 4000);
     }
-
     return (
         <FlexBox id="container" align={'center'} justify={'space-between'}>
             <Padding size = {[16, 24]}>
                 <Text typo = {typo} color = {color}>{thousandNum}원</Text>
             </Padding>
-          {fixed ? rightElement
-        :
-            (
+            {fixed ? rightElement
+            : (
                 <Padding size = {[10, 24]}>
                     <CounterWrapper width ={93} height = {36}>
                         <ImgWrapper onClick={handleMinusClick}>
                             <img src={dash} alt="dash"/>
                         </ImgWrapper>
                         <Text typo = {'Text_18'} color = {'gray_500'}>
-                                {ticketNum}
+                                {count}
                         </Text>
                         <ImgWrapper onClick={handlePlusClick}>
                             <img src={plus} alt="plus"/>
                         </ImgWrapper>
                     </CounterWrapper>
                 </Padding>
-            )
-        }
+            )}
         </FlexBox>
     );
   };
