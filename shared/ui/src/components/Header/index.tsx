@@ -5,12 +5,12 @@ import { HTMLAttributes, ReactNode } from 'react';
 import { FlexBox, Padding } from '../../layout';
 import { Text } from '../Text';
 
-export interface PCHeaderProps extends HTMLAttributes<HTMLDivElement> {
+export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   rightElement: ReactNode;
   title?: string;
 }
 
-export const Header = ({ rightElement, title }: PCHeaderProps) => {
+export const Header = ({ rightElement, title }: HeaderProps) => {
   return (
     <Wrapper align={'center'}>
       <Padding size={[0, 56, 0, 24]} fill>

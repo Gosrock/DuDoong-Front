@@ -42,7 +42,7 @@ type MenuItemSetType = {
   };
 };
 
-const menuItemSet: MenuItemSetType = {
+const MENU_ITEM_SET: MenuItemSetType = {
   dashboard: {
     text: '대시보드',
     icon: <Dashboard />,
@@ -118,10 +118,10 @@ export const MenuItem = ({
       >
         <FlexBox align={'center'} gap={16} justify={'start'}>
           <IconWrapper align={'center'} isSelected={isSelected}>
-            {menuItemSet[type].icon}
+            {MENU_ITEM_SET[type].icon}
           </IconWrapper>
           <Text typo={'Text_14'} color={isSelected ? 'main_500' : 'black'}>
-            {menuItemSet[type].text}
+            {MENU_ITEM_SET[type].text}
           </Text>
         </FlexBox>
       </MenuItemWrapper>

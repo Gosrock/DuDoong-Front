@@ -6,24 +6,24 @@ import { FlexBox, flexboxPropsKey, Padding, PaddingSize } from '../../layout';
 
 export interface ButtonSetProps {
   children: ReactNode;
-  varient?: ButtonSetVarient;
+  varient?: ButtonSetVariantKey;
   padding?: PaddingSize;
 }
 
-type ButtonSetVarient =
+type ButtonSetVariantKey =
   | 'mono'
   | 'sub'
   | 'horizontal'
   | 'vertical'
   | 'description';
 
-type buttonSetFlexType = {
-  [key in ButtonSetVarient]: {
+type buttonSetVariantType = {
+  [key in ButtonSetVariantKey]: {
     [key in flexboxPropsKey]: string;
   };
 };
 
-const buttonSetFlex: buttonSetFlexType = {
+const BUTTON_SET_VARIANT: buttonSetVariantType = {
   mono: { align: 'center', justify: 'center', direction: 'column', gap: '0' },
   sub: {
     align: 'center',
@@ -72,11 +72,12 @@ export const ButtonSet = ({
     <Wrapper>
       <Padding size={padding}>
         <FlexBox
-          align={buttonSetFlex[varient].align}
-          gap={buttonSetFlex[varient].gap}
-          justify={buttonSetFlex[varient].justify}
+          align={BUTTON_SET_VARIANT[varient].align}
+          gap={BUTTON_SET_VARIANT[varient].gap}
+          justify={BUTTON_SET_VARIANT[varient].justify}
           direction={
-            buttonSetFlex[varient].direction as CSSProperties['flexDirection']
+            BUTTON_SET_VARIANT[varient]
+              .direction as CSSProperties['flexDirection']
           }
         >
           {children}
