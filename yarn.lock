@@ -1975,6 +1975,7 @@ __metadata:
     react-datepicker: ^4.8.0
     react-dom: ^18.2.0
     react-scripts: 5.0.1
+    react-spinners: ^0.13.7
     storybook-addon-paddings: ^4.3.0
     webpack: ^5.75.0
   languageName: unknown
@@ -16163,6 +16164,16 @@ __metadata:
   bin:
     react-scripts: bin/react-scripts.js
   checksum: 92afa2f245c7092ccc97d5609dc7a2130616262e34da7f15072d9442e2d2e1d4909a91022abd1faac1336eb17c5525a10d9bd43e1ae374c7ec941ca20addca68
+  languageName: node
+  linkType: hard
+
+"react-spinners@npm:^0.13.7":
+  version: 0.13.7
+  resolution: "react-spinners@npm:0.13.7"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: d7a555b42313d301e561c39a4f20ae1b0da55541a6936ab44147eca5c8185036d4f6caebf450a9e6303211270f1aa72be843cbc1328024c832507c3f89ef0116
   languageName: node
   linkType: hard
 

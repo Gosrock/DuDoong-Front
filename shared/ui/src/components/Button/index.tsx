@@ -1,8 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { darken } from 'polished';
 import { ButtonHTMLAttributes } from 'react';
 import { theme } from '../../theme';
+import { Loader } from '../Loader';
 import { Text } from '../Text';
 
 type ButtonSize = 'fill' | 'fixed';
@@ -22,6 +24,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   varient?: ButtonVarient;
   size?: ButtonSize;
+  isLoading?: boolean;
 }
 
 const TEXT_COLOR = {
@@ -74,11 +77,16 @@ export const Button = ({
   children,
   varient = 'primary',
   size = 'fill',
+  isLoading = false,
   ...props
 }: ButtonProps) => {
   return (
     <StyledButton varient={varient} size={size} {...props}>
-      <Text typo={'Text_18'}>{children}</Text>
+      {isLoading ? (
+        <Loader color={TEXT_COLOR.normal[varient]} />
+      ) : (
+        <Text typo={'Text_18'}>{children}</Text>
+      )}
     </StyledButton>
   );
 };
