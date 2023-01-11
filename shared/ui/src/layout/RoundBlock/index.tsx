@@ -28,7 +28,7 @@ export const RoundBlock = ({
   ...props
 }: RoundBlockProps) => {
   return (
-    <RoundWrapper radius={radius} colorKey={color} size={padding} {...props}>
+    <RoundWrapper radius={radius} color={color} size={padding} {...props}>
       {children}
     </RoundWrapper>
   );
@@ -38,11 +38,11 @@ export const RoundBlock = ({
 
 interface RoundWrapperProps {
   radius: CSSProperties['borderRadius'];
-  colorKey: KeyOfPalette;
+  color: KeyOfPalette;
 }
 
 const RoundWrapper = styled(Padding)<RoundWrapperProps>`
   width: 100%;
   border-radius: ${({ radius }) => `${radius}px`};
-  background-color: ${({ colorKey, theme }) => `${theme.palette[colorKey]}`};
+  background-color: ${({ color, theme }) => `${theme.palette[color]}`};
 `;
