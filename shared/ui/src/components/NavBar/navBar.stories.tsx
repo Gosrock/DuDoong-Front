@@ -15,7 +15,7 @@ const TestFunc = () => {
 };
 
 export const Title = Template.bind({});
-Title.args = { label: '예매페이지', onClick: TestFunc() };
+Title.args = { label: '예매 상세 내역', Handler: TestFunc() };
 
 export const NoTitle = Template.bind({});
-NoTitle.args = { onClick: TestFunc() };
+NoTitle.args = { Handler: TestFunc() };
