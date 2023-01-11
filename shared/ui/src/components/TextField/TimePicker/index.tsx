@@ -6,7 +6,7 @@ import { theme } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 import { ReactComponent as Clock } from '../../../assets/icons/clock.svg';
-import { DatePicker, DatePickerProps } from '../DatePicker';
+import { DatePickerProps } from '../DatePicker';
 
 /**
  * @param width: number (기본값: 100%)
@@ -41,7 +41,7 @@ const TimePickerStyles = styled.div`
     background-color: ${theme.palette.white};
     color: ${theme.palette.gray_500};
 
-    ${theme.typo.Text_18};
+    ${theme.typo.Text_16};
 
     border: 0;
     border-radius: 10px;
@@ -52,7 +52,7 @@ const TimePickerStyles = styled.div`
     display: inline-block;
     position: relative;
 
-    width: 160px !important;
+    width: 140px !important;
 
     display: flex;
     justify-content: center;
@@ -78,7 +78,7 @@ const TimePickerStyles = styled.div`
   .react-datepicker__current-month,
   .react-datepicker-time__header,
   .react-datepicker-year-header {
-    ${theme.typo.Header_20}
+    ${theme.typo.Text_18_SB}
     color: ${theme.palette.black};
 
     height: ${calcRem(18)};
@@ -102,7 +102,7 @@ const TimePickerStyles = styled.div`
   }
 
   .react-datepicker__time {
-    width: 150px !important;
+    width: 135px !important;
     margin: 0 !important;
     display: flex;
     justify-content: center;
@@ -135,6 +135,7 @@ const TimePickerStyles = styled.div`
   }
   .react-datepicker__time-list-item {
     border-radius: 8px;
+    padding: 7px 15px 7px 15px !important;
 
     display: flex;
     text-align: center;
@@ -149,7 +150,7 @@ const TimePickerStyles = styled.div`
 
   .react-datepicker__time-list-item:hover {
     border-radius: 8px;
-    padding: 7px 20px 7px 20px !important;
+    padding: 7px 15px 7px 15px !important;
 
     display: flex;
     text-align: center;
