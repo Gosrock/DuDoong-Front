@@ -41,13 +41,13 @@ const DatePickerStyles = styled.div`
   .react-datepicker {
     background-color: ${theme.palette.white};
 
-    ${theme.typo.Text_18};
+    ${theme.typo.Text_16};
 
     border: 0;
     border-radius: 10px;
 
     box-shadow: 0px 0px 16px 0px rgba(14, 14, 14, 0.08);
-    padding: 24px 16px 24px 16px;
+    padding: 20px 12px 20px 12px;
 
     display: inline-block;
     position: relative;
@@ -58,7 +58,7 @@ const DatePickerStyles = styled.div`
   }
 
   .react-datepicker__navigation {
-    margin: 24px 16px 0px 16px;
+    margin: 20px 16px 0px 16px;
     width: 18px;
     height: 14px;
     overflow: visible;
@@ -88,13 +88,13 @@ const DatePickerStyles = styled.div`
 
     background-color: ${theme.palette.white};
     border-bottom: 1px solid ${theme.palette.gray_100};
-    padding: 0 0 16px 0;
+    padding: 0 0 12px 0;
   }
 
   .react-datepicker__current-month,
   .react-datepicker-time__header,
   .react-datepicker-year-header {
-    ${theme.typo.Header_20}
+    ${theme.typo.Text_18}
     color: ${theme.palette.black};
 
     height: ${calcRem(18)};
@@ -110,24 +110,25 @@ const DatePickerStyles = styled.div`
   }
 
   .react-datepicker__day-names {
-    padding-top: 24px;
-    gap: 6px !important;
+    padding-top: 20px;
+    gap: 4px !important;
     margin: 0 !important;
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .react-datepicker__day-name {
-    width: 38px !important;
-    height: 22px !important;
+    width: 28px !important;
+    height: 18px !important;
     margin: 0 !important;
 
     color: ${theme.palette.main_400} !important;
   }
 
   .react-datepicker__month {
-    padding-top: 16px !important;
+    padding-top: 12px !important;
     margin: 0 !important;
 
     text-align: center;
@@ -137,7 +138,7 @@ const DatePickerStyles = styled.div`
     flex-direction: column;
     align-items: center;
 
-    gap: 16px !important;
+    gap: 14px !important;
   }
 
   .react-datepicker__week {
@@ -155,14 +156,19 @@ const DatePickerStyles = styled.div`
     text-align: center;
     line-height: 0.75rem;
 
-    width: 38px;
-    height: 22px;
+    width: 32px;
+    height: 18px;
 
     margin: 0;
+    padding: 2px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .react-datepicker__day--today {
+    color: ${theme.palette.gray_500};
+    font-weight: 500 !important;
   }
 
   .react-datepicker__day:hover,
@@ -170,6 +176,7 @@ const DatePickerStyles = styled.div`
   .react-datepicker__quarter-text:hover,
   .react-datepicker__year-text:hover {
     border-radius: 4px;
+    padding: 2px;
     background-color: ${theme.palette.gray_100} !important;
   }
   .react-datepicker__day--today,
@@ -192,6 +199,7 @@ const DatePickerStyles = styled.div`
   .react-datepicker__year-text--in-selecting-range,
   .react-datepicker__year-text--in-range {
     border-radius: 4px;
+    padding: 2px;
     background-color: ${theme.palette.main_200} !important;
     color: ${theme.palette.black}!important;
   }
