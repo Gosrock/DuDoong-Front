@@ -1,6 +1,5 @@
-import { Button, ButtonSet, ListHeader, Text, theme } from '@dudoong/ui';
+import { Button, ButtonSet, ListHeader } from '@dudoong/ui';
 import { AuthApi } from '@dudoong/utils';
-import { css } from '@emotion/react';
 
 const Login = () => {
   const onLogin = async () => {

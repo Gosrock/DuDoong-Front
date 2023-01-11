@@ -1,4 +1,4 @@
-import { axiosPublic } from '../../axios';
+import { axiosPublic } from '../axios';
 import { OauthInfoResponse, OauthLoginResponse } from './authReponse';
 
 export const AuthApi = {
@@ -9,13 +9,17 @@ export const AuthApi = {
     return response.data.data;
   },
 
+  OAUTH_TOKEN: async (code: string) => {
+    const response = await axiosPublic.get(`/auth/oauth/kakao?code=${code}`);
+    return response.data.data;
+  },
+
   OAUTH_LINK: async () => {
     const response = await axiosPublic.get('/auth/oauth/kakao/link');
     return response.data.data;
   },
 
   OAUTH_VALID: async (idToken: string) => {
-    console.log(idToken);
     const response = await axiosPublic.get(
       `/auth/oauth/kakao/register/valid?id_token=${idToken}`,
     );

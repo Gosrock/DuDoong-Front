@@ -14,3 +14,9 @@ export interface OauthLoginResponse {
     name: string;
   };
 }
+
+export interface OauthTokenResponse {
+  accessToken: string;
+  refreshToken: string;
+  idToken: string;
+}

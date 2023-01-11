@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { isServer } from '../utils/isServer';
 
 const BASE_URL = `${
-  typeof window !== 'undefined'
+  isServer()
     ? window.location.origin === 'http://localhost:3000'
       ? 'https://staging.dudoong.com/api/v1'
       : `${window.location.origin}/api/v1`

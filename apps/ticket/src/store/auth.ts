@@ -1,8 +1,9 @@
-import { axiosPrivate, OauthLoginResponse } from '@dudoong/utils';
+import { isServer } from '@dudoong/utils/src/utils/isServer';
 import { atom } from 'recoil';
 
 export interface AuthStateType {
   isAuthenticated: boolean;
+  callbackUrl: string;
   accessToken: string;
   refreshToken: string;
   userProfile: {
@@ -14,6 +15,7 @@ export interface AuthStateType {
 
 const initialState: AuthStateType = {
   isAuthenticated: false,
+  callbackUrl: '/',
   accessToken: '',
   refreshToken: '',
   userProfile: null,
@@ -21,7 +23,7 @@ const initialState: AuthStateType = {
 
 const getTokenFromLocalStorage = (): AuthStateType => {
   let refreshToken = '';
-  if (typeof window !== 'undefined') {
+  if (isServer()) {
     refreshToken = localStorage.getItem('refreshToken') || '';
   }
   if (refreshToken) {

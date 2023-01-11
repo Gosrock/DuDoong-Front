@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { darken } from 'polished';
 import { ButtonHTMLAttributes } from 'react';
 import { theme } from '../../theme';
-import { Loader } from '../Loader';
+import { Spinner } from '../Loader/Spinner';
 import { Text } from '../Text';
 
 type ButtonSize = 'fill' | 'fixed';
@@ -83,7 +83,7 @@ export const Button = ({
   return (
     <StyledButton varient={varient} size={size} {...props}>
       {isLoading ? (
-        <Loader color={TEXT_COLOR.normal[varient]} />
+        <Spinner color={TEXT_COLOR.normal[varient]} />
       ) : (
         <Text typo={'Text_18'}>{children}</Text>
       )}

@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { margin } from 'polished';
 import { ReactComponent as LoaderIcon } from '../../assets/icons/loader.svg';
 
 export interface LoaderProps {
@@ -8,7 +7,7 @@ export interface LoaderProps {
   size?: number;
 }
 
-export const Loader = ({ color, size = 18 }: LoaderProps) => {
+export const Spinner = ({ color, size = 18 }: LoaderProps) => {
   return (
     <div css={{ width: `${size}px`, height: `${size}px`, margin: '0 auto' }}>
       <LoaderIcon

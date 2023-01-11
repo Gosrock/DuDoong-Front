@@ -1,3 +1,5 @@
+import { FullScreen, SyncLoader } from '@dudoong/ui';
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import useAuthMutate from './useAuthMutate';
@@ -20,7 +22,17 @@ const Callback = () => {
     }
   }, [queryParams]);
 
-  return <>로그인중</>;
+  return (
+    <FullScreen
+      css={css`
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `}
+    >
+      <SyncLoader />
+    </FullScreen>
+  );
 };
 
 export default Callback;

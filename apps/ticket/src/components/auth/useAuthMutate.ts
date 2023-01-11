@@ -1,11 +1,19 @@
-import { AuthApi, OauthInfoResponse, OauthLoginResponse } from '@dudoong/utils';
+import {
+  AuthApi,
+  OauthInfoResponse,
+  OauthLoginResponse,
+  OauthTokenResponse,
+} from '@dudoong/utils';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
+import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
-import { CallbackDataType } from './Callback';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
 
-const useAuthMutate = (queryParams: CallbackDataType) => {
-  const { openOverlay } = useGlobalOverlay();
-  const { idToken, accessToken } = queryParams;
+const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
+  const { openOverlay, closeOverlay } = useGlobalOverlay();
+  const [auth, setAuth] = useRecoilState(authState);
+  const router = useRouter();
 
   // 카카오 회원정보 가져오기
   const ouathKakaoInfoMutation = useMutation(AuthApi.OAUTH_INFO, {
@@ -25,14 +33,20 @@ const useAuthMutate = (queryParams: CallbackDataType) => {
   // 회원가입
   const ouathKakaoRegisterMutation = useMutation(AuthApi.OAUTH_REGISTER, {
     onSuccess: (data: OauthLoginResponse) => {
-      console.log(data, '회원가입 완료');
+      localStorage.setItem('refreshToken', data.refreshToken);
+      onSuccessLogin(data);
+      closeOverlay();
+      router.push(auth.callbackUrl);
     },
   });
 
   // 로그인
   const ouathKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
     onSuccess: (data: OauthLoginResponse) => {
-      console.log(data, '로그인 완료');
+      console.log(data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
+      onSuccessLogin(data);
+      router.push(auth.callbackUrl);
     },
   });
 
@@ -48,6 +62,11 @@ const useAuthMutate = (queryParams: CallbackDataType) => {
       }
     },
   });
+
+  const onSuccessLogin = (loginData: OauthLoginResponse) => {
+    setAuth({ ...auth, isAuthenticated: true, ...loginData });
+  };
+
   return { oauthValidMutation, ouathKakaoLoginMutation };
 };
 
