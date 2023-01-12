@@ -25,4 +25,7 @@ export const globalStyle = css`
   input:focus {
     outline: none;
   }
+  textarea:focus {
+    outline: none;
+  }
 `;
