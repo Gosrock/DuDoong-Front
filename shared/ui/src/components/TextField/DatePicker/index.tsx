@@ -5,8 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { theme } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
-import { ReactComponent as Calender } from '../../../assets/icons/calender.svg';
 import { ko } from 'date-fns/esm/locale';
+import { Calendar } from 'react-bootstrap-icons';
 export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   placeholder?: string;
@@ -30,7 +30,7 @@ export const DatePicker = ({ width, placeholder }: DatePickerProps) => {
         locale={ko}
         placeholderText={placeholder}
         customInput={
-          <Input width={width} value={startDate} rightIcon={<Calender />} />
+          <Input width={width} value={startDate} rightIcon={<Calendar />} />
         }
       />
     </DatePickerStyles>

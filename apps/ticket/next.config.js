@@ -5,6 +5,7 @@ const withInterceptStdout = require('next-intercept-stdout');
 const withTM = require('next-transpile-modules')([
   '@dudoong/ui',
   '@dudoong/utils',
+  'date-fns',
 ]);
 
 module.exports = withInterceptStdout(
