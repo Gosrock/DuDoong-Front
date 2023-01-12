@@ -14,3 +14,4 @@ export * from './Spacing';
 export * from './Divider';
 export * from './Loader/Spinner';
 export * from './Loader/SyncLoader';
+export * from './Accordion';

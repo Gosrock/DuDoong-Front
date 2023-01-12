@@ -12,6 +12,19 @@ module.exports = withInterceptStdout(
   withTM({
     // Any additional config for next goes in here
     swcMinify: true,
+    webpack: (config, options) => {
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: [
+          options.defaultLoaders.babel,
+          {
+            loader: '@svgr/webpack',
+            options: { babel: false },
+          },
+        ],
+      });
+      return config;
+    },
   }),
   (text) => (text.includes('Duplicate atom key') ? '' : text),
 );

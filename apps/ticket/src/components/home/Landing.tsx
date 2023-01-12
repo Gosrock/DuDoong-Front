@@ -1,4 +1,5 @@
 import {
+  Accordion,
   Button,
   ButtonSet,
   DatePicker,
@@ -10,7 +11,6 @@ import DDHead from '@lib/utils/NextHead';
 import { authState } from '@store/auth';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-
 const Landing = () => {
   const router = useRouter();
   const { openOverlay } = useGlobalOverlay();
