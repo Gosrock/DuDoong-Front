@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { forwardRef, TextareaHTMLAttributes } from 'react';
-import { FlexBox } from '../../../layout';
 
 export interface TextAreaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -34,30 +33,26 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
 const TextAreaWrapper = styled.div<{
   width?: number;
-  height?: number;
+  height: number;
 }>`
   box-sizing: border-box;
+
   background: ${({ theme }) => theme.palette.gray_200};
+
   border-radius: 16px;
-
   padding: 16px;
-  gap: 10px;
 
-  height: ${({ height }) => (height ? `${height}px` : `56px`)};
+  height: ${({ height }) => `${height}px`};
   width: ${({ width }) => (width ? `${width}px` : '100%')};
-
-  // ㅡ.ㅡ
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
 `;
 
 const StyledTextArea = styled.textarea`
   box-sizing: border-box;
+
   border: none;
   resize: none;
   background: transparent;
+
   padding: 0;
 
   width: 100%;
