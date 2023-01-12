@@ -2,6 +2,7 @@ import {
   Accordion,
   Button,
   ButtonSet,
+  Counter,
   DatePicker,
   ListHeader,
   TimePicker,
@@ -30,7 +31,6 @@ const Landing = () => {
             마이페이지
           </Button>
         </ButtonSet>
-        <DatePicker />
       </main>
     </>
   );
