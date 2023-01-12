@@ -1,4 +1,4 @@
-import { isServer } from '@dudoong/utils/src/utils/isServer';
+import { isServer } from '@lib/utils/isServer';
 import { atom } from 'recoil';
 
 export interface AuthStateType {
