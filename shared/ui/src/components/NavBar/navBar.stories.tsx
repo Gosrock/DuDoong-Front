@@ -15,7 +15,7 @@ const TestFunc = () => {
 };
 
 export const Title = Template.bind({});
-Title.args = { label: '예매 상세 내역', Handler: TestFunc() };
+Title.args = { label: '예매 상세 내역', backHandler: TestFunc() };
 
 export const NoTitle = Template.bind({});
-NoTitle.args = { Handler: TestFunc() };
+NoTitle.args = { backHandler: TestFunc() };
