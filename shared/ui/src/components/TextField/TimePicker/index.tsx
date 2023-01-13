@@ -5,8 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { theme } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
-import { ReactComponent as Clock } from '../../../assets/icons/clock.svg';
 import { DatePickerProps } from '../DatePicker';
+import { Clock } from 'react-bootstrap-icons';
 
 /**
  * @param width: number (기본값: 100%)
