@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useState } from 'react';
 import { DropZone } from '.';
+import styled from '@emotion/styled';
 
 export default {
   title: 'DropZone',
@@ -9,20 +9,24 @@ export default {
 } as ComponentMeta<typeof DropZone>;
 
 const Template: ComponentStory<typeof DropZone> = (args) => {
-  const uploadFileHandler = (file: File) => {
+  const uploadFileHandler = (file: any) => {
     console.log(file);
   };
   const fileTypeErrorHandler = (err: Error) => {
     console.log(err);
   };
+  const fileNumErrorHandler = () => {
+    console.log('file num err');
+  };
   return (
-    <>
+    <Wrapper>
       <DropZone
         {...args}
         uploadFileHandler={uploadFileHandler}
         fileTypeErrorHandler={fileTypeErrorHandler}
+        fileNumErrorHandler={fileNumErrorHandler}
       />
-    </>
+    </Wrapper>
   );
 };
 export const bigPoster = Template.bind({});
@@ -31,3 +35,9 @@ export const miniPoster = Template.bind({});
 miniPoster.args = { type: 'miniPoster' };
 export const profile = Template.bind({});
 profile.args = { type: 'profile' };
+
+const Wrapper = styled.div`
+  width: 300px;
+  height: 300px;
+  background-color: ${({ theme }) => theme.palette.gray_300};
+`;
