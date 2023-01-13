@@ -1,15 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { Padding } from '../../layout';
 import { Text } from '../Text';
 import styled from '@emotion/styled';
-import dash from '../../assets/icons/minus.svg';
-import plus from '../../assets/icons/plus.svg';
-import { PaddingSize } from '../../layout';
 import { useState } from 'react';
-
+import { Plus, Dash } from 'react-bootstrap-icons';
+import { theme } from '../../theme';
 export interface CounterProps {
   count: number;
-  padding?: PaddingSize;
   width?: number;
   hegiht?: number;
   onClickPlus: () => void;
@@ -18,7 +14,6 @@ export interface CounterProps {
 
 export const Counter = ({
   count = 1,
-  padding = [10, 24],
   width,
   hegiht,
   onClickPlus,
@@ -35,24 +30,34 @@ export const Counter = ({
     onClickMinus();
   };
   return (
-    <Padding size={padding}>
-      <CounterWrapper width={width} height={hegiht}>
-        <ImgWrapper onClick={handleMinusClick}>
-          <img src={dash} alt="dash" />
-        </ImgWrapper>
-        <Text typo={'Text_18'} color={'gray_500'}>
-          {ticketNum}
-        </Text>
-        <ImgWrapper onClick={handlePlusClick}>
-          <img src={plus} alt="plus" />
-        </ImgWrapper>
-      </CounterWrapper>
-    </Padding>
+    <CounterWrapper width={width} height={hegiht}>
+      <ImgWrapper onClick={handleMinusClick}>
+        <Dash
+          css={{
+            width: '24px',
+            height: '24px',
+            fill: `${theme.palette.gray_500}`,
+          }}
+        />
+      </ImgWrapper>
+      <Text typo={'Text_18'} color={'gray_500'}>
+        {ticketNum}
+      </Text>
+      <ImgWrapper onClick={handlePlusClick}>
+        <Plus
+          css={{
+            width: '24px',
+            height: '24px',
+            fill: `${theme.palette.gray_500}`,
+          }}
+        />
+      </ImgWrapper>
+    </CounterWrapper>
   );
 };
 
 const ImgWrapper = styled.div`
-  padding: 6px 4px;
+  padding: 0 4px;
   cursor: pointer;
 `;
 const CounterWrapper = styled.div<{
@@ -69,6 +74,5 @@ const CounterWrapper = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-direction: row;
   gap: 14;
 `;

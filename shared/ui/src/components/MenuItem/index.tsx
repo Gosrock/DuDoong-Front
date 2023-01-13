@@ -1,16 +1,18 @@
+/** @jsxImportSource @emotion/react */
 import { FlexBox, Padding, PaddingSize, RoundBlock } from '../../layout';
 import styled from '@emotion/styled';
 import { Text } from '../Text';
 import { css } from '@emotion/react';
-import { ReactComponent as BasicInfo } from '../../assets/icons/basicInfo.svg';
-import { ReactComponent as Dashboard } from '../../assets/icons/dashboard.svg';
-import { ReactComponent as DetailInfo } from '../../assets/icons/detailInfo.svg';
-import { ReactComponent as Option } from '../../assets/icons/option.svg';
-import { ReactComponent as Qr } from '../../assets/icons/qr.svg';
-import { ReactComponent as Reservationist } from '../../assets/icons/reservationist.svg';
-import { ReactComponent as Ticket } from '../../assets/icons/ticket.svg';
-import { ReactComponent as Slack } from '../../assets/icons/slack.svg';
-
+import {
+  Table,
+  CardChecklist,
+  CardImage,
+  TicketPerforated,
+  PeopleFill,
+  Slack,
+  QrCodeScan,
+  Sliders,
+} from 'react-bootstrap-icons';
 /**
  * @param type menu 종류
  * @param menuItemKey 현재 메뉴 고유 번호
@@ -45,43 +47,43 @@ type MenuItemSetType = {
 const MENU_ITEM_SET: MenuItemSetType = {
   dashboard: {
     text: '대시보드',
-    icon: <Dashboard />,
+    icon: <Table css={{ fill: 'white' }} />,
   },
   basicInfo: {
     text: '공연 기본 정보',
-    icon: <BasicInfo />,
+    icon: <CardChecklist css={{ fill: 'white' }} />,
   },
   detailInfo: {
     text: '공연 이미지/상세',
-    icon: <DetailInfo />,
+    icon: <CardImage css={{ fill: 'white' }} />,
   },
   ticket: {
     text: '티켓 관리',
-    icon: <Ticket />,
+    icon: <TicketPerforated css={{ fill: 'white' }} />,
   },
   option: {
     text: '티켓 옵션 관리',
-    icon: <Option />,
+    icon: <Sliders css={{ fill: 'white' }} />,
   },
   reservationist: {
     text: '예매자 관리',
-    icon: <Reservationist />,
+    icon: <PeopleFill css={{ fill: 'white' }} />,
   },
   qr: {
     text: 'QR 체크인',
-    icon: <Qr />,
+    icon: <QrCodeScan css={{ fill: 'white' }} />,
   },
   hostInfo: {
     text: '호스트 정보',
-    icon: <BasicInfo />,
+    icon: <CardChecklist css={{ fill: 'white' }} />,
   },
   hostMember: {
     text: '호스트 멤버',
-    icon: <Reservationist />,
+    icon: <PeopleFill css={{ fill: 'white' }} />,
   },
   slack: {
     text: '슬랙 알림 등록',
-    icon: <Slack />,
+    icon: <Slack css={{ fill: 'white' }} />,
   },
 };
 
