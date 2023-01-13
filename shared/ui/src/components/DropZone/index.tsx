@@ -1,14 +1,10 @@
-import { FlexBox, Padding, PaddingSize, RoundBlock } from '../../layout';
+import { FlexBox } from '../../layout';
 import styled from '@emotion/styled';
 import { Text } from '../Text';
-import { css } from '@emotion/react';
 import { CSSProperties } from '@emotion/serialize';
 import { KeyOfTypo } from '../../theme';
-import React, { useRef, useCallback, useState, useEffect } from 'react';
-import { theme } from '../../theme';
-import { ReactComponent as DetailInfo } from '../../assets/icons/detailInfo.svg';
+import { CardImage } from 'react-bootstrap-icons';
 import { FileUploader } from 'react-drag-drop-files';
-import { findDOMNode } from 'react-dom';
 
 export type ShapeTypeKey = 'bigPoster' | 'miniPoster' | 'profile';
 
@@ -80,7 +76,7 @@ export const DropZone = ({
         hoverTitle=" " // 호버시 컴포넌트 text
       >
         <InputBox align={'center'} direction="column" gap={10}>
-          <DetailInfo />
+          <CardImage />
           <Text typo={SHAPE_TYPE_SET[type].typo} color={'gray_400'}>
             {SHAPE_TYPE_SET[type].text}
           </Text>
