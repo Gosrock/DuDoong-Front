@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AdminMenuLayout } from '../../components/shared/AdminMenuLayout';
+import { AdminMenuLayout } from '../../components/shared/layout/AdminMenuLayout';
 import Dashboard from './Dashboard';
 import Info from './Info';
 import Member from './Member';

@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import NotFound from '@pages/common/NotFound';
 import { EventsRouter } from '@pages/events';
 import { HostsRouter } from '@pages/hosts';
-import { AdminLayout } from './components/shared/AdminLayout';
+import { AdminLayout } from './components/shared/layout/AdminLayout';
 
 function App() {
   return (

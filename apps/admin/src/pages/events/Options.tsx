@@ -1,13 +1,1 @@
-import { Button } from '@dudoong/ui';
-import { useNavigate } from 'react-router-dom';
-
-const Options = () => {
-  const navigate = useNavigate();
-  return (
-    <>
-      <Button>어드민 이벤트 options</Button>
-      <Button onClick={() => navigate('/')}>어드민 랜딩</Button>
-    </>
-  );
-};
-export default Options;
+export { default } from '../../../src/components/events/Options';

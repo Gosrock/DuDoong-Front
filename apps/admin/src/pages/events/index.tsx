@@ -7,7 +7,7 @@ import Info from './Info';
 import Options from './Options';
 import Tickets from './Tickets';
 import Qr from './Qr';
-import { AdminMenuLayout } from '../../components/shared/AdminMenuLayout';
+import { AdminMenuLayout } from '../../components/shared/layout/AdminMenuLayout';
 import { useState } from 'react';
 
 const menuItems = [
