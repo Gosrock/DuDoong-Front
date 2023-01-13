@@ -1,9 +1,13 @@
 import { Button } from '@dudoong/ui';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
   const navigate = useNavigate();
-
+  const { openOverlay } = useGlobalOverlay();
+  const openOverlayTest = () => {
+    openOverlay({ content: 'login' });
+  };
   return (
     <>
       <Button onClick={() => navigate('/')}>어드민 랜딩</Button>
@@ -38,6 +42,8 @@ const Landing = () => {
       <Button onClick={() => navigate('/hosts/1/slack')}>
         어드민 hosts slack
       </Button>
+
+      <Button onClick={() => openOverlayTest()}>overlay test</Button>
     </>
   );
 };
