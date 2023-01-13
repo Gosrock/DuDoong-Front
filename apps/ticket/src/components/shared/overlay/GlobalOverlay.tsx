@@ -44,7 +44,6 @@ export interface OverlayBoxProps {
 }
 const OverlayBox = ({ open, onDismiss, children }: OverlayBoxProps) => {
   const { isPC } = useResponsive();
-
   return (
     <>
       {isPC ? (

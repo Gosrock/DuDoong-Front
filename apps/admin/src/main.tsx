@@ -11,7 +11,7 @@ import App from './App';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <BrowserRouter>
+  <BrowserRouter basename="/admin">
     <Global styles={globalStyle} />
     <ThemeProvider theme={theme}>
       <RecoilRoot>

@@ -1,1 +1,1 @@
-export { default } from '@components/auth/Callback';
+export { default } from '@components/shared/auth/Callback';

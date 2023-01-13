@@ -3,42 +3,39 @@ import { css } from '@emotion/react';
 
 interface RegisterProps {
   name: string;
-  payload: any;
+  onMainActionClick: () => void;
 }
 
-const Register = ({ name, payload }: RegisterProps) => {
-  const onRegister = async () => {
-    console.log(payload);
-  };
+const Register = ({ name, onMainActionClick }: RegisterProps) => {
   return (
     <>
       <ListHeader
         size="listHeader_20"
         title={
           <Text typo="Header_20" color="black">
-            `<span css={{ color: `${theme.palette.main_500}` }}>{name}</span>님,
-            안녕하세요!`
+            <span css={{ color: `${theme.palette.main_500}` }}>{name}</span>님,
+            안녕하세요!
           </Text>
         }
         description={
           <Text
             css={css`
+              color: ${theme.palette.gray_500};
+              text-decoration: underline;
               &:hover {
-                text-decoration: underline;
+                color: ${theme.palette.gray_400};
               }
             `}
-            typo="Text_16"
+            typo="Text_14"
           >
             두둥 서비스 약관
           </Text>
         }
       />
       <ButtonSet varient="mono" padding={[20, 24]}>
-        <>
-          <Button varient="kakao" onClick={onRegister}>
-            약관 동의하고 시작하기
-          </Button>
-        </>
+        <Button varient="kakao" onClick={onMainActionClick}>
+          약관 동의하고 시작하기
+        </Button>
       </ButtonSet>
     </>
   );
