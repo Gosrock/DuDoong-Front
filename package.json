@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5"
+    "@emotion/styled": "^11.10.5",
+    "react-drag-drop-files": "^2.3.8"
   }
 }
