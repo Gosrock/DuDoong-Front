@@ -3,18 +3,16 @@ import { overlayState } from '@store/globalOverlay';
 import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 import Login from './content/Login';
-import Temp from './content/temp';
 import Register from './content/Register';
 import Modal from './Modal';
 
-export type GlobalSheetContentKey = 'temp' | 'login' | 'register';
+export type GlobalSheetContentKey = 'login' | 'register';
 
 export type GlobalSheetContentType = {
   [key in GlobalSheetContentKey]: ReactNode;
 };
 
 const globalSheetContent = {
-  temp: Temp,
   login: Login,
   register: Register,
 };

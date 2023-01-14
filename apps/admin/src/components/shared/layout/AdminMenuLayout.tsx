@@ -117,6 +117,6 @@ const MenuWrapper = styled.div`
 
 const OutletWrapper = styled.div`
   width: calc(100% - 250px);
-  height: calc(100vh-72px);
+  height: calc(100vh - 72px);
   background-color: ${({ theme }) => theme.palette.gray_100};
 `;

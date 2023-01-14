@@ -5,8 +5,11 @@ import { useNavigate } from 'react-router-dom';
 const Landing = () => {
   const navigate = useNavigate();
   const { openOverlay } = useGlobalOverlay();
-  const openOverlayTest = () => {
+  const openOverlayLoginTest = () => {
     openOverlay({ content: 'login' });
+  };
+  const openOverlayRegisterTest = () => {
+    openOverlay({ content: 'register' });
   };
   return (
     <>
@@ -43,7 +46,10 @@ const Landing = () => {
         어드민 hosts slack
       </Button>
 
-      <Button onClick={() => openOverlayTest()}>overlay test</Button>
+      <Button onClick={() => openOverlayLoginTest()}>overlay login test</Button>
+      <Button onClick={() => openOverlayRegisterTest()}>
+        overlay register test
+      </Button>
     </>
   );
 };
