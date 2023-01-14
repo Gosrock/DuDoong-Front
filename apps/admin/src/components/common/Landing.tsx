@@ -8,9 +8,6 @@ const Landing = () => {
   const openOverlayLoginTest = () => {
     openOverlay({ content: 'login' });
   };
-  const openOverlayRegisterTest = () => {
-    openOverlay({ content: 'register' });
-  };
   return (
     <>
       <Button onClick={() => navigate('/')}>어드민 랜딩</Button>
@@ -47,9 +44,7 @@ const Landing = () => {
       </Button>
 
       <Button onClick={() => openOverlayLoginTest()}>overlay login test</Button>
-      <Button onClick={() => openOverlayRegisterTest()}>
-        overlay register test
-      </Button>
+      <Button onClick={() => navigate('/login')}>login</Button>
     </>
   );
 };
