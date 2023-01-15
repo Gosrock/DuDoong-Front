@@ -24,7 +24,11 @@ export const EventsRouter = () => {
   const location = useLocation();
   const acticeMenuIndex = menuItems.indexOf(location.pathname.split('/')[3]);
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
-  const [thirdMenuRoute, setthirdMenuRoute] = useState<string | null>(null);
+  const [thirdMenuRoute, setThirdMenuRoute] = useState<string | null>(null);
+  const menuActiveHandler = (menuKey: number) => {
+    setThirdMenuRoute(null);
+    setCurActiveMenu(menuKey);
+  };
   return (
     <Routes>
       <Route
@@ -32,7 +36,7 @@ export const EventsRouter = () => {
           <AdminMenuLayout
             page={'events'}
             curActiveMenu={curActiveMenu}
-            setCurActiveMenu={setCurActiveMenu}
+            setCurActiveMenu={menuActiveHandler}
             thirdMenuRoute={thirdMenuRoute}
           />
         }
@@ -42,7 +46,7 @@ export const EventsRouter = () => {
         <Route path="/detail" element={<Detail />} />
         <Route
           path="/tickets"
-          element={<Tickets setThirdMenuRoute={setthirdMenuRoute} />}
+          element={<Tickets setThirdMenuRoute={setThirdMenuRoute} />}
         />
         <Route path="/options" element={<Options />} />
         <Route path="/guests" element={<Guests />} />

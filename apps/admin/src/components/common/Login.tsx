@@ -3,6 +3,8 @@ import { useRecoilValue } from 'recoil';
 import styled from '@emotion/styled';
 import { AuthApi } from '@dudoong/utils';
 import { useNavigate } from 'react-router-dom';
+import { authState } from '@store/auth';
+import { useEffect } from 'react';
 
 const Login = () => {
   const onLogin = async () => {
@@ -10,6 +12,10 @@ const Login = () => {
     window.location.href = data.link;
   };
   const navigate = useNavigate();
+  const auth = useRecoilValue(authState);
+  useEffect(() => {
+    if (auth.isAuthenticated) navigate(auth.callbackUrl);
+  }, [auth]);
   return (
     <>
       <Header rightElement={null} />

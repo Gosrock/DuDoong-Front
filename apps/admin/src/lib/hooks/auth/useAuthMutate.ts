@@ -16,14 +16,14 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const navigate = useNavigate();
 
   // 카카오 회원정보 가져오기
-  const ouathKakaoInfoMutation = useMutation(AuthApi.OAUTH_INFO, {
+  const oauthKakaoInfoMutation = useMutation(AuthApi.OAUTH_INFO, {
     onSuccess: (data: OauthInfoResponse) => {
       openOverlay({
         content: 'register',
         props: {
           name: data.name,
           onMainActionClick: () => {
-            ouathKakaoRegisterMutation.mutate({ idToken, payload: data });
+            oauthKakaoRegisterMutation.mutate({ idToken, payload: data });
           },
         },
       });
@@ -31,9 +31,10 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   });
 
   // 회원가입
-  const ouathKakaoRegisterMutation = useMutation(AuthApi.OAUTH_REGISTER, {
+  const oauthKakaoRegisterMutation = useMutation(AuthApi.OAUTH_REGISTER, {
     onSuccess: (data: OauthLoginResponse) => {
       localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem('accessToken', data.refreshToken);
       onSuccessLogin(data);
       closeOverlay();
       navigate(auth.callbackUrl);
@@ -41,9 +42,10 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   });
 
   // 로그인
-  const ouathKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
+  const oauthKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
     onSuccess: (data: OauthLoginResponse) => {
       localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem('accessToken', data.refreshToken);
       onSuccessLogin(data);
       navigate(auth.callbackUrl);
     },
@@ -54,20 +56,28 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
     onSuccess: (data: { canRegister: boolean }) => {
       if (data.canRegister) {
         // 회원가입 필요
-        ouathKakaoInfoMutation.mutate(accessToken);
+        oauthKakaoInfoMutation.mutate(accessToken);
       } else {
         // 바로 로그인
-        ouathKakaoLoginMutation.mutate(idToken);
+        oauthKakaoLoginMutation.mutate(idToken);
       }
     },
   });
 
+  const authRefreshMutation = useMutation(AuthApi.REFRESH, {
+    onSuccess: (data: OauthLoginResponse) => {
+      localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem('accessToken', data.accessToken);
+      onSuccessLogin(data);
+    },
+    onError: () => navigate('/404'),
+  });
+
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
-    console.log(loginData);
     setAuth({ ...auth, isAuthenticated: true, ...loginData });
   };
 
-  return { oauthValidMutation, ouathKakaoLoginMutation };
+  return { oauthValidMutation, oauthKakaoLoginMutation, authRefreshMutation };
 };
 
 export default useAuthMutate;

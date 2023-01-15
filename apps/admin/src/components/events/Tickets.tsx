@@ -2,7 +2,7 @@ import { Button } from '@dudoong/ui';
 import { useNavigate } from 'react-router-dom';
 
 interface TicketsProps {
-  setThirdMenuRoute: (thirdMenuRoute: string) => void;
+  setThirdMenuRoute: (thirdMenuRoute: string | null) => void;
 }
 
 const Tickets = ({ setThirdMenuRoute }: TicketsProps) => {
@@ -17,6 +17,13 @@ const Tickets = ({ setThirdMenuRoute }: TicketsProps) => {
         }}
       >
         새 티켓 만들기
+      </Button>
+      <Button
+        onClick={() => {
+          setThirdMenuRoute(null);
+        }}
+      >
+        새 티켓 안만들기
       </Button>
     </>
   );
