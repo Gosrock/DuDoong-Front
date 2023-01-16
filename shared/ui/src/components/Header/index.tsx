@@ -13,7 +13,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 export const Header = ({ rightElement, title }: HeaderProps) => {
   return (
     <Wrapper align={'center'}>
-      <Padding size={[0, 56, 0, 24]} fill>
+      <Padding size={[0, 24]} fill>
         <FlexBox justify={'space-between'} align={'center'}>
           <LogoMock />
           {rightElement}

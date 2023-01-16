@@ -36,7 +36,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
       localStorage.setItem('refreshToken', data.refreshToken);
       onSuccessLogin(data);
       closeOverlay();
-      router.push(auth.callbackUrl);
+      router.replace(auth.callbackUrl);
     },
   });
 
@@ -45,7 +45,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
     onSuccess: (data: OauthLoginResponse) => {
       localStorage.setItem('refreshToken', data.refreshToken);
       onSuccessLogin(data);
-      router.push(auth.callbackUrl);
+      router.replace(auth.callbackUrl);
     },
   });
 
