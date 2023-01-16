@@ -14,7 +14,6 @@ import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
 import { AuthApi } from '@dudoong/utils';
 import cookies from 'next-cookies';
 import { authState, AuthStateType } from '@store/auth';
-import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import MainLayout from '@components/shared/Main';
 
 interface MyAppProps extends AppProps {
@@ -22,6 +21,7 @@ interface MyAppProps extends AppProps {
 }
 
 function MyApp({ Component, pageProps, auth }: MyAppProps) {
+  console.log(auth);
   const initializer = useMemo(
     () =>
       ({ set }: MutableSnapshot) => {
@@ -54,10 +54,8 @@ function MyApp({ Component, pageProps, auth }: MyAppProps) {
 MyApp.getInitialProps = async (context: AppContext) => {
   const { ctx, Component } = context;
   const refreshToken = cookies(ctx).refreshToken;
-  //console.log(refreshToken);
   let pageProps = {};
   let auth: AuthStateType | null;
-
   try {
     const response = await AuthApi.REFRESH(refreshToken!);
     auth = {
@@ -66,7 +64,12 @@ MyApp.getInitialProps = async (context: AppContext) => {
       isAuthenticated: true,
       callbackUrl: '/',
     };
-  } catch (err) {
+    console.log(response);
+    ctx.res?.setHeader(
+      'set-cookie',
+      `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,
+    );
+  } catch (err: any) {
     auth = null;
   }
 
