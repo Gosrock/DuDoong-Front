@@ -12,10 +12,6 @@ const Login = () => {
     window.location.href = data.link;
   };
   const navigate = useNavigate();
-  const auth = useRecoilValue(authState);
-  useEffect(() => {
-    if (auth.isAuthenticated) navigate(auth.callbackUrl);
-  }, [auth]);
   return (
     <>
       <Header rightElement={null} />

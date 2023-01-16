@@ -22,9 +22,9 @@ function App() {
             <Route path="/events/:eventId/*" element={<EventsRouter />} />
           </Route>
         </Route>
-        <Route element={<RefuseAuth />}>
-          <Route path="/login" element={<Login />} />
-        </Route>
+      </Route>
+      <Route element={<RefuseAuth />}>
+        <Route path="/login" element={<Login />} />
       </Route>
       <Route path="/404" element={<NotFound />} />
       <Route path="/kakao/callback" element={<Callback />} />
