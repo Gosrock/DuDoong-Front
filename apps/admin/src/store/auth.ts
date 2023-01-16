@@ -5,7 +5,6 @@ export interface AuthStateType {
   isAuthenticated: boolean;
   callbackUrl: string;
   accessToken: string;
-  refreshToken: string;
   userProfile: {
     id: number;
     profileImage: string;
@@ -17,7 +16,6 @@ const initialState: AuthStateType = {
   isAuthenticated: false,
   callbackUrl: '/',
   accessToken: '',
-  refreshToken: '',
   userProfile: null,
 };
 
@@ -31,9 +29,8 @@ const getTokenFromLocalStorage = (): AuthStateType => {
     return {
       ...initialState,
       isAuthenticated: true,
-      refreshToken,
     };
-  } else return { ...initialState, refreshToken };
+  } else return { ...initialState };
 };
 
 export const authState = atom<AuthStateType>({
