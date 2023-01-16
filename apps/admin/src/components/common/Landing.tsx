@@ -6,7 +6,7 @@ const Landing = () => {
   const navigate = useNavigate();
   const { openOverlay } = useGlobalOverlay();
   const openOverlayLoginTest = () => {
-    openOverlay({ content: 'login' });
+    openOverlay({ content: 'register' });
   };
   return (
     <>
@@ -43,7 +43,9 @@ const Landing = () => {
         어드민 hosts slack
       </Button>
 
-      <Button onClick={() => openOverlayLoginTest()}>overlay login test</Button>
+      <Button onClick={() => openOverlayLoginTest()}>
+        overlay register test
+      </Button>
       <Button onClick={() => navigate('/login')}>login</Button>
     </>
   );

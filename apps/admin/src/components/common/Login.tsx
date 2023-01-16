@@ -1,10 +1,7 @@
 import { Button, ListHeader, ButtonSet, FlexBox, Header } from '@dudoong/ui';
-import { useRecoilValue } from 'recoil';
 import styled from '@emotion/styled';
 import { AuthApi } from '@dudoong/utils';
 import { useNavigate } from 'react-router-dom';
-import { authState } from '@store/auth';
-import { useEffect } from 'react';
 
 const Login = () => {
   const onLogin = async () => {

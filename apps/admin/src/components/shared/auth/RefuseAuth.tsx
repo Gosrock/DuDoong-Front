@@ -1,8 +1,12 @@
+import { authState } from '@store/auth';
 import { Navigate, Outlet } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+
 const RefuseAuth = () => {
-  const accessToken = localStorage.getItem('accessToken');
+  const auth = useRecoilValue(authState);
   // 엑세스 있으면 홈으로
-  if (accessToken) {
+  console.log('refuseAuth', auth);
+  if (auth.accessToken) {
     return <Navigate replace to="/" />;
   }
   // 둘 다 없으면 로그인

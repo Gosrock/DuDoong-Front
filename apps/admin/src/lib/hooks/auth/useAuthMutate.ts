@@ -34,7 +34,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const oauthKakaoRegisterMutation = useMutation(AuthApi.OAUTH_REGISTER, {
     onSuccess: (data: OauthLoginResponse) => {
       localStorage.setItem('refreshToken', data.refreshToken);
-      localStorage.setItem('accessToken', data.refreshToken);
       onSuccessLogin(data);
       closeOverlay();
       navigate(auth.callbackUrl);
@@ -45,7 +44,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const oauthKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
     onSuccess: (data: OauthLoginResponse) => {
       localStorage.setItem('refreshToken', data.refreshToken);
-      localStorage.setItem('accessToken', data.refreshToken);
       onSuccessLogin(data);
       navigate(auth.callbackUrl);
     },
@@ -64,20 +62,11 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
     },
   });
 
-  const authRefreshMutation = useMutation(AuthApi.REFRESH, {
-    onSuccess: (data: OauthLoginResponse) => {
-      localStorage.setItem('refreshToken', data.refreshToken);
-      localStorage.setItem('accessToken', data.accessToken);
-      onSuccessLogin(data);
-    },
-    onError: () => navigate('/404'),
-  });
-
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
     setAuth({ ...auth, isAuthenticated: true, ...loginData });
   };
 
-  return { oauthValidMutation, oauthKakaoLoginMutation, authRefreshMutation };
+  return { oauthValidMutation, oauthKakaoLoginMutation };
 };
 
 export default useAuthMutate;
