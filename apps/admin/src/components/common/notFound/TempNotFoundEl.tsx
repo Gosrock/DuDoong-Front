@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FlexBox } from '@dudoong/ui';
 import { Button } from '@dudoong/ui';
 
-const NotFound = () => {
+const TempNotFoundEl = () => {
   const navigate = useNavigate();
   return (
     <FlexBox align={'center'} justify={'center'}>
@@ -13,4 +13,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default TempNotFoundEl;

@@ -1,1 +1,10 @@
-export { default } from '../../../src/components/hosts/Slack';
+import TempSButtonSet from '../../components/hosts/slack/TempSButtonSet';
+
+const Slack = () => {
+  return (
+    <>
+      <TempSButtonSet />
+    </>
+  );
+};
+export default Slack;

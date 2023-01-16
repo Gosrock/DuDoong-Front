@@ -1,7 +1,7 @@
 import { Button } from '@dudoong/ui';
 import { useNavigate } from 'react-router-dom';
 
-const Landing = () => {
+const TestButtonSet = () => {
   const navigate = useNavigate();
 
   return (
@@ -41,4 +41,4 @@ const Landing = () => {
     </>
   );
 };
-export default Landing;
+export default TestButtonSet;

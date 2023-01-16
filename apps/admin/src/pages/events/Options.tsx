@@ -1,1 +1,10 @@
-export { default } from '../../../src/components/events/Options';
+import TempOButtonSet from '../../components/events/options/TempOButtonSet';
+
+const Options = () => {
+  return (
+    <>
+      <TempOButtonSet />
+    </>
+  );
+};
+export default Options;

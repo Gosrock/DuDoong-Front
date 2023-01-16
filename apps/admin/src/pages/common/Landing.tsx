@@ -1,1 +1,10 @@
-export { default } from '../../../src/components/common/Landing';
+import TestButtonSet from '../../components/common/landing/TestButtonSet';
+
+const Landing = () => {
+  return (
+    <>
+      <TestButtonSet />
+    </>
+  );
+};
+export default Landing;

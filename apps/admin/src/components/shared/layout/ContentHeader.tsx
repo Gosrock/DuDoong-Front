@@ -1,18 +1,11 @@
 import { FlexBox, Padding } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { Text } from '@dudoong/ui';
+import { menuRouting } from '@store/menuRouting';
+import { useRecoilValue } from 'recoil';
 
-interface ContentHeaderProps {
-  firstText?: string;
-  secondText: string;
-  thirdText?: string | null;
-}
-
-export const ContentHeader = ({
-  firstText = '공연',
-  secondText,
-  thirdText = null,
-}: ContentHeaderProps) => {
+export const ContentHeader = () => {
+  const { firstText, secondText, thirdText } = useRecoilValue(menuRouting);
   const isThirdExist = !!thirdText;
   return (
     <Padding size={[40, 40, 0, 40]}>

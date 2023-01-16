@@ -1,1 +1,11 @@
-export { default } from '../../../src/components/common/NotFound';
+import TempNotFoundEl from '../../components/common/notFound/TempNotFoundEl';
+
+const NotFound = () => {
+  return (
+    <>
+      <TempNotFoundEl />
+    </>
+  );
+};
+
+export default NotFound;

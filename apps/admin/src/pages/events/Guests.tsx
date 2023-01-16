@@ -1,1 +1,10 @@
-export { default } from '../../../src/components/events/Guests';
+import TempGButtonSet from '../../components/events/guests/TempGButtonSet';
+
+const Guests = () => {
+  return (
+    <>
+      <TempGButtonSet />
+    </>
+  );
+};
+export default Guests;

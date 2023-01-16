@@ -1,5 +1,5 @@
 import NotFound from '@pages/common/NotFound';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Detail from './Detail';
 import Guests from './Guests';
@@ -24,7 +24,6 @@ export const EventsRouter = () => {
   const location = useLocation();
   const acticeMenuIndex = menuItems.indexOf(location.pathname.split('/')[3]);
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
-  const [thirdMenuRoute, setthirdMenuRoute] = useState<string | null>(null);
   return (
     <Routes>
       <Route
@@ -33,17 +32,13 @@ export const EventsRouter = () => {
             page={'events'}
             curActiveMenu={curActiveMenu}
             setCurActiveMenu={setCurActiveMenu}
-            thirdMenuRoute={thirdMenuRoute}
           />
         }
       >
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/info" element={<Info />} />
         <Route path="/detail" element={<Detail />} />
-        <Route
-          path="/tickets"
-          element={<Tickets setThirdMenuRoute={setthirdMenuRoute} />}
-        />
+        <Route path="/tickets" element={<Tickets />} />
         <Route path="/options" element={<Options />} />
         <Route path="/guests" element={<Guests />} />
         <Route path="/qr" element={<Qr />} />

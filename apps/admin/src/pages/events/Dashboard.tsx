@@ -1,1 +1,10 @@
-export { default } from '../../../src/components/events/Dashboard';
+import TempDBButtonSet from '../../components/events/dashboard/TempDBButtonSet';
+
+const Dashboard = () => {
+  return (
+    <>
+      <TempDBButtonSet />
+    </>
+  );
+};
+export default Dashboard;
