@@ -7,12 +7,16 @@ export interface OauthInfoResponse {
 
 export interface OauthLoginResponse {
   accessToken: string;
+  accessTokenAge: number;
   refreshToken: string;
-  userProfile: {
-    id: number;
-    profileImage: string;
-    name: string;
-  };
+  refreshTokenAge: number;
+  userProfile: UserProfileType;
+}
+
+export interface UserProfileType {
+  id: number;
+  profileImage: string;
+  name: string;
 }
 
 export interface OauthTokenResponse {
