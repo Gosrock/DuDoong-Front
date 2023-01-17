@@ -1,4 +1,3 @@
-import { isServer } from '@lib/utils/isServer';
 import { atom } from 'recoil';
 
 export interface AuthStateType {
@@ -20,12 +19,8 @@ const initialState: AuthStateType = {
 };
 
 const getTokenFromLocalStorage = (): AuthStateType => {
-  let refreshToken = '';
-  if (isServer()) {
-    refreshToken = localStorage.getItem('refreshToken') || '';
-  }
+  const refreshToken = localStorage.getItem('refreshToken') || '';
   if (refreshToken) {
-    //새로고침할때마다 토큰으로 유저정보(입금자명, 전화번호) 가져오는 과정 필요
     return {
       ...initialState,
       isAuthenticated: true,

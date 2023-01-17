@@ -2,17 +2,22 @@ import { Header } from '@dudoong/ui';
 import { Outlet } from 'react-router-dom';
 import { Profile } from '@dudoong/ui';
 import styled from '@emotion/styled';
+import { useRecoilValue } from 'recoil';
+import { authState } from '@store/auth';
 
 export const AdminLayout = () => {
-  // 헤더 유저 정보, 공연 정보
+  const auth = useRecoilValue(authState);
 
-  const tempRightElement = <Profile size={'small'} name={'한규진'} />;
+  const rightElement = (
+    <Profile
+      image={auth.userProfile!.profileImage}
+      size={'small'}
+      name={auth.userProfile!.name}
+    />
+  );
   return (
     <>
-      <Header
-        rightElement={tempRightElement}
-        title={'고스락 23번째 정기공연'}
-      />
+      <Header rightElement={rightElement} title={'고스락 23번째 정기공연'} />
       <OutletWrapper>
         <Outlet />
       </OutletWrapper>

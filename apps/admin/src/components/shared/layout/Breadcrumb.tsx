@@ -5,9 +5,8 @@ import { useLocation } from 'react-router-dom';
 
 type BaseUrlSetTypeKey = 'events' | 'hosts';
 
-type UrlSetTypeKey =
+type EventUrlSetTypeKey =
   | 'events'
-  | 'hosts'
   | 'dashboard'
   | 'info'
   | 'detail'
@@ -15,50 +14,41 @@ type UrlSetTypeKey =
   | 'new'
   | 'options'
   | 'guests'
-  | 'qr'
-  | 'member'
-  | 'slack';
+  | 'qr';
 
-type UrlSetType = {
-  [key in BaseUrlSetTypeKey]: {
-    [key in UrlSetTypeKey]: string;
-  };
+type HostUrlSetTypeKey = 'hosts' | 'dashboard' | 'info' | 'member' | 'slack';
+
+type EventUrlSetType = {
+  [key in EventUrlSetTypeKey]: string;
 };
 
-const URL_SET: UrlSetType = {
-  events: {
-    events: '공연',
-    hosts: '',
-    dashboard: '대시보드',
-    info: '공연 기본 정보',
-    detail: '공연 이미지/상세',
-    tickets: '티켓 관리',
-    new: '새 티켓 만들기',
-    options: '티켓 옵션 관리',
-    guests: '예매자 관리',
-    qr: 'QR 체크인',
-    member: '',
-    slack: '',
-  },
-  hosts: {
-    events: '',
-    hosts: '호스트',
-    dashboard: '대시보드',
-    info: '호스트 정보',
-    detail: '',
-    tickets: '',
-    new: '',
-    options: '',
-    guests: '',
-    qr: '',
-    member: '호스트 멤버',
-    slack: '슬랙 알림 등록',
-  },
+type HostUrlSetType = {
+  [key in HostUrlSetTypeKey]: string;
+};
+
+const EVENT_URL_SET: EventUrlSetType = {
+  events: '공연',
+  dashboard: '대시보드',
+  info: '공연 기본 정보',
+  detail: '공연 이미지･상세',
+  tickets: '티켓 관리',
+  new: '새 티켓 만들기',
+  options: '티켓 옵션 관리',
+  guests: '예매자 관리',
+  qr: 'QR 체크인',
+};
+
+const HOST_URL_SET: HostUrlSetType = {
+  hosts: '호스트',
+  dashboard: '대시보드',
+  info: '호스트 정보',
+  member: '호스트 멤버',
+  slack: '슬랙 알림 등록',
 };
 
 const Breadcrumb = () => {
   const location = useLocation();
-  const urlDetails = location.pathname.substr(1).split('/') as UrlSetTypeKey[];
+  const urlDetails = location.pathname.substr(1).split('/');
   const baseUrl = urlDetails[0] as BaseUrlSetTypeKey;
 
   return (
@@ -71,7 +61,9 @@ const Breadcrumb = () => {
             index != 1 && (
               <FlexBox align={'center'} justify={'flex-start'} key={index}>
                 <Text typo="Text_14" color={textColor}>
-                  {URL_SET[baseUrl][detail]}
+                  {baseUrl === 'events'
+                    ? EVENT_URL_SET[detail as EventUrlSetTypeKey]
+                    : HOST_URL_SET[detail as HostUrlSetTypeKey]}
                 </Text>
                 {urlDetails.length !== index + 1 && (
                   <SlashWrapper size={[0, 8]}>

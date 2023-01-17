@@ -54,7 +54,7 @@ const MENU_ITEM_SET: MenuItemSetType = {
     icon: <CardChecklist css={{ fill: 'white' }} />,
   },
   detail: {
-    text: '공연 이미지/상세',
+    text: '공연 이미지･상세',
     icon: <CardImage css={{ fill: 'white' }} />,
   },
   tickets: {
