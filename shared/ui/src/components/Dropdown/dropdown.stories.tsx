@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
 import { Dropdown, DropdownOption } from '.';
 
 export default {
@@ -16,9 +17,19 @@ export default {
   ],
 } as ComponentMeta<typeof Dropdown>;
 
-const Template: ComponentStory<typeof Dropdown> = (args) => (
-  <Dropdown {...args} />
-);
+const Template: ComponentStory<typeof Dropdown> = (args) => {
+  const [value, setValue] = useState<DropdownOption>(initialOption);
+  return (
+    <Dropdown {...args} selectedOption={value} setSelectedOption={setValue} />
+  );
+};
+
+const initialOption: DropdownOption = {
+  title: '옵션 선택',
+  id: 'null',
+  description: '',
+  disabled: false,
+};
 
 const mockOptions: DropdownOption[] = [
   {
@@ -35,5 +46,5 @@ const mockOptions: DropdownOption[] = [
   },
 ];
 
-export const accordion = Template.bind({});
-accordion.args = { options: mockOptions, initialState: 'asdf' };
+export const dropdown = Template.bind({});
+dropdown.args = { options: mockOptions };

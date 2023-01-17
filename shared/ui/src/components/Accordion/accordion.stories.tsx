@@ -25,6 +25,7 @@ const Template: ComponentStory<typeof Accordion> = (args) => (
 
 export const accordion = Template.bind({});
 accordion.args = {
+  title: '아코디언',
   content: (
     // 내 티켓확인하기 아코디언 내용
     <ListRow
