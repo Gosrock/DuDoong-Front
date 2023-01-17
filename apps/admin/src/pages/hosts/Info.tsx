@@ -1,1 +1,10 @@
-export { default } from '../../../src/components/hosts/Info';
+import TempHostIButtonSet from '../../components/hosts/info/TempHostIButtonSet';
+
+const Info = () => {
+  return (
+    <>
+      <TempHostIButtonSet />
+    </>
+  );
+};
+export default Info;

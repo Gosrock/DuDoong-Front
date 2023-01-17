@@ -1,1 +1,10 @@
-export { default } from '../../../src/components/events/Qr';
+import TempQrButtonSet from '../../components/events/qr/TempQrButtonSet';
+
+const Qr = () => {
+  return (
+    <>
+      <TempQrButtonSet />
+    </>
+  );
+};
+export default Qr;

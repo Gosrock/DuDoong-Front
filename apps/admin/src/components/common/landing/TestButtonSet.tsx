@@ -2,7 +2,7 @@ import { Button } from '@dudoong/ui';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useNavigate } from 'react-router-dom';
 
-const Landing = () => {
+const TestButtonSet = () => {
   const navigate = useNavigate();
   const { openOverlay } = useGlobalOverlay();
   const openOverlayLoginTest = () => {
@@ -50,4 +50,4 @@ const Landing = () => {
     </>
   );
 };
-export default Landing;
+export default TestButtonSet;

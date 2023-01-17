@@ -3,6 +3,9 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { NavToHome } from './NavToHome';
 import { ContentHeader } from './ContentHeader';
+import { useRecoilState } from 'recoil';
+import { menuRouting } from '@store/menuRouting';
+import { useEffect } from 'react';
 
 const MENU_ITEM_SET = {
   events: {
@@ -41,21 +44,29 @@ interface AdminMenuLayoutProps {
   page: PageType;
   curActiveMenu: number;
   setCurActiveMenu: (menuItemKey: number) => void;
-  thirdMenuRoute?: string | null;
 }
 
 export const AdminMenuLayout = ({
   page,
   curActiveMenu,
   setCurActiveMenu,
-  thirdMenuRoute = null,
 }: AdminMenuLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const pageType = MENU_ITEM_SET[page];
+  const [menuRoute, setMenuRoute] = useRecoilState(menuRouting);
+
+  useEffect(() => {
+    setMenuRoute({ ...menuRoute, secondText: pageType.route[curActiveMenu] });
+  }, []);
 
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);
+    setMenuRoute({
+      ...menuRoute,
+      secondText: pageType.route[menuItemKey],
+      thirdText: null,
+    });
     navigate(
       `/${page}/${location.pathname.split('/')[2]}/${
         pageType.url[menuItemKey]
@@ -91,10 +102,7 @@ export const AdminMenuLayout = ({
         <NavToHome />
       </MenuWrapper>
       <OutletWrapper>
-        <ContentHeader
-          secondText={pageType.route[curActiveMenu]}
-          thirdText={thirdMenuRoute}
-        />
+        <ContentHeader />
         <Outlet />
       </OutletWrapper>
     </Wrapper>
