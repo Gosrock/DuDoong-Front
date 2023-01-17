@@ -1,4 +1,4 @@
-import TempTButtonSet from '../../components/events/tickets/TempTButtonSet';
+import TempTButtonSet from '../../../components/events/tickets/tickets/TempTButtonSet';
 
 const Tickets = () => {
   return (
