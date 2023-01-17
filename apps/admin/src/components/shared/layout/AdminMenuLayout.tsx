@@ -11,7 +11,6 @@ type MenuSetType = {
     items: string[];
     dividerPos: number[];
     url: string[];
-    route: string[];
   };
 };
 
@@ -28,21 +27,11 @@ const MENU_SET: MenuSetType = {
     ],
     dividerPos: [2, 4],
     url: ['dashboard', 'info', 'detail', 'tickets', 'options', 'guests', 'qr'],
-    route: [
-      '대시보드',
-      '공연 기본 정보',
-      '공연 이미지/상세',
-      '티켓 관리',
-      '티켓 옵션 관리',
-      '예매자 관리',
-      'QR 체크인',
-    ],
   },
   hosts: {
     items: ['dashboard', 'hostInfo', 'hostMember', 'slack'],
     dividerPos: [0, 2],
     url: ['dashboard', 'info', 'member', 'slack'],
-    route: ['대시보드', '호스트 정보', '호스트 멤버', '슬랙 알림 등록'],
   },
 };
 
@@ -125,4 +114,5 @@ const OutletWrapper = styled.div`
   width: calc(100% - 250px);
   height: 100%;
   background-color: ${({ theme }) => theme.palette.gray_100};
+  padding: 0 auto;
 `;

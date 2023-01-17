@@ -65,10 +65,12 @@ const Breadcrumb = () => {
     <Padding size={[40, 40, 0, 40]}>
       <FlexBox align={'center'} justify={'flex-start'}>
         {urlDetails.map((detail, index) => {
+          const textColor =
+            urlDetails.length === index + 1 ? 'gray_500' : 'gray_400';
           return (
             index != 1 && (
               <FlexBox align={'center'} justify={'flex-start'} key={index}>
-                <Text typo="Text_14" color="gray_400">
+                <Text typo="Text_14" color={textColor}>
                   {URL_SET[baseUrl][detail]}
                 </Text>
                 {urlDetails.length !== index + 1 && (
