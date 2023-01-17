@@ -21,13 +21,16 @@
     "@types/react-dom": "18.0.9",
     "axios": "^1.2.2",
     "next": "13.0.7",
+    "next-cookies": "^2.0.3",
     "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-spring-bottom-sheet": "^3.4.1",
     "recoil": "^0.7.6",
     "typescript": "4.9.4"
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.10.5"
+    "@emotion/babel-plugin": "^11.10.5",
+    "@svgr/webpack": "^6.5.1"
   }
 }

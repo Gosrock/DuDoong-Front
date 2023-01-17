@@ -9,7 +9,7 @@ import { ReactNode } from 'react';
 export interface ListHeaderProps {
   title: JSX.Element | string;
   description?: JSX.Element | string;
-  size?: ListHeaderTypo;
+  size: ListHeaderVariantKey;
   descTypo?: KeyOfTypo;
   descColor?: KeyOfPalette;
   padding?: PaddingSize;
@@ -17,25 +17,30 @@ export interface ListHeaderProps {
   gap?: number;
 }
 
-type ListHeaderTypo =
+type ListHeaderVariantKey =
   | 'listHeader_18'
   | 'listHeader_20'
   | 'listHeader_24'
   | 'listHeader_28';
 
-type ListHeaderTextType = {
-  [key in ListHeaderTypo]: {
+type ListHeaderVariantType = {
+  [key in ListHeaderVariantKey]: {
     textProp: TextType;
+    subTextProp: TextType;
     padding: PaddingSize;
     gap: number;
   };
 };
 
-const listHeaderText: ListHeaderTextType = {
+const LIST_HEADER_VARIANT: ListHeaderVariantType = {
   listHeader_18: {
     textProp: {
       typo: 'Text_18_SB',
       color: 'black',
+    },
+    subTextProp: {
+      typo: 'Text_14',
+      color: 'gray_400',
     },
     padding: [32, 24, 12, 24],
     gap: 10,
@@ -45,6 +50,10 @@ const listHeaderText: ListHeaderTextType = {
       typo: 'Header_20',
       color: 'black',
     },
+    subTextProp: {
+      typo: 'Text_14',
+      color: 'gray_400',
+    },
     padding: [32, 24, 16, 24],
     gap: 20,
   },
@@ -53,6 +62,10 @@ const listHeaderText: ListHeaderTextType = {
       typo: 'Header_24',
       color: 'black',
     },
+    subTextProp: {
+      typo: 'Text_14',
+      color: 'gray_400',
+    },
     padding: [32, 24, 16, 24],
     gap: 20,
   },
@@ -60,6 +73,10 @@ const listHeaderText: ListHeaderTextType = {
     textProp: {
       typo: 'Header_28',
       color: 'black',
+    },
+    subTextProp: {
+      typo: 'Text_16',
+      color: 'gray_400',
     },
     padding: [32, 24, 20, 24],
     gap: 20,
@@ -70,9 +87,9 @@ export const ListHeader = ({
   description,
   size = 'listHeader_24',
   title,
-  descColor = 'gray_500',
-  descTypo = 'Text_16',
-  padding = listHeaderText[size].padding,
+  descColor,
+  descTypo,
+  padding = LIST_HEADER_VARIANT[size].padding,
   rightElement = <></>,
   gap,
 }: ListHeaderProps) => {
@@ -80,21 +97,25 @@ export const ListHeader = ({
     <Padding size={padding}>
       <FlexBox
         align="left"
-        gap={size ? listHeaderText[size].gap : gap}
+        gap={size ? LIST_HEADER_VARIANT[size].gap : gap}
         justify="center"
         direction="column"
       >
         <FlexBox id="title" align="center" justify={'space-between'}>
           <Text
-            typo={listHeaderText[size].textProp.typo}
-            color={listHeaderText[size].textProp.color}
+            typo={LIST_HEADER_VARIANT[size].textProp.typo}
+            color={LIST_HEADER_VARIANT[size].textProp.color}
           >
             {title}
           </Text>
           {rightElement}
         </FlexBox>
         {description && (
-          <CustomText text={description} typo={descTypo} color={descColor} />
+          <CustomText
+            text={description}
+            typo={descTypo || LIST_HEADER_VARIANT[size].subTextProp.typo}
+            color={descColor || LIST_HEADER_VARIANT[size].subTextProp.color}
+          />
         )}
       </FlexBox>
     </Padding>

@@ -10,7 +10,7 @@ type TagColorType = {
   };
 };
 
-const tagColor: TagColorType = {
+const TAG_COLOR: TagColorType = {
   main: {
     background: 'main_100',
     text: 'main_500',
@@ -38,8 +38,8 @@ const Wrapper = styled.div<{ color: TagColorKey }>`
   padding: 4px 12px;
   ${({ theme }) => theme.typo.Text_12};
   background-color: ${({ theme, color }) =>
-    theme.palette[tagColor[color].background]};
-  color: ${({ theme, color }) => theme.palette[tagColor[color].text]};
+    theme.palette[TAG_COLOR[color].background]};
+  color: ${({ theme, color }) => theme.palette[TAG_COLOR[color].text]};
   display: inline-block;
   border-radius: 8px;
 `;

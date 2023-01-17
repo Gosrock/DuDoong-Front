@@ -20,7 +20,7 @@ type ProfileSizeType = {
   };
 };
 
-const profileSize: ProfileSizeType = {
+const PROFILE_SIZE: ProfileSizeType = {
   big: {
     imageSize: 49,
     name: {
@@ -49,12 +49,12 @@ export const Profile = ({ size, image, name, subText }: ProfileProps) => {
   return (
     <ListRow
       leftImage={
-        <ProfileImage size={profileSize[size].imageSize} imageUrl={image} />
+        <ProfileImage size={PROFILE_SIZE[size].imageSize} imageUrl={image} />
       }
       text={
         <Text
-          typo={profileSize[size].name.typo}
-          color={profileSize[size].name.color}
+          typo={PROFILE_SIZE[size].name.typo}
+          color={PROFILE_SIZE[size].name.color}
         >
           {name}
         </Text>
@@ -62,8 +62,8 @@ export const Profile = ({ size, image, name, subText }: ProfileProps) => {
       subText={
         subText && (
           <Text
-            typo={profileSize[size].sub.typo}
-            color={profileSize[size].sub.color}
+            typo={PROFILE_SIZE[size].sub.typo}
+            color={PROFILE_SIZE[size].sub.color}
           >
             {subText}
           </Text>

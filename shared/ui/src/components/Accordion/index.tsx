@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { ReactNode, useState } from 'react';
-import { ReactComponent as Down } from '../../assets/icons/down.svg';
+import { ChevronDown } from 'react-bootstrap-icons';
 import { FlexBox, ListRow, ListRowProps, PaddingSize } from '../../layout';
 export interface AccordionProps
   extends Pick<ListRowProps, 'textTypo' | 'textColor'> {
@@ -67,7 +67,10 @@ const AccordianHeader = styled.button`
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_200};
 `;
 
-const Handler = styled(Down)<{ isOpen: boolean }>`
+const Handler = styled(ChevronDown)<{ isOpen: boolean }>`
+  width: 18px;
+  height: 18px;
+  fill: ${({ theme }) => theme.palette.gray_400};
   ${({ isOpen }) =>
     isOpen &&
     css`

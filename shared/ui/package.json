@@ -10,8 +10,12 @@
     "emotion-reset": "^3.0.1",
     "polished": "^4.2.2",
     "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.10.2",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-drag-drop-files": "^2.3.8",
+    "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.7"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006 -s public",
@@ -61,6 +65,7 @@
     "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/testing-library": "^0.0.13",
     "@types/prop-types": "^15",
+    "@types/react-datepicker": "^4.8.0",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
     "storybook-addon-paddings": "^4.3.0",
