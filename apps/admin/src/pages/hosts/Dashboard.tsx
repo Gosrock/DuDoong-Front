@@ -1,4 +1,4 @@
-import TempHostDBButtonSet from '../../components/hosts/dashboard/TempHostDBButtonSet';
+import TempHostDBButtonSet from '@components/hosts/dashboard/TempHostDBButtonSet';
 
 const Dashboard = () => {
   return (

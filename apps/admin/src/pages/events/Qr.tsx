@@ -1,4 +1,4 @@
-import TempQrButtonSet from '../../components/events/qr/TempQrButtonSet';
+import TempQrButtonSet from '@components/events/qr/TempQrButtonSet';
 
 const Qr = () => {
   return (

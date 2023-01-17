@@ -6,7 +6,7 @@ import Guests from './Guests';
 import Info from './Info';
 import Options from './Options';
 import Qr from './Qr';
-import { AdminMenuLayout } from '../../components/shared/layout/AdminMenuLayout';
+import { AdminMenuLayout } from '@components/shared/layout/AdminMenuLayout';
 import { useState } from 'react';
 import TicketsRouter from './tickets/index';
 

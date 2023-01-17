@@ -1,4 +1,4 @@
-import TempIButtonSet from '../../components/events/info/TempIButtonSet';
+import TempIButtonSet from '@components/events/info/TempIButtonSet';
 
 const Info = () => {
   return (

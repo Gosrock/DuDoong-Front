@@ -1,4 +1,4 @@
-import TestButtonSet from '../../components/common/landing/TestButtonSet';
+import TestButtonSet from '@components/common/landing/TestButtonSet';
 
 const Landing = () => {
   return (

@@ -1,4 +1,4 @@
-import TempMButtonSet from '../../components/hosts/member/TempMButtonSet';
+import TempMButtonSet from '@components/hosts/member/TempMButtonSet';
 
 const Member = () => {
   return (

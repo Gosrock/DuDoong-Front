@@ -1,1 +1,1 @@
-export { default } from '../../components/kakao/Callback';
+export { default } from '@components/kakao/Callback';

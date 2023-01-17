@@ -1,4 +1,4 @@
-import TempOButtonSet from '../../components/events/options/TempOButtonSet';
+import TempOButtonSet from '@components/events/options/TempOButtonSet';
 
 const Options = () => {
   return (

@@ -1,4 +1,4 @@
-import TempNTButtonSet from '../../../components/events/tickets/newtickets/TempNTButtonSet';
+import TempNTButtonSet from '@components/events/tickets/newtickets/TempNTButtonSet';
 
 const NewTickets = () => {
   return (

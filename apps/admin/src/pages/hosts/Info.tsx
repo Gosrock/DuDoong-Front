@@ -1,4 +1,4 @@
-import TempHostIButtonSet from '../../components/hosts/info/TempHostIButtonSet';
+import TempHostIButtonSet from '@components/hosts/info/TempHostIButtonSet';
 
 const Info = () => {
   return (

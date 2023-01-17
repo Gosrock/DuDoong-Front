@@ -1,4 +1,4 @@
-import TempGButtonSet from '../../components/events/guests/TempGButtonSet';
+import TempGButtonSet from '@components/events/guests/TempGButtonSet';
 
 const Guests = () => {
   return (
