@@ -14,7 +14,14 @@
     "admin:build": "yarn workspace admin build",
     "ticket:build": "yarn workspace ticket build",
     "ticket:start": "yarn workspace ticket start",
-    "storybook": "yarn workspace @dudoong/ui storybook"
+    "storybook": "yarn workspace @dudoong/ui storybook",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,json,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@types/eslint": "^8",
@@ -26,6 +33,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "latest",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.0",
     "next-intercept-stdout": "^1.0.1",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4"
