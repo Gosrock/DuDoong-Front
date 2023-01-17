@@ -27,11 +27,11 @@ import {
 
 export type MenuItemSetTypeKey =
   | 'dashboard'
-  | 'basicInfo'
-  | 'detailInfo'
-  | 'ticket'
-  | 'option'
-  | 'reservationist'
+  | 'info'
+  | 'detail'
+  | 'tickets'
+  | 'options'
+  | 'guests'
   | 'qr'
   | 'hostInfo'
   | 'hostMember'
@@ -49,23 +49,23 @@ const MENU_ITEM_SET: MenuItemSetType = {
     text: '대시보드',
     icon: <Table css={{ fill: 'white' }} />,
   },
-  basicInfo: {
+  info: {
     text: '공연 기본 정보',
     icon: <CardChecklist css={{ fill: 'white' }} />,
   },
-  detailInfo: {
-    text: '공연 이미지/상세',
+  detail: {
+    text: '공연 이미지･상세',
     icon: <CardImage css={{ fill: 'white' }} />,
   },
-  ticket: {
+  tickets: {
     text: '티켓 관리',
     icon: <TicketPerforated css={{ fill: 'white' }} />,
   },
-  option: {
+  options: {
     text: '티켓 옵션 관리',
     icon: <Sliders css={{ fill: 'white' }} />,
   },
-  reservationist: {
+  guests: {
     text: '예매자 관리',
     icon: <PeopleFill css={{ fill: 'white' }} />,
   },
@@ -102,7 +102,7 @@ export const MenuItem = ({
   setCurActiveMenu,
   padding = [4, 12],
 }: MenuItemProps) => {
-  const isSelected = curActiveMenu === menuItemKey;
+  const isselected = curActiveMenu === menuItemKey ? 1 : 0; // camel case 로 쓰면 에러뜸
 
   const menuItemClickHandler = () => {
     setCurActiveMenu(menuItemKey);
@@ -110,19 +110,19 @@ export const MenuItem = ({
 
   return (
     <OuterPadding
-      isSelected={isSelected}
+      isselected={isselected}
       size={padding}
       onClick={menuItemClickHandler}
     >
       <MenuItemWrapper
         padding={[8, 12]}
-        color={isSelected ? 'main_100' : 'white'}
+        color={isselected ? 'main_100' : 'white'}
       >
         <FlexBox align={'center'} gap={16} justify={'start'}>
-          <IconWrapper align={'center'} isSelected={isSelected}>
+          <IconWrapper align={'center'} isselected={isselected}>
             {MENU_ITEM_SET[type].icon}
           </IconWrapper>
-          <Text typo={'Text_14'} color={isSelected ? 'main_500' : 'black'}>
+          <Text typo={'Text_14'} color={isselected ? 'main_500' : 'black'}>
             {MENU_ITEM_SET[type].text}
           </Text>
         </FlexBox>
@@ -136,12 +136,12 @@ export const MenuItem = ({
 // ------------------------------------------------------
 
 interface SelectedProps {
-  isSelected: boolean;
+  isselected: number;
 }
 
 const OuterPadding = styled(Padding)<SelectedProps>`
-  ${({ theme, isSelected }) =>
-    !isSelected
+  ${({ theme, isselected }) =>
+    !isselected
       ? css`
           & > div:hover {
             background: ${theme.palette.gray_100};
@@ -157,6 +157,6 @@ const IconWrapper = styled(FlexBox)<SelectedProps>`
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: ${({ isSelected, theme }) =>
-    isSelected ? theme.palette.main_300 : theme.palette.main_200};
+  background-color: ${({ isselected, theme }) =>
+    isselected ? theme.palette.main_300 : theme.palette.main_200};
 `;
