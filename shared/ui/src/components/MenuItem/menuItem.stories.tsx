@@ -37,20 +37,20 @@ const Template: ComponentStory<typeof MenuItem> = (args) => {
 export const dashboard = Template.bind({});
 dashboard.args = { type: 'dashboard' };
 
-export const basicInfo = Template.bind({});
-basicInfo.args = { type: 'basicInfo' };
+export const info = Template.bind({});
+info.args = { type: 'info' };
 
-export const detailInfo = Template.bind({});
-detailInfo.args = { type: 'detailInfo' };
+export const detail = Template.bind({});
+detail.args = { type: 'detail' };
 
-export const ticket = Template.bind({});
-ticket.args = { type: 'ticket' };
+export const tickets = Template.bind({});
+tickets.args = { type: 'tickets' };
 
-export const option = Template.bind({});
-option.args = { type: 'option' };
+export const options = Template.bind({});
+options.args = { type: 'options' };
 
-export const reservationist = Template.bind({});
-reservationist.args = { type: 'reservationist' };
+export const guests = Template.bind({});
+guests.args = { type: 'guests' };
 
 export const qr = Template.bind({});
 qr.args = { type: 'qr' };
