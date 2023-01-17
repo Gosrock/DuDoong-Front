@@ -2,20 +2,28 @@ import { Divider, MenuItem, MenuItemSetTypeKey, Spacing } from '@dudoong/ui';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { NavToHome } from './NavToHome';
-import { ContentHeader } from './ContentHeader';
-import { useRecoilState } from 'recoil';
-import { menuRouting } from '@store/menuRouting';
-import { useEffect } from 'react';
+import Breadcrumb from './Breadcrumb';
 
-const MENU_ITEM_SET = {
+type MenuSetTypeKey = 'events' | 'hosts';
+
+type MenuSetType = {
+  [key in MenuSetTypeKey]: {
+    items: string[];
+    dividerPos: number[];
+    url: string[];
+    route: string[];
+  };
+};
+
+const MENU_SET: MenuSetType = {
   events: {
     items: [
       'dashboard',
-      'basicInfo',
-      'detailInfo',
-      'ticket',
-      'option',
-      'reservationist',
+      'info',
+      'detail',
+      'tickets',
+      'options',
+      'guests',
       'qr',
     ],
     dividerPos: [2, 4],
@@ -53,20 +61,10 @@ export const AdminMenuLayout = ({
 }: AdminMenuLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const pageType = MENU_ITEM_SET[page];
-  const [menuRoute, setMenuRoute] = useRecoilState(menuRouting);
-
-  useEffect(() => {
-    setMenuRoute({ ...menuRoute, secondText: pageType.route[curActiveMenu] });
-  }, []);
+  const pageType = MENU_SET[page];
 
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);
-    setMenuRoute({
-      ...menuRoute,
-      secondText: pageType.route[menuItemKey],
-      thirdText: null,
-    });
     navigate(
       `/${page}/${location.pathname.split('/')[2]}/${
         pageType.url[menuItemKey]
@@ -102,7 +100,7 @@ export const AdminMenuLayout = ({
         <NavToHome />
       </MenuWrapper>
       <OutletWrapper>
-        <ContentHeader />
+        <Breadcrumb />
         <Outlet />
       </OutletWrapper>
     </Wrapper>
@@ -120,11 +118,11 @@ const Wrapper = styled.div`
 
 const MenuWrapper = styled.div`
   width: 250px;
-  height: 100vh;
+  height: 100%;
 `;
 
 const OutletWrapper = styled.div`
   width: calc(100% - 250px);
-  height: calc(100vh - 72px);
+  height: 100%;
   background-color: ${({ theme }) => theme.palette.gray_100};
 `;

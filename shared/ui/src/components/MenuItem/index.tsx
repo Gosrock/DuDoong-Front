@@ -27,11 +27,11 @@ import {
 
 export type MenuItemSetTypeKey =
   | 'dashboard'
-  | 'basicInfo'
-  | 'detailInfo'
-  | 'ticket'
-  | 'option'
-  | 'reservationist'
+  | 'info'
+  | 'detail'
+  | 'tickets'
+  | 'options'
+  | 'guests'
   | 'qr'
   | 'hostInfo'
   | 'hostMember'
@@ -49,23 +49,23 @@ const MENU_ITEM_SET: MenuItemSetType = {
     text: '대시보드',
     icon: <Table css={{ fill: 'white' }} />,
   },
-  basicInfo: {
+  info: {
     text: '공연 기본 정보',
     icon: <CardChecklist css={{ fill: 'white' }} />,
   },
-  detailInfo: {
+  detail: {
     text: '공연 이미지/상세',
     icon: <CardImage css={{ fill: 'white' }} />,
   },
-  ticket: {
+  tickets: {
     text: '티켓 관리',
     icon: <TicketPerforated css={{ fill: 'white' }} />,
   },
-  option: {
+  options: {
     text: '티켓 옵션 관리',
     icon: <Sliders css={{ fill: 'white' }} />,
   },
-  reservationist: {
+  guests: {
     text: '예매자 관리',
     icon: <PeopleFill css={{ fill: 'white' }} />,
   },

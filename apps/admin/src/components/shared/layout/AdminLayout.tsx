@@ -1,4 +1,4 @@
-import { Header } from '@dudoong/ui';
+import { FullScreen, Header } from '@dudoong/ui';
 import { Outlet } from 'react-router-dom';
 import { Profile } from '@dudoong/ui';
 import styled from '@emotion/styled';
@@ -8,7 +8,7 @@ export const AdminLayout = () => {
 
   const tempRightElement = <Profile size={'small'} name={'한규진'} />;
   return (
-    <>
+    <FullScreen>
       <Header
         rightElement={tempRightElement}
         title={'고스락 23번째 정기공연'}
@@ -16,7 +16,7 @@ export const AdminLayout = () => {
       <OutletWrapper>
         <Outlet />
       </OutletWrapper>
-    </>
+    </FullScreen>
   );
 };
 
