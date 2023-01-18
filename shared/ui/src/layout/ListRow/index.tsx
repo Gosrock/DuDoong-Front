@@ -16,6 +16,7 @@ export interface ListRowProps extends HTMLAttributes<HTMLDivElement> {
   rightElement?: ReactNode;
   gap?: number;
   fill?: boolean;
+  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
 /**
@@ -31,6 +32,7 @@ export interface ListRowProps extends HTMLAttributes<HTMLDivElement> {
  * @param rightElement : 오른쪽에 위치시킬 element (기본값 : <></>)
  * @param gap : text와 subtext 사이 gap
  * @param fill : width 100% 필요할때
+ * @param as
  * --------------------
  * text와 subText에는 string 또는 <Text/> 컴포넌트가 들어갈 수 있습니다.
  * string으로 넘길때에는 textTypo와 textColor props를 함께 넘겨줍니다.
