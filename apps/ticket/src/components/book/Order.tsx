@@ -1,4 +1,5 @@
-import { NavBar } from '@dudoong/ui';
+import Main from '@components/shared/Layout/Main';
+import { ListHeader, NavBar, Text, theme } from '@dudoong/ui';
 import DDHead from '@lib/utils/NextHead';
 import { useRouter } from 'next/router';
 
@@ -10,13 +11,26 @@ const Order = () => {
   return (
     <>
       <DDHead title="두둥!" />
-      <main>
+      <Main>
         <NavBar
           backHandler={() => {
             router.back();
           }}
         />
-      </main>
+        <ListHeader
+          title={'결제하기'}
+          size={'listHeader_20'}
+          description={
+            <Text typo="Text_14" color="gray_500">
+              고스락 제 23회 정기공연
+              <span css={{ color: `${theme.palette.main_500}` }}>
+                {' '}
+                일반티켓 총 3매
+              </span>
+            </Text>
+          }
+        />
+      </Main>
     </>
   );
 };

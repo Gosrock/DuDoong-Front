@@ -4,6 +4,7 @@ import { CSSProperties } from '@emotion/serialize';
 import styled from '@emotion/styled';
 import { HTMLAttributes, ReactNode } from 'react';
 import { FlexBox, flexboxPropsKey, Padding, PaddingSize } from '../../layout';
+import { media } from '../../theme';
 
 export interface ButtonSetProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -96,7 +97,11 @@ const Wrapper = styled.div<{ fixed: boolean }>`
     fixed &&
     css`
       position: fixed;
-      bottom: 0px;
       width: 100%;
+      bottom: 0px;
+
+      ${media.pc} {
+        max-width: 500px;
+      }
     `}
 `;

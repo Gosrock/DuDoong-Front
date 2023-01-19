@@ -13,9 +13,9 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
 import { AuthApi, OauthLoginResponse } from '@dudoong/utils';
 import { authState } from '@store/auth';
-import MainLayout from '@components/shared/Main';
 import { setCredentials } from '@lib/apis/axios';
 import cookies from 'next-cookies';
+import HeaderLayout from '@components/shared/Layout/HeaderLayout';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -48,10 +48,10 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
           <Hydrate state={pageProps.dehydratedState}>
             <Global styles={globalStyle} />
-            <MainLayout>
+            <HeaderLayout>
               <Component {...pageProps} />
               <GlobalOverlay />
-            </MainLayout>
+            </HeaderLayout>
           </Hydrate>
         </QueryClientProvider>
       </RecoilRoot>

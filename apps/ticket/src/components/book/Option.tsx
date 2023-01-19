@@ -1,3 +1,4 @@
+import Main from '@components/shared/Layout/Main';
 import {
   Button,
   ButtonSet,
@@ -31,35 +32,37 @@ const Option = () => {
   return (
     <>
       <DDHead title="두둥!" />
-      <NavBar
-        backHandler={() => {
-          router.back();
-        }}
-      />
-      <ListHeader
-        title={'옵션 선택하기'}
-        size={'listHeader_20'}
-        description={
-          <Text typo="Text_14" color="gray_500">
-            고스락 제 23회 정기공연
-            <span css={{ color: `${theme.palette.main_500}` }}>
-              {' '}
-              일반티켓 총 3매
-            </span>
-          </Text>
-        }
-      />
-      <Divider />
-      <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
-      <ButtonSet bottomFixed>
-        <Button
-          onClick={() => {
-            addCartMutation.mutate(mockCartLine);
+      <Main>
+        <NavBar
+          backHandler={() => {
+            router.back();
           }}
-        >
-          선택 완료
-        </Button>
-      </ButtonSet>
+        />
+        <ListHeader
+          title={'옵션 선택하기'}
+          size={'listHeader_20'}
+          description={
+            <Text typo="Text_14" color="gray_500">
+              고스락 제 23회 정기공연
+              <span css={{ color: `${theme.palette.main_500}` }}>
+                {' '}
+                일반티켓 총 3매
+              </span>
+            </Text>
+          }
+        />
+        <Divider />
+        <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
+        <ButtonSet bottomFixed>
+          <Button
+            onClick={() => {
+              addCartMutation.mutate(mockCartLine);
+            }}
+          >
+            선택 완료
+          </Button>
+        </ButtonSet>
+      </Main>
     </>
   );
 };
