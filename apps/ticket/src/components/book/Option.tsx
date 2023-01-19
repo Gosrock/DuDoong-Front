@@ -1,29 +1,41 @@
 import {
-  Accordion,
   Button,
   ButtonSet,
   Divider,
   ListHeader,
-  ListRow,
   NavBar,
   Text,
   theme,
-  ToggleButton,
 } from '@dudoong/ui';
+import { CartApi } from '@lib/apis/cart/CartApi';
+import { AddCartRequest } from '@lib/apis/cart/cartType';
 import DDHead from '@lib/utils/NextHead';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import OptionForm from './blocks/OptionForm';
 
 const Option = () => {
+  const router = useRouter();
   const [toggle, setToggle] = useState<boolean>(false);
 
-  const cartMutate = useMutation();
+  const addCartMutation = useMutation(CartApi.ADD_CARTLINE, {
+    onSuccess: (data) => {
+      router.push(
+        { pathname: '/book/order', query: { state: JSON.stringify(data) } },
+        '/book/order',
+      );
+    },
+  });
 
   return (
     <>
       <DDHead title="두둥!" />
-      <NavBar backHandler={() => {}} />
+      <NavBar
+        backHandler={() => {
+          router.back();
+        }}
+      />
       <ListHeader
         title={'옵션 선택하기'}
         size={'listHeader_20'}
@@ -40,7 +52,13 @@ const Option = () => {
       <Divider />
       <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
       <ButtonSet bottomFixed>
-        <Button>선택 완료</Button>
+        <Button
+          onClick={() => {
+            addCartMutation.mutate(mockCartLine);
+          }}
+        >
+          선택 완료
+        </Button>
       </ButtonSet>
     </>
   );
@@ -48,7 +66,7 @@ const Option = () => {
 
 export default Option;
 
-const mockCartLine = {
+const mockCartLine: AddCartRequest = {
   items: [
     {
       itemId: 1,

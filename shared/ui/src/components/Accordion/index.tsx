@@ -43,7 +43,7 @@ export const Accordion = ({
           />
         </FlexBox>
       </AccordianHeader>
-      {isOpen && <div>{content}</div>}
+      {isOpen && <>{content}</>}
     </div>
   );
 };

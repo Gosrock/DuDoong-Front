@@ -4,6 +4,7 @@ import {
   OauthLoginResponse,
   OauthTokenResponse,
 } from '@dudoong/utils';
+import { setCredentials } from '@lib/apis/axios';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
@@ -63,6 +64,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
     console.log(loginData);
     setAuth({ ...auth, isAuthenticated: true, ...loginData });
+    setCredentials(loginData);
   };
 
   return { oauthValidMutation, ouathKakaoLoginMutation };

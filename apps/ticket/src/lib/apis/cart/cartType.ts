@@ -1,7 +1,9 @@
 export interface AddCartRequest {
-  itemId: number;
-  quantity: number;
-  options: AddCartOptionAnswer[];
+  items: {
+    itemId: number;
+    quantity: number;
+    options: AddCartOptionAnswer[];
+  }[];
 }
 
 export interface AddCartOptionAnswer {
@@ -27,7 +29,7 @@ export interface CartItemResponse {
 
 export interface OptionAnswers {
   optionGroupType: 'TRUE_FALSE' | 'MULTIPLE_CHOICE' | 'SUBJECTIVE';
-  questinoName: string;
+  questionName: string;
   questionDescription: string;
   answer: string;
   additionalPrice: string;
