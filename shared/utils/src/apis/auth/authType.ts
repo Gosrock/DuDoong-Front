@@ -10,10 +10,10 @@ export interface OauthLoginResponse {
   accessTokenAge: number;
   refreshToken: string;
   refreshTokenAge: number;
-  userProfile: UserProfileType;
+  userProfile: UserProfile;
 }
 
-export interface UserProfileType {
+export interface UserProfile {
   id: number;
   profileImage: string;
   name: string;

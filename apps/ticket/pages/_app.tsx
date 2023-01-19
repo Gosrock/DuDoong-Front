@@ -11,7 +11,7 @@ import { useMemo, useState } from 'react';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import 'react-spring-bottom-sheet/dist/style.css';
 import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
-import { AuthApi } from '@dudoong/utils';
+import { AuthApi, axiosPrivate } from '@dudoong/utils';
 import cookies from 'next-cookies';
 import { authState, AuthStateType } from '@store/auth';
 import MainLayout from '@components/shared/Main';
@@ -63,6 +63,10 @@ MyApp.getInitialProps = async (context: AppContext) => {
       isAuthenticated: true,
       callbackUrl: '/',
     };
+    axiosPrivate.defaults.headers.common[
+      'access-token'
+    ] = `Bearer ${response.accessToken}`;
+
     ctx.res?.setHeader(
       'set-cookie',
       `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,

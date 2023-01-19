@@ -1,13 +1,15 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { CSSProperties } from '@emotion/serialize';
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { FlexBox, flexboxPropsKey, Padding, PaddingSize } from '../../layout';
 
-export interface ButtonSetProps {
+export interface ButtonSetProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   varient?: ButtonSetVariantKey;
   padding?: PaddingSize;
+  bottomFixed?: boolean;
 }
 
 type ButtonSetVariantKey =
@@ -67,9 +69,10 @@ export const ButtonSet = ({
   children,
   varient = 'mono',
   padding = [40, 24, 20, 24],
+  bottomFixed = false,
 }: ButtonSetProps) => {
   return (
-    <Wrapper>
+    <Wrapper fixed={bottomFixed}>
       <Padding size={padding}>
         <FlexBox
           align={BUTTON_SET_VARIANT[varient].align}
@@ -87,6 +90,13 @@ export const ButtonSet = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ fixed: boolean }>`
   background: ${({ theme }) => theme.palette.gradient.linear_white};
+  ${({ fixed }) =>
+    fixed &&
+    css`
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+    `}
 `;
