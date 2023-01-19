@@ -1,7 +1,10 @@
 {
   "folders": [
     {
-      "path": "apps/admin"
+      "path": "apps"
+    },
+    {
+      "path": ".github"
     },
     {
       "path": "shared"

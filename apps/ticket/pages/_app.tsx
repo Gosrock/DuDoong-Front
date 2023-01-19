@@ -1,4 +1,4 @@
-import { globalStyle, Layout, theme } from '@dudoong/ui';
+import { globalStyle, theme } from '@dudoong/ui';
 import { Global, ThemeProvider } from '@emotion/react';
 import {
   Hydrate,
@@ -7,30 +7,42 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps, AppContext } from 'next/app';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import 'react-spring-bottom-sheet/dist/style.css';
 import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
-import { AuthApi } from '@dudoong/utils';
+import { AuthApi, OauthLoginResponse } from '@dudoong/utils';
+import { authState } from '@store/auth';
 import cookies from 'next-cookies';
-import { authState, AuthStateType } from '@store/auth';
-import MainLayout from '@components/shared/Main';
+import HeaderLayout from '@components/shared/Layout/HeaderLayout';
+import { setCredentials } from '@lib/utils/setCredentials';
+import { getCookie } from 'cookies-next';
 
 interface MyAppProps extends AppProps {
-  auth: AuthStateType | null;
+  loginData: OauthLoginResponse | null;
 }
 
-function MyApp({ Component, pageProps, auth }: MyAppProps) {
-  console.log(auth);
+function MyApp({ Component, pageProps, loginData }: MyAppProps) {
   const initializer = useMemo(
     () =>
       ({ set }: MutableSnapshot) => {
-        if (auth) {
+        if (loginData) {
+          const auth = {
+            userProfile: loginData.userProfile,
+            accessToken: loginData.accessToken,
+            isAuthenticated: true,
+            callbackUrl: (getCookie('redirectUrl') as string) || '/',
+          };
           set(authState, auth);
         }
       },
-    [auth],
+    [loginData],
   );
+
+  useEffect(() => {
+    loginData && setCredentials(loginData);
+  }, [loginData]);
+
   const [queryClient] = useState(() => new QueryClient());
 
   return (
@@ -40,10 +52,10 @@ function MyApp({ Component, pageProps, auth }: MyAppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
           <Hydrate state={pageProps.dehydratedState}>
             <Global styles={globalStyle} />
-            <MainLayout>
+            <HeaderLayout>
               <Component {...pageProps} />
               <GlobalOverlay />
-            </MainLayout>
+            </HeaderLayout>
           </Hydrate>
         </QueryClientProvider>
       </RecoilRoot>
@@ -55,22 +67,16 @@ MyApp.getInitialProps = async (context: AppContext) => {
   const { ctx, Component } = context;
   const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};
-  let auth: AuthStateType | null;
+  let loginData: OauthLoginResponse | null;
   try {
     const response = await AuthApi.REFRESH(refreshToken!);
-    auth = {
-      userProfile: response.userProfile,
-      accessToken: response.accessToken,
-      isAuthenticated: true,
-      callbackUrl: '/',
-    };
-    console.log(response);
+    loginData = response;
     ctx.res?.setHeader(
       'set-cookie',
       `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,
     );
   } catch (err: any) {
-    auth = null;
+    loginData = null;
   }
 
   if (Component.getInitialProps) {
@@ -78,7 +84,7 @@ MyApp.getInitialProps = async (context: AppContext) => {
     pageProps = await Component.getInitialProps(ctx);
   }
   // return한 값은 해당 컴포넌트의 props로 들어가게 됩니다.
-  return { pageProps, auth };
+  return { pageProps, loginData };
 };
 
 export default MyApp;

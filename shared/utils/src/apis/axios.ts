@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = `${
+export const BASE_URL = `${
   typeof window !== 'undefined'
     ? window.location.origin === 'http://localhost:3000'
       ? 'https://staging.dudoong.com/api/v1'
@@ -11,12 +11,6 @@ const BASE_URL = `${
 }`;
 
 export const axiosPublic = axios.create({
-  baseURL: BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
-  withCredentials: true,
-});
-
-export const axiosPrivate = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 export interface ToggleButtonProps {
   toggle: boolean;

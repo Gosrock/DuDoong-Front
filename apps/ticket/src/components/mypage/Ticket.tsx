@@ -1,4 +1,4 @@
-import DDHead from '@lib/utils/NextHead';
+import DDHead from '@components/shared/Layout/NextHead';
 
 const Ticket = () => {
   return (

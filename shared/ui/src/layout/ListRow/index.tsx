@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { FlexBox, Padding, PaddingSize } from '..';
 import { HTMLAttributes, ReactNode } from 'react';
 import { Text } from '../../components/Text';
@@ -42,7 +43,7 @@ export const ListRow = ({
   padding = [16, 24],
   text,
   subText,
-  textTypo = ['Text_18', 'Text_16'],
+  textTypo = ['Text_16', 'Text_14'],
   textColor = ['gray_500', 'gray_400'],
   leftImage,
   rightElement = <></>,
@@ -67,6 +68,7 @@ export const ListRow = ({
                   text={subText}
                   typo={getTextTypo(textTypo, 1)}
                   color={getTextColor(textColor, 1)}
+                  css={{ marginTop: '4px' }}
                 />
               )}
             </>
@@ -104,19 +106,20 @@ const CustomText = ({
   text,
   typo,
   color,
+  ...props
 }: {
   text: JSX.Element | string;
   typo: KeyOfTypo;
   color: KeyOfPalette;
-}) => {
+} & HTMLAttributes<HTMLDivElement>) => {
   return (
     <>
       {isString(text) ? (
-        <Text typo={typo} color={color}>
+        <Text typo={typo} color={color} {...props}>
           {text}
         </Text>
       ) : (
-        <>{text}</>
+        <div {...props}>{text}</div>
       )}
     </>
   );
