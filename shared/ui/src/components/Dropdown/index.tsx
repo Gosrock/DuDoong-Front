@@ -64,7 +64,7 @@ const DropdownOptionRow = ({ option }: { option: DropdownOption }) => {
   const { id, title, disabled, description } = option;
   return (
     <ListRow
-      padding={[12, 24]}
+      padding={[16, 24]}
       text={title}
       textTypo="Text_16"
       textColor={disabled ? 'gray_400' : 'gray_500'}
