@@ -16,6 +16,7 @@ import { authState } from '@store/auth';
 import cookies from 'next-cookies';
 import HeaderLayout from '@components/shared/Layout/HeaderLayout';
 import { setCredentials } from '@lib/utils/setCredentials';
+import { getCookie } from 'cookies-next';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -30,7 +31,7 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
             userProfile: loginData.userProfile,
             accessToken: loginData.accessToken,
             isAuthenticated: true,
-            callbackUrl: '/',
+            callbackUrl: (getCookie('redirectUrl') as string) || '/',
           };
           set(authState, auth);
         }

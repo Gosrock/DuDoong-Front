@@ -1,3 +1,4 @@
+import { getCookie } from 'cookies-next';
 import { atom } from 'recoil';
 
 export interface AuthStateType {
@@ -13,7 +14,7 @@ export interface AuthStateType {
 
 const initialState: AuthStateType = {
   isAuthenticated: false,
-  callbackUrl: '/',
+  callbackUrl: (getCookie('redirectUrl') as string) || '/',
   accessToken: '',
   userProfile: null,
 };

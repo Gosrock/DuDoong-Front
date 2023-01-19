@@ -39,10 +39,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
 
   if (!state) {
-    setSsrAxiosHeader(cookies);
-    const data = await CartApi.RECENT_CARTLINE();
-    if (data) return { props: { data } };
-    else return { redirect: { destination: '/', permanent: false } };
+    try {
+      setSsrAxiosHeader(cookies);
+      const data = await CartApi.RECENT_CARTLINE();
+      if (data) return { props: { data } };
+      else return { redirect: { destination: '/', permanent: false } };
+    } catch (err: any) {
+      //TODO : 로그인 후 리다이렉트 url QA때 토큰 이리저리 해보면서 확인
+      const redirectUrl = '/book/order';
+      return {
+        redirect: {
+          destination: `/login/expired?redirect=${redirectUrl}`,
+          permanent: false,
+        },
+      };
+    }
   } else {
     const data = JSON.parse(state as string) as AddCartResponse;
     return { props: { data } };
