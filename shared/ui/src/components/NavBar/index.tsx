@@ -30,13 +30,14 @@ export const NavBar = ({ label, backHandler }: NavBarProps) => {
 
 const Wrapper = styled(FlexBox)`
   height: 40px;
+  position: relative;
   & > svg {
     height: 18px;
     width: 18px;
-    margin: 11px;
-    position: fixed;
-    left: 6px;
-    top: 4px;
+    padding: 11px;
+    position: absolute;
+    left: 0px;
+    cursor: pointer;
   }
   & > svg > path {
     fill: ${({ theme }) => theme.palette.gray_500};

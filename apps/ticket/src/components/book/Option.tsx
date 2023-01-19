@@ -1,10 +1,12 @@
+import { ListHeader, NavBar } from '@dudoong/ui';
 import DDHead from '@lib/utils/NextHead';
 
 const Option = () => {
   return (
     <>
       <DDHead title="두둥!" />
-      <main>옵션선택하기</main>
+      <NavBar backHandler={() => {}} />
+      <ListHeader title={'옵션 선택하기'} size={'listHeader_20'} />
     </>
   );
 };

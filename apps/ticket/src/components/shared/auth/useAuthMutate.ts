@@ -33,7 +33,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   // 회원가입
   const ouathKakaoRegisterMutation = useMutation(AuthApi.OAUTH_REGISTER, {
     onSuccess: (data: OauthLoginResponse) => {
-      localStorage.setItem('refreshToken', data.refreshToken);
       onSuccessLogin(data);
       closeOverlay();
       router.replace(auth.callbackUrl);
@@ -43,7 +42,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   // 로그인
   const ouathKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
     onSuccess: (data: OauthLoginResponse) => {
-      localStorage.setItem('refreshToken', data.refreshToken);
       onSuccessLogin(data);
       router.replace(auth.callbackUrl);
     },

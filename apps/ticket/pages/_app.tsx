@@ -21,7 +21,6 @@ interface MyAppProps extends AppProps {
 }
 
 function MyApp({ Component, pageProps, auth }: MyAppProps) {
-  console.log(auth);
   const initializer = useMemo(
     () =>
       ({ set }: MutableSnapshot) => {
@@ -64,7 +63,6 @@ MyApp.getInitialProps = async (context: AppContext) => {
       isAuthenticated: true,
       callbackUrl: '/',
     };
-    console.log(response);
     ctx.res?.setHeader(
       'set-cookie',
       `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,

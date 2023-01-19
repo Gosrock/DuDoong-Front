@@ -15,7 +15,7 @@ const HeaderLayout = ({ children }: HeaderLayoutProps) => {
     openOverlay({ content: 'login' });
   };
   useEffect(() => {
-    console.log(userProfile);
+    userProfile && console.log(userProfile);
   }, [userProfile]);
   return (
     <Layout
