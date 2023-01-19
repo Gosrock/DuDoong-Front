@@ -7,15 +7,15 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps, AppContext } from 'next/app';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import 'react-spring-bottom-sheet/dist/style.css';
 import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
 import { AuthApi, OauthLoginResponse } from '@dudoong/utils';
 import { authState } from '@store/auth';
-import { setCredentials } from '@lib/apis/axios';
 import cookies from 'next-cookies';
 import HeaderLayout from '@components/shared/Layout/HeaderLayout';
+import { setCredentials } from '@lib/utils/setCredentials';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -37,7 +37,10 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
       },
     [loginData],
   );
-  loginData && setCredentials(loginData);
+
+  useEffect(() => {
+    loginData && setCredentials(loginData);
+  }, [loginData]);
 
   const [queryClient] = useState(() => new QueryClient());
 

@@ -1,26 +1,19 @@
 import Main from '@components/shared/Layout/Main';
-import {
-  Button,
-  ButtonSet,
-  Divider,
-  ListHeader,
-  NavBar,
-  Text,
-  theme,
-} from '@dudoong/ui';
+import { Button, ButtonSet, Divider, NavBar } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
 import { AddCartRequest } from '@lib/apis/cart/cartType';
-import DDHead from '@lib/utils/NextHead';
+import DDHead from '@components/shared/Layout/NextHead';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import BookHeader from './blocks/BookHeader';
 import OptionForm from './blocks/OptionForm';
 
 const Option = () => {
   const router = useRouter();
   const [toggle, setToggle] = useState<boolean>(false);
 
-  const addCartMutation = useMutation(CartApi.ADD_CARTLINE, {
+  const { mutate } = useMutation(CartApi.ADD_CARTLINE, {
     onSuccess: (data) => {
       router.push(
         { pathname: '/book/order', query: { state: JSON.stringify(data) } },
@@ -38,25 +31,16 @@ const Option = () => {
             router.back();
           }}
         />
-        <ListHeader
-          title={'옵션 선택하기'}
-          size={'listHeader_20'}
-          description={
-            <Text typo="Text_14" color="gray_500">
-              고스락 제 23회 정기공연
-              <span css={{ color: `${theme.palette.main_500}` }}>
-                {' '}
-                일반티켓 총 3매
-              </span>
-            </Text>
-          }
+        <BookHeader
+          title="옵션 선택하기"
+          description={['고스락 제 23회 정기공연', '일반티켓', 3]}
         />
         <Divider />
         <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
         <ButtonSet bottomFixed>
           <Button
             onClick={() => {
-              addCartMutation.mutate(mockCartLine);
+              mutate(mockCartLine);
             }}
           >
             선택 완료

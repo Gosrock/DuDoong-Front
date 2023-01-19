@@ -4,8 +4,8 @@ import {
   OauthLoginResponse,
   OauthTokenResponse,
 } from '@dudoong/utils';
-import { setCredentials } from '@lib/apis/axios';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
+import { setCredentials } from '@lib/utils/setCredentials';
 import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';

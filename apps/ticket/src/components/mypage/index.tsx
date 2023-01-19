@@ -1,5 +1,5 @@
 import { Divider, ListHeader, Padding, Profile } from '@dudoong/ui';
-import DDHead from '@lib/utils/NextHead';
+import DDHead from '@components/shared/Layout/NextHead';
 
 const Mypage = () => {
   return (

@@ -35,7 +35,7 @@ export const Accordion = ({
         <FlexBox align="center" justify="space-between">
           <ListRow
             text={title}
-            rightElement={<Handler isOpen={isOpen} />}
+            rightElement={<Handler open={isOpen} />}
             padding={padding}
             fill
             textTypo={textTypo}
@@ -53,12 +53,12 @@ const AccordianHeader = styled.button`
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_200};
 `;
 
-const Handler = styled(ChevronDown)<{ isOpen: boolean }>`
+const Handler = styled(ChevronDown)<{ open: boolean }>`
   width: 18px;
   height: 18px;
   fill: ${({ theme }) => theme.palette.gray_400};
-  ${({ isOpen }) =>
-    isOpen &&
+  ${({ open }) =>
+    open &&
     css`
       transform: rotate(180deg);
     `}

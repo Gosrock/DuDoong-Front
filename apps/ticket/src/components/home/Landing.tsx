@@ -1,5 +1,5 @@
 import { Button, ButtonSet, ListHeader } from '@dudoong/ui';
-import DDHead from '@lib/utils/NextHead';
+import DDHead from '@components/shared/Layout/NextHead';
 import { useRouter } from 'next/router';
 const Landing = () => {
   const router = useRouter();
