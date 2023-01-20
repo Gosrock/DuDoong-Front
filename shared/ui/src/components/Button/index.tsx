@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { darken } from 'polished';
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { theme } from '../../theme';
 import { Spinner } from '../Loader/Spinner';
 import { Text } from '../Text';
@@ -21,7 +21,7 @@ type ButtonVarient =
  * @param size 버튼의 사이즈 : 화면에 꽉차게 / 크기 고정
  */
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: ReactNode;
   varient?: ButtonVarient;
   size?: ButtonSize;
   isLoading?: boolean;
