@@ -2,7 +2,6 @@ import { FlexBox, Padding } from '../../layout';
 import { Text } from '../Text';
 import { ChevronLeft } from 'react-bootstrap-icons';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
 export interface NavBarProps {
   label?: string;
@@ -17,26 +16,29 @@ export interface NavBarProps {
 
 export const NavBar = ({ label, backHandler }: NavBarProps) => {
   return (
-    <Padding size={[4, 6]}>
-      <Wrapper align={'center'} justify={'center'}>
-        <ChevronLeft onClick={backHandler} />
-        <Text typo={'Navbar_17'} color={'black'}>
-          {label}
-        </Text>
-      </Wrapper>
-    </Padding>
+    <Wrapper align={'center'} justify={'center'}>
+      <ChevronLeft onClick={backHandler} />
+      <Text typo={'Navbar_17'} color={'black'}>
+        {label}
+      </Text>
+    </Wrapper>
   );
 };
 
 const Wrapper = styled(FlexBox)`
-  height: 40px;
-  position: relative;
+  height: 48px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  background-color: ${({ theme }) => theme.palette.white};
+  z-index: 10;
+
   & > svg {
     height: 18px;
     width: 18px;
     padding: 11px;
+    left: 6px;
     position: absolute;
-    left: 0px;
     cursor: pointer;
   }
   & > svg > path {

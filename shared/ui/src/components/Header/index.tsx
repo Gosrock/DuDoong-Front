@@ -38,11 +38,10 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
 const Wrapper = styled(FlexBox)`
   height: 72px;
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_200};
-  position: fixed;
-  top: 0px;
   left: 0px;
   width: 100%;
   background-color: ${({ theme }) => theme.palette.white};
+  z-index: 10;
 `;
 
 const LogoMock = styled.div`

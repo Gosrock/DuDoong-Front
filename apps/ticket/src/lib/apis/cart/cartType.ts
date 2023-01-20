@@ -13,7 +13,7 @@ export interface AddCartOptionAnswer {
 
 export interface AddCartResponse {
   title: string;
-  items: CartItemResponse;
+  items: CartItemResponse[];
   cartId: number;
   totalQuantity: number;
   isNeedPayment: boolean;
@@ -21,13 +21,13 @@ export interface AddCartResponse {
 
 export interface CartItemResponse {
   name: string;
-  answers: OptionAnswers;
+  answers: OptionAnswer[];
   itemprice: string;
   cartLinePrice: string;
   packedQuantity: number;
 }
 
-export interface OptionAnswers {
+export interface OptionAnswer {
   optionGroupType: 'TRUE_FALSE' | 'MULTIPLE_CHOICE' | 'SUBJECTIVE';
   questionName: string;
   questionDescription: string;

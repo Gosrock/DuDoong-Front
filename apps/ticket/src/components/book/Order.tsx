@@ -7,10 +7,10 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import BookHeader from './blocks/BookHeader';
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
+import ItemPreview from './blocks/ItemPreview';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
-  console.log(data);
 
   return (
     <>
@@ -27,6 +27,9 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         />
         <Divider />
         <ListHeader size="listHeader_18" title={'내 티켓 확인하기'} />
+        {data.items.map((item) => (
+          <ItemPreview item={item} key={item.name} />
+        ))}
       </Main>
     </>
   );

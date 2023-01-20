@@ -24,17 +24,35 @@ export const Layout = ({ children, name, image, handleLogin }: LayoutProps) => {
           )
         }
       />
-      <div>{children}</div>
+      <Content>
+        <div>{children}</div>
+      </Content>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  margin-top: 73px;
+  position: relative;
   ${media.mobile} {
-    margin-top: 0px;
     & > div:first-of-type {
       display: none;
+    }
+  }
+`;
+
+const Content = styled.div`
+  ${media.pc} {
+    height: calc(100vh - 72px);
+    position: relative;
+    overflow: hidden;
+
+    & > div {
+      overflow: auto;
+      position: absolute;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      right: 0px;
     }
   }
 `;
