@@ -3,6 +3,7 @@ export * from './Button';
 export * from './ButtonSet';
 export * from './Counter';
 export * from './Divider';
+export * from './Dropdown';
 export * from './DropZone';
 export * from './Header';
 export * from './ListHeader';

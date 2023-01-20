@@ -3,13 +3,11 @@ import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 import { ListRow } from '../../layout';
 import { theme } from '../../theme';
-import { Accordion, AccordionProps } from '../Accordion';
+import { Accordion } from '../Accordion';
 import { Text } from '../Text';
 
-export interface DropdownProps extends AccordionProps {
+export interface DropdownProps {
   options: DropdownOption[];
-  initialState: string; //id
-  onSelectOption: () => void;
   selectedOption: DropdownOption;
   setSelectedOption: React.Dispatch<React.SetStateAction<DropdownOption>>;
 }

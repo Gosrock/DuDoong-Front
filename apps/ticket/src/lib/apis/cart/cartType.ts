@@ -14,6 +14,7 @@ export interface AddCartOptionAnswer {
 export interface AddCartResponse {
   title: string;
   items: CartItemResponse[];
+  totalPrice: string;
   cartId: number;
   totalQuantity: number;
   isNeedPayment: boolean;

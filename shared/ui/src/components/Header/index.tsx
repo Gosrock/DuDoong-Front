@@ -41,7 +41,6 @@ const Wrapper = styled(FlexBox)`
   left: 0px;
   width: 100%;
   background-color: ${({ theme }) => theme.palette.white};
-  z-index: 10;
 `;
 
 const LogoMock = styled.div`

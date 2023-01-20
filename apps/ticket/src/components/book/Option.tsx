@@ -1,12 +1,12 @@
 import Main from '@components/shared/Layout/Main';
-import { Button, ButtonSet, Divider, NavBar } from '@dudoong/ui';
+import { Button, ButtonSet, Divider, NavBar, Spacing } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
 import { AddCartRequest } from '@lib/apis/cart/cartType';
 import DDHead from '@components/shared/Layout/NextHead';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import BookHeader from './blocks/BookHeader';
+import BookHeader from './blocks/order/BookHeader';
 import OptionForm from './blocks/OptionForm';
 
 const Option = () => {
@@ -37,6 +37,7 @@ const Option = () => {
         />
         <Divider />
         <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
+        <Spacing size={120} />
         <ButtonSet bottomFixed>
           <Button
             onClick={() => {
