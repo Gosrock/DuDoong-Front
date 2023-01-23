@@ -8,7 +8,7 @@ const useOrderMutation = (instance: PaymentWidgetInstance | null) => {
       const payload = {
         orderId: data.orderId,
         orderName: data.orderName,
-        successUrl: 'http://localhost:3000/pay/success',
+        successUrl: 'http://localhost:3000/pay/confirm',
         failUrl: 'http://localhost:3000/pay/fail',
         customerEmail: data.customerEmail,
         customerName: data.customerName,

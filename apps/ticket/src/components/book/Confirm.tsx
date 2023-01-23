@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-const Success = () => {
+const Confirm = () => {
   const router = useRouter();
   const queries = router.query;
   const { amount, orderId, paymentKey } = queries;
@@ -13,7 +13,9 @@ const Success = () => {
     OrderApi.CONFIRM_ORDER(orderId as string),
     {
       onSuccess: (data) => {
-        console.log(data);
+        router.replace('/pay/success', {
+          query: { data: JSON.stringify(data) },
+        });
       },
     },
   );
@@ -40,4 +42,4 @@ const Success = () => {
   );
 };
 
-export default Success;
+export default Confirm;

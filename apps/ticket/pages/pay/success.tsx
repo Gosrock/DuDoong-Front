@@ -1,1 +1,1 @@
-export { default } from '@components/book/Success';
+export { default } from '@components/book/Succeses';
