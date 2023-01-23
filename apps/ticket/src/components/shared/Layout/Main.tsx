@@ -12,7 +12,7 @@ const Wrapper = styled.main`
   padding-top: 48px;
   ${media.pc} {
     padding-top: 0px;
-    max-width: 500px;
+    max-width: var(--main-width);
     margin: 0 auto;
     right: -10px; //스크롤바 자리 보정
     position: relative;
