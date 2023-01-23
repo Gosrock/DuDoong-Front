@@ -64,7 +64,7 @@ export default Order;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { state } = context.query;
   const { cookies } = context.req;
-
+  console.log('getServerSideProps');
   if (!state) {
     try {
       setSsrAxiosHeader(cookies);

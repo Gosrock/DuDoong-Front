@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps, AppContext } from 'next/app';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import 'react-spring-bottom-sheet/dist/style.css';
 import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
@@ -23,21 +23,17 @@ interface MyAppProps extends AppProps {
 }
 
 function MyApp({ Component, pageProps, loginData }: MyAppProps) {
-  const initializer = useMemo(
-    () =>
-      ({ set }: MutableSnapshot) => {
-        if (loginData) {
-          const auth = {
-            userProfile: loginData.userProfile,
-            accessToken: loginData.accessToken,
-            isAuthenticated: true,
-            callbackUrl: (getCookie('redirectUrl') as string) || '/',
-          };
-          set(authState, auth);
-        }
-      },
-    [loginData],
-  );
+  const initializer = ({ set }: MutableSnapshot) => {
+    if (loginData) {
+      const auth = {
+        userProfile: loginData.userProfile,
+        accessToken: loginData.accessToken,
+        isAuthenticated: true,
+        callbackUrl: (getCookie('redirectUrl') as string) || '/',
+      };
+      set(authState, auth);
+    }
+  };
 
   useEffect(() => {
     loginData && setCredentials(loginData);
@@ -64,17 +60,20 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
 }
 
 MyApp.getInitialProps = async (context: AppContext) => {
+  console.log('getInitialProps');
   const { ctx, Component } = context;
   const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};
   let loginData: OauthLoginResponse | null;
   try {
-    const response = await AuthApi.REFRESH(refreshToken!);
-    loginData = response;
-    ctx.res?.setHeader(
-      'set-cookie',
-      `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,
-    );
+    if (ctx.req) {
+      const response = await AuthApi.REFRESH(refreshToken!);
+      loginData = response;
+      ctx.res?.setHeader(
+        'set-cookie',
+        `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,
+      );
+    } else throw new Error('isClient');
   } catch (err: any) {
     loginData = null;
   }
