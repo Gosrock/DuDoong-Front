@@ -76,7 +76,7 @@ const mockCartLine: AddCartRequest = {
     },
     {
       itemId: 1,
-      quantity: 2,
+      quantity: 1,
       options: [
         {
           optionId: 1,

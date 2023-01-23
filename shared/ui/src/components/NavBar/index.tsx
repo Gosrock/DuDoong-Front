@@ -2,6 +2,7 @@ import { FlexBox, Padding } from '../../layout';
 import { Text } from '../Text';
 import { ChevronLeft } from 'react-bootstrap-icons';
 import styled from '@emotion/styled';
+import { media } from '../../theme';
 
 export interface NavBarProps {
   label?: string;
@@ -28,7 +29,10 @@ export const NavBar = ({ label, backHandler }: NavBarProps) => {
 const Wrapper = styled(FlexBox)`
   height: 48px;
   width: 100%;
-  position: sticky;
+  position: fixed;
+  ${media.pc} {
+    position: sticky;
+  }
   top: 0;
   background-color: ${({ theme }) => theme.palette.white};
   z-index: 10;

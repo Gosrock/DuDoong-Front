@@ -17,9 +17,13 @@ import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
 import CouponSelect from './blocks/order/CouponSelect';
 import Totalprice from './blocks/order/TotalPrice';
 import ItemPreview from './blocks/order/ItemPreview';
+import useOrderMutation from './blocks/order/useOrderMutation';
+import useTossPayments from './blocks/order/useTossPayments';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
+  const { instance, Payment } = useTossPayments();
+  const { orderMutate } = useOrderMutation(instance);
   return (
     <>
       <DDHead title="두둥!" />
@@ -41,18 +45,28 @@ const Order = ({ data }: { data: AddCartResponse }) => {
           <ItemPreview item={item} key={item.name} />
         ))}
         <Divider />
-        {/* 할인 쿠폰 */}
+        {/* 할인 쿠폰 TODO : 토스페이먼트 메소드에서 적용하기 */}
         <ListHeader size="listHeader_18" title={'할인 쿠폰 선택하기'} />
         <CouponSelect />
         <Divider />
-        {/* 총 결제금액 */}
-        <ListHeader size="listHeader_18" title={'총 결제금액'} />
+        {/* 결제금액 */}
+        <ListHeader size="listHeader_18" title={'결제금액'} />
         <Totalprice price={data.totalPrice} />
+        <Divider />
+        {/* 결제정보 */}
+        <ListHeader size="listHeader_18" title={'결제정보'} />
+        <Payment />
         <Spacing size={120} />
 
         {/* 다음으로 버튼 */}
         <ButtonSet bottomFixed>
-          <Button>{data.totalPrice} 결제하기</Button>
+          <Button
+            onClick={() => {
+              orderMutate({ couponId: null, cartId: data.cartId });
+            }}
+          >
+            {data.totalPrice} 결제하기
+          </Button>
         </ButtonSet>
       </Main>
     </>

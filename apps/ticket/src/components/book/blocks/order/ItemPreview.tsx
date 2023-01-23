@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { CartItemResponse, OptionAnswer } from '@lib/apis/cart/cartType';
 
 const ItemPreview = ({ item }: { item: CartItemResponse }) => {
-  console.log(item);
   return (
     <Accordion
       title={item.name}
