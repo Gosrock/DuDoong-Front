@@ -1,9 +1,13 @@
 /** @jsxImportSource @emotion/react */
-
+import { theme } from '../../../theme';
 import React from 'react';
 import { useState } from 'react';
 import { Text } from '../../Text';
 import { ReactNode } from 'react';
+import styled from '@emotion/styled';
+import { FlexBox, Padding } from '../../../layout';
+import { css } from '@emotion/react';
+import { ChevronDown } from 'react-bootstrap-icons';
 
 export interface PopupDropdownProps {
   options: PopupDropdownOption[];
@@ -25,32 +29,37 @@ export const PopupDropdown = ({
   const [open, setOpen] = useState(false);
   const handleOptionClick = (option: PopupDropdownOption) => {
     setValue(option);
+    setSelectedOption(option);
+    setOpen(!open);
   };
+  let ParsedOption = parseValue(value);
   return (
     <>
-      <button onClick={() => setOpen(!open)}>오픈버튼</button>
+      <OptionHeader onClick={() => setOpen(!open)}>
+        <FlexBox align="left" gap={6} justify="left" direction="row">
+          <Text typo="Text_16" color="main_400">
+            {ParsedOption}
+          </Text>
+          <PopupHandler open={open} />
+        </FlexBox>
+      </OptionHeader>
       <Dropdown open={open}>
-        <ul>
-          <li>안녕ㅋ</li>
-          <li>나도 널 따라갈래</li>
-        </ul>
+        {options.map((option) => (
+          <OptionButton
+            key={option.id}
+            onClick={() => {
+              handleOptionClick(option);
+            }}
+          >
+            <DropdownOptionRow option={option} />
+          </OptionButton>
+        ))}
       </Dropdown>
     </>
   );
 };
 
-const DropdownList = ({ option }: { option: PopupDropdownOption }) => {
-  const { id, title } = option;
-  return (
-    <ul ref={id}>
-      <Text typo={'Text_14'} color={'black'}>
-        {title}
-      </Text>
-    </ul>
-  );
-};
-
-//드롭다운이 들어가는 공간먼저 생성한다.
+//드롭다운이 들어가는 공간
 const Dropdown = ({
   children,
   open,
@@ -58,5 +67,67 @@ const Dropdown = ({
   children: ReactNode;
   open: boolean;
 }) => {
-  return <article>{open && children}</article>;
+  return <>{open && <PopupZone>{children}</PopupZone>}</>;
 };
+
+const DropdownOptionRow = ({ option }: { option: PopupDropdownOption }) => {
+  const { title } = option;
+  return (
+    <>
+      <Padding size={[8, 11]}>
+        <Text typo="Text_16_SB" color="gray_500">
+          {title}
+        </Text>
+      </Padding>
+    </>
+  );
+};
+
+const OptionHeader = styled.button`
+  position: relative;
+  padding: 3px;
+  left: 50px;
+`;
+
+const OptionButton = styled.button`
+  text-align: left;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${theme.palette.main_100};
+  }
+`;
+
+const PopupZone = styled.div`
+  position: relative;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #dedede;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  width: 164px;
+`;
+
+const PopupHandler = styled(ChevronDown)<{ open: boolean }>`
+  width: 18px;
+  height: 18px;
+  padding: 2px;
+  fill: ${({ theme }) => theme.palette.main_400};
+  ${({ open }) =>
+    open &&
+    css`
+      transform: rotate(180deg);
+    `}
+  transition: all 0.4s ease;
+`;
+
+function parseValue(value: any) {
+  value = value.title;
+  const charCode = value.charCodeAt(value.length - 1);
+  const consonantCode = (charCode - 44032) % 28;
+  if (consonantCode === 0) {
+    return `${value}로 검색`;
+  }
+  return `${value}으로 검색`;
+}
