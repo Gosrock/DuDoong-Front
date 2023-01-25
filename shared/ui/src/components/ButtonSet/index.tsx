@@ -101,7 +101,7 @@ const Wrapper = styled.div<{ fixed: boolean }>`
       bottom: 0px;
 
       ${media.pc} {
-        max-width: 500px;
+        max-width: var(--main-width);
       }
     `}
 `;
