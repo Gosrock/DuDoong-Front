@@ -147,14 +147,17 @@ interface SelectedProps {
 }
 
 const OuterPadding = styled(Padding)<SelectedProps>`
-  ${({ theme, isselected }) =>
-    !isselected
-      ? css`
-          & > div:hover {
-            background: ${theme.palette.gray_100};
-          }
-        `
-      : null}
+  & > div:hover {
+    background: ${({ theme, isselected }) =>
+      !isselected ? theme.palette.gray_200 : null};
+    & > div > span {
+      ${({ theme }) => theme.typo.G_Menu_14_B};
+      color: ${({ theme }) => theme.palette.black};
+    }
+    & > div > svg > path {
+      color: ${({ theme }) => theme.palette.black};
+    }
+  }
   cursor: pointer;
 `;
 
