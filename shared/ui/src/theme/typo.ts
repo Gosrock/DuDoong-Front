@@ -81,4 +81,68 @@ export const typo = {
     line-height: 150%;
     font-weight: 500;
   `,
+  // --------------------------------
+  // new font
+  P_Header_28_B: css`
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: ${calcRem(28)};
+    line-height: 120%;
+  `,
+  P_Text_24_Sb: css`
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: ${calcRem(24)};
+    line-height: 120%;
+  `,
+  P_Text_20_B: css`
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: ${calcRem(20)};
+    line-height: 150%;
+  `,
+  P_Text_20_M: css`
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: ${calcRem(20)};
+    line-height: 150%;
+  `,
+  P_Text_18_M: css`
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: ${calcRem(18)};
+    line-height: 150%;
+  `,
+  P_Name_14_M: css`
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: ${calcRem(14)};
+    line-height: ${calcRem(17)};
+  `,
+
+  G_Header_20_B: css`
+    font-family: 'Gmarket Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: ${calcRem(20)};
+    line-height: ${calcRem(20)};
+  `,
+  G_Name_20_M: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 400;
+    font-size: ${calcRem(20)};
+    line-height: ${calcRem(20)};
+  `,
+  G_Menu_18_B: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 500;
+    font-size: ${calcRem(18)};
+    line-height: ${calcRem(18)};
+  `,
+  G_Menu_18_M: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 400;
+    font-size: ${calcRem(18)};
+    line-height: ${calcRem(18)};
+  `,
 } as const;
