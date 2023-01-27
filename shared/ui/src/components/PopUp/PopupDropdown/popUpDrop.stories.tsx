@@ -25,19 +25,34 @@ const initialOption: PopupDropdownOption = {
   id: 'null',
 };
 
-const mockOptions: PopupDropdownOption[] = [
-  {
-    title: '이름',
-    id: 'name',
-  },
-  {
-    title: '전화번호',
-    id: 'phone',
-  },
-  {
-    title: '닉네임',
-    id: 'nickname',
-  },
-];
-export const popupDropdown = Template.bind({});
-popupDropdown.args = { options: mockOptions };
+export const twoOption = Template.bind({});
+twoOption.args = {
+  options: [
+    {
+      title: '이름',
+      id: 'name',
+    },
+    {
+      title: '전화번호',
+      id: 'phone',
+    },
+  ],
+};
+
+export const threeOption = Template.bind({});
+threeOption.args = {
+  options: [
+    {
+      title: '이름',
+      id: 'name',
+    },
+    {
+      title: '전화번호',
+      id: 'phone',
+    },
+    {
+      title: '닉네임',
+      id: 'nickname',
+    },
+  ],
+};

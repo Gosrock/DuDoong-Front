@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { theme } from '../../../theme';
-import React from 'react';
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { Text } from '../../Text';
-import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { FlexBox, Padding } from '../../../layout';
 import { css } from '@emotion/react';
 import { ChevronDown } from 'react-bootstrap-icons';
+import { parseValue } from '../../../lib/utils/parsing';
 
 export interface PopupDropdownProps {
   options: PopupDropdownOption[];
@@ -121,13 +120,3 @@ const PopupHandler = styled(ChevronDown)<{ open: boolean }>`
     `}
   transition: all 0.4s ease;
 `;
-
-function parseValue(value: any) {
-  value = value.title;
-  const charCode = value.charCodeAt(value.length - 1);
-  const consonantCode = (charCode - 44032) % 28;
-  if (consonantCode === 0) {
-    return `${value}로 검색`;
-  }
-  return `${value}으로 검색`;
-}
