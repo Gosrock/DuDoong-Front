@@ -25,5 +25,5 @@ export const NavToHome = () => {
 const Wrapper = styled.div`
   position: fixed;
   left: 48px;
-  bottom: 53px;
+  bottom: 52px;
 `;

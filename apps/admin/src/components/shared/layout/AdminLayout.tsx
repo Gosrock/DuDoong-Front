@@ -31,5 +31,5 @@ const OutletWrapper = styled.div`
   top: 80px;
   left: 0px;
   width: 100%;
-  height: calc(100% - 72px);
+  height: calc(100% - 80px);
 `;

@@ -1,4 +1,10 @@
-import { Divider, MenuItem, MenuItemSetTypeKey, Padding } from '@dudoong/ui';
+import {
+  Divider,
+  MenuItem,
+  MenuItemSetTypeKey,
+  Padding,
+  Spacing,
+} from '@dudoong/ui';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { NavToHome } from './NavToHome';
@@ -63,7 +69,8 @@ export const AdminMenuLayout = ({
 
   return (
     <Wrapper>
-      <MenuWrapper size={[36, 23, 0, 23]}>
+      <MenuWrapper size={[0, 24]}>
+        <Spacing size={36} />
         {pageType.items.map((item, index) => {
           const itemEl = (
             <MenuItem
@@ -105,17 +112,17 @@ const Wrapper = styled.div`
 `;
 
 const MenuWrapper = styled(Padding)`
-  width: 250px;
+  width: 252px;
   height: 100%;
 `;
 
 const ContentWrapper = styled.div`
-  width: calc(100% - 250px);
+  width: calc(100% - 252px);
   height: 100%;
   background-color: ${({ theme }) => theme.palette.gray_100};
 `;
 
 const OutletWrapper = styled.div`
-  width: 954px;
-  padding: 0 53px;
+  width: 956px;
+  padding: 0 52px;
 `;

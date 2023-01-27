@@ -12,6 +12,6 @@ const AdminNoMenuLayout = () => {
 export default AdminNoMenuLayout;
 
 const Wrapper = styled.div`
-  width: 954px;
+  width: 956px;
   margin: 0 auto;
 `;

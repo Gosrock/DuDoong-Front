@@ -104,7 +104,7 @@ export const MenuItem = ({
   menuItemKey,
   curActiveMenu,
   setCurActiveMenu,
-  padding = [11, 0],
+  padding = [12, 0],
 }: MenuItemProps) => {
   const isselected = curActiveMenu === menuItemKey ? 1 : 0; // camel case 로 쓰면 에러뜸
 
@@ -119,12 +119,12 @@ export const MenuItem = ({
       onClick={menuItemClickHandler}
     >
       <MenuItemWrapper
-        padding={[12, 23]}
+        padding={[12, 24]}
         color={isselected ? 'point_mint' : 'white'}
         isselected={isselected}
         radius={8}
       >
-        <FlexBox align={'center'} gap={23} justify={'start'}>
+        <FlexBox align={'center'} gap={24} justify={'start'}>
           {MENU_ITEM_SET[type].icon}
           <Text
             typo={isselected ? 'G_Menu_14_B' : 'G_Menu_14_M'}
