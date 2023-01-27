@@ -151,4 +151,18 @@ export const typo = {
     font-size: ${calcRem(18)};
     line-height: ${calcRem(18)};
   `,
+
+  // --------------------------------
+  G_Menu_14_B: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 600;
+    font-size: ${calcRem(14)};
+    line-height: ${calcRem(14)};
+  `,
+  G_Menu_14_M: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 400;
+    font-size: ${calcRem(14)};
+    line-height: ${calcRem(14)};
+  `,
 } as const;

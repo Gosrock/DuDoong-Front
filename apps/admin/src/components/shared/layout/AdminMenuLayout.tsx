@@ -1,4 +1,4 @@
-import { Divider, MenuItem, MenuItemSetTypeKey, Spacing } from '@dudoong/ui';
+import { Divider, MenuItem, MenuItemSetTypeKey, Padding } from '@dudoong/ui';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { NavToHome } from './NavToHome';
@@ -29,9 +29,9 @@ const MENU_SET: MenuSetType = {
     url: ['dashboard', 'info', 'detail', 'tickets', 'options', 'guests', 'qr'],
   },
   hosts: {
-    items: ['dashboard', 'hostInfo', 'hostMember', 'slack'],
-    dividerPos: [0, 2],
-    url: ['dashboard', 'info', 'member', 'slack'],
+    items: ['hostinfo', 'hostmember', 'hostevents', 'hostalliance'],
+    dividerPos: [],
+    url: ['info', 'member', 'events', 'alliance'],
   },
 };
 
@@ -63,35 +63,34 @@ export const AdminMenuLayout = ({
 
   return (
     <Wrapper>
-      <MenuWrapper>
-        <Spacing size={40} />
-        <>
-          {pageType.items.map((item, index) => {
-            const itemEl = (
-              <MenuItem
-                type={item as MenuItemSetTypeKey}
-                menuItemKey={index}
-                curActiveMenu={curActiveMenu}
-                setCurActiveMenu={menuActiveHandler}
-              />
-            );
-            const itemElDivider = pageType.dividerPos.includes(index) ? (
-              <Divider line={true} padding={12} height={32} />
-            ) : null;
-            return (
-              <div key={index}>
-                {itemEl}
-                {itemElDivider}
-              </div>
-            );
-          })}
-        </>
+      <MenuWrapper size={[36, 23, 0, 23]}>
+        {pageType.items.map((item, index) => {
+          const itemEl = (
+            <MenuItem
+              type={item as MenuItemSetTypeKey}
+              menuItemKey={index}
+              curActiveMenu={curActiveMenu}
+              setCurActiveMenu={menuActiveHandler}
+            />
+          );
+          const itemElDivider = pageType.dividerPos.includes(index) ? (
+            <Divider line={true} padding={0} height={0} />
+          ) : null;
+          return (
+            <div key={index}>
+              {itemEl}
+              {itemElDivider}
+            </div>
+          );
+        })}
         <NavToHome />
       </MenuWrapper>
-      <OutletWrapper>
+      <ContentWrapper>
         <Breadcrumb />
-        <Outlet />
-      </OutletWrapper>
+        <OutletWrapper>
+          <Outlet />
+        </OutletWrapper>
+      </ContentWrapper>
     </Wrapper>
   );
 };
@@ -105,14 +104,18 @@ const Wrapper = styled.div`
   align-items: flex-start;
 `;
 
-const MenuWrapper = styled.div`
+const MenuWrapper = styled(Padding)`
   width: 250px;
   height: 100%;
 `;
 
-const OutletWrapper = styled.div`
+const ContentWrapper = styled.div`
   width: calc(100% - 250px);
   height: 100%;
   background-color: ${({ theme }) => theme.palette.gray_100};
-  padding: 0 auto;
+`;
+
+const OutletWrapper = styled.div`
+  width: 954px;
+  padding: 0 53px;
 `;

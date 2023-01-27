@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 const menuItems = ['dashboard', 'info', 'member', 'slack'];
 
-export const HostsRouter = () => {
+const HostsRouter = () => {
   const location = useLocation();
   const acticeMenuIndex = menuItems.indexOf(location.pathname.split('/')[3]);
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
@@ -33,3 +33,5 @@ export const HostsRouter = () => {
     </Routes>
   );
 };
+
+export default HostsRouter;

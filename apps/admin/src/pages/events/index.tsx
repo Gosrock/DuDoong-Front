@@ -4,11 +4,11 @@ import Dashboard from './Dashboard';
 import Detail from './Detail';
 import Guests from './Guests';
 import Info from './Info';
-import Options from './Options';
 import Qr from './Qr';
 import { AdminMenuLayout } from '@components/shared/layout/AdminMenuLayout';
 import { useState } from 'react';
 import TicketsRouter from './tickets/index';
+import OptionsRouter from './options';
 
 const menuItems = [
   'dashboard',
@@ -20,7 +20,7 @@ const menuItems = [
   'qr',
 ];
 
-export const EventsRouter = () => {
+const EventsRouter = () => {
   const location = useLocation();
   const acticeMenuIndex = menuItems.indexOf(location.pathname.split('/')[3]);
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
@@ -39,7 +39,7 @@ export const EventsRouter = () => {
         <Route path="/info" element={<Info />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/tickets/*" element={<TicketsRouter />} />
-        <Route path="/options" element={<Options />} />
+        <Route path="/options/*" element={<OptionsRouter />} />
         <Route path="/guests" element={<Guests />} />
         <Route path="/qr" element={<Qr />} />
         <Route path="/*" element={<NotFound />} />
@@ -47,3 +47,5 @@ export const EventsRouter = () => {
     </Routes>
   );
 };
+
+export default EventsRouter;

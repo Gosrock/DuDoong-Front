@@ -1,4 +1,4 @@
-import { Header } from '@dudoong/ui';
+import { FlexBox, Header } from '@dudoong/ui';
 import { Outlet } from 'react-router-dom';
 import { Profile } from '@dudoong/ui';
 import styled from '@emotion/styled';
@@ -27,7 +27,8 @@ export const AdminLayout = () => {
 
 const OutletWrapper = styled.div`
   position: fixed;
-  top: 72px;
+  border-top: solid 1px ${({ theme }) => theme.palette.gray_200};
+  top: 80px;
   left: 0px;
   width: 100%;
   height: calc(100% - 72px);

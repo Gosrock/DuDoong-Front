@@ -2,13 +2,14 @@ import { Routes, Route } from 'react-router-dom';
 import Landing from '@pages/common/Landing';
 import { Navigate } from 'react-router-dom';
 import NotFound from '@pages/common/NotFound';
-import { EventsRouter } from '@pages/events';
-import { HostsRouter } from '@pages/hosts';
+import EventsRouter from '@pages/events';
+import HostsRouter from '@pages/hosts';
 import { AdminLayout } from './components/shared/layout/AdminLayout';
 import Login from './components/common/Login';
 import RefuseAuth from './components/shared/auth/RefuseAuth';
 import Callback from '@pages/kakao/Callback';
 import Refresh from './components/shared/auth/Refresh';
+import NewRouter from '@pages/new';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route element={<Refresh />}>
         <Route element={<AdminLayout />}>
           <Route path="/" element={<Landing />} />
+          <Route path="/new/*" element={<NewRouter />} />
           <Route path="/hosts/:hostId/*" element={<HostsRouter />} />
           <Route path="/events/:eventId/*" element={<EventsRouter />} />
         </Route>
