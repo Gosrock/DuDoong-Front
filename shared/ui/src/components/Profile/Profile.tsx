@@ -7,6 +7,7 @@ export interface ProfileProps {
   size: ProfileSizeKey;
   image?: string;
   name: string;
+  alliance?: boolean;
   subText?: string;
 }
 
@@ -14,7 +15,7 @@ type ProfileSizeKey = 'big' | 'small';
 
 type ProfileSizeType = {
   [key in ProfileSizeKey]: {
-    imageSize: 36 | 49;
+    imageSize: 50 | 90;
     name: TextType;
     sub: TextType;
   };
@@ -22,34 +23,44 @@ type ProfileSizeType = {
 
 const PROFILE_SIZE: ProfileSizeType = {
   big: {
-    imageSize: 49,
+    imageSize: 90,
     name: {
-      typo: 'Text_18',
+      typo: 'G_Name_24_M',
       color: 'black',
     },
     sub: {
-      typo: 'Text_16',
+      typo: 'P_Text_18_M',
       color: 'gray_400',
     },
   },
   small: {
-    imageSize: 36,
+    imageSize: 50,
     name: {
-      typo: 'Text_16',
+      typo: 'G_Name_20_M',
       color: 'black',
     },
     sub: {
-      typo: 'Text_12',
-      color: 'gray_400',
+      typo: 'P_Name_14_M',
+      color: 'black',
     },
   },
 };
 
-export const Profile = ({ size, image, name, subText }: ProfileProps) => {
+export const Profile = ({
+  size,
+  image,
+  name,
+  subText,
+  alliance = false,
+}: ProfileProps) => {
   return (
     <ListRow
       leftImage={
-        <ProfileImage size={PROFILE_SIZE[size].imageSize} imageUrl={image} />
+        <ProfileImage
+          size={PROFILE_SIZE[size].imageSize}
+          imageUrl={image}
+          alliance={alliance}
+        />
       }
       text={
         <Text

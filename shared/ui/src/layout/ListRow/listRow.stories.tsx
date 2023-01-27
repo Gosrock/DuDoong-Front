@@ -21,7 +21,7 @@ Full.args = {
   text: 'text',
   subText: 'sub',
   rightElement: <Tag text="예시 태그" color="red" />,
-  leftImage: <ProfileImage size={49} />,
+  leftImage: <ProfileImage size={49} alliance={false} />,
 };
 
 export const NoImage = Template.bind({});
