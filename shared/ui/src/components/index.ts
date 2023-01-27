@@ -22,4 +22,4 @@ export * from './TextField/DatePicker';
 export * from './TextField/TimePicker';
 export * from './TextField/Input';
 export * from './ToggleButton';
-export * from './PopUp/PopupDropdown';
+export * from './PopupDropdown';

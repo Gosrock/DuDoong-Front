@@ -1,45 +1,107 @@
 /** @jsxImportSource @emotion/react */
-import { theme } from '../../../theme';
+import { KeyOfPalette, theme, KeyOfTypo } from '../../theme';
 import { useState, ReactNode } from 'react';
-import { Text } from '../../Text';
+import { Text } from '../Text';
 import styled from '@emotion/styled';
-import { FlexBox, Padding } from '../../../layout';
+import { FlexBox, Padding } from '../../layout';
 import { css } from '@emotion/react';
-import { ChevronDown } from 'react-bootstrap-icons';
-import { parseValue } from '../../../lib/utils/parsing';
+import { ChevronDown, CaretDownFill } from 'react-bootstrap-icons';
+import { parseValue } from '../../lib/utils/parsing';
 
-export interface PopupDropdownProps {
-  options: PopupDropdownOption[];
-  selectedOption: PopupDropdownOption;
-  setSelectedOption: React.Dispatch<React.SetStateAction<PopupDropdownOption>>;
-}
+export type DropdownKey = 'ProfileDropdown' | 'FinderDropdown';
+
+type DropdownType = {
+  [key in DropdownKey]: {
+    typo: KeyOfTypo;
+    textColor: KeyOfPalette;
+    palette: string;
+    icon: any;
+    iconSize: string;
+  };
+};
+
+const DROPDOWN_TYPE_SET: DropdownType = {
+  ProfileDropdown: {
+    typo: 'Text_16',
+    textColor: 'gray_500',
+    palette: `${theme.palette.gray_500}`,
+    icon: CaretDownFill,
+    iconSize: '10px',
+  },
+  FinderDropdown: {
+    typo: 'Text_16',
+    textColor: 'main_400',
+    palette: `${theme.palette.main_400}`,
+    icon: ChevronDown,
+    iconSize: '18px',
+  },
+};
 
 export interface PopupDropdownOption {
   title: string;
   id: string;
 }
 
+export interface PopupDropdownProps {
+  type?: DropdownKey;
+  header: string;
+  openSet: boolean;
+  options: PopupDropdownOption[];
+  selectedOption: PopupDropdownOption;
+  setSelectedOption: React.Dispatch<React.SetStateAction<PopupDropdownOption>>;
+}
+
+interface IconStyle {
+  open: boolean;
+  color: string;
+  size: string;
+}
+
 export const PopupDropdown = ({
+  type = 'FinderDropdown',
+  header,
   options,
+  openSet = false,
   selectedOption,
   setSelectedOption,
 }: PopupDropdownProps) => {
   const [value, setValue] = useState<PopupDropdownOption>(selectedOption);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(openSet);
   const handleOptionClick = (option: PopupDropdownOption) => {
     setValue(option);
     setSelectedOption(option);
     setOpen(!open);
   };
-  let ParsedOption = parseValue(value);
+
+  if (type === 'FinderDropdown') header = parseValue(value);
+
+  const PopupHandler = styled(DROPDOWN_TYPE_SET[type].icon)<IconStyle>`
+    width: ${(size) => size};
+    height: ${(size) => size};
+    padding: 2px;
+    ${({ open }) =>
+      open &&
+      css`
+        transform: rotate(180deg);
+      `}
+    fill: ${(color) => color};
+  `;
+
   return (
     <>
       <OptionHeader onClick={() => setOpen(!open)}>
-        <FlexBox align="left" gap={6} justify="left" direction="row">
-          <Text typo="Text_16" color="main_400">
-            {ParsedOption}
+        <FlexBox align="center" gap={6} justify="left" direction="row">
+          <Text
+            typo={DROPDOWN_TYPE_SET[type].typo}
+            color={DROPDOWN_TYPE_SET[type].textColor}
+          >
+            {header}
           </Text>
-          <PopupHandler open={open} />
+          <PopupHandler
+            open={open}
+            color={DROPDOWN_TYPE_SET[type].palette}
+            size={DROPDOWN_TYPE_SET[type].iconSize}
+          />
         </FlexBox>
       </OptionHeader>
       <Dropdown open={open}>
@@ -58,7 +120,6 @@ export const PopupDropdown = ({
   );
 };
 
-//드롭다운이 들어가는 공간
 const Dropdown = ({
   children,
   open,
@@ -106,17 +167,4 @@ const PopupZone = styled.div`
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
   width: 164px;
-`;
-
-const PopupHandler = styled(ChevronDown)<{ open: boolean }>`
-  width: 18px;
-  height: 18px;
-  padding: 2px;
-  fill: ${({ theme }) => theme.palette.main_400};
-  ${({ open }) =>
-    open &&
-    css`
-      transform: rotate(180deg);
-    `}
-  transition: all 0.4s ease;
 `;
