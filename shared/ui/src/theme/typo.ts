@@ -123,7 +123,7 @@ export const typo = {
   G_Header_20_B: css`
     font-family: 'Gmarket Sans';
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: ${calcRem(20)};
     line-height: ${calcRem(20)};
   `,
@@ -135,7 +135,7 @@ export const typo = {
   `,
   G_Menu_18_B: css`
     font-family: 'Gmarket Sans';
-    font-weight: 500;
+    font-weight: 600;
     font-size: ${calcRem(18)};
     line-height: ${calcRem(18)};
   `,
