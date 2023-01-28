@@ -89,6 +89,18 @@ export const PopupDropdown = ({
 
   return (
     <>
+      <Dropdown open={open}>
+        {options.map((option) => (
+          <OptionButton
+            key={option.id}
+            onClick={() => {
+              handleOptionClick(option);
+            }}
+          >
+            <DropdownOptionRow option={option} />
+          </OptionButton>
+        ))}
+      </Dropdown>
       <OptionHeader onClick={() => setOpen(!open)}>
         <FlexBox align="center" gap={6} justify="left" direction="row">
           <Text
@@ -104,18 +116,6 @@ export const PopupDropdown = ({
           />
         </FlexBox>
       </OptionHeader>
-      <Dropdown open={open}>
-        {options.map((option) => (
-          <OptionButton
-            key={option.id}
-            onClick={() => {
-              handleOptionClick(option);
-            }}
-          >
-            <DropdownOptionRow option={option} />
-          </OptionButton>
-        ))}
-      </Dropdown>
     </>
   );
 };
@@ -144,9 +144,10 @@ const DropdownOptionRow = ({ option }: { option: PopupDropdownOption }) => {
 };
 
 const OptionHeader = styled.button`
-  position: relative;
+  position: fixed;
   padding: 3px;
   left: 50px;
+  top: 100px;
 `;
 
 const OptionButton = styled.button`

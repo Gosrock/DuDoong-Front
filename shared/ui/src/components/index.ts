@@ -23,3 +23,4 @@ export * from './TextField/TimePicker';
 export * from './TextField/Input';
 export * from './ToggleButton';
 export * from './PopupDropdown';
+export * from './ProfileDropdown';
