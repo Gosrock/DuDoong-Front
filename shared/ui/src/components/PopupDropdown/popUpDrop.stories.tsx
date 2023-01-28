@@ -2,6 +2,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { PopupDropdownOption, PopupDropdown } from '.';
 import { useState } from 'react';
+import { parseValue } from '../../lib/utils/parsing';
 
 export default {
   title: 'PopupDropdown',
@@ -25,22 +26,26 @@ const initialOption: PopupDropdownOption = {
   id: 'null',
 };
 
-export const twoOption = Template.bind({});
-twoOption.args = {
+export const ProfileDropdown = Template.bind({});
+ProfileDropdown.args = {
+  header: '김유진 님',
+  type: 'ProfileDropdown',
   options: [
     {
-      title: '이름',
-      id: 'name',
+      title: '마이페이지',
+      id: 'mypage',
     },
     {
-      title: '전화번호',
-      id: 'phone',
+      title: '로그아웃',
+      id: 'logout',
     },
   ],
 };
 
-export const threeOption = Template.bind({});
-threeOption.args = {
+export const FinderDropdown = Template.bind({});
+FinderDropdown.args = {
+  header: '옵션',
+  type: 'FinderDropdown',
   options: [
     {
       title: '이름',
@@ -49,10 +54,6 @@ threeOption.args = {
     {
       title: '전화번호',
       id: 'phone',
-    },
-    {
-      title: '닉네임',
-      id: 'nickname',
     },
   ],
 };
