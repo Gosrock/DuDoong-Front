@@ -9,6 +9,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { NavToHome } from './NavToHome';
 import Breadcrumb from './Breadcrumb';
+import AdminHeader from './AdminHeader';
 
 type MenuSetTypeKey = 'events' | 'hosts';
 
@@ -68,43 +69,50 @@ export const AdminMenuLayout = ({
   };
 
   return (
-    <Wrapper>
-      <MenuWrapper size={[0, 24]}>
-        <Spacing size={36} />
-        {pageType.items.map((item, index) => {
-          const itemEl = (
-            <MenuItem
-              type={item as MenuItemSetTypeKey}
-              menuItemKey={index}
-              curActiveMenu={curActiveMenu}
-              setCurActiveMenu={menuActiveHandler}
-            />
-          );
-          const itemElDivider = pageType.dividerPos.includes(index) ? (
-            <Divider line={true} padding={0} height={0} />
-          ) : null;
-          return (
-            <div key={index}>
-              {itemEl}
-              {itemElDivider}
-            </div>
-          );
-        })}
-        <NavToHome />
-      </MenuWrapper>
-      <ContentWrapper>
-        <Breadcrumb />
-        <OutletWrapper>
-          <Outlet />
-        </OutletWrapper>
-      </ContentWrapper>
-    </Wrapper>
+    <>
+      <AdminHeader />
+      <BottomWrapper>
+        <MenuWrapper size={[0, 24]}>
+          <Spacing size={36} />
+          {pageType.items.map((item, index) => {
+            const itemEl = (
+              <MenuItem
+                type={item as MenuItemSetTypeKey}
+                menuItemKey={index}
+                curActiveMenu={curActiveMenu}
+                setCurActiveMenu={menuActiveHandler}
+              />
+            );
+            const itemElDivider = pageType.dividerPos.includes(index) ? (
+              <Divider line={true} padding={0} height={0} />
+            ) : null;
+            return (
+              <div key={index}>
+                {itemEl}
+                {itemElDivider}
+              </div>
+            );
+          })}
+          <NavToHome />
+        </MenuWrapper>
+        <ContentWrapper>
+          <Breadcrumb />
+          <OutletWrapper>
+            <Outlet />
+          </OutletWrapper>
+        </ContentWrapper>
+      </BottomWrapper>
+    </>
   );
 };
 
-const Wrapper = styled.div`
+const BottomWrapper = styled.div`
+  position: fixed;
+  top: 60px;
+  left: 0px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 60px);
+  border-top: solid 1px ${({ theme }) => theme.palette.gray_200};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

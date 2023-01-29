@@ -42,7 +42,7 @@ const Wrapper = styled.div<SelectedProps>`
   border-radius: 50%;
   border: 2px
     ${({ theme, alliance }) =>
-      alliance ? theme.palette.main_500 : theme.palette.white}
+      alliance ? theme.palette.main_500 : theme.palette.point_mint}
     solid;
   box-sizing: border-box;
   padding: 2px;

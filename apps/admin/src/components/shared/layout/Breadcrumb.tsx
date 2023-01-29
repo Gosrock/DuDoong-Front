@@ -64,7 +64,7 @@ const Breadcrumb = () => {
       <Spacing size={40} />
       <Padding size={[0, 52]}>
         <FlexBox align={'center'} justify={'flex-start'}>
-          <Text typo="Text_14" color="main_400">
+          <Text typo="P_Text_12_R" color="main_400">
             {newUrl ? `${detailUrl} / ${newUrl}` : detailUrl}
           </Text>
         </FlexBox>
