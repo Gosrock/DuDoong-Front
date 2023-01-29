@@ -16,6 +16,7 @@ export interface ListRowProps extends HTMLAttributes<HTMLDivElement> {
   leftImage?: ReactNode;
   rightElement?: ReactNode;
   gap?: number;
+  imageTextGap?: number;
   fill?: boolean;
   as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
@@ -49,12 +50,18 @@ export const ListRow = ({
   rightElement = <></>,
   fill = false,
   gap = 0,
+  imageTextGap = 16,
   ...props
 }: ListRowProps) => {
   return (
     <Padding size={padding} fill={fill} {...props}>
       <FlexBox id="container" align={'center'} justify={'space-between'}>
-        <FlexBox id="left" align="center" justify={'flex-start'} gap={16}>
+        <FlexBox
+          id="left"
+          align="center"
+          justify={'flex-start'}
+          gap={imageTextGap}
+        >
           {leftImage}
           <FlexBox id="text" direction={'column'} align={'left'} gap={gap}>
             <>

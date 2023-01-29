@@ -55,11 +55,14 @@ guests.args = { type: 'guests' };
 export const qr = Template.bind({});
 qr.args = { type: 'qr' };
 
-export const hostInfo = Template.bind({});
-hostInfo.args = { type: 'hostInfo' };
+export const hostinfo = Template.bind({});
+hostinfo.args = { type: 'hostinfo' };
 
-export const hostMember = Template.bind({});
-hostMember.args = { type: 'hostMember' };
+export const hostmember = Template.bind({});
+hostmember.args = { type: 'hostmember' };
 
-export const slack = Template.bind({});
-slack.args = { type: 'slack' };
+export const hostevents = Template.bind({});
+hostevents.args = { type: 'hostevents' };
+
+export const hostalliance = Template.bind({});
+hostalliance.args = { type: 'hostalliance' };

@@ -7,9 +7,8 @@ import {
   Table,
   CardChecklist,
   CardImage,
-  TicketPerforated,
+  TicketPerforatedFill,
   PeopleFill,
-  Slack,
   QrCodeScan,
   Sliders,
 } from 'react-bootstrap-icons';
@@ -33,9 +32,10 @@ export type MenuItemSetTypeKey =
   | 'options'
   | 'guests'
   | 'qr'
-  | 'hostInfo'
-  | 'hostMember'
-  | 'slack';
+  | 'hostinfo'
+  | 'hostmember'
+  | 'hostevents'
+  | 'hostalliance';
 
 type MenuItemSetType = {
   [key in MenuItemSetTypeKey]: {
@@ -47,43 +47,47 @@ type MenuItemSetType = {
 const MENU_ITEM_SET: MenuItemSetType = {
   dashboard: {
     text: '대시보드',
-    icon: <Table css={{ fill: 'white' }} />,
+    icon: <Table css={{ width: '24px', height: '24px' }} />,
   },
   info: {
     text: '공연 기본 정보',
-    icon: <CardChecklist css={{ fill: 'white' }} />,
+    icon: <CardChecklist css={{ width: '24px', height: '24px' }} />,
   },
   detail: {
     text: '공연 이미지･상세',
-    icon: <CardImage css={{ fill: 'white' }} />,
+    icon: <CardImage css={{ width: '24px', height: '24px' }} />,
   },
   tickets: {
     text: '티켓 관리',
-    icon: <TicketPerforated css={{ fill: 'white' }} />,
+    icon: <TicketPerforatedFill css={{ width: '24px', height: '24px' }} />,
   },
   options: {
     text: '티켓 옵션 관리',
-    icon: <Sliders css={{ fill: 'white' }} />,
+    icon: <Sliders css={{ width: '24px', height: '24px' }} />,
   },
   guests: {
     text: '예매자 관리',
-    icon: <PeopleFill css={{ fill: 'white' }} />,
+    icon: <PeopleFill css={{ width: '24px', height: '24px' }} />,
   },
   qr: {
     text: 'QR 체크인',
-    icon: <QrCodeScan css={{ fill: 'white' }} />,
+    icon: <QrCodeScan css={{ width: '24px', height: '24px' }} />,
   },
-  hostInfo: {
-    text: '호스트 정보',
-    icon: <CardChecklist css={{ fill: 'white' }} />,
+  hostinfo: {
+    text: '호스트 정보 관리',
+    icon: <CardChecklist css={{ width: '24px', height: '24px' }} />,
   },
-  hostMember: {
-    text: '호스트 멤버',
-    icon: <PeopleFill css={{ fill: 'white' }} />,
+  hostmember: {
+    text: '멤버 관리',
+    icon: <PeopleFill css={{ width: '24px', height: '24px' }} />,
   },
-  slack: {
-    text: '슬랙 알림 등록',
-    icon: <Slack css={{ fill: 'white' }} />,
+  hostevents: {
+    text: '등록한 공연',
+    icon: <TicketPerforatedFill css={{ width: '24px', height: '24px' }} />,
+  },
+  hostalliance: {
+    text: '제휴 관련',
+    icon: <CardChecklist css={{ width: '24px', height: '24px' }} />,
   },
 };
 
@@ -100,7 +104,7 @@ export const MenuItem = ({
   menuItemKey,
   curActiveMenu,
   setCurActiveMenu,
-  padding = [4, 12],
+  padding = [12, 0],
 }: MenuItemProps) => {
   const isselected = curActiveMenu === menuItemKey ? 1 : 0; // camel case 로 쓰면 에러뜸
 
@@ -115,14 +119,17 @@ export const MenuItem = ({
       onClick={menuItemClickHandler}
     >
       <MenuItemWrapper
-        padding={[8, 12]}
-        color={isselected ? 'main_100' : 'white'}
+        padding={[12, 24]}
+        color={isselected ? 'point_mint' : 'white'}
+        isselected={isselected}
+        radius={8}
       >
-        <FlexBox align={'center'} gap={16} justify={'start'}>
-          <IconWrapper align={'center'} isselected={isselected}>
-            {MENU_ITEM_SET[type].icon}
-          </IconWrapper>
-          <Text typo={'Text_14'} color={isselected ? 'main_500' : 'black'}>
+        <FlexBox align={'center'} gap={24} justify={'start'}>
+          {MENU_ITEM_SET[type].icon}
+          <Text
+            typo={isselected ? 'G_Menu_14_B' : 'G_Menu_14_M'}
+            color={isselected ? 'black' : 'gray_500'}
+          >
             {MENU_ITEM_SET[type].text}
           </Text>
         </FlexBox>
@@ -140,23 +147,23 @@ interface SelectedProps {
 }
 
 const OuterPadding = styled(Padding)<SelectedProps>`
-  ${({ theme, isselected }) =>
-    !isselected
-      ? css`
-          & > div:hover {
-            background: ${theme.palette.gray_100};
-          }
-        `
-      : null}
+  & > div:hover {
+    background: ${({ theme, isselected }) =>
+      !isselected ? theme.palette.gray_200 : null};
+    & > div > span {
+      ${({ theme }) => theme.typo.G_Menu_14_B};
+      color: ${({ theme }) => theme.palette.black};
+    }
+    & > div > svg > path {
+      color: ${({ theme }) => theme.palette.black};
+    }
+  }
   cursor: pointer;
 `;
 
-const MenuItemWrapper = styled(RoundBlock)``;
-
-const IconWrapper = styled(FlexBox)<SelectedProps>`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: ${({ isselected, theme }) =>
-    isselected ? theme.palette.main_300 : theme.palette.main_200};
+const MenuItemWrapper = styled(RoundBlock)<SelectedProps>`
+  & > div > svg > path {
+    color: ${({ theme, isselected }) =>
+      isselected ? theme.palette.black : theme.palette.gray_500};
+  }
 `;

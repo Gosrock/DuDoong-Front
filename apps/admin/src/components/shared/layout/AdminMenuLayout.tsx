@@ -1,8 +1,15 @@
-import { Divider, MenuItem, MenuItemSetTypeKey, Spacing } from '@dudoong/ui';
+import {
+  Divider,
+  MenuItem,
+  MenuItemSetTypeKey,
+  Padding,
+  Spacing,
+} from '@dudoong/ui';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { NavToHome } from './NavToHome';
 import Breadcrumb from './Breadcrumb';
+import AdminHeader from './AdminHeader';
 
 type MenuSetTypeKey = 'events' | 'hosts';
 
@@ -29,9 +36,9 @@ const MENU_SET: MenuSetType = {
     url: ['dashboard', 'info', 'detail', 'tickets', 'options', 'guests', 'qr'],
   },
   hosts: {
-    items: ['dashboard', 'hostInfo', 'hostMember', 'slack'],
-    dividerPos: [0, 2],
-    url: ['dashboard', 'info', 'member', 'slack'],
+    items: ['hostinfo', 'hostmember', 'hostevents', 'hostalliance'],
+    dividerPos: [],
+    url: ['info', 'member', 'events', 'alliance'],
   },
 };
 
@@ -62,10 +69,11 @@ export const AdminMenuLayout = ({
   };
 
   return (
-    <Wrapper>
-      <MenuWrapper>
-        <Spacing size={40} />
-        <>
+    <>
+      <AdminHeader />
+      <BottomWrapper>
+        <MenuWrapper size={[0, 24]}>
+          <Spacing size={36} />
           {pageType.items.map((item, index) => {
             const itemEl = (
               <MenuItem
@@ -76,7 +84,7 @@ export const AdminMenuLayout = ({
               />
             );
             const itemElDivider = pageType.dividerPos.includes(index) ? (
-              <Divider line={true} padding={12} height={32} />
+              <Divider line={true} padding={0} height={0} />
             ) : null;
             return (
               <div key={index}>
@@ -85,34 +93,44 @@ export const AdminMenuLayout = ({
               </div>
             );
           })}
-        </>
-        <NavToHome />
-      </MenuWrapper>
-      <OutletWrapper>
-        <Breadcrumb />
-        <Outlet />
-      </OutletWrapper>
-    </Wrapper>
+          <NavToHome />
+        </MenuWrapper>
+        <ContentWrapper>
+          <Breadcrumb />
+          <OutletWrapper>
+            <Outlet />
+          </OutletWrapper>
+        </ContentWrapper>
+      </BottomWrapper>
+    </>
   );
 };
 
-const Wrapper = styled.div`
+const BottomWrapper = styled.div`
+  position: fixed;
+  top: 60px;
+  left: 0px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 60px);
+  border-top: solid 1px ${({ theme }) => theme.palette.gray_200};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
 `;
 
-const MenuWrapper = styled.div`
-  width: 250px;
+const MenuWrapper = styled(Padding)`
+  width: 252px;
   height: 100%;
 `;
 
-const OutletWrapper = styled.div`
-  width: calc(100% - 250px);
+const ContentWrapper = styled.div`
+  width: calc(100% - 252px);
   height: 100%;
   background-color: ${({ theme }) => theme.palette.gray_100};
-  padding: 0 auto;
+`;
+
+const OutletWrapper = styled.div`
+  width: 956px;
+  padding: 0 52px;
 `;

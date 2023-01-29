@@ -1,6 +1,6 @@
 import { ListRow } from '@dudoong/ui';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft } from 'react-bootstrap-icons';
+import { ArrowLeftShort } from 'react-bootstrap-icons';
 import styled from '@emotion/styled';
 
 export const NavToHome = () => {
@@ -8,12 +8,13 @@ export const NavToHome = () => {
   return (
     <Wrapper onClick={() => navigate('/')}>
       <ListRow
+        padding={0}
         text={'어드민 홈'}
-        textTypo={'Text_14'}
-        textColor={'black'}
+        textTypo={'G_Menu_14_M'}
+        textColor={'gray_500'}
         leftImage={
-          <ChevronLeft
-            css={{ fill: 'gray_500', width: '16px', margin: '8px' }}
+          <ArrowLeftShort
+            css={{ fill: 'gray_500', width: '24px', height: '24px' }}
           />
         }
       />
@@ -23,6 +24,6 @@ export const NavToHome = () => {
 
 const Wrapper = styled.div`
   position: fixed;
-  left: 0px;
-  bottom: 16px;
+  left: 48px;
+  bottom: 52px;
 `;

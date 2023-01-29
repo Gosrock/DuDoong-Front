@@ -1,10 +1,10 @@
 import TempSButtonSet from '@components/hosts/slack/TempSButtonSet';
 
-const Slack = () => {
+const Events = () => {
   return (
     <>
       <TempSButtonSet />
     </>
   );
 };
-export default Slack;
+export default Events;
