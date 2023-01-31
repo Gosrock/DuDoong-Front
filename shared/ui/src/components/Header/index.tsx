@@ -14,7 +14,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 export const Header = ({ rightElement, title }: HeaderProps) => {
   return (
     <Wrapper align={'center'}>
-      <Padding size={[0, 45]} fill>
+      <Padding size={[0, 38]} fill>
         <FlexBox justify={'space-between'} align={'center'}>
           <LogoEng />
           {rightElement}
@@ -22,11 +22,11 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
       </Padding>
       {title && (
         <Text
-          typo="G_Header_16_B"
+          typo="G_Header_20_B"
           color="black"
           css={css`
             position: absolute;
-            left: 296px;
+            left: 252px;
           `}
         >
           {title}
@@ -37,7 +37,7 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
 };
 
 const Wrapper = styled(FlexBox)`
-  height: 60px;
+  height: 80px;
   left: 0px;
   width: 100%;
 `;

@@ -47,47 +47,47 @@ type MenuItemSetType = {
 const MENU_ITEM_SET: MenuItemSetType = {
   dashboard: {
     text: '대시보드',
-    icon: <Table css={{ width: '24px', height: '24px' }} />,
+    icon: <Table css={{ width: '22px', height: '22px' }} />,
   },
   info: {
     text: '공연 기본 정보',
-    icon: <CardChecklist css={{ width: '24px', height: '24px' }} />,
+    icon: <CardChecklist css={{ width: '22px', height: '22px' }} />,
   },
   detail: {
     text: '공연 이미지･상세',
-    icon: <CardImage css={{ width: '24px', height: '24px' }} />,
+    icon: <CardImage css={{ width: '22px', height: '22px' }} />,
   },
   tickets: {
     text: '티켓 관리',
-    icon: <TicketPerforatedFill css={{ width: '24px', height: '24px' }} />,
+    icon: <TicketPerforatedFill css={{ width: '22px', height: '22px' }} />,
   },
   options: {
     text: '티켓 옵션 관리',
-    icon: <Sliders css={{ width: '24px', height: '24px' }} />,
+    icon: <Sliders css={{ width: '22px', height: '22px' }} />,
   },
   guests: {
     text: '예매자 관리',
-    icon: <PeopleFill css={{ width: '24px', height: '24px' }} />,
+    icon: <PeopleFill css={{ width: '22px', height: '22px' }} />,
   },
   qr: {
     text: 'QR 체크인',
-    icon: <QrCodeScan css={{ width: '24px', height: '24px' }} />,
+    icon: <QrCodeScan css={{ width: '22px', height: '22px' }} />,
   },
   hostinfo: {
     text: '호스트 정보 관리',
-    icon: <CardChecklist css={{ width: '24px', height: '24px' }} />,
+    icon: <CardChecklist css={{ width: '22px', height: '22px' }} />,
   },
   hostmember: {
     text: '멤버 관리',
-    icon: <PeopleFill css={{ width: '24px', height: '24px' }} />,
+    icon: <PeopleFill css={{ width: '22px', height: '22px' }} />,
   },
   hostevents: {
     text: '등록한 공연',
-    icon: <TicketPerforatedFill css={{ width: '24px', height: '24px' }} />,
+    icon: <TicketPerforatedFill css={{ width: '22px', height: '22px' }} />,
   },
   hostalliance: {
     text: '제휴 관련',
-    icon: <CardChecklist css={{ width: '24px', height: '24px' }} />,
+    icon: <CardChecklist css={{ width: '22px', height: '22px' }} />,
   },
 };
 
@@ -104,7 +104,7 @@ export const MenuItem = ({
   menuItemKey,
   curActiveMenu,
   setCurActiveMenu,
-  padding = [12, 0],
+  padding = [8, 0],
 }: MenuItemProps) => {
   const isselected = curActiveMenu === menuItemKey ? 1 : 0; // camel case 로 쓰면 에러뜸
 
@@ -119,15 +119,15 @@ export const MenuItem = ({
       onClick={menuItemClickHandler}
     >
       <MenuItemWrapper
-        padding={[12, 24]}
+        padding={[16, 20]}
         color={isselected ? 'point_mint' : 'white'}
         isselected={isselected}
-        radius={8}
+        radius={10}
       >
-        <FlexBox align={'center'} gap={24} justify={'start'}>
+        <FlexBox align={'center'} gap={15} justify={'start'}>
           {MENU_ITEM_SET[type].icon}
           <Text
-            typo={isselected ? 'G_Menu_14_B' : 'G_Menu_14_M'}
+            typo={isselected ? 'G_Side_15_B' : 'G_Side_15_M'}
             color={isselected ? 'black' : 'gray_500'}
           >
             {MENU_ITEM_SET[type].text}
@@ -151,7 +151,6 @@ const OuterPadding = styled(Padding)<SelectedProps>`
     background: ${({ theme, isselected }) =>
       !isselected ? theme.palette.gray_200 : null};
     & > div > span {
-      ${({ theme }) => theme.typo.G_Menu_14_B};
       color: ${({ theme }) => theme.palette.black};
     }
     & > div > svg > path {
