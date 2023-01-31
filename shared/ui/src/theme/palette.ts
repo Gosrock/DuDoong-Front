@@ -12,7 +12,7 @@ export const palette = {
   gray_100: '#F8F8FA',
   gray_200: '#E3E4E8',
   gray_300: '#C7C7CB',
-  gray_400: '#9F9FA3',
+  gray_400: '#7A7A80',
   gray_500: '#39393A',
   black: '#121212',
   gradient: {
