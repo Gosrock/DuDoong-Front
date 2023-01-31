@@ -188,43 +188,4 @@ export const typo = {
     font-size: ${calcRem(15)};
     line-height: 100%;
   `,
-
-  // --------------------------------
-  G_Name_18_M: css`
-    font-family: 'Gmarket Sans';
-    font-weight: 400;
-    font-size: ${calcRem(18)};
-    line-height: ${calcRem(18)};
-  `,
-  G_Header_16_B: css`
-    font-family: 'Gmarket Sans';
-    font-weight: 600;
-    font-size: ${calcRem(16)};
-    line-height: ${calcRem(16)};
-  `,
-  G_Name_15_M: css`
-    font-family: 'Gmarket Sans';
-    font-weight: 400;
-    font-size: ${calcRem(15)};
-    line-height: ${calcRem(15)};
-  `,
-  G_Menu_14_B: css`
-    font-family: 'Gmarket Sans';
-    font-weight: 600;
-    font-size: ${calcRem(14)};
-    line-height: ${calcRem(14)};
-  `,
-  G_Menu_14_M: css`
-    font-family: 'Gmarket Sans';
-    font-weight: 400;
-    font-size: ${calcRem(14)};
-    line-height: ${calcRem(14)};
-  `,
-
-  P_Name_11_M: css`
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-size: ${calcRem(11)};
-    line-height: 120%;
-  `,
 } as const;

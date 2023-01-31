@@ -25,12 +25,12 @@ const PROFILE_SIZE: ProfileSizeType = {
   big: {
     imageSize: 68,
     name: {
-      typo: 'G_Name_18_M',
+      typo: 'G_Side_15_M',
       color: 'black',
     },
     sub: {
-      typo: 'P_Text_14_M',
-      color: 'gray_400',
+      typo: 'P_Text_12_R',
+      color: 'black',
     },
   },
   small: {
