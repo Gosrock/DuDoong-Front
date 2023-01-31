@@ -25,12 +25,12 @@ const Wrapper = styled.div`
 
 const BottomWrapper = styled.div`
   position: fixed;
-  top: 60px;
+  top: 80px;
   left: 0px;
   width: 100%;
 `;
 
 const OutletWrapper = styled.div`
-  width: 956px;
+  width: 876px;
   margin: 0 auto;
 `;

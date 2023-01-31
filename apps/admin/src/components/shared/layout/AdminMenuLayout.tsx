@@ -72,8 +72,7 @@ export const AdminMenuLayout = ({
     <>
       <AdminHeader />
       <BottomWrapper>
-        <MenuWrapper size={[0, 24]}>
-          <Spacing size={36} />
+        <MenuWrapper size={[28, 18]}>
           {pageType.items.map((item, index) => {
             const itemEl = (
               <MenuItem
@@ -84,7 +83,7 @@ export const AdminMenuLayout = ({
               />
             );
             const itemElDivider = pageType.dividerPos.includes(index) ? (
-              <Divider line={true} padding={0} height={0} />
+              <Divider line={true} padding={0} height={8} />
             ) : null;
             return (
               <div key={index}>
@@ -108,10 +107,10 @@ export const AdminMenuLayout = ({
 
 const BottomWrapper = styled.div`
   position: fixed;
-  top: 60px;
+  top: 80px;
   left: 0px;
   width: 100%;
-  height: calc(100% - 60px);
+  height: calc(100% - 80px);
   border-top: solid 1px ${({ theme }) => theme.palette.gray_200};
   display: flex;
   flex-direction: row;
@@ -122,6 +121,7 @@ const BottomWrapper = styled.div`
 const MenuWrapper = styled(Padding)`
   width: 252px;
   height: 100%;
+  border-right: 1px solid ${({ theme }) => theme.palette.gray_200};
 `;
 
 const ContentWrapper = styled.div`
@@ -131,6 +131,6 @@ const ContentWrapper = styled.div`
 `;
 
 const OutletWrapper = styled.div`
-  width: 956px;
-  padding: 0 52px;
+  width: 876px;
+  padding: 0 60px;
 `;

@@ -3,16 +3,23 @@ import { Profile } from '@dudoong/ui';
 import { useRecoilValue } from 'recoil';
 import { authState } from '@store/auth';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const AdminHeader = () => {
   const auth = useRecoilValue(authState);
 
   const rightElement = (
-    <Profile
-      image={auth.userProfile!.profileImage}
-      size={'small'}
-      name={auth.userProfile!.name}
-    />
+    <div
+      css={css`
+        width: 154px;
+      `}
+    >
+      <Profile
+        image={auth.userProfile!.profileImage}
+        size={'small'}
+        name={auth.userProfile!.name}
+      />
+    </div>
   );
   return (
     <HeaderWrapper>
