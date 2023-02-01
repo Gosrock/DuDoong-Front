@@ -18,12 +18,14 @@ export type ButtonVarient =
  * @param types 버튼의 종류 :  'primary' | 'secondary' | 'selected' | 'unselected' | 'alert' | 'kakao';
  * @param size 버튼의 사이즈 : 화면에 꽉차게 / 크기 고정
  */
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  varient?: ButtonVarient;
-  fullWidth?: boolean;
-  isLoading?: boolean;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  varient: ButtonVarient;
+  fullWidth: boolean;
+  isLoading: boolean;
+  width: number;
 }
+
+type Props = Partial<ButtonProps>;
 
 const TEXT_COLOR = {
   normal: {
@@ -45,15 +47,15 @@ const BUTTON_COLOR = {
   },
   hover: {
     primary: `${darken(0.01, theme.palette.main_500)}`,
-    secondary: `${darken(0.01, theme.palette.point_mint)}`,
-    tertiary: `${darken(0.01, theme.palette.white)}`,
+    secondary: `${darken(0.035, theme.palette.point_mint)}`,
+    tertiary: `${darken(0.02, theme.palette.white)}`,
     warn: `${darken(0.01, theme.palette.red_200)}`,
     kakao: `${darken(0.01, '#FFEB00')}`,
   },
   active: {
     primary: `${darken(0.03, theme.palette.main_500)}`,
-    secondary: `${darken(0.03, theme.palette.point_mint)}`,
-    tertiary: `${theme.palette.white}`,
+    secondary: `${darken(0.06, theme.palette.point_mint)}`,
+    tertiary: `${darken(0.05, theme.palette.white)}`,
     warn: `${darken(0.03, theme.palette.red_200)}`,
     kakao: `${darken(0.03, '#FFEB00')}`,
   },
@@ -71,10 +73,16 @@ export const Button = ({
   varient = 'primary',
   fullWidth = false,
   isLoading = false,
+  width,
   ...props
-}: ButtonProps) => {
+}: Props) => {
   return (
-    <StyledButton varient={varient} fullWidth={fullWidth} {...props}>
+    <StyledButton
+      varient={varient}
+      fullWidth={fullWidth}
+      width={width}
+      {...props}
+    >
       {isLoading ? (
         <Spinner color={TEXT_COLOR.normal[varient]} />
       ) : (
@@ -87,11 +95,14 @@ export const Button = ({
 const StyledButton = styled.button<{
   varient: ButtonVarient;
   fullWidth: boolean;
+  width?: number;
 }>`
   height: 56px;
   border-radius: 12px;
 
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : '194px')};
+  width: ${({ fullWidth, width }) =>
+    width ? `${width}px` : fullWidth ? '100%' : '194px'};
+
   border: 1px solid ${({ theme }) => theme.palette.black};
   background-color: ${({ varient }) => BUTTON_COLOR.normal[varient]};
 
