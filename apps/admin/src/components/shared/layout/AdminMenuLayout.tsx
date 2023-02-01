@@ -4,12 +4,13 @@ import Breadcrumb from './Breadcrumb';
 import AdminHeader from './AdminHeader';
 import AdminMenu from './AdminMenu';
 import AdminBottomButton from './AdminBottomButton';
+import { FlexBox } from '@dudoong/ui';
 
 export const AdminMenuLayout = () => {
   return (
     <>
       <AdminHeader />
-      <BottomWrapper>
+      <BottomWrapper align={'top'}>
         <AdminMenu />
         <OutletWrapper>
           <Breadcrumb />
@@ -21,7 +22,7 @@ export const AdminMenuLayout = () => {
   );
 };
 
-const BottomWrapper = styled.div`
+const BottomWrapper = styled(FlexBox)`
   position: fixed;
   top: 80px;
   left: 0px;

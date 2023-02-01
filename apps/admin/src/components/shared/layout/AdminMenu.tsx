@@ -86,9 +86,6 @@ const AdminMenu = () => {
 export default AdminMenu;
 
 const MenuWrapper = styled(Padding)`
-  position: absolute;
-  top: 0px;
-  left: 0px;
   width: 252px;
   height: calc(100vh - 80px);
   border-right: 1px solid ${({ theme }) => theme.palette.gray_200};
