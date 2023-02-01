@@ -11,8 +11,16 @@ const Template: ComponentStory<typeof TagButton> = (args) => (
   <TagButton {...args} />
 );
 
-export const main = Template.bind({});
-main.args = { text: '예시 텍스트', color: 'main' };
+export const primary = Template.bind({});
+primary.args = { text: '예시 텍스트', color: 'primary', size: 'lg' };
 
-export const red = Template.bind({});
-red.args = { text: '예시 텍스트', color: 'red' };
+export const secondary = Template.bind({});
+secondary.args = { text: '예시 텍스트', color: 'secondary', size: 'sm' };
+
+export const disabled = Template.bind({});
+disabled.args = {
+  text: '예시 텍스트',
+  color: 'secondary',
+  size: 'sm',
+  disabled: true,
+};
