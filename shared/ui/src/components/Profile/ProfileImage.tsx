@@ -52,10 +52,4 @@ const Wrapper = styled.div<SelectedProps>`
           padding: 4px;
         `}
   box-sizing: border-box;
-
-  & > svg {
-    position: relative;
-    bottom: 50px;
-    left: 27px;
-  }
 `;
