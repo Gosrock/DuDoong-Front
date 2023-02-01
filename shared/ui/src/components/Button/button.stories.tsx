@@ -12,22 +12,14 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 export const primary = Template.bind({});
 primary.args = { children: '다음', varient: 'primary', disabled: false };
 
-export const fixed = Template.bind({});
-fixed.args = {
-  children: '다음',
-  varient: 'primary',
-  disabled: false,
-  size: 'fixed',
-};
-
 export const secondary = Template.bind({});
-secondary.args = { children: '다음', varient: 'secondary' };
+secondary.args = { children: '다음', varient: 'secondary', fullWidth: true };
 
-export const unselected = Template.bind({});
-unselected.args = { children: '다음', varient: 'unselected' };
+export const tertiary = Template.bind({});
+tertiary.args = { children: '다음', varient: 'tertiary' };
 
-export const selected = Template.bind({});
-selected.args = { children: '다음', varient: 'selected' };
+export const warn = Template.bind({});
+warn.args = { children: '다음', varient: 'warn' };
 
-export const alert = Template.bind({});
-alert.args = { children: '다음', varient: 'alert' };
+export const kakao = Template.bind({});
+kakao.args = { children: '다음', varient: 'kakao' };
