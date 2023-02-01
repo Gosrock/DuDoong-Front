@@ -14,6 +14,8 @@ const AdminHeader = () => {
         image={auth.userProfile!.profileImage}
         size={'small'}
         name={auth.userProfile!.name}
+        subText={'고스락'}
+        alliance={true}
       />
     </div>
   );
