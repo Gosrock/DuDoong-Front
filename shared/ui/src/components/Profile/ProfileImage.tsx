@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactComponent as MiniStar } from '../../assets/icons/miniStar.svg';
 
 export interface ProfileImageProps {
   size: number;
@@ -28,7 +27,6 @@ export const ProfileImage = ({
           `}
         `}
       />
-      {alliance && <MiniStar />}
     </Wrapper>
   );
 };
