@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { NavToHome } from './NavToHome';
 import { useState } from 'react';
+import useBottomButton from '@lib/hooks/useBottomButton';
 
 type MenuSetTypeKey = 'events' | 'hosts';
 
@@ -44,9 +45,11 @@ const AdminMenu = () => {
   const pageType = MENU_SET[page];
   const acticeMenuIndex = pageType.url.indexOf(path[3]);
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
+  const { hideButtons } = useBottomButton();
 
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);
+    hideButtons();
     navigate(
       `/${page}/${location.pathname.split('/')[2]}/${
         pageType.url[menuItemKey]

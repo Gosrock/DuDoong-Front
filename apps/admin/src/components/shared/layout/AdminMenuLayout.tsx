@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Breadcrumb from './Breadcrumb';
 import AdminHeader from './AdminHeader';
 import AdminMenu from './AdminMenu';
+import AdminBottomButton from './AdminBottomButton';
 
 export const AdminMenuLayout = () => {
   return (
@@ -13,6 +14,7 @@ export const AdminMenuLayout = () => {
         <OutletWrapper>
           <Breadcrumb />
           <Outlet />
+          <AdminBottomButton />
         </OutletWrapper>
       </BottomWrapper>
     </>
