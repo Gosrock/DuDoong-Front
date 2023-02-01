@@ -4,27 +4,12 @@ import Dashboard from './Dashboard';
 import Info from './Info';
 import Member from './Member';
 import Events from './Events';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Alliance from './Alliance';
 
-const menuItems = ['dashboard', 'info', 'member', 'slack'];
-
 const HostsRouter = () => {
-  const location = useLocation();
-  const acticeMenuIndex = menuItems.indexOf(location.pathname.split('/')[3]);
-  const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
   return (
     <Routes>
-      <Route
-        element={
-          <AdminMenuLayout
-            page={'hosts'}
-            curActiveMenu={curActiveMenu}
-            setCurActiveMenu={setCurActiveMenu}
-          />
-        }
-      >
+      <Route element={<AdminMenuLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/info" element={<Info />} />
         <Route path="/member" element={<Member />} />

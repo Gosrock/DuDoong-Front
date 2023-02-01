@@ -3,20 +3,23 @@ import { Profile } from '@dudoong/ui';
 import { useRecoilValue } from 'recoil';
 import { authState } from '@store/auth';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const AdminHeader = () => {
   const auth = useRecoilValue(authState);
 
   const rightElement = (
-    <Profile
-      image={auth.userProfile!.profileImage}
-      size={'small'}
-      name={auth.userProfile!.name}
-    />
+    <div css={css``}>
+      <Profile
+        image={auth.userProfile!.profileImage}
+        size={'small'}
+        name={auth.userProfile!.name}
+      />
+    </div>
   );
   return (
     <HeaderWrapper>
-      <Header rightElement={rightElement} title={'고스락 23번째 정기공연'} />
+      <Header rightElement={rightElement} />
     </HeaderWrapper>
   );
 };
@@ -28,4 +31,7 @@ const HeaderWrapper = styled.div`
   width: 100%;
   top: 0px;
   left: 0px;
+  z-index: 1;
+  border-bottom: solid 1px ${({ theme }) => theme.palette.gray_200};
+  background-color: ${({ theme }) => theme.palette.white};
 `;

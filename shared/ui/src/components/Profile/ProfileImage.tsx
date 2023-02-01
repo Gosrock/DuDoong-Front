@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { ReactComponent as MiniStar } from '../../assets/icons/miniStar.svg';
 
 export interface ProfileImageProps {
   size: number;
@@ -27,6 +28,7 @@ export const ProfileImage = ({
           `}
         `}
       />
+      {alliance && <MiniStar />}
     </Wrapper>
   );
 };
@@ -40,10 +42,20 @@ const Wrapper = styled.div<SelectedProps>`
   width: ${({ size }) => `${size + 8}px`};
   height: ${({ size }) => `${size + 8}px`};
   border-radius: 50%;
-  border: 2px
-    ${({ theme, alliance }) =>
-      alliance ? theme.palette.main_500 : theme.palette.point_mint}
-    solid;
+  ${({ theme, alliance }) =>
+    alliance
+      ? css`
+          border: 2px ${theme.palette.main_500} solid;
+          padding: 2px;
+        `
+      : css`
+          padding: 4px;
+        `}
   box-sizing: border-box;
-  padding: 2px;
+
+  & > svg {
+    position: relative;
+    bottom: 50px;
+    left: 27px;
+  }
 `;

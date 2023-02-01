@@ -1,9 +1,9 @@
-import TempDBButtonSet from '@components/events/dashboard/TempDBButtonSet';
+import TempDButtonSet from '@components/events/detail/TempDButtonSet';
 
 const Detail = () => {
   return (
     <>
-      <TempDBButtonSet />
+      <TempDButtonSet />
     </>
   );
 };

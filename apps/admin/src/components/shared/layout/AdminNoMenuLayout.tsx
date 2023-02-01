@@ -19,18 +19,14 @@ export default AdminNoMenuLayout;
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.gray_100};
-  width: 100vw;
-  height: 100vh;
 `;
 
 const BottomWrapper = styled.div`
-  position: fixed;
-  top: 60px;
-  left: 0px;
+  padding-top: 64px;
   width: 100%;
 `;
 
 const OutletWrapper = styled.div`
-  width: 956px;
+  width: 876px;
   margin: 0 auto;
 `;

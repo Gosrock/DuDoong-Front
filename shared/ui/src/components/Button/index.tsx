@@ -8,7 +8,7 @@ import { Spinner } from '../Loader/Spinner';
 import { Text } from '../Text';
 
 type ButtonSize = 'fill' | 'fixed';
-type ButtonVarient =
+export type ButtonVarient =
   | 'primary'
   | 'secondary'
   | 'selected'

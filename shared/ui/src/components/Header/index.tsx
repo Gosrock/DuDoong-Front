@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { HTMLAttributes, ReactNode } from 'react';
 import { FlexBox, Padding } from '../../layout';
 import { Text } from '../Text';
-import { ReactComponent as LogoEng } from '../../assets/logo/logoEng.svg';
+import Logo from '../../assets/logo/Logo';
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   rightElement: ReactNode;
@@ -14,19 +14,28 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 export const Header = ({ rightElement, title }: HeaderProps) => {
   return (
     <Wrapper align={'center'}>
-      <Padding size={[0, 45]} fill>
+      <Padding size={[0, 38]} fill>
         <FlexBox justify={'space-between'} align={'center'}>
-          <LogoEng />
+          <button
+            onClick={() => (window.location.href = 'https://dudoong.com')}
+            css={css`
+              &:hover {
+              }
+            `}
+          >
+            <Logo />
+          </button>
           {rightElement}
         </FlexBox>
       </Padding>
       {title && (
         <Text
-          typo="G_Header_16_B"
+          typo="G_Side_14_M"
           color="black"
           css={css`
             position: absolute;
-            left: 296px;
+            margin: 0 auto;
+            padding-left: 252px;
           `}
         >
           {title}
@@ -37,7 +46,7 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
 };
 
 const Wrapper = styled(FlexBox)`
-  height: 60px;
+  height: 64px;
   left: 0px;
   width: 100%;
 `;

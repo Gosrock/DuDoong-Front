@@ -15,7 +15,7 @@ type ProfileSizeKey = 'big' | 'small';
 
 type ProfileSizeType = {
   [key in ProfileSizeKey]: {
-    imageSize: 36 | 68;
+    imageSize: 44 | 68;
     name: TextType;
     sub: TextType;
   };
@@ -25,22 +25,22 @@ const PROFILE_SIZE: ProfileSizeType = {
   big: {
     imageSize: 68,
     name: {
-      typo: 'G_Name_18_M',
+      typo: 'G_Side_15_M',
       color: 'black',
     },
     sub: {
-      typo: 'P_Text_14_M',
-      color: 'gray_400',
+      typo: 'P_Text_12_R',
+      color: 'black',
     },
   },
   small: {
-    imageSize: 36,
+    imageSize: 44,
     name: {
-      typo: 'G_Name_15_M',
+      typo: 'G_Side_15_M',
       color: 'black',
     },
     sub: {
-      typo: 'P_Name_11_M',
+      typo: 'P_Text_12_R',
       color: 'black',
     },
   },
@@ -80,7 +80,7 @@ export const Profile = ({
           </Text>
         )
       }
-      imageTextGap={size === 'big' ? 35 : 10}
+      imageTextGap={size === 'big' ? 35 : 12}
       padding={0}
     />
   );
