@@ -1,4 +1,4 @@
-import { FlexBox, Padding, Spacing } from '@dudoong/ui';
+import { FlexBox, Spacing } from '@dudoong/ui';
 import { Text } from '@dudoong/ui';
 import { useLocation } from 'react-router-dom';
 
@@ -62,13 +62,11 @@ const Breadcrumb = () => {
   return (
     <>
       <Spacing size={55} />
-      <Padding size={[0, 60]}>
-        <FlexBox align={'center'} justify={'flex-start'}>
-          <Text typo="P_Text_14_M" color="main_500">
-            {newUrl ? `${detailUrl} / ${newUrl}` : detailUrl}
-          </Text>
-        </FlexBox>
-      </Padding>
+      <FlexBox align={'center'} justify={'flex-start'}>
+        <Text typo="P_Text_14_M" color="main_500">
+          {newUrl ? `${detailUrl} / ${newUrl}` : detailUrl}
+        </Text>
+      </FlexBox>
     </>
   );
 };
