@@ -2034,6 +2034,7 @@ __metadata:
     cra-template-typescript: 1.2.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-intersection-observer: ^9.4.1
     react-responsive: ^9.0.2
     react-scripts: 5.0.1
     typescript: ^4.9.4
@@ -4868,6 +4869,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:4.24.4":
+  version: 4.24.4
+  resolution: "@tanstack/query-core@npm:4.24.4"
+  checksum: b357e950a41e5769878a3bfe9dd56a66828ccebb2f9396e568e8835bed71eb37926770a461e3aa5bafb7e1121c5141cee86aedf3ced88a2eacf754d545b107cd
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query-devtools@npm:^4.20.4":
   version: 4.20.4
   resolution: "@tanstack/react-query-devtools@npm:4.20.4"
@@ -4899,6 +4907,25 @@ __metadata:
     react-native:
       optional: true
   checksum: ba9e2f175c58bde592c0ad14285f289585474763f8d68072d651fa75263a3a7f75eead5b62aa3140db133b95468498bc58817d07513f6f857be2bd8031b491da
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^4.24.4":
+  version: 4.24.4
+  resolution: "@tanstack/react-query@npm:4.24.4"
+  dependencies:
+    "@tanstack/query-core": 4.24.4
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-native: "*"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 8cf008d690fc5d336f6471ea2bc0751189f03874dcc7930cf8944fb57fa34e3b5347823775dbd36629d53a7aacb9ce87482b1adb3ad80d277a3a6c73b797f6a2
   languageName: node
   linkType: hard
 
@@ -6036,7 +6063,6 @@ __metadata:
     "@dudoong/utils": "workspace:shared/utils"
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
-    "@tanstack/react-query": ^4.20.4
     "@tanstack/react-query-devtools": ^4.20.4
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
@@ -8940,6 +8966,7 @@ __metadata:
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
+    "@tanstack/react-query": ^4.24.4
     "@types/eslint": ^8
     "@types/node": ^18.11.16
     "@types/react": ^18.0.26
@@ -16645,6 +16672,15 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
   checksum: ca9e4c1fedb94e4e956dd3142838c5a25a9d61375aee5e8a74dd623bae09a263098a93f220e8d84c7fd39e569e1fa4297d363ddbc91b15bca91baeb7281d7f4f
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "react-intersection-observer@npm:9.4.1"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 13d1c36658470a781d8db8870dbd272c5b4b32329fa69c27ee96424de4e1599526a9bf2a91ea59922c18323c97d6909f0ac120c5af6076d1c01e654b43fb03c1
   languageName: node
   linkType: hard
 

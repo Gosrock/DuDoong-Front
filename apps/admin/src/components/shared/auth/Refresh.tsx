@@ -6,6 +6,7 @@ import { AuthApi } from '@dudoong/utils';
 import { FullScreen, SyncLoader } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import { useMutation } from '@tanstack/react-query';
+import { axiosPrivate } from '@lib/apis/axios';
 
 const Refresh = () => {
   const refreshToken = localStorage.getItem('refreshToken');
@@ -19,6 +20,9 @@ const Refresh = () => {
       setState('loading');
     },
     onSuccess: (data) => {
+      axiosPrivate.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${data.accessToken}`;
       setAuth({
         userProfile: data.userProfile,
         accessToken: data.accessToken,
