@@ -2,7 +2,6 @@
 import { FlexBox, Padding, PaddingSize, RoundBlock } from '../../layout';
 import styled from '@emotion/styled';
 import { Text } from '../Text';
-import { css } from '@emotion/react';
 import {
   Table,
   CardChecklist,
@@ -11,6 +10,7 @@ import {
   PeopleFill,
   QrCodeScan,
   Sliders,
+  DiscFill,
 } from 'react-bootstrap-icons';
 /**
  * @param type menu 종류
@@ -166,3 +166,5 @@ const MenuItemWrapper = styled(RoundBlock)<SelectedProps>`
       isselected ? theme.palette.black : theme.palette.gray_500};
   }
 `;
+
+export { DiscFill };

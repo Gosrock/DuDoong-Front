@@ -38,7 +38,7 @@ const BottomWrapper = styled(FlexBox)`
 
 const OutletWrapper = styled.div`
   margin: 0 auto;
-  padding-left: 24px;
+  padding: 0 24px;
   width: 876px;
 
   overflow-x: hidden;
