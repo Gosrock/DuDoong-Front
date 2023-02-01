@@ -9,11 +9,7 @@ const AdminHeader = () => {
   const auth = useRecoilValue(authState);
 
   const rightElement = (
-    <div
-      css={css`
-        width: 154px;
-      `}
-    >
+    <div css={css``}>
       <Profile
         image={auth.userProfile!.profileImage}
         size={'small'}

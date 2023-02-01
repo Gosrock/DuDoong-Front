@@ -16,7 +16,15 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
     <Wrapper align={'center'}>
       <Padding size={[0, 38]} fill>
         <FlexBox justify={'space-between'} align={'center'}>
-          <Logo />
+          <button
+            onClick={() => (window.location.href = 'https://dudoong.com')}
+            css={css`
+              &:hover {
+              }
+            `}
+          >
+            <Logo />
+          </button>
           {rightElement}
         </FlexBox>
       </Padding>
