@@ -9,11 +9,11 @@ export default {
 
 const Template: ComponentStory<typeof Tag> = (args) => <Tag {...args} />;
 
-export const main = Template.bind({});
-main.args = { text: '예시 텍스트', color: 'main' };
+export const large = Template.bind({});
+large.args = { text: '예시 텍스트', color: 'main', size: 'lg' };
 
-export const mono = Template.bind({});
-mono.args = { text: '예시 텍스트', color: 'mono' };
+export const medium = Template.bind({});
+medium.args = { text: '예시 텍스트', color: 'mono', size: 'md' };
 
-export const red = Template.bind({});
-red.args = { text: '예시 텍스트', color: 'red' };
+export const small = Template.bind({});
+small.args = { text: '예시 텍스트', color: 'red', size: 'sm' };

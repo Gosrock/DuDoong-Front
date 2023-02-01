@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof ButtonSet> = (args) => (
 
 export const mono = Template.bind({});
 mono.args = {
-  children: <Button>다음</Button>,
+  children: <Button fullWidth>다음</Button>,
 };
 
 export const sub = Template.bind({});
@@ -57,7 +57,7 @@ horizontal.args = {
   children: (
     <>
       <Button varient="secondary">취소</Button>
-      <Button varient="alert">삭제</Button>
+      <Button varient="warn">삭제</Button>
     </>
   ),
   varient: 'horizontal',

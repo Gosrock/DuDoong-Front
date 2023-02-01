@@ -20,7 +20,7 @@ Full.args = {
   padding: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <Tag text="예시 태그" color="red" />,
+  rightElement: <Tag text="예시 태그" color="red" size="sm" />,
   leftImage: <ProfileImage size={49} alliance={false} />,
 };
 
@@ -29,7 +29,7 @@ NoImage.args = {
   padding: [20, 24],
   text: 'text',
   subText: 'sub',
-  rightElement: <Tag text="예시 태그" color="main" />,
+  rightElement: <Tag text="예시 태그" color="main" size="sm" />,
 };
 
 export const LeftText = Template.bind({});

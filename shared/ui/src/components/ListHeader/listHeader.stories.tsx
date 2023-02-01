@@ -44,19 +44,19 @@ export const listHeader_20 = Template.bind({});
 listHeader_20.args = {
   size: 'listHeader_20',
   title: '202020',
-  rightElement: <Tag text="태그" color="mono" />,
+  rightElement: <Tag text="태그" color="mono" size="sm" />,
 };
 
 export const listHeader_24 = Template.bind({});
 listHeader_24.args = {
   size: 'listHeader_24',
   title: '큰글씨 24px',
-  rightElement: <Tag text="태그" color="mono" />,
+  rightElement: <Tag text="태그" color="mono" size="sm" />,
 };
 
 export const listHeader_28 = Template.bind({});
 listHeader_28.args = {
   size: 'listHeader_28',
   title: ' 큰글씨 28',
-  rightElement: <Tag text="태그" color="mono" />,
+  rightElement: <Tag text="태그" color="mono" size="sm" />,
 };

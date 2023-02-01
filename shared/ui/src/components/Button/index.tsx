@@ -7,13 +7,11 @@ import { theme } from '../../theme';
 import { Spinner } from '../Loader/Spinner';
 import { Text } from '../Text';
 
-type ButtonSize = 'fill' | 'fixed';
 export type ButtonVarient =
   | 'primary'
   | 'secondary'
-  | 'selected'
-  | 'unselected'
-  | 'alert'
+  | 'tertiary'
+  | 'warn'
   | 'kakao';
 
 /**
@@ -23,52 +21,47 @@ export type ButtonVarient =
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   varient?: ButtonVarient;
-  size?: ButtonSize;
+  fullWidth?: boolean;
   isLoading?: boolean;
 }
 
 const TEXT_COLOR = {
   normal: {
     primary: `${theme.palette.white}`,
-    secondary: `${theme.palette.main_500}`,
-    selected: `${theme.palette.white}`,
-    unselected: `${theme.palette.main_500}`,
-    alert: `${theme.palette.white}`,
+    secondary: `${theme.palette.black}`,
+    tertiary: `${theme.palette.black}`,
+    warn: `${theme.palette.white}`,
     kakao: `${theme.palette.black}`,
   },
 };
 
 const BUTTON_COLOR = {
   normal: {
-    primary: `${theme.palette.main_400}`,
-    secondary: `${theme.palette.main_200}`,
-    selected: `${theme.palette.main_300}`,
-    unselected: `transparent`,
-    alert: `${theme.palette.red_200}`,
+    primary: `${theme.palette.main_500}`,
+    secondary: `${theme.palette.point_mint}`,
+    tertiary: `${theme.palette.white}`,
+    warn: `${theme.palette.red_200}`,
     kakao: `#FFEB00`,
   },
   hover: {
-    primary: `${darken(0.01, theme.palette.main_400)}`,
-    secondary: `${darken(0.01, theme.palette.main_200)}`,
-    selected: `${darken(0.01, theme.palette.main_300)}`,
-    unselected: `transparent`,
-    alert: `${darken(0.01, theme.palette.red_200)}`,
+    primary: `${darken(0.01, theme.palette.main_500)}`,
+    secondary: `${darken(0.01, theme.palette.point_mint)}`,
+    tertiary: `${darken(0.01, theme.palette.white)}`,
+    warn: `${darken(0.01, theme.palette.red_200)}`,
     kakao: `${darken(0.01, '#FFEB00')}`,
   },
   active: {
-    primary: `${darken(0.03, theme.palette.main_400)}`,
-    secondary: `${darken(0.03, theme.palette.main_200)}`,
-    selected: `${darken(0.03, theme.palette.main_300)}`,
-    unselected: `transparent`,
-    alert: `${darken(0.03, theme.palette.red_200)}`,
+    primary: `${darken(0.03, theme.palette.main_500)}`,
+    secondary: `${darken(0.03, theme.palette.point_mint)}`,
+    tertiary: `${theme.palette.white}`,
+    warn: `${darken(0.03, theme.palette.red_200)}`,
     kakao: `${darken(0.03, '#FFEB00')}`,
   },
   disabled: {
     primary: `${theme.palette.gray_200}`,
     secondary: `${theme.palette.gray_200}`,
-    selected: `${theme.palette.gray_200}`,
-    unselected: `${theme.palette.gray_200}`,
-    alert: `${theme.palette.gray_200}`,
+    tertiary: `${theme.palette.gray_200}`,
+    warn: `${theme.palette.gray_200}`,
     kakao: `${theme.palette.gray_200}`,
   },
 };
@@ -76,16 +69,16 @@ const BUTTON_COLOR = {
 export const Button = ({
   children,
   varient = 'primary',
-  size = 'fill',
+  fullWidth = false,
   isLoading = false,
   ...props
 }: ButtonProps) => {
   return (
-    <StyledButton varient={varient} size={size} {...props}>
+    <StyledButton varient={varient} fullWidth={fullWidth} {...props}>
       {isLoading ? (
         <Spinner color={TEXT_COLOR.normal[varient]} />
       ) : (
-        <Text typo={'Text_18'}>{children}</Text>
+        <Text typo={'P_Header_16_SB'}>{children}</Text>
       )}
     </StyledButton>
   );
@@ -93,18 +86,14 @@ export const Button = ({
 
 const StyledButton = styled.button<{
   varient: ButtonVarient;
-  size: ButtonSize;
+  fullWidth: boolean;
 }>`
   height: 56px;
-  border-radius: 16px;
-  width: ${({ size }) => (size === 'fill' ? '100%' : '158px')};
+  border-radius: 12px;
 
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : '194px')};
+  border: 1px solid ${({ theme }) => theme.palette.black};
   background-color: ${({ varient }) => BUTTON_COLOR.normal[varient]};
-  ${({ theme, varient }) =>
-    varient === 'unselected' &&
-    css`
-      border: 2px solid ${theme.palette.main_300};
-    `}
 
   color: ${({ varient }) => TEXT_COLOR.normal[varient]};
 

@@ -16,4 +16,9 @@ export const big = Template.bind({});
 big.args = { size: 'big', name: '한규진', subText: '010-1234-5678' };
 
 export const small = Template.bind({});
-small.args = { size: 'small', name: '한규진', subText: '고스락' };
+small.args = {
+  size: 'small',
+  name: '한규진',
+  subText: '고스락',
+  alliance: true,
+};
