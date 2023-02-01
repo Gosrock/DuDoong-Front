@@ -16,7 +16,7 @@ export const NavToHome = () => {
       <ListRow
         padding={0}
         text={'어드민 홈으로'}
-        textTypo={'G_Side_15_M'}
+        textTypo={'G_Side_14_M'}
         textColor={'gray_500'}
         leftImage={leftImage}
         imageTextGap={15}

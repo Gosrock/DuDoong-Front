@@ -45,15 +45,6 @@ const TempDButtonSet = () => {
         first button disable
       </Button>
       <ContentGrid
-        topElement={
-          <div
-            css={css`
-              width: 80%;
-              height: 100px;
-              background-color: tan;
-            `}
-          />
-        }
         leftElement={
           <div
             css={css`

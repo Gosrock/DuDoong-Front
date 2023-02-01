@@ -8,31 +8,38 @@ import { FlexBox } from '@dudoong/ui';
 
 export const AdminMenuLayout = () => {
   return (
-    <>
+    <LayoutWrapper>
       <AdminHeader />
       <BottomWrapper align={'top'}>
         <AdminMenu />
         <OutletWrapper>
           <Breadcrumb />
           <Outlet />
-          <AdminBottomButton />
         </OutletWrapper>
+        <AdminBottomButton />
       </BottomWrapper>
-    </>
+    </LayoutWrapper>
   );
 };
 
-const BottomWrapper = styled(FlexBox)`
-  position: fixed;
-  top: 80px;
-  left: 0px;
-  width: 100%;
-  height: calc(100% - 80px);
-  border-top: solid 1px ${({ theme }) => theme.palette.gray_200};
+const LayoutWrapper = styled.div`
+  height: calc(100vh - 64px);
+  padding-top: 64px;
+
   background-color: ${({ theme }) => theme.palette.gray_100};
 `;
 
+const BottomWrapper = styled(FlexBox)`
+  width: calc(100vw - 252px);
+  overflow-x: hidden;
+  height: 100%;
+  padding-left: 252px;
+`;
+
 const OutletWrapper = styled.div`
-  width: 876px;
   margin: 0 auto;
+  padding-left: 24px;
+  width: 876px;
+
+  overflow-x: hidden;
 `;

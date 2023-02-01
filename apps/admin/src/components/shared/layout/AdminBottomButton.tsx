@@ -78,10 +78,12 @@ const AdminBottomButton = () => {
     return null;
   } else {
     return (
-      <Wrapper size={[20, 0]}>
-        <FlexBox align={'center'} justify={'flex-end'} gap={12}>
-          {buttons}
-        </FlexBox>
+      <Wrapper size={[20, 24]}>
+        <div>
+          <FlexBox align={'center'} justify={'flex-end'} gap={12}>
+            {buttons}
+          </FlexBox>
+        </div>
       </Wrapper>
     );
   }
@@ -108,8 +110,15 @@ const getText = (buttonTypes: string[], index: 0 | 1): string => {
 const Wrapper = styled(Padding)`
   position: fixed;
   bottom: 0px;
-  width: 876px;
+  left: 252px;
+  width: calc(100vw - 252px);
   height: 96px;
+  border-top: 1px solid ${({ theme }) => theme.palette.gray_200};
+
+  & > div {
+    max-width: 876px;
+    margin: 0 auto;
+  }
 `;
 
 const ButtonWrapper = styled.div`

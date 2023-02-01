@@ -78,7 +78,7 @@ const AdminMenu = () => {
           </div>
         );
       })}
-      <NavToHome />
+      {/* <NavToHome /> */}
     </MenuWrapper>
   );
 };
@@ -86,8 +86,10 @@ const AdminMenu = () => {
 export default AdminMenu;
 
 const MenuWrapper = styled(Padding)`
+  position: fixed;
+  left: 0;
   width: 252px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 64px);
   border-right: 1px solid ${({ theme }) => theme.palette.gray_200};
   background-color: ${({ theme }) => theme.palette.white};
 `;

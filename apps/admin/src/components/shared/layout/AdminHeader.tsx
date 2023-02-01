@@ -23,7 +23,7 @@ const AdminHeader = () => {
   );
   return (
     <HeaderWrapper>
-      <Header rightElement={rightElement} title={'고스락 23번째 정기공연'} />
+      <Header rightElement={rightElement} />
     </HeaderWrapper>
   );
 };
@@ -35,4 +35,7 @@ const HeaderWrapper = styled.div`
   width: 100%;
   top: 0px;
   left: 0px;
+  z-index: 1;
+  border-bottom: solid 1px ${({ theme }) => theme.palette.gray_200};
+  background-color: ${({ theme }) => theme.palette.white};
 `;

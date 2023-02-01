@@ -104,7 +104,7 @@ export const MenuItem = ({
   menuItemKey,
   curActiveMenu,
   setCurActiveMenu,
-  padding = [8, 0],
+  padding = [4, 0],
 }: MenuItemProps) => {
   const isselected = curActiveMenu === menuItemKey ? 1 : 0; // camel case 로 쓰면 에러뜸
 
@@ -127,7 +127,7 @@ export const MenuItem = ({
         <FlexBox align={'center'} gap={15} justify={'start'}>
           {MENU_ITEM_SET[type].icon}
           <Text
-            typo={isselected ? 'G_Side_15_B' : 'G_Side_15_M'}
+            typo={isselected ? 'G_Side_14_B' : 'G_Side_14_M'}
             color={isselected ? 'black' : 'gray_500'}
           >
             {MENU_ITEM_SET[type].text}
@@ -149,7 +149,7 @@ interface SelectedProps {
 const OuterPadding = styled(Padding)<SelectedProps>`
   & > div:hover {
     background: ${({ theme, isselected }) =>
-      !isselected ? theme.palette.gray_200 : null};
+      !isselected ? theme.palette.gray_100 : null};
     & > div > span {
       color: ${({ theme }) => theme.palette.black};
     }

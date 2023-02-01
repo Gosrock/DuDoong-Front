@@ -176,16 +176,16 @@ export const typo = {
     line-height: 120%;
   `,
   // Side
-  G_Side_15_B: css`
+  G_Side_14_B: css`
     font-family: 'Gmarket Sans';
-    font-weight: 500;
-    font-size: ${calcRem(15)};
+    font-weight: 700;
+    font-size: ${calcRem(14)};
     line-height: 100%;
   `,
-  G_Side_15_M: css`
+  G_Side_14_M: css`
     font-family: 'Gmarket Sans';
-    font-weight: 400;
-    font-size: ${calcRem(15)};
+    font-weight: 500;
+    font-size: ${calcRem(14)};
     line-height: 100%;
   `,
 } as const;
