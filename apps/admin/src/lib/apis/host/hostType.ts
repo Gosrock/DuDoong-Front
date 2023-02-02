@@ -1,5 +1,3 @@
-import { InfiniteResponse } from '@dudoong/utils';
-
 export interface HostProfileResponse {
   hostId: number;
   name: string;
