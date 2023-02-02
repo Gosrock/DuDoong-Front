@@ -37,14 +37,17 @@ interface SelectedProps {
 }
 
 const Wrapper = styled.div<SelectedProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: ${({ size }) => `${size + 8}px`};
   height: ${({ size }) => `${size + 8}px`};
   border-radius: 50%;
   ${({ theme, alliance }) =>
     alliance
       ? css`
-          border: 2px ${theme.palette.main_500} solid;
-          padding: 2px;
+          border: 2px solid ${theme.palette.main_500};
         `
       : css`
           padding: 4px;

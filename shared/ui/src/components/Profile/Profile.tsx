@@ -18,7 +18,7 @@ type ProfileSizeKey = 'big' | 'small';
 
 type ProfileSizeType = {
   [key in ProfileSizeKey]: {
-    imageSize: 44 | 49;
+    imageSize: 40 | 49;
     name: TextType;
     sub: TextType;
   };
@@ -37,7 +37,7 @@ const PROFILE_SIZE: ProfileSizeType = {
     },
   },
   small: {
-    imageSize: 44,
+    imageSize: 40,
     name: {
       typo: 'P_Text_16_M',
       color: 'black',

@@ -47,6 +47,5 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
 
 const Wrapper = styled(FlexBox)`
   height: 64px;
-  left: 0px;
   width: 100%;
 `;

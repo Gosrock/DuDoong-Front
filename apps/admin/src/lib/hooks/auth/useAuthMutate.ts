@@ -4,6 +4,7 @@ import {
   OauthLoginResponse,
   OauthTokenResponse,
 } from '@dudoong/utils';
+import { axiosPrivate } from '@lib/apis/axios';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
@@ -63,6 +64,9 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   });
 
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
+    axiosPrivate.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${loginData.accessToken}`;
     setAuth({ ...auth, isAuthenticated: true, ...loginData });
   };
 

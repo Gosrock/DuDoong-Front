@@ -1,4 +1,4 @@
-import TempNotFoundEl from '@components/common/notFound/TempNotFoundEl';
+import TempNotFoundEl from '@components/home/notFound/TempNotFoundEl';
 
 const NotFound = () => {
   return (

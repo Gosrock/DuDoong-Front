@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import { HTMLAttributes } from 'react';
 import { FlexBox } from '../../layout';
 import { theme } from '../../theme';
 
-export interface DividerProps {
+export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   line?: boolean;
   padding?: number;
   height?: number;
@@ -17,6 +18,7 @@ export const Divider = ({
   line = false,
   padding,
   height = 20,
+  ...props
 }: DividerProps) => {
   return (
     <FlexBox
@@ -25,6 +27,7 @@ export const Divider = ({
         height: `${height}px`,
         backgroundColor: `${!line ? theme.palette.gray_100 : 'transparent'}`,
       }}
+      {...props}
     >
       {line && (
         <div
