@@ -1,6 +1,6 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import { HostProfileResponse } from './hostType';
+import { HostDetailResponse, HostProfileResponse } from './hostType';
 
 const HostApi = {
   GET_HOSTS: async ({
@@ -11,6 +11,11 @@ const HostApi = {
     const response = await axiosPrivate.get(
       `/hosts?page=${pageParam}&size=${size}&sort=${sort}`,
     );
+    return response.data.data;
+  },
+
+  GET_HOST_DETAIL: async (hostId: string): Promise<HostDetailResponse> => {
+    const response = await axiosPrivate.get(`hosts/${hostId}`);
     return response.data.data;
   },
 };

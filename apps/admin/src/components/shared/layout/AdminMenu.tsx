@@ -48,10 +48,9 @@ const MENU_SET: MenuSetType = {
 
 type PageType = 'events' | 'hosts';
 
-const AdminMenu = () => {
+const AdminMenu = ({ title }: { title: string }) => {
   const navigate = useNavigate();
   const path = useLocation().pathname.split('/');
-  console.log(path);
   const page = path[1] as PageType;
   const id = path[2];
   const pageType = MENU_SET[page];
@@ -67,10 +66,7 @@ const AdminMenu = () => {
 
   return (
     <MenuWrapper size={[20, 18]}>
-      <AdminTitle
-        title={'고스락 제 23회 정기공연'}
-        onClick={() => navigate('/')}
-      />
+      <AdminTitle title={title} onClick={() => navigate('/')} />
       <Spacing size={4} />
       <Divider line={true} padding={0} height={8} />
       {pageType.items.map((item, index) => {
