@@ -10,11 +10,11 @@ const HostsRouter = () => {
   return (
     <Routes>
       <Route element={<AdminMenuLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/info" element={<Info />} />
-        <Route path="/member" element={<Member />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/alliance" element={<Alliance />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="info" element={<Info />} />
+        <Route path="member" element={<Member />} />
+        <Route path="events" element={<Events />} />
+        <Route path="alliance" element={<Alliance />} />
         <Route path="/*" element={<Navigate to="/404" />} />
       </Route>
     </Routes>

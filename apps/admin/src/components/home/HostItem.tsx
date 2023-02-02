@@ -6,7 +6,7 @@ import { HostProfileResponse } from '@lib/apis/host/hostType';
 const HostItem = (props: HostProfileResponse) => {
   return (
     <>
-      <Link to={`/hosts/${props.hostId}/dashboard`}>
+      <Link to={`/hosts/${props.hostId}/info`}>
         <ListRow
           padding={[16, 16]}
           css={css`
