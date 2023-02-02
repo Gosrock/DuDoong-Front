@@ -13,12 +13,14 @@ const queryClient = new QueryClient();
 
 const adminGlobalStyle = css`
   ${globalStyle}
-  background-color : ${theme.palette.gray_100};
+  body {
+    background-color: ${theme.palette.gray_100};
+  }
 `;
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter basename="/admin">
-    <Global styles={globalStyle} />
+    <Global styles={adminGlobalStyle} />
     <ThemeProvider theme={theme}>
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>

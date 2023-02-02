@@ -1,13 +1,14 @@
-import Event from '@components/home/Event';
-import Host from '@components/home/Host';
+import List from '@components/home/List';
 import { Button, ButtonSet, FlexBox, Spacing, Text } from '@dudoong/ui';
 import { authState } from '@store/auth';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+export type PageType = 'host' | 'event';
+
 const Home = () => {
   const auth = useRecoilValue(authState);
-  const [select, setSelect] = useState<'host' | 'event'>('host');
+  const [select, setSelect] = useState<PageType>('host');
 
   const handleClickHost = () => {
     setSelect('host');
@@ -16,7 +17,7 @@ const Home = () => {
     setSelect('event');
   };
 
-  const setVarient = (key: 'host' | 'event') => {
+  const setVarient = (key: PageType) => {
     return key === select ? 'secondary' : 'tertiary';
   };
   return (
@@ -37,10 +38,12 @@ const Home = () => {
             등록한 공연
           </Button>
         </ButtonSet>
-        <Button>이벤트 만들기</Button>
+        <Button>
+          {select === 'event' ? '공연 만들기' : '호스트 등록하기'}
+        </Button>
       </FlexBox>
       <Spacing size={20} />
-      {select === 'host' ? <Host /> : <Event />}
+      <List page={select} />
     </>
   );
 };

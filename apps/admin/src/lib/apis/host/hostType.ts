@@ -10,6 +10,7 @@ export interface HostProfileResponse {
   profileImageUrl: string;
   role: RoleType;
   isMaster: boolean;
+  active: boolean;
 }
 
 type RoleType = 'MASTER' | 'MANAGER' | 'GUEST';

@@ -17,9 +17,10 @@ const BorderBox = ({
   fullWidth = true,
   children,
   padding,
+  ...props
 }: Props) => {
   return (
-    <Wrapper shadow={shadow} fullWidth={fullWidth}>
+    <Wrapper shadow={shadow} fullWidth={fullWidth} {...props}>
       <Padding size={padding}>{children}</Padding>
     </Wrapper>
   );

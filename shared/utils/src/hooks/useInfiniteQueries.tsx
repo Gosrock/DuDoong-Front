@@ -24,7 +24,7 @@ export const useInfiniteQueries = <T,>(
   }, [inView]);
 
   const listElement = data?.pages.map(({ content }) =>
-    content.map((item) => <ListItem {...item} />),
+    content.map((item, idx) => <ListItem {...item} key={`item-${idx}`} />),
   );
   const observer = (
     <div className="observer" ref={ref} style={{ height: '1px' }} />
@@ -46,7 +46,7 @@ export interface InfiniteResponse<T> {
 }
 
 export interface InfiniteRequest {
-  page: number;
+  pageParam: number;
   size: number;
   sort?: 'asc' | 'desc';
 }

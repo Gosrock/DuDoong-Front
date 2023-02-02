@@ -30,6 +30,7 @@ const Refresh = () => {
         callbackUrl: '/',
       });
       localStorage.setItem('refreshToken', data.refreshToken);
+      console.log(data.accessToken);
       setState('succeed');
     },
     onError: () => {
