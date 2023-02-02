@@ -85,4 +85,9 @@ export const globalStyle = css`
   :root {
     --main-width: 572px;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
