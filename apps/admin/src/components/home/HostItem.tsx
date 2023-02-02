@@ -13,7 +13,7 @@ const HostItem = (props: HostProfileResponse) => {
             background-color: ${theme.palette.gray_100};
           }
         `}
-        leftImage={<HostProfile imageSrc={props.profileImageUrl} />}
+        leftImage={<HostProfileImage imageSrc={props.profileImageUrl} />}
         text={props.name}
         subText={props.introduce}
         textTypo={['P_Text_18_M', 'P_Text_16_R']}
@@ -31,7 +31,7 @@ const HostItem = (props: HostProfileResponse) => {
 
 export default HostItem;
 
-const HostProfile = ({ imageSrc }: { imageSrc: string }) => {
+const HostProfileImage = ({ imageSrc }: { imageSrc: string }) => {
   return (
     <div
       css={css`

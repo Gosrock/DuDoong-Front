@@ -120,6 +120,12 @@ export const typo = {
     line-height: 120%;
   `,
   // Text
+  G_Text_18_M: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 500;
+    font-size: ${calcRem(18)};
+    line-height: 150%;
+  `,
   P_Text_18_SB: css`
     font-family: 'Pretendard';
     font-weight: 600;

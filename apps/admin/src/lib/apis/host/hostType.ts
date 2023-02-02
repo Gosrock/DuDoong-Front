@@ -1,8 +1,5 @@
 import { InfiniteResponse } from '@dudoong/utils';
 
-export type PageResponseHostProfileResponse =
-  InfiniteResponse<HostProfileResponse>;
-
 export interface HostProfileResponse {
   hostId: number;
   name: string;

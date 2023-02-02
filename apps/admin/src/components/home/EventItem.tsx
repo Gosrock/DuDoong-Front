@@ -1,8 +1,8 @@
-import { Divider, ListRow, Text, theme } from '@dudoong/ui';
+import { Divider, ListRow, Tag, Text, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
-import { HostProfileResponse } from '@lib/apis/host/hostType';
+import { EventProfileResponse } from '@lib/apis/event/eventType';
 
-const EventItem = (props: HostProfileResponse) => {
+const EventItem = (props: EventProfileResponse) => {
   return (
     <>
       <ListRow
@@ -13,16 +13,12 @@ const EventItem = (props: HostProfileResponse) => {
             background-color: ${theme.palette.gray_100};
           }
         `}
-        leftImage={<HostProfile imageSrc={props.profileImageUrl} />}
+        leftImage={<EventProfileImage imageSrc={props.posterImage} />}
         text={props.name}
-        subText={props.introduce}
-        textTypo={['P_Text_18_M', 'P_Text_16_R']}
+        subText={props.hostName}
+        textTypo={['P_Text_18_M', 'P_Text_12_M']}
         textColor={['black', 'gray_400']}
-        rightElement={
-          <Text typo="P_Text_16_SB" color="main_500">
-            {props.role}
-          </Text>
-        }
+        rightElement={<Tag size="lg" color="main" text={props.status} />}
       />
       <Divider className="host-divider" height={28} line padding={16} />
     </>
@@ -31,15 +27,15 @@ const EventItem = (props: HostProfileResponse) => {
 
 export default EventItem;
 
-const HostProfile = ({ imageSrc }: { imageSrc: string }) => {
+const EventProfileImage = ({ imageSrc }: { imageSrc: string }) => {
   return (
     <div
       css={css`
         background: url(${imageSrc});
         background-color: ${theme.palette.gray_300};
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
+        width: 130px;
+        height: 178px;
+        border-radius: 16px;
       `}
     />
   );
