@@ -24,6 +24,7 @@ const Wrapper = styled.div`
 const BottomWrapper = styled.div`
   padding-top: 64px;
   width: 100%;
+  overflow-x: hidden;
 `;
 
 const OutletWrapper = styled.div`

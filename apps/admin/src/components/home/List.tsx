@@ -47,16 +47,19 @@ const List = ({ page }: ListProps) => {
     );
   } else {
     return (
-      <BorderBox
-        padding={ADMIN_HOME_MAP[page].padding as PaddingSize}
-        css={css`
-          & > div > .host-divider:nth-last-of-type(2) {
-            display: none;
-          }
-        `}
-      >
-        {infiniteListElement}
-      </BorderBox>
+      <>
+        <BorderBox
+          padding={ADMIN_HOME_MAP[page].padding as PaddingSize}
+          css={css`
+            & > div > .host-divider:nth-last-of-type(2) {
+              display: none;
+            }
+          `}
+        >
+          {infiniteListElement}
+        </BorderBox>
+        <Spacing size={38} />
+      </>
     );
   }
 };
