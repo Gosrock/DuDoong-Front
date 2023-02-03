@@ -2,7 +2,7 @@ import BorderBox from '@components/shared/layout/BorderBox';
 import { ListHeader, Input, Spacing, Button, FlexBox } from '@dudoong/ui';
 import { useMutation } from '@tanstack/react-query';
 import { CreateHostRequest } from '@lib/apis/host/hostType';
-import { HostContactDes, HostDescription } from './HostDescription';
+import { HostContactDes } from './HostDescription';
 import { useNavigate } from 'react-router-dom';
 import { useInputs } from '@dudoong/utils';
 import HostApi from '@lib/apis/host/HostApi';
@@ -36,22 +36,17 @@ const CreateHost = () => {
   return (
     <>
       <BorderBox padding={[36, 60, 36, 60]}>
-        {/* <ListHeader
-          title={'호스트를 새로 만들어볼까요?'}
-          size={'listHeader_24'}
-          description={<HostDescription />}
-          padding={[32, 0, 16, 0]}
-        ></ListHeader> */}
         <ListHeader
           title={'호스트 이름'}
           size={'listHeader_18'}
           description={
-            '한번 입력되면 수정하기 어려우니, 밴드의 이름을 정확하게 입력해주세요!'
+            '저장 후에는 수정하실 수 없어요. 호스트의 이름을 정확하게 입력해주세요!'
           }
           descColor={'red_300'}
           padding={[32, 0, 12, 0]}
         ></ListHeader>
-        <Input name="name" onChange={onChange} />
+        <Input name="name" onChange={onChange} autoFocus />
+        <Spacing size={14} />
         <ListHeader
           title={'호스트 연락처'}
           size={'listHeader_18'}
@@ -97,7 +92,7 @@ const CreateHost = () => {
       </BorderBox>
       <Spacing size={100} />
       <Button varient="primary" fullWidth={true} onClick={handleSubmit}>
-        다음
+        호스트 만들기
       </Button>
     </>
   );

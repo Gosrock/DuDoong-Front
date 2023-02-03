@@ -5,7 +5,12 @@ import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-const AdminHeader = ({ host }: { host: string }) => {
+interface AdminHeaderProps {
+  host: string;
+  alliance: boolean;
+}
+
+const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
   const auth = useRecoilValue(authState);
 
   const rightElement = (
@@ -15,7 +20,7 @@ const AdminHeader = ({ host }: { host: string }) => {
         size={'small'}
         name={auth.userProfile!.name}
         subText={host}
-        alliance={true}
+        alliance={alliance}
       />
     </div>
   );

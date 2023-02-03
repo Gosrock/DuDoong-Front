@@ -7,7 +7,7 @@ const HostApi = {
   GET_HOSTS: async ({
     pageParam = 0,
     size = 10,
-    sort = 'asc',
+    sort = 'desc',
   }: InfiniteRequest): Promise<InfiniteResponse<HostProfileResponse>> => {
     const response = await axiosPrivate.get(
       `/hosts?page=${pageParam}&size=${size}&sort=${sort}`,

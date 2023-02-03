@@ -6,7 +6,7 @@ const Hosts = () => {
     <>
       <Spacing size={42} />
       <ListHeader
-        title={'호스트 만들기'}
+        title={'호스트를 새로 만들어볼까요?'}
         size={'listHeader_24'}
         padding={[32, 24, 20, 0]}
       ></ListHeader>

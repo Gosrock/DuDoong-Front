@@ -19,7 +19,11 @@ const HostsRouter = () => {
     <Routes>
       <Route
         element={
-          <AdminMenuLayout title={data?.name || ''} host={data?.name || ''} />
+          <AdminMenuLayout
+            title={data?.name || ''}
+            host={data?.name || ''}
+            alliance={data?.partner || false}
+          />
         }
       >
         <Route path="dashboard" element={<Dashboard />} />
