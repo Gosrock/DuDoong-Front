@@ -1,5 +1,4 @@
 import { InfiniteResponse } from '@dudoong/utils';
-import internal from 'stream';
 
 export type PageResponseHostProfileResponse =
   InfiniteResponse<HostProfileResponse>;
@@ -31,3 +30,26 @@ export interface CreateHostResponse {
   masterUserId: number;
 }
 type RoleType = 'MASTER' | 'MANAGER' | 'GUEST';
+
+export interface HostDetailResponse {
+  hostId: number;
+  name: string;
+  introduce: string;
+  profileImageUrl: string;
+  contactEmail: string;
+  contactNumber: string;
+  partner: boolean;
+  masterUser: HostUser;
+  hostUsers: HostUser[];
+  slackUrl: string;
+}
+
+export interface HostUser {
+  userId: number;
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  profileImage: string;
+  createdAt: string;
+  role: RoleType;
+}

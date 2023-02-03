@@ -13,8 +13,8 @@ export const HostDescription = () => {
 export const HostContactDes = () => {
   return (
     <>
-      <Text typo="P_Text_16_M" color="red_300">
-        두둥 서비스를 이용해서 예매를 한 관객들이 연락을 하기 위한 정보에요{' '}
+      <Text typo="P_Text_16_M" color="gray_400">
+        두둥 서비스를 이용해서 예매를 한 관객들이 연락을 하기 위한 정보에요
         <br />
         중요한 정보이니 정확하게 작성 부탁드려요!
       </Text>

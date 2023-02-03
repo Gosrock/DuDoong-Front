@@ -46,7 +46,7 @@ export const globalStyle = css`
     -webkit-tap-highlight-color: transparent;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-    -ms-overflow-style: none;
+    /*     -ms-overflow-style: none; */
   }
   button {
     background: inherit;
@@ -67,7 +67,7 @@ export const globalStyle = css`
     outline: none;
   }
 
-  &::-webkit-scrollbar {
+  /*   &::-webkit-scrollbar {
     width: 20px;
     ${media.mobile} {
       display: none;
@@ -80,9 +80,14 @@ export const globalStyle = css`
     background-color: rgba(211, 211, 211, 0.7);
     border-radius: 10px;
     border: 6px solid white;
-  }
+  } */
 
   :root {
     --main-width: 572px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 `;

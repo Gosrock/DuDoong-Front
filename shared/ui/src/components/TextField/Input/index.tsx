@@ -67,7 +67,7 @@ const InputWrapper = styled.div<{
 }>`
   box-sizing: border-box;
   background: ${({ theme }) => theme.palette.gray_200};
-  border-radius: 16px;
+  border-radius: 12px;
 
   padding: 16px;
   gap: 10px;

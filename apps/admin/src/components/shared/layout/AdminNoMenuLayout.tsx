@@ -5,7 +5,7 @@ import AdminHeader from './AdminHeader';
 const AdminNoMenuLayout = () => {
   return (
     <Wrapper>
-      <AdminHeader />
+      <AdminHeader host="" />
       <BottomWrapper>
         <OutletWrapper>
           <Outlet />
@@ -24,6 +24,7 @@ const Wrapper = styled.div`
 const BottomWrapper = styled.div`
   padding-top: 64px;
   width: 100%;
+  overflow-x: hidden;
 `;
 
 const OutletWrapper = styled.div`

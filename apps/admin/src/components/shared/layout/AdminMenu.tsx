@@ -48,10 +48,11 @@ const MENU_SET: MenuSetType = {
 
 type PageType = 'events' | 'hosts';
 
-const AdminMenu = () => {
+const AdminMenu = ({ title }: { title: string }) => {
   const navigate = useNavigate();
   const path = useLocation().pathname.split('/');
   const page = path[1] as PageType;
+  const id = path[2];
   const pageType = MENU_SET[page];
   const acticeMenuIndex = pageType.url.indexOf(path[3]);
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
@@ -60,19 +61,12 @@ const AdminMenu = () => {
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);
     hideButtons();
-    navigate(
-      `/${page}/${location.pathname.split('/')[2]}/${
-        pageType.url[menuItemKey]
-      }`,
-    );
+    navigate(`/${page}/${id}/${pageType.url[menuItemKey]}`);
   };
 
   return (
     <MenuWrapper size={[20, 18]}>
-      <AdminTitle
-        title={'고스락 제 23회 정기공연'}
-        onClick={() => navigate('/')}
-      />
+      <AdminTitle title={title} onClick={() => navigate('/')} />
       <Spacing size={4} />
       <Divider line={true} padding={0} height={8} />
       {pageType.items.map((item, index) => {

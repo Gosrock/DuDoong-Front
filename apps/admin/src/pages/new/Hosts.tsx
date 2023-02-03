@@ -12,7 +12,7 @@ const Hosts = () => {
       ></ListHeader>
       <Spacing size={20} />
       <CreateHost />
-      <Spacing size={74} />
+      <Spacing size={72} />
     </>
   );
 };

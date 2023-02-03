@@ -5,7 +5,7 @@ import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-const AdminHeader = () => {
+const AdminHeader = ({ host }: { host: string }) => {
   const auth = useRecoilValue(authState);
 
   const rightElement = (
@@ -14,7 +14,7 @@ const AdminHeader = () => {
         image={auth.userProfile!.profileImage}
         size={'small'}
         name={auth.userProfile!.name}
-        subText={'고스락'}
+        subText={host}
         alliance={true}
       />
     </div>
