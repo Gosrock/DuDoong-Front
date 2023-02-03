@@ -9,12 +9,17 @@ import { FlexBox } from '@dudoong/ui';
 interface AdminMenuLayoutProps {
   title: string;
   host: string;
+  alliance: boolean;
 }
 
-export const AdminMenuLayout = ({ title, host }: AdminMenuLayoutProps) => {
+export const AdminMenuLayout = ({
+  title,
+  host,
+  alliance,
+}: AdminMenuLayoutProps) => {
   return (
     <LayoutWrapper>
-      <AdminHeader host={host} />
+      <AdminHeader host={host} alliance={alliance} />
       <BottomWrapper align={'top'}>
         <AdminMenu title={title} />
         <OutletWrapper>

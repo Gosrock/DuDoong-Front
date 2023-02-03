@@ -19,7 +19,7 @@ export const useInfiniteQueries = <T,>(
     if (!data) return;
 
     const lastPageIdx = data.pages.length - 1;
-    const hasNext = data.pages[lastPageIdx].hasNextPage;
+    const hasNext = data.pages[lastPageIdx].hasNext;
     if (hasNext && inView) fetchNextPage();
   }, [inView]);
 
@@ -47,7 +47,7 @@ export interface InfiniteResponse<T> {
   content: T[];
   page: number;
   size: number;
-  hasNextPage: boolean;
+  hasNext: boolean;
 }
 
 export interface InfiniteRequest {
