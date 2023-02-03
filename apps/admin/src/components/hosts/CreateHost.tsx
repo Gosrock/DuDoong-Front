@@ -4,29 +4,50 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { CreateHostRequest } from '@lib/apis/host/hostType';
 import { HostApi } from '@lib/apis/host/HostApi';
+import { HostContactDes, HostDescription } from './HostDescription';
+import { useNavigate } from 'react-router-dom';
 
 const CreateHost = () => {
   const [info, setInfo] = useState<CreateHostRequest>({
     name: '',
     contactEmail: '',
-    contactNumber: '',
+    contactNumber: '010',
   });
+  const navigate = useNavigate();
 
-  const { mutate } = useMutation(HostApi.ADD_HOSTS, {});
+  const { mutate } = useMutation(HostApi.ADD_HOSTS, {
+    onSuccess: (data) => {
+      const curId = data.hostId;
+      navigate(`/hosts/${curId}/info`);
+    },
+    onError: () => {
+      console.log('error');
+    },
+  });
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     mutate(info);
   };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    val: string,
+  ) => {
+    let data = e.target.value;
+    if (val == 'contactNumber') {
+      data = data.replace(/[^0-9]/g, '');
+      data = data.replace(/(\d{3})(\d{4})(\d)/, '$1-$2-$3');
+    }
+    setInfo((prev): CreateHostRequest => ({ ...prev, [val]: data }));
+  };
   return (
     <>
-      <BorderBox shadow={false} fullWidth={true} padding={[36, 60, 36, 60]}>
+      <BorderBox padding={[36, 60, 36, 60]}>
         <ListHeader
           title={'호스트를 새로 만들어볼까요?'}
           size={'listHeader_24'}
-          description={
-            '공연이 확정되기 전까지 바꿀 수 있으니 걱정하지 마세요. 추후 자세한 정보들을 더 작성할 수 있어요!'
-          }
+          description={HostDescription()}
           padding={[32, 0, 16, 0]}
         ></ListHeader>
         <ListHeader
@@ -38,22 +59,11 @@ const CreateHost = () => {
           descColor={'red_300'}
           padding={[32, 0, 12, 0]}
         ></ListHeader>
-        <Input
-          value={info?.name}
-          width={760}
-          height={48}
-          onChange={(e) =>
-            setInfo(
-              (prev): CreateHostRequest => ({ ...prev, name: e.target.value }),
-            )
-          }
-        />
+        <Input value={info?.name} onChange={(e) => handleChange(e, 'name')} />
         <ListHeader
           title={'호스트 연락처'}
           size={'listHeader_18'}
-          description={
-            '두둥 서비스를 이용해서 예매를 한 관객들이 연락을 하기 위한 정보에요. 중요한 정보이니 정확하게 작성 부탁드려요!'
-          }
+          description={HostContactDes()}
           descColor={'red_300'}
           padding={[32, 0, 12, 0]}
         ></ListHeader>
@@ -63,18 +73,10 @@ const CreateHost = () => {
           padding={[32, 0, 12, 0]}
         ></ListHeader>
         <Input
-          width={760}
-          height={48}
+          type="tel"
           placeholder={'호스트의 대표 전화번호를 입력해주세요.'}
           value={info?.contactNumber}
-          onChange={(e) =>
-            setInfo(
-              (prev): CreateHostRequest => ({
-                ...prev,
-                contactNumber: e.target.value,
-              }),
-            )
-          }
+          onChange={(e) => handleChange(e, 'contactNumber')}
         />
         <ListHeader
           title={'대표 메일'}
@@ -82,18 +84,9 @@ const CreateHost = () => {
           padding={[6, 0, 12, 0]}
         ></ListHeader>
         <Input
-          width={760}
-          height={48}
           placeholder={'ex)email@aaa.bbb'}
           value={info?.contactEmail}
-          onChange={(e) =>
-            setInfo(
-              (prev): CreateHostRequest => ({
-                ...prev,
-                contactEmail: e.target.value,
-              }),
-            )
-          }
+          onChange={(e) => handleChange(e, 'contactEmail')}
         />
       </BorderBox>
       <Spacing size={100} />
