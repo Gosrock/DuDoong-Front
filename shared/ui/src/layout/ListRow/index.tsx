@@ -16,6 +16,7 @@ export interface ListRowProps extends HTMLAttributes<HTMLDivElement> {
   leftImage?: ReactNode;
   rightElement?: ReactNode;
   gap?: number;
+  textGap?: number;
   imageTextGap?: number;
   fill?: boolean;
   as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -51,6 +52,7 @@ export const ListRow = ({
   fill = false,
   gap = 0,
   imageTextGap = 16,
+  textGap = 4,
   ...props
 }: ListRowProps) => {
   return (
@@ -75,7 +77,7 @@ export const ListRow = ({
                   text={subText}
                   typo={getTextTypo(textTypo, 1)}
                   color={getTextColor(textColor, 1)}
-                  css={{ marginTop: '4px' }}
+                  css={{ marginTop: `${textGap}px` }}
                 />
               )}
             </>

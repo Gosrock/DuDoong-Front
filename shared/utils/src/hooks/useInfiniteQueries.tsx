@@ -30,12 +30,17 @@ export const useInfiniteQueries = <T,>(
     <div className="observer" ref={ref} style={{ height: '1px' }} />
   );
 
-  return (
-    <>
-      {listElement}
-      {observer}
-    </>
-  );
+  const isEmpty = data?.pages[0].content.length === 0;
+
+  return {
+    infiniteListElement: (
+      <>
+        {listElement}
+        {observer}
+      </>
+    ),
+    isEmpty,
+  };
 };
 
 export interface InfiniteResponse<T> {

@@ -20,7 +20,14 @@ const EventsRouter = () => {
   //TODO: fallback 처리하기
   return (
     <Routes>
-      <Route element={<AdminMenuLayout title={data?.name || ''} />}>
+      <Route
+        element={
+          <AdminMenuLayout
+            title={data?.name || ''}
+            host={data?.host.name || ''}
+          />
+        }
+      >
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/info" element={<Info />} />
         <Route path="/detail" element={<Detail />} />

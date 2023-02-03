@@ -5,7 +5,7 @@ import AdminHeader from './AdminHeader';
 const AdminNoMenuLayout = () => {
   return (
     <Wrapper>
-      <AdminHeader />
+      <AdminHeader host="" />
       <BottomWrapper>
         <OutletWrapper>
           <Outlet />

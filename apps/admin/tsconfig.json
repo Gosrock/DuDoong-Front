@@ -22,7 +22,8 @@
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/components/*"],
       "@lib/*": ["src/lib/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src", "**/*.ts", "**/*.tsx", "custom.d.ts", "../../**/*.d.ts"],

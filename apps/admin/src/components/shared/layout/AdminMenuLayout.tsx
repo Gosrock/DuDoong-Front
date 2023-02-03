@@ -6,10 +6,15 @@ import AdminMenu from './AdminMenu';
 import AdminBottomButton from './AdminBottomButton';
 import { FlexBox } from '@dudoong/ui';
 
-export const AdminMenuLayout = ({ title }: { title: string }) => {
+interface AdminMenuLayoutProps {
+  title: string;
+  host: string;
+}
+
+export const AdminMenuLayout = ({ title, host }: AdminMenuLayoutProps) => {
   return (
     <LayoutWrapper>
-      <AdminHeader />
+      <AdminHeader host={host} />
       <BottomWrapper align={'top'}>
         <AdminMenu title={title} />
         <OutletWrapper>

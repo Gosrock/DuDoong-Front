@@ -1,5 +1,5 @@
 import BorderBox from '@components/shared/layout/BorderBox';
-import { PaddingSize } from '@dudoong/ui';
+import { FlexBox, PaddingSize, Spacing, Text } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import EventApi from '@lib/apis/event/EventApi';
@@ -9,6 +9,7 @@ import { HostProfileResponse } from '@lib/apis/host/hostType';
 import { PageType } from '@pages/common/Home';
 import EventItem from './EventItem';
 import HostItem from './HostItem';
+import { ReactComponent as DoongDoong } from '@assets/teduri.svg';
 
 interface ListProps {
   page: PageType;
@@ -28,20 +29,35 @@ const ADMIN_HOME_MAP = {
 };
 
 const List = ({ page }: ListProps) => {
-  const ItemList = useInfiniteQueries<
+  const { infiniteListElement, isEmpty } = useInfiniteQueries<
     EventProfileResponse | HostProfileResponse
   >(page, ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
-  return (
-    <BorderBox
-      padding={ADMIN_HOME_MAP[page].padding as PaddingSize}
-      css={css`
-        & > div > .host-divider:nth-last-of-type(2) {
-          display: none;
-        }
-      `}
-    >
-      {ItemList}
-    </BorderBox>
-  );
+
+  if (isEmpty) {
+    return (
+      <>
+        <Spacing size={70} />
+        <FlexBox direction={'column'} align="center" gap={48}>
+          <DoongDoong />
+          <Text typo="P_Text_16_M" color="gray_500">
+            두둥! 아무것도 없어요.
+          </Text>
+        </FlexBox>
+      </>
+    );
+  } else {
+    return (
+      <BorderBox
+        padding={ADMIN_HOME_MAP[page].padding as PaddingSize}
+        css={css`
+          & > div > .host-divider:nth-last-of-type(2) {
+            display: none;
+          }
+        `}
+      >
+        {infiniteListElement}
+      </BorderBox>
+    );
+  }
 };
 export default List;
