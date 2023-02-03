@@ -6,14 +6,23 @@ import { CreateHostRequest } from '@lib/apis/host/hostType';
 import { HostApi } from '@lib/apis/host/HostApi';
 import { HostContactDes, HostDescription } from './HostDescription';
 import { useNavigate } from 'react-router-dom';
+import { useInputs } from '@dudoong/utils';
 
 const CreateHost = () => {
-  const [info, setInfo] = useState<CreateHostRequest>({
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('a');
+    let data = e.target.value;
+    data = data.replace(/[^0-9]/g, '');
+    data = data.replace(/(\d{3})(\d{4})(\d)/, '$1-$2-$3');
+    console.log(data);
+  };
+  const [form, onChange] = useInputs<CreateHostRequest>({
     name: '',
     contactEmail: '',
-    contactNumber: '010',
+    contactNumber: '',
   });
-  const navigate = useNavigate();
 
   const { mutate } = useMutation(HostApi.ADD_HOSTS, {
     onSuccess: (data) => {
@@ -27,20 +36,10 @@ const CreateHost = () => {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    mutate(info);
+    console.log(form);
+    mutate(form);
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    val: string,
-  ) => {
-    let data = e.target.value;
-    if (val == 'contactNumber') {
-      data = data.replace(/[^0-9]/g, '');
-      data = data.replace(/(\d{3})(\d{4})(\d)/, '$1-$2-$3');
-    }
-    setInfo((prev): CreateHostRequest => ({ ...prev, [val]: data }));
-  };
   return (
     <>
       <BorderBox padding={[36, 60, 36, 60]}>
@@ -59,7 +58,7 @@ const CreateHost = () => {
           descColor={'red_300'}
           padding={[32, 0, 12, 0]}
         ></ListHeader>
-        <Input value={info?.name} onChange={(e) => handleChange(e, 'name')} />
+        <Input name="name" onChange={onChange} />
         <ListHeader
           title={'호스트 연락처'}
           size={'listHeader_18'}
@@ -75,8 +74,8 @@ const CreateHost = () => {
         <Input
           type="tel"
           placeholder={'호스트의 대표 전화번호를 입력해주세요.'}
-          value={info?.contactNumber}
-          onChange={(e) => handleChange(e, 'contactNumber')}
+          name="contactNumber"
+          onChange={onChange}
         />
         <ListHeader
           title={'대표 메일'}
@@ -85,8 +84,8 @@ const CreateHost = () => {
         ></ListHeader>
         <Input
           placeholder={'ex)email@aaa.bbb'}
-          value={info?.contactEmail}
-          onChange={(e) => handleChange(e, 'contactEmail')}
+          name="contactEmail"
+          onChange={onChange}
         />
       </BorderBox>
       <Spacing size={100} />
