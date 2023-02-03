@@ -1,7 +1,6 @@
 import BorderBox from '@components/shared/layout/BorderBox';
 import { ListHeader, Input, Spacing, Button } from '@dudoong/ui';
 import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
 import { CreateHostRequest } from '@lib/apis/host/hostType';
 import { HostApi } from '@lib/apis/host/HostApi';
 import { HostContactDes, HostDescription } from './HostDescription';
@@ -11,13 +10,6 @@ import { useInputs } from '@dudoong/utils';
 const CreateHost = () => {
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('a');
-    let data = e.target.value;
-    data = data.replace(/[^0-9]/g, '');
-    data = data.replace(/(\d{3})(\d{4})(\d)/, '$1-$2-$3');
-    console.log(data);
-  };
   const [form, onChange] = useInputs<CreateHostRequest>({
     name: '',
     contactEmail: '',

@@ -28,7 +28,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { value, height = 56, errorMessageColor = 'red_200', ...props }: InputProps,
+    { value, height, errorMessageColor = 'red_200', ...props }: InputProps,
     ref,
   ) => {
     return (
@@ -72,7 +72,7 @@ const InputWrapper = styled.div<{
   padding: 16px;
   gap: 10px;
 
-  height: ${({ height }) => (height ? `${height}px` : `56px`)};
+  height: ${({ height }) => (height ? `${height}px` : `48px`)};
   width: ${({ width }) => (width ? `${width}px` : '100%')};
 
   // ㅡ.ㅡ

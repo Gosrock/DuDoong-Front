@@ -11,7 +11,7 @@ const Hosts = () => {
         padding={[32, 24, 20, 0]}
       ></ListHeader>
       <Spacing size={20} />
-      <CreateHost></CreateHost>
+      <CreateHost />
       <Spacing size={74} />
     </>
   );
