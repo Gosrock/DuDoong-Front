@@ -54,7 +54,7 @@ const CreateHost = () => {
         <Input name="name" onChange={onChange} />
         <ListHeader
           title={'호스트 연락처'}
-          size={'listHeader_20'}
+          size={'listHeader_18'}
           description={<HostContactDes />}
           descColor={'red_300'}
           padding={[32, 0, 12, 0]}
