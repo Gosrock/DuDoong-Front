@@ -9,9 +9,7 @@ const Landing = () => {
       <main>
         <ListHeader title={'테스트페이지'} size="listHeader_28" />
         <ButtonSet>
-          <Button onClick={() => router.push('/book/option')}>
-            티켓 예매 테스트
-          </Button>
+          <Button onClick={() => router.push('/events/1')}>event1</Button>
         </ButtonSet>
       </main>
     </>
