@@ -12,42 +12,20 @@ import { useMoneyType } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
+import useTicketItems from './useTicketItems';
 
 interface TicketsProps {
   items: TicketItemResponse[];
 }
 
 const Tickets = ({ items }: TicketsProps) => {
-  const { mulMoneyType } = useMoneyType();
-  const initialDropdownOption = {
-    title: items[0].ticketName,
-    id: items[0].ticketItemId,
-    description: items[0].price,
-    disabled: false,
-  };
+  const { initialDropdownOption, ticketOptions, getSelectedTicket } =
+    useTicketItems(items);
+
   const [form, setForm] = useState<{
     ticketItemId: number;
     quantity: number;
   }>({ ticketItemId: items[0].ticketItemId, quantity: 1 });
-  const [option, setOption] = useState<DropdownOption>(initialDropdownOption);
-
-  const ticketOptions: DropdownOption[] = items.map((item) => {
-    return {
-      title: item.ticketName,
-      id: item.ticketItemId,
-      disabled: item.quantity === 0,
-      description: item.price,
-    };
-  });
-
-  const getSelectedTicket = (itemId: number) => {
-    const selectedTicket = items.find((item) => itemId === item.ticketItemId);
-    if (selectedTicket) {
-      return selectedTicket;
-    } else {
-      throw new Error('티켓 없음');
-    }
-  };
 
   const handleCounter = (key: boolean) => {
     setForm({
@@ -55,6 +33,10 @@ const Tickets = ({ items }: TicketsProps) => {
       quantity: key ? form.quantity + 1 : form.quantity - 1,
     });
   };
+
+  const [option, setOption] = useState<DropdownOption>(initialDropdownOption);
+
+  const { mulMoneyType } = useMoneyType();
 
   useEffect(() => {
     setForm({ ...form, ticketItemId: option.id as number });
