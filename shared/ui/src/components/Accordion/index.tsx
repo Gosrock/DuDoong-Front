@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { forwardRef, ReactNode, useEffect, useState } from 'react';
+import { forwardRef, ReactNode, useState } from 'react';
 import { ChevronDown } from 'react-bootstrap-icons';
 import { FlexBox, ListRow, ListRowProps, PaddingSize } from '../../layout';
 export interface AccordionProps
@@ -8,6 +8,7 @@ export interface AccordionProps
   title: string;
   padding?: PaddingSize;
   content: ReactNode;
+  contentHeight?: number;
   onAccordionOpened?: () => void;
   onAccordionClosed?: () => void;
 }
@@ -20,6 +21,7 @@ export interface AccordionProps
  * @param content:
  * @param textTypo
  * @param textColor
+ * @param contentHeight 컨텐츠 높이 지정되면 애니메이션 적용
  */
 
 export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
@@ -28,13 +30,15 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
       title,
       padding = [16, 24],
       content,
-      textTypo = 'Text_16',
+      textTypo = 'P_Text_16_M',
       textColor = 'gray_500',
       onAccordionOpened,
       onAccordionClosed,
+      contentHeight,
     }: AccordionProps,
     ref,
   ) => {
+    console.log(contentHeight);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleAccordion = () => {
@@ -61,7 +65,10 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
             />
           </FlexBox>
         </AccordianHeader>
-        {isOpen && <div>{content}</div>}
+
+        <Content open={isOpen} height={contentHeight}>
+          {content}
+        </Content>
       </div>
     );
   },
@@ -82,4 +89,10 @@ const Handler = styled(ChevronDown)<{ open: boolean }>`
       transform: rotate(180deg);
     `}
   transition: all 0.2s ease;
+`;
+
+const Content = styled.div<{ height: number | undefined; open: boolean }>`
+  height: ${({ height, open }) => (open ? height : 0)}px;
+  transition: all 0.2s ease;
+  overflow: hidden;
 `;

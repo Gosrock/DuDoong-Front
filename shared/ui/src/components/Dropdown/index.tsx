@@ -14,8 +14,8 @@ export interface DropdownProps {
 
 export interface DropdownOption {
   title: string;
-  id: string;
-  description: string;
+  id: string | number;
+  description?: string;
   disabled: boolean;
 }
 
@@ -54,6 +54,7 @@ export const Dropdown = ({
           <DropdownOptionRow option={option} />
         </button>
       ))}
+      contentHeight={options.length * 56}
     />
   );
 };
@@ -64,10 +65,10 @@ const DropdownOptionRow = ({ option }: { option: DropdownOption }) => {
     <ListRow
       padding={[16, 24]}
       text={title}
-      textTypo="Text_16"
+      textTypo="P_Text_16_R"
       textColor={disabled ? 'gray_400' : 'gray_500'}
       rightElement={
-        <Text typo="Text_16_SB" color="gray_500">
+        <Text typo="P_Text_16_R" color="gray_500">
           {description}
         </Text>
       }
