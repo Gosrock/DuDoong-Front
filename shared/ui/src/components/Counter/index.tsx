@@ -36,6 +36,7 @@ export const Counter = ({
           css={{
             width: '24px',
             height: '24px',
+            paddingTop: '3px',
             fill: `${theme.palette.gray_500}`,
           }}
         />
@@ -48,6 +49,7 @@ export const Counter = ({
           css={{
             width: '24px',
             height: '24px',
+            paddingTop: '3px',
             fill: `${theme.palette.gray_500}`,
           }}
         />

@@ -18,13 +18,13 @@ export default {
 } as ComponentMeta<typeof Dropdown>;
 
 const Template: ComponentStory<typeof Dropdown> = (args) => {
-  const [value, setValue] = useState<DropdownOption>(initialOption);
+  const [value, setValue] = useState<DropdownOption>(initialDropdownOption);
   return (
     <Dropdown {...args} selectedOption={value} setSelectedOption={setValue} />
   );
 };
 
-const initialOption: DropdownOption = {
+const initialDropdownOption: DropdownOption = {
   title: '옵션 선택',
   id: 'null',
   description: '',

@@ -4,10 +4,19 @@ import { Button } from '@dudoong/ui';
 import { EventDetailResponse } from '@dudoong/utils';
 import EventApi from '@dudoong/utils/src/apis/event/EventApi';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Tickets from './blocks/Tickets';
+import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { TicketApi } from '@lib/apis/ticket/TicketApi';
+import OverlayBox from '@components/shared/overlay/OverlayBox';
 
-const EventDetail = ({ data }: { data: EventDetailResponse }) => {
-  console.log(data);
-  const { OverlayBox, openOverlay, closeOverlay } = useOverlay();
+const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
+  const router = useRouter();
+  const { eventId } = router.query;
+  const { data: tickets } = useQuery(['tickets', eventId], () =>
+    TicketApi.GET_TICKETITEMS(eventId as string),
+  );
+  const { isOpen, openOverlay, closeOverlay } = useOverlay();
 
   return (
     <>
@@ -15,9 +24,11 @@ const EventDetail = ({ data }: { data: EventDetailResponse }) => {
       <main>
         <Button onClick={openOverlay}>예매하기</Button>
       </main>
-      <OverlayBox>
-        <>열기</>
-      </OverlayBox>
+      {tickets && (
+        <OverlayBox open={isOpen} onDismiss={closeOverlay}>
+          <Tickets items={tickets?.ticketItems} />
+        </OverlayBox>
+      )}
     </>
   );
 };
@@ -34,11 +45,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { eventId } = context.params as unknown as { eventId: string };
 
-  const data = await EventApi.GET_EVENT_DETAIL(eventId);
+  const detail = await EventApi.GET_EVENT_DETAIL(eventId);
 
   return {
     props: {
-      data,
+      detail,
     },
   };
 };

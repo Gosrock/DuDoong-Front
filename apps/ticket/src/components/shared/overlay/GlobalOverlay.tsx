@@ -12,6 +12,12 @@ export type GlobalSheetContentType = {
   [key in GlobalSheetContentKey]: ReactNode;
 };
 
+export interface OverlayBoxProps {
+  open: boolean;
+  onDismiss: () => void;
+  children: ReactNode;
+}
+
 const globalSheetContent = {
   login: Login,
   register: Register,
@@ -34,9 +40,3 @@ const GlobalOverlay = () => {
 };
 
 export default GlobalOverlay;
-
-export interface OverlayBoxProps {
-  open: boolean;
-  onDismiss: () => void;
-  children: ReactNode;
-}

@@ -7,7 +7,10 @@ const Modal = ({ open, onDismiss, children }: OverlayBoxProps) => {
   return (
     <Wrapper open={open}>
       <Overlay onClick={onDismiss} />
-      <RoundBlock padding={[16, 0]} css={{ zIndex: '10', width: '390px' }}>
+      <RoundBlock
+        padding={[16, 0]}
+        css={{ zIndex: '10', width: '390px', border: '1px solid black' }}
+      >
         {children}
       </RoundBlock>
     </Wrapper>

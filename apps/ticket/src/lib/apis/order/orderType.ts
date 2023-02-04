@@ -1,4 +1,5 @@
 import { OptionAnswer } from '../cart/cartType';
+import { TicketType } from '../ticket/ticketType';
 
 export interface CreateOrderRequest {
   couponId: number | null;
@@ -11,6 +12,9 @@ export interface CreateOrderResponse {
   customerEmail: string;
   customerName: string;
   amount: string;
+  isNeedPayment: boolean;
+  orderMethod: OrderMethod;
+  ticketType: TicketType;
 }
 
 export interface ConfirmOrderRequest {
@@ -24,7 +28,8 @@ export interface OrderResponse {
   refundInfo: RefundInfo;
   orderUuid: string;
   orderId: number;
-  orderMethod: 'APPROVAL' | 'PAYMENT';
+  orderMethod: OrderMethod;
+  ticketType: TicketType;
 }
 
 /**
@@ -37,16 +42,7 @@ export interface OrderPaymentResponse {
   discountAmount: string;
   couponName: string;
   totalAmount: string;
-  orderStatus:
-    | 'READY'
-    | 'PENDING_PAYMENT'
-    | 'PENDING_APPROVE'
-    | 'OUTDATED'
-    | 'CONFIRM'
-    | 'APPROVED'
-    | 'REFUND'
-    | 'CANCELED'
-    | 'FAILED';
+  orderStatus: OrderStatus;
   receiptUrl: string;
 }
 
@@ -71,3 +67,16 @@ interface RefundInfo {
   endAt: string;
   available: boolean;
 }
+
+export type OrderMethod = '승인 방식' | '결제 방식';
+
+export type OrderStatus =
+  | '주문 생성상태'
+  | '결제 대기중'
+  | ' 승인 대기중'
+  | ' 결제 시간 만료'
+  | ' 결제 완료'
+  | ' 승인 완료'
+  | ' 환불 완료'
+  | ' 취소된 결제'
+  | ' 결제 실패';
