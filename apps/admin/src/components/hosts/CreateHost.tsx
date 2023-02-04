@@ -18,11 +18,12 @@ const CreateHost = () => {
     contactNumber: '',
   });
 
+  const returnUrl = location.state ? location.state.returnUrl : null;
   const { mutate } = useMutation(HostApi.ADD_HOSTS, {
     onSuccess: (data) => {
       const curId = data.hostId;
-      if (location.state) {
-        navigate('/new/events/2', {
+      if (returnUrl) {
+        navigate(returnUrl, {
           state: {
             hostId: curId,
           },
