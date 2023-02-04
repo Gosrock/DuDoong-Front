@@ -13,7 +13,9 @@ const useTicketItems = (items: TicketItemResponse[]) => {
       title: item.ticketName,
       id: item.ticketItemId,
       disabled: item.quantity === 0,
-      description: item.price,
+      description: `${item.price}${
+        item.type === '승인' ? ' (승인 후 발매)' : ''
+      }`,
     };
   });
 

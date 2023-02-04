@@ -68,7 +68,7 @@ const DropdownOptionRow = ({ option }: { option: DropdownOption }) => {
       textTypo="P_Text_16_R"
       textColor={disabled ? 'gray_400' : 'gray_500'}
       rightElement={
-        <Text typo="P_Text_16_R" color="gray_500">
+        <Text typo="P_Text_16_R" color="gray_400">
           {description}
         </Text>
       }
