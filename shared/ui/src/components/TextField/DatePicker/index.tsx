@@ -2,14 +2,24 @@ import styled from '@emotion/styled';
 import { InputHTMLAttributes, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { theme } from '../../../theme';
+import { theme, KeyOfPalette, KeyOfTypo } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 import { ko } from 'date-fns/esm/locale';
 import { Calendar } from 'react-bootstrap-icons';
-export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
-  width?: number;
-  placeholder?: string;
+import { ReactNode } from 'react';
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  value?: string;
+  width?: number | string;
+  height?: number;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  errorMessage?: string;
+  errorMessageColor?: KeyOfPalette;
+  padding?: string;
+  typo?: KeyOfTypo;
+  setValue?: Function;
 }
 
 /**

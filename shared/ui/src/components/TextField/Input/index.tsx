@@ -48,14 +48,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
           {props.rightIcon}
         </InputWrapper>
-
-        <MessageWrapper errorMessage={props.errorMessage}>
-          {props.errorMessage && (
+        {props.errorMessage && (
+          <MessageWrapper errorMessage={props.errorMessage}>
             <Text typo={'Text_12'} color={errorMessageColor}>
               {props.errorMessage}
             </Text>
-          )}
-        </MessageWrapper>
+          </MessageWrapper>
+        )}
       </FlexBox>
     );
   },

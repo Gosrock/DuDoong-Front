@@ -5,6 +5,7 @@ export const palette = {
   main_400: '#9568F6',
   main_500: '#6B36DC',
   point_mint: '#25F3CF',
+  sub_mint: '#11CFAE',
   red_100: '#FFE5E8',
   red_200: '#FF5461',
   red_300: '#F93949',

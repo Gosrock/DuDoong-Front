@@ -5,7 +5,7 @@ import Events from './Events';
 const NewRouter = () => {
   return (
     <Routes>
-      <Route path="/events" element={<Events />} />
+      <Route path="/events/:step" element={<Events />} />
       <Route path="/hosts" element={<Hosts />} />
       <Route path="/*" element={<Navigate to="/404" />} />
     </Routes>

@@ -30,7 +30,8 @@ const Home = () => {
   };
 
   const handleClickPost = () => {
-    navigate(`/new/${select}s`);
+    if (select === 'host') navigate(`/new/${select}s`);
+    else navigate(`/new/${select}s/1`);
   };
   return (
     <>

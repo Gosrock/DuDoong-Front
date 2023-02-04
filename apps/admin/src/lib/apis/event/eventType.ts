@@ -43,3 +43,29 @@ export interface HostInfo {
   contactNumber: string;
   partner: boolean;
 }
+
+export interface CreateEventRequest {
+  hostId: number;
+  name: string;
+  startAt: string;
+  runTime: number;
+}
+
+export interface CreateEventResponse {
+  eventId: number;
+  hostId: number;
+  status: '준비중' | '진행중' | '정산중' | '지난공연';
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
+  posterImage: string;
+  detailImages: string;
+  content: string;
+  place: {
+    latitude: number;
+    longitude: number;
+    placeName: string;
+    placeAddress: string;
+  };
+}
