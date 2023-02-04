@@ -1,6 +1,5 @@
 import { darken } from 'polished';
 import { FlexBox, theme } from '@dudoong/ui';
-import { TagButton } from '@dudoong/ui';
 import styled from '@emotion/styled';
 
 type TimeButtonColorKey = 'reset' | 'modify';
@@ -32,7 +31,7 @@ const TAG_BUTTON_COLOR: TimeButtonColorType = {
 interface TimeButtonProps {
   type: TimeButtonColorKey;
   text: string;
-  onClick: () => void;
+  onClick: (event: any) => void;
 }
 
 const TimeButton = ({ type, text, onClick }: TimeButtonProps) => {

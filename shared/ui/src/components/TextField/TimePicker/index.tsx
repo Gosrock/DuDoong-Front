@@ -7,14 +7,20 @@ import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 import { DatePickerProps } from '../DatePicker';
 import { Clock } from 'react-bootstrap-icons';
+import { useEffect } from 'react';
+import { css } from '@emotion/react';
 
 /**
  * @param width: number (기본값: 100%)
  * @param placeholder: string
  */
 
-export const TimePicker = ({ width, placeholder }: DatePickerProps) => {
+export const TimePicker = (props: DatePickerProps) => {
   const [startTime, setStartTime] = useState();
+
+  useEffect(() => {
+    props.onChange(startTime);
+  }, [startTime]);
 
   return (
     <TimePickerStyles>
@@ -27,9 +33,16 @@ export const TimePicker = ({ width, placeholder }: DatePickerProps) => {
         dateFormat="hh:mm aa"
         timeIntervals={30}
         timeCaption="Time"
-        placeholderText={placeholder}
+        placeholderText={props.placeholder}
         customInput={
-          <Input width={width} value={startTime} rightIcon={<Clock />} />
+          <Input
+            width={props.width}
+            value={startTime}
+            rightIcon={<Clock />}
+            css={css`
+              ${theme.typo.P_Text_14_M}
+            `}
+          />
         }
       />
     </TimePickerStyles>

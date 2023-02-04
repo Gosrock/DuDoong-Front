@@ -90,7 +90,7 @@ const StyledInput = styled.input`
   width: 100%;
   line-height: 100%;
 
-  ${({ theme }) => theme.typo.Text_16};
+  ${({ theme }) => theme.typo.P_Text_16_M};
   color: ${({ theme }) => theme.palette.gray_500};
 
   ::placeholder {
