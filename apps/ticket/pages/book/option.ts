@@ -1,1 +1,1 @@
-export { default } from '@components/book/Option';
+export { default, getServerSideProps } from '@components/book/Option';
