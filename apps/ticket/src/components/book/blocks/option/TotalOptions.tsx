@@ -1,4 +1,11 @@
-import { Accordion, Divider, ListRow, ToggleButton } from '@dudoong/ui';
+import {
+  Accordion,
+  Button,
+  ButtonSet,
+  Divider,
+  ListRow,
+  ToggleButton,
+} from '@dudoong/ui';
 import type { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
@@ -16,6 +23,10 @@ interface OptionGroupSelect {
   optionGroupId: number;
   answer: AddCartOptionAnswer;
 }
+interface ItemOptionsType {
+  itemIdx: number;
+  optionGroups: OptionGroupSelect[];
+}
 
 const TotalOptions = ({
   toggle,
@@ -31,9 +42,11 @@ const TotalOptions = ({
     };
   });
 
-  const initForm = [...Array(quantity)].map(() => initOptions);
+  const initForm = [...Array(quantity)].map((_, idx) => {
+    return { itemIdx: idx, optionGroups: initOptions };
+  });
 
-  const [totalForm, setTotalForm] = useState<OptionGroupSelect[][]>(initForm);
+  const [totalForm, setTotalForm] = useState<ItemOptionsType[]>(initForm);
   const [complete, setComplete] = useState<boolean>(false);
 
   const onChangeForm = (
@@ -41,25 +54,32 @@ const TotalOptions = ({
     optionGroupId: number,
     answer: AddCartOptionAnswer,
   ) => {
-    // eslint-disable-next-line prefer-const
-    let temp = [...totalForm];
-    const optionGroupIdx = totalForm[itemIdx].findIndex(
-      (v) => optionGroupId === v.optionGroupId,
+    // https://dev.to/shareef/how-to-work-with-arrays-in-reactjs-usestate-4cmi
+    const temp = totalForm.map((item) =>
+      item.itemIdx === itemIdx
+        ? {
+            ...item,
+            optionGroups: item.optionGroups.map((optionGroup) =>
+              optionGroup.optionGroupId === optionGroupId
+                ? { ...optionGroup, answer }
+                : { ...optionGroup },
+            ),
+          }
+        : { ...item },
     );
-
-    temp[itemIdx][optionGroupIdx].answer = answer;
     setTotalForm(temp);
   };
 
   useEffect(() => {
-    console.log(
-      totalForm,
-      /* totalForm.filter((item) => {
-        const blank = item.filter(
-          (optionGroup) => optionGroup.answer.answer == '',
-        ).length;
-        return blank !== 0 ? false : true;
-      }), */
+    setComplete(
+      totalForm.filter(
+        (item) =>
+          item.optionGroups.filter((optionGroup) =>
+            optionGroup.answer.answer === '' ? true : false,
+          ).length !== 0,
+      ).length === 0
+        ? true
+        : false,
     );
   }, [totalForm]);
 
@@ -108,6 +128,13 @@ const TotalOptions = ({
           />
         </>
       )}
+
+      {/* 선택 완료 버튼 */}
+      <ButtonSet bottomFixed>
+        <Button fullWidth onClick={() => {}} disabled={!complete}>
+          선택 완료
+        </Button>
+      </ButtonSet>
     </>
   );
 };

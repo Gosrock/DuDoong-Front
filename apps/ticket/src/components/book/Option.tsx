@@ -60,18 +60,6 @@ const Option = ({ selectTicketState, optionGroups }: OptionProps) => {
           optionGroups={optionGroups}
         />
         <Spacing size={120} />
-
-        {/* 선택 완료 버튼 */}
-        <ButtonSet bottomFixed>
-          <Button
-            fullWidth
-            onClick={() => {
-              mutate(mockCartLine);
-            }}
-          >
-            선택 완료
-          </Button>
-        </ButtonSet>
       </Main>
     </>
   );
