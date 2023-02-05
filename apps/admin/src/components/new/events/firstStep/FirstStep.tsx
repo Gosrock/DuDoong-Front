@@ -1,5 +1,5 @@
 import BorderBox from '@components/shared/layout/BorderBox';
-import HostProfiles from './HostProfiles';
+import HostButtons from './HostButtons';
 import NewHost from './NewHost';
 import { Spacing, Button } from '@dudoong/ui';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ const FirstStep = () => {
     <>
       <BorderBox padding={[36, 60]}>
         <NewHost />
-        <HostProfiles hostId={selectedHostId} setHostId={setSelectedHostId} />
+        <HostButtons hostId={selectedHostId} setHostId={setSelectedHostId} />
       </BorderBox>
       <Spacing size={100} />
       <Button

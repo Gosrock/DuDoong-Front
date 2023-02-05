@@ -1,28 +1,21 @@
 import { useInfiniteQueries } from '@dudoong/utils';
 import { HostProfileResponse } from '@lib/apis/host/hostType';
 import HostApi from '@lib/apis/host/HostApi';
-import HostItem from '@components/shared/component/HostItem';
+import HostButton from './HostButton';
 
 interface HostProfilesProps {
   hostId: number | null;
   setHostId: (props: number) => void;
 }
 
-const HostProfiles = ({ hostId, setHostId }: HostProfilesProps) => {
+const HostButtons = ({ hostId, setHostId }: HostProfilesProps) => {
   const HostProfileContainer = (props: HostProfileResponse) => {
-    const onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
       event.preventDefault();
       setHostId(props.hostId);
       console.log(props.hostId);
     };
-    return (
-      <HostItem
-        {...props}
-        type={'sm'}
-        onClick={onClick}
-        selectedHostId={hostId}
-      />
-    );
+    return <HostButton {...props} onClick={onClick} selectedHostId={hostId} />;
   };
 
   const { infiniteListElement } = useInfiniteQueries<HostProfileResponse>(
@@ -33,4 +26,4 @@ const HostProfiles = ({ hostId, setHostId }: HostProfilesProps) => {
   return <>{infiniteListElement}</>;
 };
 
-export default HostProfiles;
+export default HostButtons;

@@ -15,7 +15,7 @@ const NewHost = () => {
           },
         });
       }}
-      padding={[5, 0]}
+      padding={[16, 16]}
       css={css`
         cursor: pointer;
         border-radius: 12px;
@@ -26,9 +26,9 @@ const NewHost = () => {
       leftImage={<HostProfileImage />}
       text={'멤버 초대하기'}
       subText={'호스트의 새로운 멤버를 초대해보세요!'}
-      textTypo={['G_Side_15_M', 'P_Text_14_R']}
+      textTypo={['P_Text_18_M', 'P_Text_16_R']}
       textColor={['black', 'gray_400']}
-      imageTextGap={26}
+      imageTextGap={16}
     />
   );
 };
@@ -41,8 +41,8 @@ const HostProfileImage = () => {
       align={'center'}
       css={css`
         background-color: ${theme.palette.gray_100};
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         border: 1px solid ${theme.palette.black};
       `}
