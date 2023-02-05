@@ -46,7 +46,9 @@ export const globalStyle = css`
     -webkit-tap-highlight-color: transparent;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-    /*     -ms-overflow-style: none; */
+    ${media.mobile} {
+      -ms-overflow-style: none;
+    }
   }
   button {
     background: inherit;
@@ -67,12 +69,12 @@ export const globalStyle = css`
     outline: none;
   }
 
-  /*   &::-webkit-scrollbar {
-    width: 20px;
+  &::-webkit-scrollbar {
     ${media.mobile} {
       display: none;
     }
   }
+  /*   
   &::-webkit-scrollbar-track {
     background-color: transparent;
   }

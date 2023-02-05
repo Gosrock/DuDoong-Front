@@ -59,10 +59,11 @@ const StyledTextArea = styled.textarea`
   height: 100%;
   line-height: 100%;
 
-  ${({ theme }) => theme.typo.Text_16};
+  ${({ theme }) => theme.typo.P_Text_16_R};
   color: ${({ theme }) => theme.palette.gray_500};
 
   ::placeholder {
+    ${({ theme }) => theme.typo.P_Text_16_R}
     color: ${({ theme }) => theme.palette.gray_400};
   }
 

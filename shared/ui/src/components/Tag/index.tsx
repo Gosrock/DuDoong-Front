@@ -36,7 +36,7 @@ const TAG_COLOR: TagColorType = {
 
 const TAG_SIZE: TagSizeType = {
   sm: { typo: 'P_Text_10_M', padding: '2px 10px', radius: 6 },
-  md: { typo: 'P_Text_12_M', padding: '4px 12px', radius: 8 },
+  md: { typo: 'P_Text_12_M', padding: '3px 12px', radius: 8 },
   lg: { typo: 'P_Text_14_M', padding: '7.5px 20px', radius: 8 },
 };
 
