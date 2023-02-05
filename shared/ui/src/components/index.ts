@@ -11,6 +11,7 @@ export * from './Loader/Spinner';
 export * from './Loader/SyncLoader';
 export * from './MenuBar';
 export * from './MenuItem';
+export * from './Modal';
 export * from './NavBar';
 export * from './PopupDropdown';
 export * from './ProfileDropdown';

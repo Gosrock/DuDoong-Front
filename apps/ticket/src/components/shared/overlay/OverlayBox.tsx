@@ -1,8 +1,8 @@
+import { Modal } from '@dudoong/ui';
 import { useResponsive } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { OverlayBoxProps } from './GlobalOverlay';
-import Modal from './Modal';
 
 const OverlayBox = ({ open, onDismiss, children }: OverlayBoxProps) => {
   const { isPC } = useResponsive();

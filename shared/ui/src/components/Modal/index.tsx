@@ -1,9 +1,15 @@
-import { RoundBlock } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { OverlayBoxProps } from './GlobalOverlay';
+import { ReactNode } from 'react';
+import { RoundBlock } from '../../layout';
 
-const Modal = ({ open, onDismiss, children }: OverlayBoxProps) => {
+export interface ModalBoxProps {
+  open: boolean;
+  onDismiss: () => void;
+  children: ReactNode;
+}
+
+export const Modal = ({ open, onDismiss, children }: ModalBoxProps) => {
   return (
     <Wrapper open={open}>
       <Overlay onClick={onDismiss} />
@@ -11,7 +17,6 @@ const Modal = ({ open, onDismiss, children }: OverlayBoxProps) => {
     </Wrapper>
   );
 };
-export default Modal;
 
 const Wrapper = styled.div<{ open: boolean }>`
   @keyframes fadeIn {
