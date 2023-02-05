@@ -38,7 +38,6 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
     }: AccordionProps,
     ref,
   ) => {
-    console.log(contentHeight);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleAccordion = () => {

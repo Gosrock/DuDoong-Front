@@ -1,8 +1,9 @@
 import { Button, ButtonSet, ListHeader } from '@dudoong/ui';
-import { AuthApi } from '@dudoong/utils';
+import { loginFc } from '@dudoong/utils';
 
 export interface LoginProps {
   variant?: 'expired' | 'new';
+  redirect?: string;
 }
 
 const titleText = {
@@ -10,18 +11,17 @@ const titleText = {
   new: '로그인이 필요해요',
 };
 
-const Login = ({ variant = 'new' }: LoginProps) => {
-  console.log(variant);
-  const onLogin = async () => {
-    const data = await AuthApi.OAUTH_LINK();
-    window.location.href = data.link;
-  };
+const Login = ({ variant = 'new', redirect }: LoginProps) => {
   return (
     <>
       <ListHeader size="listHeader_20" title={titleText[variant]} />
       <ButtonSet varient="sub" padding={[20, 24]}>
         <>
-          <Button varient="kakao" onClick={onLogin}>
+          <Button
+            varient="kakao"
+            onClick={() => loginFc.login(redirect ? { redirect } : undefined)}
+            fullWidth
+          >
             카카오로 로그인하기
           </Button>
         </>

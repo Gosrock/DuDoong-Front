@@ -1,8 +1,8 @@
 import { overlayState, OverlayStateType } from '@store/globalOverlay';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 const useGlobalOverlay = () => {
-  const setOverlay = useSetRecoilState(overlayState);
+  const [overlay, setOverlay] = useRecoilState(overlayState);
   const openOverlay = ({ content, props, isOpen = true }: OverlayStateType) => {
     setOverlay({ content, props, isOpen });
   };
@@ -10,8 +10,8 @@ const useGlobalOverlay = () => {
   const closeOverlay = () => {
     setOverlay(null);
   };
-
-  return { openOverlay, closeOverlay };
+  const isOpen = overlay?.isOpen || false;
+  return { isOpen, openOverlay, closeOverlay };
 };
 
 export default useGlobalOverlay;

@@ -9,20 +9,34 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
 import OverlayBox from '@components/shared/overlay/OverlayBox';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
+import { useRecoilValue } from 'recoil';
+import { authState } from '@store/auth';
 
 const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
   const router = useRouter();
   const { eventId } = router.query;
+  const auth = useRecoilValue(authState);
   const { data: tickets } = useQuery(['tickets', eventId], () =>
     TicketApi.GET_TICKETITEMS(eventId as string),
   );
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
+  const { openGlobalOverlay } = useGlobalOverlay();
+
+  const handleClickBooking = () => {
+    auth.isAuthenticated
+      ? openOverlay()
+      : openGlobalOverlay({
+          content: 'login',
+          props: { redirect: router.asPath },
+        });
+  };
 
   return (
     <>
       <DDHead title="두둥! | 공연상세" />
       <main>
-        <Button onClick={openOverlay}>예매하기</Button>
+        <Button onClick={handleClickBooking}>예매하기</Button>
       </main>
       {tickets && (
         <OverlayBox open={isOpen} onDismiss={closeOverlay}>

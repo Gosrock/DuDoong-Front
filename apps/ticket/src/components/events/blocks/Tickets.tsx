@@ -8,11 +8,11 @@ import {
   ListRow,
   Text,
 } from '@dudoong/ui';
-import { useMoneyType } from '@dudoong/utils';
+import { calcMoneyType } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
-import useTicketItems from './useTicketItems';
+import getTicketItemObjects from './getTicketItemObjects';
 
 interface TicketsProps {
   items: TicketItemResponse[];
@@ -20,7 +20,7 @@ interface TicketsProps {
 
 const Tickets = ({ items }: TicketsProps) => {
   const { initialDropdownOption, ticketOptions, getSelectedTicket } =
-    useTicketItems(items);
+    getTicketItemObjects(items);
 
   const [form, setForm] = useState<{
     ticketItemId: number;
@@ -35,9 +35,6 @@ const Tickets = ({ items }: TicketsProps) => {
   };
 
   const [option, setOption] = useState<DropdownOption>(initialDropdownOption);
-
-  const { mulMoneyType } = useMoneyType();
-
   useEffect(() => {
     setForm({ ...form, ticketItemId: option.id as number });
   }, [option]);
@@ -58,7 +55,7 @@ const Tickets = ({ items }: TicketsProps) => {
       <ListRow
         text={
           <Text typo="P_Text_16_M" color="main_500">
-            {mulMoneyType(
+            {calcMoneyType.mul(
               getSelectedTicket(form.ticketItemId)!.price,
               form.quantity,
             )}
