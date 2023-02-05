@@ -12,14 +12,14 @@ import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 
 const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
-  const { openOverlay, closeOverlay } = useGlobalOverlay();
+  const { openGlobalOverlay, closeGlobalOverlay } = useGlobalOverlay();
   const [auth, setAuth] = useRecoilState(authState);
   const router = useRouter();
 
   // 카카오 회원정보 가져오기
   const ouathKakaoInfoMutation = useMutation(AuthApi.OAUTH_INFO, {
     onSuccess: (data: OauthInfoResponse) => {
-      openOverlay({
+      openGlobalOverlay({
         content: 'register',
         props: {
           name: data.name,
@@ -35,7 +35,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const ouathKakaoRegisterMutation = useMutation(AuthApi.OAUTH_REGISTER, {
     onSuccess: (data: OauthLoginResponse) => {
       onSuccessLogin(data);
-      closeOverlay();
+      closeGlobalOverlay();
       router.replace(auth.callbackUrl);
     },
   });

@@ -26,7 +26,10 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
   const handleClickBooking = () => {
     auth.isAuthenticated
       ? openOverlay()
-      : openGlobalOverlay({ content: 'login' });
+      : openGlobalOverlay({
+          content: 'login',
+          props: { redirect: router.asPath },
+        });
   };
 
   return (
