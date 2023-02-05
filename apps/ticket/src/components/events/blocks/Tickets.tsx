@@ -12,7 +12,7 @@ import { calcMoneyType } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
-import getTicketItemObjects from './getTicketItemObjects';
+import getTicketItemObjects from '../getTicketItemObjects';
 
 interface TicketsProps {
   items: TicketItemResponse[];
