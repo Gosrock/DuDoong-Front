@@ -29,9 +29,11 @@ export interface CartItemResponse {
 }
 
 export interface OptionAnswer {
-  optionGroupType: 'TRUE_FALSE' | 'MULTIPLE_CHOICE' | 'SUBJECTIVE';
+  optionGroupType: OptionGroupType;
   questionName: string;
   questionDescription: string;
   answer: string;
   additionalPrice: string;
 }
+
+export type OptionGroupType = 'Y/N' | ' 객관식' | '주관식';

@@ -90,4 +90,9 @@ export const globalStyle = css`
     color: inherit;
     text-decoration: none;
   }
+
+  [data-rsbs-scroll] {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
 `;

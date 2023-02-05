@@ -1,12 +1,16 @@
 import { RoundBlock } from '@dudoong/ui';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { OverlayBoxProps } from './GlobalOverlay';
 
-const Modal = ({ onDismiss, children }: OverlayBoxProps) => {
+const Modal = ({ open, onDismiss, children }: OverlayBoxProps) => {
   return (
-    <Wrapper>
+    <Wrapper open={open}>
       <Overlay onClick={onDismiss} />
-      <RoundBlock padding={[16, 0]} css={{ zIndex: '10', width: '390px' }}>
+      <RoundBlock
+        padding={[16, 0]}
+        css={{ zIndex: '10', width: '390px', border: '1px solid black' }}
+      >
         {children}
       </RoundBlock>
     </Wrapper>
@@ -14,7 +18,7 @@ const Modal = ({ onDismiss, children }: OverlayBoxProps) => {
 };
 export default Modal;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ open: boolean }>`
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -33,6 +37,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${({ open }) =>
+    !open &&
+    css`
+      display: none;
+    `}
 `;
 
 const Overlay = styled.div`

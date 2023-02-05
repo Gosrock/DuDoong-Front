@@ -71,9 +71,10 @@ export const ButtonSet = ({
   varient = 'mono',
   padding = [40, 24, 20, 24],
   bottomFixed = false,
+  ...props
 }: ButtonSetProps) => {
   return (
-    <Wrapper fixed={bottomFixed}>
+    <Wrapper fixed={bottomFixed} {...props}>
       <Padding size={padding}>
         <FlexBox
           align={BUTTON_SET_VARIANT[varient].align}
