@@ -7,12 +7,7 @@ const Modal = ({ open, onDismiss, children }: OverlayBoxProps) => {
   return (
     <Wrapper open={open}>
       <Overlay onClick={onDismiss} />
-      <RoundBlock
-        padding={[16, 0]}
-        css={{ zIndex: '10', width: '390px', border: '1px solid black' }}
-      >
-        {children}
-      </RoundBlock>
+      <ModalBox padding={[16, 0]}>{children}</ModalBox>
     </Wrapper>
   );
 };
@@ -27,7 +22,8 @@ const Wrapper = styled.div<{ open: boolean }>`
       opacity: 1;
     }
   }
-  animation: 0.1s forwards fadeIn;
+
+  animation: 0.1s forwards fadeIn ease-out;
   position: fixed;
   top: 0;
   left: 0;
@@ -44,8 +40,24 @@ const Wrapper = styled.div<{ open: boolean }>`
     `}
 `;
 
+const ModalBox = styled(RoundBlock)`
+  @keyframes grow {
+    from {
+      transform: scale(0.95);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  animation: 0.15s forwards grow ease-out;
+  z-index: 10;
+  width: 390px;
+  border: 1px solid black;
+`;
+
 const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   width: 100%;
   height: 100%;
