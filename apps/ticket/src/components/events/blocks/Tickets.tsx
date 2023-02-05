@@ -35,7 +35,7 @@ const Tickets = ({ items, eventName }: TicketsProps) => {
     setOption,
     handleCounter,
   } = useTicketSelect(items);
-
+  const router = useRouter();
   const data: TicketSelectState = {
     eventName: eventName,
     ticketName: selectedTicket.ticketName,
@@ -44,11 +44,7 @@ const Tickets = ({ items, eventName }: TicketsProps) => {
   };
 
   return (
-    <div
-      css={css`
-        position: relative;
-      `}
-    >
+    <>
       <ListHeader title="티켓 선택하기" size="listHeader_18" />
       <Dropdown
         options={ticketOptions}
@@ -78,16 +74,19 @@ const Tickets = ({ items, eventName }: TicketsProps) => {
       />
       <ButtonSet padding={[20, 24]}>
         <Link
+          css={css`
+            width: 100%;
+          `}
           href={{
-            pathname: '/book/option',
+            pathname: `${router.asPath}/book/option`,
             query: { selectTicketState: JSON.stringify(data) },
           }}
-          as={`/book/option`}
+          as={`${router.asPath}/book/option`}
         >
           <Button fullWidth>예매하기</Button>
         </Link>
       </ButtonSet>
-    </div>
+    </>
   );
 };
 
