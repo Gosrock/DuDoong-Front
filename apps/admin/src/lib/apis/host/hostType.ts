@@ -29,7 +29,7 @@ export interface CreateHostResponse {
   partner?: boolean;
   masterUserId: number;
 }
-type RoleType = 'MASTER' | 'MANAGER' | 'GUEST';
+type RoleType = '마스터' | '매니저' | '게스트';
 
 export interface HostDetailResponse {
   hostId: number;

@@ -3,13 +3,14 @@ import { ListHeader, Input, Spacing, Button, FlexBox } from '@dudoong/ui';
 import { useMutation } from '@tanstack/react-query';
 import { CreateHostRequest } from '@lib/apis/host/hostType';
 import { HostContactDes } from './HostDescription';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useInputs } from '@dudoong/utils';
 import HostApi from '@lib/apis/host/HostApi';
 import { css } from '@emotion/react';
 
 const CreateHost = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [form, onChange] = useInputs<CreateHostRequest>({
     name: '',
@@ -17,10 +18,19 @@ const CreateHost = () => {
     contactNumber: '',
   });
 
+  const returnUrl = location.state ? location.state.returnUrl : null;
   const { mutate } = useMutation(HostApi.ADD_HOSTS, {
     onSuccess: (data) => {
       const curId = data.hostId;
-      navigate(`/hosts/${curId}/info`);
+      if (returnUrl) {
+        navigate(returnUrl, {
+          state: {
+            hostId: curId,
+          },
+        });
+      } else {
+        navigate(`/hosts/${curId}/info`);
+      }
     },
     onError: () => {
       console.log('error');
@@ -35,7 +45,7 @@ const CreateHost = () => {
 
   return (
     <>
-      <BorderBox padding={[36, 60, 36, 60]}>
+      <BorderBox padding={[36, 60, 52, 60]}>
         <ListHeader
           title={'호스트 이름'}
           size={'listHeader_18'}

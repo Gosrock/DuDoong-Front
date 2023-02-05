@@ -48,14 +48,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           />
           {props.rightIcon}
         </InputWrapper>
-
-        <MessageWrapper errorMessage={props.errorMessage}>
-          {props.errorMessage && (
+        {props.errorMessage && (
+          <MessageWrapper errorMessage={props.errorMessage}>
             <Text typo={'Text_12'} color={errorMessageColor}>
               {props.errorMessage}
             </Text>
-          )}
-        </MessageWrapper>
+          </MessageWrapper>
+        )}
       </FlexBox>
     );
   },
@@ -91,7 +90,7 @@ const StyledInput = styled.input`
   width: 100%;
   line-height: 100%;
 
-  ${({ theme }) => theme.typo.Text_16};
+  ${({ theme }) => theme.typo.P_Text_16_M};
   color: ${({ theme }) => theme.palette.gray_500};
 
   ::placeholder {

@@ -7,9 +7,13 @@ import { calcRem } from '../../../theme/typo';
 import { Input } from '../Input';
 import { ko } from 'date-fns/esm/locale';
 import { Calendar } from 'react-bootstrap-icons';
+import { useEffect } from 'react';
+import { css } from '@emotion/react';
+
 export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   placeholder?: string;
+  onChange: any;
 }
 
 /**
@@ -17,8 +21,12 @@ export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param placeholder: string
  */
 
-export const DatePicker = ({ width, placeholder }: DatePickerProps) => {
+export const DatePicker = (props: DatePickerProps) => {
   const [startDate, setStartDate] = useState();
+
+  useEffect(() => {
+    props.onChange(startDate);
+  }, [startDate]);
 
   return (
     <DatePickerStyles>
@@ -28,9 +36,16 @@ export const DatePicker = ({ width, placeholder }: DatePickerProps) => {
         disabledKeyboardNavigation
         dateFormat="yyyy년 MM월 dd일"
         locale={ko}
-        placeholderText={placeholder}
+        placeholderText={props.placeholder}
         customInput={
-          <Input width={width} value={startDate} rightIcon={<Calendar />} />
+          <Input
+            width={props.width}
+            value={startDate}
+            rightIcon={<Calendar />}
+            css={css`
+              ${theme.typo.P_Text_14_M}
+            `}
+          />
         }
       />
     </DatePickerStyles>

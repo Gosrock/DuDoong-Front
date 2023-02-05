@@ -8,7 +8,7 @@ import HostApi from '@lib/apis/host/HostApi';
 import { HostProfileResponse } from '@lib/apis/host/hostType';
 import { PageType } from '@pages/common/Home';
 import EventItem from './EventItem';
-import HostItem from './HostItem';
+import HostLink from './HostLink';
 import { ReactComponent as DoongDoong } from '@assets/teduri.svg';
 
 interface ListProps {
@@ -24,7 +24,7 @@ const ADMIN_HOME_MAP = {
   host: {
     padding: [36, 44],
     apiFunction: HostApi.GET_HOSTS,
-    item: HostItem,
+    item: HostLink,
   },
 };
 

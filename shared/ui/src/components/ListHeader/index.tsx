@@ -35,11 +35,11 @@ type ListHeaderVariantType = {
 const LIST_HEADER_VARIANT: ListHeaderVariantType = {
   listHeader_18: {
     textProp: {
-      typo: 'Text_18_SB',
+      typo: 'P_Header_18_SB',
       color: 'black',
     },
     subTextProp: {
-      typo: 'Text_14',
+      typo: 'P_Text_16_M',
       color: 'gray_400',
     },
     padding: [32, 24, 12, 24],
@@ -47,11 +47,11 @@ const LIST_HEADER_VARIANT: ListHeaderVariantType = {
   },
   listHeader_20: {
     textProp: {
-      typo: 'Header_20',
+      typo: 'P_Header_20_B',
       color: 'black',
     },
     subTextProp: {
-      typo: 'Text_14',
+      typo: 'P_Text_16_M',
       color: 'gray_400',
     },
     padding: [32, 24, 16, 24],
@@ -59,11 +59,11 @@ const LIST_HEADER_VARIANT: ListHeaderVariantType = {
   },
   listHeader_24: {
     textProp: {
-      typo: 'Header_24',
+      typo: 'P_Header_24_B',
       color: 'black',
     },
     subTextProp: {
-      typo: 'Text_14',
+      typo: 'P_Text_16_M',
       color: 'gray_400',
     },
     padding: [32, 24, 16, 24],
@@ -71,11 +71,11 @@ const LIST_HEADER_VARIANT: ListHeaderVariantType = {
   },
   listHeader_28: {
     textProp: {
-      typo: 'Header_28',
+      typo: 'P_Header_28_B',
       color: 'black',
     },
     subTextProp: {
-      typo: 'Text_16',
+      typo: 'P_Text_16_M',
       color: 'gray_400',
     },
     padding: [32, 24, 20, 24],
