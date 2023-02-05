@@ -22,7 +22,7 @@ interface TicketsProps {
 export type TicketSelectState = {
   eventName: string;
   ticketName: string;
-  ticketId: number;
+  itemId: number;
   quantity: number;
 };
 
@@ -39,7 +39,7 @@ const Tickets = ({ items, eventName }: TicketsProps) => {
   const data: TicketSelectState = {
     eventName: eventName,
     ticketName: selectedTicket.ticketName,
-    ticketId: form.ticketItemId,
+    itemId: form.ticketItemId,
     quantity: form.quantity,
   };
 

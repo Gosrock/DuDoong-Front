@@ -1,23 +1,37 @@
 import Main from '@components/shared/Layout/Main';
 import { Button, ButtonSet, Divider, NavBar, Spacing } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
-import { AddCartRequest } from '@lib/apis/cart/cartType';
 import DDHead from '@components/shared/Layout/NextHead';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';
 import OptionForm from './blocks/OptionForm';
+import type { AddCartRequest } from '@lib/apis/cart/cartType';
+import type { TicketSelectState } from '@components/events/blocks/Tickets';
+import type { GetServerSideProps } from 'next';
+import { TicketApi } from '@lib/apis/ticket/TicketApi';
+import { GetTicketItemOptionsResponse } from '@lib/apis/ticket/ticketType';
+import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
 
-const Option = () => {
+interface OptionProps {
+  selectTicketState: TicketSelectState;
+  options: GetTicketItemOptionsResponse;
+}
+
+const Option = ({ selectTicketState, options }: OptionProps) => {
   const router = useRouter();
+  const { eventName, ticketName, itemId, quantity } = selectTicketState;
   const [toggle, setToggle] = useState<boolean>(false);
 
   const { mutate } = useMutation(CartApi.ADD_CARTLINE, {
     onSuccess: (data) => {
       router.push(
-        { pathname: '/book/order', query: { state: JSON.stringify(data) } },
-        '/book/order',
+        {
+          pathname: `${router.asPath}/book/order`,
+          query: { state: JSON.stringify(data) },
+        },
+        `${router.asPath}/book/order`,
       );
     },
   });
@@ -33,13 +47,14 @@ const Option = () => {
         />
         <BookHeader
           title="옵션 선택하기"
-          description={['고스락 제 23회 정기공연', '일반티켓', 3]}
+          description={[eventName, ticketName, quantity]}
         />
         <Divider />
         <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
         <Spacing size={120} />
         <ButtonSet bottomFixed>
           <Button
+            fullWidth
             onClick={() => {
               mutate(mockCartLine);
             }}
@@ -53,6 +68,34 @@ const Option = () => {
 };
 
 export default Option;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { selectTicketState } = context.query;
+  const eventId = context.params!.eventId as string;
+  try {
+    const parsedState: TicketSelectState = JSON.parse(
+      selectTicketState as string,
+    );
+    setSsrAxiosHeader(context.req.cookies);
+    const options = await TicketApi.GET_TICKETITEM_OPTIONS(
+      eventId,
+      parsedState.itemId,
+    );
+    console.log(options);
+    return {
+      props: { selectTicketState: parsedState },
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      // 새로고침 등으로 query 데이터가 없을땐 이벤트 상세로 리다이렉트
+      redirect: {
+        destination: `/events/${context.params!.eventId}`,
+        permanent: false,
+      },
+    };
+  }
+};
 
 const mockCartLine: AddCartRequest = {
   items: [

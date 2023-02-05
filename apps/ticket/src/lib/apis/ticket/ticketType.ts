@@ -1,3 +1,5 @@
+import { OptionGroupType } from '../cart/cartType';
+
 export interface GetEventTicketItemsResponse {
   ticketItems: TicketItemResponse[];
 }
@@ -14,3 +16,21 @@ export interface TicketItemResponse {
 }
 
 export type TicketType = '선착순' | '승인';
+
+export interface GetTicketItemOptionsResponse {
+  optoinGroups: OptionGroupResponse[];
+}
+
+export interface OptionGroupResponse {
+  optionGroupId: number;
+  type: OptionGroupType;
+  name: string;
+  description: string;
+  options: OptionResponse[];
+}
+
+export interface OptionResponse {
+  optionId: number;
+  answer: string;
+  additionalPrice: string;
+}
