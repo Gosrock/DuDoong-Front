@@ -18,7 +18,7 @@ export interface TicketItemResponse {
 export type TicketType = '선착순' | '승인';
 
 export interface GetTicketItemOptionsResponse {
-  optoinGroups: OptionGroupResponse[];
+  optionGroups: OptionGroupResponse[];
 }
 
 export interface OptionGroupResponse {

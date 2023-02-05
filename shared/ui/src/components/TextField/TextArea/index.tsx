@@ -39,8 +39,8 @@ const TextAreaWrapper = styled.div<{
 
   background: ${({ theme }) => theme.palette.gray_200};
 
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: 12px;
+  padding: 16px 12px;
 
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => (width ? `${width}px` : '100%')};

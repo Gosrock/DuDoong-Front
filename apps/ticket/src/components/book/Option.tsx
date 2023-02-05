@@ -6,20 +6,23 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';
-import OptionForm from './blocks/OptionForm';
+import OptionForm from './blocks/option/OptionForm';
 import type { AddCartRequest } from '@lib/apis/cart/cartType';
 import type { TicketSelectState } from '@components/events/blocks/Tickets';
 import type { GetServerSideProps } from 'next';
-import { TicketApi } from '@lib/apis/ticket/TicketApi';
-import { GetTicketItemOptionsResponse } from '@lib/apis/ticket/ticketType';
+import type {
+  GetTicketItemOptionsResponse,
+  OptionGroupResponse,
+} from '@lib/apis/ticket/ticketType';
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
+import { TicketApi } from '@lib/apis/ticket/TicketApi';
 
 interface OptionProps {
   selectTicketState: TicketSelectState;
-  options: GetTicketItemOptionsResponse;
+  optionGroups: OptionGroupResponse[];
 }
 
-const Option = ({ selectTicketState, options }: OptionProps) => {
+const Option = ({ selectTicketState, optionGroups }: OptionProps) => {
   const router = useRouter();
   const { eventName, ticketName, itemId, quantity } = selectTicketState;
   const [toggle, setToggle] = useState<boolean>(false);
@@ -50,8 +53,18 @@ const Option = ({ selectTicketState, options }: OptionProps) => {
           description={[eventName, ticketName, quantity]}
         />
         <Divider />
-        <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
+
+        {/* 옵션 선택하기 폼 */}
+        <OptionForm
+          ticketName={ticketName}
+          quantity={quantity}
+          toggle={toggle}
+          setToggle={() => setToggle(!toggle)}
+          optionGroups={optionGroups}
+        />
         <Spacing size={120} />
+
+        {/* 선택 완료 버튼 */}
         <ButtonSet bottomFixed>
           <Button
             fullWidth
@@ -81,9 +94,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       eventId,
       parsedState.itemId,
     );
-    console.log(options);
     return {
-      props: { selectTicketState: parsedState },
+      props: {
+        selectTicketState: parsedState,
+        optionGroups: options.optionGroups,
+      },
     };
   } catch (e) {
     console.log(e);
