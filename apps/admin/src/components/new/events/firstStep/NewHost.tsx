@@ -1,8 +1,7 @@
-import { Divider, FlexBox, ListRow, Text, theme } from '@dudoong/ui';
+import { FlexBox, ListRow, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
-import { HostProfileResponse } from '@lib/apis/host/hostType';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Plus } from '../../../../assets/Plus.svg';
+import { ReactComponent as Plus } from '@assets/Plus.svg';
 
 const NewHost = () => {
   const navigate = useNavigate();

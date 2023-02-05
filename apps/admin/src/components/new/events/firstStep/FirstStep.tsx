@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const FirstStep = () => {
-  const [selectedHostId, setSelectedHostId] = useState<number>(-1);
+  const [selectedHostId, setSelectedHostId] = useState<number | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -26,7 +26,7 @@ const FirstStep = () => {
             },
           });
         }}
-        disabled={selectedHostId === -1}
+        disabled={selectedHostId === null}
       >
         호스트 만들기
       </Button>
