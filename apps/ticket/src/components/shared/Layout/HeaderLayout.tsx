@@ -10,9 +10,9 @@ interface HeaderLayoutProps {
 
 const HeaderLayout = ({ children }: HeaderLayoutProps) => {
   const { userProfile } = useRecoilValue(authState);
-  const { openOverlay } = useGlobalOverlay();
+  const { openGlobalOverlay } = useGlobalOverlay();
   const handleLogin = () => {
-    openOverlay({ content: 'login' });
+    openGlobalOverlay({ content: 'login' });
   };
 
   return (

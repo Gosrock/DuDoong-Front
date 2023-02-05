@@ -25,14 +25,14 @@ const globalSheetContent = {
 
 const GlobalOverlay = () => {
   const overlay = useRecoilValue(overlayState);
-  const { isOpen, closeOverlay } = useGlobalOverlay();
+  const { isOpen, closeGlobalOverlay } = useGlobalOverlay();
 
   if (!overlay) {
     return null;
   } else {
     const Content = globalSheetContent[overlay.content];
     return (
-      <OverlayBox open={isOpen} onDismiss={closeOverlay}>
+      <OverlayBox open={isOpen} onDismiss={closeGlobalOverlay}>
         <Content {...overlay.props} />
       </OverlayBox>
     );

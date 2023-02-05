@@ -13,12 +13,12 @@ const Login = () => {
   const router = useRouter();
   const { param, redirect } = router.query;
 
-  const { openOverlay } = useGlobalOverlay();
+  const { openGlobalOverlay } = useGlobalOverlay();
   useEffect(() => {
     if (param) {
-      openOverlay({ content: 'login', props: { variant: param[0] } });
+      openGlobalOverlay({ content: 'login', props: { variant: param[0] } });
     } else {
-      openOverlay({ content: 'login' });
+      openGlobalOverlay({ content: 'login' });
     }
 
     if (redirect) {

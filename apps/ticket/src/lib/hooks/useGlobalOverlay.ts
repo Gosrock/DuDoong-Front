@@ -5,11 +5,15 @@ import { useRecoilState } from 'recoil';
 const useGlobalOverlay = () => {
   const [overlay, setOverlay] = useRecoilState(overlayState);
   const { isPC } = useResponsive();
-  const openOverlay = ({ content, props, isOpen = true }: OverlayStateType) => {
+  const openGlobalOverlay = ({
+    content,
+    props,
+    isOpen = true,
+  }: OverlayStateType) => {
     setOverlay({ content, props, isOpen });
   };
 
-  const closeOverlay = () => {
+  const closeGlobalOverlay = () => {
     setOverlay({ ...overlay!, isOpen: false });
     if (isPC) {
       setOverlay(null);
@@ -22,7 +26,7 @@ const useGlobalOverlay = () => {
 
   const isOpen = overlay?.isOpen || false;
 
-  return { isOpen, openOverlay, closeOverlay };
+  return { isOpen, openGlobalOverlay, closeGlobalOverlay };
 };
 
 export default useGlobalOverlay;

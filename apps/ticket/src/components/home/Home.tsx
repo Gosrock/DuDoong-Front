@@ -2,9 +2,9 @@ import { Button } from '@dudoong/ui';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import DDHead from '@components/shared/Layout/NextHead';
 const Home = () => {
-  const { openOverlay } = useGlobalOverlay();
+  const { openGlobalOverlay } = useGlobalOverlay();
   const openLoginTest = () => {
-    openOverlay({ content: 'login' });
+    openGlobalOverlay({ content: 'login' });
   };
   return (
     <>

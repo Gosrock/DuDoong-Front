@@ -21,7 +21,7 @@ const Login = ({ variant = 'new' }: LoginProps) => {
       <ListHeader size="listHeader_20" title={titleText[variant]} />
       <ButtonSet varient="sub" padding={[20, 24]}>
         <>
-          <Button varient="kakao" onClick={onLogin}>
+          <Button varient="kakao" onClick={onLogin} fullWidth>
             카카오로 로그인하기
           </Button>
         </>
