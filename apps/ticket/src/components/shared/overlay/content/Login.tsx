@@ -1,5 +1,5 @@
 import { Button, ButtonSet, ListHeader } from '@dudoong/ui';
-import { AuthApi, useLogin } from '@dudoong/utils';
+import { loginFc } from '@dudoong/utils';
 
 export interface LoginProps {
   variant?: 'expired' | 'new';
@@ -12,8 +12,6 @@ const titleText = {
 };
 
 const Login = ({ variant = 'new', redirect }: LoginProps) => {
-  console.log(variant);
-  const { login } = useLogin();
   return (
     <>
       <ListHeader size="listHeader_20" title={titleText[variant]} />
@@ -21,7 +19,7 @@ const Login = ({ variant = 'new', redirect }: LoginProps) => {
         <>
           <Button
             varient="kakao"
-            onClick={() => login(redirect ? { redirect } : undefined)}
+            onClick={() => loginFc.login(redirect ? { redirect } : undefined)}
             fullWidth
           >
             카카오로 로그인하기

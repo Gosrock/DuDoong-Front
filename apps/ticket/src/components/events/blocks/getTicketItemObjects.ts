@@ -1,7 +1,7 @@
 import { DropdownOption } from '@dudoong/ui';
 import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 
-const useTicketItems = (items: TicketItemResponse[]) => {
+const getTicketItemObjects = (items: TicketItemResponse[]) => {
   const initialDropdownOption = {
     title: items[0].ticketName,
     id: items[0].ticketItemId,
@@ -31,4 +31,4 @@ const useTicketItems = (items: TicketItemResponse[]) => {
   return { initialDropdownOption, ticketOptions, getSelectedTicket };
 };
 
-export default useTicketItems;
+export default getTicketItemObjects;
