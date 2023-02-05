@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import NotFound from '@pages/common/NotFound';
 import EventsRouter from '@pages/events';
 import HostsRouter from '@pages/hosts';
-import Login from './components/home/Login';
+import Login from './pages/common/Login';
 import RefuseAuth from './components/shared/auth/RefuseAuth';
 import Callback from '@pages/kakao/Callback';
 import Refresh from './components/shared/auth/Refresh';

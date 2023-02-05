@@ -1,4 +1,4 @@
-import BorderBox from '@components/shared/layout/BorderBox';
+import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import HostButtons from './HostButtons';
 import NewHost from './NewHost';
 import { Spacing, Button } from '@dudoong/ui';
