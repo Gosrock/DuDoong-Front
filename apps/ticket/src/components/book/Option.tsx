@@ -6,14 +6,11 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';
-import OptionForm from './blocks/option/OptionForm';
+import TotalOptions from './blocks/option/TotalOptions';
 import type { AddCartRequest } from '@lib/apis/cart/cartType';
 import type { TicketSelectState } from '@components/events/blocks/Tickets';
 import type { GetServerSideProps } from 'next';
-import type {
-  GetTicketItemOptionsResponse,
-  OptionGroupResponse,
-} from '@lib/apis/ticket/ticketType';
+import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
 
@@ -55,7 +52,7 @@ const Option = ({ selectTicketState, optionGroups }: OptionProps) => {
         <Divider />
 
         {/* 옵션 선택하기 폼 */}
-        <OptionForm
+        <TotalOptions
           ticketName={ticketName}
           quantity={quantity}
           toggle={toggle}
