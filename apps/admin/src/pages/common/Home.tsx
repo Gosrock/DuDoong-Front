@@ -1,12 +1,5 @@
 import List from '@components/home/List';
-import {
-  Button,
-  ButtonSet,
-  FlexBox,
-  ListHeader,
-  Spacing,
-  Text,
-} from '@dudoong/ui';
+import { Button, ButtonSet, FlexBox, ListHeader, Spacing } from '@dudoong/ui';
 import { authState } from '@store/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -43,7 +36,7 @@ const Home = () => {
       />
       <Spacing size={20} />
       <FlexBox align={'center'} justify={'space-between'}>
-        <ButtonSet varient="horizontal" padding={0} noBackground>
+        <ButtonSet varient="horizontal" padding={0}>
           <Button
             varient={setVarient('host')}
             width={139}

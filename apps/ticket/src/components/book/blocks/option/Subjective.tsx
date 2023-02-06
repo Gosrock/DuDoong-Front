@@ -5,11 +5,10 @@ import { Dispatch, SetStateAction } from 'react';
 
 interface SubjectiveProps {
   options: OptionResponse[];
-  answer: AddCartOptionAnswer;
   setAnswer: Dispatch<SetStateAction<AddCartOptionAnswer>>;
 }
 
-const Subjective = ({ options, answer, setAnswer }: SubjectiveProps) => {
+const Subjective = ({ options, setAnswer }: SubjectiveProps) => {
   return (
     <Padding>
       <TextArea
