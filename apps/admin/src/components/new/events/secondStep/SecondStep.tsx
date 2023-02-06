@@ -84,8 +84,8 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
           padding={[32, 0, 12, 0]}
         />
         <Input
-          type="tel"
-          placeholder={'최대 N글자까지 쓸 수 있어요.'}
+          maxLength={25}
+          placeholder={'최대 25글자까지 쓸 수 있어요.'}
           name="name"
           onChange={onChange}
         />
@@ -109,7 +109,7 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
             />
             <PickerWrapper align={'center'} gap={10} width={385}>
               <Input
-                type="tel"
+                type="number"
                 placeholder={'단위 : 분'}
                 name="runTime"
                 onChange={(e) => {

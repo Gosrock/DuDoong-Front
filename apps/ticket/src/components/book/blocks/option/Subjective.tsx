@@ -13,6 +13,7 @@ const Subjective = ({ options, answer, setAnswer }: SubjectiveProps) => {
   return (
     <Padding>
       <TextArea
+        maxLength={100}
         placeholder="최대 100글자까지 쓸 수 있어요."
         onChange={(e) =>
           setAnswer({ optionId: options[0].optionId, answer: e.target.value })
