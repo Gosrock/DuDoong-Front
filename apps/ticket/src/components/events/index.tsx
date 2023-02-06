@@ -40,7 +40,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
       </main>
       {tickets && (
         <OverlayBox open={isOpen} onDismiss={closeOverlay}>
-          <Tickets items={tickets?.ticketItems} />
+          <Tickets items={tickets?.ticketItems} eventName={detail.name} />
         </OverlayBox>
       )}
     </>

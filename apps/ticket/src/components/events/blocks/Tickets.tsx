@@ -3,7 +3,6 @@ import {
   ButtonSet,
   Counter,
   Dropdown,
-  DropdownOption,
   ListHeader,
   ListRow,
   Text,
@@ -11,40 +10,44 @@ import {
 import { calcMoneyType } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
-import { useEffect, useState } from 'react';
-import getTicketItemObjects from './getTicketItemObjects';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import useTicketSelect from '../utils/useTicketSelect';
 
 interface TicketsProps {
   items: TicketItemResponse[];
+  eventName: string;
 }
 
-const Tickets = ({ items }: TicketsProps) => {
-  const { initialDropdownOption, ticketOptions, getSelectedTicket } =
-    getTicketItemObjects(items);
+export type SelectedTicketState = {
+  eventName: string;
+  eventId: string;
+  ticketName: string;
+  itemId: number;
+  quantity: number;
+};
 
-  const [form, setForm] = useState<{
-    ticketItemId: number;
-    quantity: number;
-  }>({ ticketItemId: items[0].ticketItemId, quantity: 1 });
-
-  const handleCounter = (key: boolean) => {
-    setForm({
-      ...form,
-      quantity: key ? form.quantity + 1 : form.quantity - 1,
-    });
+const Tickets = ({ items, eventName }: TicketsProps) => {
+  const {
+    form,
+    selectedTicket,
+    ticketOptions,
+    option,
+    setOption,
+    handleCounter,
+  } = useTicketSelect(items);
+  const router = useRouter();
+  console.log(router);
+  const data: SelectedTicketState = {
+    eventId: router.query.eventId as string,
+    eventName: eventName,
+    ticketName: selectedTicket.ticketName,
+    itemId: form.ticketItemId,
+    quantity: form.quantity,
   };
 
-  const [option, setOption] = useState<DropdownOption>(initialDropdownOption);
-  useEffect(() => {
-    setForm({ ...form, ticketItemId: option.id as number });
-  }, [option]);
-
   return (
-    <div
-      css={css`
-        position: relative;
-      `}
-    >
+    <>
       <ListHeader title="티켓 선택하기" size="listHeader_18" />
       <Dropdown
         options={ticketOptions}
@@ -55,14 +58,11 @@ const Tickets = ({ items }: TicketsProps) => {
       <ListRow
         text={
           <Text typo="P_Text_16_M" color="main_500">
-            {calcMoneyType.mul(
-              getSelectedTicket(form.ticketItemId)!.price,
-              form.quantity,
-            )}
+            {calcMoneyType.mul(selectedTicket.price, form.quantity)}
           </Text>
         }
         rightElement={
-          getSelectedTicket(form.ticketItemId).purchaseLimit === 1 ? (
+          selectedTicket.purchaseLimit === 1 ? (
             <Text typo="P_Text_16_M" color="gray_400">
               1인 1매 (매수 선택 불가)
             </Text>
@@ -76,9 +76,20 @@ const Tickets = ({ items }: TicketsProps) => {
         }
       />
       <ButtonSet padding={[20, 24]}>
-        <Button fullWidth>예매하기</Button>
+        <Link
+          css={css`
+            width: 100%;
+          `}
+          href={{
+            pathname: `${router.asPath}/book/option`,
+            query: { selectedTicketState: JSON.stringify(data) },
+          }}
+          as={`${router.asPath}/book/option`}
+        >
+          <Button fullWidth>예매하기</Button>
+        </Link>
       </ButtonSet>
-    </div>
+    </>
   );
 };
 

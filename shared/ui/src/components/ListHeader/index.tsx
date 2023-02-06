@@ -5,6 +5,7 @@ import { TextType } from '../../theme';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 import { PaddingSize } from '../../layout';
 import { ReactNode } from 'react';
+import { css } from '@emotion/react';
 
 export interface ListHeaderProps {
   title: JSX.Element | string;
@@ -101,7 +102,14 @@ export const ListHeader = ({
         justify="center"
         direction="column"
       >
-        <FlexBox id="title" align="center" justify={'space-between'}>
+        <FlexBox
+          id="title"
+          align="center"
+          justify={'space-between'}
+          css={css`
+            min-height: 24px; // md tag 넣었을때 문제 안생기도록
+          `}
+        >
           <Text
             typo={LIST_HEADER_VARIANT[size].textProp.typo}
             color={LIST_HEADER_VARIANT[size].textProp.color}

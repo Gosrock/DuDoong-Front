@@ -1,10 +1,13 @@
 export interface AddCartRequest {
-  items: {
-    itemId: number;
-    quantity: number;
-    options: AddCartOptionAnswer[];
-  }[];
+  items: AddCartLineDto[];
 }
+
+export interface AddCartLineDto {
+  itemId: number;
+  quantity: number;
+  options: AddCartOptionAnswer[];
+}
+[];
 
 export interface AddCartOptionAnswer {
   optionId: number;

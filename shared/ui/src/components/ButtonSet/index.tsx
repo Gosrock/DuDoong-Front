@@ -11,6 +11,7 @@ export interface ButtonSetProps extends HTMLAttributes<HTMLDivElement> {
   varient?: ButtonSetVariantKey;
   padding?: PaddingSize;
   bottomFixed?: boolean;
+  noBackground: boolean;
 }
 
 type ButtonSetVariantKey =
@@ -65,16 +66,18 @@ const BUTTON_SET_VARIANT: buttonSetVariantType = {
  * number : 상하좌우 패딩
  * [number,number] : 상하, 좌우
  * [number,number,number,number] : 상, 우, 하, 좌
+ * @noBackground
  */
 export const ButtonSet = ({
   children,
   varient = 'mono',
   padding = [40, 24, 20, 24],
   bottomFixed = false,
+  noBackground = false,
   ...props
 }: ButtonSetProps) => {
   return (
-    <Wrapper fixed={bottomFixed} {...props}>
+    <Wrapper fixed={bottomFixed} noBackground={noBackground} {...props}>
       <Padding size={padding}>
         <FlexBox
           align={BUTTON_SET_VARIANT[varient].align}
@@ -92,8 +95,9 @@ export const ButtonSet = ({
   );
 };
 
-const Wrapper = styled.div<{ fixed: boolean }>`
-  background: ${({ theme }) => theme.palette.gradient.linear_white};
+const Wrapper = styled.div<{ fixed: boolean; noBackground: boolean }>`
+  background: ${({ noBackground, theme }) =>
+    noBackground ? 'transparent' : theme.palette.gradient.linear_white};
   ${({ fixed }) =>
     fixed &&
     css`

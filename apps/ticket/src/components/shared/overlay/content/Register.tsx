@@ -33,7 +33,7 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
         }
       />
       <ButtonSet varient="mono" padding={[20, 24]}>
-        <Button varient="kakao" onClick={onMainActionClick}>
+        <Button varient="kakao" onClick={onMainActionClick} fullWidth>
           약관 동의하고 시작하기
         </Button>
       </ButtonSet>

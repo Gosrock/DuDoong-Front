@@ -39,8 +39,8 @@ const TextAreaWrapper = styled.div<{
 
   background: ${({ theme }) => theme.palette.gray_200};
 
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: 12px;
+  padding: 16px 12px;
 
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => (width ? `${width}px` : '100%')};
@@ -59,10 +59,11 @@ const StyledTextArea = styled.textarea`
   height: 100%;
   line-height: 100%;
 
-  ${({ theme }) => theme.typo.Text_16};
+  ${({ theme }) => theme.typo.P_Text_16_R};
   color: ${({ theme }) => theme.palette.gray_500};
 
   ::placeholder {
+    ${({ theme }) => theme.typo.P_Text_16_R}
     color: ${({ theme }) => theme.palette.gray_400};
   }
 

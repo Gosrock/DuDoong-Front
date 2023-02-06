@@ -43,7 +43,7 @@ const Home = () => {
       />
       <Spacing size={20} />
       <FlexBox align={'center'} justify={'space-between'}>
-        <ButtonSet varient="horizontal" padding={0}>
+        <ButtonSet varient="horizontal" padding={0} noBackground>
           <Button
             varient={setVarient('host')}
             width={139}

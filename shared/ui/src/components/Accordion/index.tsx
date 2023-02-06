@@ -9,6 +9,7 @@ export interface AccordionProps
   padding?: PaddingSize;
   content: ReactNode;
   contentHeight?: number;
+  initialState?: boolean;
   onAccordionOpened?: () => void;
   onAccordionClosed?: () => void;
 }
@@ -22,6 +23,7 @@ export interface AccordionProps
  * @param textTypo
  * @param textColor
  * @param contentHeight 컨텐츠 높이 지정되면 애니메이션 적용
+ * @param initialState
  */
 
 export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
@@ -35,10 +37,11 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
       onAccordionOpened,
       onAccordionClosed,
       contentHeight,
+      initialState = false,
     }: AccordionProps,
     ref,
   ) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(initialState);
 
     const handleAccordion = () => {
       if (isOpen) {

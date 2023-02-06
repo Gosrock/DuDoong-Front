@@ -30,10 +30,11 @@ const ToggleBtn = styled.button<{ toggle: boolean }>`
   width: 51px;
   height: 31px;
   border-radius: 15px;
-  border: none;
+  box-sizing: border-box;
+  border: 1px solid ${({ theme }) => theme.palette.black};
   cursor: pointer;
   background-color: ${({ theme, toggle }) =>
-    !toggle ? theme.palette.gray_200 : theme.palette.main_400};
+    !toggle ? theme.palette.gray_200 : theme.palette.point_mint};
   position: relative;
   display: flex;
   justify-content: center;
@@ -43,11 +44,13 @@ const ToggleBtn = styled.button<{ toggle: boolean }>`
 
 const Circle = styled.div<{ toggle: boolean }>`
   background-color: ${({ theme }) => theme.palette.white};
+  border: 0.7px solid ${({ theme }) => theme.palette.black};
   width: 27px;
   height: 27px;
+  box-sizing: border-box;
   border-radius: 50%;
   position: absolute;
-  left: 2px;
+  left: 1px;
   transition: all 0.2s ease-in-out;
   ${(props) =>
     props.toggle &&

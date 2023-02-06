@@ -1,1 +1,1 @@
-export { default } from '@components/book/Confirm';
+export { default } from '@components/pay/Confirm';

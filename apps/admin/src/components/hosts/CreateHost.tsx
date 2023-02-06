@@ -55,7 +55,13 @@ const CreateHost = () => {
           descColor={'red_300'}
           padding={[32, 0, 12, 0]}
         ></ListHeader>
-        <Input name="name" onChange={onChange} autoFocus />
+        <Input
+          name="name"
+          maxLength={15}
+          onChange={onChange}
+          autoFocus
+          placeholder="최대 15자까지 쓸 수 있어요."
+        />
         <Spacing size={14} />
         <ListHeader
           title={'호스트 연락처'}

@@ -16,7 +16,7 @@ const BookHeader = ({ title, description }: BookHeaderProps) => {
       title={title}
       size={'listHeader_20'}
       description={
-        <Text typo="Text_14" color="gray_500">
+        <Text typo="P_Text_16_M" color="gray_500">
           {description[0]}
           <span css={{ color: `${theme.palette.main_500}` }}>
             {' '}

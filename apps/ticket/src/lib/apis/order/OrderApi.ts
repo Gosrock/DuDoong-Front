@@ -1,4 +1,3 @@
-import order from '@pages/book/order';
 import { axiosPrivate } from '../axios';
 import {
   ConfirmOrderRequest,

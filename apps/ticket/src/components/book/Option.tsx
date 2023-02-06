@@ -1,26 +1,27 @@
 import Main from '@components/shared/Layout/Main';
-import { Button, ButtonSet, Divider, NavBar, Spacing } from '@dudoong/ui';
+import { Divider, NavBar, Spacing } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
-import { AddCartRequest } from '@lib/apis/cart/cartType';
 import DDHead from '@components/shared/Layout/NextHead';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';
-import OptionForm from './blocks/OptionForm';
+import TotalOptions from './blocks/option/TotalOptions';
+import type { SelectedTicketState } from '@components/events/blocks/Tickets';
+import type { GetServerSideProps } from 'next';
+import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
+import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
+import { TicketApi } from '@lib/apis/ticket/TicketApi';
 
-const Option = () => {
+interface OptionProps {
+  selectedTicketState: SelectedTicketState;
+  optionGroups: OptionGroupResponse[];
+}
+
+const Option = ({ selectedTicketState, optionGroups }: OptionProps) => {
   const router = useRouter();
+  const { eventName, ticketName, quantity } = selectedTicketState;
   const [toggle, setToggle] = useState<boolean>(false);
-
-  const { mutate } = useMutation(CartApi.ADD_CARTLINE, {
-    onSuccess: (data) => {
-      router.push(
-        { pathname: '/book/order', query: { state: JSON.stringify(data) } },
-        '/book/order',
-      );
-    },
-  });
 
   return (
     <>
@@ -33,20 +34,18 @@ const Option = () => {
         />
         <BookHeader
           title="옵션 선택하기"
-          description={['고스락 제 23회 정기공연', '일반티켓', 3]}
+          description={[eventName, ticketName, quantity]}
         />
         <Divider />
-        <OptionForm toggle={toggle} setToggle={() => setToggle(!toggle)} />
+
+        {/* 옵션 선택하기 폼 */}
+        <TotalOptions
+          selectedTicketState={selectedTicketState}
+          toggle={toggle}
+          setToggle={() => setToggle(!toggle)}
+          optionGroups={optionGroups}
+        />
         <Spacing size={120} />
-        <ButtonSet bottomFixed>
-          <Button
-            onClick={() => {
-              mutate(mockCartLine);
-            }}
-          >
-            선택 완료
-          </Button>
-        </ButtonSet>
       </Main>
     </>
   );
@@ -54,43 +53,31 @@ const Option = () => {
 
 export default Option;
 
-const mockCartLine: AddCartRequest = {
-  items: [
-    {
-      itemId: 1,
-      quantity: 2,
-      options: [
-        {
-          optionId: 1,
-          answer: '네',
-        },
-        {
-          optionId: 4,
-          answer: '아니오',
-        },
-        {
-          optionId: 5,
-          answer: '유입경로로 말할 것 같으면~~ 그냥 지인 추천으로 들어왔어요!',
-        },
-      ],
-    },
-    {
-      itemId: 1,
-      quantity: 1,
-      options: [
-        {
-          optionId: 1,
-          answer: '예',
-        },
-        {
-          optionId: 4,
-          answer: '예',
-        },
-        {
-          optionId: 5,
-          answer: '다른거에요',
-        },
-      ],
-    },
-  ],
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { selectedTicketState } = context.query;
+  try {
+    const parsedState: SelectedTicketState = JSON.parse(
+      selectedTicketState as string,
+    );
+    setSsrAxiosHeader(context.req.cookies);
+    const options = await TicketApi.GET_TICKETITEM_OPTIONS(
+      parsedState.eventId,
+      parsedState.itemId,
+    );
+    return {
+      props: {
+        selectedTicketState: parsedState,
+        optionGroups: options.optionGroups,
+      },
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      // 새로고침 등으로 query 데이터가 없을땐 이벤트 상세로 리다이렉트
+      redirect: {
+        destination: `/events/${context.params!.eventId}`,
+        permanent: false,
+      },
+    };
+  }
 };
