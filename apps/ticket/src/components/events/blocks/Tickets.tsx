@@ -19,7 +19,7 @@ interface TicketsProps {
   eventName: string;
 }
 
-export type TicketSelectState = {
+export type SelectedTicketState = {
   eventName: string;
   ticketName: string;
   itemId: number;
@@ -36,7 +36,7 @@ const Tickets = ({ items, eventName }: TicketsProps) => {
     handleCounter,
   } = useTicketSelect(items);
   const router = useRouter();
-  const data: TicketSelectState = {
+  const data: SelectedTicketState = {
     eventName: eventName,
     ticketName: selectedTicket.ticketName,
     itemId: form.ticketItemId,
@@ -79,7 +79,7 @@ const Tickets = ({ items, eventName }: TicketsProps) => {
           `}
           href={{
             pathname: `${router.asPath}/book/option`,
-            query: { selectTicketState: JSON.stringify(data) },
+            query: { selectedTicketState: JSON.stringify(data) },
           }}
           as={`${router.asPath}/book/option`}
         >

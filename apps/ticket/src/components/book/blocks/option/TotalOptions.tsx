@@ -1,3 +1,5 @@
+import useOptionForm from '@components/book/utils/useOptionForm';
+import { SelectedTicketState } from '@components/events/blocks/Tickets';
 import {
   Accordion,
   Button,
@@ -6,82 +8,29 @@ import {
   ListRow,
   ToggleButton,
 } from '@dudoong/ui';
-import type { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
-import { useEffect, useState } from 'react';
 import ItemOptions from './ItemOptions';
 
 interface TotalOptionsProps {
   toggle: boolean;
-  quantity: number;
-  ticketName: string;
+  selectedTicketState: SelectedTicketState;
   setToggle: () => void;
   optionGroups: OptionGroupResponse[];
 }
 
-interface OptionGroupSelect {
-  optionGroupId: number;
-  answer: AddCartOptionAnswer;
-}
-interface ItemOptionsType {
-  itemIdx: number;
-  optionGroups: OptionGroupSelect[];
-}
-
 const TotalOptions = ({
+  selectedTicketState,
   toggle,
-  quantity,
-  ticketName,
   setToggle,
   optionGroups,
 }: TotalOptionsProps) => {
-  const initOptions = optionGroups.map((v) => {
-    return {
-      optionGroupId: v.optionGroupId,
-      answer: { optionId: 0, answer: '' },
-    };
-  });
-
-  const initForm = [...Array(quantity)].map((_, idx) => {
-    return { itemIdx: idx, optionGroups: initOptions };
-  });
-
-  const [totalForm, setTotalForm] = useState<ItemOptionsType[]>(initForm);
-  const [complete, setComplete] = useState<boolean>(false);
-
-  const onChangeForm = (
-    itemIdx: number,
-    optionGroupId: number,
-    answer: AddCartOptionAnswer,
-  ) => {
-    // https://dev.to/shareef/how-to-work-with-arrays-in-reactjs-usestate-4cmi
-    const temp = totalForm.map((item) =>
-      item.itemIdx === itemIdx
-        ? {
-            ...item,
-            optionGroups: item.optionGroups.map((optionGroup) =>
-              optionGroup.optionGroupId === optionGroupId
-                ? { ...optionGroup, answer }
-                : { ...optionGroup },
-            ),
-          }
-        : { ...item },
-    );
-    setTotalForm(temp);
-  };
-
-  useEffect(() => {
-    setComplete(
-      totalForm.filter(
-        (item) =>
-          item.optionGroups.filter((optionGroup) =>
-            optionGroup.answer.answer === '' ? true : false,
-          ).length !== 0,
-      ).length === 0
-        ? true
-        : false,
-    );
-  }, [totalForm]);
+  const { ticketName, itemId, quantity } = selectedTicketState;
+  const { complete, onChangeForm, getAddCartRequest } = useOptionForm(
+    optionGroups,
+    itemId,
+    quantity,
+    toggle,
+  );
 
   const contentHeight = optionGroups.reduce((acc, cur) => {
     return (acc += cur.type === '주관식' ? 240 : 168);
@@ -131,7 +80,13 @@ const TotalOptions = ({
 
       {/* 선택 완료 버튼 */}
       <ButtonSet bottomFixed>
-        <Button fullWidth onClick={() => {}} disabled={!complete}>
+        <Button
+          fullWidth
+          onClick={() => {
+            console.log(getAddCartRequest());
+          }}
+          disabled={!complete}
+        >
           선택 완료
         </Button>
       </ButtonSet>
