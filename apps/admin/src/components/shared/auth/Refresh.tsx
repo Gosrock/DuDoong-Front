@@ -1,42 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { authState } from '@store/auth';
-import { AuthApi } from '@dudoong/utils';
+import { useEffect } from 'react';
 import { FullScreen, SyncLoader } from '@dudoong/ui';
 import { css } from '@emotion/react';
-import { useMutation } from '@tanstack/react-query';
-import { axiosPrivate } from '@lib/apis/axios';
+import useRefresh from '@lib/hooks/auth/useRefresh';
 
 const Refresh = () => {
   const refreshToken = localStorage.getItem('refreshToken');
-  const [state, setState] = useState<'loading' | 'succeed' | 'failed'>(
-    'loading',
-  );
-  const setAuth = useSetRecoilState(authState);
-
-  const refreshMutation = useMutation(AuthApi.REFRESH, {
-    onMutate: () => {
-      setState('loading');
-    },
-    onSuccess: (data) => {
-      axiosPrivate.defaults.headers.common[
-        'Authorization'
-      ] = `Bearer ${data.accessToken}`;
-      setAuth({
-        userProfile: data.userProfile,
-        accessToken: data.accessToken,
-        isAuthenticated: true,
-        callbackUrl: '/',
-      });
-      localStorage.setItem('refreshToken', data.refreshToken);
-      console.log(data.accessToken);
-      setState('succeed');
-    },
-    onError: () => {
-      setState('failed');
-    },
-  });
+  const { refreshMutation, state, setState } = useRefresh();
 
   useEffect(() => {
     refreshToken ? refreshMutation.mutate(refreshToken) : setState('failed');

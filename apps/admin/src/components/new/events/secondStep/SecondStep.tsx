@@ -1,4 +1,4 @@
-import BorderBox from '@components/shared/layout/BorderBox';
+import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import {
   FlexBox,
   ListHeader,

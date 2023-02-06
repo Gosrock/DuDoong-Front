@@ -1,4 +1,4 @@
-import BorderBox from '@components/shared/layout/BorderBox';
+import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import { FlexBox, PaddingSize, Spacing, Text } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import { css } from '@emotion/react';
