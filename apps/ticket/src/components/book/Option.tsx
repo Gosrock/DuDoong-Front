@@ -23,18 +23,6 @@ const Option = ({ selectedTicketState, optionGroups }: OptionProps) => {
   const { eventName, ticketName, quantity } = selectedTicketState;
   const [toggle, setToggle] = useState<boolean>(false);
 
-  const { mutate } = useMutation(CartApi.ADD_CARTLINE, {
-    onSuccess: (data) => {
-      router.push(
-        {
-          pathname: `${router.asPath}/book/order`,
-          query: { state: JSON.stringify(data) },
-        },
-        `${router.asPath}/book/order`,
-      );
-    },
-  });
-
   return (
     <>
       <DDHead title="두둥!" />
@@ -67,14 +55,13 @@ export default Option;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { selectedTicketState } = context.query;
-  const eventId = context.params!.eventId as string;
   try {
     const parsedState: SelectedTicketState = JSON.parse(
       selectedTicketState as string,
     );
     setSsrAxiosHeader(context.req.cookies);
     const options = await TicketApi.GET_TICKETITEM_OPTIONS(
-      eventId,
+      parsedState.eventId,
       parsedState.itemId,
     );
     return {

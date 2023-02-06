@@ -21,6 +21,7 @@ interface TicketsProps {
 
 export type SelectedTicketState = {
   eventName: string;
+  eventId: string;
   ticketName: string;
   itemId: number;
   quantity: number;
@@ -36,7 +37,9 @@ const Tickets = ({ items, eventName }: TicketsProps) => {
     handleCounter,
   } = useTicketSelect(items);
   const router = useRouter();
+  console.log(router);
   const data: SelectedTicketState = {
+    eventId: router.query.eventId as string,
     eventName: eventName,
     ticketName: selectedTicket.ticketName,
     itemId: form.ticketItemId,
