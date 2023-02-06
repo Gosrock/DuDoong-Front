@@ -59,7 +59,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <Spacing size={120} />
 
         {/* 다음으로 버튼 */}
-        <ButtonSet bottomFixed>
+        <ButtonSet bottomFixed backGradient>
           <Button
             onClick={() => {
               orderMutate({ couponId: null, cartId: data.cartId });

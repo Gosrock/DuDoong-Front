@@ -63,11 +63,7 @@ const OptionGroup = ({
           setAnswer={setAnswer}
         />
       ) : (
-        <Subjective
-          options={data.options}
-          answer={answer}
-          setAnswer={setAnswer}
-        />
+        <Subjective options={data.options} setAnswer={setAnswer} />
       )}
     </>
   );

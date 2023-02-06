@@ -1,6 +1,6 @@
 const Logo = ({
-  width = 128,
-  height = 34,
+  width = 105.03,
+  height = 28,
 }: {
   width?: number;
   height?: number;

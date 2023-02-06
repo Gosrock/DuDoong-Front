@@ -1,8 +1,6 @@
 import Main from '@components/shared/Layout/Main';
 import { Divider, NavBar, Spacing } from '@dudoong/ui';
-import { CartApi } from '@lib/apis/cart/CartApi';
 import DDHead from '@components/shared/Layout/NextHead';
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';

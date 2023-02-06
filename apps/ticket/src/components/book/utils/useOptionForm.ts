@@ -1,5 +1,5 @@
 import { isEqualObject } from '@dudoong/utils';
-import { AddCartOptionAnswer, AddCartRequest } from '@lib/apis/cart/cartType';
+import { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
 import { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
 
@@ -124,44 +124,3 @@ const useOptionForm = (
 };
 
 export default useOptionForm;
-
-const mockCartLine: AddCartRequest = {
-  items: [
-    {
-      itemId: 1,
-      quantity: 2,
-      options: [
-        {
-          optionId: 1,
-          answer: '네',
-        },
-        {
-          optionId: 4,
-          answer: '아니오',
-        },
-        {
-          optionId: 5,
-          answer: '유입경로로 말할 것 같으면~~ 그냥 지인 추천으로 들어왔어요!',
-        },
-      ],
-    },
-    {
-      itemId: 1,
-      quantity: 1,
-      options: [
-        {
-          optionId: 1,
-          answer: '예',
-        },
-        {
-          optionId: 4,
-          answer: '예',
-        },
-        {
-          optionId: 5,
-          answer: '다른거에요',
-        },
-      ],
-    },
-  ],
-};
