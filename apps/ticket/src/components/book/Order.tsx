@@ -61,6 +61,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         {/* 다음으로 버튼 */}
         <ButtonSet bottomFixed backGradient>
           <Button
+            fullWidth
             onClick={() => {
               orderMutate({ couponId: null, cartId: data.cartId });
             }}

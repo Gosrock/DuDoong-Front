@@ -10,6 +10,7 @@ export interface AccordionProps
   content: ReactNode;
   contentHeight?: number;
   initialState?: boolean;
+  rightElement?: ReactNode;
   onAccordionOpened?: () => void;
   onAccordionClosed?: () => void;
 }
@@ -38,6 +39,7 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
       onAccordionClosed,
       contentHeight,
       initialState = false,
+      rightElement,
     }: AccordionProps,
     ref,
   ) => {
@@ -59,7 +61,12 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
           <FlexBox align="center" justify="space-between">
             <ListRow
               text={title}
-              rightElement={<Handler open={isOpen} />}
+              rightElement={
+                <FlexBox align={'center'} gap={12}>
+                  {rightElement}
+                  <Handler open={isOpen} />
+                </FlexBox>
+              }
               padding={padding}
               fill
               textTypo={textTypo}
@@ -94,7 +101,7 @@ const Handler = styled(ChevronDown)<{ open: boolean }>`
 `;
 
 const Content = styled.div<{ height: number | undefined; open: boolean }>`
-  height: ${({ height, open }) => (open ? height : 0)}px;
+  max-height: ${({ height, open }) => (open ? height : 0)}px;
   transition: all 0.2s ease;
   overflow: hidden;
 `;

@@ -95,7 +95,7 @@ const TotalOptions = ({
       )}
 
       {/* 선택 완료 버튼 */}
-      <ButtonSet bottomFixed>
+      <ButtonSet bottomFixed backGradient>
         <Button
           fullWidth
           onClick={() => {

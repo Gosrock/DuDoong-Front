@@ -45,7 +45,7 @@ export const ListRow = ({
   padding = [16, 24],
   text,
   subText,
-  textTypo = ['Text_16', 'Text_14'],
+  textTypo = ['P_Text_16_M', 'P_Text_14_R'],
   textColor = ['gray_500', 'gray_400'],
   leftImage,
   rightElement = <></>,
