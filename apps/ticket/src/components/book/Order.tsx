@@ -23,7 +23,7 @@ import useTossPayments from './blocks/order/useTossPayments';
 const Order = ({ data }: { data: AddCartResponse }) => {
   console.log(data);
   const router = useRouter();
-  const { instance, Payment } = useTossPayments();
+  const { instance, Payment } = useTossPayments(data.totalPrice);
   const { orderMutate } = useOrderMutation(instance);
   return (
     <>

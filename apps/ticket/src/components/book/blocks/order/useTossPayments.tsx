@@ -1,5 +1,5 @@
 import { FlexBox, SyncLoader } from '@dudoong/ui';
-import { css } from '@emotion/react';
+import { getCount } from '@dudoong/utils';
 import {
   ANONYMOUS,
   loadPaymentWidget,
@@ -12,7 +12,7 @@ export interface TossPaymentWidgets {
   Payment: () => JSX.Element;
 }
 
-const useTossPayments = (): TossPaymentWidgets => {
+const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
   const [widgetInstance, setWidgetInstance] =
     useState<PaymentWidgetInstance | null>(null);
   const initWidget = async () => {
@@ -28,7 +28,10 @@ const useTossPayments = (): TossPaymentWidgets => {
       initWidget();
     } else {
       console.log(widgetInstance);
-      widgetInstance.renderPaymentMethods('#payment-method', 15000);
+      widgetInstance.renderPaymentMethods(
+        '#payment-method',
+        getCount(totalPrice),
+      );
     }
   }, [widgetInstance]);
 
