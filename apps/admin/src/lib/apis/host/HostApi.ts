@@ -1,7 +1,13 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import { HostDetailResponse, HostProfileResponse } from './hostType';
-import { CreateHostRequest, CreateHostResponse } from './hostType';
+import {
+  HostDetailResponse,
+  UpdateHostRequest,
+  HostProfileResponse,
+  imageFileExtensionType,
+  CreateHostRequest,
+  CreateHostResponse,
+} from './hostType';
 
 const HostApi = {
   GET_HOSTS: async ({
@@ -23,6 +29,33 @@ const HostApi = {
     payload: CreateHostRequest,
   ): Promise<CreateHostResponse> => {
     const response = await axiosPrivate.post('/hosts', payload);
+    return response.data.data;
+  },
+
+  PATCH_HOST_PROFILE: async ({
+    hostId,
+    payload,
+  }: {
+    hostId: string;
+    payload: UpdateHostRequest;
+  }): Promise<HostDetailResponse> => {
+    const response = await axiosPrivate.patch(
+      `/hosts/${hostId}/profile`,
+      payload,
+    );
+    return response.data.data;
+  },
+
+  POST_HOST_IMAGE: async ({
+    hostId,
+    imageFileExtension,
+  }: {
+    hostId: string;
+    imageFileExtension: imageFileExtensionType;
+  }): Promise<any> => {
+    const response = await axiosPrivate.post(
+      `/hosts/${hostId}/images?imageFileExtension=${imageFileExtension}`,
+    );
     return response.data.data;
   },
 };
