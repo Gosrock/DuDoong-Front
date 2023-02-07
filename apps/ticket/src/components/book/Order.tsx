@@ -3,9 +3,11 @@ import {
   Button,
   ButtonSet,
   Divider,
+  FlexBox,
   ListHeader,
   NavBar,
   Spacing,
+  SyncLoader,
 } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
 import { AddCartResponse } from '@lib/apis/cart/cartType';
@@ -21,9 +23,8 @@ import useOrderMutation from './blocks/order/useOrderMutation';
 import useTossPayments from './blocks/order/useTossPayments';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
-  console.log(data);
   const router = useRouter();
-  const { instance, Payment } = useTossPayments(data.totalPrice);
+  const { instance } = useTossPayments(data.totalPrice);
   const { orderMutate } = useOrderMutation(instance);
   return (
     <>
@@ -56,7 +57,13 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <Divider />
         {/* 결제정보 */}
         <ListHeader size="listHeader_18" title={'결제정보'} />
-        <Payment />
+        {instance ? (
+          <div id="payment-method" />
+        ) : (
+          <FlexBox align={'center'} css={{ marginTop: '30px' }}>
+            <SyncLoader />
+          </FlexBox>
+        )}
         <Spacing size={120} />
 
         {/* 다음으로 버튼 */}

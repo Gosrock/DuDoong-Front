@@ -1,4 +1,3 @@
-import { FlexBox, SyncLoader } from '@dudoong/ui';
 import { getCount } from '@dudoong/utils';
 import {
   ANONYMOUS,
@@ -9,7 +8,6 @@ import { useEffect, useState } from 'react';
 
 export interface TossPaymentWidgets {
   instance: PaymentWidgetInstance | null;
-  Payment: () => JSX.Element;
 }
 
 const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
@@ -37,14 +35,6 @@ const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
 
   return {
     instance: widgetInstance,
-    Payment: () =>
-      widgetInstance ? (
-        <div id="payment-method" />
-      ) : (
-        <FlexBox align={'center'} css={{ marginTop: '30px' }}>
-          <SyncLoader />
-        </FlexBox>
-      ),
   };
 };
 
