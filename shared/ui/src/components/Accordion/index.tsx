@@ -102,6 +102,6 @@ const Handler = styled(ChevronDown)<{ open: boolean }>`
 
 const Content = styled.div<{ height: number | undefined; open: boolean }>`
   max-height: ${({ height, open }) => (open ? height : 0)}px;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease-in-out;
   overflow: hidden;
 `;

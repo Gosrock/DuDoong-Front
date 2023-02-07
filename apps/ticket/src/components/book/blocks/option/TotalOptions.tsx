@@ -8,10 +8,7 @@ import {
   ListRow,
   ToggleButton,
 } from '@dudoong/ui';
-import { CartApi } from '@lib/apis/cart/CartApi';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
 import ItemOptions from './ItemOptions';
 
 interface TotalOptionsProps {
@@ -27,26 +24,14 @@ const TotalOptions = ({
   setToggle,
   optionGroups,
 }: TotalOptionsProps) => {
-  const router = useRouter();
   const { eventId, ticketName, itemId, quantity } = selectedTicketState;
-  const { complete, onChangeForm, getAddCartRequest } = useOptionForm(
+  const { complete, onChangeForm, isloading, onSubmitForm } = useOptionForm(
     optionGroups,
     itemId,
     quantity,
+    eventId,
     toggle,
   );
-
-  const { mutate } = useMutation(CartApi.ADD_CARTLINE, {
-    onSuccess: (data) => {
-      router.push(
-        {
-          pathname: `/events/${eventId}/book/order`,
-          query: { state: JSON.stringify(data) },
-        },
-        `/events/${eventId}/book/order`,
-      );
-    },
-  });
 
   const contentHeight = optionGroups.reduce((acc, cur) => {
     return (acc += cur.type === '주관식' ? 240 : 168);
@@ -98,10 +83,9 @@ const TotalOptions = ({
       <ButtonSet bottomFixed backGradient>
         <Button
           fullWidth
-          onClick={() => {
-            mutate({ items: getAddCartRequest() });
-          }}
+          onClick={onSubmitForm}
           disabled={!complete}
+          isLoading={isloading}
         >
           선택 완료
         </Button>

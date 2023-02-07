@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { ArrowClockwise } from 'react-bootstrap-icons';
+import Loading from '../../assets/icons/Loading';
 
 export interface LoaderProps {
   color: string;
   size?: number;
 }
 
-export const Spinner = ({ color, size = 20 }: LoaderProps) => {
+export const Spinner = ({ color, size = 18 }: LoaderProps) => {
   return (
     <div css={{ width: `${size}px`, height: `${size}px`, margin: '0 auto' }}>
-      <ArrowClockwise
+      <Loading
         css={css`
           width: ${size}px;
           height: ${size}px;
@@ -27,8 +27,6 @@ export const Spinner = ({ color, size = 20 }: LoaderProps) => {
             }
           }
           animation: rotate 1s linear infinite;
-          stroke: ${color};
-          opacity: 0.8;
         `}
       />
     </div>

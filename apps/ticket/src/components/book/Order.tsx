@@ -21,6 +21,7 @@ import useOrderMutation from './blocks/order/useOrderMutation';
 import useTossPayments from './blocks/order/useTossPayments';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
+  console.log(data);
   const router = useRouter();
   const { instance, Payment } = useTossPayments();
   const { orderMutate } = useOrderMutation(instance);
@@ -77,7 +78,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
 export default Order;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { state } = context.query;
+  const { state, eventId } = context.query;
   const { cookies } = context.req;
 
   if (!state) {
@@ -88,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       else return { redirect: { destination: '/', permanent: false } };
     } catch (err: any) {
       //TODO : 로그인 후 리다이렉트 url QA때 토큰 이리저리 해보면서 확인
-      const redirectUrl = '/book/order';
+      const redirectUrl = `events/${eventId}`;
       return {
         redirect: {
           destination: `/login/expired?redirect=${redirectUrl}`,
