@@ -59,15 +59,19 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         {/* 결제금액 */}
         <ListHeader size="listHeader_18" title={'결제금액'} />
         <Totalprice price={data.totalPrice} />
-        <Divider />
         {/* 결제정보 */}
-        <ListHeader size="listHeader_18" title={'결제정보'} />
-        {instance ? (
-          <div id="payment-method" />
-        ) : (
-          <FlexBox align={'center'} css={{ marginTop: '30px' }}>
-            <SyncLoader />
-          </FlexBox>
+        {data.totalPrice !== '0원' && (
+          <>
+            <Divider />
+            <ListHeader size="listHeader_18" title={'결제정보'} />
+            {instance ? (
+              <div id="payment-method" />
+            ) : (
+              <FlexBox align={'center'} css={{ marginTop: '30px' }}>
+                <SyncLoader />
+              </FlexBox>
+            )}
+          </>
         )}
         <Spacing size={120} />
 

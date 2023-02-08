@@ -22,14 +22,16 @@ const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
   };
 
   useEffect(() => {
-    if (!widgetInstance) {
-      initWidget();
-    } else {
-      console.log(widgetInstance);
-      widgetInstance.renderPaymentMethods(
-        '#payment-method',
-        getCount(totalPrice),
-      );
+    if (totalPrice !== '0원') {
+      if (!widgetInstance) {
+        initWidget();
+      } else {
+        console.log(widgetInstance);
+        widgetInstance.renderPaymentMethods(
+          '#payment-method',
+          getCount(totalPrice),
+        );
+      }
     }
   }, [widgetInstance]);
 
