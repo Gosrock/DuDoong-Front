@@ -53,3 +53,18 @@ export interface HostUser {
   createdAt: string;
   role: RoleType;
 }
+
+export interface UpdateHostRequest {
+  profileImageKey: string;
+  introduce: string;
+  contactNumber: string;
+  contactEmail: string;
+}
+
+export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';
+
+export interface ImageUrlResponse {
+  presignedUrl: string;
+  key: string;
+  url: string;
+}

@@ -10,7 +10,7 @@ import {
 } from '@dudoong/ui';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import { DiscFill } from '@dudoong/ui';
 import { css } from '@emotion/react';
@@ -56,7 +56,11 @@ const AdminMenu = ({ title }: { title: string }) => {
   const pageType = MENU_SET[page];
   const acticeMenuIndex = pageType.url.indexOf(path[3]);
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
-  const { hideButtons } = useBottomButton();
+  const { hideButtons } = useBottomButton({ isActive: false });
+
+  useEffect(() => {
+    hideButtons();
+  }, [pageType]);
 
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);

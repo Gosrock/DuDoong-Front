@@ -5,8 +5,8 @@ export interface BottomButtonType {
   type: AdminBottomButtonTypeKey;
   firstButtonClickHandler: () => void;
   firstButtonDisable: boolean;
-  secondButtonClickHandler: () => void;
-  secondButtonDisable: boolean;
+  secondButtonClickHandler?: () => void;
+  secondButtonDisable?: boolean;
   isActive: boolean;
 }
 
