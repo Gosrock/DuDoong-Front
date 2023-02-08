@@ -5,9 +5,14 @@ import { useResponsive } from './Layout/useResponsive';
 
 interface FullScreenProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  verticalCenter?: boolean;
 }
 
-export const FullScreen = ({ children, ...props }: FullScreenProps) => {
+export const FullScreen = ({
+  children,
+  verticalCenter,
+  ...props
+}: FullScreenProps) => {
   const [height, setHeight] = useState(0);
   const { isPC } = useResponsive();
 
@@ -21,6 +26,12 @@ export const FullScreen = ({ children, ...props }: FullScreenProps) => {
         height: ${height}px;
         width: 100%;
         overflow: hidden;
+        ${verticalCenter &&
+        css`
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        `}
       `}
       {...props}
     >
