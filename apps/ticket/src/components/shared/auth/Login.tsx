@@ -1,5 +1,6 @@
 import { FullScreen, SyncLoader } from '@dudoong/ui';
-import { css } from '@emotion/react';
+import LoginMarkup from '@dudoong/ui/src/layout/LoginMarkup';
+import { loginFc } from '@dudoong/utils';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
@@ -12,25 +13,31 @@ import { useEffect } from 'react';
 const Login = () => {
   const router = useRouter();
   const { param, redirect } = router.query;
-
   const { openGlobalOverlay } = useGlobalOverlay();
   useEffect(() => {
     if (param) {
       openGlobalOverlay({ content: 'login', props: { variant: param[0] } });
-    } else {
-      openGlobalOverlay({ content: 'login' });
-    }
-
-    if (redirect) {
-      setCookie('redirectUrl', redirect, { maxAge: 60 });
+      if (redirect) {
+        setCookie('redirectUrl', redirect, { maxAge: 60 });
+      }
     }
   }, []);
 
-  return (
-    <FullScreen verticalCenter>
-      <SyncLoader />
-    </FullScreen>
-  );
+  if (param) {
+    return (
+      <FullScreen verticalCenter>
+        <SyncLoader />
+      </FullScreen>
+    );
+  } else {
+    return (
+      <LoginMarkup
+        onKakao={() => {
+          loginFc.login({ redirect: redirect as string });
+        }}
+      />
+    );
+  }
 };
 
 export default Login;

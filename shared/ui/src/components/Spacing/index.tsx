@@ -3,7 +3,7 @@ import { KeyOfPalette, theme } from '../../theme';
 
 export const Spacing = ({
   size,
-  color = 'white',
+  color,
 }: {
   size: number;
   color?: KeyOfPalette;
@@ -12,7 +12,7 @@ export const Spacing = ({
     <div
       css={css`
         height: ${size}px;
-        background-color: ${theme.palette[color]};
+        background-color: ${color ? `${theme.palette[color]}` : 'transperent'};
       `}
     ></div>
   );
