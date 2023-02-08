@@ -26,6 +26,7 @@ const ItemPreview = ({ item }: { item: CartItemResponse }) => {
       contentHeight={
         getOptionTypeCount('Y/N') * 80 + getOptionTypeCount('주관식') * 112
       }
+      disabled={item.answers.length === 0}
     />
   );
 };

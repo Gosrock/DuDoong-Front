@@ -36,7 +36,7 @@ export const Dropdown = ({
     <Accordion
       ref={accordionRef}
       title={value.title}
-      textColor={'main_500'}
+      textColor={options.length === 0 ? 'gray_400' : 'main_500'}
       content={options.map((option) => (
         <button
           key={option.id}
@@ -55,6 +55,7 @@ export const Dropdown = ({
         </button>
       ))}
       contentHeight={options.length * 56}
+      disabled={options.length === 0}
     />
   );
 };

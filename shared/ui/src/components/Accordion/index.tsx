@@ -13,6 +13,7 @@ export interface AccordionProps
   rightElement?: ReactNode;
   onAccordionOpened?: () => void;
   onAccordionClosed?: () => void;
+  disabled?: boolean;
 }
 /**
  * @param padding 제목 패딩 기본:[20,10]
@@ -20,11 +21,13 @@ export interface AccordionProps
  * [num,num]:상하, 좌우
  * [num,num,num,num]:상,우,하,좌
  * @param title : 제목
- * @param content:
+ * @param content: 아코디언 내용
  * @param textTypo
  * @param textColor
  * @param contentHeight 컨텐츠 높이 지정되면 애니메이션 적용
- * @param initialState
+ * @param initialState 초기 오픈 상태
+ * @param disabled
+ * @param rightElement : 오른쪽 (핸들러 왼쪽)에 뱃지 같은거 넣을겨
  */
 
 export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
@@ -40,18 +43,21 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
       contentHeight,
       initialState = false,
       rightElement,
+      disabled = false,
     }: AccordionProps,
     ref,
   ) => {
     const [isOpen, setIsOpen] = useState(initialState);
 
     const handleAccordion = () => {
-      if (isOpen) {
-        setIsOpen((prev) => !prev);
-        onAccordionClosed && onAccordionClosed();
-      } else {
-        setIsOpen((prev) => !prev);
-        onAccordionOpened && onAccordionOpened();
+      if (!disabled) {
+        if (isOpen) {
+          setIsOpen((prev) => !prev);
+          onAccordionClosed && onAccordionClosed();
+        } else {
+          setIsOpen((prev) => !prev);
+          onAccordionOpened && onAccordionOpened();
+        }
       }
     };
 
@@ -64,7 +70,7 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
               rightElement={
                 <FlexBox align={'center'} gap={12}>
                   {rightElement}
-                  <Handler open={isOpen} />
+                  <Handler open={isOpen} disabled={disabled} />
                 </FlexBox>
               }
               padding={padding}
@@ -88,10 +94,11 @@ const AccordianHeader = styled.button`
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_200};
 `;
 
-const Handler = styled(ChevronDown)<{ open: boolean }>`
+const Handler = styled(ChevronDown)<{ open: boolean; disabled: boolean }>`
   width: 18px;
   height: 18px;
-  fill: ${({ theme }) => theme.palette.gray_400};
+  fill: ${({ theme, disabled }) =>
+    disabled ? theme.palette.gray_200 : theme.palette.gray_400};
   ${({ open }) =>
     open &&
     css`
