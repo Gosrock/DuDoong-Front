@@ -26,15 +26,20 @@ const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
   const { instance } = useTossPayments(data.totalPrice);
   const { orderMutate } = useOrderMutation(instance);
+  const skipSelectOption = data.items[0].answers.length === 0;
+
+  const handleNavBarButton = () => {
+    // 옵션 선택이 생략되었을땐 바로 상세페이지로 뒤로가기
+    return skipSelectOption
+      ? router.replace(`/events/${router.query.eventId}`)
+      : router.back();
+  };
+
   return (
     <>
       <DDHead title="두둥!" />
       <Main>
-        <NavBar
-          backHandler={() => {
-            router.back();
-          }}
-        />
+        <NavBar backHandler={handleNavBarButton} />
         {/* 헤더 */}
         <BookHeader
           title="결제하기"
