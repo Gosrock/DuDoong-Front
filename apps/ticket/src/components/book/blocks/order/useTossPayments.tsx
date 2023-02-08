@@ -1,5 +1,4 @@
-import { FlexBox, SyncLoader } from '@dudoong/ui';
-import { css } from '@emotion/react';
+import { getCount } from '@dudoong/utils';
 import {
   ANONYMOUS,
   loadPaymentWidget,
@@ -9,10 +8,9 @@ import { useEffect, useState } from 'react';
 
 export interface TossPaymentWidgets {
   instance: PaymentWidgetInstance | null;
-  Payment: () => JSX.Element;
 }
 
-const useTossPayments = (): TossPaymentWidgets => {
+const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
   const [widgetInstance, setWidgetInstance] =
     useState<PaymentWidgetInstance | null>(null);
   const initWidget = async () => {
@@ -24,24 +22,21 @@ const useTossPayments = (): TossPaymentWidgets => {
   };
 
   useEffect(() => {
-    if (!widgetInstance) {
-      initWidget();
-    } else {
-      console.log(widgetInstance);
-      widgetInstance.renderPaymentMethods('#payment-method', 15000);
+    if (totalPrice !== '0원') {
+      if (!widgetInstance) {
+        initWidget();
+      } else {
+        console.log(widgetInstance);
+        widgetInstance.renderPaymentMethods(
+          '#payment-method',
+          getCount(totalPrice),
+        );
+      }
     }
   }, [widgetInstance]);
 
   return {
     instance: widgetInstance,
-    Payment: () =>
-      widgetInstance ? (
-        <div id="payment-method" />
-      ) : (
-        <FlexBox align={'center'} css={{ marginTop: '30px' }}>
-          <SyncLoader />
-        </FlexBox>
-      ),
   };
 };
 

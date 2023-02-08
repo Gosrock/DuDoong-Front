@@ -3,9 +3,11 @@ import {
   Button,
   ButtonSet,
   Divider,
+  FlexBox,
   ListHeader,
   NavBar,
   Spacing,
+  SyncLoader,
 } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
 import { AddCartResponse } from '@lib/apis/cart/cartType';
@@ -22,17 +24,22 @@ import useTossPayments from './blocks/order/useTossPayments';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
-  const { instance, Payment } = useTossPayments();
+  const { instance } = useTossPayments(data.totalPrice);
   const { orderMutate } = useOrderMutation(instance);
+  const skipSelectOption = data.items[0].answers.length === 0;
+
+  const handleNavBarButton = () => {
+    // 옵션 선택이 생략되었을땐 바로 상세페이지로 뒤로가기
+    return skipSelectOption
+      ? router.replace(`/events/${router.query.eventId}`)
+      : router.back();
+  };
+
   return (
     <>
       <DDHead title="두둥!" />
       <Main>
-        <NavBar
-          backHandler={() => {
-            router.back();
-          }}
-        />
+        <NavBar backHandler={handleNavBarButton} />
         {/* 헤더 */}
         <BookHeader
           title="결제하기"
@@ -41,8 +48,8 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <Divider />
         {/* 티켓옵션 프리뷰 */}
         <ListHeader size="listHeader_18" title={'내 티켓 확인하기'} />
-        {data.items.map((item) => (
-          <ItemPreview item={item} key={item.name} />
+        {data.items.map((item, i) => (
+          <ItemPreview item={item} key={`${item.name}-${i}`} />
         ))}
         <Divider />
         {/* 할인 쿠폰 TODO : 토스페이먼트 메소드에서 적용하기 */}
@@ -52,15 +59,26 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         {/* 결제금액 */}
         <ListHeader size="listHeader_18" title={'결제금액'} />
         <Totalprice price={data.totalPrice} />
-        <Divider />
         {/* 결제정보 */}
-        <ListHeader size="listHeader_18" title={'결제정보'} />
-        <Payment />
+        {data.totalPrice !== '0원' && (
+          <>
+            <Divider />
+            <ListHeader size="listHeader_18" title={'결제정보'} />
+            {instance ? (
+              <div id="payment-method" />
+            ) : (
+              <FlexBox align={'center'} css={{ marginTop: '30px' }}>
+                <SyncLoader />
+              </FlexBox>
+            )}
+          </>
+        )}
         <Spacing size={120} />
 
         {/* 다음으로 버튼 */}
         <ButtonSet bottomFixed backGradient>
           <Button
+            fullWidth
             onClick={() => {
               orderMutate({ couponId: null, cartId: data.cartId });
             }}
@@ -76,7 +94,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
 export default Order;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { state } = context.query;
+  const { state, eventId } = context.query;
   const { cookies } = context.req;
 
   if (!state) {
@@ -87,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       else return { redirect: { destination: '/', permanent: false } };
     } catch (err: any) {
       //TODO : 로그인 후 리다이렉트 url QA때 토큰 이리저리 해보면서 확인
-      const redirectUrl = '/book/order';
+      const redirectUrl = `events/${eventId}`;
       return {
         redirect: {
           destination: `/login/expired?redirect=${redirectUrl}`,

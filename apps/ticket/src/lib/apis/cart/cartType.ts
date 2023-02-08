@@ -29,6 +29,7 @@ export interface CartItemResponse {
   itemprice: string;
   cartLinePrice: string;
   packedQuantity: number;
+  eachOptionPrice: string;
 }
 
 export interface OptionAnswer {
@@ -39,4 +40,4 @@ export interface OptionAnswer {
   additionalPrice: string;
 }
 
-export type OptionGroupType = 'Y/N' | ' 객관식' | '주관식';
+export type OptionGroupType = 'Y/N' | '객관식' | '주관식';

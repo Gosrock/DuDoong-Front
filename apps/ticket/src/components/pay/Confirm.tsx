@@ -13,9 +13,7 @@ const Confirm = () => {
     OrderApi.CONFIRM_ORDER(orderId as string),
     {
       onSuccess: (data) => {
-        router.replace('/pay/success', {
-          query: { data: JSON.stringify(data) },
-        });
+        router.replace(`/pay/success?order=${data.orderUuid}`, '/pay/success');
       },
     },
   );
@@ -29,13 +27,7 @@ const Confirm = () => {
 
   return (
     <>
-      <FullScreen
-        css={css`
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `}
-      >
+      <FullScreen verticalCenter>
         <SyncLoader />
       </FullScreen>
     </>

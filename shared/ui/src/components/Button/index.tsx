@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { darken } from 'polished';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { theme } from '../../theme';
 import { Spinner } from '../Loader/Spinner';
 import { Text } from '../Text';

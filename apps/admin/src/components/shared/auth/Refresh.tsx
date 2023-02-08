@@ -14,13 +14,7 @@ const Refresh = () => {
 
   if (state === 'loading') {
     return (
-      <FullScreen
-        css={css`
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `}
-      >
+      <FullScreen verticalCenter>
         <SyncLoader />
       </FullScreen>
     );
