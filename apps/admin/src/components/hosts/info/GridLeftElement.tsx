@@ -11,35 +11,41 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import encodeFileToBase64 from '@lib/utils/encodeFileToBase64';
+import { ImageInfoType } from '@lib/hooks/usePresignedUrl';
 
 interface GridLeftElementProps {
-  hostName: string;
-  imageurl: string;
-  setImage: (image: File) => void;
+  hostName: string | null;
+  imageurl: string | null;
+  setImageInfo: React.Dispatch<React.SetStateAction<ImageInfoType>>;
 }
 
 const GridLeftElement = ({
   hostName,
   imageurl,
-  setImage,
+  setImageInfo,
 }: GridLeftElementProps) => {
-  const [curImage, setCurImage] = useState<any>(imageurl);
+  const [curImage, setCurImage] = useState<string | null>('');
 
   useEffect(() => setCurImage(imageurl), [imageurl]);
 
   const uploadHandler = (image: File) => {
     encodeFileToBase64(image, setCurImage);
-    setImage(image);
+    setImageInfo((prev) => {
+      return { ...prev, image: image };
+    });
   };
 
   const deleteImageHandler = () => {
-    setCurImage('');
+    setCurImage(null);
+    setImageInfo((prev) => {
+      return { ...prev, image: null, key: '' };
+    });
   };
 
   return (
     <div>
       <ListHeader
-        title={<ListHeaderTitle hostName={hostName} />}
+        title={<ListHeaderTitle hostName={hostName ? hostName : 'OOO'} />}
         size={'listHeader_18'}
         padding={[32, 0, 12, 0]}
         description={'호스트 이름은 수정할 수 없어요.'}
@@ -50,7 +56,7 @@ const GridLeftElement = ({
         size={'listHeader_18'}
         padding={[32, 0, 12, 0]}
       />
-      {curImage === '' || undefined ? (
+      {curImage === null || '' ? (
         <DropZoneWrapper color="gray_200" padding={24}>
           <DropZone
             type="profile"

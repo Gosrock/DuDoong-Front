@@ -3,7 +3,7 @@ import GridRightElement from '@components/hosts/info/GridRightElement';
 import ContentGrid from '@components/shared/layout/ContentGrid';
 import { ListHeader } from '@dudoong/ui';
 import useBottomButton from '@lib/hooks/useBottomButton';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useInputs } from '@dudoong/utils';
 import {
   HostDetailResponse,
@@ -17,14 +17,8 @@ import { useMutation } from '@tanstack/react-query';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 
 const Info = () => {
-  const [image, setImage] = useState<File | null>(null);
-  const {
-    imageInfo,
-    setImageInfo,
-    uploadImageToS3,
-    getImageExtension,
-    postImageMutation,
-  } = usePresignedUrl();
+  const hostId = useLocation().pathname.split('/')[2];
+  const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(hostId);
   const { displayButtons } = useBottomButton();
   const [form, onChange, , initForm] = useInputs<UpdateHostRequest>({
     profileImageKey: '',
@@ -32,15 +26,6 @@ const Info = () => {
     contactNumber: '',
     contactEmail: '',
   });
-
-  useEffect(() => {
-    if (image) {
-      postImageMutation.mutate({
-        hostId: hostId,
-        imageFileExtension: getImageExtension(image!.type),
-      });
-    }
-  }, [image]);
 
   // profile 수정 api
   const postEventMutation = useMutation(HostApi.PATCH_HOST_PROFILE, {
@@ -50,17 +35,18 @@ const Info = () => {
   });
 
   // 호스트 정보
-  const { pathname } = useLocation();
-  const hostId = pathname.split('/')[2];
   const { data, status } = useQuery(
     ['hostDetail'],
     () => HostApi.GET_HOST_DETAIL(hostId),
     {
       onSuccess: (data: HostDetailResponse) => {
         if (data.profileImageUrl) {
-          setImageInfo({
-            presignedUrl: '',
-            key: getKeyFromUrl(data.profileImageUrl),
+          setImageInfo((prev) => {
+            return {
+              ...prev,
+              presignedUrl: '',
+              key: getKeyFromUrl(data.profileImageUrl),
+            };
           });
         }
         initForm({
@@ -77,15 +63,17 @@ const Info = () => {
   // 하단부 버튼
   const buttonClickHandler = () => {
     // 이미지 post
-    if (image) {
-      uploadImageToS3(imageInfo.presignedUrl, image);
+    console.log(imageInfo);
+    if (imageInfo.image) {
+      console.log('upload image');
+      uploadImageToS3();
     }
     // 호스트 정보 post
     postEventMutation.mutate({
       hostId: hostId,
       payload: { ...form, profileImageKey: imageInfo.key },
     });
-    console.log(form, image, imageInfo);
+    // console.log(form, imageInfo);
   };
   useEffect(() => {
     const buttonDisable = checkButtonDisable(form, imageInfo);
@@ -95,7 +83,7 @@ const Info = () => {
       firstButtonDisable: buttonDisable,
       isActive: true,
     });
-  }, [form, image, imageInfo]);
+  }, [form, imageInfo]);
 
   return (
     <>
@@ -107,8 +95,8 @@ const Info = () => {
       <ContentGrid>
         <GridLeftElement
           hostName={status === 'success' ? data!.name : ''}
-          imageurl={status === 'success' ? data!.profileImageUrl : ''}
-          setImage={setImage}
+          imageurl={status === 'success' ? data!.profileImageUrl : null}
+          setImageInfo={setImageInfo}
         />
         <GridRightElement onChange={onChange} {...form} />
       </ContentGrid>
@@ -125,7 +113,7 @@ const checkButtonDisable = (
     props.contactEmail === '' ||
     props.contactNumber === '' ||
     props.introduce === '' ||
-    imageInfo.key === null
+    imageInfo.key === ''
   )
     return true;
   return false;
