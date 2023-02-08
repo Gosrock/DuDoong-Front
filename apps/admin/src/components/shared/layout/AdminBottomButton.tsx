@@ -2,6 +2,7 @@ import { Button, ButtonVarient, FlexBox, Padding } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { bottomButtonState } from '@store/bottomButton';
 import { useRecoilValue } from 'recoil';
+import { keyframes } from '@emotion/react';
 
 export type AdminBottomButtonTypeKey =
   | 'save'
@@ -107,6 +108,15 @@ const getText = (buttonTypes: string[], index: 0 | 1): string => {
 
 // -------------------------------------------------------
 
+const buttonMov = keyframes`
+  0% {
+    transform: translateY(96px);
+  }
+  100% {
+      transform: translateY(0px);
+  }
+`;
+
 const Wrapper = styled(Padding)`
   position: fixed;
   bottom: 0px;
@@ -114,7 +124,8 @@ const Wrapper = styled(Padding)`
   width: calc(100vw - 252px);
   height: 96px;
   border-top: 1px solid ${({ theme }) => theme.palette.gray_200};
-
+  background-color: ${({ theme }) => theme.palette.gray_100};
+  animation: ${buttonMov} 0.4s ease-out;
   & > div {
     max-width: 876px;
     margin: 0 auto;

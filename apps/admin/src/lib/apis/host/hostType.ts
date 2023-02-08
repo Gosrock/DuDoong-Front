@@ -14,19 +14,19 @@ export interface HostProfileResponse {
 }
 
 export interface CreateHostRequest {
-  name?: string;
-  contactEmail?: string;
-  contactNumber?: string;
+  name: string;
+  contactEmail: string;
+  contactNumber: string;
 }
 
 export interface CreateHostResponse {
-  hostId?: number;
-  name?: string;
-  introduce?: string;
-  profileImageUrl?: string;
-  contactEmail?: string;
-  contactNumber?: string;
-  partner?: boolean;
+  hostId: number;
+  name: string;
+  introduce: string;
+  profileImageUrl: string;
+  contactEmail: string;
+  contactNumber: string;
+  partner: boolean;
   masterUserId: number;
 }
 type RoleType = '마스터' | '매니저' | '게스트';
@@ -52,4 +52,19 @@ export interface HostUser {
   profileImage: string;
   createdAt: string;
   role: RoleType;
+}
+
+export interface UpdateHostRequest {
+  profileImageKey: string;
+  introduce: string;
+  contactNumber: string;
+  contactEmail: string;
+}
+
+export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';
+
+export interface ImageUrlResponse {
+  presignedUrl: string;
+  key: string;
+  url: string;
 }

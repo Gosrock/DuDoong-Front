@@ -2,22 +2,11 @@ import styled from '@emotion/styled';
 import { HTMLAttributes, ReactNode } from 'react';
 
 export interface ContenGridProps extends HTMLAttributes<HTMLDivElement> {
-  leftElement?: ReactNode;
-  rightElement?: ReactNode;
   rowGap?: number;
 }
 
-const ContentGrid = ({
-  leftElement,
-  rightElement,
-  rowGap = 0,
-}: ContenGridProps) => {
-  return (
-    <Container rowGap={rowGap}>
-      {leftElement}
-      {rightElement}
-    </Container>
-  );
+const ContentGrid = ({ rowGap = 0, children }: ContenGridProps) => {
+  return <Container rowGap={rowGap}>{children}</Container>;
 };
 export default ContentGrid;
 

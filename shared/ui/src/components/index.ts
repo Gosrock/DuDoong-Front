@@ -5,6 +5,7 @@ export * from './Counter';
 export * from './Divider';
 export * from './Dropdown';
 export * from './DropZone';
+export * from './Footer';
 export * from './Header';
 export * from './ListHeader';
 export * from './Loader/Spinner';

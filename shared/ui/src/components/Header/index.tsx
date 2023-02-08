@@ -17,7 +17,7 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
       <Padding size={[0, 38]} fill>
         <FlexBox justify={'space-between'} align={'center'}>
           <button
-            onClick={() => (window.location.href = 'https://dudoong.com')}
+            onClick={() => (window.location.href = window.location.origin)}
             css={css`
               &:hover {
               }
@@ -49,4 +49,5 @@ const Wrapper = styled(FlexBox)`
   height: 64px;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_200};
+  box-sizing: border-box;
 `;

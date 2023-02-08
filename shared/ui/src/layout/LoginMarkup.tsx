@@ -1,5 +1,6 @@
-import { Button, FlexBox, theme, Text, Spacing } from '@dudoong/ui';
-import BorderBox from '../layout/BorderBox';
+import { Button, theme, Text, Spacing, FlexBox, TextProps } from '@dudoong/ui';
+import { FlexBoxProps } from '@dudoong/ui';
+import BorderBox from './BorderBox';
 import { css } from '@emotion/react';
 import Logo from '../assets/logo/Logo';
 import Keyboard from '../assets/image/Keyboard';
@@ -9,11 +10,9 @@ import styled from '@emotion/styled';
 
 interface LoginMarkupProps {
   onKakao: () => void;
-  onTerm: () => void;
-  onPolicy: () => void;
 }
 
-const LoginMarkup = ({ onKakao, onTerm, onPolicy }: LoginMarkupProps) => {
+const LoginMarkup = ({ onKakao }: LoginMarkupProps) => {
   return (
     <>
       <Wrapper align={'center'} justify={'center'}>
@@ -26,6 +25,7 @@ const LoginMarkup = ({ onKakao, onTerm, onPolicy }: LoginMarkupProps) => {
           css={css`
             width: 595px;
             height: 584px;
+            z-index: 1;
           `}
         >
           <FlexBox align={'center'} justify={'center'} direction={'column'}>
@@ -40,7 +40,12 @@ const LoginMarkup = ({ onKakao, onTerm, onPolicy }: LoginMarkupProps) => {
             <CustomText
               typo={'P_Text_16_R'}
               color={'gray_400'}
-              onClick={onTerm}
+              onClick={() => {
+                window.open(
+                  'https://9yujin.notion.site/7b2b68ddd6054579befc86baf691db9f',
+                  '_blank',
+                );
+              }}
             >
               두둥 서비스 약관
             </CustomText>
@@ -48,7 +53,12 @@ const LoginMarkup = ({ onKakao, onTerm, onPolicy }: LoginMarkupProps) => {
             <CustomText
               typo={'P_Text_16_R'}
               color={'gray_400'}
-              onClick={onPolicy}
+              onClick={() => {
+                window.open(
+                  'https://9yujin.notion.site/91eafd1fc2864386b9961d8e5277c2df',
+                  '_blank',
+                );
+              }}
             >
               두둥 개인정보 처리방침
             </CustomText>
@@ -61,16 +71,19 @@ const LoginMarkup = ({ onKakao, onTerm, onPolicy }: LoginMarkupProps) => {
 
 export default LoginMarkup;
 
-const Wrapper = styled(FlexBox)`
-  width: 100vw;
+const Wrapper = styled((props: FlexBoxProps) => <FlexBox {...props} />)`
+  width: 100%;
   height: 100vh;
-  background-color: ${theme.palette.gray_100};
+  background-color: ${({ theme }) => theme.palette.gray_100};
   overflow-x: hidden;
   z-index: 100000;
 `;
 
-const CustomText = styled(Text)`
+const CustomText = styled((props: TextProps) => <Text {...props} />)`
   cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const KeyboardItem = () => {
@@ -79,7 +92,8 @@ const KeyboardItem = () => {
       css={css`
         position: fixed;
         top: 0px;
-        left: 90px;
+        left: 5vw;
+        z-index: 2;
       `}
     >
       <Keyboard />
@@ -93,7 +107,8 @@ const DoongDoongsItem = () => {
       css={css`
         position: fixed;
         bottom: -3px;
-        right: 120px;
+        right: 6vw;
+        z-index: 2;
       `}
     >
       <DoongDoongs />
@@ -107,7 +122,7 @@ const DotsItem1 = () => {
       css={css`
         position: fixed;
         top: 195px;
-        left: 240px;
+        left: 12vw;
       `}
     >
       <Dots />
@@ -121,7 +136,7 @@ const DotsItem2 = () => {
       css={css`
         position: fixed;
         bottom: 150px;
-        right: 219px;
+        right: 11vw;
       `}
     >
       <Dots />

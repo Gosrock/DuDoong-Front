@@ -1,4 +1,4 @@
-import { Button } from '@dudoong/ui';
+import { Button, Footer } from '@dudoong/ui';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import DDHead from '@components/shared/Layout/NextHead';
 const Home = () => {
@@ -12,6 +12,9 @@ const Home = () => {
       <main>
         <Button onClick={openLoginTest}>로그인 열기</Button>
       </main>
+      <section>
+        <Footer />
+      </section>
     </>
   );
 };

@@ -85,7 +85,7 @@ export const globalStyle = css`
   } */
 
   :root {
-    --main-width: 572px;
+    --main-width: 600px;
   }
 
   a {
