@@ -6,17 +6,7 @@ const Login = () => {
     const data = await AuthApi.OAUTH_LINK();
     window.location.href = data.link;
   };
-  return (
-    <LoginMarkup
-      onKakao={onLogin}
-      onTerm={() => {
-        console.log('term');
-      }}
-      onPolicy={() => {
-        console.log('policy');
-      }}
-    />
-  );
+  return <LoginMarkup onKakao={onLogin} />;
 };
 
 export default Login;
