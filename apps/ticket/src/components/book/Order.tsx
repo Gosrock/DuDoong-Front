@@ -4,6 +4,7 @@ import {
   ButtonSet,
   Divider,
   FlexBox,
+  Footer,
   ListHeader,
   NavBar,
   Spacing,
@@ -73,7 +74,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             )}
           </>
         )}
-        <Spacing size={120} />
+        <Spacing size={40} />
 
         {/* 다음으로 버튼 */}
         <ButtonSet bottomFixed backGradient>
@@ -86,6 +87,11 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             {data.totalPrice} 결제하기
           </Button>
         </ButtonSet>
+
+        <section>
+          <Footer />
+        </section>
+        <Spacing size={120} color={'gray_200'} />
       </Main>
     </>
   );

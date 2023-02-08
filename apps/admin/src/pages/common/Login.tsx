@@ -1,5 +1,5 @@
+import LoginMarkup from '@dudoong/ui/src/layout/LoginMarkup';
 import { AuthApi } from '@dudoong/utils';
-import LoginMarkup from '@dudoong/ui/src/markup/LoginMarkup';
 
 const Login = () => {
   const onLogin = async () => {

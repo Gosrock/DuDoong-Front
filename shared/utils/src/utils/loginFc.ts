@@ -3,7 +3,7 @@ import { AuthApi } from '../apis';
 
 export const loginFc = {
   login: async (options?: { redirect: string }) => {
-    if (options && options.redirect.length > 0) {
+    if (options && options.redirect) {
       document.cookie = serialize('redirectUrl', options.redirect, {
         path: '/',
         maxAge: 60,
