@@ -64,6 +64,7 @@ const AdminMenu = ({ title }: { title: string }) => {
 
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);
+    hideButtons();
     navigate(`/${page}/${id}/${pageType.url[menuItemKey]}`, { replace: true });
   };
 

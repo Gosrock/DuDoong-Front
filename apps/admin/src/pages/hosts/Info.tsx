@@ -25,6 +25,10 @@ const Info = () => {
     contactNumber: '',
     contactEmail: '',
   });
+  const { setButtonInfo } = useBottomButton({
+    type: 'save',
+    isActive: true,
+  });
 
   // profile 수정 api
   const postEventMutation = useMutation(HostApi.PATCH_HOST_PROFILE, {
@@ -62,28 +66,22 @@ const Info = () => {
   // 하단부 버튼
   const buttonClickHandler = () => {
     // 이미지 post
-    // if (imageInfo.image) {
-    //   console.log('upload image');
-    //   uploadImageToS3();
-    // }
-    // // 호스트 정보 post
-    // postEventMutation.mutate({
-    //   hostId: hostId,
-    //   payload: { ...form, profileImageKey: imageInfo.key },
-    // });
-    // console.log(form, imageInfo);
-    console.log('click button');
+    if (imageInfo.image) {
+      console.log('upload image');
+      uploadImageToS3();
+    }
+    // 호스트 정보 post
+    postEventMutation.mutate({
+      hostId: hostId,
+      payload: { ...form, profileImageKey: imageInfo.key },
+    });
+    console.log('click button', form, imageInfo);
   };
-  const { setButtonDisableStatus } = useBottomButton({
-    type: 'save',
-    firstButtonClickHandler: buttonClickHandler,
-    secondButtonClickHandler: () => {
-      console.log('second');
-    },
-    isActive: true,
-  });
   useEffect(() => {
-    setButtonDisableStatus({ first: checkButtonDisable(form, imageInfo) });
+    setButtonInfo({
+      firstHandler: buttonClickHandler,
+      firstDisable: checkButtonDisable(form, imageInfo),
+    });
   }, [form, imageInfo]);
 
   return (

@@ -9,25 +9,25 @@ import { useEffect } from 'react';
 
 interface useBottomButtonProps {
   type?: AdminBottomButtonTypeKey;
-  firstButtonClickHandler?: () => void;
-  secondButtonClickHandler?: () => void;
   isActive: boolean;
 }
 
-const useBottomButton = ({
-  isActive,
-  type = 'save',
-  firstButtonClickHandler = () => {},
-  secondButtonClickHandler = () => {},
-}: useBottomButtonProps) => {
+interface setButtonInfoProps {
+  firstHandler: () => void;
+  firstDisable: boolean;
+  secondHandler?: () => void;
+  secondDisable?: boolean;
+}
+
+const useBottomButton = ({ isActive, type = 'save' }: useBottomButtonProps) => {
   const setButton = useSetRecoilState(bottomButtonState);
 
   useEffect(() => {
     setButton({
       type: type,
-      firstButtonClickHandler: firstButtonClickHandler,
+      firstButtonClickHandler: () => {},
       firstButtonDisable: true,
-      secondButtonClickHandler: secondButtonClickHandler,
+      secondButtonClickHandler: () => {},
       secondButtonDisable: true,
       isActive: isActive,
     });
@@ -37,23 +37,24 @@ const useBottomButton = ({
     setButton(initBottomButtonState as BottomButtonType);
   };
 
-  const setButtonDisableStatus = ({
-    first,
-    second = false,
-  }: {
-    first: boolean;
-    second?: boolean;
-  }) => {
+  const setButtonInfo = ({
+    firstHandler,
+    firstDisable,
+    secondHandler = () => {},
+    secondDisable = true,
+  }: setButtonInfoProps) => {
     setButton((prev) => {
       return {
         ...prev,
-        firstButtonDisable: first,
-        secondButtonDisable: second,
+        firstButtonClickHandler: firstHandler,
+        firstButtonDisable: firstDisable,
+        secondButtonClickHandler: secondHandler,
+        secondButtonDisable: secondDisable,
       };
     });
   };
 
-  return { setButtonDisableStatus, hideButtons };
+  return { setButtonInfo, hideButtons };
 };
 
 export default useBottomButton;
