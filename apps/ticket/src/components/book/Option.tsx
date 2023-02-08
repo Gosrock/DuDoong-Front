@@ -1,8 +1,17 @@
 import Main from '@components/shared/Layout/Main';
-import { Divider, NavBar, Spacing } from '@dudoong/ui';
+import {
+  Button,
+  ButtonSet,
+  Divider,
+  FullScreen,
+  NavBar,
+  Spacing,
+  Spinner,
+  SyncLoader,
+} from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';
 import TotalOptions from './blocks/option/TotalOptions';
 import type { SelectedTicketState } from '@components/events/blocks/Tickets';
@@ -10,6 +19,7 @@ import type { GetServerSideProps } from 'next';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
+import useOptionForm from './utils/useOptionForm';
 
 interface OptionProps {
   selectedTicketState: SelectedTicketState;
@@ -18,35 +28,70 @@ interface OptionProps {
 
 const Option = ({ selectedTicketState, optionGroups }: OptionProps) => {
   const router = useRouter();
-  const { eventName, ticketName, quantity } = selectedTicketState;
+  const { eventId, ticketName, itemId, quantity, eventName } =
+    selectedTicketState;
   const [toggle, setToggle] = useState<boolean>(false);
 
-  return (
-    <>
-      <DDHead title="두둥!" />
-      <Main>
-        <NavBar
-          backHandler={() => {
-            router.back();
-          }}
-        />
-        <BookHeader
-          title="옵션 선택하기"
-          description={[eventName, ticketName, quantity]}
-        />
-        <Divider />
-
-        {/* 옵션 선택하기 폼 */}
-        <TotalOptions
-          selectedTicketState={selectedTicketState}
-          toggle={toggle}
-          setToggle={() => setToggle(!toggle)}
-          optionGroups={optionGroups}
-        />
-        <Spacing size={120} />
-      </Main>
-    </>
+  const { complete, onChangeForm, isloading, onSubmitForm } = useOptionForm(
+    optionGroups,
+    itemId,
+    quantity,
+    eventId,
+    toggle,
   );
+
+  const skipSelectOptions = optionGroups.length === 0;
+
+  useEffect(() => {
+    skipSelectOptions && onSubmitForm();
+  }, []);
+
+  if (skipSelectOptions) {
+    return (
+      <FullScreen verticalCenter>
+        <SyncLoader />
+      </FullScreen>
+    );
+  } else
+    return (
+      <>
+        <DDHead title="두둥!" />
+        <Main>
+          <NavBar
+            backHandler={() => {
+              router.back();
+            }}
+          />
+          <BookHeader
+            title="옵션 선택하기"
+            description={[eventName, ticketName, quantity]}
+          />
+          <Divider />
+
+          {/* 옵션 선택하기 폼 */}
+          <TotalOptions
+            selectedTicketState={selectedTicketState}
+            toggle={toggle}
+            setToggle={() => setToggle(!toggle)}
+            optionGroups={optionGroups}
+            onChangeForm={onChangeForm}
+          />
+          <Spacing size={120} />
+
+          {/* 선택 완료 버튼 */}
+          <ButtonSet bottomFixed backGradient>
+            <Button
+              fullWidth
+              onClick={onSubmitForm}
+              disabled={!complete}
+              isLoading={isloading}
+            >
+              선택 완료
+            </Button>
+          </ButtonSet>
+        </Main>
+      </>
+    );
 };
 
 export default Option;
@@ -62,6 +107,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       parsedState.eventId,
       parsedState.itemId,
     );
+
     return {
       props: {
         selectedTicketState: parsedState,

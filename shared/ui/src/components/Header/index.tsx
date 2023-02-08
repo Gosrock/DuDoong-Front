@@ -49,4 +49,5 @@ const Wrapper = styled(FlexBox)`
   height: 64px;
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_200};
+  box-sizing: border-box;
 `;

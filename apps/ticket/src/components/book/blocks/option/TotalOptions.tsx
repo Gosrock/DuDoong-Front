@@ -1,13 +1,6 @@
-import useOptionForm from '@components/book/utils/useOptionForm';
 import { SelectedTicketState } from '@components/events/blocks/Tickets';
-import {
-  Accordion,
-  Button,
-  ButtonSet,
-  Divider,
-  ListRow,
-  ToggleButton,
-} from '@dudoong/ui';
+import { Accordion, Divider, ListRow, ToggleButton } from '@dudoong/ui';
+import { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import ItemOptions from './ItemOptions';
 
@@ -15,6 +8,11 @@ interface TotalOptionsProps {
   toggle: boolean;
   selectedTicketState: SelectedTicketState;
   setToggle: () => void;
+  onChangeForm: (
+    itemIdx: number,
+    optionGroupId: number,
+    answer: AddCartOptionAnswer,
+  ) => void;
   optionGroups: OptionGroupResponse[];
 }
 
@@ -22,16 +20,10 @@ const TotalOptions = ({
   selectedTicketState,
   toggle,
   setToggle,
+  onChangeForm,
   optionGroups,
 }: TotalOptionsProps) => {
-  const { eventId, ticketName, itemId, quantity } = selectedTicketState;
-  const { complete, onChangeForm, isloading, onSubmitForm } = useOptionForm(
-    optionGroups,
-    itemId,
-    quantity,
-    eventId,
-    toggle,
-  );
+  const { ticketName, quantity } = selectedTicketState;
 
   const contentHeight = optionGroups.reduce((acc, cur) => {
     return (acc += cur.type === '주관식' ? 240 : 168);
@@ -64,7 +56,7 @@ const TotalOptions = ({
                 />
               }
               title={`${ticketName} (${idx + 1}/${quantity})`}
-              initialState={idx === 0 ? true : false}
+              initialState={true}
               contentHeight={contentHeight}
             />
           ))}
@@ -78,18 +70,6 @@ const TotalOptions = ({
           />
         </>
       )}
-
-      {/* 선택 완료 버튼 */}
-      <ButtonSet bottomFixed backGradient>
-        <Button
-          fullWidth
-          onClick={onSubmitForm}
-          disabled={!complete}
-          isLoading={isloading}
-        >
-          선택 완료
-        </Button>
-      </ButtonSet>
     </>
   );
 };
