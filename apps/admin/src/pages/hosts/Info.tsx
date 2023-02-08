@@ -80,6 +80,7 @@ const Info = () => {
     secondButtonClickHandler: () => {
       console.log('second');
     },
+    isActive: true,
   });
   useEffect(() => {
     setButtonDisableStatus({ first: checkButtonDisable(form, imageInfo) });

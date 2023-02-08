@@ -8,14 +8,16 @@ import { AdminBottomButtonTypeKey } from '@components/shared/layout/AdminBottomB
 import { useEffect } from 'react';
 
 interface useBottomButtonProps {
-  type: AdminBottomButtonTypeKey;
-  firstButtonClickHandler: () => void;
+  type?: AdminBottomButtonTypeKey;
+  firstButtonClickHandler?: () => void;
   secondButtonClickHandler?: () => void;
+  isActive: boolean;
 }
 
 const useBottomButton = ({
-  type,
-  firstButtonClickHandler,
+  isActive,
+  type = 'save',
+  firstButtonClickHandler = () => {},
   secondButtonClickHandler = () => {},
 }: useBottomButtonProps) => {
   const setButton = useSetRecoilState(bottomButtonState);
@@ -27,7 +29,7 @@ const useBottomButton = ({
       firstButtonDisable: true,
       secondButtonClickHandler: secondButtonClickHandler,
       secondButtonDisable: true,
-      isActive: true,
+      isActive: isActive,
     });
   }, []);
 
