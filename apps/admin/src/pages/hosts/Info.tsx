@@ -104,16 +104,14 @@ const Info = () => {
         size={'listHeader_24'}
         padding={[32, 0, 40, 0]}
       />
-      <ContentGrid
-        leftElement={
-          <GridLeftElement
-            hostName={status === 'success' ? data!.name : ''}
-            imageurl={status === 'success' ? data!.profileImageUrl : ''}
-            setImage={setImage}
-          />
-        }
-        rightElement={<GridRightElement onChange={onChange} {...form} />}
-      />
+      <ContentGrid>
+        <GridLeftElement
+          hostName={status === 'success' ? data!.name : ''}
+          imageurl={status === 'success' ? data!.profileImageUrl : ''}
+          setImage={setImage}
+        />
+        <GridRightElement onChange={onChange} {...form} />
+      </ContentGrid>
     </>
   );
 };
