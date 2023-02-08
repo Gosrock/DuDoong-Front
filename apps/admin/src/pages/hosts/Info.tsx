@@ -19,7 +19,6 @@ import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 const Info = () => {
   const hostId = useLocation().pathname.split('/')[2];
   const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(hostId);
-  const { displayButtons } = useBottomButton();
   const [form, onChange, , initForm] = useInputs<UpdateHostRequest>({
     profileImageKey: '',
     introduce: '',
@@ -63,26 +62,27 @@ const Info = () => {
   // 하단부 버튼
   const buttonClickHandler = () => {
     // 이미지 post
-    console.log(imageInfo);
-    if (imageInfo.image) {
-      console.log('upload image');
-      uploadImageToS3();
-    }
-    // 호스트 정보 post
-    postEventMutation.mutate({
-      hostId: hostId,
-      payload: { ...form, profileImageKey: imageInfo.key },
-    });
+    // if (imageInfo.image) {
+    //   console.log('upload image');
+    //   uploadImageToS3();
+    // }
+    // // 호스트 정보 post
+    // postEventMutation.mutate({
+    //   hostId: hostId,
+    //   payload: { ...form, profileImageKey: imageInfo.key },
+    // });
     // console.log(form, imageInfo);
+    console.log('click button');
   };
+  const { setButtonDisableStatus } = useBottomButton({
+    type: 'save',
+    firstButtonClickHandler: buttonClickHandler,
+    secondButtonClickHandler: () => {
+      console.log('second');
+    },
+  });
   useEffect(() => {
-    const buttonDisable = checkButtonDisable(form, imageInfo);
-    displayButtons({
-      type: 'save',
-      firstButtonClickHandler: buttonClickHandler,
-      firstButtonDisable: buttonDisable,
-      isActive: true,
-    });
+    setButtonDisableStatus({ first: checkButtonDisable(form, imageInfo) });
   }, [form, imageInfo]);
 
   return (

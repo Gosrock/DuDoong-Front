@@ -4,31 +4,54 @@ import {
   initBottomButtonState,
 } from '@store/bottomButton';
 import { useSetRecoilState } from 'recoil';
+import { AdminBottomButtonTypeKey } from '@components/shared/layout/AdminBottomButton';
+import { useEffect } from 'react';
 
-const useBottomButton = () => {
+interface useBottomButtonProps {
+  type: AdminBottomButtonTypeKey;
+  firstButtonClickHandler: () => void;
+  secondButtonClickHandler?: () => void;
+}
+
+const useBottomButton = ({
+  type,
+  firstButtonClickHandler,
+  secondButtonClickHandler = () => {},
+}: useBottomButtonProps) => {
   const setButton = useSetRecoilState(bottomButtonState);
-  const displayButtons = ({
-    type,
-    firstButtonClickHandler,
-    firstButtonDisable,
-    secondButtonClickHandler = () => {},
-    secondButtonDisable = false,
-  }: BottomButtonType) => {
+
+  useEffect(() => {
     setButton({
-      type,
-      firstButtonClickHandler,
-      firstButtonDisable,
-      secondButtonClickHandler,
-      secondButtonDisable,
+      type: type,
+      firstButtonClickHandler: firstButtonClickHandler,
+      firstButtonDisable: true,
+      secondButtonClickHandler: secondButtonClickHandler,
+      secondButtonDisable: true,
       isActive: true,
     });
-  };
+  }, []);
 
   const hideButtons = () => {
     setButton(initBottomButtonState as BottomButtonType);
   };
 
-  return { displayButtons, hideButtons };
+  const setButtonDisableStatus = ({
+    first,
+    second = false,
+  }: {
+    first: boolean;
+    second?: boolean;
+  }) => {
+    setButton((prev) => {
+      return {
+        ...prev,
+        firstButtonDisable: first,
+        secondButtonDisable: second,
+      };
+    });
+  };
+
+  return { setButtonDisableStatus, hideButtons };
 };
 
 export default useBottomButton;
