@@ -38,7 +38,7 @@ const PreviewContent = ({ answers }: { answers: OptionAnswer[] }) => {
     <>
       {answers.map((answer, i) => (
         <Answer
-          key={answer.questionName}
+          key={`${answer.questionName}-${i}`}
           padding={[12, 24]}
           text={
             <Text typo="P_Text_14_M" color="gray_500">

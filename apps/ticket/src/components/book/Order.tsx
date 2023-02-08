@@ -48,8 +48,8 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <Divider />
         {/* 티켓옵션 프리뷰 */}
         <ListHeader size="listHeader_18" title={'내 티켓 확인하기'} />
-        {data.items.map((item) => (
-          <ItemPreview item={item} key={item.name} />
+        {data.items.map((item, i) => (
+          <ItemPreview item={item} key={`${item.name}-${i}`} />
         ))}
         <Divider />
         {/* 할인 쿠폰 TODO : 토스페이먼트 메소드에서 적용하기 */}
