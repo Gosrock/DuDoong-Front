@@ -24,7 +24,6 @@ const TotalOptions = ({
   optionGroups,
 }: TotalOptionsProps) => {
   const { ticketName, quantity } = selectedTicketState;
-
   const contentHeight = optionGroups.reduce((acc, cur) => {
     return (acc += cur.type === '주관식' ? 240 : 168);
   }, 0);

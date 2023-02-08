@@ -25,12 +25,12 @@ export const Dropdown = ({
   setSelectedOption,
 }: DropdownProps) => {
   const [value, setValue] = useState<DropdownOption>(selectedOption);
+  const { accordionRef, toggleAccordion } = useAccordion();
   const handleOptionClick = (option: DropdownOption) => {
     setValue(option);
     setSelectedOption(option);
-    accordionRef.current?.click();
+    toggleAccordion();
   };
-  const accordionRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Accordion
@@ -74,4 +74,13 @@ const DropdownOptionRow = ({ option }: { option: DropdownOption }) => {
       }
     />
   );
+};
+
+export const useAccordion = () => {
+  const toggleAccordion = () => {
+    accordionRef.current?.click();
+  };
+  const accordionRef = useRef<HTMLButtonElement>(null);
+
+  return { accordionRef, toggleAccordion };
 };
