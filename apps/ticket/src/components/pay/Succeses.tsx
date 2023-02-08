@@ -1,16 +1,43 @@
-import { Button, ButtonSet, ListHeader } from '@dudoong/ui';
+import Main from '@components/shared/Layout/Main';
+import {
+  Button,
+  ButtonSet,
+  FlexBox,
+  FullScreen,
+  Padding,
+  Spacing,
+  Text,
+} from '@dudoong/ui';
 import { useRouter } from 'next/router';
+import Keyboard from '@assets/keyboard.svg';
 
 const Success = () => {
   const router = useRouter();
-  console.log(router.query);
+  const orderUuid = router.query.order;
+
   return (
-    <>
-      <ListHeader size="listHeader_28" title="예매가 완료되었어요" />
-      <ButtonSet>
-        <Button onClick={() => router.replace('/')}>홈으로</Button>
-      </ButtonSet>
-    </>
+    <Main>
+      <FullScreen verticalCenter>
+        <FlexBox align={'center'} direction={'column'}>
+          <Keyboard />
+          <Padding size={24}>
+            <Text typo="P_Text_16_M">예매가 완료되었습니다!</Text>
+          </Padding>
+          <ButtonSet varient="horizontal">
+            <Button varient="tertiary" onClick={() => router.replace('/')}>
+              홈으로
+            </Button>
+            <Button
+              varient="secondary"
+              onClick={() => router.replace(`/history/${orderUuid}`)}
+            >
+              예매내역
+            </Button>
+          </ButtonSet>
+          <Spacing size={40} />
+        </FlexBox>
+      </FullScreen>
+    </Main>
   );
 };
 

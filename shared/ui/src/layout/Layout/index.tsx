@@ -42,7 +42,7 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   ${media.pc} {
-    height: calc(100vh - 73px);
+    height: calc(100vh - 64px);
     position: relative;
     overflow: hidden;
 

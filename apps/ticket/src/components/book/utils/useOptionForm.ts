@@ -1,22 +1,26 @@
 import { isEqualObject } from '@dudoong/utils';
+import { CartApi } from '@lib/apis/cart/CartApi';
 import { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
 import { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+
+export interface ItemOptionsType {
+  itemIdx: number;
+  optionGroups: OptionGroupSelect[];
+}
 
 interface OptionGroupSelect {
   optionGroupId: number;
   answer: AddCartOptionAnswer;
 }
 
-interface ItemOptionsType {
-  itemIdx: number;
-  optionGroups: OptionGroupSelect[];
-}
-
 const useOptionForm = (
   optionGroups: OptionGroupResponse[],
   itemId: number,
   quantity: number,
+  eventId: string,
   toggle: boolean,
 ) => {
   const initOptions = optionGroups.map((v) => {
@@ -30,8 +34,38 @@ const useOptionForm = (
     return { itemIdx: idx, optionGroups: initOptions };
   });
 
+  const router = useRouter();
   const [totalForm, setTotalForm] = useState<ItemOptionsType[]>(initForm);
   const [complete, setComplete] = useState<boolean>(false);
+
+  const { mutate, status } = useMutation(CartApi.ADD_CARTLINE, {
+    onSuccess: (data) => {
+      router.push(
+        {
+          pathname: `/events/${eventId}/book/order`,
+          query: { state: JSON.stringify(data) },
+        },
+        `/events/${eventId}/book/order`,
+      );
+    },
+  });
+
+  const onSubmitForm = () => {
+    mutate({ items: getAddCartRequest() });
+  };
+
+  useEffect(() => {
+    setComplete(
+      totalForm.filter(
+        (item) =>
+          item.optionGroups.filter((optionGroup) =>
+            optionGroup.answer.answer === '' ? true : false,
+          ).length !== 0,
+      ).length === 0
+        ? true
+        : false,
+    );
+  }, [totalForm]);
 
   const onChangeForm = (
     itemIdx: number,
@@ -67,19 +101,6 @@ const useOptionForm = (
       setTotalForm(temp);
     }
   };
-
-  useEffect(() => {
-    setComplete(
-      totalForm.filter(
-        (item) =>
-          item.optionGroups.filter((optionGroup) =>
-            optionGroup.answer.answer === '' ? true : false,
-          ).length !== 0,
-      ).length === 0
-        ? true
-        : false,
-    );
-  }, [totalForm]);
 
   const getAddCartRequest = () => {
     // 각 티켓 옵션들 개별 객체로 (quantity 0으로 초기화)
@@ -120,7 +141,9 @@ const useOptionForm = (
     return result;
   };
 
-  return { complete, onChangeForm, getAddCartRequest };
+  const isloading = status !== 'idle';
+
+  return { complete, isloading, onChangeForm, onSubmitForm };
 };
 
 export default useOptionForm;

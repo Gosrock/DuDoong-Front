@@ -10,6 +10,10 @@ export const BASE_URL = `${
     : 'https://staging.dudoong.com/api/v1'
 }`;
 
+export const DOMAIN = `${
+  typeof window !== 'undefined' && window.location.origin
+}`;
+
 export const axiosPublic = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },

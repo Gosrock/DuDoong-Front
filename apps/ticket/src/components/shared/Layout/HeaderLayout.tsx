@@ -1,6 +1,6 @@
 import { Layout } from '@dudoong/ui';
-import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { authState } from '@store/auth';
+import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -10,20 +10,24 @@ interface HeaderLayoutProps {
 
 const HeaderLayout = ({ children }: HeaderLayoutProps) => {
   const { userProfile } = useRecoilValue(authState);
-  const { openGlobalOverlay } = useGlobalOverlay();
+  const router = useRouter();
   const handleLogin = () => {
-    openGlobalOverlay({ content: 'login' });
+    router.push(`/login?redirect=${window.location.pathname}`, `/login`);
   };
 
-  return (
-    <Layout
-      name={userProfile?.name}
-      image={userProfile?.profileImage}
-      handleLogin={handleLogin}
-    >
-      {children}
-    </Layout>
-  );
+  if (router.asPath === '/login') {
+    return <>{children}</>;
+  } else {
+    return (
+      <Layout
+        name={userProfile?.name}
+        image={userProfile?.profileImage}
+        handleLogin={handleLogin}
+      >
+        {children}
+      </Layout>
+    );
+  }
 };
 
 export default HeaderLayout;

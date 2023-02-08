@@ -25,18 +25,18 @@ export const Dropdown = ({
   setSelectedOption,
 }: DropdownProps) => {
   const [value, setValue] = useState<DropdownOption>(selectedOption);
+  const { accordionRef, toggleAccordion } = useAccordion();
   const handleOptionClick = (option: DropdownOption) => {
     setValue(option);
     setSelectedOption(option);
-    accordionRef.current?.click();
+    toggleAccordion();
   };
-  const accordionRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Accordion
       ref={accordionRef}
       title={value.title}
-      textColor={'main_500'}
+      textColor={options.length === 0 ? 'gray_400' : 'main_500'}
       content={options.map((option) => (
         <button
           key={option.id}
@@ -55,6 +55,7 @@ export const Dropdown = ({
         </button>
       ))}
       contentHeight={options.length * 56}
+      disabled={options.length === 0}
     />
   );
 };
@@ -74,4 +75,13 @@ const DropdownOptionRow = ({ option }: { option: DropdownOption }) => {
       }
     />
   );
+};
+
+export const useAccordion = () => {
+  const toggleAccordion = () => {
+    accordionRef.current?.click();
+  };
+  const accordionRef = useRef<HTMLButtonElement>(null);
+
+  return { accordionRef, toggleAccordion };
 };
