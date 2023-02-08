@@ -14,19 +14,19 @@ export interface HostProfileResponse {
 }
 
 export interface CreateHostRequest {
-  name?: string;
-  contactEmail?: string;
-  contactNumber?: string;
+  name: string;
+  contactEmail: string;
+  contactNumber: string;
 }
 
 export interface CreateHostResponse {
-  hostId?: number;
-  name?: string;
-  introduce?: string;
-  profileImageUrl?: string;
-  contactEmail?: string;
-  contactNumber?: string;
-  partner?: boolean;
+  hostId: number;
+  name: string;
+  introduce: string;
+  profileImageUrl: string;
+  contactEmail: string;
+  contactNumber: string;
+  partner: boolean;
   masterUserId: number;
 }
 type RoleType = '마스터' | '매니저' | '게스트';

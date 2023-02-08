@@ -1,4 +1,4 @@
-import { Button, ButtonSet, ListHeader } from '@dudoong/ui';
+import { Button, ButtonSet, Footer, ListHeader } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import { useRouter } from 'next/router';
 const Landing = () => {
@@ -12,6 +12,9 @@ const Landing = () => {
           <Button onClick={() => router.push('/events/1')}>event1</Button>
         </ButtonSet>
       </main>
+      <section>
+        <Footer />
+      </section>
     </>
   );
 };

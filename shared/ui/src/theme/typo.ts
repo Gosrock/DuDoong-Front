@@ -186,6 +186,12 @@ export const typo = {
     font-size: ${calcRem(10)};
     line-height: 150%;
   `,
+  P_Text_10_R: css`
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: ${calcRem(10)};
+    line-height: 150%;
+  `,
   // Button
   P_Button_16_SB: css`
     font-family: 'Pretendard';
