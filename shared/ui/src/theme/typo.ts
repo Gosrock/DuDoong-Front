@@ -83,6 +83,12 @@ export const typo = {
   `,
   // ------------------------------- new font -------------------------------
   // Header
+  G_Header_28_B: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 700;
+    font-size: ${calcRem(28)};
+    line-height: 120%;
+  `,
   P_Header_28_B: css`
     font-family: 'Pretendard';
     font-weight: 700;

@@ -4,8 +4,8 @@ import { FlexBox } from '../../layout';
 import { media, theme } from '../../theme';
 import { Github, Instagram } from 'react-bootstrap-icons';
 import Kakao from '../../assets/icons/Kakao';
-import { useResponsive } from '../../layout/Layout/useResponsive';
 import { css } from '@emotion/react';
+import { useResponsive } from '@dudoong/utils';
 
 export const Footer = () => {
   const { isPC } = useResponsive();
