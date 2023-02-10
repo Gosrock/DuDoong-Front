@@ -1,4 +1,4 @@
-import { EventDetailResponse } from '@dudoong/utils';
+import { EventDetailResponse, parseDate } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
@@ -15,11 +15,13 @@ const Summary = ({ detail }: { detail: EventDetailResponse }) => {
         <div>
           <div>
             <p>날짜</p>
-            <p>{detail.startAt}</p>
+            <p>{parseDate(detail.startAt, true)[0]}</p>
           </div>
           <div>
             <p>시간</p>
-            <p>{detail.startAt}</p>
+            <p>{`${parseDate(detail.startAt)[1]} ${
+              detail.runtime ? `(${detail.runtime}분)` : ''
+            }`}</p>
           </div>
           <div>
             <p>장소</p>
