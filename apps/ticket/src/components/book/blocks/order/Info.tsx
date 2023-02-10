@@ -39,7 +39,7 @@ const Info = () => {
                 }
                 rightElement={
                   <Text typo="P_Text_16_R" color="gray_300">
-                    공연 시작 전 까
+                    공연 시작 전 까지
                   </Text>
                 }
               />

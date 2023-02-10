@@ -70,7 +70,10 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             <Divider />
             <ListHeader size="listHeader_18" title={'결제정보'} />
             {instance ? (
-              <div id="payment-method" />
+              <>
+                <div id="payment-method" />
+                <div id="agreement" />
+              </>
             ) : (
               <FlexBox align={'center'} css={{ marginTop: '30px' }}>
                 <SyncLoader />
