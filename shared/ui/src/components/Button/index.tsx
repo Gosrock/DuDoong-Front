@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { darken } from 'polished';
 import { ButtonHTMLAttributes } from 'react';
@@ -102,7 +103,11 @@ const StyledButton = styled.button<{
   width: ${({ fullWidth, width }) =>
     width ? `${width}px` : fullWidth ? '100%' : '194px'};
 
-  border: 1px solid ${({ theme }) => theme.palette.black};
+  ${({ theme, varient }) =>
+    varient !== 'kakao' &&
+    css`
+      border: 1px solid ${theme.palette.black};
+    `}
   background-color: ${({ varient }) => BUTTON_COLOR.normal[varient]};
 
   color: ${({ varient }) => TEXT_COLOR.normal[varient]};

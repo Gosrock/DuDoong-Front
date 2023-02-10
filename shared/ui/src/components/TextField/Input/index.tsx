@@ -1,14 +1,17 @@
+import { css, SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 import { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import { FlexBox } from '../../../layout';
 import { KeyOfPalette } from '../../../theme';
 import { calcRem } from '../../../theme/typo';
 import { Text } from '../../Text';
+export { Search } from 'react-bootstrap-icons';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   width?: number;
   height?: number;
+  styles?: SerializedStyles;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   errorMessage?: string;
@@ -28,7 +31,13 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { value, height, errorMessageColor = 'red_200', ...props }: InputProps,
+    {
+      value,
+      height,
+      styles,
+      errorMessageColor = 'red_200',
+      ...props
+    }: InputProps,
     ref,
   ) => {
     return (
@@ -38,7 +47,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         direction={'column'}
         gap={10}
       >
-        <InputWrapper width={props.width} height={height}>
+        <InputWrapper width={props.width} height={height} css={styles}>
           {props.leftIcon}
           <StyledInput
             value={value}

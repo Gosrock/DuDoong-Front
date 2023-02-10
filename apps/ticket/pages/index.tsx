@@ -1,1 +1,1 @@
-export { default } from '@components/home/Landing';
+export { default, getStaticProps } from '@components/home/Landing';

@@ -25,6 +25,19 @@ module.exports = withInterceptStdout(
       });
       return config;
     },
+    images: {
+      domains: ['asset.dudoong.com'],
+    },
+    rewrites: async () => [
+      {
+        source: '/meta/term',
+        destination: '/term.html',
+      },
+      {
+        source: '/meta/privacy',
+        destination: '/privacy.html',
+      },
+    ],
   }),
   (text) => (text.includes('Duplicate atom key') ? '' : text),
 );
