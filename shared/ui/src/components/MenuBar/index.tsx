@@ -66,7 +66,7 @@ export const MenuBar = ({
       <>
         <FlexBox align="center" justify="start">
           {menus.map((menu, index) => (
-            <div ref={(el: HTMLDivElement) => addRef(el)}>
+            <div ref={(el: HTMLDivElement) => addRef(el)} key={menu}>
               <Content size={[12, 11, 9, 11]} key={index}>
                 <Text
                   typo="Navbar_17"

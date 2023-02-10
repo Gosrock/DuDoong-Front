@@ -1,5 +1,4 @@
-import TextListRow from '@components/shared/TextListRow';
-import { Accordion, ListRow, Spacing, Text } from '@dudoong/ui';
+import { Accordion, ListRow, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
 
 const Info = () => {

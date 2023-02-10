@@ -35,11 +35,19 @@ export const Footer = () => {
         <div id="footer-bottom">
           <p>© Dudoong. 2023 All rights reserved. </p>
           <div>
-            <a href={`${DOMAIN}/meta/privay`} target="_blank" rel="noreferrer">
+            <a
+              href={`https://dudoong.com/meta/privacy`}
+              target="_blank"
+              rel="noreferrer"
+            >
               개인정보 처리방침
             </a>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-            <a href={`${DOMAIN}/meta/term`} target="_blank" rel="noreferrer">
+            <a
+              href={`https://dudooong.com/meta/term`}
+              target="_blank"
+              rel="noreferrer"
+            >
               서비스 이용약관
             </a>
           </div>

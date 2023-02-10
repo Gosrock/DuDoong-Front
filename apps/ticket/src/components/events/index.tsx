@@ -1,8 +1,7 @@
 import DDHead from '@components/shared/Layout/NextHead';
 import useOverlay from '@lib/hooks/useOverlay';
 import { Footer, media } from '@dudoong/ui';
-import { EventDetailResponse } from '@dudoong/utils';
-import EventApi from '@dudoong/utils/src/apis/event/EventApi';
+import { EventApi, EventDetailResponse } from '@dudoong/utils';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import SelectTicket from './blocks/SelectTicket';
 import { useQuery } from '@tanstack/react-query';
@@ -77,7 +76,7 @@ const Wrapper = styled.main`
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [{ params: { eventId: '1' } }],
-    fallback: true,
+    fallback: 'blocking',
   };
 };
 
@@ -85,7 +84,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { eventId } = context.params as unknown as { eventId: string };
 
   const detail = await EventApi.GET_EVENT_DETAIL(eventId);
-
   return {
     props: {
       detail,
