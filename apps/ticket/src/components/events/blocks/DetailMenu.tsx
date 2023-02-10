@@ -18,8 +18,6 @@ const DetailMenu = ({ content }: { content: string }) => {
       <Content>
         <Spacing size={32} />
         {menu === 0 ? <MdViewer content={content} /> : <SaleInfo />}
-
-        <Spacing size={120} />
       </Content>
     </>
   );

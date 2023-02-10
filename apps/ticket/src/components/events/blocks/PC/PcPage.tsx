@@ -29,9 +29,12 @@ const PcPage = ({
           <Text typo="P_Header_16_SB">티켓</Text>
           <Divider line />
           {tickets && <Tickets tickets={tickets} />}
+          <Spacing size={12} />
           <Remote openOverlay={openOverlay} />
         </RightSticky>
       </Wrapper>
+
+      <Spacing size={120} />
     </>
   );
 };
@@ -56,5 +59,5 @@ const RightSticky = styled(RoundBlock)`
   top: 36px;
   margin-left: 22px;
   max-width: 356px;
-  height: 300px;
+  height: 100%;
 `;
