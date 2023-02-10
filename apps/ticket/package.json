@@ -16,6 +16,7 @@
     "@next/font": "13.0.7",
     "@tanstack/react-query": "^4.20.4",
     "@tanstack/react-query-devtools": "^4.20.4",
+    "@toast-ui/react-editor": "^3.2.2",
     "@tosspayments/payment-widget-sdk": "^0.5.2",
     "@types/node": "18.11.16",
     "@types/react": "18.0.26",
