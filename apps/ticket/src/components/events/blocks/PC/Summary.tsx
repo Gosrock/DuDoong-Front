@@ -20,7 +20,7 @@ const Summary = ({ detail }: { detail: EventDetailResponse }) => {
           <div>
             <p>시간</p>
             <p>{`${parseDate(detail.startAt)[1]} ${
-              detail.runtime ? `(${detail.runtime}분)` : ''
+              detail.runTime ? `(${detail.runTime}분)` : ''
             }`}</p>
           </div>
           <div>

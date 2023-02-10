@@ -16,12 +16,3 @@ const Landing = () => {
 };
 
 export default Landing;
-
-export const getStaticProps: GetStaticProps = () => {
-  return {
-    redirect: {
-      destination: '/home',
-      permanent: true,
-    },
-  };
-};
