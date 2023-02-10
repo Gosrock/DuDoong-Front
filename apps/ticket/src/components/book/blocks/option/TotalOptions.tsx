@@ -1,4 +1,4 @@
-import { SelectedTicketState } from '@components/events/blocks/Tickets';
+import { SelectedTicketState } from '@components/events/blocks/SelectTicket';
 import { Accordion, Divider, ListRow, ToggleButton } from '@dudoong/ui';
 import { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';

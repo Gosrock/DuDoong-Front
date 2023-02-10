@@ -25,6 +25,9 @@ module.exports = withInterceptStdout(
       });
       return config;
     },
+    images: {
+      domains: ['asset.dudoong.com'],
+    },
   }),
   (text) => (text.includes('Duplicate atom key') ? '' : text),
 );
