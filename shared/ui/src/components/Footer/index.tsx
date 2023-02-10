@@ -5,10 +5,11 @@ import { media, theme } from '../../theme';
 import { Github, Instagram } from 'react-bootstrap-icons';
 import Kakao from '../../assets/icons/Kakao';
 import { css } from '@emotion/react';
-import { useResponsive } from '@dudoong/utils';
+import { DOMAIN, useResponsive } from '@dudoong/utils';
 
 export const Footer = () => {
   const { isPC } = useResponsive();
+
   return (
     <Wrapper>
       <Container>
@@ -34,19 +35,11 @@ export const Footer = () => {
         <div id="footer-bottom">
           <p>© Dudoong. 2023 All rights reserved. </p>
           <div>
-            <a
-              href="https://9yujin.notion.site/91eafd1fc2864386b9961d8e5277c2df"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={`${DOMAIN}/meta/privay`} target="_blank" rel="noreferrer">
               개인정보 처리방침
             </a>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-            <a
-              href="https://9yujin.notion.site/7b2b68ddd6054579befc86baf691db9f"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={`${DOMAIN}/meta/term`} target="_blank" rel="noreferrer">
               서비스 이용약관
             </a>
           </div>
