@@ -1,5 +1,4 @@
-import TextListRow from '@components/shared/TextListRow';
-import { Accordion, ListRow, Spacing, Text } from '@dudoong/ui';
+import { Accordion, ListRow, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
 
 const Info = () => {
@@ -10,7 +9,8 @@ const Info = () => {
         content={
           <Content>
             <ul>
-              <li>본 공연은 1인 4매까지 예매 가능합니다.</li>
+              {/* 혹시 몰라서 주석으로 함 */}
+              {/* <li>본 공연은 1인 4매까지 예매 가능합니다.</li> */}
               <li>예매한 티켓의 QR코드를 통해 입장 확인을 진행합니다.</li>
               <li>
                 티켓 구매시 선택한 옵션은 추후 변경 불가합니다.
@@ -38,7 +38,7 @@ const Info = () => {
                 }
                 rightElement={
                   <Text typo="P_Text_16_R" color="gray_300">
-                    공연 1일전 23:59까지
+                    공연 시작 전 까지
                   </Text>
                 }
               />
