@@ -1,6 +1,7 @@
 import { DetailTemplateProps } from '@components/events';
 import { Divider, RoundBlock, Spacing, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
+import dynamic from 'next/dynamic';
 import DetailMenu from '../DetailMenu';
 import Remote from '../Remote';
 import Tickets from '../Tickets';
@@ -12,6 +13,9 @@ const PcPage = ({
   openOverlay,
   ...props
 }: DetailTemplateProps) => {
+  const MdViewer = dynamic(() => import('../../blocks/MdViewer'), {
+    ssr: false,
+  });
   return (
     <>
       <Spacing size={100} />
@@ -23,7 +27,7 @@ const PcPage = ({
 
           {/* 상세정보 */}
           <Spacing size={32} />
-          <DetailMenu content={detail.content} />
+          <DetailMenu content={detail.content} MdViewer={MdViewer} />
         </LeftContent>
         <RightSticky>
           <Text typo="P_Header_16_SB">티켓</Text>

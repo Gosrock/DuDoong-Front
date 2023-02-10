@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+import { HTMLAttributes } from 'react';
 
-const SaleInfo = () => {
+const SaleInfo = ({ ...props }: HTMLAttributes<HTMLDivElement>) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <h4>두둥 서비스 티켓 종류 안내</h4>
       <ul>
         <li>

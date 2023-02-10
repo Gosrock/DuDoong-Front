@@ -1,12 +1,19 @@
 import { MenuBar, Spacing } from '@dudoong/ui';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
 
-import { useState } from 'react';
+import { ComponentType, useState } from 'react';
+import { MdViewerProps } from './MdViewer';
 import SaleInfo from './SaleInfo';
 
-const DetailMenu = ({ content }: { content: string }) => {
-  const MdViewer = dynamic(() => import('../blocks/MdViewer'), { ssr: false });
+const DetailMenu = ({
+  content,
+  MdViewer,
+}: {
+  content: string;
+  MdViewer: ComponentType<MdViewerProps>;
+}) => {
   const [menu, setMenu] = useState<number>(0);
   return (
     <>
@@ -15,9 +22,10 @@ const DetailMenu = ({ content }: { content: string }) => {
         curActiveMenu={menu}
         setCurActiveMenu={setMenu}
       />
-      <Content>
+      <Content menu={menu}>
         <Spacing size={32} />
-        {menu === 0 ? <MdViewer content={content} /> : <SaleInfo />}
+        <MdViewer content={content} className="detail-info" />
+        <SaleInfo className="sale-info" />
       </Content>
     </>
   );
@@ -25,4 +33,17 @@ const DetailMenu = ({ content }: { content: string }) => {
 
 export default DetailMenu;
 
-const Content = styled.div``;
+const Content = styled.div<{ menu: number }>`
+  ${({ menu }) =>
+    menu === 0
+      ? css`
+          .sale-info {
+            display: none;
+          }
+        `
+      : css`
+          .detail-info {
+            display: none;
+          }
+        `}
+`;
