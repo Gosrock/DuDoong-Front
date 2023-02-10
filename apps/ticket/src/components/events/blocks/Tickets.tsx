@@ -12,10 +12,9 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
   return (
     <Wrapper>
       {tickets.ticketItems.map((item) => (
-        <>
+        <div key={item.ticketItemId}>
           <ListRow
             padding={[12, 0]}
-            key={item.ticketItemId}
             text={item.ticketName}
             subText={`${item.price} ∙ ${item.type} ∙ 인당 ${item.purchaseLimit}매 제한`}
             textGap={0}
@@ -28,7 +27,7 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
             }
           />
           <Divider line className="divider" />
-        </>
+        </div>
       ))}
     </Wrapper>
   );

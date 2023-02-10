@@ -34,9 +34,21 @@ export const Footer = () => {
         <div id="footer-bottom">
           <p>© Dudoong. 2023 All rights reserved. </p>
           <div>
-            <a>개인정보 처리방침</a>
+            <a
+              href="https://9yujin.notion.site/91eafd1fc2864386b9961d8e5277c2df"
+              target="_blank"
+              rel="noreferrer"
+            >
+              개인정보 처리방침
+            </a>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-            <a>서비스 이용약관</a>
+            <a
+              href="https://9yujin.notion.site/7b2b68ddd6054579befc86baf691db9f"
+              target="_blank"
+              rel="noreferrer"
+            >
+              서비스 이용약관
+            </a>
           </div>
           {isPC && (
             <OutLink
