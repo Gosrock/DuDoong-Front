@@ -37,7 +37,8 @@ export const MenuBar = ({
   >([0, 0]);
 
   const addRef = (element: HTMLDivElement) => {
-    contentRef.current?.push(element);
+    if (contentRef.current.length < menus.length)
+      contentRef.current?.push(element);
   };
 
   useEffect(() => {

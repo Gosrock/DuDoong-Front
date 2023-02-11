@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { useResponsive } from '@dudoong/utils';
+
 import { css } from '@emotion/react';
 import { HTMLAttributes, ReactNode, useEffect, useState } from 'react';
+import { useResponsive } from '../lib/useResponsive';
 
 interface FullScreenProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
