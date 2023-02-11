@@ -74,15 +74,19 @@ export const globalStyle = css`
       display: none;
     }
   }
-  /*   
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
+
+  ::-webkit-scrollbar-thumb {
+    border: solid transparent;
+    background-clip: padding-box;
+    border-radius: 7px;
+    box-shadow: rgb(0 0 0 / 11%) 0px 0px 100px inset;
   }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(211, 211, 211, 0.7);
-    border-radius: 10px;
-    border: 6px solid white;
-  } */
+  :-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
 
   :root {
     --main-width: 600px;

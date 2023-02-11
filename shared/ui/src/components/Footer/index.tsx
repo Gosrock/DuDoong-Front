@@ -5,7 +5,7 @@ import { media, theme } from '../../theme';
 import { Github, Instagram } from 'react-bootstrap-icons';
 import Kakao from '../../assets/icons/Kakao';
 import { css } from '@emotion/react';
-import { DOMAIN, useResponsive } from '@dudoong/utils';
+import { useResponsive } from '../../lib/useResponsive';
 
 export const Footer = () => {
   const { isPC } = useResponsive();
@@ -44,7 +44,7 @@ export const Footer = () => {
             </a>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
             <a
-              href={`https://dudooong.com/meta/term`}
+              href={`https://dudoong.com/meta/term`}
               target="_blank"
               rel="noreferrer"
             >
