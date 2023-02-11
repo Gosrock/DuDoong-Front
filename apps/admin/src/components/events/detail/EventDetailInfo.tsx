@@ -2,17 +2,30 @@ import { ListHeader, Text } from '@dudoong/ui';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import styled from '@emotion/styled';
+import { Dispatch, SetStateAction, useRef } from 'react';
+import { UpdateEventDetailRequest } from '@lib/apis/event/eventType';
 
-const EventDetailInfo = () => {
+interface EventDetailInfoProps {
+  content: string;
+  setForm: Dispatch<SetStateAction<UpdateEventDetailRequest>>;
+}
+
+const EventDetailInfo = ({ content, setForm }: EventDetailInfoProps) => {
   const toolbarItems = [
     ['heading', 'bold', 'italic', 'strike'],
-    ['hr', 'quote'],
-    ['ul', 'ol', 'task'],
-    ['table', 'link'],
-    ['image'],
-    ['code'],
-    ['scrollSync'],
+    ['quote'],
+    ['ul', 'ol'],
   ];
+  const editorRef = useRef<Editor>(null);
+  const onChange = () => {
+    if (editorRef.current)
+      setForm((prev) => {
+        return {
+          ...prev,
+          content: editorRef.current!.getInstance().getMarkdown(),
+        };
+      });
+  };
   return (
     <div>
       <ListHeader
@@ -23,12 +36,14 @@ const EventDetailInfo = () => {
       />
       <EditorWrapper>
         <Editor
-          // ref={editorRef}
+          ref={editorRef}
+          onChange={onChange}
           placeholder="내용을 입력해주세요."
           previewStyle="tab" // 미리보기 스타일 지정
-          hideModeSwitch={false}
+          initialValue={content || ''}
+          hideModeSwitch={true}
           previewHighlight={true}
-          height="210px" // 에디터 창 높이
+          height="300px" // 에디터 창 높이
           initialEditType="wysiwyg" // 초기 입력모드 설정
           toolbarItems={toolbarItems}
           autofocus
@@ -78,6 +93,6 @@ const EditorWrapper = styled.div`
   }
   .toastui-editor-contents {
     padding: 15px;
-    ${({ theme }) => theme.typo.P_Text_14_M}
+    ${({ theme }) => theme.typo.P_Text_16_M}
   }
 `;

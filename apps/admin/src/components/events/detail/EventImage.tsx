@@ -10,16 +10,32 @@ import {
 } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { ImageInfoType } from '@lib/hooks/usePresignedUrl';
+import { useEffect } from 'react';
 
-const EventImage = () => {
-  const [curImage, setCurImage] = useState<string | null>(null);
+interface EventImageProps {
+  hostName: string | null;
+  imageurl: string | null;
+  setImageInfo: React.Dispatch<React.SetStateAction<ImageInfoType>>;
+}
+
+const EventImage = ({ imageurl, setImageInfo }: EventImageProps) => {
+  const [curImage, setCurImage] = useState<string | null>('');
+
+  useEffect(() => setCurImage(imageurl), [imageurl]);
 
   const uploadHandler = (image: File) => {
     encodeFileToBase64(image, setCurImage);
+    setImageInfo((prev) => {
+      return { ...prev, image: image };
+    });
   };
 
   const deleteImageHandler = () => {
     setCurImage(null);
+    setImageInfo((prev) => {
+      return { ...prev, image: null, key: '' };
+    });
   };
 
   return (

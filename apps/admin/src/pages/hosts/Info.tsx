@@ -18,7 +18,10 @@ import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 
 const Info = () => {
   const hostId = useLocation().pathname.split('/')[2];
-  const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(hostId);
+  const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(
+    'host',
+    hostId,
+  );
   const [form, onChange, , initForm] = useInputs<UpdateHostRequest>({
     profileImageKey: '',
     introduce: '',

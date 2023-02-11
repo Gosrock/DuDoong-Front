@@ -5,6 +5,10 @@ import {
   CreateEventResponse,
   EventDetailResponse,
   EventProfileResponse,
+  EventResponse,
+  imageFileExtensionType,
+  ImageUrlResponse,
+  UpdateEventDetailRequest,
 } from './eventType';
 
 const EventApi = {
@@ -28,6 +32,33 @@ const EventApi = {
     payload: CreateEventRequest,
   ): Promise<CreateEventResponse> => {
     const response = await axiosPrivate.post(`events`, payload);
+    return response.data.data;
+  },
+
+  POST_EVENT_IMAGE: async ({
+    eventId,
+    imageFileExtension,
+  }: {
+    eventId: string;
+    imageFileExtension: imageFileExtensionType;
+  }): Promise<ImageUrlResponse> => {
+    const response = await axiosPrivate.post(
+      `/events/${eventId}/images?imageFileExtension=${imageFileExtension}`,
+    );
+    return response.data.data;
+  },
+
+  PATCH_EVENT_DETAIL: async ({
+    eventId,
+    payload,
+  }: {
+    eventId: string;
+    payload: UpdateEventDetailRequest;
+  }): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(
+      `/hosts/${eventId}/details`,
+      payload,
+    );
     return response.data.data;
   },
 };
