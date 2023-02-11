@@ -13,7 +13,7 @@ type EventUrlSetTypeKey =
   | 'guests'
   | 'qr';
 
-type HostUrlSetTypeKey = 'info' | 'member' | 'events' | 'alliance';
+type HostUrlSetTypeKey = 'info' | 'member' | 'slack' | 'events' | 'alliance';
 
 type EventUrlSetType = {
   [key in EventUrlSetTypeKey]: string;
@@ -39,6 +39,7 @@ const HOST_URL_SET: HostUrlSetType = {
   info: '호스트 정보 관리',
   member: '멤버 관리',
   events: '등록한 공연',
+  slack: '슬랙 알림',
   alliance: '제휴 관련',
 };
 
