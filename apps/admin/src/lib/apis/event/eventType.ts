@@ -18,7 +18,7 @@ type StatusType = 'PREPAREING' | 'OPEN' | 'CLOSED';
 export interface EventDetailResponse {
   name: string;
   startAt: string;
-  runtime: number;
+  runTime: number;
   status: StatusType;
   host: HostInfo;
   place: EventPlace;
@@ -68,4 +68,16 @@ export interface CreateEventResponse {
     placeName: string;
     placeAddress: string;
   };
+}
+
+export interface BasicEventRequest {
+  name: string;
+  startAt: string;
+  runTime: number;
+  placeName: string;
+  placeAddress: string;
+  longitude: number;
+  latitude: number;
+  ticketingStartAt: string;
+  ticketingEndAt: string;
 }

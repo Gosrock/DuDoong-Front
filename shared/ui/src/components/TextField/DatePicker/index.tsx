@@ -14,6 +14,7 @@ export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   placeholder?: string;
   onChange: any;
+  initialValue?: Date | null;
 }
 
 /**
@@ -22,7 +23,13 @@ export interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 
 export const DatePicker = (props: DatePickerProps) => {
-  const [startDate, setStartDate] = useState();
+  const curDate = props.initialValue ? props.initialValue : null;
+  const [startDate, setStartDate] = useState<Date | null>(curDate);
+
+  useEffect(() => {
+    console.log(curDate);
+    setStartDate(curDate);
+  }, [curDate]);
 
   useEffect(() => {
     props.onChange(startDate);
@@ -40,7 +47,7 @@ export const DatePicker = (props: DatePickerProps) => {
         customInput={
           <Input
             width={props.width}
-            value={startDate}
+            value={String(startDate)}
             rightIcon={<Calendar />}
             css={css`
               ${theme.typo.P_Text_14_M}
