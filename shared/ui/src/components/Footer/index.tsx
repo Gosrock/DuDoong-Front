@@ -44,7 +44,7 @@ export const Footer = () => {
             </a>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
             <a
-              href={`https://dudooong.com/meta/term`}
+              href={`https://dudoong.com/meta/term`}
               target="_blank"
               rel="noreferrer"
             >
