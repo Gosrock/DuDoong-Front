@@ -3,22 +3,56 @@ import { ListHeader, Text, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import EventInfo from '@components/events/dashboard/EventInfo';
 import useBottomButton from '@lib/hooks/useBottomButton';
+import { useQuery } from '@tanstack/react-query';
+import EventApi from '@lib/apis/event/EventApi';
+import { useLocation } from 'react-router-dom';
+import { EventChecklistResponse } from '@lib/apis/event/eventType';
+import { useEffect, useState } from 'react';
 
 const Dashboard = () => {
-  const { setButtonInfo } = useBottomButton({
-    type: 'save',
+  const eventId = useLocation().pathname.split('/')[2];
+  const [isPosted, setIsPosted] = useState<boolean>(false);
+  const { setButtonInfo, changeButtonType } = useBottomButton({
+    type: 'deletePostEvent',
     isActive: true,
   });
+
+  useEffect(() => {
+    changeButtonType(buttonTypeDistinction(isPosted));
+  }, [isPosted]);
+
+  // 이벤트 체크리스트
+  const { data, status } = useQuery(
+    ['eventCheckList'],
+    () => EventApi.GET_EVENT_CHECKLIST(eventId),
+    {
+      onSuccess: (data: EventChecklistResponse) => {
+        if (checkIsPosted(data)) {
+          setIsPosted(true);
+        }
+        console.log('GET_EVENT_CHECKLIST : ', data);
+      },
+    },
+  );
 
   return (
     <>
       <ListHeader
-        title={'호스트 정보'}
+        title={data ? data.name : '호스트'}
         size={'listHeader_24'}
         padding={[50, 0, 48, 0]}
       />
-      {/* <CheckList check={[true, false, true]} /> */}
-      <EventInfo />
+      {isPosted ? (
+        <CheckList
+          check={
+            status === 'success'
+              ? [data?.hasBasic, data?.hasDetail, data?.hasTicketItem]
+              : undefined
+          }
+        />
+      ) : (
+        <EventInfo />
+      )}
       <ListHeader
         title={'유의사항'}
         size={'listHeader_20'}
@@ -29,6 +63,16 @@ const Dashboard = () => {
   );
 };
 export default Dashboard;
+
+const buttonTypeDistinction = (isPosted: boolean) => {
+  if (!isPosted) return 'deletePostEvent';
+  return 'deleteEvent';
+};
+
+const checkIsPosted = (data: EventChecklistResponse) => {
+  if (data.hasTicketItem && data.hasDetail && data.hasBasic) return true;
+  return false;
+};
 
 const Warning = () => {
   return (

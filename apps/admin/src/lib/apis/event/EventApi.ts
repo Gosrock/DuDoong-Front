@@ -3,6 +3,7 @@ import { axiosPrivate } from '../axios';
 import {
   CreateEventRequest,
   CreateEventResponse,
+  EventChecklistResponse,
   EventDetailResponse,
   EventProfileResponse,
 } from './eventType';
@@ -28,6 +29,13 @@ const EventApi = {
     payload: CreateEventRequest,
   ): Promise<CreateEventResponse> => {
     const response = await axiosPrivate.post(`events`, payload);
+    return response.data.data;
+  },
+
+  GET_EVENT_CHECKLIST: async (
+    eventId: string,
+  ): Promise<EventChecklistResponse> => {
+    const response = await axiosPrivate.get(`events/${eventId}/checklist`);
     return response.data.data;
   },
 };

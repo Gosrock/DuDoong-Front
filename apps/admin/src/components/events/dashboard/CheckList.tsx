@@ -2,7 +2,11 @@ import { ListHeader, Spacing } from '@dudoong/ui';
 import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import ListContents from './ListContents';
 
-const CheckList = ({ check }: { check: boolean[] }) => {
+const CheckList = ({
+  check = [false, false, false],
+}: {
+  check?: boolean[];
+}) => {
   return (
     <BorderBox padding={[36, 32]} shadow>
       <ListHeader

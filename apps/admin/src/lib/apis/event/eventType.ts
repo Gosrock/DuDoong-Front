@@ -69,3 +69,12 @@ export interface CreateEventResponse {
     placeAddress: string;
   };
 }
+
+export interface EventChecklistResponse {
+  hostId: number;
+  eventId: number;
+  name: string;
+  hasBasic: boolean;
+  hasDetail: boolean;
+  hasTicketItem: boolean;
+}
