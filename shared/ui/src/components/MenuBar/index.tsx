@@ -2,7 +2,7 @@ import { FlexBox, Padding, PaddingSize } from '../../layout';
 import styled from '@emotion/styled';
 import { Text } from '../Text';
 import React, { useState } from 'react';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 /**
  * @param menus menu 항목
@@ -36,23 +36,24 @@ export const MenuBar = ({
   >([0, 0]);
 
   const addRef = (element: HTMLDivElement) => {
-    contentRef.current?.push(element);
-    if (indicatorPositionAndWidth[1] === 0) {
+    if (contentRef.current.length < menus.length)
+      contentRef.current?.push(element);
+  };
+
+  useEffect(() => {
+    if (contentRef.current.length === menus.length) {
       setIndicatorPositionAndWidth([
         0,
         contentRef.current[0].getBoundingClientRect().width,
       ]);
     }
-  };
+  }, [contentRef.current.length]);
 
-  const menuIndicatorHandler = (
-    index: number,
-    leftPadding: number,
-    e: React.MouseEvent,
-  ) => {
+  const menuIndicatorHandler = (index: number, e: React.MouseEvent) => {
     e.preventDefault();
     const indicatorPosition =
-      contentRef.current[index].getBoundingClientRect().left - leftPadding;
+      contentRef.current[index].getBoundingClientRect().left -
+      contentRef.current[0].getBoundingClientRect().left;
     const indicatorWidth =
       contentRef.current[index].getBoundingClientRect().width;
     setCurActiveMenu(index);
@@ -72,7 +73,7 @@ export const MenuBar = ({
                   typo="Navbar_17"
                   color={curActiveMenu === index ? 'black' : 'gray_300'}
                   onClick={(e: React.MouseEvent) =>
-                    menuIndicatorHandler(index, convertedPadding[3], e)
+                    menuIndicatorHandler(index, e)
                   }
                 >
                   {menu}
