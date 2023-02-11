@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { FlexBox, Text } from '@dudoong/ui';
 import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 
-const TotalBox = ({ total }: { total: number }) => {
+const TotalBox = ({ total }: { total: string }) => {
   return (
     <BorderBox
       shadow
@@ -17,7 +17,7 @@ const TotalBox = ({ total }: { total: number }) => {
           판매금액
         </Text>
         <Text typo={'P_Header_20_B'} color={'main_500'}>
-          {total}원
+          {total}
         </Text>
       </FlexBox>
     </BorderBox>

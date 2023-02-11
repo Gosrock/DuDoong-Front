@@ -6,6 +6,7 @@ import {
   EventChecklistResponse,
   EventDetailResponse,
   EventProfileResponse,
+  DashBoardStatisticResponse,
 } from './eventType';
 
 const EventApi = {
@@ -36,6 +37,13 @@ const EventApi = {
     eventId: string,
   ): Promise<EventChecklistResponse> => {
     const response = await axiosPrivate.get(`events/${eventId}/checklist`);
+    return response.data.data;
+  },
+
+  GET_EVENT_STATISTICS: async (
+    eventId: string,
+  ): Promise<DashBoardStatisticResponse> => {
+    const response = await axiosPrivate.get(`events/${eventId}/statistics`);
     return response.data.data;
   },
 };

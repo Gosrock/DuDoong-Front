@@ -48,6 +48,7 @@ const TicketRatio = ({
 export default TicketRatio;
 
 const calcRatio = (checked: number, notChecked: number) => {
+  if (!checked && !notChecked) return 0;
   return checked / (checked + notChecked);
 };
 
@@ -66,11 +67,11 @@ interface CircularGraphProps {
 }
 
 const CircularGraph = styled.div<CircularGraphProps>`
-  ${({ theme }) =>
+  ${({ theme, deg }) =>
     css`
       background: conic-gradient(
-        ${theme.palette.main_500} 50deg,
-        ${theme.palette.gray_200} 50deg
+        ${theme.palette.main_500} ${deg}deg,
+        ${theme.palette.gray_200} ${deg}deg
       );
     `};
   border-radius: 70px;

@@ -78,3 +78,12 @@ export interface EventChecklistResponse {
   hasDetail: boolean;
   hasTicketItem: boolean;
 }
+
+export interface DashBoardStatisticResponse {
+  notApprovedCount: number;
+  sellAmount: string;
+  doneCount: number;
+  enteredCount: number;
+  notEnteredCount: number;
+  issuedCount: number;
+}

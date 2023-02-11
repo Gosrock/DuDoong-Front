@@ -13,7 +13,6 @@ const ListContents = ({ check }: { check: boolean[] }) => {
   return (
     <>
       {listOption.map((option, index) => {
-        console.log(option, check[index] ? 1 : 0);
         return (
           <div key={index}>
             <Spacing size={10} />
@@ -45,7 +44,6 @@ const ListContent = ({
 };
 
 const CheckMarker = ({ ischecked }: { ischecked: number }) => {
-  console.log(ischecked);
   return (
     <MarkerContainer align={'center'} ischecked={ischecked}>
       <CheckLg />

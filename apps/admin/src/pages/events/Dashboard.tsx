@@ -8,6 +8,7 @@ import EventApi from '@lib/apis/event/EventApi';
 import { useLocation } from 'react-router-dom';
 import { EventChecklistResponse } from '@lib/apis/event/eventType';
 import { useEffect, useState } from 'react';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 const Dashboard = () => {
   const eventId = useLocation().pathname.split('/')[2];
@@ -16,9 +17,15 @@ const Dashboard = () => {
     type: 'deletePostEvent',
     isActive: true,
   });
+  // const { openOverlay } = useGlobalOverlay();
 
   useEffect(() => {
-    changeButtonType(buttonTypeDistinction(isPosted));
+    setButtonInfo({
+      firstHandler: () => {},
+      firstDisable: false,
+      secondHandler: () => {},
+      secondDisable: isPosted,
+    });
   }, [isPosted]);
 
   // 이벤트 체크리스트
@@ -29,6 +36,7 @@ const Dashboard = () => {
       onSuccess: (data: EventChecklistResponse) => {
         if (checkIsPosted(data)) {
           setIsPosted(true);
+          changeButtonType('deleteEvent');
         }
         console.log('GET_EVENT_CHECKLIST : ', data);
       },
@@ -42,7 +50,7 @@ const Dashboard = () => {
         size={'listHeader_24'}
         padding={[50, 0, 48, 0]}
       />
-      {isPosted ? (
+      {!isPosted ? (
         <CheckList
           check={
             status === 'success'
@@ -51,7 +59,11 @@ const Dashboard = () => {
           }
         />
       ) : (
-        <EventInfo />
+        <EventInfo
+          eventId={eventId}
+          setButtonInfo={setButtonInfo}
+          changeButtonType={changeButtonType}
+        />
       )}
       <ListHeader
         title={'유의사항'}
@@ -63,11 +75,6 @@ const Dashboard = () => {
   );
 };
 export default Dashboard;
-
-const buttonTypeDistinction = (isPosted: boolean) => {
-  if (!isPosted) return 'deletePostEvent';
-  return 'deleteEvent';
-};
 
 const checkIsPosted = (data: EventChecklistResponse) => {
   if (data.hasTicketItem && data.hasDetail && data.hasBasic) return true;
