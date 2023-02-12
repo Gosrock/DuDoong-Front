@@ -13,7 +13,7 @@ export interface EventProfileResponse {
   status: StatusType;
 }
 
-type StatusType = 'PREPAREING' | 'OPEN' | 'CLOSED';
+type StatusType = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface EventDetailResponse {
   name: string;
@@ -86,4 +86,28 @@ export interface DashBoardStatisticResponse {
   enteredCount: number;
   notEnteredCount: number;
   issuedCount: number;
+}
+
+export interface EventResponse {
+  eventId: number;
+  hostId: number;
+  status: string;
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
+  posterImage: string;
+  content: string;
+  place: {
+    latitude: number;
+    longitude: number;
+    placeName: string;
+    placeAddress: string;
+  };
+}
+
+type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
+
+export interface UpdateEventStatusRequest {
+  status: EventStatusType;
 }

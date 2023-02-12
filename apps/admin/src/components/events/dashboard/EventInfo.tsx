@@ -5,31 +5,28 @@ import { TicketPerforatedFill } from '@dudoong/ui';
 import MiniBox from './MiniBox';
 import TotalBox from './TotalBox';
 import TicketRatio from './TicketRatio';
+import { DashBoardStatisticResponse } from '@lib/apis/event/eventType';
 import { useQuery } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
-import { DashBoardStatisticResponse } from '@lib/apis/event/eventType';
+import { Dispatch, SetStateAction } from 'react';
 import { AdminBottomButtonTypeKey } from '@components/shared/layout/AdminBottomButton';
-import { useEffect } from 'react';
 
 interface EventInfoProps {
   eventId: string;
-  setButtonInfo: (props: any) => void;
-  changeButtonType: (type: AdminBottomButtonTypeKey) => void;
+  setButtonType: Dispatch<SetStateAction<AdminBottomButtonTypeKey>>;
 }
 
-const EventInfo = ({
-  eventId,
-  setButtonInfo,
-  changeButtonType,
-}: EventInfoProps) => {
-  // 이벤트 통계 정보
-  const { data, status } = useQuery(
+const EventInfo = ({ eventId, setButtonType }: EventInfoProps) => {
+  // 이벤트 통계 정보 api
+  const { data } = useQuery(
     ['eventStatistics'],
     () => EventApi.GET_EVENT_STATISTICS(eventId),
     {
       onSuccess: (data: DashBoardStatisticResponse) => {
         if (checkIsSold(data)) {
-          changeButtonType('pay');
+          setButtonType('pay');
+        } else {
+          setButtonType('deleteEvent');
         }
         console.log('GET_EVENT_STATISTICS : ', data);
       },
@@ -71,7 +68,8 @@ const EventInfo = ({
 
 export default EventInfo;
 
-const checkIsSold = (data: DashBoardStatisticResponse) => {
+const checkIsSold = (data: DashBoardStatisticResponse | undefined) => {
+  if (!data) return false;
   if (
     !data.notApprovedCount &&
     !data.notEnteredCount &&

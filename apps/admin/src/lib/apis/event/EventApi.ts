@@ -7,6 +7,8 @@ import {
   EventDetailResponse,
   EventProfileResponse,
   DashBoardStatisticResponse,
+  EventResponse,
+  UpdateEventStatusRequest,
 } from './eventType';
 
 const EventApi = {
@@ -44,6 +46,25 @@ const EventApi = {
     eventId: string,
   ): Promise<DashBoardStatisticResponse> => {
     const response = await axiosPrivate.get(`events/${eventId}/statistics`);
+    return response.data.data;
+  },
+
+  PATCH_EVENT_OPEN: async (eventId: string): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(`events/${eventId}/open`);
+    return response.data.data;
+  },
+
+  PATCH_EVENT_STATUS: async ({
+    eventId,
+    payload,
+  }: {
+    eventId: string;
+    payload: UpdateEventStatusRequest;
+  }): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(
+      `events/${eventId}/status`,
+      payload,
+    );
     return response.data.data;
   },
 };
