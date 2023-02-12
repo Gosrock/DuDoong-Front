@@ -11,7 +11,10 @@ import {
   EventResponse,
   ImageUrlResponse,
   UpdateEventDetailRequest,
+  EventDetailResponse,
 } from '@lib/apis/event/eventType';
+import { queryClient } from '../../main';
+import EventImage from '@components/events/detail/EventImage';
 
 const Detail = () => {
   const eventId = useLocation().pathname.split('/')[2];
@@ -29,38 +32,33 @@ const Detail = () => {
     isActive: true,
   });
 
+  // 이벤트 디테일 api
+  const eventDetail = queryClient.getQueryData([
+    'eventDetail',
+  ]) as EventDetailResponse;
+
+  useEffect(() => {
+    if (eventDetail) {
+      console.log('EVENT_DETAIL :', eventDetail);
+      setForm({
+        posterImageKey: getKeyFromUrl(eventDetail.posterImage),
+        content: eventDetail.content,
+      });
+      setImageInfo((prev) => {
+        return {
+          ...prev,
+          key: getKeyFromUrl(eventDetail.posterImage),
+        };
+      });
+    }
+  }, [eventDetail]);
+
   // detail 정보 수정 api
   const patchEventDetailMutation = useMutation(EventApi.PATCH_EVENT_DETAIL, {
     onSuccess: (data: EventResponse) => {
       console.log('patchEventDetailMutation : ', data);
     },
   });
-
-  // event detail info get request api
-  // const { data, status } = useQuery(
-  //   ['hostDetail'],
-  //   () => HostApi.GET_HOST_DETAIL(hostId),
-  //   {
-  //     onSuccess: (data: HostDetailResponse) => {
-  //       if (data.profileImageUrl) {
-  //         setImageInfo((prev) => {
-  //           return {
-  //             ...prev,
-  //             presignedUrl: '',
-  //             key: getKeyFromUrl(data.profileImageUrl),
-  //           };
-  //         });
-  //       }
-  //       setForm({
-  //         posterImageKey: data.posterImageUrl
-  //           ? getKeyFromUrl(data.posterImageUrl)
-  //           : '',
-  //         content: data.content,
-  //       });
-  //       console.log('GET_HOST_DETAIL : ', data);
-  //     },
-  //   },
-  // );
 
   // 하단부 버튼
   const buttonClickHandler = () => {
@@ -72,10 +70,10 @@ const Detail = () => {
     // 호스트 정보 post
     patchEventDetailMutation.mutate({
       eventId: eventId,
-      payload: { ...form },
+      payload: { ...form, posterImageKey: imageInfo.key },
     });
-    console.log('click button', form, imageInfo);
   };
+
   useEffect(() => {
     setButtonInfo({
       firstHandler: buttonClickHandler,
@@ -92,10 +90,10 @@ const Detail = () => {
       />
       <ContentGrid>
         <EventDetailInfo setForm={setForm} content={form.content} />
-        {/* <EventImage
-          imageurl={status === 'success' ? data!.profileImageUrl : null}
+        <EventImage
+          imageKey={form.posterImageKey}
           setImageInfo={setImageInfo}
-        /> */}
+        />
       </ContentGrid>
     </>
   );
@@ -108,11 +106,12 @@ const checkButtonDisable = (
   props: UpdateEventDetailRequest,
   imageInfo: Pick<ImageUrlResponse, 'presignedUrl' | 'key'>,
 ) => {
-  if (props.posterImageKey === '' || imageInfo.key === '') return true;
+  if (props.content === '' || imageInfo.key === '') return true;
   return false;
 };
 
 const getKeyFromUrl = (url: string) => {
+  if (!url) return '';
   const fragments = url.split('/');
   return `${fragments[3]}/${fragments[4]}/${fragments[5]}/${fragments[6]}`;
 };

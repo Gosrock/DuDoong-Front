@@ -14,15 +14,14 @@ import { ImageInfoType } from '@lib/hooks/usePresignedUrl';
 import { useEffect } from 'react';
 
 interface EventImageProps {
-  hostName: string | null;
-  imageurl: string | null;
+  imageKey: string;
   setImageInfo: React.Dispatch<React.SetStateAction<ImageInfoType>>;
 }
 
-const EventImage = ({ imageurl, setImageInfo }: EventImageProps) => {
-  const [curImage, setCurImage] = useState<string | null>('');
+const EventImage = ({ imageKey, setImageInfo }: EventImageProps) => {
+  const [curImage, setCurImage] = useState<string | null>(null);
 
-  useEffect(() => setCurImage(imageurl), [imageurl]);
+  useEffect(() => setCurImage(getUrlFromKey(imageKey)), [imageKey]);
 
   const uploadHandler = (image: File) => {
     encodeFileToBase64(image, setCurImage);
@@ -46,7 +45,7 @@ const EventImage = ({ imageurl, setImageInfo }: EventImageProps) => {
         padding={[32, 0, 12, 0]}
         description={<TitleDescription />}
       />
-      <Wrapper color="gray_200" padding={16}>
+      <Wrapper background="gray_200" padding={16}>
         {curImage === null || '' ? (
           <DropZone
             uploadFileHandler={uploadHandler}
@@ -84,6 +83,11 @@ const EventImage = ({ imageurl, setImageInfo }: EventImageProps) => {
 export default EventImage;
 
 // -----------------------------------------------
+
+const getUrlFromKey = (key: string) => {
+  if (!key) return null;
+  return 'https://asset.dudoong.com/' + key;
+};
 
 const TitleDescription = () => {
   return (

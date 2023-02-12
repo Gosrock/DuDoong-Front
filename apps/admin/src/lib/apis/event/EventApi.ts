@@ -56,7 +56,7 @@ const EventApi = {
     payload: UpdateEventDetailRequest;
   }): Promise<EventResponse> => {
     const response = await axiosPrivate.patch(
-      `/hosts/${eventId}/details`,
+      `/events/${eventId}/details`,
       payload,
     );
     return response.data.data;

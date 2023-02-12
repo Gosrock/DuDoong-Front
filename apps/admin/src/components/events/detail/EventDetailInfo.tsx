@@ -2,7 +2,7 @@ import { ListHeader, Text } from '@dudoong/ui';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import styled from '@emotion/styled';
-import { Dispatch, SetStateAction, useRef } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { UpdateEventDetailRequest } from '@lib/apis/event/eventType';
 
 interface EventDetailInfoProps {
@@ -26,6 +26,11 @@ const EventDetailInfo = ({ content, setForm }: EventDetailInfoProps) => {
         };
       });
   };
+  useEffect(() => {
+    if (editorRef.current && content) {
+      editorRef.current.getInstance().setMarkdown(content);
+    }
+  }, [content]);
   return (
     <div>
       <ListHeader
@@ -40,19 +45,12 @@ const EventDetailInfo = ({ content, setForm }: EventDetailInfoProps) => {
           onChange={onChange}
           placeholder="내용을 입력해주세요."
           previewStyle="tab" // 미리보기 스타일 지정
-          initialValue={content || ''}
           hideModeSwitch={true}
           previewHighlight={true}
           height="300px" // 에디터 창 높이
           initialEditType="wysiwyg" // 초기 입력모드 설정
           toolbarItems={toolbarItems}
           autofocus
-          theme={''}
-          hooks={
-            {
-              // addImageBlobHook: onUploadImage,
-            }
-          }
         />
       </EditorWrapper>
     </div>
