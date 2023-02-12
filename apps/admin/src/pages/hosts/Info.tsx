@@ -46,12 +46,12 @@ const Info = () => {
     () => HostApi.GET_HOST_DETAIL(hostId),
     {
       onSuccess: (data: HostDetailResponse) => {
-        if (data.profileImageUrl) {
+        if (data.profileImage) {
           setImageInfo((prev) => {
             return {
               ...prev,
               presignedUrl: '',
-              key: getKeyFromUrl(data.profileImageUrl),
+              key: getKeyFromUrl(data.profileImage),
             };
           });
         }
@@ -97,7 +97,7 @@ const Info = () => {
       <ContentGrid>
         <GridLeftElement
           hostName={status === 'success' ? data!.name : ''}
-          imageurl={status === 'success' ? data!.profileImageUrl : null}
+          imageurl={status === 'success' ? data!.profileImage : null}
           setImageInfo={setImageInfo}
         />
         <GridRightElement onChange={onChange} {...form} />
