@@ -34,6 +34,8 @@ const LeftSide = () => {
     },
   );
 
+  console.log(data);
+
   const [startDate, setStartAt] = useState<Date | undefined>();
   const [startTime, setStartAtTime] = useState<Date | undefined>();
   const runTimeRef = useRef<HTMLInputElement>(null);
@@ -74,6 +76,7 @@ const LeftSide = () => {
   };
   console.log(startDate);
   console.log(startTime);
+  //time지정
 
   return (
     <>
