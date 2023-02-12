@@ -31,6 +31,7 @@ const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
           '#payment-method',
           getCount(totalPrice),
         );
+        widgetInstance.renderAgreement('#agreement');
       }
     }
   }, [widgetInstance]);

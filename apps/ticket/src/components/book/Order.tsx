@@ -9,6 +9,8 @@ import {
   NavBar,
   Spacing,
   SyncLoader,
+  Text,
+  theme,
 } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
 import { AddCartResponse } from '@lib/apis/cart/cartType';
@@ -22,6 +24,8 @@ import Totalprice from './blocks/order/TotalPrice';
 import ItemPreview from './blocks/order/ItemPreview';
 import useOrderMutation from './blocks/order/useOrderMutation';
 import useTossPayments from './blocks/order/useTossPayments';
+import Info from './blocks/order/Info';
+import { css } from '@emotion/react';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
@@ -66,7 +70,10 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             <Divider />
             <ListHeader size="listHeader_18" title={'결제정보'} />
             {instance ? (
-              <div id="payment-method" />
+              <>
+                <div id="payment-method" />
+                <div id="agreement" />
+              </>
             ) : (
               <FlexBox align={'center'} css={{ marginTop: '30px' }}>
                 <SyncLoader />
@@ -74,10 +81,26 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             )}
           </>
         )}
-        <Spacing size={40} />
+        {/* 판매정보 */}
+        <Divider />
+        <div
+          css={css`
+            background-color: ${theme.palette.gray_100};
+            & > div:first-of-type > div > div > span {
+              color: ${theme.palette.gray_400} !important;
+            }
+          `}
+        >
+          <ListHeader size="listHeader_18" title={'판매정보'} />
+          <Info />
+          <Spacing size={60} />
+        </div>
 
         {/* 다음으로 버튼 */}
-        <ButtonSet bottomFixed backGradient>
+        <ButtonSet bottomFixed backGradient varient="vertical">
+          <Text typo="P_Text_12_R" color="gray_500">
+            위 내용을 확인하였으며 결제에 동의합니다.
+          </Text>
           <Button
             fullWidth
             onClick={() => {

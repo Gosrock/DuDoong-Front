@@ -1,18 +1,18 @@
 import { IncomingHttpHeaders } from 'http';
 
 export interface EventDetailResponse {
-  name: string;
-  startAt: string;
-  runtime: number;
   status: StatusType;
   host: HostInfo;
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
   place: EventPlace;
   posterImage: string;
-  detailImage: string[]; //TODO : 삭제
   content: string;
 }
 
-type StatusType = 'PREPAREING' | 'OPEN' | 'CLOSED';
+type StatusType = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface EventPlace {
   latitude: number;
@@ -25,7 +25,7 @@ export interface HostInfo {
   hostId: IncomingHttpHeaders;
   name: string;
   introduce: string;
-  profileImageUrl: string;
+  profileImage: string;
   contactEmail: string;
   contactNumber: string;
   partner: boolean;

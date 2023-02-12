@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';
 import TotalOptions from './blocks/option/TotalOptions';
-import type { SelectedTicketState } from '@components/events/blocks/Tickets';
+import type { SelectedTicketState } from '@components/events/blocks/SelectTicket';
 import type { GetServerSideProps } from 'next';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';

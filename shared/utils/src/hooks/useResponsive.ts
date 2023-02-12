@@ -1,6 +1,13 @@
+import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-export const useResponsive = () => {
-  const isPC = useMediaQuery({ minWidth: '768px' });
+export function useResponsive() {
+  const [isPC, setIsPC] = useState<boolean>(false);
+  const pc = useMediaQuery({ minWidth: '768px' });
+
+  useEffect(() => {
+    setIsPC(pc);
+  }, [pc]);
+
   return { isPC };
-};
+}
