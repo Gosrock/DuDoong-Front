@@ -37,6 +37,8 @@ const Dashboard = () => {
   const patchEventOpenMutation = useMutation(EventApi.PATCH_EVENT_OPEN, {
     onSuccess: (data: EventResponse) => {
       console.log('PATCH_EVENT_OPEN : ', data);
+      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      closeOverlay();
     },
   });
 
@@ -44,6 +46,9 @@ const Dashboard = () => {
   const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_STATUS, {
     onSuccess: (data: EventResponse) => {
       console.log('PATCH_EVENT_Delete : ', data);
+      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      closeOverlay();
+      navigate('/');
     },
   });
 
@@ -60,8 +65,6 @@ const Dashboard = () => {
 
   const eventOpenHandler = () => {
     patchEventOpenMutation.mutate(eventId);
-    closeOverlay();
-    navigate(`/events/${eventId}/dashboard`);
   };
 
   const eventDeleteHandler = () => {
@@ -69,8 +72,6 @@ const Dashboard = () => {
       eventId: eventId,
       payload: { status: 'CLOSED' },
     });
-    closeOverlay();
-    navigate('/');
   };
 
   const eventPayHandler = () => {
@@ -117,7 +118,7 @@ const Dashboard = () => {
       setButtonInfo({
         firstHandler: () =>
           openOverlay({
-            content: 'deleteEvent',
+            content: 'pay',
             props: {
               eventDeleteHandler: eventPayHandler,
             },
