@@ -15,6 +15,7 @@ import {
 } from '@lib/apis/event/eventType';
 import { queryClient } from '../../main';
 import EventImage from '@components/events/detail/EventImage';
+import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
 
 const Detail = () => {
   const eventId = useLocation().pathname.split('/')[2];
@@ -108,10 +109,4 @@ const checkButtonDisable = (
 ) => {
   if (props.content === '' || imageInfo.key === '') return true;
   return false;
-};
-
-const getKeyFromUrl = (url: string) => {
-  if (!url) return '';
-  const fragments = url.split('/');
-  return `${fragments[3]}/${fragments[4]}/${fragments[5]}/${fragments[6]}`;
 };
