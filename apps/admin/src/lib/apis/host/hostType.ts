@@ -35,7 +35,7 @@ export interface HostDetailResponse {
   hostId: number;
   name: string;
   introduce: string;
-  profileImageUrl: string;
+  profileImage: string;
   contactEmail: string;
   contactNumber: string;
   partner: boolean;

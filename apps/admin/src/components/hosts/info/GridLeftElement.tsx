@@ -57,7 +57,7 @@ const GridLeftElement = ({
         padding={[32, 0, 12, 0]}
       />
       {curImage === null || '' ? (
-        <DropZoneWrapper color="gray_200" padding={24}>
+        <DropZoneWrapper background="gray_200" padding={24}>
           <DropZone
             type="profile"
             uploadFileHandler={uploadHandler}
