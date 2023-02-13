@@ -54,6 +54,8 @@ const EventProfileImage = ({ imageSrc }: { imageSrc: string }) => {
         width: 130px;
         height: 178px;
         border-radius: 16px;
+        background-size: cover;
+        background-position: center;
       `}
     />
   );

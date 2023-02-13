@@ -28,7 +28,7 @@ const HOST_ITEM_SET: HostItemType = {
 export interface HostItemProps
   extends Pick<
     HostProfileResponse,
-    'hostId' | 'name' | 'introduce' | 'profileImageUrl' | 'role'
+    'hostId' | 'name' | 'introduce' | 'profileImage' | 'role'
   > {
   type?: HostItemTypeKey;
   selectedHostId?: number | null;
@@ -43,7 +43,7 @@ const HostItem = ({
     <Content
       isselected={selectedHostId === props.hostId ? 1 : 0}
       padding={HOST_ITEM_SET[type].padding}
-      leftImage={<HostItemImage type={type} imageSrc={props.profileImageUrl} />}
+      leftImage={<HostItemImage type={type} imageSrc={props.profileImage} />}
       text={props.name}
       subText={props.introduce}
       textTypo={HOST_ITEM_SET[type].typo}
@@ -84,4 +84,6 @@ const HostItemImage = styled.div<HostItemImageProps>`
   width: ${({ type }) => `${HOST_ITEM_SET[type].imageSize}px`};
   height: ${({ type }) => `${HOST_ITEM_SET[type].imageSize}px`};
   border-radius: 50%;
+  background-size: cover;
+  background-position: center;
 `;
