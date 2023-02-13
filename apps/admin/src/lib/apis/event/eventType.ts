@@ -51,10 +51,12 @@ export interface CreateEventRequest {
   runTime: number;
 }
 
+export type EventStatus = '준비중' | '진행중' | '정산중' | '지난공연';
+
 export interface CreateEventResponse {
   eventId: number;
   hostId: number;
-  status: '준비중' | '진행중' | '정산중' | '지난공연';
+  status: EventStatus;
   name: string;
   startAt: string;
   endAt: string;
@@ -88,10 +90,23 @@ export interface DashBoardStatisticResponse {
   issuedCount: number;
 }
 
+export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';
+
+export interface ImageUrlResponse {
+  presignedUrl: string;
+  key: string;
+  url: string;
+}
+
+export interface UpdateEventDetailRequest {
+  posterImageKey: string;
+  content: string;
+}
+
 export interface EventResponse {
   eventId: number;
   hostId: number;
-  status: string;
+  status: EventStatus;
   name: string;
   startAt: string;
   endAt: string;

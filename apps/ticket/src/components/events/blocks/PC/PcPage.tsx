@@ -47,21 +47,26 @@ export default PcPage;
 
 const Wrapper = styled.div`
   max-width: 936px;
+  min-width: 896px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
   justify-content: space-between;
 `;
 
-const LeftContent = styled.div``;
+const LeftContent = styled.div`
+  width: auto;
+`;
 
 const RightSticky = styled(RoundBlock)`
+  flex-shrink: 0;
   border: 1px solid black;
   position: sticky;
   position: -webkit-sticky;
   margin-top: 44px;
   top: 36px;
   margin-left: 22px;
-  max-width: 356px;
+  width: 356px;
+  box-sizing: border-box;
   height: 100%;
 `;

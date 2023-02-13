@@ -1991,7 +1991,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dudoong/ui@workspace:shared/ui"
   dependencies:
-    "@dudoong/utils": "workspace:shared/utils"
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.5.14
     "@storybook/addon-docs": ^6.5.14
@@ -6101,6 +6100,8 @@ __metadata:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     "@tanstack/react-query-devtools": ^4.20.4
+    "@toast-ui/editor": ^3.2.1
+    "@toast-ui/react-editor": ^3.2.2
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@vitejs/plugin-react": ^3.0.0

@@ -7,13 +7,16 @@ import { useMutation } from '@tanstack/react-query';
 import HostApi from '@lib/apis/host/HostApi';
 import axios from 'axios';
 import { useEffect } from 'react';
+import EventApi from '@lib/apis/event/EventApi';
 
 export interface ImageInfoType
   extends Pick<ImageUrlResponse, 'presignedUrl' | 'key'> {
   image: File | null;
 }
 
-const usePresignedUrl = (hostId: string) => {
+type presignedUrlType = 'host' | 'event';
+
+const usePresignedUrl = (type: presignedUrlType, id: string) => {
   const [imageInfo, setImageInfo] = useState<ImageInfoType>({
     presignedUrl: '',
     key: '',
@@ -21,22 +24,38 @@ const usePresignedUrl = (hostId: string) => {
   });
 
   // presigned 발급 api
-  const postImageMutation = useMutation(HostApi.POST_HOST_IMAGE, {
+  const postHostImageMutation = useMutation(HostApi.POST_HOST_IMAGE, {
     onSuccess: (data: ImageUrlResponse) => {
       setImageInfo((prev) => {
         return { ...prev, presignedUrl: data.presignedUrl, key: data.key };
       });
-      console.log('postImageMutation : ', data);
+      console.log('postHostImageMutation : ', data);
+    },
+  });
+
+  const postEventImageMutation = useMutation(EventApi.POST_EVENT_IMAGE, {
+    onSuccess: (data: ImageUrlResponse) => {
+      setImageInfo((prev) => {
+        return { ...prev, presignedUrl: data.presignedUrl, key: data.key };
+      });
+      console.log('postHostImageMutation : ', data);
     },
   });
 
   // 이미지 업로드 될 때마다 presigned url 받아오기
   useEffect(() => {
     if (imageInfo.image) {
-      postImageMutation.mutate({
-        hostId: hostId,
-        imageFileExtension: getImageExtension(imageInfo.image.type),
-      });
+      if (type === 'host') {
+        postHostImageMutation.mutate({
+          hostId: id,
+          imageFileExtension: getImageExtension(imageInfo.image.type),
+        });
+      } else {
+        postEventImageMutation.mutate({
+          eventId: id,
+          imageFileExtension: getImageExtension(imageInfo.image.type),
+        });
+      }
     }
   }, [imageInfo.image]);
 

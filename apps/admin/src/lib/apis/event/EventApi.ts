@@ -9,6 +9,9 @@ import {
   DashBoardStatisticResponse,
   EventResponse,
   UpdateEventStatusRequest,
+  imageFileExtensionType,
+  ImageUrlResponse,
+  UpdateEventDetailRequest,
 } from './eventType';
 
 const EventApi = {
@@ -63,6 +66,32 @@ const EventApi = {
   }): Promise<EventResponse> => {
     const response = await axiosPrivate.patch(
       `events/${eventId}/status`,
+      payload,
+    );
+    return response.data.data;
+  },
+  POST_EVENT_IMAGE: async ({
+    eventId,
+    imageFileExtension,
+  }: {
+    eventId: string;
+    imageFileExtension: imageFileExtensionType;
+  }): Promise<ImageUrlResponse> => {
+    const response = await axiosPrivate.post(
+      `/events/${eventId}/images?imageFileExtension=${imageFileExtension}`,
+    );
+    return response.data.data;
+  },
+
+  PATCH_EVENT_DETAIL: async ({
+    eventId,
+    payload,
+  }: {
+    eventId: string;
+    payload: UpdateEventDetailRequest;
+  }): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(
+      `/events/${eventId}/details`,
       payload,
     );
     return response.data.data;

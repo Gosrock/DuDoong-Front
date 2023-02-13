@@ -1,7 +1,7 @@
 import DDHead from '@components/shared/Layout/NextHead';
 import useOverlay from '@lib/hooks/useOverlay';
 import { Footer, media } from '@dudoong/ui';
-import { EventApi, EventDetailResponse } from '@dudoong/utils';
+import { AuthApi, EventApi, EventDetailResponse } from '@dudoong/utils';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import SelectTicket from './blocks/SelectTicket';
 import { useQuery } from '@tanstack/react-query';
@@ -11,8 +11,12 @@ import OverlayBox from '@components/shared/overlay/OverlayBox';
 import PcPage from './blocks/PC/PcPage';
 import MobilePage from './blocks/Mobile/MobilePage';
 import { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useEffect } from 'react';
 import styled from '@emotion/styled';
+import { authState } from '@store/auth';
+import { useRecoilState } from 'recoil';
+import { getCookie } from 'cookies-next';
+import { setCredentials } from '@lib/utils/setCredentials';
 
 export interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
   detail: EventDetailResponse;
@@ -23,11 +27,30 @@ export interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
 const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
   const router = useRouter();
   const { eventId } = router.query;
+  const [auth, setAuth] = useRecoilState(authState);
   const { data: tickets } = useQuery(['tickets', eventId], () =>
     TicketApi.GET_TICKETITEMS(eventId as string),
   );
 
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
+
+  useEffect(() => {
+    const fetchRefresh = async (token: string) => {
+      const data = await AuthApi.REFRESH(token);
+      const auth = {
+        userProfile: data.userProfile,
+        accessToken: data.accessToken,
+        isAuthenticated: true,
+        callbackUrl: (getCookie('redirectUrl') as string) || '/',
+      };
+      setCredentials(data);
+      setAuth(auth);
+    };
+    if (!auth.isAuthenticated) {
+      const refreshToken = getCookie('refreshToken') as string;
+      fetchRefresh(refreshToken);
+    }
+  }, []);
 
   return (
     <>
