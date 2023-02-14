@@ -4,16 +4,20 @@ import {
   FlexBox,
   Input,
   ListHeader,
+  Padding,
   Spacing,
   TimePicker,
 } from '@dudoong/ui';
-import { useInputs } from '@dudoong/utils';
+import { EventDetailResponse, useInputs } from '@dudoong/utils';
+import styled from '@emotion/styled';
 import EventApi from '@lib/apis/event/EventApi';
 import { BasicEventRequest } from '@lib/apis/event/eventType';
+import timeFormatter from '@lib/utils/timeFormatter';
 import { useQuery } from '@tanstack/react-query';
 import { run } from 'node:test';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import MapPage from './Map';
 
 //공연이름, 공연날짜, 관람시간
 //Map컴포넌트를 여기다가 쓰는게 더 날듯
@@ -24,7 +28,7 @@ const LeftSide = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
 
-  const { data, isFetched } = useQuery(
+  const { data } = useQuery(
     ['eventDetail'],
     () => EventApi.GET_EVENT_DETAIL(eventId),
     {
@@ -36,11 +40,15 @@ const LeftSide = () => {
 
   console.log(data);
 
-  const [startDate, setStartAt] = useState<Date | undefined>();
-  const [startTime, setStartAtTime] = useState<Date | undefined>();
+  const [startDate, setStartAt] = useState<Date | null>();
+  const [startTime, setStartAtTime] = useState<Date | null>();
   const runTimeRef = useRef<HTMLInputElement>(null);
   const [runTime, setRunTime] = useState<number | undefined>(data?.runTime);
+
   //const [form, onChange] = useInputs<BasicEventRequest>(data?data:);
+
+  //1.form제출 해야됨...how?->props를 map에다가 전달해주면 될듯!!
+  //2.dropDown modal?
 
   useEffect(() => {
     setRunTime(data?.runTime);
@@ -80,62 +88,91 @@ const LeftSide = () => {
 
   return (
     <>
-      <FlexBox align={'flex-start'} direction={'column'}>
-        <ListHeader title={'공연 이름'} size={'listHeader_18'} />
-        <Input disabled={true} value={data?.name || ''}></Input>
-        <Spacing size={40} />
-        <ListHeader title={'공연 날짜'} size={'listHeader_18'} />
-        <FlexBox align={'center'} gap={10}>
-          <DatePicker
-            placeholder={'Select Date'}
-            onChange={setStartAt}
-            initialValue={startDate || null}
+      <FlexBox align={'center'} direction={'row'}>
+        <FlexBox align={'flex-start'} direction={'column'}>
+          <ListHeader
+            padding={[32, 0, 12, 0]}
+            title={'공연 이름'}
+            size={'listHeader_18'}
           />
-          <TimePicker
-            placeholder={'Select Time'}
-            onChange={setStartAtTime}
-            initialValue={startTime || null}
+
+          <Input width={398} disabled={true} value={data?.name || ''}></Input>
+          <Spacing size={40} />
+          <ListHeader
+            padding={[32, 0, 12, 0]}
+            title={'공연 날짜'}
+            size={'listHeader_18'}
           />
+          <FlexBox align={'center'} gap={10}>
+            <Box>
+              <DatePicker
+                placeholder={'Select Date'}
+                onChange={setStartAt}
+                initialValue={startDate || null}
+              />
+            </Box>
+            <Box>
+              <TimePicker
+                placeholder={'Select Time'}
+                onChange={setStartAtTime}
+                initialValue={startTime || null}
+              />
+            </Box>
+          </FlexBox>
+          <ListHeader
+            padding={[32, 0, 12, 0]}
+            title={'관람 시간'}
+            size={'listHeader_18'}
+          />
+          <FlexBox align={'center'} gap={10}>
+            <Input
+              type="number"
+              placeholder={data?.runTime ? `${data?.runTime}` : '시:분'}
+              name="runTime"
+              onChange={(e) => {
+                setRunTime(Number(e.target.value));
+              }}
+              width={160}
+              ref={runTimeRef}
+              value={String(runTime) || ''}
+            />
+            <TimeButton
+              type={'modify'}
+              text={'-10분'}
+              onClick={() => {
+                changeRunTimeHandler(-10);
+              }}
+            />
+            <TimeButton
+              type={'modify'}
+              text={'+30분'}
+              onClick={(event) => {
+                event.preventDefault();
+                changeRunTimeHandler(30);
+              }}
+            />
+            <TimeButton
+              type={'reset'}
+              text={'초기화'}
+              onClick={() => {
+                changeRunTimeHandler(0);
+              }}
+            />
+          </FlexBox>
         </FlexBox>
-        <ListHeader title={'관람 시간'} size={'listHeader_18'} />
-        <FlexBox align={'center'} gap={10}>
-          <Input
-            type="number"
-            placeholder={data?.runTime ? `${data?.runTime}` : '시:분'}
-            name="runTime"
-            onChange={(e) => {
-              setRunTime(Number(e.target.value));
-            }}
-            width={154}
-            ref={runTimeRef}
-            value={String(runTime) || ''}
-          />
-          <TimeButton
-            type={'modify'}
-            text={'-10분'}
-            onClick={() => {
-              changeRunTimeHandler(-10);
-            }}
-          />
-          <TimeButton
-            type={'modify'}
-            text={'+30분'}
-            onClick={(event) => {
-              event.preventDefault();
-              changeRunTimeHandler(30);
-            }}
-          />
-          <TimeButton
-            type={'reset'}
-            text={'초기화'}
-            onClick={() => {
-              changeRunTimeHandler(0);
-            }}
-          />
-        </FlexBox>
+        <MapPage
+          name={data?.name}
+          startDate={startDate}
+          startTime={startTime}
+          runtime={runTime}
+        />
       </FlexBox>
     </>
   );
 };
+
+const Box = styled.div`
+  width: 192px;
+`;
 
 export default LeftSide;

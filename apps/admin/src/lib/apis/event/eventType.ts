@@ -78,6 +78,22 @@ export interface BasicEventRequest {
   placeAddress: string;
   longitude: number;
   latitude: number;
-  ticketingStartAt: string;
-  ticketingEndAt: string;
+}
+
+export interface BasicEventResponse {
+  eventId: number;
+  hostId: number;
+  status: '준비중' | '진행중' | '정산중' | '지난공연';
+  name: string;
+  startAt: string;
+  runTime: number;
+  posterImage: string;
+  detailImages: string;
+  content: string;
+  place: {
+    latitude: number;
+    longitude: number;
+    placeName: string;
+    placeAddress: string;
+  };
 }

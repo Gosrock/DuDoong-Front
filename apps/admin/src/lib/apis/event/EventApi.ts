@@ -2,6 +2,7 @@ import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
 import {
   BasicEventRequest,
+  BasicEventResponse,
   CreateEventRequest,
   CreateEventResponse,
   EventDetailResponse,
@@ -35,7 +36,7 @@ const EventApi = {
   PATCH_EVENT_BASIC: async (
     payload: BasicEventRequest,
     eventId: string,
-  ): Promise<BasicEventRequest> => {
+  ): Promise<BasicEventResponse> => {
     const response = await axiosPrivate.patch(
       `events/${eventId}/basic`,
       payload,
