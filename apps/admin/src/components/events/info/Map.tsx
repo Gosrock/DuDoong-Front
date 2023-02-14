@@ -143,8 +143,8 @@ const MapPage = (props: any) => {
 
   return (
     <>
-      <FlexBox align={'flex-start'} direction={'column'}>
-        <Padding size={[24, 0, 0, 80]}>
+      <FlexBox align={'normal'} direction={'column'}>
+        <Padding size={[0, 0, 0, 80]}>
           <ListHeader
             padding={[32, 0, 12, 0]}
             size={'listHeader_18'}

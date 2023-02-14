@@ -89,7 +89,7 @@ const LeftSide = () => {
 
   return (
     <>
-      <FlexBox align={'center'} direction={'row'}>
+      <FlexBox align={'flex-start'} direction={'row'}>
         <FlexBox align={'flex-start'} direction={'column'}>
           <ListHeader
             padding={[32, 0, 12, 0]}

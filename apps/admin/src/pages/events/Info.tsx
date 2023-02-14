@@ -14,6 +14,7 @@ const Info = () => {
         size={'listHeader_24'}
         description={'공연 기본정보는 공연 등록 이후에는 수정할 수 없어요'}
       />
+      <Spacing size={24} />
       <LeftSide />
     </>
   );
