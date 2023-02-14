@@ -6,21 +6,14 @@ import {
   Padding,
   Spacing,
 } from '@dudoong/ui';
-import styled from '@emotion/styled';
-import {
-  BasicEventRequest,
-  BasicEventResponse,
-} from '@lib/apis/event/eventType';
+import EventApi from '@dudoong/utils/src/apis/event/EventApi';
+import { BasicEventRequest } from '@lib/apis/event/eventType';
 import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
-import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useLocation } from 'react-router-dom';
-
-//지도
-
-//지도 placeholder만들기
-//지도 모달창 만들기
 
 const MapPage = (props: any) => {
   const [lat, setLat] = useState<string | null>();
@@ -30,9 +23,27 @@ const MapPage = (props: any) => {
   const [info, setInfo] = useState<any>();
   const [markers, setMarkers] = useState<any>([]);
   const [map, setMap] = useState<any>();
-  const [address, setAddress] = useState<any>('홍대 001');
+  const [address, setAddress] = useState<string>('홍대 001');
   const [isOpen, setIsOpen] = useState(false);
-  const [curMarker, setMarker] = useState();
+  const [curMarker, setMarker] = useState({
+    content: '홍대 001',
+    position: {
+      lat: Number('37.55097092681401'),
+      lng: Number('126.92364650757898'),
+    },
+  });
+
+  useEffect(() => {
+    if (props?.place) {
+      setMarker({
+        content: props.place.placeName,
+        position: {
+          lat: Number(props.place.latitude),
+          lng: Number(props.place.longitude),
+        },
+      });
+    }
+  }, [props?.place]);
 
   const ps = new kakao.maps.services.Places();
 
@@ -54,44 +65,25 @@ const MapPage = (props: any) => {
       changeEventMutation.mutate(payload);
     }
   };
-
-  console.log(eventId);
-  console.log(props.runtime);
   function getAddress(lat: string, lng: string) {
     const geocoder = new kakao.maps.services.Geocoder();
 
     const coord = new kakao.maps.LatLng(Number(lat), Number(lng));
     const callback = function (result: any, status: any) {
       if (status === kakao.maps.services.Status.OK) {
-        console.log(result);
-        setPlaceAddress(result[0].road_address.address_name);
+        setPlaceAddress(result[0].address.address_name);
       }
     };
     //좌표에서 주소 변환까지 완료
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
   }
 
-  console.log(props.runtime);
-  console.log(props.startDate);
-  console.log(props.startTime);
-  console.log(placeAddress);
-  console.log(lat);
-  console.log(lng);
-  console.log(placeName);
-
-  // const changeEventHandler=()=>{
-  //   if()
-  // }
-
   const onInput = (props: any) => {
     props.preventDefault();
-    console.log(props);
-    console.log('한번만 실행');
     ps.keywordSearch(address, handleMap);
   };
   const handleChange = (e: { target: { value: any } }) => {
     setAddress(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleMap = () => {
@@ -162,8 +154,9 @@ const MapPage = (props: any) => {
             <Input
               width={398}
               placeholder="검색하세요"
-              value={curMarker.content || null}
+              value={curMarker.content || undefined}
               onClick={() => setIsOpen(true)}
+              readOnly
             ></Input>
           </form>
           <Spacing size={12} />
@@ -197,7 +190,7 @@ const MapPage = (props: any) => {
                     onChange={handleChange}
                   ></Input>
                 </form>
-                <Class>
+                <div>
                   {markers.map((marker: any) => (
                     <>
                       <button onClick={() => setInfos(marker)}>
@@ -205,7 +198,7 @@ const MapPage = (props: any) => {
                       </button>
                     </>
                   ))}
-                </Class>
+                </div>
               </Modal>
             )}
           </Map>
@@ -215,10 +208,5 @@ const MapPage = (props: any) => {
     </>
   );
 };
-
-const Class = styled.div`
-  height: 300;
-  color: black;
-`;
 
 export default MapPage;

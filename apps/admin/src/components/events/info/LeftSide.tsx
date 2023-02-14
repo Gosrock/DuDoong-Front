@@ -44,7 +44,7 @@ const LeftSide = () => {
   const [startTime, setStartAtTime] = useState<Date | null>();
   const runTimeRef = useRef<HTMLInputElement>(null);
   const [runTime, setRunTime] = useState<number | undefined>(data?.runTime);
-
+  const [place, setPlace] = useState<any | undefined>();
   //const [form, onChange] = useInputs<BasicEventRequest>(data?data:);
 
   //1.form제출 해야됨...how?->props를 map에다가 전달해주면 될듯!!
@@ -52,6 +52,7 @@ const LeftSide = () => {
 
   useEffect(() => {
     setRunTime(data?.runTime);
+    setPlace(data?.place);
     if (data?.startAt != null) {
       const DateTime = data?.startAt.split(' ');
       const curDate = new Date(`${DateTime[0]}`);
@@ -59,7 +60,7 @@ const LeftSide = () => {
       setStartAtTime(curTime);
       setStartAt(curDate);
     }
-  }, [data?.runTime]);
+  }, [data?.runTime, data?.place]);
 
   const changeRunTimeHandler = (change: number) => {
     if (runTimeRef.current) {
@@ -165,6 +166,7 @@ const LeftSide = () => {
           startDate={startDate}
           startTime={startTime}
           runtime={runTime}
+          place={place}
         />
       </FlexBox>
     </>
