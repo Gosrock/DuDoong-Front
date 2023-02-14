@@ -2,9 +2,10 @@ import { FlexBox } from '../../layout';
 import styled from '@emotion/styled';
 import { Text } from '../Text';
 import { CSSProperties } from '@emotion/serialize';
-import { KeyOfTypo } from '../../theme';
+import { KeyOfTypo, KeyOfPalette } from '../../theme';
 import { CardImage } from 'react-bootstrap-icons';
 import { FileUploader } from 'react-drag-drop-files';
+import { ReactNode } from 'react';
 
 export type ShapeTypeKey = 'bigPoster' | 'miniPoster' | 'profile';
 
@@ -14,8 +15,22 @@ type ShapeType = {
     width: CSSProperties['width'];
     height: CSSProperties['height'];
     typo: KeyOfTypo;
-    text: String;
+    text: String | ReactNode;
   };
+};
+
+const PosterText = () => {
+  return (
+    <FlexBox align={'center'} direction={'column'} gap={0}>
+      <Text typo={'P_Text_16_M'} color={'gray_400'}>
+        여기에 이미지를 드래그앤 드랍 또는 클릭해서
+        <br />
+      </Text>
+      <Text typo={'P_Text_16_M'} color={'gray_400'}>
+        업로드 할 수 있어요
+      </Text>
+    </FlexBox>
+  );
 };
 
 const SHAPE_TYPE_SET: ShapeType = {
@@ -23,21 +38,21 @@ const SHAPE_TYPE_SET: ShapeType = {
     radius: '8px',
     width: '100%',
     height: '100%',
-    typo: 'Text_16',
-    text: '여기에 이미지를 드래그앤 드랍 또는 클릭해서 업로드 할 수 있어요',
+    typo: 'P_Text_16_SB',
+    text: <PosterText />,
   },
   miniPoster: {
     radius: '8px',
     width: '100px',
     height: '100%',
-    typo: 'Text_12',
+    typo: 'P_Text_12_M',
     text: '이미지 업로드',
   },
   profile: {
     radius: '50%',
     width: '240px',
     height: '240px',
-    typo: 'Text_16',
+    typo: 'P_Text_16_SB',
     text: '이미지 업로드',
   },
 };
@@ -77,9 +92,11 @@ export const DropZone = ({
       >
         <InputBox align={'center'} direction="column" gap={10}>
           <CardImage />
-          <Text typo={SHAPE_TYPE_SET[type].typo} color={'gray_400'}>
-            {SHAPE_TYPE_SET[type].text}
-          </Text>
+          <CustomText
+            text={SHAPE_TYPE_SET[type].text}
+            color={'gray_400'}
+            typo={SHAPE_TYPE_SET[type].typo}
+          />
         </InputBox>
       </FileUploader>
     </BorderBox>
@@ -87,6 +104,33 @@ export const DropZone = ({
 };
 
 // ------------------------------------------------------
+
+const CustomText = ({
+  text,
+  typo,
+  color,
+  ...props
+}: {
+  text: ReactNode | string;
+  typo: KeyOfTypo;
+  color: KeyOfPalette;
+}) => {
+  return (
+    <>
+      {isString(text) ? (
+        <Text typo={typo} color={color} {...props}>
+          {text}
+        </Text>
+      ) : (
+        <div {...props}>{text}</div>
+      )}
+    </>
+  );
+};
+
+const isString = (text: any): text is string => {
+  return typeof text === 'string'; // T of F
+};
 
 // ------------------------------------------------------
 

@@ -56,8 +56,8 @@ interface OutletWrapperProps {
 }
 
 const OutletWrapper = styled.div<OutletWrapperProps>`
-  /* margin: 0 auto; */
-  padding: 0 calc((100vw - 252px - 876px) / 2);
+  margin: 0 20px;
+  padding: 0 calc((100vw - 252px - 876px - 40px) / 2);
   width: 876px;
   ${({ isButtonActive }) =>
     isButtonActive &&
