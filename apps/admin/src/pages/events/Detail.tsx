@@ -81,6 +81,7 @@ const Detail = () => {
       firstDisable: checkButtonDisable(form, imageInfo),
     });
   }, [form, imageInfo]);
+  // console.log(imageInfo);
 
   return (
     <>
@@ -90,7 +91,11 @@ const Detail = () => {
         padding={[32, 0, 40, 0]}
       />
       <ContentGrid>
-        <EventDetailInfo setForm={setForm} content={form.content} />
+        <EventDetailInfo
+          setForm={setForm}
+          content={form.content}
+          eventId={eventId}
+        />
         <EventImage
           imageKey={form.posterImageKey}
           setImageInfo={setImageInfo}

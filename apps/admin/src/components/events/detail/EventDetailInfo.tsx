@@ -1,36 +1,93 @@
 import { ListHeader, Text } from '@dudoong/ui';
-import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import styled from '@emotion/styled';
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import { UpdateEventDetailRequest } from '@lib/apis/event/eventType';
+import {
+  UpdateEventDetailRequest,
+  ImageUrlResponse,
+} from '@lib/apis/event/eventType';
+import EventApi from '@lib/apis/event/EventApi';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import getImageExtension from '@lib/utils/getImageExtension';
+
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import chart from '@toast-ui/editor-plugin-chart';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import 'tui-color-picker/dist/tui-color-picker.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
+import uml from '@toast-ui/editor-plugin-uml';
+import { HookCallback } from '@toast-ui/editor/types/editor';
 
 interface EventDetailInfoProps {
   content: string;
   setForm: Dispatch<SetStateAction<UpdateEventDetailRequest>>;
+  eventId: string;
 }
 
-const EventDetailInfo = ({ content, setForm }: EventDetailInfoProps) => {
+const EventDetailInfo = ({
+  content,
+  setForm,
+  eventId,
+}: EventDetailInfoProps) => {
   const toolbarItems = [
     ['heading', 'bold', 'italic', 'strike'],
-    ['quote'],
-    ['ul', 'ol'],
+    ['hr', 'quote'],
+    ['ul', 'ol', 'task', 'indent', 'outdent'],
+    ['table', 'image', 'link'],
+    ['code', 'codeblock'],
+    ['scrollSync'],
   ];
   const editorRef = useRef<Editor>(null);
+
+  // presigned 발급 api
+  const postEventImageMutation = useMutation(EventApi.POST_EVENT_IMAGE, {
+    onSuccess: async (data: ImageUrlResponse) => {
+      console.log('postHostImageMutation : ', data);
+    },
+  });
+
+  // editor image upload handler
+  const uploadImageHandler = async (image: any, callback: HookCallback) => {
+    postEventImageMutation.mutate(
+      {
+        eventId: eventId,
+        imageFileExtension: getImageExtension(image.type),
+      },
+      {
+        onSuccess: async (data: ImageUrlResponse) => {
+          console.log('editor image upload: ', data, image);
+          await axios.put(data.presignedUrl, image, {
+            headers: {
+              'Content-Type': image!.type,
+            },
+            baseURL: '',
+          });
+          callback(data.url, image.name);
+        },
+      },
+    );
+  };
+
+  // 입력값 onChangeHandler
   const onChange = () => {
     if (editorRef.current)
       setForm((prev) => {
         return {
           ...prev,
-          content: editorRef.current!.getInstance().getMarkdown(),
+          content: editorRef.current!.getInstance().getHTML(),
         };
       });
+    console.log(editorRef.current!.getInstance().getHTML());
   };
+
   useEffect(() => {
     if (editorRef.current && content) {
-      editorRef.current.getInstance().setMarkdown(content);
+      editorRef.current.getInstance().setHTML(content);
     }
   }, [content]);
+
   return (
     <div>
       <ListHeader
@@ -43,14 +100,24 @@ const EventDetailInfo = ({ content, setForm }: EventDetailInfoProps) => {
         <Editor
           ref={editorRef}
           onChange={onChange}
-          placeholder="내용을 입력해주세요."
+          placeholder="공연 상세 내용을 입력해주세요."
           previewStyle="tab" // 미리보기 스타일 지정
-          hideModeSwitch={true}
+          // hideModeSwitch={true} // 모드 바꾸기 스위치 숨기기 여부
           previewHighlight={true}
-          height="300px" // 에디터 창 높이
+          height="398px" // 에디터 창 높이
           initialEditType="wysiwyg" // 초기 입력모드 설정
           toolbarItems={toolbarItems}
           autofocus
+          hooks={{
+            addImageBlobHook: uploadImageHandler,
+          }}
+          plugins={[
+            chart,
+            codeSyntaxHighlight,
+            colorSyntax,
+            tableMergedCell,
+            uml,
+          ]}
         />
       </EditorWrapper>
     </div>

@@ -64,13 +64,9 @@ const AdminMenu = ({ title }: { title: string }) => {
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
   const { hideButtons } = useBottomButton({ isActive: false });
 
-  useEffect(() => {
-    hideButtons();
-  }, [pageType]);
-
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);
-    hideButtons();
+    if (acticeMenuIndex !== menuItemKey) hideButtons();
     navigate(`/${page}/${id}/${pageType.url[menuItemKey]}`, { replace: true });
   };
 

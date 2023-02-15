@@ -128,7 +128,7 @@ export const MenuItem = ({
     >
       <MenuItemWrapper
         padding={[16, 20]}
-        color={isselected ? 'point_mint' : 'white'}
+        background={isselected ? 'point_mint' : 'white'}
         isselected={isselected}
         radius={10}
       >
