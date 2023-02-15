@@ -1,18 +1,10 @@
-import {
-  FlexBox,
-  Input,
-  ListHeader,
-  Modal,
-  Padding,
-  Spacing,
-} from '@dudoong/ui';
+import { Input, ListHeader, Modal, Padding, Spacing } from '@dudoong/ui';
 import { BasicEventRequest } from '@lib/apis/event/eventType';
+import useBottomButton from '@lib/hooks/useBottomButton';
 import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
-import Info from '@pages/events/Info';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { useLocation } from 'react-router-dom';
 
 interface place {
   content: string;
@@ -39,11 +31,6 @@ const MapPage = (props: any) => {
       lng: Number('126.92364650757898'),
     },
   });
-
-  console.log(lat);
-  console.log(lng);
-  console.log(curMarker);
-
   useEffect(() => {
     if (props?.place) {
       setMarker({
@@ -59,18 +46,11 @@ const MapPage = (props: any) => {
   const ps = new kakao.maps.services.Places();
 
   const { changeEventMutation } = useEvents();
-  const { pathname } = useLocation();
-  const eventId = pathname.split('/')[2];
 
-  // const payload = {
-  //   name: props.name,
-  //   startAt: timeFormatter(props.startDate, props.startTime),
-  //   runTime: props.runtime,
-  //   placeName: placeName,
-  //   placeAddress: placeAddress,
-  //   longitude: Number(lng),
-  //   latitude: Number(lat),
-  // } as BasicEventRequest;
+  const { setButtonInfo } = useBottomButton({
+    type: 'save',
+    isActive: true,
+  });
 
   const changeEventHandler = () => {
     if (curMarker.position.lng && curMarker.position.lat) {
@@ -88,6 +68,13 @@ const MapPage = (props: any) => {
     }
   };
   console.log(curMarker);
+
+  useEffect(() => {
+    setButtonInfo({
+      firstHandler: changeEventHandler,
+      firstDisable: checkButtonDisable(curMarker),
+    });
+  }, [curMarker]);
 
   function getAddress(lat: string, lng: string) {
     const geocoder = new kakao.maps.services.Geocoder();
@@ -178,9 +165,7 @@ const MapPage = (props: any) => {
           <Input
             width={398}
             placeholder="검색하세요"
-            value={
-              curMarker.content !== null ? curMarker.content : '설정해주세요'
-            }
+            value={curMarker.content !== null ? curMarker.content : ''}
             onClick={() => setIsOpen(true)}
             readOnly
           ></Input>
@@ -230,10 +215,13 @@ const MapPage = (props: any) => {
           )}
         </Map>
       </Padding>
-      {/* <FooterButton payload={payload} /> */}
-      <button onClick={changeEventHandler}>+</button>
     </>
   );
 };
 
 export default MapPage;
+
+const checkButtonDisable = (props: place) => {
+  if (props.content === null) return true;
+  return false;
+};

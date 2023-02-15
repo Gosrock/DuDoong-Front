@@ -4,11 +4,12 @@ import { FlexBox } from '../../layout';
 import { media, theme } from '../../theme';
 import { Github, Instagram } from 'react-bootstrap-icons';
 import Kakao from '../../assets/icons/Kakao';
-import { useResponsive } from '../../layout/Layout/useResponsive';
 import { css } from '@emotion/react';
+import { useResponsive } from '../../lib/useResponsive';
 
 export const Footer = () => {
   const { isPC } = useResponsive();
+
   return (
     <Wrapper>
       <Container>
@@ -34,9 +35,21 @@ export const Footer = () => {
         <div id="footer-bottom">
           <p>© Dudoong. 2023 All rights reserved. </p>
           <div>
-            <a>개인정보 처리방침</a>
+            <a
+              href={`https://dudoong.com/meta/privacy`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              개인정보 처리방침
+            </a>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-            <a>서비스 이용약관</a>
+            <a
+              href={`https://dudoong.com/meta/term`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              서비스 이용약관
+            </a>
           </div>
           {isPC && (
             <OutLink

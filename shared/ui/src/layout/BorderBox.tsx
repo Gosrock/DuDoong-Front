@@ -2,7 +2,6 @@ import { Padding, PaddingSize } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { HTMLAttributes } from 'react';
-
 interface BorderBoxProps extends HTMLAttributes<HTMLDivElement> {
   shadow: boolean;
   fullWidth: boolean;

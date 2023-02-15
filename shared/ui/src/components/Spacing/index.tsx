@@ -12,6 +12,7 @@ export const Spacing = ({
     <div
       css={css`
         height: ${size}px;
+        width: 100%;
         background-color: ${color ? `${theme.palette[color]}` : 'transperent'};
       `}
     ></div>

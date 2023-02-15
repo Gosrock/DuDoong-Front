@@ -13,7 +13,7 @@ export interface EventProfileResponse {
   status: StatusType;
 }
 
-type StatusType = 'PREPAREING' | 'OPEN' | 'CLOSED';
+type StatusType = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface EventDetailResponse {
   name: string;
@@ -51,16 +51,67 @@ export interface CreateEventRequest {
   runTime: number;
 }
 
+export type EventStatus = '준비중' | '진행중' | '정산중' | '지난공연';
+
 export interface CreateEventResponse {
   eventId: number;
   hostId: number;
-  status: '준비중' | '진행중' | '정산중' | '지난공연';
+  status: EventStatus;
   name: string;
   startAt: string;
   endAt: string;
   runTime: number;
   posterImage: string;
   detailImages: string;
+  content: string;
+  place: {
+    latitude: number;
+    longitude: number;
+    placeName: string;
+    placeAddress: string;
+  };
+}
+
+export interface EventChecklistResponse {
+  hostId: number;
+  eventId: number;
+  name: string;
+  hasBasic: boolean;
+  hasDetail: boolean;
+  hasTicketItem: boolean;
+}
+
+export interface DashBoardStatisticResponse {
+  notApprovedCount: number;
+  sellAmount: string;
+  doneCount: number;
+  enteredCount: number;
+  notEnteredCount: number;
+  issuedCount: number;
+}
+
+export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';
+
+export interface ImageUrlResponse {
+  presignedUrl: string;
+  key: string;
+  url: string;
+}
+
+export interface UpdateEventDetailRequest {
+  posterImageKey: string;
+  content: string;
+}
+
+export interface EventResponse {
+  eventId: number;
+  hostId: number;
+  status: EventStatus;
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
+  posterImage: string;
   content: string;
   place: {
     latitude: number;
@@ -80,20 +131,8 @@ export interface BasicEventRequest {
   latitude: number;
 }
 
-export interface BasicEventResponse {
-  eventId: number;
-  hostId: number;
-  status: '준비중' | '진행중' | '정산중' | '지난공연';
-  name: string;
-  startAt: string;
-  runTime: number;
-  posterImage: string;
-  detailImages: string;
-  content: string;
-  place: {
-    latitude: number;
-    longitude: number;
-    placeName: string;
-    placeAddress: string;
-  };
+type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
+
+export interface UpdateEventStatusRequest {
+  status: EventStatusType;
 }

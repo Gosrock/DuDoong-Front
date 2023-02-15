@@ -7,11 +7,11 @@ export const BASE_URL = `${
       : window.location.origin === 'http://localhost:5173'
       ? 'https://staging.dudoong.com/api/v1'
       : `${window.location.origin}/api/v1`
-    : 'https://staging.dudoong.com/api/v1'
+    : 'https://dudoong.com/api/v1'
 }`;
 
 export const DOMAIN = `${
-  typeof window !== 'undefined' && window.location.origin
+  typeof window !== 'undefined' ? window.location.origin : 'https://dudoong.com'
 }`;
 
 export const axiosPublic = axios.create({

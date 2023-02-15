@@ -7,6 +7,7 @@ import Events from './Events';
 import Alliance from './Alliance';
 import { useQuery } from '@tanstack/react-query';
 import HostApi from '@lib/apis/host/HostApi';
+import Slack from './Slack';
 
 const HostsRouter = () => {
   const { pathname } = useLocation();
@@ -30,6 +31,7 @@ const HostsRouter = () => {
         <Route path="info" element={<Info />} />
         <Route path="member" element={<Member />} />
         <Route path="events" element={<Events />} />
+        <Route path="slack" element={<Slack />} />
         <Route path="alliance" element={<Alliance />} />
         <Route path="/*" element={<Navigate to="/404" />} />
       </Route>

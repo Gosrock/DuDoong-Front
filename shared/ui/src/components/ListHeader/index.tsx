@@ -93,9 +93,10 @@ export const ListHeader = ({
   padding = LIST_HEADER_VARIANT[size].padding,
   rightElement = <></>,
   gap,
+  ...props
 }: ListHeaderProps) => {
   return (
-    <Padding size={padding}>
+    <Padding size={padding} {...props}>
       <FlexBox
         align="left"
         gap={size ? LIST_HEADER_VARIANT[size].gap : gap}

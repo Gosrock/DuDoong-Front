@@ -2,11 +2,17 @@ import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
 import {
   BasicEventRequest,
-  BasicEventResponse,
   CreateEventRequest,
   CreateEventResponse,
+  EventChecklistResponse,
   EventDetailResponse,
   EventProfileResponse,
+  DashBoardStatisticResponse,
+  EventResponse,
+  UpdateEventStatusRequest,
+  imageFileExtensionType,
+  ImageUrlResponse,
+  UpdateEventDetailRequest,
 } from './eventType';
 
 const EventApi = {
@@ -33,10 +39,68 @@ const EventApi = {
     return response.data.data;
   },
 
+  GET_EVENT_CHECKLIST: async (
+    eventId: string,
+  ): Promise<EventChecklistResponse> => {
+    const response = await axiosPrivate.get(`events/${eventId}/checklist`);
+    return response.data.data;
+  },
+
+  GET_EVENT_STATISTICS: async (
+    eventId: string,
+  ): Promise<DashBoardStatisticResponse> => {
+    const response = await axiosPrivate.get(`events/${eventId}/statistics`);
+    return response.data.data;
+  },
+
+  PATCH_EVENT_OPEN: async (eventId: string): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(`events/${eventId}/open`);
+    return response.data.data;
+  },
+
+  PATCH_EVENT_STATUS: async ({
+    eventId,
+    payload,
+  }: {
+    eventId: string;
+    payload: UpdateEventStatusRequest;
+  }): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(
+      `events/${eventId}/status`,
+      payload,
+    );
+    return response.data.data;
+  },
+  POST_EVENT_IMAGE: async ({
+    eventId,
+    imageFileExtension,
+  }: {
+    eventId: string;
+    imageFileExtension: imageFileExtensionType;
+  }): Promise<ImageUrlResponse> => {
+    const response = await axiosPrivate.post(
+      `/events/${eventId}/images?imageFileExtension=${imageFileExtension}`,
+    );
+    return response.data.data;
+  },
+
+  PATCH_EVENT_DETAIL: async ({
+    eventId,
+    payload,
+  }: {
+    eventId: string;
+    payload: UpdateEventDetailRequest;
+  }): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(
+      `/events/${eventId}/details`,
+      payload,
+    );
+    return response.data.data;
+  },
   PATCH_EVENT_BASIC: async (
     payload: BasicEventRequest,
     eventId: string,
-  ): Promise<BasicEventResponse> => {
+  ): Promise<EventResponse> => {
     const response = await axiosPrivate.patch(
       `events/${eventId}/basic`,
       payload,

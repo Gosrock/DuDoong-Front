@@ -10,7 +10,10 @@ import {
   PeopleFill,
   QrCodeScan,
   Sliders,
+  Slack,
   DiscFill,
+  RocketTakeoffFill,
+  LightningChargeFill,
 } from 'react-bootstrap-icons';
 /**
  * @param type menu 종류
@@ -35,6 +38,7 @@ export type MenuItemSetTypeKey =
   | 'hostinfo'
   | 'hostmember'
   | 'hostevents'
+  | 'hostslack'
   | 'hostalliance';
 
 type MenuItemSetType = {
@@ -83,11 +87,15 @@ const MENU_ITEM_SET: MenuItemSetType = {
   },
   hostevents: {
     text: '등록한 공연',
-    icon: <TicketPerforatedFill css={{ width: '22px', height: '22px' }} />,
+    icon: <DiscFill css={{ width: '22px', height: '22px' }} />,
+  },
+  hostslack: {
+    text: '슬랙 알림',
+    icon: <Slack css={{ width: '22px', height: '22px' }} />,
   },
   hostalliance: {
     text: '제휴 관련',
-    icon: <CardChecklist css={{ width: '22px', height: '22px' }} />,
+    icon: <LightningChargeFill css={{ width: '22px', height: '22px' }} />,
   },
 };
 
@@ -120,7 +128,7 @@ export const MenuItem = ({
     >
       <MenuItemWrapper
         padding={[16, 20]}
-        color={isselected ? 'point_mint' : 'white'}
+        background={isselected ? 'point_mint' : 'white'}
         isselected={isselected}
         radius={10}
       >
@@ -167,4 +175,4 @@ const MenuItemWrapper = styled(RoundBlock)<SelectedProps>`
   }
 `;
 
-export { DiscFill };
+export { DiscFill, RocketTakeoffFill };

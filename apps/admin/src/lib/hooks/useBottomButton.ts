@@ -54,7 +54,16 @@ const useBottomButton = ({ isActive, type = 'save' }: useBottomButtonProps) => {
     });
   };
 
-  return { setButtonInfo, hideButtons };
+  const changeButtonType = (type: AdminBottomButtonTypeKey) => {
+    setButton((prev) => {
+      return {
+        ...prev,
+        type: type,
+      };
+    });
+  };
+
+  return { setButtonInfo, hideButtons, changeButtonType };
 };
 
 export default useBottomButton;
