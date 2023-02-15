@@ -8,26 +8,18 @@ import {
   Spacing,
   TimePicker,
 } from '@dudoong/ui';
-import { EventDetailResponse, useInputs } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import EventApi from '@lib/apis/event/EventApi';
 import { BasicEventRequest } from '@lib/apis/event/eventType';
 import timeFormatter from '@lib/utils/timeFormatter';
 import { useQuery } from '@tanstack/react-query';
-import { run } from 'node:test';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MapPage from './Map';
 
-//공연이름, 공연날짜, 관람시간
-//Map컴포넌트를 여기다가 쓰는게 더 날듯
-//날짜, 시간 picker 이미있는것 쓰기->컴포넌트로 분리하는거 어떰
-//useInputs의 onChange함수 쓸 수 있을듯
-
 const LeftSide = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
-
   const { data } = useQuery(
     ['eventDetail'],
     () => EventApi.GET_EVENT_DETAIL(eventId),
@@ -37,18 +29,11 @@ const LeftSide = () => {
       },
     },
   );
-
-  console.log(data);
-
   const [startDate, setStartAt] = useState<Date | null>();
   const [startTime, setStartAtTime] = useState<Date | null>();
   const runTimeRef = useRef<HTMLInputElement>(null);
   const [runTime, setRunTime] = useState<number | undefined>(data?.runTime);
   const [place, setPlace] = useState<any | undefined>();
-  //const [form, onChange] = useInputs<BasicEventRequest>(data?data:);
-
-  //1.form제출 해야됨...how?->props를 map에다가 전달해주면 될듯!!
-  //2.dropDown modal?
 
   useEffect(() => {
     setRunTime(data?.runTime);
@@ -83,8 +68,6 @@ const LeftSide = () => {
       }
     }
   };
-  console.log(startDate);
-  console.log(startTime);
   //time지정
 
   return (

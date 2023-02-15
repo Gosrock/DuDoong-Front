@@ -1,7 +1,7 @@
 import LeftSide from '@components/events/info/LeftSide';
-import TempIButtonSet from '@components/events/info/TempIButtonSet';
-import { FlexBox, ListHeader, Spacing } from '@dudoong/ui';
-import Map from '@components/events/info/Map';
+import MapPage from '@components/events/info/Map';
+import { Divider, FlexBox, ListHeader, Spacing } from '@dudoong/ui';
+import { useEffect, useState } from 'react';
 
 //기본 state를 get해와서 넣어주고 patch로 변경만해주면 될듯
 
@@ -16,6 +16,7 @@ const Info = () => {
       />
       <Spacing size={24} />
       <LeftSide />
+      <Divider line={true} height={238} />
     </>
   );
 };
