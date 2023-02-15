@@ -13,7 +13,7 @@ export interface EventProfileResponse {
   status: StatusType;
 }
 
-type StatusType = 'PREPAREING' | 'OPEN' | 'CLOSED';
+type StatusType = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface EventDetailResponse {
   name: string;
@@ -72,6 +72,24 @@ export interface CreateEventResponse {
   };
 }
 
+export interface EventChecklistResponse {
+  hostId: number;
+  eventId: number;
+  name: string;
+  hasBasic: boolean;
+  hasDetail: boolean;
+  hasTicketItem: boolean;
+}
+
+export interface DashBoardStatisticResponse {
+  notApprovedCount: number;
+  sellAmount: string;
+  doneCount: number;
+  enteredCount: number;
+  notEnteredCount: number;
+  issuedCount: number;
+}
+
 export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';
 
 export interface ImageUrlResponse {
@@ -101,4 +119,10 @@ export interface EventResponse {
     placeName: string;
     placeAddress: string;
   };
+}
+
+type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
+
+export interface UpdateEventStatusRequest {
+  status: EventStatusType;
 }
