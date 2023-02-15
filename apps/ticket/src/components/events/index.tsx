@@ -48,7 +48,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
     };
     if (!auth.isAuthenticated) {
       const refreshToken = getCookie('refreshToken') as string;
-      fetchRefresh(refreshToken);
+      refreshToken && fetchRefresh(refreshToken);
     }
   }, []);
 

@@ -16,14 +16,16 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
           <ListRow
             padding={[12, 0]}
             text={item.ticketName}
-            subText={`${item.price} ∙ ${item.type} ∙ 인당 ${item.purchaseLimit}매 제한`}
+            subText={`${item.price} ∙ ${item.payType} ∙ 인당 ${item.purchaseLimit}매 제한`}
             textGap={0}
             rightElement={
-              <Tag
-                size="md"
-                text={`${item.quantity}/${item.supplyCount}`}
-                color="main"
-              />
+              item.isQuantityPublic && (
+                <Tag
+                  size="md"
+                  text={`${item.quantity}/${item.supplyCount}`}
+                  color="main"
+                />
+              )
             }
           />
           <Divider line className="divider" />
@@ -35,7 +37,9 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
 export default Tickets;
 
 const Wrapper = styled.div`
-  .divider:last-of-type {
-    display: none;
+  div:last-of-type {
+    .divider {
+      display: none;
+    }
   }
 `;

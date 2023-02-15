@@ -1,19 +1,26 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { Padding, RoundBlock } from '../../layout';
 
-export interface ModalBoxProps {
+export interface ModalBoxProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
   onDismiss: () => void;
   children: ReactNode;
 }
 
-export const Modal = ({ open, onDismiss, children }: ModalBoxProps) => {
+export const Modal = ({
+  open,
+  onDismiss,
+  children,
+  ...props
+}: ModalBoxProps) => {
   return (
     <Wrapper open={open}>
       <Overlay onClick={onDismiss} />
-      <ModalBox size={[16, 0]}>{children}</ModalBox>
+      <ModalBox size={[16, 0]} {...props}>
+        {children}
+      </ModalBox>
     </Wrapper>
   );
 };
