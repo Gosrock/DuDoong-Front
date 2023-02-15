@@ -68,9 +68,6 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
           openOverlay={openOverlay}
           className={'media-mobile'}
         />
-        <section>
-          <Footer />
-        </section>
       </Wrapper>
       {tickets && (
         <OverlayBox open={isOpen} onDismiss={closeOverlay}>
