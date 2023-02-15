@@ -13,7 +13,7 @@ const TicketRatio = ({
   return (
     <BorderBox
       shadow
-      padding={[38, 58, 25, 58]}
+      padding={[38, 57, 25, 57]}
       css={css`
         width: 317px;
         height: 271px;
@@ -27,6 +27,7 @@ const TicketRatio = ({
             <Text typo={'P_Text_16_SB'} color={'gray_500'}>
               {checked}장<br />
             </Text>
+            <Spacing size={2} />
             <Text typo={'P_Text_12_R'} color={'gray_500'}>
               입장 확인된 티켓
             </Text>
@@ -35,6 +36,7 @@ const TicketRatio = ({
             <Text typo={'P_Text_16_SB'} color={'gray_500'}>
               {notChecked}장<br />
             </Text>
+            <Spacing size={2} />
             <Text typo={'P_Text_12_R'} color={'gray_500'}>
               입장 미확인 티켓
             </Text>
