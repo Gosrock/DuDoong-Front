@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import {
-  ImageUrlResponse,
-  imageFileExtensionType,
-} from '@lib/apis/host/hostType';
+import { ImageUrlResponse } from '@lib/apis/host/hostType';
 import { useMutation } from '@tanstack/react-query';
 import HostApi from '@lib/apis/host/HostApi';
 import axios from 'axios';
 import { useEffect } from 'react';
 import EventApi from '@lib/apis/event/EventApi';
+import getImageExtension from '@lib/utils/getImageExtension';
 
 export interface ImageInfoType
   extends Pick<ImageUrlResponse, 'presignedUrl' | 'key'> {
@@ -58,14 +56,6 @@ const usePresignedUrl = (type: presignedUrlType, id: string) => {
       }
     }
   }, [imageInfo.image]);
-
-  // extension 구하는 function
-  const getImageExtension = (extension: string) => {
-    const type = extension.split('/')[1];
-    if (type === 'jpg') return 'JPG' as imageFileExtensionType;
-    else if (type === 'png') return 'PNG' as imageFileExtensionType;
-    else return 'JPEG' as imageFileExtensionType;
-  };
 
   // s3 upload function
   const uploadImageToS3 = async () => {
