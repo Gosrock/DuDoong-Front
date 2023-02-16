@@ -1,22 +1,20 @@
-import { MenuBar, Spacing } from '@dudoong/ui';
+import { media, MenuBar, Spacing } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import dynamic from 'next/dynamic';
 
-import { ComponentType, useState } from 'react';
+import { ComponentProps, ComponentType, useState } from 'react';
 import { MdViewerProps } from './MdViewer';
 import SaleInfo from './SaleInfo';
 
-const DetailMenu = ({
-  content,
-  MdViewer,
-}: {
+interface DetailMenuProps extends ComponentProps<'div'> {
   content: string;
   MdViewer: ComponentType<MdViewerProps>;
-}) => {
+}
+
+const DetailMenu = ({ content, MdViewer, ...props }: DetailMenuProps) => {
   const [menu, setMenu] = useState<number>(0);
   return (
-    <>
+    <Wrapper {...props}>
       <MenuBar
         menus={['공연상세', '판매정보']}
         curActiveMenu={menu}
@@ -27,11 +25,13 @@ const DetailMenu = ({
         <MdViewer content={content} className="detail-info" />
         <SaleInfo className="sale-info" />
       </Content>
-    </>
+    </Wrapper>
   );
 };
 
 export default DetailMenu;
+
+const Wrapper = styled.div``;
 
 const Content = styled.div<{ menu: number }>`
   ${({ menu }) =>
@@ -46,4 +46,7 @@ const Content = styled.div<{ menu: number }>`
             display: none;
           }
         `}
+  ${media.mobile} {
+    padding: 0 24px;
+  }
 `;

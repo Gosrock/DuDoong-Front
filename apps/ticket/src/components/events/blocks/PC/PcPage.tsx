@@ -1,5 +1,5 @@
 import { DetailTemplateProps } from '@components/events';
-import { Divider, RoundBlock, Spacing, Text } from '@dudoong/ui';
+import { Divider, Footer, RoundBlock, Spacing, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
 import DetailMenu from '../DetailMenu';
@@ -17,9 +17,9 @@ const PcPage = ({
     ssr: false,
   });
   return (
-    <>
+    <div {...props}>
       <Spacing size={100} />
-      <Wrapper {...props}>
+      <Container>
         {/* 상단 헤더 */}
         <LeftContent>
           <Text typo="G_Header_24_B">{detail.name}</Text>
@@ -36,16 +36,18 @@ const PcPage = ({
           <Spacing size={12} />
           <Remote openOverlay={openOverlay} />
         </RightSticky>
-      </Wrapper>
-
+      </Container>
       <Spacing size={120} />
-    </>
+      <section>
+        <Footer />
+      </section>
+    </div>
   );
 };
 
 export default PcPage;
 
-const Wrapper = styled.div`
+const Container = styled.div`
   max-width: 936px;
   min-width: 896px;
   margin: 0 auto;

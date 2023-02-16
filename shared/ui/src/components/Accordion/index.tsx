@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { forwardRef, ReactNode, useState } from 'react';
+import { ComponentPropsWithRef, forwardRef, ReactNode, useState } from 'react';
 import { ChevronDown } from 'react-bootstrap-icons';
 import { FlexBox, ListRow, ListRowProps, PaddingSize } from '../../layout';
 export interface AccordionProps
-  extends Pick<ListRowProps, 'textTypo' | 'textColor'> {
+  extends ComponentPropsWithRef<'div'>,
+    Pick<ListRowProps, 'textTypo' | 'textColor'> {
   title: string;
   padding?: PaddingSize;
   content: ReactNode;
@@ -44,6 +45,7 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
       initialState = false,
       rightElement,
       disabled = false,
+      ...props
     }: AccordionProps,
     ref,
   ) => {
@@ -62,7 +64,7 @@ export const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
     };
 
     return (
-      <div>
+      <div {...props}>
         <AccordianHeader onClick={handleAccordion} ref={ref}>
           <FlexBox align="center" justify="space-between">
             <ListRow

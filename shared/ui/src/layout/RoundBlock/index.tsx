@@ -47,7 +47,6 @@ interface RoundWrapperProps {
 }
 
 const RoundWrapper = styled(Padding)<RoundWrapperProps>`
-  width: 100%;
   border-radius: ${({ radius }) => `${radius}px`};
   background-color: ${({ background, theme }) =>
     `${theme.palette[background]}`};
