@@ -18,7 +18,10 @@ import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 
 const Info = () => {
   const hostId = useLocation().pathname.split('/')[2];
-  const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(hostId);
+  const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(
+    'host',
+    hostId,
+  );
   const [form, onChange, , initForm] = useInputs<UpdateHostRequest>({
     profileImageKey: '',
     introduce: '',
@@ -43,12 +46,12 @@ const Info = () => {
     () => HostApi.GET_HOST_DETAIL(hostId),
     {
       onSuccess: (data: HostDetailResponse) => {
-        if (data.profileImageUrl) {
+        if (data.profileImage) {
           setImageInfo((prev) => {
             return {
               ...prev,
               presignedUrl: '',
-              key: getKeyFromUrl(data.profileImageUrl),
+              key: getKeyFromUrl(data.profileImage),
             };
           });
         }
@@ -94,7 +97,7 @@ const Info = () => {
       <ContentGrid>
         <GridLeftElement
           hostName={status === 'success' ? data!.name : ''}
-          imageurl={status === 'success' ? data!.profileImageUrl : null}
+          imageurl={status === 'success' ? data!.profileImage : null}
           setImageInfo={setImageInfo}
         />
         <GridRightElement onChange={onChange} {...form} />

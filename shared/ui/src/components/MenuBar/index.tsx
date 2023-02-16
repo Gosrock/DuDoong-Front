@@ -1,7 +1,7 @@
 import { FlexBox, Padding, PaddingSize } from '../../layout';
 import styled from '@emotion/styled';
 import { Text } from '../Text';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 
 /**
@@ -29,6 +29,7 @@ export const MenuBar = ({
   setCurActiveMenu,
   padding = [8, 24],
 }: MenuBarProps) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement[]>([]);
   // [left position, width]
   const [indicatorPositionAndWidth, setIndicatorPositionAndWidth] = useState<
@@ -36,14 +37,18 @@ export const MenuBar = ({
   >([0, 0]);
 
   const addRef = (element: HTMLDivElement) => {
-    contentRef.current?.push(element);
-    if (indicatorPositionAndWidth[1] === 0) {
+    if (contentRef.current.length < menus.length)
+      contentRef.current?.push(element);
+  };
+
+  useEffect(() => {
+    if (contentRef.current.length === menus.length) {
       setIndicatorPositionAndWidth([
-        0,
+        convertedPadding[3],
         contentRef.current[0].getBoundingClientRect().width,
       ]);
     }
-  };
+  }, [contentRef.current.length]);
 
   const menuIndicatorHandler = (
     index: number,
@@ -51,8 +56,13 @@ export const MenuBar = ({
     e: React.MouseEvent,
   ) => {
     e.preventDefault();
+    const leftMarginWidth = wrapperRef.current
+      ? wrapperRef.current.getBoundingClientRect().left
+      : 0;
     const indicatorPosition =
-      contentRef.current[index].getBoundingClientRect().left - leftPadding;
+      contentRef.current[index].getBoundingClientRect().left -
+      leftMarginWidth +
+      convertedPadding[3];
     const indicatorWidth =
       contentRef.current[index].getBoundingClientRect().width;
     setCurActiveMenu(index);
@@ -63,13 +73,13 @@ export const MenuBar = ({
 
   return (
     <MenuBarWrapper size={convertedPadding as PaddingSize}>
-      <>
+      <div ref={wrapperRef}>
         <FlexBox align="center" justify="start">
           {menus.map((menu, index) => (
             <div ref={(el: HTMLDivElement) => addRef(el)} key={menu}>
               <Content size={[12, 11, 9, 11]} key={index}>
                 <Text
-                  typo="Navbar_17"
+                  typo="P_Text_16_M"
                   color={curActiveMenu === index ? 'black' : 'gray_300'}
                   onClick={(e: React.MouseEvent) =>
                     menuIndicatorHandler(index, convertedPadding[3], e)
@@ -82,7 +92,7 @@ export const MenuBar = ({
           ))}
         </FlexBox>
         <Indicator leftAndWidth={indicatorPositionAndWidth} />
-      </>
+      </div>
     </MenuBarWrapper>
   );
 };
@@ -108,11 +118,11 @@ const paddingConvertion = ({ padding }: paddingConvertionProps) => {
 const MenuBarWrapper = styled(Padding)`
   width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.palette.gray_300};
+  position: relative;
 `;
 
 const Content = styled(Padding)`
   & > span:hover {
-    color: ${({ theme }) => theme.palette.black};
     cursor: pointer;
   }
 `;
@@ -122,11 +132,11 @@ interface IndicatorProps {
 }
 
 const Indicator = styled.div<IndicatorProps>`
-  position: relative;
+  position: absolute;
   height: 2px;
   background: ${({ theme }) => theme.palette.black};
   left: ${({ leftAndWidth }) => `${leftAndWidth[0]}px`};
   width: ${({ leftAndWidth }) => `${leftAndWidth[1]}px`};
   transition: all 300ms ease-in-out;
-  margin-bottom: -1px;
+  transform: translateY(-1px);
 `;

@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { Viewer } from '@toast-ui/react-editor';
 import { HTMLAttributes } from 'react';
@@ -8,9 +9,15 @@ export interface MdViewerProps extends HTMLAttributes<HTMLDivElement> {
 
 const MdViewer = ({ content, ...props }: MdViewerProps) => {
   return (
-    <div {...props}>
+    <Wrapper {...props}>
       <Viewer initialValue={content} />
-    </div>
+    </Wrapper>
   );
 };
 export default MdViewer;
+
+const Wrapper = styled.div`
+  p {
+    font-size: 14px;
+  }
+`;

@@ -37,7 +37,7 @@ const SelectTicket = ({ items, eventName }: TicketsProps) => {
     handleCounter,
   } = useTicketSelect(items);
   const router = useRouter();
-  console.log(router);
+
   const data: SelectedTicketState = {
     eventId: router.query.eventId as string,
     eventName: eventName,

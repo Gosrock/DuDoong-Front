@@ -81,8 +81,10 @@ const Wrapper = styled.div`
     margin-top: 8px;
     margin-bottom: 24px;
     list-style: disc;
-    padding-left: 20px;
     ${({ theme }) => theme.typo.P_Text_14_M}
     color :${({ theme }) => theme.palette.gray_400};
+  }
+  ul {
+    padding-left: 20px;
   }
 `;

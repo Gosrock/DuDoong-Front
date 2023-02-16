@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 interface RegisterProps {
   name: string;
   onMainActionClick: () => void;
+  closeOverlay?: () => void;
 }
 
 const Register = ({ name, onMainActionClick }: RegisterProps) => {

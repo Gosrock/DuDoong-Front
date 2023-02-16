@@ -35,6 +35,7 @@ const Remote = ({ openOverlay }: { openOverlay: () => void }) => {
 export default Remote;
 
 const Wrapper = styled.div`
+  width: 100%;
   display: grid;
   grid-template-columns: 56px auto;
   grid-column-gap: 10px;
