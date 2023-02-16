@@ -10,8 +10,6 @@ import {
 } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import EventApi from '@lib/apis/event/EventApi';
-import { BasicEventRequest } from '@lib/apis/event/eventType';
-import timeFormatter from '@lib/utils/timeFormatter';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
