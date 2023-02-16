@@ -14,7 +14,7 @@ export type AdminBottomButtonTypeKey =
 export type AdminBottomButtonType = {
   [key in AdminBottomButtonTypeKey]: {
     buttons: string[];
-    varient: 'primary' | 'alert';
+    varient: 'primary' | 'warn';
     text: string;
   };
 };
@@ -24,7 +24,7 @@ const adminBottomButtonContent = {
   pay: { buttons: ['pay'], varient: 'primary', text: '정산하기' },
   deleteEvent: {
     buttons: ['deleteEvent'],
-    varient: 'alert',
+    varient: 'warn',
     text: '공연 삭제하기',
   },
   postEvent: {

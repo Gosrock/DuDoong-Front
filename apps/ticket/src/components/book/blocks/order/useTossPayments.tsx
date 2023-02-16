@@ -26,11 +26,11 @@ const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
       if (!widgetInstance) {
         initWidget();
       } else {
-        console.log(widgetInstance);
         widgetInstance.renderPaymentMethods(
           '#payment-method',
           getCount(totalPrice),
         );
+        widgetInstance.renderAgreement('#agreement');
       }
     }
   }, [widgetInstance]);

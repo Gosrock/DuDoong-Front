@@ -1,4 +1,4 @@
-import { FlexBox, Padding } from '../../layout';
+import { FlexBox } from '../../layout';
 import { Text } from '../Text';
 import BackArrow from '../../assets/icons/BackArrow';
 import styled from '@emotion/styled';

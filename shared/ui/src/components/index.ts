@@ -28,3 +28,5 @@ export * from './TextField/TimePicker';
 export * from './TextField/Input';
 export * from './TextField/TextArea';
 export * from './ToggleButton';
+
+export * from './iconExporter';

@@ -1,19 +1,26 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
-import { RoundBlock } from '../../layout';
+import { HTMLAttributes, ReactNode } from 'react';
+import { Padding, RoundBlock } from '../../layout';
 
-export interface ModalBoxProps {
+export interface ModalBoxProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
   onDismiss: () => void;
   children: ReactNode;
 }
 
-export const Modal = ({ open, onDismiss, children }: ModalBoxProps) => {
+export const Modal = ({
+  open,
+  onDismiss,
+  children,
+  ...props
+}: ModalBoxProps) => {
   return (
     <Wrapper open={open}>
       <Overlay onClick={onDismiss} />
-      <ModalBox padding={[16, 0]}>{children}</ModalBox>
+      <ModalBox size={[16, 0]} {...props}>
+        {children}
+      </ModalBox>
     </Wrapper>
   );
 };
@@ -45,7 +52,7 @@ const Wrapper = styled.div<{ open: boolean }>`
     `}
 `;
 
-const ModalBox = styled(RoundBlock)`
+const ModalBox = styled(Padding)`
   @keyframes grow {
     from {
       transform: scale(0.95);
@@ -55,9 +62,11 @@ const ModalBox = styled(RoundBlock)`
     }
   }
 
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.palette.white};
   animation: 0.15s forwards grow ease-out;
   z-index: 10;
-  width: 390px;
+  /* width: 390px; */
   border: 1px solid black;
 `;
 

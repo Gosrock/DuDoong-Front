@@ -9,7 +9,13 @@ const OverlayBox = ({ open, onDismiss, children }: OverlayBoxProps) => {
   return (
     <>
       {isPC ? (
-        <Modal open={open} onDismiss={onDismiss}>
+        <Modal
+          open={open}
+          onDismiss={onDismiss}
+          css={css`
+            width: 375px;
+          `}
+        >
           {children}
         </Modal>
       ) : (

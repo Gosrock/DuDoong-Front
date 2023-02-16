@@ -41,10 +41,7 @@ const LoginMarkup = ({ onKakao }: LoginMarkupProps) => {
               typo={'P_Text_16_R'}
               color={'gray_400'}
               onClick={() => {
-                window.open(
-                  'https://9yujin.notion.site/7b2b68ddd6054579befc86baf691db9f',
-                  '_blank',
-                );
+                window.open('https://dudoong.com/meta/term', '_blank');
               }}
             >
               두둥 서비스 약관
@@ -54,10 +51,7 @@ const LoginMarkup = ({ onKakao }: LoginMarkupProps) => {
               typo={'P_Text_16_R'}
               color={'gray_400'}
               onClick={() => {
-                window.open(
-                  'https://9yujin.notion.site/91eafd1fc2864386b9961d8e5277c2df',
-                  '_blank',
-                );
+                window.open('https://dudoong.com/meta/privacy', '_blank');
               }}
             >
               두둥 개인정보 처리방침

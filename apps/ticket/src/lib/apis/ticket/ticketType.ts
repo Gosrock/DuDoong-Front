@@ -6,16 +6,18 @@ export interface GetEventTicketItemsResponse {
 
 export interface TicketItemResponse {
   ticketItemId: number;
+  payType: PayType;
   ticketName: string;
   description: string;
   price: string;
-  type: TicketType;
+  approveType: ApproveType;
   purchaseLimit: number;
   supplyCount: number;
   quantity: number;
+  isQuantityPublic: boolean;
 }
-
-export type TicketType = '선착순' | '승인';
+export type PayType = '두둥티켓' | '무료티켓' | '유료티켓';
+export type ApproveType = '선착순' | '승인';
 
 export interface GetTicketItemOptionsResponse {
   optionGroups: OptionGroupResponse[];

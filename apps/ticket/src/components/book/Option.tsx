@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import BookHeader from './blocks/order/BookHeader';
 import TotalOptions from './blocks/option/TotalOptions';
-import type { SelectedTicketState } from '@components/events/blocks/Tickets';
+import type { SelectedTicketState } from '@components/events/blocks/SelectTicket';
 import type { GetServerSideProps } from 'next';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
@@ -114,8 +114,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         optionGroups: options.optionGroups,
       },
     };
-  } catch (e) {
-    console.log(e);
+  } catch (e: any) {
+    const { status } = e.response.data;
+
+    //토큰 만료일때 -> 재로그인 페이지로
+    if (status === 401 || status === 403) {
+      return {
+        redirect: {
+          destination: `/login/expired?redirect=/events/${
+            context.params!.eventId
+          }`,
+          permanent: false,
+        },
+      };
+    }
     return {
       // 새로고침 등으로 query 데이터가 없을땐 이벤트 상세로 리다이렉트
       redirect: {

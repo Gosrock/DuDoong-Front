@@ -15,20 +15,25 @@ import { HTMLAttributes, ReactNode } from 'react';
 
 export interface RoundBlockProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
-  color?: KeyOfPalette;
+  background?: KeyOfPalette;
   padding?: PaddingSize;
   radius?: CSSProperties['borderRadius'];
 }
 
 export const RoundBlock = ({
   children,
-  color = 'white',
+  background = 'white',
   padding = [20, 20],
   radius = 16,
   ...props
 }: RoundBlockProps) => {
   return (
-    <RoundWrapper radius={radius} color={color} size={padding} {...props}>
+    <RoundWrapper
+      radius={radius}
+      background={background}
+      size={padding}
+      {...props}
+    >
       {children}
     </RoundWrapper>
   );
@@ -38,11 +43,11 @@ export const RoundBlock = ({
 
 interface RoundWrapperProps {
   radius: CSSProperties['borderRadius'];
-  color: KeyOfPalette;
+  background: KeyOfPalette;
 }
 
 const RoundWrapper = styled(Padding)<RoundWrapperProps>`
-  width: 100%;
   border-radius: ${({ radius }) => `${radius}px`};
-  background-color: ${({ color, theme }) => `${theme.palette[color]}`};
+  background-color: ${({ background, theme }) =>
+    `${theme.palette[background]}`};
 `;

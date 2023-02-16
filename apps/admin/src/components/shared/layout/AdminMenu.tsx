@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import useBottomButton from '@lib/hooks/useBottomButton';
-import { DiscFill } from '@dudoong/ui';
+import { DiscFill, RocketTakeoffFill } from '@dudoong/ui';
 import { css } from '@emotion/react';
 
 type MenuSetTypeKey = 'events' | 'hosts';
@@ -40,9 +40,15 @@ const MENU_SET: MenuSetType = {
     url: ['dashboard', 'info', 'detail', 'tickets', 'options', 'guests', 'qr'],
   },
   hosts: {
-    items: ['hostinfo', 'hostmember', 'hostevents', 'hostalliance'],
+    items: [
+      'hostinfo',
+      'hostmember',
+      'hostevents',
+      'hostslack',
+      'hostalliance',
+    ],
     dividerPos: [],
-    url: ['info', 'member', 'events', 'alliance'],
+    url: ['info', 'member', 'events', 'slack', 'alliance'],
   },
 };
 
@@ -58,19 +64,15 @@ const AdminMenu = ({ title }: { title: string }) => {
   const [curActiveMenu, setCurActiveMenu] = useState<number>(acticeMenuIndex);
   const { hideButtons } = useBottomButton({ isActive: false });
 
-  useEffect(() => {
-    hideButtons();
-  }, [pageType]);
-
   const menuActiveHandler = (menuItemKey: number) => {
     setCurActiveMenu(menuItemKey);
-    hideButtons();
+    if (acticeMenuIndex !== menuItemKey) hideButtons();
     navigate(`/${page}/${id}/${pageType.url[menuItemKey]}`, { replace: true });
   };
 
   return (
     <MenuWrapper size={[20, 18]}>
-      <AdminTitle title={title} onClick={() => navigate('/')} />
+      <AdminTitle type={page} title={title} onClick={() => navigate('/')} />
       <Spacing size={4} />
       <Divider line={true} padding={0} height={8} />
       {pageType.items.map((item, index) => {
@@ -109,33 +111,45 @@ const MenuWrapper = styled(Padding)`
 `;
 
 const AdminTitle = ({
+  type,
   title,
   onClick,
 }: {
+  type: PageType;
   title: string;
   onClick: () => void;
 }) => {
   return (
-    <FlexBox
+    <Wrapper
       onClick={onClick}
       align={'center'}
       justify={'center'}
       direction={'column'}
-      css={css`
-        height: 100px;
-        border-radius: 12px;
-        cursor: pointer;
-        &:hover {
-          background-color: ${theme.palette.gray_200};
-          box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.05);
-        }
-        & > svg {
-          margin-bottom: 12px;
-        }
-      `}
+      css={css``}
     >
-      <DiscFill width={32} height={32} />
+      {type === 'events' ? (
+        <DiscFill width={32} height={32} />
+      ) : (
+        <RocketTakeoffFill width={32} height={32} />
+      )}
       <Text typo="G_Side_14_B">{title}</Text>
-    </FlexBox>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled(FlexBox)`
+  height: 100px;
+  border-radius: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${theme.palette.gray_100};
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.07);
+  }
+  & > svg {
+    margin-bottom: 12px;
+  }
+  & > span {
+    word-break: break-all;
+    padding-inline: 16px;
+  }
+`;
