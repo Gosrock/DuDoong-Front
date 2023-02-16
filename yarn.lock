@@ -4958,6 +4958,56 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toast-ui/chart@npm:^4.1.4":
+  version: 4.6.1
+  resolution: "@toast-ui/chart@npm:4.6.1"
+  checksum: c39b74a45f0d2d56f2da13d856ae95bdfb7c0e732834b7dda4c2cb86786714e220e8cf8bc3bab0fd7ab788b027cefecce27a02180147feddbdc8b04706228d08
+  languageName: node
+  linkType: hard
+
+"@toast-ui/editor-plugin-chart@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@toast-ui/editor-plugin-chart@npm:3.0.1"
+  dependencies:
+    "@toast-ui/chart": ^4.1.4
+  checksum: 107b5b53c5e2efaa7f118a4965ab85f570c3ea9e1a500b213c51b75f005c6cc9f72467a0ac9e1b2a1423a303dbf1af114d66663f4b21db68c0ceab1f215cf7a7
+  languageName: node
+  linkType: hard
+
+"@toast-ui/editor-plugin-code-syntax-highlight@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@toast-ui/editor-plugin-code-syntax-highlight@npm:3.1.0"
+  dependencies:
+    prismjs: ^1.23.0
+  checksum: cdef0f5da7d1d7d693bc514ff9e570211baa01e1937a86fa35b5216667a8e15cb34d38063b3261fdd21970e42125b0778c6c767a3f535306ac223ab15ed0d9be
+  languageName: node
+  linkType: hard
+
+"@toast-ui/editor-plugin-color-syntax@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@toast-ui/editor-plugin-color-syntax@npm:3.1.0"
+  dependencies:
+    tui-color-picker: ^2.2.6
+  checksum: e4f47afbdc291c2f60103779c6423b081de8605f53ec7bebac83d5c7842fe0e679b3a94ac2970b2aeff3fff6394f803ca3344861a0f5d269f25c45b5e3dd868e
+  languageName: node
+  linkType: hard
+
+"@toast-ui/editor-plugin-table-merged-cell@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@toast-ui/editor-plugin-table-merged-cell@npm:3.1.0"
+  checksum: 0dc4f30d1fb844f0edafd445389eab49d24c777716549c192f390cfc3e5bf184d90a68e74220cbf468f4be8dba2c1b33096d46460d29c4a345c68c0590df2449
+  languageName: node
+  linkType: hard
+
+"@toast-ui/editor-plugin-uml@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@toast-ui/editor-plugin-uml@npm:3.0.1"
+  dependencies:
+    plantuml-encoder: ^1.4.0
+  checksum: ffd2d61711fcbb732bb9bc1b5afaec83166a8c166bcc685270eb3e708673252f82709a023dccbd42d0669910a3c7867dd2fcdb0b8b482b0bae2dd06b20d68f28
+  languageName: node
+  linkType: hard
+
 "@toast-ui/editor@npm:^3.2.1":
   version: 3.2.1
   resolution: "@toast-ui/editor@npm:3.2.1"
@@ -6101,6 +6151,11 @@ __metadata:
     "@emotion/styled": ^11.10.5
     "@tanstack/react-query-devtools": ^4.20.4
     "@toast-ui/editor": ^3.2.1
+    "@toast-ui/editor-plugin-chart": ^3.0.1
+    "@toast-ui/editor-plugin-code-syntax-highlight": ^3.1.0
+    "@toast-ui/editor-plugin-color-syntax": ^3.1.0
+    "@toast-ui/editor-plugin-table-merged-cell": ^3.1.0
+    "@toast-ui/editor-plugin-uml": ^3.0.1
     "@toast-ui/react-editor": ^3.2.2
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
@@ -15265,6 +15320,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"plantuml-encoder@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "plantuml-encoder@npm:1.4.0"
+  checksum: d0ad77d960a8b092d8cfe9bdefc7a482ec073ecc686a92e482a8cbe35183d42433e79efd61fe24859ebd3219859d7fe022d49aaeec8827d46fde2ae4e7dba461
+  languageName: node
+  linkType: hard
+
 "pnp-webpack-plugin@npm:1.6.4":
   version: 1.6.4
   resolution: "pnp-webpack-plugin@npm:1.6.4"
@@ -16312,6 +16374,13 @@ __metadata:
   version: 1.0.3
   resolution: "pretty-hrtime@npm:1.0.3"
   checksum: bae0e6832fe13c3de43d1a3d43df52bf6090499d74dc65a17f5552cb1a94f1f8019a23284ddf988c3c408a09678d743901e1d8f5b7a71bec31eeeac445bef371
+  languageName: node
+  linkType: hard
+
+"prismjs@npm:^1.23.0":
+  version: 1.29.0
+  resolution: "prismjs@npm:1.29.0"
+  checksum: 007a8869d4456ff8049dc59404e32d5666a07d99c3b0e30a18bd3b7676dfa07d1daae9d0f407f20983865fd8da56de91d09cb08e6aa61f5bc420a27c0beeaf93
   languageName: node
   linkType: hard
 
@@ -19452,6 +19521,13 @@ __metadata:
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
   checksum: 1843f4c1b2e0f975e08c4c21caa4af4f7f65a12ac1b81b3b8489366826259323feb3fc7a243123453d2d1a02314205a7634e048d4a8009921da19f99755cdc48
+  languageName: node
+  linkType: hard
+
+"tui-color-picker@npm:^2.2.6":
+  version: 2.2.8
+  resolution: "tui-color-picker@npm:2.2.8"
+  checksum: d0a7dadf1d704bb66f662e852fd0ad57a6670e7e01fe1b8e5aabff4d1ff9960321f1961f253c95b18216e5b5bf96b714cdcd9047be4da4f9af452451b3e89544
   languageName: node
   linkType: hard
 
