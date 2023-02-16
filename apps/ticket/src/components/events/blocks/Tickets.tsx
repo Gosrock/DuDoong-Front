@@ -19,11 +19,7 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
             textGap={0}
             rightElement={
               item.isQuantityPublic && (
-                <Tag
-                  size="md"
-                  text={`${item.quantity}/${item.supplyCount}`}
-                  color="main"
-                />
+                <Tag size="md" text={`${item.quantity}매 남음`} color="main" />
               )
             }
           />
