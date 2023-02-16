@@ -1,5 +1,6 @@
 import { FlexBox, Padding } from '@dudoong/ui';
 import { EventPlace } from '@dudoong/utils';
+import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
@@ -33,17 +34,11 @@ const MobileMap = (props: MobileMapProps) => {
   return (
     <>
       <FlexBox align={'center'} justify={'center'}>
-        <Padding size={[20, 0, 20, 0]}>
-          <Map // 로드뷰를 표시할 Container
+        <Padding size={[20, 0, 0, 0]} fill>
+          <StyledMap // 로드뷰를 표시할 Container
             center={{
               lat: Number(`${curMarker.position.lat}`),
               lng: Number(`${curMarker.position.lng}`),
-            }}
-            style={{
-              width: '326px',
-              height: '181px',
-              borderRadius: '8px',
-              zIndex: 0,
             }}
             level={2}
             onCreate={setMap}
@@ -61,7 +56,7 @@ const MobileMap = (props: MobileMapProps) => {
                 )}
               </MapMarker>
             )}
-          </Map>
+          </StyledMap>
         </Padding>
       </FlexBox>
     </>
@@ -69,3 +64,10 @@ const MobileMap = (props: MobileMapProps) => {
 };
 
 export default MobileMap;
+
+const StyledMap = styled(Map)`
+  width: 100%;
+  height: 285px;
+
+  border-radius: 8px !important;
+`;
