@@ -1,6 +1,5 @@
 import { OptionAnswer } from '../cart/cartType';
-import { TicketType } from '../ticket/ticketType';
-
+import { ApproveType } from '../ticket/ticketType';
 export interface CreateOrderRequest {
   couponId: number | null;
   cartId: number;
@@ -14,7 +13,7 @@ export interface CreateOrderResponse {
   amount: string;
   isNeedPayment: boolean;
   orderMethod: OrderMethod;
-  ticketType: TicketType;
+  approveType: ApproveType;
 }
 
 export interface ConfirmOrderRequest {
@@ -29,7 +28,7 @@ export interface OrderResponse {
   orderUuid: string;
   orderId: number;
   orderMethod: OrderMethod;
-  ticketType: TicketType;
+  approveType: ApproveType;
 }
 
 /**
