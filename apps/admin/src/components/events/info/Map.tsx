@@ -8,6 +8,7 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 interface place {
   content: string;
+  placeAddress: string;
   position: {
     lat: number;
     lng: number;
@@ -26,6 +27,7 @@ const MapPage = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [curMarker, setMarker] = useState<place>({
     content: '홍대 001',
+    placeAddress: '서울 마포구 서교동 360-18',
     position: {
       lat: Number('37.55097092681401'),
       lng: Number('126.92364650757898'),
@@ -35,6 +37,7 @@ const MapPage = (props: any) => {
     if (props?.place) {
       setMarker({
         content: props.place.placeName,
+        placeAddress: props.place.placeAddress,
         position: {
           lat: Number(props.place.latitude),
           lng: Number(props.place.longitude),
@@ -59,7 +62,7 @@ const MapPage = (props: any) => {
         startAt: timeFormatter(props.startDate, props.startTime),
         runTime: props.runtime,
         placeName: curMarker.content,
-        placeAddress: placeAddress,
+        placeAddress: curMarker.placeAddress,
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
       } as BasicEventRequest;
@@ -139,6 +142,7 @@ const MapPage = (props: any) => {
     setLat(Number(markers.position.lat));
     setLng(Number(markers.position.lng));
     setPlaceName(markers.content);
+
     bounds.extend(
       new kakao.maps.LatLng(
         Number(markers.position.lat),
