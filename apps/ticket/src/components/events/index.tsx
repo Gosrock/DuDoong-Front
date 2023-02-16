@@ -48,7 +48,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
     };
     if (!auth.isAuthenticated) {
       const refreshToken = getCookie('refreshToken') as string;
-      fetchRefresh(refreshToken);
+      refreshToken && fetchRefresh(refreshToken);
     }
   }, []);
 
@@ -68,9 +68,6 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
           openOverlay={openOverlay}
           className={'media-mobile'}
         />
-        <section>
-          <Footer />
-        </section>
       </Wrapper>
       {tickets && (
         <OverlayBox open={isOpen} onDismiss={closeOverlay}>
