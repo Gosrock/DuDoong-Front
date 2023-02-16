@@ -58,6 +58,11 @@ const HostApi = {
     );
     return response.data.data;
   },
+
+  GET_HOST_EVENTS: async (hostId: string): Promise<any> => {
+    const response = await axiosPrivate.get(`/hosts/${hostId}/events`);
+    return response.data.data;
+  },
 };
 
 export default HostApi;
