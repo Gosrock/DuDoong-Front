@@ -8,7 +8,6 @@ interface TicketsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Tickets = ({ tickets, ...props }: TicketsProps) => {
-  console.log(tickets);
   return (
     <Wrapper>
       {tickets.ticketItems.map((item) => (

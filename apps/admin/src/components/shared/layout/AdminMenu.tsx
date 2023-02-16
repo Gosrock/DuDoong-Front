@@ -120,23 +120,12 @@ const AdminTitle = ({
   onClick: () => void;
 }) => {
   return (
-    <FlexBox
+    <Wrapper
       onClick={onClick}
       align={'center'}
       justify={'center'}
       direction={'column'}
-      css={css`
-        height: 100px;
-        border-radius: 12px;
-        cursor: pointer;
-        &:hover {
-          background-color: ${theme.palette.gray_200};
-          box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.05);
-        }
-        & > svg {
-          margin-bottom: 12px;
-        }
-      `}
+      css={css``}
     >
       {type === 'events' ? (
         <DiscFill width={32} height={32} />
@@ -144,6 +133,23 @@ const AdminTitle = ({
         <RocketTakeoffFill width={32} height={32} />
       )}
       <Text typo="G_Side_14_B">{title}</Text>
-    </FlexBox>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled(FlexBox)`
+  height: 100px;
+  border-radius: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${theme.palette.gray_100};
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.07);
+  }
+  & > svg {
+    margin-bottom: 12px;
+  }
+  & > span {
+    word-break: break-all;
+    padding-inline: 16px;
+  }
+`;
