@@ -20,6 +20,7 @@ import { useRouter } from 'next/router';
 import DetailMenu from '../DetailMenu';
 import Remote from '../Remote';
 import Tickets from '../Tickets';
+import MobileMap from './MobileMap';
 
 const MobilePage = ({
   tickets,
@@ -83,7 +84,7 @@ const MobilePage = ({
             `}
             padding={[16, 0, 0, 0]}
             title={detail.place.placeName}
-            content={<></>}
+            content={<MobileMap place={detail.place} />}
             rightElement={
               <Text typo={'P_Text_16_R'} color={'main_500'}>
                 지도보기
