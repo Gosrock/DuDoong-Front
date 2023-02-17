@@ -1,5 +1,5 @@
 import { axiosPublic } from '../axios';
-import { OauthInfoResponse, OauthLoginResponse } from './authType';
+import type { OauthInfoResponse, OauthLoginResponse } from './authType';
 
 export const AuthApi = {
   REFRESH: async (refreshToken: string): Promise<OauthLoginResponse> => {

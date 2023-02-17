@@ -1,7 +1,7 @@
 import { ListHeader, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import {
+import type {
   UpdateEventDetailRequest,
   ImageUrlResponse,
 } from '@lib/apis/event/eventType';

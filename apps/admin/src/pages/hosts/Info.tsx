@@ -5,7 +5,7 @@ import { ListHeader } from '@dudoong/ui';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import { useEffect } from 'react';
 import { useInputs } from '@dudoong/utils';
-import {
+import type {
   HostDetailResponse,
   ImageUrlResponse,
   UpdateHostRequest,

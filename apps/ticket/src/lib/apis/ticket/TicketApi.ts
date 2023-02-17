@@ -1,6 +1,6 @@
 import { axiosPublic } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import {
+import type {
   GetEventTicketItemsResponse,
   GetTicketItemOptionsResponse,
 } from './ticketType';

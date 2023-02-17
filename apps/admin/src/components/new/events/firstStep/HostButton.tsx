@@ -4,12 +4,7 @@ import HostItem, { HostItemProps } from '@components/shared/component/HostItem';
 interface HostButtonProps
   extends Pick<
     HostItemProps,
-    | 'hostId'
-    | 'name'
-    | 'introduce'
-    | 'profileImageUrl'
-    | 'role'
-    | 'selectedHostId'
+    'hostId' | 'name' | 'introduce' | 'profileImage' | 'role' | 'selectedHostId'
   > {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }

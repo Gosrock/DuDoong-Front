@@ -1,14 +1,13 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import { EventProfileResponse } from '../event/eventType';
-import {
+import type { EventProfileResponse } from '../event/eventType';
+import type {
   HostDetailResponse,
   UpdateHostRequest,
   HostProfileResponse,
   imageFileExtensionType,
   CreateHostRequest,
   CreateHostResponse,
-  HostEventResponse,
 } from './hostType';
 
 const HostApi = {

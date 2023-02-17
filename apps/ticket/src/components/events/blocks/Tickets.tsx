@@ -1,6 +1,6 @@
 import { Divider, ListRow, Tag } from '@dudoong/ui';
 import styled from '@emotion/styled';
-import { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
+import type { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
 import { HTMLAttributes } from 'react';
 
 interface TicketsProps extends HTMLAttributes<HTMLDivElement> {
