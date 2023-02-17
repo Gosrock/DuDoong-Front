@@ -4,6 +4,7 @@ import TempSButtonSet from '@components/hosts/slack/TempSButtonSet';
 import HostItem from '@components/shared/component/HostItem';
 import { ListHeader, Padding, Spacing } from '@dudoong/ui';
 import BorderBox from '@dudoong/ui/src/layout/BorderBox';
+import { css } from '@emotion/react';
 import { EventProfileResponse } from '@lib/apis/event/eventType';
 import HostApi from '@lib/apis/host/HostApi';
 import { HostEventResponse } from '@lib/apis/host/hostType';
@@ -41,7 +42,13 @@ const Events = () => {
       />
       <Spacing size={20} />
       {data?.size !== 0 && events !== undefined ? (
-        <BorderBox>
+        <BorderBox
+          css={css`
+            & .host-divider:last-of-type {
+              display: none;
+            }
+          `}
+        >
           <Padding size={[24, 80, 8, 22]}>
             {events.map((event: EventProfileResponse) => (
               <>
@@ -53,19 +60,6 @@ const Events = () => {
       ) : (
         <NoEventPage />
       )}
-      {/* <BorderBox>
-        <Padding size={[24, 80, 8, 22]}>
-          {events ? (
-            events.map((event: EventProfileResponse) => (
-              <>
-                <EventItem {...event} />
-              </>
-            ))
-          ) : (
-            <NoEventPage />
-          )}
-        </Padding>
-      </BorderBox> */}
     </>
   );
 };
