@@ -1,3 +1,4 @@
+import { EventStatus } from '@dudoong/utils';
 import { IncomingHttpHeaders } from 'http';
 
 export interface EventProfileResponse {
@@ -9,16 +10,14 @@ export interface EventProfileResponse {
   startAt: string;
   endAt: string;
   placeName: string;
-  status: StatusType;
+  status: EventStatus;
 }
-
-type StatusType = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface EventDetailResponse {
   name: string;
   startAt: string;
   runtime: number;
-  status: StatusType;
+  status: EventStatus;
   host: HostInfo;
   place: EventPlace;
   posterImage: string;
@@ -49,8 +48,6 @@ export interface CreateEventRequest {
   startAt: string;
   runTime: number;
 }
-
-export type EventStatus = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface CreateEventResponse {
   eventId: number;
@@ -120,8 +117,6 @@ export interface EventResponse {
   };
 }
 
-type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
-
 export interface UpdateEventStatusRequest {
-  status: EventStatusType;
+  status: EventStatus;
 }
