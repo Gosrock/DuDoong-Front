@@ -17,8 +17,8 @@ const TicketList = ({
           subText={`${item.price} · ${
             item.approveType === '승인' ? '승인 후 발매' : '선착순'
           } · 1인당 ${item.purchaseLimit}매`}
-          quantity={item.quantity}
-          stock={item.supplyCount}
+          quantity={item.supplyCount}
+          stock={item.quantity}
           isSold={false}
         />
       ))}

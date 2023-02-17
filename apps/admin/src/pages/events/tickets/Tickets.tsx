@@ -1,7 +1,7 @@
 import TempTButtonSet from '@components/events/tickets/tickets/TempTButtonSet';
 import TicketList from '@components/events/tickets/tickets/TicketList';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
-import TicketApi from '@lib/apis/ticket/TicketAPI';
+import TicketApi from '@lib/apis/ticket/TicketApi';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ const Tickets = () => {
         }
       />
       <Spacing size={36} />
-      <TempTButtonSet />
+      <TempTButtonSet eventId={eventId} />
       <Spacing size={72} />
       <ListHeader padding={0} size="listHeader_18" title="티켓 목록" />
       <Spacing size={42} />
