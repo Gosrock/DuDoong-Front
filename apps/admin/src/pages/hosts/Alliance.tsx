@@ -4,7 +4,6 @@ import {
   SecondParagraph,
   ThirdParagraph,
 } from '@components/hosts/alliance/TextFile';
-import TempSButtonSet from '@components/hosts/slack/TempSButtonSet';
 import { ListHeader, Spacing } from '@dudoong/ui';
 
 const Alliance = () => {
