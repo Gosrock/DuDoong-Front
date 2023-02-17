@@ -71,6 +71,9 @@ export interface ImageUrlResponse {
   url: string;
 }
 
+export interface SlackRequest {
+  slackUrl: string;
+}
 export interface HostEventResponse {
   content: EventProfileResponse[];
   page: number;

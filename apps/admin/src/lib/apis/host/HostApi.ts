@@ -8,6 +8,7 @@ import type {
   imageFileExtensionType,
   CreateHostRequest,
   CreateHostResponse,
+  SlackRequest,
 } from './hostType';
 
 const HostApi = {
@@ -60,6 +61,16 @@ const HostApi = {
     return response.data.data;
   },
 
+  PATCH_HOST_SLACK: async (
+    hostId: string | undefined,
+    payload: SlackRequest,
+  ): Promise<HostDetailResponse> => {
+    const response = await axiosPrivate.patch(
+      `/hosts/${hostId}/slack`,
+      payload,
+    );
+    return response.data.data;
+  },
   GET_HOST_EVENTS: async (
     hostId: string,
     pageParam = 0,
