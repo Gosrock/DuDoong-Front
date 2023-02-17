@@ -1,6 +1,6 @@
 import DDHead from '@components/shared/Layout/NextHead';
 import useOverlay from '@lib/hooks/useOverlay';
-import { Footer, media } from '@dudoong/ui';
+import { media } from '@dudoong/ui';
 import { AuthApi, EventApi, EventDetailResponse } from '@dudoong/utils';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import SelectTicket from './blocks/SelectTicket';
@@ -10,7 +10,7 @@ import { TicketApi } from '@lib/apis/ticket/TicketApi';
 import OverlayBox from '@components/shared/overlay/OverlayBox';
 import PcPage from './blocks/PC/PcPage';
 import MobilePage from './blocks/Mobile/MobilePage';
-import { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
+import type { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
 import { HTMLAttributes, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { authState } from '@store/auth';

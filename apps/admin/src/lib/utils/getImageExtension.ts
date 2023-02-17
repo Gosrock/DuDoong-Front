@@ -1,4 +1,4 @@
-import { imageFileExtensionType } from '@lib/apis/event/eventType';
+import type { imageFileExtensionType } from '@lib/apis/event/eventType';
 
 // extension 구하는 function
 const getImageExtension = (extension: string) => {

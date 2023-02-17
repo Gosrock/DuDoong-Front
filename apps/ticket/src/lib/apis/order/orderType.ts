@@ -1,6 +1,6 @@
 import { EventStatus } from '@dudoong/utils';
-import { OptionAnswer } from '../cart/cartType';
-import { ApproveType } from '../ticket/ticketType';
+import type { OptionAnswer } from '../cart/cartType';
+import type { ApproveType } from '../ticket/ticketType';
 
 export interface CreateOrderRequest {
   couponId: number | null;

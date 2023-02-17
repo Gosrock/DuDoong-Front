@@ -12,7 +12,7 @@ import {
 import { useInputs } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import TimeButton from './TimeButton';
-import { CreateEventRequest } from '@lib/apis/event/eventType';
+import type { CreateEventRequest } from '@lib/apis/event/eventType';
 import { useRef } from 'react';
 import { useState } from 'react';
 import useEvents from '@lib/hooks/useEvents';

@@ -1,7 +1,7 @@
 import { Divider, FlexBox, Tag, Text, theme } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
 import { css } from '@emotion/react';
-import { EventProfileResponse } from '@lib/apis/event/eventType';
+import type { EventProfileResponse } from '@lib/apis/event/eventType';
 import { Link } from 'react-router-dom';
 
 const EventItem = (props: EventProfileResponse) => {

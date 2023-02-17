@@ -1,5 +1,5 @@
 import { useInfiniteQueries } from '@dudoong/utils';
-import { HostProfileResponse } from '@lib/apis/host/hostType';
+import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import HostApi from '@lib/apis/host/HostApi';
 import HostButton from './HostButton';
 

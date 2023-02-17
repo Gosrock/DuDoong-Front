@@ -1,4 +1,4 @@
-import { OptionGroupType } from '../cart/cartType';
+import type { OptionGroupType } from '../cart/cartType';
 
 /*
  * GET /v1/events/{eventId}/ticketItems 해당 이벤트의 티켓 조회
