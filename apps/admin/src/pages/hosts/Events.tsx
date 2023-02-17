@@ -5,28 +5,21 @@ import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import { css } from '@emotion/react';
 import { EventProfileResponse } from '@lib/apis/event/eventType';
 import HostApi from '@lib/apis/host/HostApi';
-import { HostEventResponse } from '@lib/apis/host/hostType';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Events = () => {
   const hostId = useLocation().pathname.split('/')[2];
-  const [events, setEvent] = useState<any>();
 
   const { data } = useQuery(
     ['hostEventDetail'],
     () => HostApi.GET_HOST_EVENTS(hostId),
     {
-      onSuccess: (data: HostEventResponse) => {
-        return data.content;
+      onSuccess: () => {
+        console.log('success');
       },
     },
   );
-
-  useEffect(() => {
-    setEvent(data?.content);
-  }, [data?.content]);
 
   return (
     <>
@@ -36,7 +29,7 @@ const Events = () => {
         title={'등록한 공연 한눈에 보기'}
       />
       <Spacing size={20} />
-      {data?.size !== 0 && events !== undefined ? (
+      {data?.size !== 0 && data?.content !== undefined ? (
         <BorderBox
           css={css`
             & .host-divider:last-of-type {
@@ -45,7 +38,7 @@ const Events = () => {
           `}
         >
           <Padding size={[24, 80, 8, 22]}>
-            {events.map((event: EventProfileResponse) => (
+            {data?.content.map((event: EventProfileResponse) => (
               <>
                 <EventItem {...event} />
               </>

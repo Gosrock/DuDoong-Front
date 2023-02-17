@@ -72,7 +72,7 @@ export interface ImageUrlResponse {
 }
 
 export interface HostEventResponse {
-  content: EventProfileResponse;
+  content: EventProfileResponse[];
   page: number;
   size: number;
   totalElements: number;

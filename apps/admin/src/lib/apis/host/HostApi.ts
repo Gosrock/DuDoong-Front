@@ -7,6 +7,7 @@ import {
   imageFileExtensionType,
   CreateHostRequest,
   CreateHostResponse,
+  HostEventResponse,
 } from './hostType';
 
 const HostApi = {
@@ -59,7 +60,7 @@ const HostApi = {
     return response.data.data;
   },
 
-  GET_HOST_EVENTS: async (hostId: string): Promise<any> => {
+  GET_HOST_EVENTS: async (hostId: string): Promise<HostEventResponse> => {
     const response = await axiosPrivate.get(`/hosts/${hostId}/events`);
     return response.data.data;
   },
