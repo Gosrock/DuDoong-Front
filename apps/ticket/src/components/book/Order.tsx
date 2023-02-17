@@ -13,7 +13,7 @@ import {
   theme,
 } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
-import { AddCartResponse } from '@lib/apis/cart/cartType';
+import type { AddCartResponse } from '@lib/apis/cart/cartType';
 import DDHead from '@components/shared/Layout/NextHead';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';

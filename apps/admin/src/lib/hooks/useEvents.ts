@@ -1,5 +1,5 @@
 import EventApi from '@lib/apis/event/EventApi';
-import { CreateEventResponse } from '@lib/apis/event/eventType';
+import type { CreateEventResponse } from '@lib/apis/event/eventType';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 

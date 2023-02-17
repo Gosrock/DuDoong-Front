@@ -1,10 +1,15 @@
-import { OptionAnswer } from '../cart/cartType';
-import { ApproveType } from '../ticket/ticketType';
+import { EventStatus } from '@dudoong/utils';
+import type { OptionAnswer } from '../cart/cartType';
+import type { ApproveType } from '../ticket/ticketType';
+
 export interface CreateOrderRequest {
   couponId: number | null;
   cartId: number;
 }
 
+/**
+ * POST /v1/orders/ (주문 생성)
+ */
 export interface CreateOrderResponse {
   orderId: string;
   orderName: string;
@@ -21,10 +26,14 @@ export interface ConfirmOrderRequest {
   amount: number;
 }
 
+/**
+ * POST confirm (결제확인하기)
+ */
 export interface OrderResponse {
   paymentInfo: OrderPaymentResponse;
   tickets: OrderLineTicketResponse;
   refundInfo: RefundInfo;
+  eventProfile: EventProfile;
   orderUuid: string;
   orderId: number;
   orderMethod: OrderMethod;
@@ -57,6 +66,7 @@ export interface OrderLineTicketResponse {
   orderLinePrice: string;
   purchaseQuantity: number;
   answers: OptionAnswer;
+  eachOptionPrice: string;
 }
 
 /**
@@ -65,6 +75,20 @@ export interface OrderLineTicketResponse {
 interface RefundInfo {
   endAt: string;
   available: boolean;
+}
+
+/**
+ * 이벤트 프로필 정보
+ */
+interface EventProfile {
+  eventId: number;
+  posterImage: string;
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
+  placeName: string;
+  status: EventStatus;
 }
 
 export type OrderMethod = '승인 방식' | '결제 방식';

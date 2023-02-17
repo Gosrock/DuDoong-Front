@@ -5,7 +5,7 @@ import { TicketPerforatedFill } from '@dudoong/ui';
 import MiniBox from './MiniBox';
 import TotalBox from './TotalBox';
 import TicketRatio from './TicketRatio';
-import { DashBoardStatisticResponse } from '@lib/apis/event/eventType';
+import type { DashBoardStatisticResponse } from '@lib/apis/event/eventType';
 import { useQuery } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
 import { Dispatch, SetStateAction } from 'react';

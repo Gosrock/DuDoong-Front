@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ImageUrlResponse } from '@lib/apis/host/hostType';
+import type { ImageUrlResponse } from '@lib/apis/host/hostType';
 import { useMutation } from '@tanstack/react-query';
 import HostApi from '@lib/apis/host/HostApi';
 import axios from 'axios';

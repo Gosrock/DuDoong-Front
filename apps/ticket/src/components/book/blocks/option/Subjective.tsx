@@ -1,6 +1,6 @@
 import { Padding, TextArea } from '@dudoong/ui';
-import { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
-import { OptionResponse } from '@lib/apis/ticket/ticketType';
+import type { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
+import type { OptionResponse } from '@lib/apis/ticket/ticketType';
 import { Dispatch, SetStateAction } from 'react';
 
 interface SubjectiveProps {
