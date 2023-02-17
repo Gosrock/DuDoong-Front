@@ -36,12 +36,12 @@ const TAG_BUTTON_COLOR: TagButtonColorType = {
   },
 };
 
-type tagButtonSizeKey = 'sm' | 'lg';
+type tagButtonSizeKey = 'sm' | 'lg' | 'md';
 type TagButtonSizeType = {
   [key in tagButtonSizeKey]: {
     typo: KeyOfTypo;
     padding: string;
-    radius: 6 | 12;
+    radius: 6 | 8 | 12;
   };
 };
 
@@ -50,6 +50,11 @@ const TAG_BUTTON_SIZE: TagButtonSizeType = {
     typo: 'P_Text_10_M',
     padding: '4px 12px',
     radius: 6,
+  },
+  md: {
+    typo: 'P_Text_12_M',
+    padding: '4px 12px',
+    radius: 8,
   },
   lg: {
     typo: 'P_Text_16_M',

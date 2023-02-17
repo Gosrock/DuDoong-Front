@@ -36,15 +36,19 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
 
   useEffect(() => {
     const fetchRefresh = async (token: string) => {
-      const data = await AuthApi.REFRESH(token);
-      const auth = {
-        userProfile: data.userProfile,
-        accessToken: data.accessToken,
-        isAuthenticated: true,
-        callbackUrl: (getCookie('redirectUrl') as string) || '/',
-      };
-      setCredentials(data);
-      setAuth(auth);
+      try {
+        const data = await AuthApi.REFRESH(token);
+        const auth = {
+          userProfile: data.userProfile,
+          accessToken: data.accessToken,
+          isAuthenticated: true,
+          callbackUrl: (getCookie('redirectUrl') as string) || '/',
+        };
+        setCredentials(data);
+        setAuth(auth);
+      } catch (err: any) {
+        console.error(err);
+      }
     };
     if (!auth.isAuthenticated) {
       const refreshToken = getCookie('refreshToken') as string;

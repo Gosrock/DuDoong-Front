@@ -10,7 +10,10 @@ export interface TossPaymentWidgets {
   instance: PaymentWidgetInstance | null;
 }
 
-const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
+const useTossPayments = (
+  totalPrice: string,
+  isDuddong: boolean,
+): TossPaymentWidgets => {
   const [widgetInstance, setWidgetInstance] =
     useState<PaymentWidgetInstance | null>(null);
   const initWidget = async () => {
@@ -22,7 +25,7 @@ const useTossPayments = (totalPrice: string): TossPaymentWidgets => {
   };
 
   useEffect(() => {
-    if (totalPrice !== '0원') {
+    if (!isDuddong) {
       if (!widgetInstance) {
         initWidget();
       } else {

@@ -9,59 +9,52 @@ export const globalStyle = css`
     font-family: 'Gmarket Sans';
     font-style: normal;
     font-weight: 700;
-    src: url(./GmarketSansBold.woff2) format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
-        format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
+      format('woff');
   }
   @font-face {
     font-family: 'Gmarket Sans';
     font-style: normal;
     font-weight: 500;
-    src: url(./GmarketSansMedium.woff2) format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-        format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+      format('woff');
   }
   @font-face {
     font-family: 'Gmarket Sans';
     font-style: normal;
     font-weight: 300;
-    src: url(./GmarketSansLight.woff2) format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
-        format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
+      format('woff');
   }
 
   @font-face {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
-    src: url(./Pretendard-Bold.subset.woff2) format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
-        format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+      format('woff');
   }
   @font-face {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 600;
-    src: url(./Pretendard-SemiBold.subset.woff2) format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff')
-        format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff')
+      format('woff');
   }
 
   @font-face {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 500;
-    src: url(./Pretendard-Medium.subset.woff2) format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff')
-        format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff')
+      format('woff');
   }
   @font-face {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    src: url(./Pretendard-Regular.subset.woff2) format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
-        format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+      format('woff');
   }
 
   body {
