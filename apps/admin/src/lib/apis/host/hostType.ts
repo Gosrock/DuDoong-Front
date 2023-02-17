@@ -1,4 +1,5 @@
 import { InfiniteResponse } from '@dudoong/utils';
+import { EventProfileResponse } from '../event/eventType';
 
 export type PageResponseHostProfileResponse =
   InfiniteResponse<HostProfileResponse>;
@@ -62,6 +63,7 @@ export interface UpdateHostRequest {
 }
 
 export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';
+export type status = ' 준비중' | '진행중' | '정산중' | '지난공연 ';
 
 export interface ImageUrlResponse {
   presignedUrl: string;
@@ -71,4 +73,12 @@ export interface ImageUrlResponse {
 
 export interface SlackRequest {
   slackUrl: string;
+}
+export interface HostEventResponse {
+  content: EventProfileResponse[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  hasNextPage: boolean;
 }
