@@ -1,4 +1,3 @@
-import { InfiniteResponse } from '@dudoong/utils';
 import { IncomingHttpHeaders } from 'http';
 
 export interface EventProfileResponse {

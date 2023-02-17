@@ -1,10 +1,14 @@
 import { OptionAnswer } from '../cart/cartType';
 import { ApproveType } from '../ticket/ticketType';
+
 export interface CreateOrderRequest {
   couponId: number | null;
   cartId: number;
 }
 
+/**
+ * POST /v1/orders/ (주문 생성)
+ */
 export interface CreateOrderResponse {
   orderId: string;
   orderName: string;
