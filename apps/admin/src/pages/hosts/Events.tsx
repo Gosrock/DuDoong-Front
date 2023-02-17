@@ -1,7 +1,5 @@
 import EventItem from '@components/home/EventItem';
 import NoEventPage from '@components/hosts/NoEventPage';
-import TempSButtonSet from '@components/hosts/slack/TempSButtonSet';
-import HostItem from '@components/shared/component/HostItem';
 import { ListHeader, Padding, Spacing } from '@dudoong/ui';
 import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import { css } from '@emotion/react';
@@ -27,12 +25,9 @@ const Events = () => {
   );
 
   useEffect(() => {
-    console.log(data?.content);
     setEvent(data?.content);
-  }, [data]);
+  }, [data?.content]);
 
-  console.log(data);
-  console.log(events);
   return (
     <>
       <ListHeader
