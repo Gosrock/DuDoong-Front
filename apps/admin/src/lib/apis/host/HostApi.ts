@@ -1,5 +1,6 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
+import { EventProfileResponse } from '../event/eventType';
 import {
   HostDetailResponse,
   UpdateHostRequest,
@@ -60,7 +61,12 @@ const HostApi = {
     return response.data.data;
   },
 
-  GET_HOST_EVENTS: async (hostId: string): Promise<HostEventResponse> => {
+  GET_HOST_EVENTS: async (
+    hostId: string,
+    pageParam = 0,
+    size = 10,
+    sort = 'asc',
+  ): Promise<InfiniteResponse<EventProfileResponse>> => {
     const response = await axiosPrivate.get(`/hosts/${hostId}/events`);
     return response.data.data;
   },
