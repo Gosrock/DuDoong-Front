@@ -1,5 +1,5 @@
 import { DropdownOption } from '@dudoong/ui';
-import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
+import type { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
 import getTicketItemObjects from './getTicketItemObjects';
 

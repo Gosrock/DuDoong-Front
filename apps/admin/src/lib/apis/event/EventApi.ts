@@ -1,6 +1,6 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import {
+import type {
   CreateEventRequest,
   CreateEventResponse,
   EventChecklistResponse,

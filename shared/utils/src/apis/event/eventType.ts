@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from 'http';
 
 export interface EventDetailResponse {
-  status: StatusType;
+  status: EventStatus;
   host: HostInfo;
   name: string;
   startAt: string;
@@ -12,7 +12,7 @@ export interface EventDetailResponse {
   content: string;
 }
 
-type StatusType = '준비중' | '진행중' | '정산중' | '지난공연';
+export type EventStatus = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface EventPlace {
   latitude: number;

@@ -6,7 +6,7 @@ const TotalBox = ({ total }: { total: string }) => {
   return (
     <BorderBox
       shadow
-      padding={[30, 48]}
+      padding={[32, 48]}
       css={css`
         width: 546px;
         height: 86px;

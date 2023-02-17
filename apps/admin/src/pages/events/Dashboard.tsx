@@ -5,7 +5,7 @@ import useBottomButton from '@lib/hooks/useBottomButton';
 import { useQuery } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
+import type {
   EventChecklistResponse,
   EventDetailResponse,
   EventResponse,
@@ -70,7 +70,7 @@ const Dashboard = () => {
   const eventDeleteHandler = () => {
     patchEventDeleteMutation.mutate({
       eventId: eventId,
-      payload: { status: 'CLOSED' },
+      payload: { status: '지난공연' }, //TODO 공연삭제시??? 일단 임시로 박아놓음
     });
   };
 

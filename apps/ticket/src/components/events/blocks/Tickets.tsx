@@ -1,6 +1,6 @@
 import { Divider, ListRow, Tag } from '@dudoong/ui';
 import styled from '@emotion/styled';
-import { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
+import type { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
 import { HTMLAttributes } from 'react';
 
 interface TicketsProps extends HTMLAttributes<HTMLDivElement> {
@@ -8,7 +8,6 @@ interface TicketsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Tickets = ({ tickets, ...props }: TicketsProps) => {
-  console.log(tickets);
   return (
     <Wrapper>
       {tickets.ticketItems.map((item) => (
@@ -20,11 +19,7 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
             textGap={0}
             rightElement={
               item.isQuantityPublic && (
-                <Tag
-                  size="md"
-                  text={`${item.quantity}/${item.supplyCount}`}
-                  color="main"
-                />
+                <Tag size="md" text={`${item.quantity}매 남음`} color="main" />
               )
             }
           />

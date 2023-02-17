@@ -1,5 +1,5 @@
 import { KeyOfTypo, ListRow, Text, theme } from '@dudoong/ui';
-import { HostProfileResponse } from '@lib/apis/host/hostType';
+import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import styled from '@emotion/styled';
 
 export type HostItemTypeKey = 'lg' | 'sm';

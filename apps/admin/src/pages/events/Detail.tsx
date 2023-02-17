@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 import { useMutation } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
-import {
+import type {
   EventResponse,
   ImageUrlResponse,
   UpdateEventDetailRequest,

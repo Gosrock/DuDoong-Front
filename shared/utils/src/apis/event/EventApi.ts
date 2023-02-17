@@ -1,5 +1,5 @@
 import { axiosPublic } from '../axios';
-import { EventDetailResponse } from './eventType';
+import type { EventDetailResponse } from './eventType';
 
 export const EventApi = {
   GET_EVENT_DETAIL: async (eventId: string): Promise<EventDetailResponse> => {

@@ -9,7 +9,7 @@ import {
 } from '@dudoong/ui';
 import { calcMoneyType } from '@dudoong/utils';
 import { css } from '@emotion/react';
-import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
+import type { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTicketSelect from '../utils/useTicketSelect';
@@ -37,7 +37,7 @@ const SelectTicket = ({ items, eventName }: TicketsProps) => {
     handleCounter,
   } = useTicketSelect(items);
   const router = useRouter();
-  console.log(router);
+
   const data: SelectedTicketState = {
     eventId: router.query.eventId as string,
     eventName: eventName,
