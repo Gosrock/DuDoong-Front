@@ -61,12 +61,15 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
 
 MyApp.getInitialProps = async (context: AppContext) => {
   console.log('getInitialProps');
-  const { ctx, Component } = context;
+  const { ctx, Component, router } = context;
+  console.log(router);
   const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};
   let loginData: OauthLoginResponse | null;
+
   try {
-    if (ctx.req) {
+    //정적생성페이지(이벤트상세)에서는 리프레쉬로직 돌지 않음
+    if (ctx.req && router.pathname !== '/events/[eventId]') {
       const response = await AuthApi.REFRESH(refreshToken!);
       loginData = response;
       ctx.res?.setHeader(
