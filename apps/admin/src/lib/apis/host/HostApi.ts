@@ -7,6 +7,7 @@ import type {
   imageFileExtensionType,
   CreateHostRequest,
   CreateHostResponse,
+  SlackRequest,
 } from './hostType';
 
 const HostApi = {
@@ -55,6 +56,17 @@ const HostApi = {
   }): Promise<any> => {
     const response = await axiosPrivate.post(
       `/hosts/${hostId}/images?imageFileExtension=${imageFileExtension}`,
+    );
+    return response.data.data;
+  },
+
+  PATCH_HOST_SLACK: async (
+    hostId: string,
+    payload: SlackRequest,
+  ): Promise<HostDetailResponse> => {
+    const response = await axiosPrivate.patch(
+      `/hosys/${hostId}/slack`,
+      payload,
     );
     return response.data.data;
   },

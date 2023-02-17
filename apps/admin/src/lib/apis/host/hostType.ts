@@ -68,3 +68,7 @@ export interface ImageUrlResponse {
   key: string;
   url: string;
 }
+
+export interface SlackRequest {
+  slackUrl: string;
+}
