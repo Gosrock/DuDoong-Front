@@ -46,6 +46,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         justify={'center'}
         direction={'column'}
         gap={10}
+        style={{ width: '100%' }}
       >
         <InputWrapper width={props.width} height={height} css={styles}>
           {props.leftIcon}
