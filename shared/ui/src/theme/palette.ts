@@ -20,4 +20,4 @@ export const palette = {
     linear_white:
       'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 20.83%);',
   },
-};
+} as const;
