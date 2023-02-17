@@ -61,7 +61,7 @@ const HostApi = {
   },
 
   PATCH_HOST_SLACK: async (
-    hostId: string,
+    hostId: string | undefined,
     payload: SlackRequest,
   ): Promise<HostDetailResponse> => {
     const response = await axiosPrivate.patch(
