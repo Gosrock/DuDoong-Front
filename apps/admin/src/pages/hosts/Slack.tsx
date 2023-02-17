@@ -1,5 +1,6 @@
 import { Button, FlexBox, Input, ListHeader, Spacing, Text } from '@dudoong/ui';
 import { useInputs } from '@dudoong/utils';
+import { css } from '@emotion/react';
 import HostApi from '@lib/apis/host/HostApi';
 import { SlackRequest } from '@lib/apis/host/hostType';
 import { useMutation } from '@tanstack/react-query';
@@ -18,8 +19,9 @@ const Slack = () => {
     },
   });
 
-  const handleSlack = (e: any) => {
+  const handleSlack = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(typeof e);
     mutate();
   };
 
@@ -38,14 +40,28 @@ const Slack = () => {
       <Spacing size={16} />
 
       <form onSubmit={handleSlack}>
-        <FlexBox direction={'row'} align={'flex-start'} gap={20}>
+        <FlexBox
+          direction={'row'}
+          align={'flex-start'}
+          justify={'flex-start'}
+          gap={20}
+        >
           <Input
             name="slackUrl"
             onChange={onChange}
             placeholder={'slack URL 입력'}
             width={398}
           ></Input>
-          <Button width={139} varient="primary">
+          <Button
+            width={139}
+            varient="primary"
+            css={css`
+              & {
+                height: 48px;
+                border: none;
+              }
+            `}
+          >
             공유하기
           </Button>
         </FlexBox>

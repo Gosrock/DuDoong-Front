@@ -65,7 +65,7 @@ const HostApi = {
     payload: SlackRequest,
   ): Promise<HostDetailResponse> => {
     const response = await axiosPrivate.patch(
-      `/hosys/${hostId}/slack`,
+      `/hosts/${hostId}/slack`,
       payload,
     );
     return response.data.data;
