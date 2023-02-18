@@ -60,7 +60,7 @@ const TicketSelect = ({
           </Text>
         }
       />
-      <Spacing size={24} />
+      <Spacing size={12} />
 
       <Controller
         rules={{ required: true }}
@@ -114,17 +114,17 @@ const TicketSelect = ({
 export default TicketSelect;
 
 const Wrapper = styled.div`
-  width: 396px;
   height: 114px;
+  position: relative;
 
   .recommendation {
     z-index: 1;
-    position: relative;
+    position: absolute;
 
     width: 33px;
     height: 33px;
 
     left: 96px;
-    top: -72px;
+    top: 54px;
   }
 `;
