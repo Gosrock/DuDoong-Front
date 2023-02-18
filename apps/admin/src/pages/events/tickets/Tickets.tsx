@@ -1,8 +1,6 @@
 import TempTButtonSet from '@components/events/tickets/tickets/TempTButtonSet';
 import TicketList from '@components/events/tickets/tickets/TicketList';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 import TicketApi from '@lib/apis/ticket/TicketApi';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
