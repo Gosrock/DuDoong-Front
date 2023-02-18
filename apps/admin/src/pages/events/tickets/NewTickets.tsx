@@ -7,6 +7,7 @@ import TicketApi from '@lib/apis/ticket/TicketApi';
 import { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
 
 import useBottomButton from '@lib/hooks/useBottomButton';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -23,6 +24,7 @@ const NewTickets = () => {
   const { register, handleSubmit, watch, control, formState } = useForm({
     mode: 'onChange',
   });
+  const { openOverlay, closeOverlay } = useGlobalOverlay();
   const { setButtonInfo } = useBottomButton({
     type: 'save',
     isActive: true,
@@ -32,7 +34,15 @@ const NewTickets = () => {
   const postTicketCreateMutation = useMutation(TicketApi.POST_TICKET, {
     onSuccess: (data: GetTicketDetailResponse) => {
       console.log('POST_TICKET: ', data);
-      navigate(`/events/${eventId}/tickets`);
+      openOverlay({
+        content: 'saveTicket',
+        props: {
+          saveTicketHandler: () => {
+            navigate(`/events/${eventId}/tickets`);
+            closeOverlay();
+          },
+        },
+      });
     },
   });
 

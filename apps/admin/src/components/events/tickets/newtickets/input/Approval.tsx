@@ -1,4 +1,5 @@
 import { FlexBox, ListHeader, Tag, Text, ToggleButton } from '@dudoong/ui';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 
 export const Approval = ({
@@ -8,6 +9,7 @@ export const Approval = ({
   control: Control<FieldValues, any>;
   disabled: boolean;
 }) => {
+  const { openOverlay } = useGlobalOverlay();
   return (
     <FlexBox align="center" justify="space-between" style={{ width: '100%' }}>
       <ListHeader
@@ -16,7 +18,16 @@ export const Approval = ({
         title={
           <FlexBox align="center" justify="space-between" gap={16}>
             <div>관리자 승인 여부</div>
-            <Tag text="관리자 승인이란?" color="red" size="md" />
+            <Tag
+              text="관리자 승인이란?"
+              color="red"
+              size="md"
+              onClick={() =>
+                openOverlay({
+                  content: 'approve',
+                })
+              }
+            />
           </FlexBox>
         }
         description={

@@ -3,18 +3,22 @@ import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { overlayState } from '@store/globalOverlay';
 import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
+import Approve from './content/Approve';
 import DeleteEvent from './content/DeleteEvent';
 import PaidTicket from './content/PaidTicket';
 import Pay from './content/Pay';
 import PostEvent from './content/PostEvent';
 import Register from './content/Register';
+import SaveTicket from './content/SaveTicket';
 
 export type GlobalSheetContentKey =
   | 'register'
   | 'deleteEvent'
   | 'postEvent'
   | 'pay'
-  | 'paidTicket';
+  | 'paidTicket'
+  | 'approve'
+  | 'saveTicket';
 
 export type GlobalSheetContentType = {
   [key in GlobalSheetContentKey]: ReactNode;
@@ -26,6 +30,8 @@ const globalSheetContent = {
   postEvent: PostEvent,
   pay: Pay,
   paidTicket: PaidTicket,
+  approve: Approve,
+  saveTicket: SaveTicket,
 };
 
 const GlobalOverlay = () => {

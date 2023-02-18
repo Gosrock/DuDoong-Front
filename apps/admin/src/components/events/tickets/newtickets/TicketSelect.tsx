@@ -25,7 +25,7 @@ const TicketSelect = ({
   hostId: number | null;
 }) => {
   const [payType, setPayType] = useState<payType>();
-  const { isOpen, openOverlay, closeOverlay } = useGlobalOverlay();
+  const { openOverlay, closeOverlay } = useGlobalOverlay();
   const navigate = useNavigate();
 
   return (
