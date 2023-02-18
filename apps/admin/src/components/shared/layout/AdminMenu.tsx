@@ -10,7 +10,7 @@ import {
 } from '@dudoong/ui';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import { DiscFill, RocketTakeoffFill } from '@dudoong/ui';
 import { css } from '@emotion/react';

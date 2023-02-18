@@ -32,7 +32,8 @@ import { useState } from 'react';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
-  const [coupon, setCoupon] = useState(null);
+
+  const [coupon] = useState(null);
   const isDudoong = data.ticketPayType === '두둥티켓';
   const { instance } = useTossPayments(data.totalPrice, isDudoong);
   const { orderMutate } = useOrderMutation(instance);

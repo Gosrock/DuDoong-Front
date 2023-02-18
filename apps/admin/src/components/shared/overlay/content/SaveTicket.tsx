@@ -14,7 +14,7 @@ interface SaveTicketProps {
   saveTicketHandler: () => void;
 }
 
-const SaveTicket = ({ closeOverlay, saveTicketHandler }: SaveTicketProps) => {
+const SaveTicket = ({ saveTicketHandler }: SaveTicketProps) => {
   return (
     <Wrapper>
       <ListHeader
