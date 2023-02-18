@@ -8,7 +8,6 @@ export const CartApi = {
   },
 
   RECENT_CARTLINE: async (): Promise<AddCartResponse> => {
-    console.log(axiosPrivate.defaults.headers);
     const response = await axiosPrivate.get('/carts/recent');
     return response.data.data;
   },

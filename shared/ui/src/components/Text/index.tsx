@@ -4,7 +4,7 @@ import { HTMLAttributes } from 'react';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
 export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
-  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
   typo: KeyOfTypo;
   color?: KeyOfPalette;
   children: any;

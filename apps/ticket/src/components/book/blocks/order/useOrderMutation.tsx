@@ -2,11 +2,12 @@ import { DOMAIN } from '@dudoong/utils';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import { useMutation } from '@tanstack/react-query';
 import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
+import { useRouter } from 'next/router';
 
-const useOrderMutation = (instance: PaymentWidgetInstance | null) => {
+const useOrderMutation = (instance?: PaymentWidgetInstance | null) => {
+  const router = useRouter();
   const { mutate: orderMutate } = useMutation(OrderApi.CREATE_ORDER, {
     onSuccess: (data) => {
-      console.log(DOMAIN);
       const payload = {
         orderId: data.orderId,
         orderName: data.orderName,
@@ -18,7 +19,14 @@ const useOrderMutation = (instance: PaymentWidgetInstance | null) => {
       instance && instance.requestPayment(payload);
     },
   });
-  return { orderMutate };
+
+  const { mutate: dudoongMutate } = useMutation(OrderApi.CREATE_ORDER, {
+    onSuccess: (data) => {
+      router.replace(`/pay/success?order=${data.orderId}`, '/pay/success');
+    },
+  });
+
+  return { orderMutate, dudoongMutate };
 };
 
 export default useOrderMutation;

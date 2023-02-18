@@ -16,11 +16,11 @@ export type flexboxPropsKey = 'align' | 'justify' | 'direction' | 'gap';
  *
  * @param align : align-items 속성 (기본값 : center)
  * @param jusitfy : justify-content 속성 (기본값 : center)
- * @param direction : direction 속성 (기본값 : column)
+ * @param direction : direction 속성 (기본값 : row)
  * @param gap : gap 속성
  */
 export const FlexBox = ({
-  align,
+  align = 'center',
   justify = 'center',
   direction = 'row',
   gap = 0,
