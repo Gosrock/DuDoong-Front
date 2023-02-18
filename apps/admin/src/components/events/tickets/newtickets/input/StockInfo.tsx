@@ -14,7 +14,7 @@ export const StockInfo = ({
         title="재고 정보 공개"
         description={
           <Text typo="P_Text_16_M" color="gray_400">
-            티켓이 남은 재고 수를 공개합니다.
+            남은 티켓의 수량을 공개합니다.
           </Text>
         }
       />

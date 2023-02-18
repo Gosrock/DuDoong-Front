@@ -1,13 +1,5 @@
-import { forwardRef } from 'react';
 import { payType } from '@lib/apis/ticket/ticketType';
-import {
-  Control,
-  FieldErrors,
-  FieldValues,
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormWatch,
-} from 'react-hook-form';
+import { Control, FieldValues, UseFormRegister } from 'react-hook-form';
 import DudoongTicketForm from './DudoongTicketForm';
 import FreeTicketForm from './FreeTicketForm';
 import PaidTicketForm from './PaidTicketForm';

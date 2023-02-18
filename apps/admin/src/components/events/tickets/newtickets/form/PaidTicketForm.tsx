@@ -1,6 +1,5 @@
 import TicketInput from '@components/events/tickets/newtickets/input/TicketInput';
 import { FlexBox, Spacing } from '@dudoong/ui';
-import { Approval } from '../input/Approval';
 import { PurchaseLimit } from '../input/PurchaseLimit';
 import { StockInfo } from '../input/StockInfo';
 import { TicketFormProps } from './TicketForm';
