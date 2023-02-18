@@ -37,17 +37,8 @@ const Tickets = () => {
       <Spacing size={36} />
       <TempTButtonSet eventId={eventId} />
       <Spacing size={72} />
-      <ListHeader padding={0} size="listHeader_18" title="티켓 목록" />
-      <Spacing size={42} />
-      <div
-        css={css`
-          & > div > .host-divider:nth-last-of-type(1) {
-            display: none;
-          }
-        `}
-      >
-        <TicketList ticketItems={data ? data.ticketItems : null} />
-      </div>
+
+      <TicketList ticketItems={data ? data.ticketItems : null} />
     </>
   );
 };
