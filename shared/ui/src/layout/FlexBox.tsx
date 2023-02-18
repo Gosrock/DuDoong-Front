@@ -4,7 +4,7 @@ import { CSSProperties } from '@emotion/serialize';
 import { HTMLAttributes, ReactNode } from 'react';
 
 export interface FlexBoxProps extends HTMLAttributes<HTMLDivElement> {
-  align: CSSProperties['alignItems'];
+  align?: CSSProperties['alignItems'];
   justify?: CSSProperties['justifyContent'];
   direction?: CSSProperties['flexDirection'];
   gap?: CSSProperties['gap'];

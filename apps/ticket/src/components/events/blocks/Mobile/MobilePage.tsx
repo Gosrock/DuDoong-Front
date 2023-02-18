@@ -25,7 +25,7 @@ import MobileMap from './MobileMap';
 const MobilePage = ({
   tickets,
   detail,
-  openOverlay,
+  openTicketOverlay,
   ...props
 }: DetailTemplateProps) => {
   const router = useRouter();
@@ -116,7 +116,7 @@ const MobilePage = ({
       <Footer />
       <Spacing size={120} color={'gray_200'} />
       <ButtonSet bottomFixed backGradient>
-        <Remote openOverlay={openOverlay} />
+        <Remote openTicketOverlay={openTicketOverlay} eventName={detail.name} />
       </ButtonSet>
     </Wrapper>
   );
