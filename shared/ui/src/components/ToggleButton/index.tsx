@@ -1,8 +1,14 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Dispatch, SetStateAction, useState } from 'react';
+import {
+  ButtonHTMLAttributes,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from 'react';
 
-export interface ToggleButtonProps {
+export interface ToggleButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   toggle: boolean;
   onToggleClick: () => void;
 }
@@ -12,7 +18,11 @@ export interface ToggleButtonProps {
  * @param toggle 현재 토글상태
  * @param onToggleClick 토글시 액션
  */
-export const ToggleButton = ({ toggle, onToggleClick }: ToggleButtonProps) => {
+export const ToggleButton = ({
+  toggle,
+  onToggleClick,
+  ...props
+}: ToggleButtonProps) => {
   const [value, setValue] = useState<boolean>(toggle);
   const handleClickToggle = () => {
     setValue(!value);
@@ -20,7 +30,7 @@ export const ToggleButton = ({ toggle, onToggleClick }: ToggleButtonProps) => {
   };
 
   return (
-    <ToggleBtn onClick={handleClickToggle} toggle={value}>
+    <ToggleBtn onClick={handleClickToggle} toggle={value} {...props}>
       <Circle toggle={value} />
     </ToggleBtn>
   );
@@ -40,6 +50,10 @@ const ToggleBtn = styled.button<{ toggle: boolean }>`
   justify-content: center;
   align-items: center;
   transition: all 0.2s ease-in-out;
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.palette.sub_mint};
+  }
 `;
 
 const Circle = styled.div<{ toggle: boolean }>`
