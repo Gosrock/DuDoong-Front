@@ -4,38 +4,23 @@ import TicketSelect from '@components/events/tickets/newtickets/TicketSelect';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
 import { EventDetailResponse } from '@dudoong/utils/src/apis/event/eventType';
 import TicketApi from '@lib/apis/ticket/TicketApi';
-import {
-  CreateTicketRequest,
-  GetTicketDetailResponse,
-} from '@lib/apis/ticket/ticketType';
+import { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
 
 import useBottomButton from '@lib/hooks/useBottomButton';
 import { useMutation } from '@tanstack/react-query';
-import { useEffect, useRef } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
-import { preview } from 'vite';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { queryClient } from '../../../main';
 
 const NewTickets = () => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
   const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
   ]);
-  const ref = useRef(null);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setError,
-    getValues,
-    setValue,
-    control,
-    trigger,
-    formState,
-  } = useForm({
+  const { register, handleSubmit, watch, control, formState } = useForm({
     mode: 'onChange',
   });
   const { setButtonInfo } = useBottomButton({
@@ -47,6 +32,7 @@ const NewTickets = () => {
   const postTicketCreateMutation = useMutation(TicketApi.POST_TICKET, {
     onSuccess: (data: GetTicketDetailResponse) => {
       console.log('POST_TICKET: ', data);
+      navigate(`/events/${eventId}/tickets`);
     },
   });
 
@@ -104,6 +90,7 @@ const NewTickets = () => {
           <TicketSelect
             partner={eventDetail?.host.partner || null}
             control={control}
+            hostId={eventDetail?.host.hostId || null}
           />
           <Spacing size={80} />
           <TicketInput

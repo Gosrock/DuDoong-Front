@@ -6,22 +6,27 @@ import {
   Tag,
   Text,
 } from '@dudoong/ui';
-import { css } from '@emotion/react';
 import { ReactComponent as Recommendation } from '@assets/recommendation.svg';
 
 import styled from '@emotion/styled';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { payType } from '@lib/apis/ticket/ticketType';
 import { useState } from 'react';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
+import { useNavigate } from 'react-router-dom';
 
 const TicketSelect = ({
   partner,
   control,
+  hostId,
 }: {
   partner: boolean | null;
   control: Control<FieldValues, any>;
+  hostId: number | null;
 }) => {
   const [payType, setPayType] = useState<payType>();
+  const { isOpen, openOverlay, closeOverlay } = useGlobalOverlay();
+  const navigate = useNavigate();
 
   return (
     <Wrapper>
@@ -31,7 +36,22 @@ const TicketSelect = ({
         title={
           <FlexBox align="center" gap={16}>
             <div>티켓 종류</div>
-            <Tag text="유료티켓은 어떻게 이용하나요?" color="red" size="md" />
+            <Tag
+              text="유료티켓은 어떻게 이용하나요?"
+              color="red"
+              size="md"
+              onClick={() =>
+                openOverlay({
+                  content: 'paidTicket',
+                  props: {
+                    paidTicketHandler: () => {
+                      navigate(`/hosts/${hostId}/alliance`);
+                      closeOverlay();
+                    },
+                  },
+                })
+              }
+            />
           </FlexBox>
         }
         description={
