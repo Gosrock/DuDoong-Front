@@ -29,7 +29,7 @@ const TicketItem = ({
   const patchTicketDeleteMutation = useMutation(TicketApi.PATCH_TICKET_DELETE, {
     onSuccess: (data: GetTicketDetailResponse) => {
       console.log('DELETE_TICKET: ', data);
-      queryClient.invalidateQueries({ queryKey: ['ticketDetail'] });
+      queryClient.invalidateQueries({ queryKey: ['ticketDetail', eventId] });
     },
   });
 

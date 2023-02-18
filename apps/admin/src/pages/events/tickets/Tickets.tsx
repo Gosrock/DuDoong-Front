@@ -11,7 +11,7 @@ const Tickets = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
 
-  const { data } = useQuery(['ticketDetail'], () =>
+  const { data } = useQuery(['ticketDetail', eventId], () =>
     TicketApi.GET_TICKET_DETAIL(eventId),
   );
 
