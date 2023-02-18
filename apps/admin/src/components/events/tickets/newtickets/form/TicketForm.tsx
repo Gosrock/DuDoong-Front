@@ -68,14 +68,14 @@ const Wrapper = styled.div`
   }
 
   .dudoong-ticket {
-    animation: 1s forwards fadeIn1 ease-out;
+    animation: 0.5s forwards fadeIn1 ease-out;
   }
 
   .free-ticket {
-    animation: 1s forwards fadeIn2 ease-out;
+    animation: 0.5s forwards fadeIn2 ease-out;
   }
 
   .paid-ticket {
-    animation: 1s forwards fadeIn3 ease-out;
+    animation: 0.5s forwards fadeIn3 ease-out;
   }
 `;

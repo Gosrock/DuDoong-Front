@@ -67,7 +67,13 @@ const TicketSelect = ({
         control={control}
         name="payType"
         render={({ field: { onChange } }) => (
-          <FlexBox align="center" justify="flex-start" gap={12}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1fr',
+              gridGap: '10px',
+            }}
+          >
             <SelectButton
               text="두둥티켓"
               fullWidth={true}
@@ -96,7 +102,7 @@ const TicketSelect = ({
                 onChange('유료티켓');
               }}
             />
-          </FlexBox>
+          </div>
         )}
       />
       <div className="recommendation">

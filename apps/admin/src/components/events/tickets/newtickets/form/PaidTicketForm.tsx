@@ -7,7 +7,6 @@ import { TicketFormProps } from './TicketForm';
 const PaidTicketForm = ({ register, control }: TicketFormProps) => {
   return (
     <FlexBox direction="column" align="flex-start" justify="flex-start">
-      <Spacing size={32} />
       <FlexBox align="flex-start" gap={18}>
         <TicketInput
           type="number"

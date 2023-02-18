@@ -1,6 +1,7 @@
 import TicketForm from '@components/events/tickets/newtickets/form/TicketForm';
 import TicketInput from '@components/events/tickets/newtickets/input/TicketInput';
 import TicketSelect from '@components/events/tickets/newtickets/TicketSelect';
+import ContentGrid from '@components/shared/layout/ContentGrid';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
 import { EventDetailResponse } from '@dudoong/utils/src/apis/event/eventType';
 import TicketApi from '@lib/apis/ticket/TicketApi';
@@ -96,7 +97,7 @@ const NewTickets = () => {
         }
       />
       <Spacing size={72} />
-      <FlexBox align="flex-start" justify="flex-start" gap={82}>
+      <ContentGrid>
         <div>
           <TicketSelect
             partner={eventDetail?.host.partner || null}
@@ -108,7 +109,6 @@ const NewTickets = () => {
             title="티켓 이름"
             description="티켓의 성격을 잘 드러내는 이름을 써주세요. (ex. 무료 티켓)"
             placeholder="최대 12글자까지 쓸 수 있어요"
-            width={396}
             {...register('name', {
               required: true,
               maxLength: {
@@ -123,7 +123,7 @@ const NewTickets = () => {
           register={register}
           control={control}
         />
-      </FlexBox>
+      </ContentGrid>
     </div>
   );
 };
