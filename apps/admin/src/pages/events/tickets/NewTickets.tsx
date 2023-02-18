@@ -25,7 +25,7 @@ const NewTickets = () => {
     mode: 'onChange',
   });
   const { openOverlay, closeOverlay } = useGlobalOverlay();
-  const { setButtonInfo } = useBottomButton({
+  const { setButtonInfo, hideButtons } = useBottomButton({
     type: 'save',
     isActive: true,
   });
@@ -40,6 +40,7 @@ const NewTickets = () => {
           saveTicketHandler: () => {
             navigate(`/events/${eventId}/tickets`);
             closeOverlay();
+            hideButtons();
           },
         },
       });
