@@ -17,11 +17,11 @@ export const PurchaseLimit = ({
       <Controller
         rules={{ required: true }}
         control={control}
-        name="limit"
-        defaultValue={0}
+        name="purchaseLimit"
+        defaultValue={1}
         render={({ field: { onChange, value } }) => (
           <Counter
-            count={0}
+            count={1}
             onClickMinus={() => onChange(value - 1)}
             onClickPlus={() => onChange(value + 1)}
           />

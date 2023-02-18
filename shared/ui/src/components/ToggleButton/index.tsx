@@ -53,6 +53,7 @@ const ToggleBtn = styled.button<{ toggle: boolean }>`
 
   &:disabled {
     background-color: ${({ theme }) => theme.palette.sub_mint};
+    cursor: default;
   }
 `;
 

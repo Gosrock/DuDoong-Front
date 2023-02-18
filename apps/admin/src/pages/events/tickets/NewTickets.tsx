@@ -3,13 +3,23 @@ import TicketInput from '@components/events/tickets/newtickets/input/TicketInput
 import TicketSelect from '@components/events/tickets/newtickets/TicketSelect';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
 import { EventDetailResponse } from '@dudoong/utils/src/apis/event/eventType';
+import TicketApi from '@lib/apis/ticket/TicketApi';
+import {
+  CreateTicketRequest,
+  GetTicketDetailResponse,
+} from '@lib/apis/ticket/ticketType';
 
 import useBottomButton from '@lib/hooks/useBottomButton';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
+import { preview } from 'vite';
 import { queryClient } from '../../../main';
 
 const NewTickets = () => {
+  const { pathname } = useLocation();
+  const eventId = pathname.split('/')[2];
   const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
   ]);
@@ -24,7 +34,7 @@ const NewTickets = () => {
     setValue,
     control,
     trigger,
-    formState: { errors },
+    formState,
   } = useForm({
     mode: 'onChange',
   });
@@ -33,41 +43,40 @@ const NewTickets = () => {
     isActive: true,
   });
 
+  //티켓 생성 api
+  const postTicketCreateMutation = useMutation(TicketApi.POST_TICKET, {
+    onSuccess: (data: GetTicketDetailResponse) => {
+      console.log('POST_TICKET: ', data);
+    },
+  });
+
   useEffect(() => {
-    console.log(
-      'payType',
-      watch('payType'),
-      'name',
-      watch('name'),
-      'price',
-      watch('price'),
-      'account',
-      watch('account'),
-      'issuance',
-      watch('issuance'),
-      'approve',
-      watch('approve'),
-      'stock',
-      watch('stock'),
-      'limit',
-      watch('limit'),
-    );
-  }, [
-    watch('payType'),
-    watch('name'),
-    watch('account'),
-    watch('price'),
-    watch('issuance'),
-    watch('approve'),
-    watch('stock'),
-    watch('limit'),
-  ]);
+    formState.isValid
+      ? setButtonInfo({
+          firstDisable: false,
+          firstHandler: handleSubmit(onSubmit, onError),
+        })
+      : setButtonInfo({
+          firstDisable: true,
+          firstHandler: () => {},
+        });
+  }, [formState.isValid]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    postTicketCreateMutation.mutate({
+      eventId: eventId,
+      payload: {
+        ...data,
+        approveType: data.approveType ? '승인' : '선착순',
+        description: '',
+        price: data.price || 0,
+      },
+    });
   };
 
-  const onError = (error: any) => {};
+  const onError = (error: any) => {
+    console.log('error', error);
+  };
 
   return (
     <div onSubmit={handleSubmit(onSubmit, onError)}>

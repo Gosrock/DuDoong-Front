@@ -12,7 +12,7 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
         title="계좌번호 입력"
         description="은행과 계좌번호를 적어주세요 (ex. 우리 123456789)"
         placeholder="최대 14글자까지 쓸 수 있어요"
-        {...register('account', {
+        {...register('accountNumber', {
           required: true,
           maxLength: {
             value: 14,
@@ -38,7 +38,7 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
           description="최대 1000장까지 발행 가능해요"
           descriptionTypo="P_Text_14_M"
           placeholder="0"
-          {...register('issuance', {
+          {...register('supplyCount', {
             required: true,
           })}
         />

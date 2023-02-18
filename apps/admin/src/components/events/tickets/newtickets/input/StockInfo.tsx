@@ -21,7 +21,7 @@ export const StockInfo = ({
       <Controller
         rules={{ required: true }}
         control={control}
-        name="stock"
+        name="isQuantityPublic"
         defaultValue={true}
         render={({ field: { onChange, value } }) => (
           <ToggleButton toggle={true} onToggleClick={() => onChange(!value)} />

@@ -28,7 +28,7 @@ export const Approval = ({
       <Controller
         rules={{ required: true }}
         control={control}
-        name="approve"
+        name="approveType"
         defaultValue={true}
         render={({ field: { onChange, value } }) => (
           <ToggleButton
