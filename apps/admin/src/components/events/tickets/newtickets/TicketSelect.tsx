@@ -9,10 +9,9 @@ import {
 import { css } from '@emotion/react';
 import { ReactComponent as Recommendation } from '@assets/recommendation.svg';
 
-import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-const TicketSelect = () => {
+const TicketSelect = ({ select }: { select: boolean | null }) => {
   return (
     <Wrapper>
       <ListHeader
@@ -34,9 +33,16 @@ const TicketSelect = () => {
       <FlexBox align="center" justify="flex-start" gap={12}>
         <SelectButton text="두둥티켓" fullWidth={true} isSelected={false} />
         <SelectButton text="무료티켓" fullWidth={true} isSelected={false} />
-        <SelectButton text="유료티켓" fullWidth={true} isSelected={false} />
+        <SelectButton
+          text="유료티켓"
+          fullWidth={true}
+          isSelected={false}
+          disabled={!select}
+        />
       </FlexBox>
-      <Recommendation className="recommendation" />
+      <div className="recommendation">
+        <Recommendation />
+      </div>
     </Wrapper>
   );
 };
@@ -44,12 +50,16 @@ export default TicketSelect;
 
 const Wrapper = styled.div`
   width: 396px;
+  height: 114px;
 
   .recommendation {
     z-index: 1;
     position: relative;
 
+    width: 33px;
+    height: 33px;
+
     left: 96px;
-    top: -64px;
+    top: -72px;
   }
 `;

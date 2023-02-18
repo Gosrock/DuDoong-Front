@@ -1,8 +1,8 @@
-import TicketInput from '@components/events/tickets/newtickets/TicketInput';
+import TicketInput from '@components/events/tickets/newtickets/input/TicketInput';
 import { Counter, FlexBox, ListHeader, Spacing, Tag } from '@dudoong/ui';
-import TicketToggle from './TicketToggle';
+import TicketToggle from '../input/TicketToggle';
 
-const DudoongTicketForm = () => {
+const PaidTicketForm = () => {
   return (
     <FlexBox direction="column" align="flex-start" justify="flex-start">
       <TicketInput
@@ -58,4 +58,4 @@ const DudoongTicketForm = () => {
   );
 };
 
-export default DudoongTicketForm;
+export default PaidTicketForm;

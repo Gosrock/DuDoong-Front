@@ -1,16 +1,4 @@
-import {
-  FlexBox,
-  ListHeader,
-  SelectButton,
-  Spacing,
-  Tag,
-  Text,
-  ToggleButton,
-} from '@dudoong/ui';
-import { css } from '@emotion/react';
-import { ReactComponent as Recommendation } from '@assets/recommendation.svg';
-
-import styled from '@emotion/styled';
+import { FlexBox, ListHeader, Text, ToggleButton } from '@dudoong/ui';
 
 export interface TicketToggleProps {
   title: string | JSX.Element;
