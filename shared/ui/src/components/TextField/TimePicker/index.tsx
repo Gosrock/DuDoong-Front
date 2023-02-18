@@ -65,7 +65,7 @@ const TimePickerStyles = styled.div`
     display: inline-block;
     position: relative;
 
-    width: 140px !important;
+    width: 112px !important;
 
     display: flex;
     justify-content: center;
@@ -111,7 +111,7 @@ const TimePickerStyles = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 150px !important;
+    width: 130px !important;
   }
 
   .react-datepicker__time {
