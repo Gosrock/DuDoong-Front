@@ -22,7 +22,7 @@ export interface EventPlace {
 }
 
 export interface HostInfo {
-  hostId: IncomingHttpHeaders;
+  hostId: number;
   name: string;
   introduce: string;
   profileImage: string;
