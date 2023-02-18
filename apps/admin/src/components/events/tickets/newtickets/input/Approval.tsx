@@ -37,7 +37,7 @@ export const Approval = ({
         }
       />
       <Controller
-        rules={{ required: true }}
+        rules={{ required: '' }}
         control={control}
         name="approveType"
         defaultValue={true}

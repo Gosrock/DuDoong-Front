@@ -19,7 +19,7 @@ export const StockInfo = ({
         }
       />
       <Controller
-        rules={{ required: true }}
+        rules={{ required: '' }}
         control={control}
         name="isQuantityPublic"
         defaultValue={true}
