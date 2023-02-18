@@ -20,6 +20,7 @@ const TicketList = ({
           quantity={item.supplyCount}
           stock={item.quantity}
           isSold={false}
+          ticketItemId={item.ticketItemId}
         />
       ))}
     </Wrapper>

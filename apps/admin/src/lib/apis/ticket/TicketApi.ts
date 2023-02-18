@@ -22,6 +22,19 @@ const TicketApi = {
     );
     return response.data.data;
   },
+
+  PATCH_TICKET_DELETE: async ({
+    eventId,
+    ticketItemId,
+  }: {
+    eventId: string;
+    ticketItemId: number;
+  }): Promise<GetTicketDetailResponse> => {
+    const response = await axiosPrivate.patch(
+      `events/${eventId}/ticketItems/${ticketItemId}`,
+    );
+    return response.data.data;
+  },
 };
 
 export default TicketApi;
