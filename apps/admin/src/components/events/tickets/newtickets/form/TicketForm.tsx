@@ -1,5 +1,7 @@
+import { forwardRef } from 'react';
 import { payType } from '@lib/apis/ticket/ticketType';
 import {
+  Control,
   FieldErrors,
   FieldValues,
   UseFormRegister,
@@ -9,15 +11,13 @@ import {
 import DudoongTicketForm from './DudoongTicketForm';
 import FreeTicketForm from './FreeTicketForm';
 import PaidTicketForm from './PaidTicketForm';
-import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 export interface TicketFormProps {
-  select: payType;
+  select?: payType;
   register: UseFormRegister<FieldValues>;
-  errors: FieldErrors<FieldValues>;
-  watch: UseFormWatch<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
+  control: Control<FieldValues, any>;
 }
 
 const TicketForm = ({ select, ...props }: TicketFormProps) => {
@@ -29,11 +29,11 @@ const TicketForm = ({ select, ...props }: TicketFormProps) => {
         </div>
       ) : select === '무료티켓' ? (
         <div className="free-ticket">
-          <FreeTicketForm />
+          <FreeTicketForm {...props} />
         </div>
       ) : select === '유료티켓' ? (
         <div className="paid-ticket">
-          <PaidTicketForm />
+          <PaidTicketForm {...props} />
         </div>
       ) : (
         <></>
@@ -41,6 +41,7 @@ const TicketForm = ({ select, ...props }: TicketFormProps) => {
     </Wrapper>
   );
 };
+TicketForm.displayName = 'TicktForm';
 
 export default TicketForm;
 

@@ -10,8 +10,19 @@ import { css } from '@emotion/react';
 import { ReactComponent as Recommendation } from '@assets/recommendation.svg';
 
 import styled from '@emotion/styled';
+import { Control, Controller, FieldValues } from 'react-hook-form';
+import { payType } from '@lib/apis/ticket/ticketType';
+import { useState } from 'react';
 
-const TicketSelect = ({ select }: { select: boolean | null }) => {
+const TicketSelect = ({
+  partner,
+  control,
+}: {
+  partner: boolean | null;
+  control: Control<FieldValues, any>;
+}) => {
+  const [payType, setPayType] = useState<payType>();
+
   return (
     <Wrapper>
       <ListHeader
@@ -30,16 +41,44 @@ const TicketSelect = ({ select }: { select: boolean | null }) => {
         }
       />
       <Spacing size={24} />
-      <FlexBox align="center" justify="flex-start" gap={12}>
-        <SelectButton text="두둥티켓" fullWidth={true} isSelected={false} />
-        <SelectButton text="무료티켓" fullWidth={true} isSelected={false} />
-        <SelectButton
-          text="유료티켓"
-          fullWidth={true}
-          isSelected={false}
-          disabled={!select}
-        />
-      </FlexBox>
+
+      <Controller
+        rules={{ required: true }}
+        control={control}
+        name="payType"
+        render={({ field: { onChange } }) => (
+          <FlexBox align="center" justify="flex-start" gap={12}>
+            <SelectButton
+              text="두둥티켓"
+              fullWidth={true}
+              isSelected={payType === '두둥티켓'}
+              onClick={() => {
+                setPayType('두둥티켓');
+                onChange('두둥티켓');
+              }}
+            />
+            <SelectButton
+              text="무료티켓"
+              fullWidth={true}
+              isSelected={payType === '무료티켓'}
+              onClick={() => {
+                setPayType('무료티켓');
+                onChange('무료티켓');
+              }}
+            />
+            <SelectButton
+              text="유료티켓"
+              fullWidth={true}
+              isSelected={payType === '유료티켓'}
+              disabled={!partner}
+              onClick={() => {
+                setPayType('유료티켓');
+                onChange('유료티켓');
+              }}
+            />
+          </FlexBox>
+        )}
+      />
       <div className="recommendation">
         <Recommendation />
       </div>

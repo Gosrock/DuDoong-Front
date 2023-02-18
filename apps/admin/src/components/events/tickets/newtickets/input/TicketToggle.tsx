@@ -1,8 +1,10 @@
 import { FlexBox, ListHeader, Text, ToggleButton } from '@dudoong/ui';
+import { Control, FieldValues } from 'react-hook-form';
 
 export interface TicketToggleProps {
   title: string | JSX.Element;
   description: string;
+  control: Control<FieldValues, any>;
 }
 
 const TicketToggle = ({ title, description }: TicketToggleProps) => {

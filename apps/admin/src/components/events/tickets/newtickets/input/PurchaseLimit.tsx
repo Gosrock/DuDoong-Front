@@ -1,6 +1,11 @@
-import { Counter, FlexBox, ListHeader, Tag } from '@dudoong/ui';
+import { Counter, FlexBox, ListHeader } from '@dudoong/ui';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 
-export const PurchaseLimit = () => {
+export const PurchaseLimit = ({
+  control,
+}: {
+  control: Control<FieldValues, any>;
+}) => {
   return (
     <FlexBox align="center" justify="space-between" style={{ width: '100%' }}>
       <ListHeader
@@ -9,10 +14,18 @@ export const PurchaseLimit = () => {
         title="1인당 구매 가능 매수 제한"
         description="한명이 구매 가능한 티켓 매수를 제한합니다."
       />
-      <Counter
-        count={0}
-        onClickMinus={() => console.log('')}
-        onClickPlus={() => console.log('')}
+      <Controller
+        rules={{ required: true }}
+        control={control}
+        name="limit"
+        defaultValue={0}
+        render={({ field: { onChange, value } }) => (
+          <Counter
+            count={0}
+            onClickMinus={() => onChange(value - 1)}
+            onClickPlus={() => onChange(value + 1)}
+          />
+        )}
       />
     </FlexBox>
   );
