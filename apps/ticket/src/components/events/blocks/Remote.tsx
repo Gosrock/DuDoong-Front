@@ -1,19 +1,32 @@
-import { Button, ButtonSet } from '@dudoong/ui';
+import { Button } from '@dudoong/ui';
 import Talk from '@assets/talk.svg';
 import styled from '@emotion/styled';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useRecoilValue } from 'recoil';
 import { authState } from '@store/auth';
 import { useRouter } from 'next/router';
+import useOverlay from '@lib/hooks/useOverlay';
+import OverlayBox from '@components/shared/overlay/OverlayBox';
+import TalkOverlay from './Talk/Index';
 
-const Remote = ({ openOverlay }: { openOverlay: () => void }) => {
+interface RemoteProps {
+  openTicketOverlay: () => void;
+  eventName: string;
+}
+
+const Remote = ({ openTicketOverlay, eventName }: RemoteProps) => {
   const router = useRouter();
   const auth = useRecoilValue(authState);
   const { openGlobalOverlay } = useGlobalOverlay();
+  const {
+    openOverlay: openTalkOverlay,
+    isOpen,
+    closeOverlay: closeTalkOverlay,
+  } = useOverlay();
 
   const handleClickBooking = () => {
     auth.isAuthenticated
-      ? openOverlay()
+      ? openTicketOverlay()
       : openGlobalOverlay({
           content: 'login',
           props: { redirect: router.asPath },
@@ -21,14 +34,19 @@ const Remote = ({ openOverlay }: { openOverlay: () => void }) => {
   };
 
   return (
-    <Wrapper>
-      <Button varient="tertiary" width={56}>
-        <Talk />
-      </Button>
-      <Button varient="primary" fullWidth onClick={handleClickBooking}>
-        예매하기
-      </Button>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Button varient="tertiary" width={56} onClick={openTalkOverlay}>
+          <Talk />
+        </Button>
+        <Button varient="primary" fullWidth onClick={handleClickBooking}>
+          예매하기
+        </Button>
+      </Wrapper>
+      <OverlayBox open={isOpen} onDismiss={closeTalkOverlay}>
+        <TalkOverlay eventName={eventName} onClose={closeTalkOverlay} />
+      </OverlayBox>
+    </>
   );
 };
 

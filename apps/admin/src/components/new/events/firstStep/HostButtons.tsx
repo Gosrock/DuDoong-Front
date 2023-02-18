@@ -19,7 +19,7 @@ const HostButtons = ({ hostId, setHostId }: HostProfilesProps) => {
   };
 
   const { infiniteListElement } = useInfiniteQueries<HostProfileResponse>(
-    'host',
+    ['host'],
     HostApi.GET_HOSTS,
     HostProfileContainer,
   );

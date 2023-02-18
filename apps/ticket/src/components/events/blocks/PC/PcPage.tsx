@@ -10,7 +10,7 @@ import Summary from './Summary';
 const PcPage = ({
   detail,
   tickets,
-  openOverlay,
+  openTicketOverlay,
   ...props
 }: DetailTemplateProps) => {
   const MdViewer = dynamic(() => import('../../blocks/MdViewer'), {
@@ -34,7 +34,10 @@ const PcPage = ({
           <Divider line />
           {tickets && <Tickets tickets={tickets} />}
           <Spacing size={12} />
-          <Remote openOverlay={openOverlay} />
+          <Remote
+            openTicketOverlay={openTicketOverlay}
+            eventName={detail.name}
+          />
         </RightSticky>
       </Container>
       <Spacing size={120} />

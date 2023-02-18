@@ -31,7 +31,7 @@ const ADMIN_HOME_MAP = {
 const List = ({ page }: ListProps) => {
   const { infiniteListElement, isEmpty } = useInfiniteQueries<
     EventProfileResponse | HostProfileResponse
-  >(page, ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
+  >([page], ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
 
   if (isEmpty) {
     return (

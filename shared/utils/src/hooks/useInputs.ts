@@ -7,10 +7,13 @@ export const useInputs = <T>(initialForm: T) => {
     setForm(initForm);
   };
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm((form: any) => ({ ...form, [name]: value }));
-  }, []);
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setForm((form: any) => ({ ...form, [name]: value }));
+    },
+    [],
+  );
   const reset = useCallback(() => setForm(initialForm), [initialForm]);
   return [form, onChange, reset, initForm] as const;
 };

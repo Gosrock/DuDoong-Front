@@ -17,6 +17,7 @@ const EventsRouter = () => {
   const { data } = useQuery(['eventDetail'], () =>
     EventApi.GET_EVENT_DETAIL(eventId),
   );
+
   //TODO: fallback 처리하기
   return (
     <Routes>
