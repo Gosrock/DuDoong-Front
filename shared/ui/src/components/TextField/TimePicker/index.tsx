@@ -65,6 +65,7 @@ const TimePickerStyles = styled.div`
     display: inline-block;
     position: relative;
 
+    height: 219px !important;
     width: 112px !important;
 
     display: flex;
@@ -85,7 +86,7 @@ const TimePickerStyles = styled.div`
 
     background-color: ${theme.palette.white};
     border-bottom: 1px solid ${theme.palette.gray_100};
-    padding: 0 0 16px 0;
+    padding: 0 0 10px 0;
   }
 
   .react-datepicker__current-month,
