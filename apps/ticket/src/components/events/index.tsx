@@ -4,7 +4,6 @@ import { media } from '@dudoong/ui';
 import { AuthApi, EventApi, EventDetailResponse } from '@dudoong/utils';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import SelectTicket from './blocks/SelectTicket';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
 import OverlayBox from '@components/shared/overlay/OverlayBox';
@@ -17,11 +16,12 @@ import { authState } from '@store/auth';
 import { useRecoilState } from 'recoil';
 import { getCookie } from 'cookies-next';
 import { setCredentials } from '@lib/utils/setCredentials';
+import { useQuery } from '@tanstack/react-query';
 
 export interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
   detail: EventDetailResponse;
   tickets: GetEventTicketItemsResponse | undefined;
-  openOverlay: () => void;
+  openTicketOverlay: () => void;
 }
 
 const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
@@ -63,13 +63,13 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
         <PcPage
           detail={detail}
           tickets={tickets}
-          openOverlay={openOverlay}
+          openTicketOverlay={openOverlay}
           className={'media-pc'}
         />
         <MobilePage
           detail={detail}
           tickets={tickets}
-          openOverlay={openOverlay}
+          openTicketOverlay={openOverlay}
           className={'media-mobile'}
         />
       </Wrapper>

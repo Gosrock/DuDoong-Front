@@ -1,9 +1,9 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 export const useInfiniteQueries = <T,>(
-  queryKey: string,
+  queryKey: QueryKey,
   apiFunction: (payload: any) => Promise<InfiniteResponse<T>>,
   ListItem: (props: any) => JSX.Element,
 ) => {
@@ -11,7 +11,7 @@ export const useInfiniteQueries = <T,>(
   const { data, fetchNextPage } = useInfiniteQuery<
     InfiniteResponse<T>,
     unknown
-  >([queryKey], apiFunction, {
+  >(queryKey, apiFunction, {
     getNextPageParam: (lastPage) => lastPage.page + 1,
   });
 
@@ -51,7 +51,8 @@ export interface InfiniteResponse<T> {
 }
 
 export interface InfiniteRequest {
-  pageParam: number;
-  size: number;
+  pageParam?: number;
+  size?: number;
   sort?: 'asc' | 'desc';
+  id?: string;
 }
