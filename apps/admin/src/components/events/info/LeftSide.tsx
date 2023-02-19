@@ -1,4 +1,5 @@
 import TimeButton from '@components/new/events/secondStep/TimeButton';
+import ContentGrid from '@components/shared/layout/ContentGrid';
 import {
   DatePicker,
   FlexBox,
@@ -7,6 +8,7 @@ import {
   Spacing,
   TimePicker,
 } from '@dudoong/ui';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import EventApi from '@lib/apis/event/EventApi';
 import { useQuery } from '@tanstack/react-query';
@@ -69,14 +71,13 @@ const LeftSide = () => {
 
   return (
     <>
-      <FlexBox align={'flex-start'} direction={'row'}>
-        <FlexBox align={'flex-start'} direction={'column'}>
+      <ContentGrid>
+        <div>
           <ListHeader
             padding={[32, 0, 12, 0]}
             title={'공연 이름'}
             size={'listHeader_18'}
           />
-
           <Input width={398} disabled={true} value={data?.name || ''}></Input>
           <Spacing size={40} />
           <ListHeader
@@ -105,7 +106,7 @@ const LeftSide = () => {
             title={'관람 시간'}
             size={'listHeader_18'}
           />
-          <FlexBox align={'center'} gap={10}>
+          <FlexBox align={'center'}>
             <Input
               type="number"
               placeholder={data?.runTime ? `${data?.runTime}` : '시:분'}
@@ -118,21 +119,6 @@ const LeftSide = () => {
               value={String(runTime) || ''}
             />
             <TimeButton
-              type={'modify'}
-              text={'-10분'}
-              onClick={() => {
-                changeRunTimeHandler(-10);
-              }}
-            />
-            <TimeButton
-              type={'modify'}
-              text={'+30분'}
-              onClick={(event) => {
-                event.preventDefault();
-                changeRunTimeHandler(30);
-              }}
-            />
-            <TimeButton
               type={'reset'}
               text={'초기화'}
               onClick={() => {
@@ -140,7 +126,7 @@ const LeftSide = () => {
               }}
             />
           </FlexBox>
-        </FlexBox>
+        </div>
         <MapPage
           name={data?.name}
           startDate={startDate}
@@ -148,7 +134,7 @@ const LeftSide = () => {
           runtime={runTime}
           place={place}
         />
-      </FlexBox>
+      </ContentGrid>
     </>
   );
 };

@@ -166,7 +166,7 @@ const MapPage = (props: any) => {
 
   return (
     <>
-      <Padding size={[0, 0, 0, 80]}>
+      <div>
         <ListHeader
           padding={[32, 0, 12, 0]}
           size={'listHeader_18'}
@@ -215,7 +215,7 @@ const MapPage = (props: any) => {
             />
           )}
         </Map>
-      </Padding>
+      </div>
     </>
   );
 };
