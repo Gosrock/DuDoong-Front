@@ -88,7 +88,7 @@ const ModalSearch = ({
             ></Input>
           </form>
           <Spacing size={16} />
-          {address === '' || markers?.length === 0 ? (
+          {address === '' || markers?.length === 0 || !markers ? (
             <ModalTip />
           ) : (
             <>

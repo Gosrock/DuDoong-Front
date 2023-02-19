@@ -25,7 +25,7 @@ const MapPage = (props: any) => {
   const [info, setInfo] = useState<any>();
   const [markers, setMarkers] = useState<any>();
   const [map, setMap] = useState<any>();
-  const [address, setAddress] = useState<string | undefined>('와우산로');
+  const [address, setAddress] = useState<string | undefined>('');
   const [isOpen, setIsOpen] = useState(false);
   const [curMarker, setMarker] = useState<place>({
     content: '홍대 001',
@@ -207,11 +207,11 @@ const MapPage = (props: any) => {
               handleMap={handleMap}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
-              address={address === '와우산로' ? '' : address}
-              markers={markers}
+              address={address === '' ? '' : address}
+              markers={markers !== undefined ? markers : undefined}
               handleChange={handleChange}
               setInfos={setInfos}
-              pagination={pagination}
+              pagination={pagination !== undefined ? pagination : undefined}
             />
           )}
         </Map>
