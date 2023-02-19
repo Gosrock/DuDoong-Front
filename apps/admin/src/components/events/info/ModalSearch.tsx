@@ -125,6 +125,7 @@ const ModalSearch = ({
                       key={`marker-${marker?.content}-${marker?.position?.lat},${marker?.position?.lng}`}
                       css={css`
                         width: 100%;
+                        text-align: end;
                       `}
                       onClick={() => setInfos(marker)}
                     >
@@ -138,10 +139,10 @@ const ModalSearch = ({
                           />
                         }
                         rightElement={
-                          <ListHeader
-                            size={'listHeader_18'}
-                            title={`${marker?.placeAddress}`}
-                            description={`${marker?.roadAddress}`}
+                          <ListRow //listRow로 바꾸기 도로명,주소 위치바꾸기, css수정,초기화 width:90,10px
+                            textTypo={'P_Text_16_M'}
+                            text={`${marker?.roadAddress}`}
+                            subText={`지번: ${marker?.placeAddress}`}
                             padding={[16, 0, 16, 0]}
                           />
                         }
