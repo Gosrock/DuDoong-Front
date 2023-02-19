@@ -40,9 +40,9 @@ const Info = () => {
     },
   });
 
-  // 호스트 정보
+  // TODO : useQuery 치우고 getQueryData. 프리사인드url은 따로받아오자
   const { data, status } = useQuery(
-    ['hostDetail'],
+    ['hostDetail', hostId],
     () => HostApi.GET_HOST_DETAIL(hostId),
     {
       onSuccess: (data: HostDetailResponse) => {

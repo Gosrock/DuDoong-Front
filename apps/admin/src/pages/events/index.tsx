@@ -14,7 +14,7 @@ import EventApi from '@lib/apis/event/EventApi';
 const EventsRouter = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
-  const { data } = useQuery(['eventDetail'], () =>
+  const { data } = useQuery(['eventDetail', eventId], () =>
     EventApi.GET_EVENT_DETAIL(eventId),
   );
 
