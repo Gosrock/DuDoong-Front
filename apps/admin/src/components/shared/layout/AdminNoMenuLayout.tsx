@@ -18,13 +18,16 @@ const AdminNoMenuLayout = () => {
 export default AdminNoMenuLayout;
 
 const Wrapper = styled.div`
+  height: calc(100vh - 64px);
+  padding-top: 64px;
+
   background-color: ${({ theme }) => theme.palette.gray_100};
 `;
 
 const BottomWrapper = styled.div`
-  padding-top: 64px;
-  width: 100%;
-  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+  padding-left: 14px;
 `;
 
 const OutletWrapper = styled.div`

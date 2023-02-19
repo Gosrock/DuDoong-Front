@@ -134,7 +134,7 @@ const Dashboard = () => {
       <ListHeader
         title={eventDetail ? eventDetail.name : '호스트'}
         size={'listHeader_24'}
-        padding={[50, 0, 48, 0]}
+        padding={[32, 0, 40, 0]}
       />
       {eventDetail && eventDetail.status !== '준비중' ? (
         <EventInfo eventId={eventId} setButtonType={setButtonType} />
