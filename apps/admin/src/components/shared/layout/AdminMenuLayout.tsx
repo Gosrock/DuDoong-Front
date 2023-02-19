@@ -27,9 +27,11 @@ export const AdminMenuLayout = ({
       <BottomWrapper>
         <AdminMenu title={title} />
         <OutletWrapper isButtonActive={isActive}>
-          <Breadcrumb />
-          <Outlet />
-          {isActive && <Spacing size={55} />}
+          <div>
+            <Breadcrumb />
+            <Outlet />
+            {isActive && <Spacing size={55} />}
+          </div>
         </OutletWrapper>
         <AdminBottomButton />
       </BottomWrapper>
@@ -56,9 +58,8 @@ interface OutletWrapperProps {
 }
 
 const OutletWrapper = styled.div<OutletWrapperProps>`
-  margin: 0 0 0 20px;
-  padding: 0 calc((100vw - 252px - 876px - 20px) / 2);
-  width: 876px;
+  padding: 0 20px;
+
   ${({ isButtonActive }) =>
     isButtonActive &&
     css`
@@ -66,4 +67,8 @@ const OutletWrapper = styled.div<OutletWrapperProps>`
     `}
 
   overflow-x: hidden;
+  & > div {
+    width: 876px;
+    margin: 0 auto;
+  }
 `;
