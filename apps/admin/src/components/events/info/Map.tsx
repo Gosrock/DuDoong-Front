@@ -37,6 +37,7 @@ const MapPage = (props: any) => {
     },
   });
   const [roadAddress, setRoadAddress] = useState<string | null>();
+  const [pagination, setPagination] = useState<any>();
 
   useEffect(() => {
     if (props?.place) {
@@ -131,6 +132,7 @@ const MapPage = (props: any) => {
           setMarkers(markers);
           console.log(markers);
           console.log(_pagination);
+          setPagination(_pagination);
           //여기서 lat,lngset해주면될듯?
 
           // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
@@ -209,6 +211,7 @@ const MapPage = (props: any) => {
               markers={markers}
               handleChange={handleChange}
               setInfos={setInfos}
+              pagination={pagination}
             />
           )}
         </Map>

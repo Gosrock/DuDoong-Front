@@ -13,8 +13,9 @@ import {
   Button,
 } from '@dudoong/ui';
 import { css } from '@emotion/react';
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import ModalTip from './ModalTip';
+import Pagination from './Pagination';
 
 interface place {
   content: string;
@@ -37,6 +38,7 @@ interface ModalSearchProps {
   setInfos: React.Dispatch<any>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleMap: () => void;
+  pagination: any;
 }
 
 const ModalSearch = ({
@@ -47,8 +49,10 @@ const ModalSearch = ({
   setInfos,
   setIsOpen,
   handleMap,
+  pagination,
 }: ModalSearchProps) => {
   const ps = new kakao.maps.services.Places();
+  const [pageCount, setTotalPage] = useState<number>();
 
   console.log(address);
   const onInput = (props: SyntheticEvent) => {
@@ -56,8 +60,13 @@ const ModalSearch = ({
     props.preventDefault();
     if (address !== undefined) {
       ps.keywordSearch(address, handleMap);
+      displayPagination(pagination);
     }
   };
+
+  function displayPagination(pagination: any) {
+    setTotalPage(pagination.last);
+  }
 
   return (
     <>
@@ -95,7 +104,7 @@ const ModalSearch = ({
                     주소 검색결과 총
                   </Text>
                   <Text typo={'P_Header_18_SB'} color={'main_400'}>
-                    {markers.length}건
+                    {pagination.totalCount}건
                   </Text>
                 </Padding>
               </FlexBox>
@@ -104,35 +113,44 @@ const ModalSearch = ({
                 align={'flex-start'}
                 justify={'space-between'}
               >
-                {markers.slice(0, 3).map((marker: place) => (
-                  <button
-                    css={css`
-                      width: 100%;
-                    `}
-                    onClick={() => setInfos(marker)}
-                    key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
-                  >
-                    <ListRow
-                      padding={0}
-                      text={
-                        <ListHeader
-                          size={'listHeader_18'}
-                          padding={[16, 0, 16, 10]}
-                          title={`${marker.content}`}
-                        />
-                      }
-                      rightElement={
-                        <ListHeader
-                          size={'listHeader_18'}
-                          title={`${marker.placeAddress}`}
-                          description={`${marker.roadAddress}`}
-                          padding={[16, 0, 16, 0]}
-                        />
-                      }
-                    />
-                  </button>
-                ))}
+                <div
+                  css={css`
+                    width: 806px;
+                    height: 400px;
+                    overflow: scroll;
+                  `}
+                >
+                  {markers.map((marker: place) => (
+                    <button
+                      key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+                      css={css`
+                        width: 100%;
+                      `}
+                      onClick={() => setInfos(marker)}
+                    >
+                      <ListRow
+                        padding={0}
+                        text={
+                          <ListHeader
+                            size={'listHeader_18'}
+                            padding={[16, 0, 16, 10]}
+                            title={`${marker.content}`}
+                          />
+                        }
+                        rightElement={
+                          <ListHeader
+                            size={'listHeader_18'}
+                            title={`${marker.placeAddress}`}
+                            description={`${marker.roadAddress}`}
+                            padding={[16, 0, 16, 0]}
+                          />
+                        }
+                      />
+                    </button>
+                  ))}
+                </div>
               </FlexBox>
+              <Pagination pagination={pagination} />
             </>
           )}
           <Spacing size={40} />
