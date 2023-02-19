@@ -37,6 +37,7 @@ const Tickets = () => {
       <Spacing size={72} />
 
       <TicketList ticketItems={data ? data.ticketItems : null} />
+      <Spacing size={72} />
     </>
   );
 };

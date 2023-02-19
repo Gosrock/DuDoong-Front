@@ -47,6 +47,7 @@ const TicketItem = ({
           text={text}
           textColor={['main_500', 'gray_400']}
           subText={subText}
+          padding={[12, 0]}
         />
         <FlexBox align="center" justify="space-between" gap={20}>
           <Tag text={`재고 ${stock}/${quantity}`} color="main" size="lg" />
@@ -59,7 +60,7 @@ const TicketItem = ({
           />
         </FlexBox>
       </FlexBox>
-      <Divider className="host-divider" height={28} line padding={16} />
+      <Divider className="host-divider" height={28} line />
     </>
   );
 };
