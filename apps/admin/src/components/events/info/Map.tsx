@@ -22,7 +22,6 @@ const MapPage = (props: any) => {
   const [lng, setLng] = useState<number | null>();
   const [placeName, setPlaceName] = useState<string | null>();
   const [placeAddress, setPlaceAddress] = useState<string | null>();
-  const [info, setInfo] = useState<any>();
   const [markers, setMarkers] = useState<any>();
   const [map, setMap] = useState<any>();
   const [address, setAddress] = useState<string | undefined>('');
@@ -195,12 +194,7 @@ const MapPage = (props: any) => {
             <MapMarker
               key={`marker-${curMarker.content}-${curMarker.position.lat},${curMarker.position.lng}`}
               position={curMarker.position}
-              onClick={() => setInfo(curMarker)}
-            >
-              {info && info.content === curMarker.content && (
-                <div style={{ color: '#000' }}>{curMarker.content}</div>
-              )}
-            </MapMarker>
+            ></MapMarker>
           )}
           {isOpen && (
             <ModalSearch
