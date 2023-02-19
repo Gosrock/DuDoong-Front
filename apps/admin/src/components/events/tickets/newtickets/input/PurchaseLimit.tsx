@@ -15,7 +15,7 @@ export const PurchaseLimit = ({
         description="한명이 구매 가능한 티켓 매수를 제한합니다."
       />
       <Controller
-        rules={{ required: true }}
+        rules={{ required: '' }}
         control={control}
         name="purchaseLimit"
         defaultValue={1}

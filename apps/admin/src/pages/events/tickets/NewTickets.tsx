@@ -109,6 +109,8 @@ const NewTickets = () => {
             title="티켓 이름"
             description="티켓의 성격을 잘 드러내는 이름을 써주세요. (ex. 무료 티켓)"
             placeholder="최대 12글자까지 쓸 수 있어요"
+            type="text"
+            maxLength={12}
             {...register('name', {
               required: true,
               maxLength: {
