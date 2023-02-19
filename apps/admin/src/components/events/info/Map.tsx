@@ -168,7 +168,7 @@ const MapPage = (props: any) => {
     <>
       <div>
         <ListHeader
-          padding={[32, 0, 12, 0]}
+          padding={[32, 24, 12, 0]}
           size={'listHeader_18'}
           title={'공연 장소'}
         ></ListHeader>

@@ -1,15 +1,13 @@
+import { SearchInput } from '@components/shared/component/SearchInput';
 import {
   Text,
   Divider,
   FlexBox,
-  Input,
   ListHeader,
   ListRow,
   Modal,
   Padding,
-  Search,
   Spacing,
-  theme,
   Button,
 } from '@dudoong/ui';
 import { css } from '@emotion/react';
@@ -54,7 +52,6 @@ const ModalSearch = ({
   const ps = new kakao.maps.services.Places();
   const [pageCount, setTotalPage] = useState<number>();
 
-  console.log(address);
   const onInput = (props: SyntheticEvent) => {
     // eslint-disable-next-line react/prop-types
     props.preventDefault();
@@ -73,19 +70,16 @@ const ModalSearch = ({
       <Modal open={isOpen} onDismiss={() => setIsOpen(!isOpen)}>
         <Padding size={[0, 35]}>
           <Text typo={'P_Header_20_B'}>
-            <Padding size={[31, 0, 0, 0]}>공연장소 찾기</Padding>
+            <Padding size={[32, 0, 0, 0]}>공연장소 찾기</Padding>
           </Text>
           <Divider line={true} />
           <Spacing size={10} />
           <form onSubmit={onInput}>
-            <Input
-              height={60}
-              styles={InputStyle}
+            <SearchInput
               placeholder="예)와우산로 94"
               value={address}
               onChange={handleChange}
-              rightIcon={<Search />}
-            ></Input>
+            ></SearchInput>
           </form>
           <Spacing size={16} />
           {address === '' || markers?.length === 0 || !markers ? (
@@ -175,13 +169,3 @@ const ModalSearch = ({
 };
 
 export default ModalSearch;
-
-const InputStyle = css`
-  border-radius: 16px;
-  border: 1px solid black;
-  background-color: ${theme.palette.gray_100};
-  color: ${theme.palette.black};
-  margin-top: 16px;
-  box-sizing: border-box;
-  width: 806px;
-`;
