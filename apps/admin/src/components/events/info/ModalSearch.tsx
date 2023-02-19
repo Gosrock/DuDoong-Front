@@ -10,9 +10,11 @@ import {
   Search,
   Spacing,
   theme,
+  Button,
 } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import { SyntheticEvent } from 'react';
+import ModalTip from './ModalTip';
 
 interface place {
   content: string;
@@ -25,7 +27,7 @@ interface place {
 }
 interface ModalSearchProps {
   isOpen: boolean;
-  address: string;
+  address: string | undefined;
   handleChange: (e: {
     target: {
       value: string;
@@ -48,10 +50,13 @@ const ModalSearch = ({
 }: ModalSearchProps) => {
   const ps = new kakao.maps.services.Places();
 
+  console.log(address);
   const onInput = (props: SyntheticEvent) => {
     // eslint-disable-next-line react/prop-types
     props.preventDefault();
-    ps.keywordSearch(address, handleMap);
+    if (address !== undefined) {
+      ps.keywordSearch(address, handleMap);
+    }
   };
 
   return (
@@ -74,8 +79,8 @@ const ModalSearch = ({
             ></Input>
           </form>
           <Spacing size={16} />
-          {markers.length === 0 ? (
-            <div>a</div>
+          {address === '' || markers.length === 0 ? (
+            <ModalTip />
           ) : (
             <>
               <FlexBox direction={'row'} gap={8} align={'flex-start'}>
@@ -130,6 +135,20 @@ const ModalSearch = ({
               </FlexBox>
             </>
           )}
+          <Spacing size={40} />
+          <div
+            css={css`
+              float: right;
+            `}
+          >
+            <Button
+              onClick={(prev) => setIsOpen(!prev)}
+              width={106}
+              varient={'tertiary'}
+            >
+              취소
+            </Button>
+          </div>
         </Padding>
       </Modal>
     </>
@@ -143,7 +162,7 @@ const InputStyle = css`
   border: 1px solid black;
   background-color: ${theme.palette.gray_100};
   color: ${theme.palette.black};
-  margin-top:16px
+  margin-top: 16px;
   box-sizing: border-box;
   width: 806px;
 `;

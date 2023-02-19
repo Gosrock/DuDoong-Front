@@ -25,7 +25,7 @@ const MapPage = (props: any) => {
   const [info, setInfo] = useState<any>();
   const [markers, setMarkers] = useState<any>();
   const [map, setMap] = useState<any>();
-  const [address, setAddress] = useState<string>('홍대 001');
+  const [address, setAddress] = useState<string | undefined>('와우산로');
   const [isOpen, setIsOpen] = useState(false);
   const [curMarker, setMarker] = useState<place>({
     content: '홍대 001',
@@ -51,8 +51,6 @@ const MapPage = (props: any) => {
       });
     }
   }, [props?.place]);
-
-  const ps = new kakao.maps.services.Places();
 
   const { changeEventMutation } = useEvents();
 
@@ -100,10 +98,6 @@ const MapPage = (props: any) => {
     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
   }
 
-  const onInput = (props: SyntheticEvent) => {
-    props.preventDefault();
-    ps.keywordSearch(address, handleMap);
-  };
   const handleChange = (e: { target: { value: string } }) => {
     setAddress(e.target.value);
   };
@@ -211,7 +205,7 @@ const MapPage = (props: any) => {
               handleMap={handleMap}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
-              address={address}
+              address={address === '와우산로' ? '' : address}
               markers={markers}
               handleChange={handleChange}
               setInfos={setInfos}
