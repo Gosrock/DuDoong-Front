@@ -5,13 +5,16 @@ import { useEffect, useState } from 'react';
 
 const Pagination = (pagination: any) => {
   const [cur, setCu] = useState<number>(1);
-  console.log(pagination.pagination);
-  const count = [1, 2, 3];
-
   const setChange = (num: number) => {
     pagination.pagination.gotoPage(num);
     setCu(num);
   };
+
+  const arr = [];
+  for (let i = 0; i < pagination.pagination.last; i++) {
+    arr.push(i + 1);
+  }
+  console.log(arr);
   useEffect(() => {
     setCu(pagination.pagination.current);
   }, [pagination.pagination.current]);
@@ -24,32 +27,20 @@ const Pagination = (pagination: any) => {
         <button onClick={() => pagination.pagination.prevPage()}>
           <Left />
         </button>
-        {pagination.pagination.last !== 1 ? (
-          count.map((num) => (
-            <>
-              <Mini cur={cur} num={num}>
-                <button onClick={() => setChange(num)}>
-                  <Text
-                    typo={'P_Text_16_M'}
-                    color={cur === num ? 'white' : 'black'}
-                  >
-                    {num}
-                  </Text>
-                </button>
-              </Mini>
-            </>
-          ))
-        ) : (
+        {arr.map((num) => (
           <>
-            <Mini num={1} cur={1}>
-              <button onClick={() => setChange(1)}>
-                <Text typo={'P_Text_16_M'} color={'white'}>
-                  1
+            <Mini cur={cur} num={num}>
+              <button onClick={() => setChange(num)}>
+                <Text
+                  typo={'P_Text_16_M'}
+                  color={cur === num ? 'white' : 'black'}
+                >
+                  {num}
                 </Text>
               </button>
             </Mini>
           </>
-        )}
+        ))}
         <button onClick={() => pagination.pagination.nextPage()}>
           <Right />
         </button>
