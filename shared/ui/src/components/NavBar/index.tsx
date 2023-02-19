@@ -1,4 +1,4 @@
-import { FlexBox, Padding } from '../../layout';
+import { FlexBox } from '../../layout';
 import { Text } from '../Text';
 import BackArrow from '../../assets/icons/BackArrow';
 import styled from '@emotion/styled';
@@ -35,7 +35,7 @@ const Wrapper = styled(FlexBox)`
   }
   top: 0;
   background-color: ${({ theme }) => theme.palette.white};
-  z-index: 10;
+  z-index: 3;
 
   & > button {
     width: 40px;

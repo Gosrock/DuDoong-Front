@@ -1,12 +1,14 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import {
+import type { EventProfileResponse } from '../event/eventType';
+import type {
   HostDetailResponse,
   UpdateHostRequest,
   HostProfileResponse,
   imageFileExtensionType,
   CreateHostRequest,
   CreateHostResponse,
+  SlackRequest,
 } from './hostType';
 
 const HostApi = {
@@ -56,6 +58,26 @@ const HostApi = {
     const response = await axiosPrivate.post(
       `/hosts/${hostId}/images?imageFileExtension=${imageFileExtension}`,
     );
+    return response.data.data;
+  },
+
+  PATCH_HOST_SLACK: async (
+    hostId: string | undefined,
+    payload: SlackRequest,
+  ): Promise<HostDetailResponse> => {
+    const response = await axiosPrivate.patch(
+      `/hosts/${hostId}/slack`,
+      payload,
+    );
+    return response.data.data;
+  },
+  GET_HOST_EVENTS: async (
+    hostId: string,
+    pageParam = 0,
+    size = 10,
+    sort = 'asc',
+  ): Promise<InfiniteResponse<EventProfileResponse>> => {
+    const response = await axiosPrivate.get(`/hosts/${hostId}/events`);
     return response.data.data;
   },
 };

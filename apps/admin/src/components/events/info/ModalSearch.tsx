@@ -65,7 +65,7 @@ const ModalSearch = ({
   };
 
   function displayPagination(pagination: any) {
-    setTotalPage(pagination.last);
+    setTotalPage(pagination?.last);
   }
 
   return (
@@ -88,7 +88,7 @@ const ModalSearch = ({
             ></Input>
           </form>
           <Spacing size={16} />
-          {address === '' || markers.length === 0 ? (
+          {address === '' || markers?.length === 0 ? (
             <ModalTip />
           ) : (
             <>
@@ -104,7 +104,7 @@ const ModalSearch = ({
                     주소 검색결과 총
                   </Text>
                   <Text typo={'P_Header_18_SB'} color={'main_400'}>
-                    {pagination.totalCount}건
+                    {pagination?.totalCount}건
                   </Text>
                 </Padding>
               </FlexBox>
@@ -120,9 +120,9 @@ const ModalSearch = ({
                     overflow: scroll;
                   `}
                 >
-                  {markers.map((marker: place) => (
+                  {markers?.map((marker: place) => (
                     <button
-                      key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+                      key={`marker-${marker?.content}-${marker?.position?.lat},${marker?.position?.lng}`}
                       css={css`
                         width: 100%;
                       `}
@@ -134,14 +134,14 @@ const ModalSearch = ({
                           <ListHeader
                             size={'listHeader_18'}
                             padding={[16, 0, 16, 10]}
-                            title={`${marker.content}`}
+                            title={`${marker?.content}`}
                           />
                         }
                         rightElement={
                           <ListHeader
                             size={'listHeader_18'}
-                            title={`${marker.placeAddress}`}
-                            description={`${marker.roadAddress}`}
+                            title={`${marker?.placeAddress}`}
+                            description={`${marker?.roadAddress}`}
                             padding={[16, 0, 16, 0]}
                           />
                         }

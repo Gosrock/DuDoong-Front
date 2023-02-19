@@ -1,7 +1,6 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import {
-  BasicEventRequest,
+import type {
   CreateEventRequest,
   CreateEventResponse,
   EventChecklistResponse,
@@ -13,6 +12,7 @@ import {
   imageFileExtensionType,
   ImageUrlResponse,
   UpdateEventDetailRequest,
+  BasicEventRequest,
 } from './eventType';
 
 const EventApi = {

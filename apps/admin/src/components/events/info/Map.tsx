@@ -71,18 +71,18 @@ const MapPage = (props: any) => {
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
       } as BasicEventRequest;
-
+      console.log(payload);
       changeEventMutation.mutate(payload);
     }
   };
-  console.log(curMarker);
 
+  const buttonHandler = [props, curMarker];
   useEffect(() => {
     setButtonInfo({
       firstHandler: changeEventHandler,
-      firstDisable: checkButtonDisable(curMarker),
+      firstDisable: checkButtonDisable(buttonHandler),
     });
-  }, [curMarker]);
+  }, [buttonHandler]);
 
   function getAddress(lat: string, lng: string) {
     const geocoder = new kakao.maps.services.Geocoder();
@@ -184,8 +184,8 @@ const MapPage = (props: any) => {
         <Spacing size={12} />
         <Map // 로드뷰를 표시할 Container
           center={{
-            lat: 37.566826,
-            lng: 126.9786567,
+            lat: 37.55097092681401,
+            lng: 126.92364650757898,
           }}
           style={{ width: '398px', height: '292px', borderRadius: '8px' }}
           level={4}
@@ -222,7 +222,7 @@ const MapPage = (props: any) => {
 
 export default MapPage;
 
-const checkButtonDisable = (props: place) => {
+const checkButtonDisable = (props: any) => {
   if (props.content === null) return true;
   return false;
 };

@@ -3,9 +3,9 @@ import { FlexBox, PaddingSize, Spacing, Text } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import EventApi from '@lib/apis/event/EventApi';
-import { EventProfileResponse } from '@lib/apis/event/eventType';
+import type { EventProfileResponse } from '@lib/apis/event/eventType';
 import HostApi from '@lib/apis/host/HostApi';
-import { HostProfileResponse } from '@lib/apis/host/hostType';
+import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import { PageType } from '@pages/common/Home';
 import EventItem from './EventItem';
 import HostLink from './HostLink';
@@ -31,7 +31,7 @@ const ADMIN_HOME_MAP = {
 const List = ({ page }: ListProps) => {
   const { infiniteListElement, isEmpty } = useInfiniteQueries<
     EventProfileResponse | HostProfileResponse
-  >(page, ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
+  >([page], ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
 
   if (isEmpty) {
     return (

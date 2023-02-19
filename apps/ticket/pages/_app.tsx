@@ -61,11 +61,13 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
 
 MyApp.getInitialProps = async (context: AppContext) => {
   console.log('getInitialProps');
-  const { ctx, Component } = context;
+  const { ctx, Component, router } = context;
   const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};
   let loginData: OauthLoginResponse | null;
+
   try {
+    //정적생성페이지(이벤트상세)에서는 리프레쉬로직 돌지 않음
     if (ctx.req) {
       const response = await AuthApi.REFRESH(refreshToken!);
       loginData = response;

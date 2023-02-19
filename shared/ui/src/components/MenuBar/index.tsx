@@ -48,7 +48,6 @@ export const MenuBar = ({
         contentRef.current[0].getBoundingClientRect().width,
       ]);
     }
-    console.log(wrapperRef.current!.getBoundingClientRect().left);
   }, [contentRef.current.length]);
 
   const menuIndicatorHandler = (

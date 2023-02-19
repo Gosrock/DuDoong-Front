@@ -1,6 +1,7 @@
 import { Divider, FlexBox, Tag, Text, theme } from '@dudoong/ui';
+import { parseDate } from '@dudoong/utils';
 import { css } from '@emotion/react';
-import { EventProfileResponse } from '@lib/apis/event/eventType';
+import type { EventProfileResponse } from '@lib/apis/event/eventType';
 import { Link } from 'react-router-dom';
 
 const EventItem = (props: EventProfileResponse) => {
@@ -62,13 +63,14 @@ const EventProfileImage = ({ imageSrc }: { imageSrc: string }) => {
 };
 
 const EventProfileContent = (props: EventProfileResponse) => {
+  const [date, time] = parseDate(props.startAt, true);
   return (
     <Text typo="P_Text_12_M" color="gray_400">
       호스트 : {props.hostName}
       <br />
-      날짜 : {props.startAt}
+      날짜 : {date}
       <br />
-      시간 :
+      시간 : {time}
       <br />
       장소 : {props.placeName}
     </Text>

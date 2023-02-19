@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes } from 'react';
 
 export interface ContenGridProps extends HTMLAttributes<HTMLDivElement> {
   rowGap?: number;

@@ -1,5 +1,5 @@
 import { DropdownOption } from '@dudoong/ui';
-import { TicketItemResponse } from '@lib/apis/ticket/ticketType';
+import type { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 
 const getTicketItemObjects = (items: TicketItemResponse[]) => {
   const initialDropdownOption = {
@@ -14,7 +14,7 @@ const getTicketItemObjects = (items: TicketItemResponse[]) => {
       id: item.ticketItemId,
       disabled: item.quantity === 0,
       description: `${item.price}${
-        item.type === '승인' ? ' (승인 후 발매)' : ''
+        item.approveType === '승인' ? ' (승인 후 발매)' : ''
       }`,
     };
   });

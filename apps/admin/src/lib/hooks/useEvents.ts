@@ -1,7 +1,7 @@
 import EventApi from '@lib/apis/event/EventApi';
-import {
+import type {
   BasicEventRequest,
-  BasicEventResponse,
+  EventResponse,
   CreateEventResponse,
 } from '@lib/apis/event/eventType';
 import { useMutation } from '@tanstack/react-query';
@@ -27,7 +27,7 @@ const useEvents = () => {
     (payload: BasicEventRequest) =>
       EventApi.PATCH_EVENT_BASIC(payload, eventId),
     {
-      onSuccess: (data: BasicEventResponse) => {
+      onSuccess: (data: EventResponse) => {
         console.log('success');
         console.log(data);
       },

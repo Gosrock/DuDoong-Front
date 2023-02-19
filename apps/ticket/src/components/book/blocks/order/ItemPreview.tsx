@@ -1,6 +1,6 @@
 import { Accordion, ListRow, Tag, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
-import {
+import type {
   CartItemResponse,
   OptionAnswer,
   OptionGroupType,

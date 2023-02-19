@@ -1,5 +1,5 @@
 import { ListHeader, Spacing, Input, FlexBox } from '@dudoong/ui';
-import { UpdateHostRequest } from '@lib/apis/host/hostType';
+import type { UpdateHostRequest } from '@lib/apis/host/hostType';
 import { ChangeEvent } from 'react';
 
 interface GridRightElementProps extends UpdateHostRequest {
