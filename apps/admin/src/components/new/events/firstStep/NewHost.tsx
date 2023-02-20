@@ -45,6 +45,7 @@ const HostProfileImage = () => {
         height: 60px;
         border-radius: 50%;
         border: 1px solid ${theme.palette.black};
+        box-sizing: border-box;
       `}
     >
       <Plus />

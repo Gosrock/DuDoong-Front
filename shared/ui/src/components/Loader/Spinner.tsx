@@ -3,11 +3,10 @@ import { css } from '@emotion/react';
 import Loading from '../../assets/icons/Loading';
 
 export interface LoaderProps {
-  color: string;
   size?: number;
 }
 
-export const Spinner = ({ color, size = 18 }: LoaderProps) => {
+export const Spinner = ({ size = 18 }: LoaderProps) => {
   return (
     <div css={{ width: `${size}px`, height: `${size}px`, margin: '0 auto' }}>
       <Loading

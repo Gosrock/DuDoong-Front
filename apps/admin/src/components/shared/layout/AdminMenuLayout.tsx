@@ -47,8 +47,6 @@ const LayoutWrapper = styled.div`
 `;
 
 const BottomWrapper = styled.div`
-  width: calc(100vw - 252px);
-  overflow-x: hidden;
   height: 100%;
   padding-left: 252px;
 `;
@@ -58,8 +56,8 @@ interface OutletWrapperProps {
 }
 
 const OutletWrapper = styled.div<OutletWrapperProps>`
-  padding: 0 20px;
-
+  padding: 0px 6px 0px 20px;
+  overflow-y: scroll;
   ${({ isButtonActive }) =>
     isButtonActive &&
     css`
