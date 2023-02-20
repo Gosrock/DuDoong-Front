@@ -27,7 +27,7 @@ const PaidTicketForm = ({ register, control }: TicketFormProps) => {
           description="최대 1000장까지 발행 가능해요"
           descriptionTypo="P_Text_14_M"
           placeholder="0"
-          {...register('issuance', {
+          {...register('supplyCount', {
             required: true,
             max: 1000,
           })}
