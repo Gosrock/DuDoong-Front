@@ -33,7 +33,7 @@ const TicketList = ({
                 } · 1인당 ${item.purchaseLimit}매`}
                 quantity={item.supplyCount}
                 stock={item.quantity}
-                isSold={false}
+                isSold={item.quantity !== item.supplyCount}
                 ticketItemId={item.ticketItemId}
               />
             ))}

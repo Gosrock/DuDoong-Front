@@ -115,5 +115,6 @@ const Wrapper = styled.button<{
   &:disabled {
     background-color: ${({ theme }) => theme.palette.gray_300};
     color: ${({ theme }) => theme.palette.white};
+    cursor: default;
   }
 `;
