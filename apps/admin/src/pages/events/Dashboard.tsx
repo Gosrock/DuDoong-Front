@@ -2,7 +2,7 @@ import CheckList from '@components/events/dashboard/CheckList';
 import { ListHeader } from '@dudoong/ui';
 import EventInfo from '@components/events/dashboard/EventInfo';
 import useBottomButton from '@lib/hooks/useBottomButton';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type {
@@ -12,8 +12,7 @@ import type {
 } from '@lib/apis/event/eventType';
 import { useEffect, useState } from 'react';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
-import { queryClient } from '../../main';
-import { useMutation } from '@tanstack/react-query';
+
 import { AdminBottomButtonTypeKey } from '@components/shared/layout/AdminBottomButton';
 import Warning from '@components/events/dashboard/Warning';
 
@@ -29,15 +28,17 @@ const Dashboard = () => {
   const { openOverlay, closeOverlay } = useGlobalOverlay();
 
   // 이벤트 디테일 api
-  const eventDetail = queryClient.getQueryData([
+  const queryClient = useQueryClient();
+  const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
-  ]) as EventDetailResponse;
+    eventId,
+  ]);
 
   // 이벤트 등록 api
   const patchEventOpenMutation = useMutation(EventApi.PATCH_EVENT_OPEN, {
     onSuccess: (data: EventResponse) => {
       console.log('PATCH_EVENT_OPEN : ', data);
-      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
     },
   });
@@ -46,7 +47,7 @@ const Dashboard = () => {
   const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_STATUS, {
     onSuccess: (data: EventResponse) => {
       console.log('PATCH_EVENT_Delete : ', data);
-      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
       navigate('/');
     },

@@ -1,5 +1,10 @@
 import { axiosPrivate } from '../axios';
-import { CreateTicketRequest, GetTicketDetailResponse } from './ticketType';
+import {
+  CreateTicketRequest,
+  GetIssuedTicketRequest,
+  GetTicketDetailResponse,
+  RetrieveIssuedTicketListResponse,
+} from './ticketType';
 
 const TicketApi = {
   GET_TICKET_DETAIL: async (
@@ -34,6 +39,18 @@ const TicketApi = {
   }): Promise<GetTicketDetailResponse> => {
     const response = await axiosPrivate.patch(
       `events/${eventId}/ticketItems/${ticketItemId}`,
+    );
+    return response.data.data;
+  },
+
+  GET_ISSUEDTICKETS: async ({
+    eventId,
+    page,
+    userName,
+    phoneNumber,
+  }: GetIssuedTicketRequest): Promise<RetrieveIssuedTicketListResponse> => {
+    const response = await axiosPrivate.get(
+      `events/${eventId}/issuedTickets?page=${page}&userName=${userName}&phoneNumber=${phoneNumber}`,
     );
     return response.data.data;
   },
