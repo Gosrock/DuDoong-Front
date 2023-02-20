@@ -10,22 +10,26 @@ const PaidTicketForm = ({ register, control }: TicketFormProps) => {
       <FlexBox align="flex-start" gap={18}>
         <TicketInput
           type="number"
+          min="1000"
           title="티켓 가격"
           description="1000원 이상부터 가능해요"
           descriptionTypo="P_Text_14_M"
           placeholder="0"
           {...register('price', {
             required: true,
+            min: 1000,
           })}
         />
         <TicketInput
           type="number"
+          max="1000"
           title="발행매수"
           description="최대 1000장까지 발행 가능해요"
           descriptionTypo="P_Text_14_M"
           placeholder="0"
-          {...register('issuance', {
+          {...register('supplyCount', {
             required: true,
+            max: 1000,
           })}
         />
       </FlexBox>

@@ -5,7 +5,9 @@ const TicketApi = {
   GET_TICKET_DETAIL: async (
     eventId: string,
   ): Promise<GetTicketDetailResponse> => {
-    const response = await axiosPrivate.get(`events/${eventId}/ticketItems`);
+    const response = await axiosPrivate.get(
+      `events/${eventId}/ticketItems/admin`,
+    );
     return response.data.data;
   },
 
