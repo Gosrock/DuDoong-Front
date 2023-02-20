@@ -32,6 +32,5 @@ const BottomWrapper = styled.div`
 
 const OutletWrapper = styled.div`
   width: 876px;
-  padding: 0 38px;
   margin: 0 auto;
 `;

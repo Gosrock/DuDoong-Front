@@ -4,10 +4,9 @@ import Breadcrumb from './Breadcrumb';
 import AdminHeader from './AdminHeader';
 import AdminMenu from './AdminMenu';
 import AdminBottomButton from './AdminBottomButton';
-import { FlexBox, Spacing } from '@dudoong/ui';
+import { Spacing } from '@dudoong/ui';
 import { useRecoilValue } from 'recoil';
 import { bottomButtonState } from '@store/bottomButton';
-import { css } from '@emotion/react';
 
 interface AdminMenuLayoutProps {
   title: string;
@@ -47,8 +46,6 @@ const LayoutWrapper = styled.div`
 `;
 
 const BottomWrapper = styled.div`
-  width: calc(100vw - 252px);
-  overflow-x: hidden;
   height: 100%;
   padding-left: 252px;
 `;
@@ -58,15 +55,11 @@ interface OutletWrapperProps {
 }
 
 const OutletWrapper = styled.div<OutletWrapperProps>`
-  padding: 0 20px;
+  padding: 0px 6px 0px 20px;
+  overflow-y: scroll;
+  height: ${({ isButtonActive }) =>
+    isButtonActive ? 'calc(100% - 88px)' : '100%'};
 
-  ${({ isButtonActive }) =>
-    isButtonActive &&
-    css`
-      height: calc(100% - 96px);
-    `}
-
-  overflow-x: hidden;
   & > div {
     width: 876px;
     margin: 0 auto;

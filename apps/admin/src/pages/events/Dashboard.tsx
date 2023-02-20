@@ -54,7 +54,7 @@ const Dashboard = () => {
 
   // 이벤트 체크리스트 api
   const { data } = useQuery(
-    ['eventCheckList'],
+    ['eventCheckList', eventId],
     () => EventApi.GET_EVENT_CHECKLIST(eventId),
     {
       onSuccess: (data: EventChecklistResponse) => {

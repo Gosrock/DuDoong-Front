@@ -40,7 +40,7 @@ const EventImage = ({ imageKey, setImageInfo }: EventImageProps) => {
   return (
     <div>
       <ListHeader
-        title={'공연 상세 내용'}
+        title={'공연 포스터'}
         size={'listHeader_18'}
         padding={[32, 0, 12, 0]}
         description={<TitleDescription />}

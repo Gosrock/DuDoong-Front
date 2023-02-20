@@ -86,7 +86,7 @@ const Detail = () => {
   return (
     <>
       <ListHeader
-        title={'호스트 정보'}
+        title={'공연 이미지･상세'}
         size={'listHeader_24'}
         padding={[32, 0, 40, 0]}
       />

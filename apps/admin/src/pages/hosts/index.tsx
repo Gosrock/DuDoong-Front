@@ -12,7 +12,7 @@ import Slack from './Slack';
 const HostsRouter = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
-  const { data } = useQuery(['hostDetail'], () =>
+  const { data } = useQuery(['hostDetail', eventId], () =>
     HostApi.GET_HOST_DETAIL(eventId),
   );
   //TODO: fallback 처리하기

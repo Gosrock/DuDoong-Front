@@ -11,7 +11,7 @@ const HostsEvents = () => {
   const hostId = useLocation().pathname.split('/')[2];
   const { infiniteListElement, isEmpty } =
     useInfiniteQueries<EventProfileResponse>(
-      ['Hostevent'],
+      ['Hostevent', hostId],
       () => HostApi.GET_HOST_EVENTS(hostId),
       EventItem,
     );

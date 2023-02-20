@@ -9,7 +9,7 @@ const NoEventPage = () => {
 
   return (
     <>
-      <Spacing size={166} />
+      <Spacing size={72} />
       <FlexBox align={'center'} direction={'column'}>
         <DudoongOne />
         <Padding size={[24, 124.5, 24, 124.5]}>
