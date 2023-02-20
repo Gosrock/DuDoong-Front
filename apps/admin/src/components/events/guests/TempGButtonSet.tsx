@@ -3,11 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const TempGButtonSet = () => {
   const navigate = useNavigate();
-  return (
-    <>
-      <Button>어드민 이벤트 guests</Button>
-      <Button onClick={() => navigate('/')}>어드민 랜딩</Button>
-    </>
-  );
+  return <></>;
 };
 export default TempGButtonSet;
