@@ -11,11 +11,13 @@ const PaidTicketForm = ({ register, control }: TicketFormProps) => {
         <TicketInput
           type="number"
           title="티켓 가격"
+          min="1000"
           description="1000원 이상부터 가능해요"
           descriptionTypo="P_Text_14_M"
           placeholder="0"
           {...register('price', {
             required: true,
+            min: 1000,
           })}
         />
         <TicketInput
