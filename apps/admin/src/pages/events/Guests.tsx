@@ -1,13 +1,15 @@
-import ApproveWaiting from '@components/events/guests/ApproveWaiting';
-import Confirmed from '@components/events/guests/Confirmed';
-import IssuedTickets from '@components/events/guests/IssuedTickets';
-import { Input, ListHeader, MenuBar, Spacing } from '@dudoong/ui';
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
+import { TableType } from '@components/events/guests/useTableData';
+import GuestTable from '@components/events/guests/GuestTable';
+import { BorderBox, ListHeader, MenuBar, Spacing } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
-const menus = ['예매티켓', '주문 승인대기', '주문 목록'];
+const menus: { title: string; key: TableType }[] = [
+  { title: '예매티켓', key: 'issuedTicket' },
+  { title: '주문 승인대기', key: 'approveWaiting' },
+  { title: '주문 목록', key: 'confirmed' },
+];
 
 const Guests = () => {
   const [menu, setMenu] = useState<number>(0);
@@ -27,19 +29,18 @@ const Guests = () => {
       >
         <>
           <MenuBar
-            menus={menus}
+            menus={menus.map((menu) => menu.title)}
             curActiveMenu={menu}
             setCurActiveMenu={setMenu}
           />
-          <Filter>
+          {/* <Filter>
             <Input width={398} />
-          </Filter>
+          </Filter> */}
+          <GuestTable tableType={menus[menu].key} />
           <Spacing size={20} />
-          {menu === 0 && <IssuedTickets />}
-          {menu === 1 && <ApproveWaiting />}
-          {menu === 2 && <Confirmed />}
         </>
       </BorderBox>
+      <Spacing size={72} />
     </>
   );
 };

@@ -1,4 +1,3 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import {
   FlexBox,
   ListHeader,
@@ -8,6 +7,7 @@ import {
   TimePicker,
   Spacing,
   Button,
+  BorderBox,
 } from '@dudoong/ui';
 import { useInputs } from '@dudoong/utils';
 import styled from '@emotion/styled';

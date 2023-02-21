@@ -1,7 +1,7 @@
 import { Button } from '@dudoong/ui';
 import { useNavigate } from 'react-router-dom';
 
-const TempTButtonSet = ({ eventId }: { eventId: string }) => {
+const NewTicket = ({ eventId }: { eventId: string }) => {
   const navigate = useNavigate();
 
   return (
@@ -16,4 +16,4 @@ const TempTButtonSet = ({ eventId }: { eventId: string }) => {
     </>
   );
 };
-export default TempTButtonSet;
+export default NewTicket;

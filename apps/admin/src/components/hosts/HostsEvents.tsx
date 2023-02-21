@@ -1,5 +1,5 @@
 import EventItem from '@components/home/EventItem';
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
+import { BorderBox } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { EventProfileResponse } from '@lib/apis/event/eventType';

@@ -11,7 +11,7 @@ interface BorderBoxProps extends ComponentProps<'div'> {
 type Props = Partial<BorderBoxProps>;
 type WrapperProps = Pick<BorderBoxProps, 'shadow'>;
 
-const BorderBox = ({
+export const BorderBox = ({
   shadow = false,
   fullWidth = true,
   children,
@@ -19,15 +19,15 @@ const BorderBox = ({
   ...props
 }: Props) => {
   return (
-    <Wrapper shadow={shadow} fill={fullWidth} size={padding} {...props}>
-      <>{children}</>
+    <Wrapper shadow={shadow} {...props}>
+      <Padding fill={fullWidth} size={padding}>
+        {children}
+      </Padding>
     </Wrapper>
   );
 };
 
-export default BorderBox;
-
-const Wrapper = styled(Padding)<WrapperProps>`
+const Wrapper = styled.div<WrapperProps>`
   border-radius: 12px;
   border: 1px solid ${({ theme }) => theme.palette.black};
   background-color: ${({ theme }) => theme.palette.white};

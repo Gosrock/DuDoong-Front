@@ -31,27 +31,28 @@ export interface CreateTicketRequest {
   isQuantityPublic: boolean;
 }
 
-export interface RetrieveIssuedTicketListResponse {
+export interface PageResponseIssuedTicketAdminTableElement {
+  content: IssuedTicketAdminTableElement[];
   page: number;
-  totalPage: number;
-  issuedTickets: RetrieveIssuedTicket[];
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  hasNextPage: boolean;
 }
 
-export interface RetrieveIssuedTicket {
-  issuedTicketInfo: IssuedTicketInfo[];
-  issuedTicketOptionAnswers: IssuedTicketOptionAnswer[];
-}
-
-interface IssuedTicketInfo {
+export interface IssuedTicketAdminTableElement {
   issuedTicketId: number;
   issuedTicketNo: string;
+  orderNo: string;
   uuid: string;
   ticketName: string;
   ticketPrice: string;
   createdAt: string;
+  enteredAt: string;
   issuedTicketStatus: IssuedTicketStatus;
   optionPrice: string;
   userInfo: IssuedTicketUserInfo;
+  issuedTicketOptionAnswers: IssuedTicketOptionAnswer[];
 }
 
 export type IssuedTicketStatus = '입장 완료' | '입장 전' | '취소 티켓';
@@ -59,7 +60,10 @@ export type IssuedTicketStatus = '입장 완료' | '입장 전' | '취소 티켓
 interface IssuedTicketUserInfo {
   userId: number;
   userName: string;
+  email: string;
   phoneNumber: string;
+  profileImage: string;
+  createdAt: string;
 }
 
 export interface IssuedTicketOptionAnswer {

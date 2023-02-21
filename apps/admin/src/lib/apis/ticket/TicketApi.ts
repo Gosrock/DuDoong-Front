@@ -3,7 +3,7 @@ import {
   CreateTicketRequest,
   GetIssuedTicketRequest,
   GetTicketDetailResponse,
-  RetrieveIssuedTicketListResponse,
+  PageResponseIssuedTicketAdminTableElement,
 } from './ticketType';
 
 const TicketApi = {
@@ -48,9 +48,11 @@ const TicketApi = {
     page,
     userName,
     phoneNumber,
-  }: GetIssuedTicketRequest): Promise<RetrieveIssuedTicketListResponse> => {
+  }: GetIssuedTicketRequest): Promise<PageResponseIssuedTicketAdminTableElement> => {
+    const userNameParam = userName ? `&userName=${userName}` : '';
+    const phoneNumberParam = phoneNumber ? `&phoneNumber=${phoneNumber}` : '';
     const response = await axiosPrivate.get(
-      `events/${eventId}/issuedTickets?page=${page}&userName=${userName}&phoneNumber=${phoneNumber}`,
+      `events/${eventId}/issuedTickets?page=${page}${userNameParam}${phoneNumberParam}&size=10`,
     );
     return response.data.data;
   },

@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import { css } from '@emotion/react';
-import { FlexBox, Spacing, Text } from '@dudoong/ui';
+import { BorderBox, FlexBox, Spacing, Text } from '@dudoong/ui';
 
 const MiniBox = ({
   icon,

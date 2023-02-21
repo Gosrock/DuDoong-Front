@@ -1,4 +1,4 @@
-import TempTButtonSet from '@components/events/tickets/tickets/TempTButtonSet';
+import NewTicket from '@components/events/tickets/tickets/NewTicket';
 import TicketList from '@components/events/tickets/tickets/TicketList';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
 import TicketApi from '@lib/apis/ticket/TicketApi';
@@ -33,7 +33,7 @@ const Tickets = () => {
         }
       />
       <Spacing size={36} />
-      <TempTButtonSet eventId={eventId} />
+      <NewTicket eventId={eventId} />
       <Spacing size={72} />
 
       <TicketList ticketItems={data ? data.ticketItems : null} />
