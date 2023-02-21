@@ -11,7 +11,7 @@ const OrderApi = {
     searchType,
     searchString,
     page,
-    size,
+    size = 10,
     eventId,
   }: GetOrdersRequest): Promise<PageResponseOrderAdminTableElement> => {
     const searchTypeParam = searchType ? `&searchType=${searchType}` : '';

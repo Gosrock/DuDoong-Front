@@ -7,10 +7,11 @@ import { TableType, useTableData } from './useTableData';
 import { css } from '@emotion/react';
 import { PageResponseOrderAdminTableElement } from '@lib/apis/order/orderType';
 import { PageResponseIssuedTicketAdminTableElement } from '@lib/apis/ticket/ticketType';
+import { calcMoneyType } from '@dudoong/utils';
 
 const GuestTable = ({ tableType }: { tableType: TableType }) => {
   const eventId = useLocation().pathname.split('/')[2];
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(0);
   const tableMap = useTableData();
   const { data, refetch, isSuccess } = useQuery<
     | PageResponseIssuedTicketAdminTableElement

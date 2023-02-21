@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Breadcrumb from './Breadcrumb';
 import AdminHeader from './AdminHeader';
@@ -7,6 +7,7 @@ import AdminBottomButton from './AdminBottomButton';
 import { Spacing } from '@dudoong/ui';
 import { useRecoilValue } from 'recoil';
 import { bottomButtonState } from '@store/bottomButton';
+import { css } from '@emotion/react';
 
 interface AdminMenuLayoutProps {
   title: string;
@@ -20,12 +21,14 @@ export const AdminMenuLayout = ({
   alliance,
 }: AdminMenuLayoutProps) => {
   const { isActive } = useRecoilValue(bottomButtonState);
+  const fullWidth = useLocation().pathname.split('/')[3] === 'guests';
+  console.log(fullWidth);
   return (
     <LayoutWrapper>
       <AdminHeader host={host} alliance={alliance} />
       <BottomWrapper>
         <AdminMenu title={title} />
-        <OutletWrapper isButtonActive={isActive}>
+        <OutletWrapper isButtonActive={isActive} fullWidth={fullWidth}>
           <div>
             <Breadcrumb />
             <Outlet />
@@ -52,6 +55,7 @@ const BottomWrapper = styled.div`
 
 interface OutletWrapperProps {
   isButtonActive: boolean;
+  fullWidth: boolean;
 }
 
 const OutletWrapper = styled.div<OutletWrapperProps>`
@@ -61,6 +65,27 @@ const OutletWrapper = styled.div<OutletWrapperProps>`
     isButtonActive ? 'calc(100% - 88px)' : '100%'};
 
   & > div {
+    width: ${({ fullWidth }) => (fullWidth ? `100%` : `876px`)};
+    margin: 0 auto;
+
+    @keyframes tableGrow {
+      from {
+        opacity: 0.5;
+        width: 876px;
+      }
+      to {
+        opacity: 1;
+        width: 100%;
+      }
+    }
+    ${({ fullWidth }) =>
+      fullWidth &&
+      css`
+        animation: 0.4s forwards tableGrow ease-in-out;
+      `}
+  }
+
+  & > div > div:nth-of-type(2) {
     width: 876px;
     margin: 0 auto;
   }

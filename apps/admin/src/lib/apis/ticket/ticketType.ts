@@ -76,6 +76,7 @@ export interface IssuedTicketOptionAnswer {
 export interface GetIssuedTicketRequest {
   eventId: string;
   page: number;
+  size?: number;
   userName?: string;
   phoneNumber?: string;
 }

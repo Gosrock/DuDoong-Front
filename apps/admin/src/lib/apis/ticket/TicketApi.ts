@@ -48,11 +48,12 @@ const TicketApi = {
     page,
     userName,
     phoneNumber,
+    size = 10,
   }: GetIssuedTicketRequest): Promise<PageResponseIssuedTicketAdminTableElement> => {
     const userNameParam = userName ? `&userName=${userName}` : '';
     const phoneNumberParam = phoneNumber ? `&phoneNumber=${phoneNumber}` : '';
     const response = await axiosPrivate.get(
-      `events/${eventId}/issuedTickets?page=${page}${userNameParam}${phoneNumberParam}&size=10`,
+      `events/${eventId}/issuedTickets?page=${page}${userNameParam}${phoneNumberParam}&size=${size}`,
     );
     return response.data.data;
   },

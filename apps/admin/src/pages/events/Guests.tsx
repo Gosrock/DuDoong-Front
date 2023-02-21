@@ -15,7 +15,7 @@ const Guests = () => {
   const [menu, setMenu] = useState<number>(0);
   return (
     <>
-      <ListHeader
+      <GuestsHeader
         title={'예매자 관리'}
         description={'공연을 예매한 사람들의 정보를 관리해요.'}
         size={'listHeader_24'}
@@ -25,6 +25,7 @@ const Guests = () => {
         padding={0}
         css={css`
           position: relative;
+          margin: 0 20px;
         `}
       >
         <>
@@ -44,6 +45,12 @@ const Guests = () => {
     </>
   );
 };
+
+const GuestsHeader = styled(ListHeader)`
+  width: 876px;
+  margin: 0 auto;
+`;
+
 const Filter = styled.div`
   position: absolute;
   right: 20px;
