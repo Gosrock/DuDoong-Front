@@ -13,8 +13,6 @@
     "@dudoong/utils": "workspace:shared/utils",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@tanstack/react-query": "^4.24.6",
-    "@tanstack/react-query-devtools": "^4.20.4",
     "@toast-ui/editor": "^3.2.1",
     "@toast-ui/editor-plugin-chart": "^3.0.1",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
