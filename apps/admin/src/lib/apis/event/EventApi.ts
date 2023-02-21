@@ -52,6 +52,11 @@ const EventApi = {
     return response.data.data;
   },
 
+  PATCH_EVENT_DELETE: async (eventId: string): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(`events/${eventId}/delete`);
+    return response.data.data;
+  },
+
   PATCH_EVENT_OPEN: async (eventId: string): Promise<EventResponse> => {
     const response = await axiosPrivate.patch(`events/${eventId}/open`);
     return response.data.data;
