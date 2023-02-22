@@ -78,7 +78,7 @@ const LeftSide = () => {
             title={'공연 이름'}
             size={'listHeader_18'}
           />
-          <Input width={398} disabled={true} value={data?.name || ''}></Input>
+          <Input disabled={true} value={data?.name || ''}></Input>
           <Spacing size={40} />
           <ListHeader
             padding={[32, 0, 12, 0]}
@@ -106,7 +106,7 @@ const LeftSide = () => {
             title={'관람 시간'}
             size={'listHeader_18'}
           />
-          <FlexBox align={'center'}>
+          <DateGrid>
             <Input
               type="number"
               placeholder={data?.runTime ? `${data?.runTime}` : '시:분'}
@@ -114,7 +114,6 @@ const LeftSide = () => {
               onChange={(e) => {
                 setRunTime(Number(e.target.value));
               }}
-              width={160}
               ref={runTimeRef}
               value={String(runTime) || ''}
             />
@@ -125,7 +124,7 @@ const LeftSide = () => {
                 changeRunTimeHandler(0);
               }}
             />
-          </FlexBox>
+          </DateGrid>
         </div>
         <MapPage
           name={data?.name}
@@ -141,6 +140,12 @@ const LeftSide = () => {
 
 const Box = styled.div`
   width: 192px;
+`;
+
+const DateGrid = styled.div`
+  display: grid;
+  grid-template-columns: auto 100px;
+  grid-column-gap: 10px;
 `;
 
 export default LeftSide;

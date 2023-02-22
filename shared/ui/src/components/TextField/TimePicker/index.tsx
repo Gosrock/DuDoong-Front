@@ -45,9 +45,6 @@ export const TimePicker = (props: DatePickerProps) => {
             width={props.width}
             value={String(startTime)}
             rightIcon={<Clock />}
-            css={css`
-              ${theme.typo.P_Text_14_M}
-            `}
           />
         }
       />

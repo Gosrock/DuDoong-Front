@@ -70,11 +70,9 @@ const OutletWrapper = styled.div<OutletWrapperProps>`
 
     @keyframes tableGrow {
       from {
-        opacity: 0.5;
         width: 876px;
       }
       to {
-        opacity: 1;
         width: 100%;
       }
     }
