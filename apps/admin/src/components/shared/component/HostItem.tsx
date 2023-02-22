@@ -28,7 +28,7 @@ const HOST_ITEM_SET: HostItemType = {
 export interface HostItemProps
   extends Pick<
     HostProfileResponse,
-    'hostId' | 'name' | 'introduce' | 'profileImage' | 'role'
+    'hostId' | 'name' | 'introduce' | 'profileImage' | 'role' | 'active'
   > {
   type?: HostItemTypeKey;
   selectedHostId?: number | null;
@@ -45,12 +45,16 @@ const HostItem = ({
       padding={HOST_ITEM_SET[type].padding}
       leftImage={<HostItemImage type={type} imageSrc={props.profileImage} />}
       text={props.name}
-      subText={props.introduce}
+      subText={type === 'lg' ? props.introduce : undefined}
       textTypo={HOST_ITEM_SET[type].typo}
       textColor={['black', 'gray_400']}
+      imageTextGap={type === 'sm' ? 26 : 16}
       rightElement={
-        <Text typo="P_Text_16_SB" color="main_500">
-          {props.role}
+        <Text
+          typo="P_Text_16_SB"
+          color={props.active ? 'main_500' : 'sub_mint'}
+        >
+          {props.active ? props.role : '대기중'}
         </Text>
       }
     />
