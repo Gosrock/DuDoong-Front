@@ -1,10 +1,7 @@
 import BorderBox from '@dudoong/ui/src/layout/BorderBox';
-import { Spacing, ListHeader, FlexBox, Text, Divider } from '@dudoong/ui';
-import { css } from '@emotion/react';
-import { queryClient } from '../../main';
-import { HostDetailResponse, HostUser } from '@lib/apis/host/hostType';
-import { useLocation } from 'react-router-dom';
+import { Spacing, ListHeader, FlexBox, Text } from '@dudoong/ui';
 import HostMembers from '@components/hosts/member/HostMembers';
+import NewMember from '@components/hosts/member/NewMember';
 
 const Member = () => {
   return (
@@ -19,6 +16,7 @@ const Member = () => {
       <Spacing size={20} />
       <BorderBox padding={[36, 55]}>
         <HostMembers />
+        <NewMember />
       </BorderBox>
       <Spacing size={38} />
     </>

@@ -1,11 +1,5 @@
 import { Divider } from '@dudoong/ui';
-import HostItem, { HostItemProps } from '@components/shared/component/HostItem';
-import {
-  HostProfileResponse,
-  HostUser,
-  HostDetailResponse,
-} from '@lib/apis/host/hostType';
-import styled from '@emotion/styled';
+import { HostUser, HostDetailResponse } from '@lib/apis/host/hostType';
 import { useLocation } from 'react-router-dom';
 import { queryClient } from '../../../main';
 import HostMember from './HostMember';
@@ -21,11 +15,12 @@ const HostMembers = () => {
   return hostDetail ? (
     <>
       <HostMember {...hostDetail.masterUser} />
+      <Divider height={28} line padding={5} />
       {hostDetail.hostUsers.map((user: HostUser) => {
         return (
           <div key={user.userId}>
-            <Divider className="host-divider" height={28} line padding={5} />
             <HostMember {...user} />
+            <Divider height={28} line padding={5} />
           </div>
         );
       })}

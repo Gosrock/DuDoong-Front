@@ -16,7 +16,7 @@ const HOST_ITEM_SET: HostItemType = {
   lg: {
     padding: [16, 16],
     imageSize: 60,
-    typo: ['P_Text_18_M', 'P_Text_16_R'],
+    typo: ['G_Header_18_M', 'P_Text_16_R'],
   },
   sm: {
     padding: [5, 5],
