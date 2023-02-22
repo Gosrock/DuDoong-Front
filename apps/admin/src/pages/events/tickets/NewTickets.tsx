@@ -21,6 +21,7 @@ const NewTickets = () => {
   const eventId = pathname.split('/')[2];
   const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
+    eventId,
   ]);
   const { register, handleSubmit, watch, control, formState } = useForm({
     mode: 'onChange',
