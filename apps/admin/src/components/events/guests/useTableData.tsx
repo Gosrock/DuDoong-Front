@@ -64,7 +64,9 @@ const useTableData = () => {
           parseDate(row.createdAt)[1]
         }`,
         issuedTicketStatus: row.issuedTicketStatus,
-        issuedTicketTime: row.enteredAt,
+        issuedTicketTime: row.enteredAt
+          ? `${parseDate(row.enteredAt)[0]} ${parseDate(row.enteredAt)[1]}`
+          : '--',
       };
     });
   };
@@ -196,7 +198,9 @@ const useTableData = () => {
         createdAt: `${parseDate(row.createdAt)[0]} ${
           parseDate(row.createdAt)[1]
         }`,
-        withDraw: row.withDrawAt ? `${row.withDrawAt}` : '--',
+        withDraw: row.withDrawAt
+          ? `${parseDate(row.withDrawAt)[0]} ${parseDate(row.withDrawAt)[1]}`
+          : '--',
         remote: row,
       };
     });
