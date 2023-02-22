@@ -1,8 +1,12 @@
 import NewPerson from '@components/shared/component/NewPerson';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 const NewMember = () => {
+  const { openOverlay } = useGlobalOverlay();
   const newMemberHandler = () => {
-    console.log('뉴멤버');
+    openOverlay({
+      content: 'invitation',
+    });
   };
 
   return <NewPerson type="member" size="sm" onClick={newMemberHandler} />;

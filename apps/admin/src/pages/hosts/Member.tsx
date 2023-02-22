@@ -6,19 +6,17 @@ import NewMember from '@components/hosts/member/NewMember';
 const Member = () => {
   return (
     <>
-      <Spacing size={42} />
       <ListHeader
         size="listHeader_24"
         padding={[32, 0, 20, 0]}
         title={'멤버 관리'}
         description={<SubTitle />}
       />
-      <Spacing size={20} />
       <BorderBox padding={[36, 55]}>
         <HostMembers />
         <NewMember />
       </BorderBox>
-      <Spacing size={38} />
+      <Spacing size={16} />
     </>
   );
 };
