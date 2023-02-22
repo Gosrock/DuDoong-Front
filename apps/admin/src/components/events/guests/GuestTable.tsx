@@ -7,7 +7,6 @@ import { TableType, useTableData } from './useTableData';
 import { css } from '@emotion/react';
 import { PageResponseOrderAdminTableElement } from '@lib/apis/order/orderType';
 import { PageResponseIssuedTicketAdminTableElement } from '@lib/apis/ticket/ticketType';
-import { calcMoneyType } from '@dudoong/utils';
 
 const GuestTable = ({ tableType }: { tableType: TableType }) => {
   const eventId = useLocation().pathname.split('/')[2];
@@ -27,7 +26,6 @@ const GuestTable = ({ tableType }: { tableType: TableType }) => {
           columns={tableMap[tableType].columns}
           dataSource={tableMap[tableType].dataSource(data.content)}
           scroll={{ x: tableMap[tableType].scroll }}
-          pagination={false}
           css={css`
             .ant-table-content {
               overflow: auto visible !important;

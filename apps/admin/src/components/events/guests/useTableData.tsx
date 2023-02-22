@@ -21,19 +21,31 @@ const useTableData = () => {
   const issuedTicketColumns: ColumnsType<unknown> = [
     { title: '티켓 번호', dataIndex: 'ticketNo', key: 'ticketNo', width: 100 },
     { title: '이름', dataIndex: 'userName', key: 'userName', width: 100 },
-    { title: '이메일', dataIndex: 'email', key: 'email' },
-    { title: '전화 번호', dataIndex: 'phoneNumber', key: 'phoneNumber' },
-    { title: '주문 번호', dataIndex: 'orderNo', key: 'orderNo' },
-    { title: '발급 일시', dataIndex: 'createdAt', key: 'createdAt' },
+    { title: '이메일', dataIndex: 'email', key: 'email', width: 270 },
+    {
+      title: '전화 번호',
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
+      width: 150,
+    },
+    { title: '주문 번호', dataIndex: 'orderNo', key: 'orderNo', width: 100 },
+    {
+      title: '발급 일시',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      width: 200,
+    },
     {
       title: '체크인',
       dataIndex: 'issuedTicketStatus',
       key: 'issuedTicketStatus',
+      width: 100,
     },
     {
       title: '체크인 시간',
       dataIndex: 'enteredAt',
       key: 'enteredAt',
+      width: 200,
     },
   ];
 
@@ -62,13 +74,18 @@ const useTableData = () => {
   const approveWaitingColumns: ColumnsType<OrderAdminTableElement> = [
     { title: '주문 번호', dataIndex: 'orderNo', key: 'orderNo', width: 100 },
     { title: '이름', dataIndex: 'userName', key: 'userName', width: 100 },
-    { title: '이메일', dataIndex: 'email', key: 'email' },
-    { title: '전화 번호', dataIndex: 'phoneNumber', key: 'phoneNumber' },
+    { title: '이메일', dataIndex: 'email', key: 'email', width: 270 },
+    {
+      title: '전화 번호',
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
+      width: 150,
+    },
     {
       title: '매수',
       dataIndex: 'totalQuantity',
       key: 'totalQuantity',
-      width: 100,
+      width: 70,
     },
     {
       title: '총 결제금액',
@@ -76,7 +93,12 @@ const useTableData = () => {
       key: 'totalPaymentPrice',
       width: 120,
     },
-    { title: '주문 일시', dataIndex: 'createdAt', key: 'createdAt' },
+    {
+      title: '주문 일시',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      width: 200,
+    },
     {
       title: '',
       dataIndex: 'remote',
@@ -114,14 +136,24 @@ const useTableData = () => {
   const confirmedColumns: ColumnsType<unknown> = [
     { title: '주문 번호', dataIndex: 'orderNo', key: 'orderNo', width: 100 },
     { title: '이름', dataIndex: 'userName', key: 'userName', width: 100 },
-    { title: '이메일', dataIndex: 'email', key: 'email' },
-    { title: '전화 번호', dataIndex: 'phoneNumber', key: 'phoneNumber' },
-    { title: '주문 티켓', dataIndex: 'orderName', key: 'orderName' },
+    { title: '이메일', dataIndex: 'email', key: 'email', width: 270 },
+    {
+      title: '전화 번호',
+      dataIndex: 'phoneNumber',
+      key: 'phoneNumber',
+      width: 150,
+    },
+    {
+      title: '주문 티켓',
+      dataIndex: 'orderName',
+      key: 'orderName',
+      width: 150,
+    },
     {
       title: '매수',
       dataIndex: 'totalQuantity',
       key: 'totalQuantity',
-      width: 100,
+      width: 70,
     },
     {
       title: '총 결제금액',
@@ -129,11 +161,17 @@ const useTableData = () => {
       key: 'totalPaymentPrice',
       width: 120,
     },
-    { title: '주문 일시', dataIndex: 'createdAt', key: 'createdAt' },
+    {
+      title: '주문 일시',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      width: 200,
+    },
     {
       title: '철회/환불',
       dataIndex: 'withDraw',
       key: 'withDraw',
+      width: 200,
     },
     {
       title: '',
@@ -174,7 +212,7 @@ const useTableData = () => {
           eventId,
           page,
         }),
-      scroll: 1200,
+      scroll: 1220,
     },
     approveWaiting: {
       columns: approveWaitingColumns,
@@ -186,7 +224,7 @@ const useTableData = () => {
           page,
           orderStage: 'APPROVE_WAITING',
         }),
-      scroll: 1200,
+      scroll: 1060,
     },
     confirmed: {
       columns: confirmedColumns,
@@ -198,7 +236,7 @@ const useTableData = () => {
           page,
           orderStage: 'CONFIRMED',
         }),
-      scroll: 1500,
+      scroll: 1410,
     },
   };
 

@@ -65,7 +65,7 @@ const OutletWrapper = styled.div<OutletWrapperProps>`
     isButtonActive ? 'calc(100% - 88px)' : '100%'};
 
   & > div {
-    width: ${({ fullWidth }) => (fullWidth ? `100%` : `876px`)};
+    width: 876px;
     margin: 0 auto;
 
     @keyframes tableGrow {
@@ -74,11 +74,16 @@ const OutletWrapper = styled.div<OutletWrapperProps>`
       }
       to {
         width: 100%;
+        max-width: 1200px;
+        min-width: 876px;
       }
     }
     ${({ fullWidth }) =>
       fullWidth &&
       css`
+        width: 100%;
+        max-width: 1200px;
+        min-width: 876px;
         animation: 0.4s forwards tableGrow ease-in-out;
       `}
   }
