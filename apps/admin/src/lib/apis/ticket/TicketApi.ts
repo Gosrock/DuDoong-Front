@@ -46,14 +46,18 @@ const TicketApi = {
   GET_ISSUEDTICKETS: async ({
     eventId,
     page,
-    userName,
-    phoneNumber,
+    searchString,
+    searchType,
     size = 10,
   }: GetIssuedTicketRequest): Promise<PageResponseIssuedTicketAdminTableElement> => {
-    const userNameParam = userName ? `&userName=${userName}` : '';
-    const phoneNumberParam = phoneNumber ? `&phoneNumber=${phoneNumber}` : '';
+    const searchStringParam = searchString
+      ? `&searchString=${encodeURIComponent(searchString)}`
+      : '';
+    const searchTypeParam = searchType
+      ? `&searchType=${encodeURIComponent(searchType)}`
+      : '';
     const response = await axiosPrivate.get(
-      `events/${eventId}/issuedTickets?page=${page}${userNameParam}${phoneNumberParam}&size=${size}`,
+      `events/${eventId}/issuedTickets?page=${page}${searchStringParam}${searchTypeParam}&size=${size}`,
     );
     return response.data.data;
   },

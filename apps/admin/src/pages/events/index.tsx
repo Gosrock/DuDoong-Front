@@ -33,7 +33,7 @@ const EventsRouter = () => {
               <AdminMenuLayout
                 title={data.name || ''}
                 host={data.host.name || ''}
-                alliance={false} //TODO : 값 넣기 고민
+                alliance={data.host.partner}
               />
             }
           >

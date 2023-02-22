@@ -1,6 +1,16 @@
 import { TableType } from '@components/events/guests/useTableData';
 import GuestTable from '@components/events/guests/GuestTable';
-import { BorderBox, ListHeader, MenuBar, Spacing } from '@dudoong/ui';
+import {
+  BorderBox,
+  ChevronDown,
+  Input,
+  ListHeader,
+  MenuBar,
+  Popup,
+  Spacing,
+  TagButton,
+  theme,
+} from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useState } from 'react';
@@ -13,6 +23,7 @@ const menus: { title: string; key: TableType }[] = [
 
 const Guests = () => {
   const [menu, setMenu] = useState<number>(0);
+
   return (
     <>
       <GuestsHeader
@@ -34,9 +45,7 @@ const Guests = () => {
             curActiveMenu={menu}
             setCurActiveMenu={setMenu}
           />
-          {/* <Filter>
-            <Input width={398} />
-          </Filter> */}
+
           <GuestTable tableType={menus[menu].key} />
           <Spacing size={20} />
         </>
@@ -51,9 +60,4 @@ const GuestsHeader = styled(ListHeader)`
   margin: 0 auto;
 `;
 
-const Filter = styled.div`
-  position: absolute;
-  right: 20px;
-  top: 12px;
-`;
 export default Guests;

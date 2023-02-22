@@ -25,6 +25,7 @@ type DropdownOptionsProps = Pick<
  * @param width (size === 'small'일 때) 기본적으로 auto, width 지정하면 fix
  * @param value 외부 state
  * @param setValue 외부 setState
+ * @param renderElement
  */
 function Popup(props: Props) {
   const {

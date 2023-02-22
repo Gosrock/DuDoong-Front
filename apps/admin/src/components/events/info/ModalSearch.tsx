@@ -110,6 +110,7 @@ const ModalSearch = ({
                   <div
                     css={css`
                       height: 300px;
+                      width: 100%;
                       overflow: scroll;
                     `}
                   >

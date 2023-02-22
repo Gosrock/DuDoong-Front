@@ -6,20 +6,71 @@ import styled from '@emotion/styled';
 import { TableType, useTableData } from './useTableData';
 import { PageResponseOrderAdminTableElement } from '@lib/apis/order/orderType';
 import { PageResponseIssuedTicketAdminTableElement } from '@lib/apis/ticket/ticketType';
+import { ChevronDown, Input, Popup, TagButton, theme } from '@dudoong/ui';
+import { css } from '@emotion/react';
+import { useInput } from '@dudoong/utils';
 
 const GuestTable = ({ tableType }: { tableType: TableType }) => {
   const eventId = useLocation().pathname.split('/')[2];
   const [page, setPage] = useState<number>(0);
+  const [searchType, setSearchType] = useState<'NAME' | 'PHONE'>('NAME');
+  const [searchString, onChange, reset] = useInput('');
   const tableMap = useTableData();
-  const { data, isSuccess } = useQuery<
+  const { data, refetch, isSuccess } = useQuery<
     | PageResponseIssuedTicketAdminTableElement
     | PageResponseOrderAdminTableElement
   >(['events', eventId, tableType, page], () =>
-    tableMap[tableType].queryFn(eventId, page),
+    tableMap[tableType].queryFn(eventId, page, searchType, searchString),
   );
 
   return (
     <Wrapper>
+      <Filter>
+        <Popup
+          renderElement={
+            <SearchOptionDropdown>
+              {searchType === 'NAME' ? '이름으로 검색' : '전화번호로 검색'}
+              <ChevronDown width={16} height={16} />
+            </SearchOptionDropdown>
+          }
+          options={[
+            {
+              title: '이름',
+              onClick: () => {
+                setSearchType('NAME');
+              },
+            },
+            {
+              title: '전화번호',
+              onClick: () => {
+                setSearchType('PHONE');
+              },
+            },
+          ]}
+          width={100}
+        />
+        <Input
+          height={36}
+          width={200}
+          placeholder={
+            searchType === 'PHONE' ? 'ex) 010-1234-5678' : '검색어를 입력하세요'
+          }
+          css={css`
+            ${theme.typo.P_Text_14_R}
+          `}
+          value={searchString}
+          onChange={onChange}
+        />
+        <TagButton
+          color="secondary"
+          size="lg"
+          text="검색"
+          onClick={() => {
+            refetch();
+            reset();
+          }}
+        />
+      </Filter>
       {isSuccess ? (
         <Table
           columns={tableMap[tableType].columns}
@@ -75,5 +126,24 @@ const Wrapper = styled.div`
       }
     }
   }
+`;
+
+const Filter = styled.div`
+  position: absolute;
+  right: 30px;
+  top: -45px;
+
+  display: flex;
+  gap: 10px;
+`;
+
+const SearchOptionDropdown = styled.div`
+  ${({ theme }) => theme.typo.P_Text_14_M}
+  color: ${({ theme }) => theme.palette.main_500};
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding-top: 12px;
 `;
 export default GuestTable;

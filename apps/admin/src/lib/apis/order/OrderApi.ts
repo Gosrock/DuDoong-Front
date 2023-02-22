@@ -15,9 +15,14 @@ const OrderApi = {
     size = 10,
     eventId,
   }: GetOrdersRequest): Promise<PageResponseOrderAdminTableElement> => {
-    const searchTypeParam = searchType ? `&searchType=${searchType}` : '';
+    const searchTypeParam = searchType
+      ? `&searchType=${encodeURIComponent(searchType)}`
+      : '';
+    const searchStringParam = searchString
+      ? `&searchString=${encodeURIComponent(searchString)}`
+      : '';
     const response = await axiosPrivate.get(
-      `/events/${eventId}/orders?orderStage=${orderStage}${searchTypeParam}&searchString=${searchString}&page=${page}&size=${size}`,
+      `/events/${eventId}/orders?orderStage=${orderStage}${searchTypeParam}${searchStringParam}&page=${page}&size=${size}`,
     );
     return response.data.data;
   },

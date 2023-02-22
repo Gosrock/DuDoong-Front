@@ -61,7 +61,7 @@ const MapPage = (props: any) => {
 
   const changeEventHandler = () => {
     if (curMarker.position.lng && curMarker.position.lat) {
-      const payload = {
+      const payload: BasicEventRequest = {
         name: props.name,
         startAt: timeFormatter(props.startDate, props.startTime),
         runTime: props.runtime,
@@ -69,7 +69,7 @@ const MapPage = (props: any) => {
         placeAddress: curMarker.placeAddress,
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
-      } as BasicEventRequest;
+      };
       console.log(payload);
       changeEventMutation.mutate(payload);
     }

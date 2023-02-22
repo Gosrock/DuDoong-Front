@@ -77,6 +77,6 @@ export interface GetIssuedTicketRequest {
   eventId: string;
   page: number;
   size?: number;
-  userName?: string;
-  phoneNumber?: string;
+  searchType?: 'PHONE' | 'NAME';
+  searchString?: string;
 }

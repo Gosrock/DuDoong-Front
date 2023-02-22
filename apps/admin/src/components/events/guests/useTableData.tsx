@@ -208,10 +208,17 @@ const useTableData = () => {
       columns: issuedTicketColumns,
       dataSource: (arg: IssuedTicketAdminTableElement[]) =>
         generateIssuedTicketTableSource(arg),
-      queryFn: (eventId: string, page: number) =>
+      queryFn: (
+        eventId: string,
+        page: number,
+        searchType?: 'PHONE' | 'NAME',
+        searchString?: string,
+      ) =>
         TicketApi.GET_ISSUEDTICKETS({
           eventId,
           page,
+          searchType: searchString ? searchType : undefined,
+          searchString,
         }),
       scroll: 1220,
     },
@@ -219,11 +226,18 @@ const useTableData = () => {
       columns: approveWaitingColumns,
       dataSource: (arg: OrderAdminTableElement[]) =>
         generateApproveWaitingTableSource(arg),
-      queryFn: (eventId: string, page: number) =>
+      queryFn: (
+        eventId: string,
+        page: number,
+        searchType?: 'PHONE' | 'NAME',
+        searchString?: string,
+      ) =>
         OrderApi.GET_ORDERS({
           eventId,
           page,
           orderStage: 'APPROVE_WAITING',
+          searchType: searchString ? searchType : undefined,
+          searchString,
         }),
       scroll: 1060,
     },
@@ -231,11 +245,18 @@ const useTableData = () => {
       columns: confirmedColumns,
       dataSource: (arg: OrderAdminTableElement[]) =>
         generateConfirmedTableSource(arg),
-      queryFn: (eventId: string, page: number) =>
+      queryFn: (
+        eventId: string,
+        page: number,
+        searchType?: 'PHONE' | 'NAME',
+        searchString?: string,
+      ) =>
         OrderApi.GET_ORDERS({
           eventId,
           page,
           orderStage: 'CONFIRMED',
+          searchType: searchString ? searchType : undefined,
+          searchString,
         }),
       scroll: 1410,
     },
