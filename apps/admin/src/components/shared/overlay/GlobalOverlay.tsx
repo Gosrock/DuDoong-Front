@@ -10,6 +10,7 @@ import PaidTicket from './content/PaidTicket';
 import Pay from './content/Pay';
 import PostEvent from './content/PostEvent';
 import Register from './content/Register';
+import Saved from './content/Saved';
 import SaveTicket from './content/SaveTicket';
 
 export type GlobalSheetContentKey =
@@ -20,6 +21,7 @@ export type GlobalSheetContentKey =
   | 'paidTicket'
   | 'approve'
   | 'saveTicket'
+  | 'saved'
   | 'invitation';
 
 export type GlobalSheetContentType = {
@@ -34,6 +36,7 @@ const globalSheetContent = {
   paidTicket: PaidTicket,
   approve: Approve,
   saveTicket: SaveTicket,
+  saved: Saved,
   invitation: Invitation,
 };
 
