@@ -1,6 +1,7 @@
 import { axiosPrivate } from '../axios';
 import {
   GetOrdersRequest,
+  OrderResponse,
   PageResponseOrderAdminTableElement,
   PatchOrderApproveRequest,
 } from './orderType';
@@ -27,6 +28,16 @@ const OrderApi = {
   }: PatchOrderApproveRequest) => {
     const response = await axiosPrivate.post(
       `/events/${eventId}/orders/${order_uuid}/approve`,
+    );
+    return response.data.data;
+  },
+
+  GET_ORDER_DETAIL: async ({
+    eventId,
+    order_uuid,
+  }: PatchOrderApproveRequest): Promise<OrderResponse> => {
+    const response = await axiosPrivate.get(
+      `/events/${eventId}/orders/${order_uuid}`,
     );
     return response.data.data;
   },

@@ -5,7 +5,6 @@ import { parseDate } from '@dudoong/utils';
 import TableOption from './TableOption';
 import TicketApi from '@lib/apis/ticket/TicketApi';
 import OrderApi from '@lib/apis/order/OrderApi';
-import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 export type TableType = 'issuedTicket' | 'approveWaiting' | 'confirmed';
 
@@ -17,7 +16,6 @@ interface TableMapValue {
 }
 
 const useTableData = () => {
-  const { openOverlay } = useGlobalOverlay();
   const issuedTicketColumns: ColumnsType<unknown> = [
     { title: '티켓 번호', dataIndex: 'ticketNo', key: 'ticketNo', width: 100 },
     { title: '이름', dataIndex: 'userName', key: 'userName', width: 100 },
@@ -115,7 +113,6 @@ const useTableData = () => {
   const generateApproveWaitingTableSource = (
     data: OrderAdminTableElement[],
   ) => {
-    console.log(data);
     return data.map((row) => {
       return {
         key: row.orderNo,

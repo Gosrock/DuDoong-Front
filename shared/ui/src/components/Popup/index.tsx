@@ -141,10 +141,12 @@ const DropdownTable = styled.div<{ size: DropdownSize }>`
   }
 
   &:first-of-type {
-    border-radius: 8px 8px 0 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   &:last-of-type {
-    border-radius: 0 0 8px 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 `;
 

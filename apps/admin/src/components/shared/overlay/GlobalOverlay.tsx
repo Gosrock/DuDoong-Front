@@ -10,6 +10,7 @@ import Pay from './content/Pay';
 import PostEvent from './content/PostEvent';
 import Register from './content/Register';
 import SaveTicket from './content/SaveTicket';
+import TableViewDetail from './content/TableDetailView';
 
 export type GlobalSheetContentKey =
   | 'register'
@@ -18,7 +19,8 @@ export type GlobalSheetContentKey =
   | 'pay'
   | 'paidTicket'
   | 'approve'
-  | 'saveTicket';
+  | 'saveTicket'
+  | 'tableViewDetail';
 
 export type GlobalSheetContentType = {
   [key in GlobalSheetContentKey]: ReactNode;
@@ -32,6 +34,7 @@ const globalSheetContent = {
   paidTicket: PaidTicket,
   approve: Approve,
   saveTicket: SaveTicket,
+  tableViewDetail: TableViewDetail,
 };
 
 const GlobalOverlay = () => {

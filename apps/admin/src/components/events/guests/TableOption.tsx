@@ -5,6 +5,7 @@ import type { OrderAdminTableElement } from '@lib/apis/order/orderType';
 import { TableType } from './useTableData';
 import useGuestMutation from './useGuestMutation';
 import { useLocation } from 'react-router-dom';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 const TableOption = ({
   data,
@@ -15,6 +16,7 @@ const TableOption = ({
 }) => {
   const eventId = useLocation().pathname.split('/')[2];
   const { mutate } = useGuestMutation();
+  const { openOverlay } = useGlobalOverlay();
   const approveWaitingOptions = [
     {
       title: '승인하기',
@@ -26,7 +28,10 @@ const TableOption = ({
     {
       title: '자세히 보기',
       onClick: () => {
-        console.log('자세히 보기');
+        openOverlay({
+          content: 'tableViewDetail',
+          props: { eventId, order_uuid: data.orderUuid },
+        });
       },
     },
   ];
@@ -34,7 +39,10 @@ const TableOption = ({
     {
       title: '자세히 보기',
       onClick: () => {
-        console.log('자세히 보기');
+        openOverlay({
+          content: 'tableViewDetail',
+          props: { eventId, order_uuid: data.orderUuid },
+        });
       },
     },
   ];
