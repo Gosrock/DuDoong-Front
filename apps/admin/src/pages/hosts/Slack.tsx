@@ -51,6 +51,7 @@ const Slack = () => {
           css={css`
             width: 530px;
           `}
+          gap={10}
         >
           <Input
             name="slackUrl"

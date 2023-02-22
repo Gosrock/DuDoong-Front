@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Breadcrumb from './Breadcrumb';
 import AdminHeader from './AdminHeader';
@@ -21,12 +21,14 @@ export const AdminMenuLayout = ({
   alliance,
 }: AdminMenuLayoutProps) => {
   const { isActive } = useRecoilValue(bottomButtonState);
+  const fullWidth = useLocation().pathname.split('/')[3] === 'guests';
+  console.log(fullWidth);
   return (
     <LayoutWrapper>
       <AdminHeader host={host} alliance={alliance} />
       <BottomWrapper>
         <AdminMenu title={title} />
-        <OutletWrapper isButtonActive={isActive}>
+        <OutletWrapper isButtonActive={isActive} fullWidth={fullWidth}>
           <div>
             <Breadcrumb />
             <Outlet />
@@ -53,6 +55,7 @@ const BottomWrapper = styled.div`
 
 interface OutletWrapperProps {
   isButtonActive: boolean;
+  fullWidth: boolean;
 }
 
 const wrapperSize = keyframes`
@@ -75,6 +78,30 @@ const OutletWrapper = styled.div<OutletWrapperProps>`
       animation: ${wrapperSize} 0.4s ease-out;
     `}
   & > div {
+    width: 876px;
+    margin: 0 auto;
+
+    @keyframes tableGrow {
+      from {
+        width: 876px;
+      }
+      to {
+        width: 100%;
+        max-width: 1200px;
+        min-width: 876px;
+      }
+    }
+    ${({ fullWidth }) =>
+      fullWidth &&
+      css`
+        width: 100%;
+        max-width: 1200px;
+        min-width: 876px;
+        animation: 0.4s forwards tableGrow ease-in-out;
+      `}
+  }
+
+  & > div > div:nth-of-type(2) {
     width: 876px;
     margin: 0 auto;
   }

@@ -12,6 +12,7 @@ import PostEvent from './content/PostEvent';
 import Register from './content/Register';
 import Saved from './content/Saved';
 import SaveTicket from './content/SaveTicket';
+import TableViewDetail from './content/TableDetailView';
 
 export type GlobalSheetContentKey =
   | 'register'
@@ -21,6 +22,7 @@ export type GlobalSheetContentKey =
   | 'paidTicket'
   | 'approve'
   | 'saveTicket'
+  | 'tableViewDetail'
   | 'saved'
   | 'invitation';
 
@@ -36,6 +38,7 @@ const globalSheetContent = {
   paidTicket: PaidTicket,
   approve: Approve,
   saveTicket: SaveTicket,
+  tableViewDetail: TableViewDetail,
   saved: Saved,
   invitation: Invitation,
 };

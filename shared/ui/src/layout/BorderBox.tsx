@@ -1,17 +1,17 @@
 import { Padding, PaddingSize } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { HTMLAttributes } from 'react';
-interface BorderBoxProps extends HTMLAttributes<HTMLDivElement> {
+import { ComponentProps } from 'react';
+interface BorderBoxProps extends ComponentProps<'div'> {
   shadow: boolean;
   fullWidth: boolean;
   padding: PaddingSize;
 }
 
 type Props = Partial<BorderBoxProps>;
-type WrapperProps = Pick<BorderBoxProps, 'shadow' | 'fullWidth'>;
+type WrapperProps = Pick<BorderBoxProps, 'shadow'>;
 
-const BorderBox = ({
+export const BorderBox = ({
   shadow = false,
   fullWidth = true,
   children,
@@ -19,13 +19,13 @@ const BorderBox = ({
   ...props
 }: Props) => {
   return (
-    <Wrapper shadow={shadow} fullWidth={fullWidth} {...props}>
-      <Padding size={padding}>{children}</Padding>
+    <Wrapper shadow={shadow} {...props}>
+      <Padding fill={fullWidth} size={padding}>
+        {children}
+      </Padding>
     </Wrapper>
   );
 };
-
-export default BorderBox;
 
 const Wrapper = styled.div<WrapperProps>`
   border-radius: 12px;

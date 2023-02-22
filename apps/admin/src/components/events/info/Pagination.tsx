@@ -4,36 +4,34 @@ import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 
 const Pagination = (pagination: any) => {
-  const [cur, setCu] = useState<number>(1);
+  const [current, setCurrent] = useState<number>(1);
   const setChange = (num: number) => {
     pagination.pagination.gotoPage(num);
-    setCu(num);
+    setCurrent(num);
   };
 
   const arr = [];
   for (let i = 0; i < pagination.pagination.last; i++) {
     arr.push(i + 1);
   }
-  console.log(arr);
   useEffect(() => {
-    setCu(pagination.pagination.current);
+    setCurrent(pagination.pagination.current);
   }, [pagination.pagination.current]);
 
-  console.log(cur);
   return (
     <>
-      <Spacing size={56} />
-      <FlexBox align={'center'} gap={50}>
+      <Spacing size={32} />
+      <FlexBox align={'center'} gap={30}>
         <button onClick={() => pagination.pagination.prevPage()}>
           <Left />
         </button>
         {arr.map((num) => (
           <>
-            <Mini cur={cur} num={num}>
+            <Mini cur={current} num={num}>
               <button onClick={() => setChange(num)}>
                 <Text
                   typo={'P_Text_16_M'}
-                  color={cur === num ? 'white' : 'black'}
+                  color={current === num ? 'white' : 'black'}
                 >
                   {num}
                 </Text>
@@ -56,6 +54,7 @@ const Mini = styled.div<any>`
   display: flex;
   background-color: ${(props) =>
     props.cur === props.num ? '#6b36dc' : 'white'};
+  border-radius: 4px;
   justify-content: center;
   align-items: center;
 `;

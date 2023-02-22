@@ -1,14 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { ComponentProps } from 'react';
 import Loading from '../../assets/icons/Loading';
 
-export interface LoaderProps {
+export interface LoaderProps extends ComponentProps<'div'> {
   size?: number;
 }
 
-export const Spinner = ({ size = 18 }: LoaderProps) => {
+export const Spinner = ({ size = 18, ...props }: LoaderProps) => {
   return (
-    <div css={{ width: `${size}px`, height: `${size}px`, margin: '0 auto' }}>
+    <div
+      css={{ width: `${size}px`, height: `${size}px`, margin: '0 auto' }}
+      {...props}
+    >
       <Loading
         css={css`
           width: ${size}px;

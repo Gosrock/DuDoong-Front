@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { FlexBox, Text } from '@dudoong/ui';
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
+import { BorderBox, FlexBox, Text } from '@dudoong/ui';
 
 const TotalBox = ({ total }: { total: string }) => {
   return (

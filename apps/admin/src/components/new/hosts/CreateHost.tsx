@@ -1,5 +1,11 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
-import { ListHeader, Input, Spacing, Button, FlexBox } from '@dudoong/ui';
+import {
+  ListHeader,
+  Input,
+  Spacing,
+  Button,
+  FlexBox,
+  BorderBox,
+} from '@dudoong/ui';
 import { useMutation } from '@tanstack/react-query';
 import type { CreateHostRequest } from '@lib/apis/host/hostType';
 import { HostContactDes } from '@components/hosts/HostDescription';

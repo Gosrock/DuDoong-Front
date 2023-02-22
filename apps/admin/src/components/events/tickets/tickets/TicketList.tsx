@@ -48,7 +48,7 @@ export default TicketList;
 const Wrapper = styled.div`
   width: 876px;
   height: auto;
-
+  box-sizing: border-box;
   background-color: ${theme.palette.white};
   border-radius: 12px;
   border: 1px solid ${theme.palette.black};

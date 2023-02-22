@@ -49,9 +49,6 @@ export const DatePicker = (props: DatePickerProps) => {
             width={props.width}
             value={String(startDate)}
             rightIcon={<Calendar />}
-            css={css`
-              ${theme.typo.P_Text_14_M}
-            `}
           />
         }
       />

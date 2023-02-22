@@ -2109,7 +2109,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dudoong/utils@workspace:shared/utils"
   dependencies:
-    "@tanstack/react-query": ^4.24.6
     "@types/cookie": ^0
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
@@ -5011,41 +5010,41 @@ __metadata:
   linkType: hard
 
 "@tanstack/match-sorter-utils@npm:^8.7.0":
-  version: 8.7.2
-  resolution: "@tanstack/match-sorter-utils@npm:8.7.2"
+  version: 8.7.6
+  resolution: "@tanstack/match-sorter-utils@npm:8.7.6"
   dependencies:
     remove-accents: 0.4.2
-  checksum: 0821430d7de76911481b5300f4812f7cfefb804bf2f23fb1bab45e66c273379f0c919785ca1aecd8614b72d9e5e0e0edf9f449cbbb87dd91166d77ca285351f6
+  checksum: 3f3dda277e6e55ca1224a28b38a2deb3ac912c2f2f5263a32fa0d9126c6b6d05feb475539729fd248f1eb88b612109db90b847ec8fdfc05d0f4073c900a2d3f6
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.24.6":
-  version: 4.24.6
-  resolution: "@tanstack/query-core@npm:4.24.6"
-  checksum: 495dff04f27d72174051f97676fce0fbe322bca966edb7f174f0005a3363ac0300c31eb06255dafa7ee519a430840542379f5ec9f6846903b6bb878e46c33656
+"@tanstack/query-core@npm:4.24.9":
+  version: 4.24.9
+  resolution: "@tanstack/query-core@npm:4.24.9"
+  checksum: 7b84e960d82c046c9eef6083cbc13b21c2ed8552fe8a5f092a66ca2586af66b770ca71ad838135ef49ac8b990e5f85d34a1d8b8de13fffb3abb0fb780a64a532
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:^4.20.4":
-  version: 4.20.4
-  resolution: "@tanstack/react-query-devtools@npm:4.20.4"
+"@tanstack/react-query-devtools@npm:^4.24.9":
+  version: 4.24.9
+  resolution: "@tanstack/react-query-devtools@npm:4.24.9"
   dependencies:
     "@tanstack/match-sorter-utils": ^8.7.0
     superjson: ^1.10.0
     use-sync-external-store: ^1.2.0
   peerDependencies:
-    "@tanstack/react-query": 4.20.4
+    "@tanstack/react-query": 4.24.9
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 77f55b3f7794ee95284969f4f5dfc8f81a856f31d9fa76343059e9580cb6099841cc63a540c6cdcc841be2c2249affdf49e1ad247f2c150472f856f2ecda9056
+  checksum: ec528c7b0f8e5bb24ed52d442111bb5c0f7a5090320ba580ac61fee42e6e6d87c8c25acaeb2f6305d7ca76bdb030c2b5961b72aa4ea06e0bed7356de0885f2bd
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^4.24.6":
-  version: 4.24.6
-  resolution: "@tanstack/react-query@npm:4.24.6"
+"@tanstack/react-query@npm:^4.24.9":
+  version: 4.24.9
+  resolution: "@tanstack/react-query@npm:4.24.9"
   dependencies:
-    "@tanstack/query-core": 4.24.6
+    "@tanstack/query-core": 4.24.9
     use-sync-external-store: ^1.2.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -5056,7 +5055,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 250bc2cba8dd7da61680a8e360fac87ee057d079ee3be950c76dbc063f941119817634857c1cb0d9b12042dd5d4fbe847c02af5dfb89ae8daa0f9339f87ad605
+  checksum: 409c945c5043d11fa2f3c219254df5b0505bdf7d9dc94821f5db495d87a38fe27e0a373144446cef42fc829d1449a64e3fa873adf37e8abe15562e5832d59516
   languageName: node
   linkType: hard
 
@@ -6278,8 +6277,6 @@ __metadata:
     "@dudoong/utils": "workspace:shared/utils"
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
-    "@tanstack/react-query": ^4.24.6
-    "@tanstack/react-query-devtools": ^4.20.4
     "@toast-ui/editor": ^3.2.1
     "@toast-ui/editor-plugin-chart": ^3.0.1
     "@toast-ui/editor-plugin-code-syntax-highlight": ^3.1.0
@@ -9300,6 +9297,8 @@ __metadata:
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
+    "@tanstack/react-query": ^4.24.9
+    "@tanstack/react-query-devtools": ^4.24.9
     "@types/eslint": ^8
     "@types/node": ^18.11.16
     "@types/react": ^18.0.26
@@ -19830,11 +19829,11 @@ __metadata:
   linkType: hard
 
 "superjson@npm:^1.10.0":
-  version: 1.12.1
-  resolution: "superjson@npm:1.12.1"
+  version: 1.12.2
+  resolution: "superjson@npm:1.12.2"
   dependencies:
     copy-anything: ^3.0.2
-  checksum: d69badde9892bd2acfb6a2c37f233b7018b64fe88357568a7ab480547d6755ac1ed33a8d438d7ca856178312f5367574de180774d558bc0b75d1439efdfc53ba
+  checksum: cf7735e172811ed87476a7c2f1bb0e83725a0e3c2d7a50a71303a973060b3c710288767fb767a7a7eee8e5625d3ccaee1176a93e27f43841627512c15c4cdf84
   languageName: node
   linkType: hard
 
@@ -20196,8 +20195,6 @@ __metadata:
     "@emotion/styled": ^11.10.5
     "@next/font": 13.0.7
     "@svgr/webpack": ^6.5.1
-    "@tanstack/react-query": ^4.24.6
-    "@tanstack/react-query-devtools": ^4.20.4
     "@toast-ui/react-editor": ^3.2.2
     "@tosspayments/payment-widget-sdk": ^0.5.2
     "@types/node": 18.11.16

@@ -33,5 +33,5 @@ const InputStyle = css`
   color: ${theme.palette.black};
   margin-top: 16px;
   box-sizing: border-box;
-  width: 806px;
+  width: 100%;
 `;
