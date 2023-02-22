@@ -31,22 +31,22 @@ const Dashboard = () => {
   // 이벤트 디테일 api
   const eventDetail = queryClient.getQueryData([
     'eventDetail',
+    eventId,
   ]) as EventDetailResponse;
 
   // 이벤트 등록 api
   const patchEventOpenMutation = useMutation(EventApi.PATCH_EVENT_OPEN, {
     onSuccess: (data: EventResponse) => {
       console.log('PATCH_EVENT_OPEN : ', data);
-      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
     },
   });
 
   // 이벤트 삭제 api
-  const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_STATUS, {
+  const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_DELETE, {
     onSuccess: (data: EventResponse) => {
-      console.log('PATCH_EVENT_Delete : ', data);
-      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      console.log('PATCH_EVENT_DELETE : ', data);
       closeOverlay();
       navigate('/');
     },
@@ -68,10 +68,7 @@ const Dashboard = () => {
   };
 
   const eventDeleteHandler = () => {
-    patchEventDeleteMutation.mutate({
-      eventId: eventId,
-      payload: { status: '지난공연' }, //TODO 공연삭제시??? 일단 임시로 박아놓음
-    });
+    patchEventDeleteMutation.mutate(eventId);
   };
 
   const eventPayHandler = () => {
@@ -89,8 +86,7 @@ const Dashboard = () => {
               eventDeleteHandler: eventDeleteHandler,
             },
           }),
-        firstDisable:
-          eventDetail && eventDetail.status === '지난공연' ? true : false,
+        firstDisable: false,
         secondHandler: () =>
           openOverlay({
             content: 'postEvent',
@@ -111,7 +107,9 @@ const Dashboard = () => {
             },
           }),
         firstDisable:
-          eventDetail && eventDetail.status === '지난공연' ? true : false,
+          eventDetail && eventDetail.status === ('진행중' || '정산중')
+            ? true
+            : false,
       });
       changeButtonType('deleteEvent');
     } else if (buttonType === 'pay') {
