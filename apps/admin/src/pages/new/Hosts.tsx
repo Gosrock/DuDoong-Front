@@ -1,4 +1,4 @@
-import CreateHost from '@components/hosts/CreateHost';
+import CreateHost from '@components/new/hosts/CreateHost';
 import { ListHeader, Spacing } from '@dudoong/ui';
 
 const Hosts = () => {

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { theme } from '../../../theme';
@@ -16,7 +16,13 @@ import { css } from '@emotion/react';
  */
 
 export const TimePicker = (props: DatePickerProps) => {
-  const [startTime, setStartTime] = useState();
+  const curTime = props.initialValue ? props.initialValue : null;
+  const [startTime, setStartTime] = useState<Date | null>(curTime);
+
+  useEffect(() => {
+    console.log(curTime);
+    setStartTime(curTime);
+  }, [curTime]);
 
   useEffect(() => {
     props.onChange(startTime);
@@ -37,7 +43,7 @@ export const TimePicker = (props: DatePickerProps) => {
         customInput={
           <Input
             width={props.width}
-            value={startTime}
+            value={String(startTime)}
             rightIcon={<Clock />}
             css={css`
               ${theme.typo.P_Text_14_M}

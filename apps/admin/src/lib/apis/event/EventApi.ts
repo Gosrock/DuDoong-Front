@@ -12,6 +12,7 @@ import type {
   imageFileExtensionType,
   ImageUrlResponse,
   UpdateEventDetailRequest,
+  BasicEventRequest,
 } from './eventType';
 
 const EventApi = {
@@ -92,6 +93,16 @@ const EventApi = {
   }): Promise<EventResponse> => {
     const response = await axiosPrivate.patch(
       `/events/${eventId}/details`,
+      payload,
+    );
+    return response.data.data;
+  },
+  PATCH_EVENT_BASIC: async (
+    payload: BasicEventRequest,
+    eventId: string,
+  ): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(
+      `events/${eventId}/basic`,
       payload,
     );
     return response.data.data;

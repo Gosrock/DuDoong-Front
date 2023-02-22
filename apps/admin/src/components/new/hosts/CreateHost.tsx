@@ -2,7 +2,7 @@ import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import { ListHeader, Input, Spacing, Button, FlexBox } from '@dudoong/ui';
 import { useMutation } from '@tanstack/react-query';
 import type { CreateHostRequest } from '@lib/apis/host/hostType';
-import { HostContactDes } from './HostDescription';
+import { HostContactDes } from '@components/hosts/HostDescription';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useInputs } from '@dudoong/utils';
 import HostApi from '@lib/apis/host/HostApi';
