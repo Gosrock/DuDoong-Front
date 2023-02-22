@@ -4,10 +4,12 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { Plus, Dash } from 'react-bootstrap-icons';
 import { theme } from '../../theme';
+
 export interface CounterProps {
   count: number;
   width?: number;
   hegiht?: number;
+  limit?: number;
   onClickPlus: () => void;
   onClickMinus: () => void;
 }
@@ -16,22 +18,30 @@ export const Counter = ({
   count = 1,
   width,
   hegiht,
+  limit = 10000,
   onClickPlus,
   onClickMinus,
 }: CounterProps) => {
   const [ticketNum, setTicketNum] = useState<number>(count);
   const handlePlusClick = () => {
-    setTicketNum(ticketNum + 1);
-    onClickPlus();
+    if (ticketNum < limit) {
+      setTicketNum(ticketNum + 1);
+      onClickPlus();
+    }
   };
   const handleMinusClick = () => {
-    if (ticketNum === 1) return;
+    if (ticketNum === 0) return;
     setTicketNum(ticketNum - 1);
     onClickMinus();
   };
   return (
-    <CounterWrapper width={width} height={hegiht}>
-      <ImgWrapper onClick={handleMinusClick}>
+    <CounterWrapper
+      width={width}
+      height={hegiht}
+      count={ticketNum}
+      limit={limit}
+    >
+      <ImgWrapper count={ticketNum} limit={limit} onClick={handleMinusClick}>
         <Dash
           css={{
             width: '24px',
@@ -44,7 +54,7 @@ export const Counter = ({
       <Text typo={'Text_18'} color={'gray_500'}>
         {ticketNum}
       </Text>
-      <ImgWrapper onClick={handlePlusClick}>
+      <ImgWrapper count={ticketNum} limit={limit} onClick={handlePlusClick}>
         <Plus
           css={{
             width: '24px',
@@ -58,18 +68,27 @@ export const Counter = ({
   );
 };
 
-const ImgWrapper = styled.div`
+const ImgWrapper = styled.div<{
+  count: number;
+  limit: number;
+}>`
   padding: 0 4px;
-  cursor: pointer;
+  cursor: ${({ count, limit }) => (count >= limit ? `default` : `pointer`)};
 `;
+
 const CounterWrapper = styled.div<{
   width?: number;
   height?: number;
+  count: number;
+  limit: number;
 }>`
   box-sizing: border-box;
-  border: 1px solid ${({ theme }) => theme.palette.gray_400};
+  border: 1px solid ${({ theme }) => theme.palette.gray_500};
   border-radius: 18px;
-
+  background-color: ${({ count, limit, theme }) =>
+    count >= limit || count === 0
+      ? theme.palette.gray_300
+      : theme.palette.white};
   height: ${({ height }) => (height ? `${height}px` : `36px`)};
   width: ${({ width }) => (width ? `${width}px` : '93px')};
 
