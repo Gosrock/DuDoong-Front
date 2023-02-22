@@ -45,7 +45,13 @@ const Slack = () => {
       <Spacing size={16} />
 
       <form onSubmit={handleSlack}>
-        <FlexBox align={'flex-start'} justify={'flex-start'} gap={20}>
+        <FlexBox
+          align={'flex-start'}
+          justify={'space-evenly'}
+          css={css`
+            width: 530px;
+          `}
+        >
           <Input
             name="slackUrl"
             onChange={onChange}

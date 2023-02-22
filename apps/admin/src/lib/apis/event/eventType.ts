@@ -16,7 +16,7 @@ export interface EventProfileResponse {
 export interface EventDetailResponse {
   name: string;
   startAt: string;
-  runtime: number;
+  runTime: number;
   status: EventStatus;
   host: HostInfo;
   place: EventPlace;
@@ -116,6 +116,18 @@ export interface EventResponse {
     placeAddress: string;
   };
 }
+
+export interface BasicEventRequest {
+  name: string;
+  startAt: string;
+  runTime: number;
+  placeName: string;
+  placeAddress: string;
+  longitude: number;
+  latitude: number;
+}
+
+type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
 
 export interface UpdateEventStatusRequest {
   status: EventStatus;
