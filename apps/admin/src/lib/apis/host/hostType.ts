@@ -53,6 +53,7 @@ export interface HostUser {
   profileImage: string;
   createdAt: string;
   role: RoleType;
+  active: boolean;
 }
 
 export interface UpdateHostRequest {
