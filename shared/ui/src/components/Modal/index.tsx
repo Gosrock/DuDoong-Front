@@ -41,7 +41,7 @@ const Wrapper = styled.div<{ open: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +65,7 @@ const ModalBox = styled(Padding)`
   border-radius: 16px;
   background-color: ${({ theme }) => theme.palette.white};
   animation: 0.15s forwards grow ease-out;
-  z-index: 10;
+  z-index: 101;
   /* width: 390px; */
   border: 1px solid black;
 `;

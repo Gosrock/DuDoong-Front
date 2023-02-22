@@ -15,6 +15,7 @@ import type {
 import { queryClient } from '../../main';
 import EventImage from '@components/events/detail/EventImage';
 import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 const Detail = () => {
   const eventId = useLocation().pathname.split('/')[2];
@@ -26,6 +27,7 @@ const Detail = () => {
     posterImageKey: '',
     content: '',
   });
+  const { openOverlay } = useGlobalOverlay();
 
   const { setButtonInfo } = useBottomButton({
     type: 'save',
@@ -72,6 +74,9 @@ const Detail = () => {
     patchEventDetailMutation.mutate({
       eventId: eventId,
       payload: { ...form, posterImageKey: imageInfo.key },
+    });
+    openOverlay({
+      content: 'saved',
     });
   };
 
