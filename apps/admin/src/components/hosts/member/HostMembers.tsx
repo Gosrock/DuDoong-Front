@@ -7,10 +7,10 @@ import HostMember from './HostMember';
 const HostMembers = () => {
   const hostId = useLocation().pathname.split('/')[2];
   // 호스트 디테일 api
-  const hostDetail = queryClient.getQueryData([
+  const hostDetail = queryClient.getQueryData<HostDetailResponse>([
     'hostDetail',
     hostId,
-  ]) as HostDetailResponse;
+  ]);
 
   return hostDetail ? (
     <>

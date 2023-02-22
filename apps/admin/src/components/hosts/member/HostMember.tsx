@@ -3,16 +3,17 @@ import HostItem from '@components/shared/component/HostItem';
 import styled from '@emotion/styled';
 
 const HostMember = (props: HostUser) => {
+  const { userId, userName, role, profileImage, active } = props;
   return (
     <Wrapper>
       <HostItem
         type="sm"
-        hostId={props.userId}
-        name={props.userName}
-        introduce={props.role}
-        profileImage={props.profileImage}
-        role={props.role}
-        active={props.active}
+        hostId={userId}
+        name={userName}
+        introduce={role}
+        profileImage={profileImage}
+        role={role}
+        active={active}
       />
     </Wrapper>
   );
