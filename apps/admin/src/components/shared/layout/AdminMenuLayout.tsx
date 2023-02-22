@@ -7,6 +7,7 @@ import AdminBottomButton from './AdminBottomButton';
 import { Spacing } from '@dudoong/ui';
 import { useRecoilValue } from 'recoil';
 import { bottomButtonState } from '@store/bottomButton';
+import { keyframes, css } from '@emotion/react';
 
 interface AdminMenuLayoutProps {
   title: string;
@@ -54,12 +55,25 @@ interface OutletWrapperProps {
   isButtonActive: boolean;
 }
 
+const wrapperSize = keyframes`
+  0% {
+    height: 100%;
+  }
+  100% {
+    height: calc(100% - 88px);
+  }
+`;
+
 const OutletWrapper = styled.div<OutletWrapperProps>`
   padding: 0px 6px 0px 20px;
   overflow-y: scroll;
   height: ${({ isButtonActive }) =>
     isButtonActive ? 'calc(100% - 88px)' : '100%'};
-
+  ${({ isButtonActive }) =>
+    isButtonActive &&
+    css`
+      animation: ${wrapperSize} 0.4s ease-out;
+    `}
   & > div {
     width: 876px;
     margin: 0 auto;
