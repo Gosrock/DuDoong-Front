@@ -1,4 +1,4 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
+import { BorderBox } from '@dudoong/ui/src/layout/BorderBox';
 import { Spacing, ListHeader, FlexBox, Text } from '@dudoong/ui';
 import HostMembers from '@components/hosts/member/HostMembers';
 import NewMember from '@components/hosts/member/NewMember';

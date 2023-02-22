@@ -66,7 +66,12 @@ const NewTickets = () => {
       eventId: eventId,
       payload: {
         ...data,
-        approveType: data.approveType ? '승인' : '선착순',
+        approveType:
+          data.payType === '유료티켓'
+            ? '선착순'
+            : data.approveType
+            ? '승인'
+            : '선착순',
         description: '',
         price: data.price || 0,
       },
