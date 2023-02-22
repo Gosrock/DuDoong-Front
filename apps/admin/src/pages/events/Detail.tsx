@@ -1,5 +1,4 @@
 import { ListHeader } from '@dudoong/ui';
-import ContentGrid from '@components/shared/layout/ContentGrid';
 import { useEffect, useState } from 'react';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import EventDetailInfo from '@components/events/detail/EventDetailInfo';
@@ -36,6 +35,7 @@ const Detail = () => {
   // 이벤트 디테일 api
   const eventDetail = queryClient.getQueryData([
     'eventDetail',
+    eventId,
   ]) as EventDetailResponse;
 
   useEffect(() => {
@@ -81,7 +81,6 @@ const Detail = () => {
       firstDisable: checkButtonDisable(form, imageInfo),
     });
   }, [form, imageInfo]);
-  // console.log(imageInfo);
 
   return (
     <>
@@ -90,17 +89,12 @@ const Detail = () => {
         size={'listHeader_24'}
         padding={[32, 0, 40, 0]}
       />
-      <ContentGrid>
-        <EventDetailInfo
-          setForm={setForm}
-          content={form.content}
-          eventId={eventId}
-        />
-        <EventImage
-          imageKey={form.posterImageKey}
-          setImageInfo={setImageInfo}
-        />
-      </ContentGrid>
+      <EventImage imageKey={form.posterImageKey} setImageInfo={setImageInfo} />
+      <EventDetailInfo
+        setForm={setForm}
+        content={form.content}
+        eventId={eventId}
+      />
     </>
   );
 };

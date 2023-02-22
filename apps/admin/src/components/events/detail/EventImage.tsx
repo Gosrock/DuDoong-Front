@@ -106,7 +106,7 @@ const TitleDescription = () => {
 // -----------------------------------------------
 
 const Wrapper = styled(RoundBlock)`
-  width: 100%;
+  width: 398px;
   height: 398px;
 `;
 
