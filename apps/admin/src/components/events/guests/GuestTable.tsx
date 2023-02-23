@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Table } from 'antd';
 import styled from '@emotion/styled';
@@ -37,6 +37,11 @@ const GuestTable = ({ tableType }: { tableType: TableType }) => {
     },
   ];
 
+  useEffect(() => {
+    reset();
+    setPage(0);
+  }, [tableType]);
+
   return (
     <Wrapper>
       <Filter>
@@ -68,7 +73,6 @@ const GuestTable = ({ tableType }: { tableType: TableType }) => {
           text="검색"
           onClick={() => {
             refetch();
-            reset();
           }}
         />
       </Filter>

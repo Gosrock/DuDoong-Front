@@ -1,5 +1,3 @@
-import { IncomingHttpHeaders } from 'http';
-
 export interface EventDetailResponse {
   status: EventStatus;
   host: HostInfo;
@@ -12,7 +10,12 @@ export interface EventDetailResponse {
   content: string;
 }
 
-export type EventStatus = '준비중' | '진행중' | '정산중' | '지난공연';
+export type EventStatus =
+  | '준비중'
+  | '진행중'
+  | '정산중'
+  | '지난공연'
+  | '삭제된공연';
 
 export interface EventPlace {
   latitude: number;
