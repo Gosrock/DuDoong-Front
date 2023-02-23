@@ -16,12 +16,12 @@ const HOST_ITEM_SET: HostItemType = {
   lg: {
     padding: [16, 16],
     imageSize: 60,
-    typo: ['G_Header_18_M', 'P_Text_16_R'],
+    typo: ['P_Text_18_M', 'P_Text_16_R'],
   },
   sm: {
     padding: [5, 5],
     imageSize: 50,
-    typo: ['G_Side_15_M', 'P_Text_14_R'],
+    typo: ['P_Text_15_M', 'P_Text_14_R'],
   },
 };
 
