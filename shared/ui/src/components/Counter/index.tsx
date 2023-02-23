@@ -47,7 +47,10 @@ export const Counter = ({
             width: '24px',
             height: '24px',
             paddingTop: '3px',
-            fill: `${theme.palette.gray_500}`,
+            fill: `${
+              ticketNum === 0 ? theme.palette.gray_300 : theme.palette.gray_500
+            }`,
+            cursor: `${ticketNum === 0 ? `default` : `pointer`}`,
           }}
         />
       </ImgWrapper>
@@ -60,7 +63,12 @@ export const Counter = ({
             width: '24px',
             height: '24px',
             paddingTop: '3px',
-            fill: `${theme.palette.gray_500}`,
+            fill: `${
+              ticketNum >= limit
+                ? theme.palette.gray_300
+                : theme.palette.gray_500
+            }`,
+            cursor: `${ticketNum >= limit ? `default` : `pointer`}`,
           }}
         />
       </ImgWrapper>
@@ -73,7 +81,6 @@ const ImgWrapper = styled.div<{
   limit: number;
 }>`
   padding: 0 4px;
-  cursor: ${({ count, limit }) => (count >= limit ? `default` : `pointer`)};
 `;
 
 const CounterWrapper = styled.div<{
@@ -85,10 +92,6 @@ const CounterWrapper = styled.div<{
   box-sizing: border-box;
   border: 1px solid ${({ theme }) => theme.palette.gray_500};
   border-radius: 18px;
-  background-color: ${({ count, limit, theme }) =>
-    count >= limit || count === 0
-      ? theme.palette.gray_300
-      : theme.palette.white};
   height: ${({ height }) => (height ? `${height}px` : `36px`)};
   width: ${({ width }) => (width ? `${width}px` : '93px')};
 
