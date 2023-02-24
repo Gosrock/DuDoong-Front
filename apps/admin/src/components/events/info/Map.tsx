@@ -1,4 +1,4 @@
-import { Input, ListHeader, Search, Spacing } from '@dudoong/ui';
+import { Input, ListHeader, Search, Spacing, TagButton } from '@dudoong/ui';
 import { BasicEventRequest } from '@lib/apis/event/eventType';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import useEvents from '@lib/hooks/useEvents';
@@ -51,6 +51,7 @@ const MapPage = (props: any) => {
         },
       });
       setPlaceName(props.place.placeName);
+      setDetailAddress(props.place.placeAddress);
     }
   }, [props?.place]);
 
@@ -173,10 +174,17 @@ const MapPage = (props: any) => {
     <>
       <div>
         <ListHeader
-          padding={[32, 24, 12, 0]}
+          padding={[32, 0, 10, 0]}
           size={'listHeader_18'}
           title={'공연 장소'}
-          rightElement={<Search onClick={() => setIsOpen(true)} />}
+          rightElement={
+            <TagButton
+              size="md"
+              color="primary"
+              text="주소 찾기"
+              onClick={() => setIsOpen(true)}
+            />
+          }
         ></ListHeader>
 
         <form onSubmit={handleName}>
@@ -194,7 +202,7 @@ const MapPage = (props: any) => {
             title={'상세주소'}
           ></ListHeader>
           <Input
-            placeholder="공연장 이름을 적어주세요"
+            placeholder="공연장 주소를 적어주세요"
             value={detailAddress}
             onChange={(e: { target: { value: string } }) =>
               setDetailAddress(e.target.value)
