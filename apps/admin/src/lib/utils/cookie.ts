@@ -6,8 +6,6 @@ export const setCookie = (name: string, value: any, option?: any) => {
   return cookies.set(name, value, {
     ...option,
     path: '/',
-    secure: true,
-    sameSite: 'none',
   });
 };
 
