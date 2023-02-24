@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import { Outlet } from 'react-router-dom';
 import AdminHeader from './AdminHeader';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 
 const AdminNoMenuLayout = () => {
+  const { Toast } = useToastify();
+
   return (
     <Wrapper>
       <AdminHeader host="" alliance={false} />
@@ -10,6 +13,7 @@ const AdminNoMenuLayout = () => {
         <OutletWrapper>
           <Outlet />
         </OutletWrapper>
+        <Toast />
       </BottomWrapper>
     </Wrapper>
   );
