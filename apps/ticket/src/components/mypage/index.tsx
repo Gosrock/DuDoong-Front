@@ -1,4 +1,4 @@
-import { Divider, ListHeader, Padding, Profile } from '@dudoong/ui';
+import { Divider, ListHeader, Padding, Profile, Spacing } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import { useInfiniteQueries } from '@dudoong/utils';
 
@@ -46,12 +46,11 @@ const Mypage = () => {
       <Divider />
       <Shortcuts text="공연 시작하기" url="/" />
       <Divider />
-      <Shortcuts text="고스락 깃허브" url="/" />
-      <Shortcuts text="개발자 이야기" url="/" />
-      <Divider />
+
       <Shortcuts text="로그아웃" url="/" />
       <Divider />
       <Shortcuts text="회원탈퇴" textColor="red_300" url="/" />
+      <Spacing size={234} />
     </Main>
   );
 };

@@ -1,4 +1,4 @@
-import { KeyOfPalette, ListRow, theme } from '@dudoong/ui';
+import { KeyOfPalette, ListRow } from '@dudoong/ui';
 import Chevron from '@assets/chevron.svg';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
