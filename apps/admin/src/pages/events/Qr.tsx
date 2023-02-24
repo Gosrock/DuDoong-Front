@@ -1,14 +1,43 @@
-import { Button, FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { QrReader } from 'react-qr-reader';
+import { FlexBox, ListHeader, Spacing } from '@dudoong/ui';
+import QrReader from 'react-qr-reader';
 import { ReactComponent as Scanner } from '@assets/scanner.svg';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { useMutation } from '@tanstack/react-query';
+import EventApi from '@lib/apis/event/EventApi';
+import { IssuedTicket } from '@lib/apis/event/eventType';
+import { useLocation } from 'react-router-dom';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 
 const Qr = () => {
-  const handleScan = (result: any, error: any) => {
-    // console.log(result, error);
+  const eventId = useLocation().pathname.split('/')[2];
+  const { setToast } = useToastify();
+
+  // 입장 처리 api
+  const patchEventIssuedTicket = useMutation(
+    EventApi.PATCH_EVENT_ISSUEDTICKET,
+    {
+      onSuccess: (data: IssuedTicket) => {
+        console.log('PATCH_EVENT_ISSUEDTICKET : ', data);
+        setToast({ type: 'success', comment: '입장이 완료되었습니다.' });
+      },
+      onError: (error: any) => {
+        const comment = error.response.data.reason;
+        setToast({ comment: comment });
+      },
+    },
+  );
+
+  const handleScan = (result: any) => {
+    if (result) {
+      console.log('scan ticket : ', result);
+      patchEventIssuedTicket.mutate({
+        eventId: eventId,
+        issuedTicketId: result,
+      });
+    }
   };
+
   return (
     <>
       <ListHeader
@@ -26,23 +55,20 @@ const Qr = () => {
         <ScannerWrapper>
           <Scanner />
         </ScannerWrapper>
-        <QrReader
-          scanDelay={500}
-          onResult={handleScan}
-          constraints={{ facingMode: 'user' }}
-          videoStyle={{
-            backgroundSize: 'cover',
-          }}
-          containerStyle={{
+        <QrScanner
+          delay={500}
+          onScan={handleScan}
+          onError={() => {}}
+          facingMode="user"
+          style={{
             borderRadius: '12px',
             boxShadow: '3px 4px 7px rgba(0, 0, 0, 0.15)',
             border: ` 1px solid #000`,
-          }}
-          videoContainerStyle={{
             width: '100%',
             height: '600px',
             padding: '0',
             margin: '0',
+            overflow: 'hidden',
           }}
         />
       </div>
@@ -53,18 +79,15 @@ const Qr = () => {
 export default Qr;
 
 const ScannerWrapper = styled(FlexBox)`
-  /* position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0; */
-  /* transition: all 200ms ease-in; */
-  /* background-color: #000; */
   position: absolute;
-  /* bottom: 525px; */
-  /* float: left; */
   margin: 75px 0px;
   width: 100%;
-  z-index: 100;
-  /* margin: auto; */
+  z-index: 50;
+`;
+
+const QrScanner = styled(QrReader)`
+  & > section > div {
+    border: 0px none !important;
+    box-shadow: none !important;
+  }
 `;

@@ -13,6 +13,7 @@ import type {
   ImageUrlResponse,
   UpdateEventDetailRequest,
   BasicEventRequest,
+  IssuedTicket,
 } from './eventType';
 
 const EventApi = {
@@ -102,6 +103,7 @@ const EventApi = {
     );
     return response.data.data;
   },
+
   PATCH_EVENT_BASIC: async (
     payload: BasicEventRequest,
     eventId: string,
@@ -109,6 +111,19 @@ const EventApi = {
     const response = await axiosPrivate.patch(
       `events/${eventId}/basic`,
       payload,
+    );
+    return response.data.data;
+  },
+
+  PATCH_EVENT_ISSUEDTICKET: async ({
+    issuedTicketId,
+    eventId,
+  }: {
+    issuedTicketId: string;
+    eventId: string;
+  }): Promise<IssuedTicket> => {
+    const response = await axiosPrivate.patch(
+      `events/${eventId}/issuedTickets/${issuedTicketId}`,
     );
     return response.data.data;
   },
