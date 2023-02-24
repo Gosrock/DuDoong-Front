@@ -18,12 +18,6 @@ const HomeHeader = () => {
             width: 54px;
           `}
         ></div>
-        <Input
-          height={60}
-          styles={InputStyle}
-          placeholder={'검색어를 입력해주세요'}
-          rightIcon={<Search />}
-        />
       </div>
 
       <Twinkle className="twinkle" />
@@ -36,11 +30,8 @@ const HomeHeader = () => {
 export default HomeHeader;
 
 const Wrapper = styled.div`
-  height: 469px;
-  max-width: 415px;
   margin: 0 auto;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,15 +51,14 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.typo.G_Header_28_B}
     margin-top:14px;
   }
-  position: relative;
   .twinkle {
     position: absolute;
     &:first-of-type {
-      left: 27px;
+      transform: translate3d(-172px, 0, 0);
       top: 110px;
     }
     &:nth-of-type(2) {
-      right: 32px;
+      transform: translate3d(172px, 0, 0);
       top: 188px;
     }
   }
@@ -77,22 +67,12 @@ const Wrapper = styled.div`
     width: 100px;
 
     &:nth-last-of-type(2) {
-      left: -17.3vw;
+      transform: translate3d(-450px, 0, 0);
       top: 38px;
     }
     &:last-of-type {
-      right: -17.3vw;
+      transform: translate3d(450px, 0, 0);
       top: 283px;
     }
   }
-`;
-
-const InputStyle = css`
-  border-radius: 16px;
-  border: 1px solid black;
-  background-color: ${theme.palette.gray_100};
-  color: ${theme.palette.black};
-  margin-top: 50px;
-  box-sizing: border-box;
-  width: 100%;
 `;

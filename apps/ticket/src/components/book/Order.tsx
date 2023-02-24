@@ -61,7 +61,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         {/* 헤더 */}
         <BookHeader
           title="결제하기"
-          description={['고스락 제 23회 정기공연', '일반티켓', 3]}
+          description={['adfs', data.title, data.totalQuantity]}
         />
         <Divider />
         {/* 티켓옵션 프리뷰 */}

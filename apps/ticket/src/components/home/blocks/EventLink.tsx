@@ -1,35 +1,24 @@
 import { Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
+import { EventResponse } from '@lib/apis/events/eventType';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export interface EventLinkProps {
-  eventName: string;
-  date: string;
-  eventId: number;
-  posterImage: string;
-}
-
-const EventLink = ({
-  eventName,
-  date,
-  eventId,
-  posterImage,
-}: EventLinkProps) => {
+const EventLink = (props: EventResponse) => {
   return (
-    <Wrapper href={`events/${eventId}`}>
+    <Wrapper href={`events/${props.eventId}`}>
       <Image
-        src={'/sangsang.png'}
+        src={props.posterImage}
         alt=""
         className="poster"
         width={204}
         height={287}
       />
       <Text typo="P_Text_14_R" color="gray_400" as="p">
-        {date}
+        {props.startAt}
       </Text>
       <Text typo="P_Header_18_SB" color="black" as="p">
-        {eventName}
+        {props.name}
       </Text>
     </Wrapper>
   );
