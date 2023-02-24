@@ -51,6 +51,7 @@ const OrderList = (
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 
   padding: 20px 24px 20px 24px;

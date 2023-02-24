@@ -1,5 +1,6 @@
 import {
   Divider,
+  FlexBox,
   ListHeader,
   NavBar,
   Padding,
@@ -40,14 +41,15 @@ const Mypage = () => {
       <Divider />
       <Spacing size={20} />
       <Padding size={[10, 24, 10, 24]}>
-        {data ? <OrderItem {...data} /> : <></>}
+        <FlexBox>{data ? <OrderItem {...data} /> : <></>}</FlexBox>
       </Padding>
+
       <ListHeader title={'바로가기'} size={'listHeader_20'} />
 
       <Shortcuts text="내 예매내역" url="/history" />
-      <Shortcuts text="내 쿠폰함" url="/mycoupon" />
+      <Shortcuts text="내 쿠폰함" url="/history/mycoupon" />
       <Divider />
-      <Shortcuts text="공연 시작하기" url="/" />
+      <Shortcuts text="공연 만들기" url="/" />
       <Divider />
       <Shortcuts text="로그아웃" url="/" />
       <Divider />

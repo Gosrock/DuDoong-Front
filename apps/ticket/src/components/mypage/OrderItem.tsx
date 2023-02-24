@@ -61,6 +61,7 @@ const Wrapper = styled.div`
   border: 1px solid ${theme.palette.black};
 
   width: 100%;
+  max-width: 440px;
   height: 166px;
 
   overflow: hidden;
