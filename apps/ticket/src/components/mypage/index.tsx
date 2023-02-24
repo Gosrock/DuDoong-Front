@@ -7,13 +7,9 @@ import {
   Spacing,
 } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
-import { useInfiniteQueries } from '@dudoong/utils';
-
 import { authState } from '@store/auth';
 import { useRecoilValue } from 'recoil';
-
 import OrderItem from './OrderItem';
-import { OrderListResponse } from '@lib/apis/order/orderType';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import Shortcuts from '@components/shared/Shortcuts';
 import Main from '@components/shared/Layout/Main';

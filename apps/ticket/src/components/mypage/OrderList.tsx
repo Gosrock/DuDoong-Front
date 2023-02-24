@@ -1,27 +1,20 @@
-import { MenuBar } from '@dudoong/ui';
+import { MenuBar, Spacing } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import { OrderListResponse } from '@lib/apis/order/orderType';
-import {
-  ForwardedRef,
-  forwardRef,
-  HTMLAttributes,
-  useEffect,
-  useState,
-} from 'react';
+import { ForwardedRef, forwardRef, HTMLAttributes, useState } from 'react';
+import NoData from './NoData';
 import OrderItem from './OrderItem';
-import { useQueryClient } from '@tanstack/react-query';
 
 const OrderList = (
   props: HTMLAttributes<HTMLDivElement>,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
-  const queryClient = useQueryClient;
   const [menu, setMenu] = useState<number>(0);
   const { infiniteListElement, isEmpty } =
     useInfiniteQueries<OrderListResponse>(
-      ['orderDetail'],
+      ['orderDetail', menu],
       ({ pageParam = 0 }) =>
         OrderApi.GET_ORDERS(
           {
@@ -32,8 +25,6 @@ const OrderList = (
       OrderItem,
     );
 
-  useEffect(() => {}, [menu]);
-
   return (
     <>
       <MenuBar
@@ -41,7 +32,17 @@ const OrderList = (
         curActiveMenu={menu}
         setCurActiveMenu={setMenu}
       />
-      {isEmpty && <></>}
+
+      {isEmpty && (
+        <>
+          <Spacing size={182} />
+          <NoData
+            text={
+              menu === 0 ? '예매내역이 없습니다.' : '지난 관람내역이 없습니다.'
+            }
+          />
+        </>
+      )}
       <Wrapper ref={ref}>{infiniteListElement}</Wrapper>
     </>
   );
