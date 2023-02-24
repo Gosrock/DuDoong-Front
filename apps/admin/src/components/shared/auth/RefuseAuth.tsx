@@ -1,9 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import useRefresh from '@lib/hooks/auth/useRefresh';
 import { useEffect } from 'react';
+import { getCookie } from '@lib/utils/cookie';
 
 const RefuseAuth = () => {
-  const refreshToken = localStorage.getItem('refreshToken');
+  const refreshToken = getCookie('refreshToken');
   const { refreshMutation, state, setState } = useRefresh();
 
   useEffect(() => {

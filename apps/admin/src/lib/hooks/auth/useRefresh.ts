@@ -4,6 +4,7 @@ import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
 import { AuthApi } from '@dudoong/utils';
 import { axiosPrivate } from '@lib/apis/axios';
+import { setCookie } from '@lib/utils/cookie';
 
 const useRefresh = () => {
   const [state, setState] = useState<'loading' | 'succeed' | 'failed'>(
@@ -25,7 +26,9 @@ const useRefresh = () => {
         isAuthenticated: true,
         callbackUrl: '/',
       });
-      localStorage.setItem('refreshToken', data.refreshToken);
+      setCookie('refreshToken', data.refreshToken, {
+        maxAge: data.refreshTokenAge,
+      });
       console.log(data.accessToken);
       setState('succeed');
     },
