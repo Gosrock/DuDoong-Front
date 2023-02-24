@@ -103,3 +103,25 @@ export type OrderStatus =
   | ' 환불 완료'
   | ' 취소된 결제'
   | ' 결제 실패';
+
+export type StageType =
+  | '승인대기'
+  | '입장완료'
+  | '관람예정'
+  | '입장중'
+  | '취소됨';
+
+/**
+ * 예매 목록
+ * OrderBiefElement
+ */
+export interface OrderListResponse {
+  refundInfo: RefundInfo;
+  eventProfile: EventProfile;
+  orderUuid: string;
+  orderNo: string;
+  stage: StageType;
+  orderStatus: OrderStatus;
+  itemName: string;
+  totalQuantity: number;
+}
