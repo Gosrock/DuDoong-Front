@@ -30,7 +30,7 @@ export const AdminMenuLayout = ({
         <AdminMenu title={title} />
         <OutletWrapper isButtonActive={isActive} fullWidth={fullWidth}>
           <div>
-            <Breadcrumb />
+            <Breadcrumb name={title} />
             <Outlet />
             {isActive && <Spacing size={55} />}
           </div>

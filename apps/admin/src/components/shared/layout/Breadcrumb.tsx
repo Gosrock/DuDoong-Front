@@ -43,7 +43,7 @@ const HOST_URL_SET: HostUrlSetType = {
   alliance: '제휴 관련',
 };
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ name }: { name: string }) => {
   const location = useLocation();
   const urlDetails = location.pathname.substr(1).split('/');
   let detailUrl,
@@ -65,7 +65,9 @@ const Breadcrumb = () => {
       <Spacing size={55} />
       <FlexBox align={'center'} justify={'flex-start'}>
         <Text typo="P_Text_14_M" color="main_500">
-          {newUrl ? `${detailUrl} / ${newUrl}` : detailUrl}
+          {newUrl
+            ? `${name} / ${detailUrl} / ${newUrl}`
+            : `${name} / ${detailUrl}`}
         </Text>
       </FlexBox>
     </>
