@@ -2100,6 +2100,7 @@ __metadata:
     react-drag-drop-files: ^2.3.8
     react-scripts: 5.0.1
     react-spinners: ^0.13.7
+    react-toastify: ^9.1.1
     storybook-addon-paddings: ^4.3.0
     webpack: ^5.75.0
   languageName: unknown
@@ -5409,6 +5410,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/hoist-non-react-statics@npm:^3.0.1":
+  version: 3.3.1
+  resolution: "@types/hoist-non-react-statics@npm:3.3.1"
+  dependencies:
+    "@types/react": "*"
+    hoist-non-react-statics: ^3.3.0
+  checksum: 2c0778570d9a01d05afabc781b32163f28409bb98f7245c38d5eaf082416fdb73034003f5825eb5e21313044e8d2d9e1f3fe2831e345d3d1b1d20bcd12270719
+  languageName: node
+  linkType: hard
+
 "@types/html-minifier-terser@npm:^5.0.0":
   version: 5.1.2
   resolution: "@types/html-minifier-terser@npm:5.1.2"
@@ -6323,6 +6334,7 @@ __metadata:
     "@vitejs/plugin-react": ^3.0.0
     antd: ^5.2.2
     react: ^18.2.0
+    react-cookie: ^4.1.1
     react-dom: ^18.2.0
     react-error-boundary: ^3.1.4
     react-qr-reader: ^3.0.0-beta-1
@@ -7997,7 +8009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.0.4":
+"clsx@npm:^1.0.4, clsx@npm:^1.1.1":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
@@ -11430,7 +11442,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.0.0, hoist-non-react-statics@npm:^3.3.1":
+"hoist-non-react-statics@npm:^3.0.0, hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -16909,6 +16921,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qr-code-styling@npm:^1.6.0-rc.1":
+  version: 1.6.0-rc.1
+  resolution: "qr-code-styling@npm:1.6.0-rc.1"
+  dependencies:
+    qrcode-generator: ^1.4.3
+  checksum: 778754790fe0b586ecd38fb02de777c7dd9cf844cf6e3c88f9a23ad85b122200a8567c946e3c41dba84ddd2f0016aa31ddfd1507150e1dbfea8a58323b62d944
+  languageName: node
+  linkType: hard
+
+"qrcode-generator@npm:^1.4.3":
+  version: 1.4.4
+  resolution: "qrcode-generator@npm:1.4.4"
+  checksum: 860cfdd2a7a608d34e92cab99774cc08182e1911432f30ed36d16f8a5cdabd7fdf40239caed91fa2691cfe66c8d95c1340a2fc9cc439eed07a9f2eb328c6f527
+  languageName: node
+  linkType: hard
+
 "qrcode.react@npm:^3.1.0":
   version: 3.1.0
   resolution: "qrcode.react@npm:3.1.0"
@@ -17586,6 +17614,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-cookie@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "react-cookie@npm:4.1.1"
+  dependencies:
+    "@types/hoist-non-react-statics": ^3.0.1
+    hoist-non-react-statics: ^3.0.0
+    universal-cookie: ^4.0.0
+  peerDependencies:
+    react: ">= 16.3.0"
+  checksum: b734dcad35d790ced8c8fc3b19e3eb1f546e0923c637bad888c7c0096dbe2c996668416a49b48827ec7ad2d81522f1b57567694c791e1a5fb89ca41b39158a74
+  languageName: node
+  linkType: hard
+
 "react-datepicker@npm:^4.8.0":
   version: 4.8.0
   resolution: "react-datepicker@npm:4.8.0"
@@ -17994,6 +18035,18 @@ __metadata:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
   checksum: 4f306e30c3a425fd2b11c265ca0a7c261de0f63c0250fa6fa19eddd58c50fc9eaa463927571ee1dec39659a1bf619aaacf3352602b7724695da240ec0bc106cf
+  languageName: node
+  linkType: hard
+
+"react-toastify@npm:^9.1.1":
+  version: 9.1.1
+  resolution: "react-toastify@npm:9.1.1"
+  dependencies:
+    clsx: ^1.1.1
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 2039255539961a9b4d77b2656f120b20abe46cb0c699a7f3c0af23b4ef669d9c4d24dae6b8f4954b5efd83edf6d6e23614a29e94e9ee0d2647741fba9ba2db85
   languageName: node
   linkType: hard
 
@@ -19421,6 +19474,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ssr-window@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "ssr-window@npm:4.0.2"
+  checksum: df182600927f4f3225224cf8c02338ea637c9750519505bbfb9a9236741a2a7ec088386fb948bca7b447b8303d9109e7dc7672e3de041c79ac2a0e03665af7d2
+  languageName: node
+  linkType: hard
+
 "ssri@npm:^8.0.1":
   version: 8.0.1
   resolution: "ssri@npm:8.0.1"
@@ -19978,6 +20038,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swiper@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "swiper@npm:9.0.5"
+  dependencies:
+    ssr-window: ^4.0.2
+  checksum: 33c45c0d9ebce4c99737b7aac110ca461fa99cfc84e9d45443550c24ec246ebba6e709a2edac0437180fd141a2e9092816d8932494be25509a8a4d6d0c8ba5b6
+  languageName: node
+  linkType: hard
+
 "symbol-tree@npm:^3.2.4":
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
@@ -20255,10 +20324,12 @@ __metadata:
     next: 13.0.7
     next-cookies: ^2.0.3
     next-transpile-modules: ^10.0.0
+    qr-code-styling: ^1.6.0-rc.1
     react: 18.2.0
     react-dom: 18.2.0
     react-spring-bottom-sheet: ^3.4.1
     recoil: ^0.7.6
+    swiper: ^9.0.5
     typescript: 4.9.4
   languageName: unknown
   linkType: soft
@@ -20786,7 +20857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"universal-cookie@npm:^4.0.2":
+"universal-cookie@npm:^4.0.0, universal-cookie@npm:^4.0.2":
   version: 4.0.4
   resolution: "universal-cookie@npm:4.0.4"
   dependencies:

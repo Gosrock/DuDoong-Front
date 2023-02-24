@@ -45,6 +45,7 @@ const EventDetailInfo = ({
 
   useEffect(() => {
     setCurContent(content);
+    if (editorRef.current) editorRef.current!.getInstance().setHTML(content);
   }, [content]);
 
   // presigned 발급 api

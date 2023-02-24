@@ -54,6 +54,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             value={value}
             ref={ref}
             onClick={props.onClick}
+            autoComplete="off"
             {...props}
           />
           {props.rightIcon}

@@ -4,6 +4,7 @@ import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { useCookies } from 'react-cookie';
 
 interface AdminHeaderProps {
   host: string;
@@ -13,6 +14,8 @@ interface AdminHeaderProps {
 const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
   const auth = useRecoilValue(authState);
   const resetAuthState = useResetRecoilState(authState);
+  const [, , removeCookie] = useCookies(['refreshToken']);
+
   const profileOption: PopupOptions[] = [
     {
       title: '마이페이지',
@@ -23,8 +26,9 @@ const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
     {
       title: '로그아웃',
       onClick: () => {
-        // resetAuthState();
-        //TODO : 쿠키에서 토큰 삭제, axios 인스턴스에서 헤더 삭제
+        removeCookie('refreshToken', { path: '/' });
+        resetAuthState();
+        window.location.href = '/';
       },
     },
   ];
