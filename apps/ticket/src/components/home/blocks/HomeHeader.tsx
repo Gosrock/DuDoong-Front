@@ -52,6 +52,7 @@ const Wrapper = styled.div`
     margin-top:14px;
   }
   .twinkle {
+    width: 66px;
     position: absolute;
     &:first-of-type {
       transform: translate3d(-172px, 0, 0);
