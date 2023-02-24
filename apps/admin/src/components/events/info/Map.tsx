@@ -22,6 +22,7 @@ const MapPage = (props: any) => {
   const [lng, setLng] = useState<number | null>();
   const [placeName, setPlaceName] = useState<string | undefined>();
   const [placeAddress, setPlaceAddress] = useState<string | undefined>();
+  const [detailAddress, setDetailAddress] = useState<string | undefined>();
   const [markers, setMarkers] = useState<any>();
   const [map, setMap] = useState<any>();
   const [address, setAddress] = useState<string | undefined>('');
@@ -67,7 +68,7 @@ const MapPage = (props: any) => {
         startAt: timeFormatter(props.startDate, props.startTime),
         runTime: props.runtime,
         placeName: placeName,
-        placeAddress: address,
+        placeAddress: detailAddress,
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
       };
@@ -175,7 +176,9 @@ const MapPage = (props: any) => {
           padding={[32, 24, 12, 0]}
           size={'listHeader_18'}
           title={'공연 장소'}
+          rightElement={<Search onClick={() => setIsOpen(true)} />}
         ></ListHeader>
+
         <form onSubmit={handleName}>
           <Input
             width={398}
@@ -184,7 +187,18 @@ const MapPage = (props: any) => {
             onChange={(e: { target: { value: string } }) =>
               setPlaceName(e.target.value)
             }
-            rightIcon={<Search onClick={() => setIsOpen(true)} />}
+          ></Input>
+          <ListHeader
+            padding={[32, 24, 12, 0]}
+            size={'listHeader_18'}
+            title={'상세주소'}
+          ></ListHeader>
+          <Input
+            placeholder="공연장 이름을 적어주세요"
+            value={detailAddress}
+            onChange={(e: { target: { value: string } }) =>
+              setDetailAddress(e.target.value)
+            }
           ></Input>
         </form>
         <Spacing size={12} />
