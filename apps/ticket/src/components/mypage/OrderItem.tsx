@@ -69,7 +69,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
 
   .poster {
-    width: auto;
+    width: 120px;
     height: 100%;
 
     object-fit: cover;

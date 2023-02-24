@@ -1,4 +1,11 @@
-import { Divider, ListHeader, Padding, Profile, Spacing } from '@dudoong/ui';
+import {
+  Divider,
+  ListHeader,
+  NavBar,
+  Padding,
+  Profile,
+  Spacing,
+} from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import { useInfiniteQueries } from '@dudoong/utils';
 
@@ -11,31 +18,20 @@ import { OrderApi } from '@lib/apis/order/OrderApi';
 import Shortcuts from '@components/shared/Shortcuts';
 import Main from '@components/shared/Layout/Main';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const Mypage = () => {
   const { userProfile } = useRecoilValue(authState);
-  const { data, isSuccess } = useQuery(['recentOrderDetail'], () =>
+  const router = useRouter();
+
+  const { data } = useQuery(['recentOrderDetail'], () =>
     OrderApi.GET_RECENT_ORDER(),
   );
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  const { infiniteListElement, isEmpty } =
-    useInfiniteQueries<OrderListResponse>(
-      ['mypage'],
-      ({ pageParam = 0 }) =>
-        OrderApi.GET_ORDERS({
-          pageParam,
-        }),
-      OrderItem,
-    );
 
   return (
     <Main>
       <DDHead title="두둥! | 마이페이지" />
+      <NavBar backHandler={() => router.back()} />
       <ListHeader title={'마이페이지'} size={'listHeader_28'} />
       <Padding size={[20, 24]}>
         <Profile
