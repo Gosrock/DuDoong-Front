@@ -32,8 +32,10 @@ export default Shortcuts;
 const StyledListRow = styled(ListRow)`
   cursor: pointer;
 
+  transform: scale(1);
+  transition: all 0.1s ease-out;
+
   :active {
     transform: scale(0.99);
-    transition: 0.1s;
   }
 `;

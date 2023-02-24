@@ -6,14 +6,22 @@ import { authState } from '@store/auth';
 import { useRecoilValue } from 'recoil';
 
 import OrderItem from './OrderItem';
-import styled from '@emotion/styled';
 import { OrderListResponse } from '@lib/apis/order/orderType';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import Shortcuts from '@components/shared/Shortcuts';
 import Main from '@components/shared/Layout/Main';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 const Mypage = () => {
   const { userProfile } = useRecoilValue(authState);
+  const { data, isSuccess } = useQuery(['recentOrderDetail'], () =>
+    OrderApi.GET_RECENT_ORDER(),
+  );
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const { infiniteListElement, isEmpty } =
     useInfiniteQueries<OrderListResponse>(
@@ -38,7 +46,10 @@ const Mypage = () => {
         />
       </Padding>
       <Divider />
-      <Padding size={[10, 24, 10, 24]}>{infiniteListElement}</Padding>
+      <Spacing size={20} />
+      <Padding size={[10, 24, 10, 24]}>
+        {data ? <OrderItem {...data} /> : <></>}
+      </Padding>
       <ListHeader title={'바로가기'} size={'listHeader_20'} />
 
       <Shortcuts text="내 예매내역" url="/history" />
@@ -46,7 +57,6 @@ const Mypage = () => {
       <Divider />
       <Shortcuts text="공연 시작하기" url="/" />
       <Divider />
-
       <Shortcuts text="로그아웃" url="/" />
       <Divider />
       <Shortcuts text="회원탈퇴" textColor="red_300" url="/" />

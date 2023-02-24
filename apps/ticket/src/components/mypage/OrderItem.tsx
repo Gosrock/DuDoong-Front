@@ -38,7 +38,7 @@ const OrderItem = (prop: OrderListResponse) => {
       <ContentWrapper>
         <FlexBox align="flex-start" direction="column" gap={5}>
           <Tag text={prop.stage} color={TAG_COLOR[prop.stage]} size={'sm'} />
-          <Text className="title" typo="P_Button_16_SB">
+          <Text className="title" typo="P_Text_16_M">
             {prop.eventProfile.name}
           </Text>
         </FlexBox>
