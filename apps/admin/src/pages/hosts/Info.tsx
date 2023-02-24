@@ -65,13 +65,7 @@ const Info = () => {
           };
         });
       }
-      reset({
-        introduce: hostDetail.introduce !== null ? hostDetail.introduce : '',
-        contactNumber:
-          hostDetail.contactNumber !== null ? hostDetail.contactNumber : '',
-        contactEmail:
-          hostDetail.contactEmail !== null ? hostDetail.contactEmail : '',
-      });
+      reset({ ...hostDetail });
     }
   }, [hostDetail]);
 
