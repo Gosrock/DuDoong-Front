@@ -83,3 +83,17 @@ export interface HostEventResponse {
   totalPages: number;
   hasNextPage: boolean;
 }
+
+export interface UserProfile {
+  userId: number;
+  userName: string;
+  email: string;
+  profileImage: string;
+}
+
+export type InviteHostRoleType = 'MANAGER' | 'GUEST';
+
+export interface InviteHostRequest {
+  email: string;
+  role: InviteHostRoleType;
+}
