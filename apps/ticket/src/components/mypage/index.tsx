@@ -45,7 +45,7 @@ const Mypage = () => {
       <ListHeader title={'바로가기'} size={'listHeader_20'} />
 
       <Shortcuts text="내 예매내역" url="/history" />
-      <Shortcuts text="내 쿠폰함" url="/" />
+      <Shortcuts text="내 쿠폰함" url="/mycoupon" />
       <Divider />
       <Shortcuts text="공연 시작하기" url="/" />
       <Divider />
