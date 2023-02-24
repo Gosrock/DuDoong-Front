@@ -53,6 +53,9 @@ const Breadcrumb = ({ name }: { name: string }) => {
     if (urlDetails.length > 3) {
       newUrl = EVENT_URL_SET[`${urlDetails[2]}new` as EventUrlSetTypeKey];
     }
+    if (urlDetails[2] == 'qr' && urlDetails.length > 3) {
+      newUrl = 'QR 확인';
+    }
   } else {
     detailUrl = HOST_URL_SET[urlDetails[2] as HostUrlSetTypeKey];
     if (urlDetails.length > 3) {
