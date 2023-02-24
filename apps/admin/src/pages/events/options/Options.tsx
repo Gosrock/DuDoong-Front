@@ -1,4 +1,50 @@
+import NewOption from '@components/events/tickets/tickets/NewOption';
+import { Spacing, ListHeader, FlexBox, Text } from '@dudoong/ui';
+import { useLocation } from 'react-router-dom';
+import ContentGrid from '@components/shared/layout/ContentGrid';
+import OptionList from '@components/events/tickets/ticketoptions/options/OptionList';
+import { useQuery } from '@tanstack/react-query';
+import TicketApi from '@lib/apis/ticket/TicketApi';
+import TicketListOption from '@components/events/tickets/ticketoptions/options/TicketListOption';
+
 const Options = () => {
-  return <div>옵션</div>;
+  const { pathname } = useLocation();
+  const eventId = pathname.split('/')[2];
+  console.log(eventId);
+  const { data } = useQuery(['ticketDetail', eventId], () =>
+    TicketApi.GET_TICKET_DETAIL(eventId),
+  );
+
+  console.log(data);
+
+  return (
+    <>
+      <Spacing size={32} />
+      <ListHeader
+        padding={0}
+        size="listHeader_24"
+        title="티켓에 옵션 넣기"
+        description={
+          <FlexBox direction="column" align="flex-start">
+            <Text typo="P_Text_16_M" color="gray_400">
+              티켓을 구매하기 전 설문 응답을 위해 옵션을 각 티켓으로
+            </Text>
+            <Text typo="P_Text_16_M" color="gray_400">
+              드래그 앤 드롭 해보세요. 옵션의 답변은 필수입니다.
+            </Text>
+          </FlexBox>
+        }
+      />
+      <Spacing size={36} />
+      <NewOption eventId={eventId} />
+      <Spacing size={72} />
+      <ContentGrid>
+        <OptionList optionItems={data ? data.ticketItems : null} />
+        <TicketListOption ticketItems={data ? data.ticketItems : null} />
+      </ContentGrid>
+      {/* <TicketList ticketItems={data ? data.ticketItems : null} /> */}
+      <Spacing size={72} />
+    </>
+  );
 };
 export default Options;
