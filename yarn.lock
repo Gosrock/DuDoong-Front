@@ -16874,6 +16874,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qr-code-styling@npm:^1.6.0-rc.1":
+  version: 1.6.0-rc.1
+  resolution: "qr-code-styling@npm:1.6.0-rc.1"
+  dependencies:
+    qrcode-generator: ^1.4.3
+  checksum: 778754790fe0b586ecd38fb02de777c7dd9cf844cf6e3c88f9a23ad85b122200a8567c946e3c41dba84ddd2f0016aa31ddfd1507150e1dbfea8a58323b62d944
+  languageName: node
+  linkType: hard
+
+"qrcode-generator@npm:^1.4.3":
+  version: 1.4.4
+  resolution: "qrcode-generator@npm:1.4.4"
+  checksum: 860cfdd2a7a608d34e92cab99774cc08182e1911432f30ed36d16f8a5cdabd7fdf40239caed91fa2691cfe66c8d95c1340a2fc9cc439eed07a9f2eb328c6f527
+  languageName: node
+  linkType: hard
+
 "qrcode.react@npm:^3.1.0":
   version: 3.1.0
   resolution: "qrcode.react@npm:3.1.0"
@@ -19372,6 +19388,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ssr-window@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "ssr-window@npm:4.0.2"
+  checksum: df182600927f4f3225224cf8c02338ea637c9750519505bbfb9a9236741a2a7ec088386fb948bca7b447b8303d9109e7dc7672e3de041c79ac2a0e03665af7d2
+  languageName: node
+  linkType: hard
+
 "ssri@npm:^8.0.1":
   version: 8.0.1
   resolution: "ssri@npm:8.0.1"
@@ -19929,6 +19952,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swiper@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "swiper@npm:9.0.5"
+  dependencies:
+    ssr-window: ^4.0.2
+  checksum: 33c45c0d9ebce4c99737b7aac110ca461fa99cfc84e9d45443550c24ec246ebba6e709a2edac0437180fd141a2e9092816d8932494be25509a8a4d6d0c8ba5b6
+  languageName: node
+  linkType: hard
+
 "symbol-tree@npm:^3.2.4":
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
@@ -20206,10 +20238,12 @@ __metadata:
     next: 13.0.7
     next-cookies: ^2.0.3
     next-transpile-modules: ^10.0.0
+    qr-code-styling: ^1.6.0-rc.1
     react: 18.2.0
     react-dom: 18.2.0
     react-spring-bottom-sheet: ^3.4.1
     recoil: ^0.7.6
+    swiper: ^9.0.5
     typescript: 4.9.4
   languageName: unknown
   linkType: soft

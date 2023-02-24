@@ -112,7 +112,13 @@ export const globalStyle = css`
   :root {
     --main-width: 600px;
   }
-
+  .swiper-pagination-bullet {
+    background-color: #e3e4e8;
+    opacity: 1;
+  }
+  .swiper-pagination-bullet-active {
+    background-color: #c7c7cb;
+  }
   a {
     color: inherit;
     text-decoration: none;
