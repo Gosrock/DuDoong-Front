@@ -1,15 +1,33 @@
-import { TicketDetailResponse } from '@lib/apis/ticket/ticketType';
-import { ListHeader, theme, Spacing, FlexBox } from '@dudoong/ui';
+import { AllOptionResponse } from '@lib/apis/option/optionType';
+import {
+  ListHeader,
+  theme,
+  Spacing,
+  FlexBox,
+  Text,
+  Padding,
+} from '@dudoong/ui';
 import styled from '@emotion/styled';
+import OptionItem from './OptionItem';
 
 const OptionList = ({
   optionItems,
 }: {
-  optionItems: TicketDetailResponse[] | null;
+  optionItems: AllOptionResponse[] | null;
 }) => {
   console.log(optionItems);
   if (!optionItems?.length) {
-    return <div>아무것도 없음ㅋ</div>;
+    return (
+      <div>
+        <ListHeader padding={0} size="listHeader_18" title="옵션 목록" />
+        <Spacing size={42} />
+        <Wrapper>
+          <Padding size={[24, 12, 24, 12]}>
+            <Text typo="P_Header_16_SB">옵션을 먼저 생성해주세요!</Text>
+          </Padding>
+        </Wrapper>
+      </div>
+    );
   } else {
     return (
       <>
@@ -18,7 +36,19 @@ const OptionList = ({
             <ListHeader padding={0} size="listHeader_18" title="옵션 목록" />
             <Spacing size={42} />
           </div>
-          <Wrapper>옵션 내용 어쩌구</Wrapper>
+
+          {optionItems?.map((item: AllOptionResponse) => (
+            <>
+              <Wrapper key={item.optionGroupId}>
+                <OptionItem
+                  name={item.name}
+                  subText={`필수응답 · ${item.type}`}
+                  OptionGroupId={item.optionGroupId}
+                />
+              </Wrapper>
+              <Spacing size={16} />
+            </>
+          ))}
         </FlexBox>
       </>
     );
@@ -34,6 +64,4 @@ const Wrapper = styled.div`
   background-color: ${theme.palette.white};
   border-radius: 12px;
   border: 1px solid ${theme.palette.black};
-
-  padding: 24px 22px;
 `;

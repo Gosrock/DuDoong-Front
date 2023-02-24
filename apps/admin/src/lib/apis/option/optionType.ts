@@ -5,7 +5,7 @@ export interface OptionItemProps {
     type: OptionGroupType;
 }
 
-export type OptionGroupType =  'Y/N' | '주관식';
+export type OptionGroupType =  undefined | 'Y/N' | '주관식';
 
 
 export interface Option {
@@ -14,12 +14,15 @@ export interface Option {
     additionalPrice?: number;
 }
 
-
 export interface CreateOptionRequest {
     type: OptionGroupType;
     name: string;
     description: string;
     additionalPrice?: number;
+}
+
+export interface AllOptionGroupResponse {
+    optionGroups: AllOptionResponse[]
 }
 
 export interface AllOptionResponse {

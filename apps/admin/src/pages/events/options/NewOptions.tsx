@@ -23,15 +23,11 @@ import { Controller } from 'react-hook-form';
 
 const NewOptions = () => {
   const navigate = useNavigate();
-  const [optionType, setOptionType] = useState<OptionGroupType>('주관식');
+  const [optionType, setOptionType] = useState<OptionGroupType>();
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
   const [optionName, setOptionName] = useState<string>('');
   const [optionDescrip, setOptionDescrip] = useState<string>('');
-  const eventDetail = queryClient.getQueryData<EventDetailResponse>([
-    'eventDetail',
-    eventId,
-  ]);
   const { register, handleSubmit, control, formState } = useForm({
     mode: 'onChange',
   });
@@ -204,7 +200,13 @@ const NewOptions = () => {
                 />
               </>
             ) : (
-              <div></div>
+              <div
+                {...register('additionalPrice', {
+                  required: false,
+                  valueAsNumber: true,
+                  value: 0,
+                })}
+              ></div>
             )}
           </div>
         </FlexBox>

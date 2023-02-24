@@ -1,14 +1,27 @@
-import { ListHeader, Spacing, theme, Text, Divider } from '@dudoong/ui';
+import {
+  ListHeader,
+  Spacing,
+  theme,
+  Text,
+  Divider,
+  RoundBlock,
+} from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { TicketDetailResponse } from '@lib/apis/ticket/ticketType';
 import TicketItem from '../../tickets/TicketItem';
+import TicketApi from '@lib/apis/ticket/TicketApi';
+import { useQuery } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
 
-const TicketListOption = ({
-  ticketItems,
-}: {
-  ticketItems: TicketDetailResponse[] | null;
-}) => {
+const TicketListOption = () => {
+  const { pathname } = useLocation();
+  const eventId = pathname.split('/')[2];
+  const { data } = useQuery(['ticketDetail', eventId], () =>
+    TicketApi.GET_TICKET_DETAIL(eventId),
+  );
+  const ticketItems = data ? data.ticketItems : null;
+
   if (!ticketItems?.length) {
     return <div></div>;
   } else {
@@ -16,34 +29,19 @@ const TicketListOption = ({
       <div>
         <ListHeader padding={0} size="listHeader_18" title="티켓 목록" />
         <Spacing size={42} />
-        <div
-          css={css`
-            & > div > .host-divider:nth-last-of-type(1) {
-              display: none;
-            }
-          `}
-        >
-          {ticketItems?.map((item: TicketDetailResponse) => (
-            <>
-              <Wrapper>
-                <Text typo={'P_Header_16_SB'}>{item.ticketName}</Text>
-                <Divider line={true} />
-              </Wrapper>
-              <Spacing size={16} />
-            </>
-            //   <TicketItem
-            //     key={item.ticketItemId}
-            //     text={item.ticketName}
-            //     subText={`${item.price} · ${
-            //       item.approveType === '승인' ? '승인 후 발매' : '선착순'
-            //     } · 1인당 ${item.purchaseLimit}매`}
-            //     quantity={item.supplyCount}
-            //     stock={item.quantity}
-            //     isSold={item.quantity !== item.supplyCount}
-            //     ticketItemId={item.ticketItemId}
-            //   />
-          ))}
-        </div>
+
+        {ticketItems?.map((item: TicketDetailResponse) => (
+          <>
+            <Wrapper key={item.ticketItemId}>
+              <Text typo={'P_Header_16_SB'}>{item.ticketName}</Text>
+              <Divider line={true} />
+              <RoundBlock background="gray_200" padding={10} radius={15}>
+                Drag
+              </RoundBlock>
+            </Wrapper>
+            <Spacing size={16} />
+          </>
+        ))}
       </div>
     );
   }
