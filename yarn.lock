@@ -9329,6 +9329,7 @@ __metadata:
     react-kakao-maps-sdk: ^1.1.6
     typescript: ^4.9.4
     use-debounce: ^9.0.3
+    vite-plugin-html-env: ^1.2.7
   languageName: unknown
   linkType: soft
 
@@ -21103,6 +21104,15 @@ __metadata:
     unist-util-stringify-position: ^2.0.0
     vfile-message: ^2.0.0
   checksum: ee5726e10d170472cde778fc22e0f7499caa096eb85babea5d0ce0941455b721037ee1c9e6ae506ca2803250acd313d0f464328ead0b55cfe7cb6315f1b462d6
+  languageName: node
+  linkType: hard
+
+"vite-plugin-html-env@npm:^1.2.7":
+  version: 1.2.7
+  resolution: "vite-plugin-html-env@npm:1.2.7"
+  peerDependencies:
+    vite: "*"
+  checksum: 5e40ca5285c9164448aa7f2b4f8dda12365b833649211f086495bad98bda08d69d09855c00991226186a7844e9ed579384e13ca6edd4e9c666556d6941c44e2f
   languageName: node
   linkType: hard
 
