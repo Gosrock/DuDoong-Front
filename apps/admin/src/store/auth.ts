@@ -1,3 +1,4 @@
+import { getCookie } from '@lib/utils/cookie';
 import { atom } from 'recoil';
 
 export interface AuthStateType {
@@ -18,8 +19,8 @@ const initialState: AuthStateType = {
   userProfile: null,
 };
 
-const getTokenFromLocalStorage = (): AuthStateType => {
-  const refreshToken = localStorage.getItem('refreshToken') || '';
+const getTokenFromCookie = (): AuthStateType => {
+  const refreshToken = getCookie('refreshToken') || '';
   if (refreshToken) {
     return {
       ...initialState,
@@ -30,5 +31,5 @@ const getTokenFromLocalStorage = (): AuthStateType => {
 
 export const authState = atom<AuthStateType>({
   key: 'authState',
-  default: getTokenFromLocalStorage(),
+  default: getTokenFromCookie(),
 });
