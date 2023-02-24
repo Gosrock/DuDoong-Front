@@ -2100,6 +2100,7 @@ __metadata:
     react-drag-drop-files: ^2.3.8
     react-scripts: 5.0.1
     react-spinners: ^0.13.7
+    react-toastify: ^9.1.1
     storybook-addon-paddings: ^4.3.0
     webpack: ^5.75.0
   languageName: unknown
@@ -7962,7 +7963,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.0.4":
+"clsx@npm:^1.0.4, clsx@npm:^1.1.1":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
@@ -17944,6 +17945,18 @@ __metadata:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
   checksum: 4f306e30c3a425fd2b11c265ca0a7c261de0f63c0250fa6fa19eddd58c50fc9eaa463927571ee1dec39659a1bf619aaacf3352602b7724695da240ec0bc106cf
+  languageName: node
+  linkType: hard
+
+"react-toastify@npm:^9.1.1":
+  version: 9.1.1
+  resolution: "react-toastify@npm:9.1.1"
+  dependencies:
+    clsx: ^1.1.1
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 2039255539961a9b4d77b2656f120b20abe46cb0c699a7f3c0af23b4ef669d9c4d24dae6b8f4954b5efd83edf6d6e23614a29e94e9ee0d2647741fba9ba2db85
   languageName: node
   linkType: hard
 

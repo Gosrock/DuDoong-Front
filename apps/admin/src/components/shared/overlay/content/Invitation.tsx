@@ -19,6 +19,7 @@ import HostApi from '@lib/apis/host/HostApi';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { HostDetailResponse } from '@lib/apis/host/hostType';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 
 interface PostEventProps {
   closeOverlay: () => void;
@@ -29,6 +30,7 @@ const Invitation = ({ closeOverlay }: PostEventProps) => {
   const hostId = useLocation().pathname.split('/')[2];
   const [memberType, setMemberType] = useState<memberTypes>('일반멤버');
   const [buttonDisable, setButtonDisable] = useState<boolean>(true);
+  const { setToast } = useToastify();
   const { register, handleSubmit, formState } = useForm({
     mode: 'onChange',
   });
@@ -40,6 +42,10 @@ const Invitation = ({ closeOverlay }: PostEventProps) => {
       console.log('POST_HOST_INVITE : ', data);
       queryClient.invalidateQueries({ queryKey: ['hostDetail', hostId] });
       closeOverlay();
+    },
+    onError: (error: any) => {
+      const comment = error.response.data.reason;
+      setToast({ comment: comment });
     },
   });
 
