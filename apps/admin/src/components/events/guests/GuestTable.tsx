@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Table } from 'antd';
 import styled from '@emotion/styled';
@@ -22,6 +22,25 @@ const GuestTable = ({ tableType }: { tableType: TableType }) => {
   >(['events', eventId, tableType, page], () =>
     tableMap[tableType].queryFn(eventId, page, searchType, searchString),
   );
+  const selectOption = [
+    {
+      title: '이름',
+      onClick: () => {
+        setSearchType('NAME');
+      },
+    },
+    {
+      title: '전화번호',
+      onClick: () => {
+        setSearchType('PHONE');
+      },
+    },
+  ];
+
+  useEffect(() => {
+    reset();
+    setPage(0);
+  }, [tableType]);
 
   return (
     <Wrapper>
@@ -33,20 +52,7 @@ const GuestTable = ({ tableType }: { tableType: TableType }) => {
               <ChevronDown width={16} height={16} />
             </SearchOptionDropdown>
           }
-          options={[
-            {
-              title: '이름',
-              onClick: () => {
-                setSearchType('NAME');
-              },
-            },
-            {
-              title: '전화번호',
-              onClick: () => {
-                setSearchType('PHONE');
-              },
-            },
-          ]}
+          options={selectOption}
           width={100}
         />
         <Input
@@ -67,10 +73,10 @@ const GuestTable = ({ tableType }: { tableType: TableType }) => {
           text="검색"
           onClick={() => {
             refetch();
-            reset();
           }}
         />
       </Filter>
+
       {isSuccess ? (
         <Table
           columns={tableMap[tableType].columns}
@@ -132,9 +138,11 @@ const Filter = styled.div`
   position: absolute;
   right: 30px;
   top: -45px;
+  z-index: 2;
 
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
 `;
 
 const SearchOptionDropdown = styled.div`

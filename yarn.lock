@@ -9316,6 +9316,7 @@ __metadata:
     react-hook-form: ^7.43.1
     react-kakao-maps-sdk: ^1.1.6
     typescript: ^4.9.4
+    use-debounce: ^9.0.3
   languageName: unknown
   linkType: soft
 
@@ -20847,6 +20848,15 @@ __metadata:
     querystringify: ^2.1.1
     requires-port: ^1.0.0
   checksum: fbdba6b1d83336aca2216bbdc38ba658d9cfb8fc7f665eb8b17852de638ff7d1a162c198a8e4ed66001ddbf6c9888d41e4798912c62b4fd777a31657989f7bdf
+  languageName: node
+  linkType: hard
+
+"use-debounce@npm:^9.0.3":
+  version: 9.0.3
+  resolution: "use-debounce@npm:9.0.3"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: e9aa3b89abe28bd746cfb5e7edc281d786788b6afe4063cfd8e34c4fff58af212809f13bffa16ff291bead199abb497325330e66d1e772d1843853edbd4646ba
   languageName: node
   linkType: hard
 

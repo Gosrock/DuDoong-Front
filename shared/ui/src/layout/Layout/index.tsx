@@ -46,7 +46,7 @@ const Content = styled.div`
     overflow: hidden;
 
     & > div {
-      overflow-y: scroll;
+      overflow: hidden scroll;
       position: absolute;
       height: 100%;
       top: 0px;
