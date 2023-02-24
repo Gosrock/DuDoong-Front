@@ -1,9 +1,9 @@
-import { Input, ListHeader, Modal, Padding, Spacing } from '@dudoong/ui';
+import { Input, ListHeader, Search, Spacing } from '@dudoong/ui';
 import { BasicEventRequest } from '@lib/apis/event/eventType';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import ModalSearch from './ModalSearch';
 
@@ -20,8 +20,8 @@ interface place {
 const MapPage = (props: any) => {
   const [lat, setLat] = useState<number | null>();
   const [lng, setLng] = useState<number | null>();
-  const [placeName, setPlaceName] = useState<string | null>();
-  const [placeAddress, setPlaceAddress] = useState<string | null>();
+  const [placeName, setPlaceName] = useState<string | undefined>();
+  const [placeAddress, setPlaceAddress] = useState<string | undefined>();
   const [markers, setMarkers] = useState<any>();
   const [map, setMap] = useState<any>();
   const [address, setAddress] = useState<string | undefined>('');
@@ -49,6 +49,7 @@ const MapPage = (props: any) => {
           lng: Number(props.place.longitude),
         },
       });
+      setPlaceName(props.place.placeName);
     }
   }, [props?.place]);
 
@@ -65,8 +66,8 @@ const MapPage = (props: any) => {
         name: props.name,
         startAt: timeFormatter(props.startDate, props.startTime),
         runTime: props.runtime,
-        placeName: curMarker.content,
-        placeAddress: curMarker.placeAddress,
+        placeName: placeName,
+        placeAddress: address,
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
       };
@@ -100,6 +101,10 @@ const MapPage = (props: any) => {
 
   const handleChange = (e: { target: { value: string } }) => {
     setAddress(e.target.value);
+  };
+
+  const handleName = (e: any) => {
+    e.preventDefault();
   };
 
   const handleMap = () => {
@@ -147,7 +152,6 @@ const MapPage = (props: any) => {
     setMarker(markers);
     setLat(Number(markers.position.lat));
     setLng(Number(markers.position.lng));
-    setPlaceName(markers.content);
 
     bounds.extend(
       new kakao.maps.LatLng(
@@ -163,6 +167,7 @@ const MapPage = (props: any) => {
     handleMap();
   }, [map]);
 
+  console.log(address);
   return (
     <>
       <div>
@@ -171,20 +176,22 @@ const MapPage = (props: any) => {
           size={'listHeader_18'}
           title={'공연 장소'}
         ></ListHeader>
-        <form>
+        <form onSubmit={handleName}>
           <Input
             width={398}
-            placeholder="검색하세요"
-            value={curMarker.content !== null ? curMarker.content : ''}
-            onClick={() => setIsOpen(true)}
-            readOnly
+            placeholder="공연장 이름을 적어주세요"
+            value={placeName}
+            onChange={(e: { target: { value: string } }) =>
+              setPlaceName(e.target.value)
+            }
+            rightIcon={<Search onClick={() => setIsOpen(true)} />}
           ></Input>
         </form>
         <Spacing size={12} />
         <Map // 로드뷰를 표시할 Container
           center={{
-            lat: 37.55097092681401,
-            lng: 126.92364650757898,
+            lat: curMarker.position.lat,
+            lng: curMarker.position.lng,
           }}
           style={{ width: '398px', height: '292px', borderRadius: '8px' }}
           level={4}
