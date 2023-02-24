@@ -5,12 +5,12 @@ import { ComponentProps, useEffect, useRef, useState } from 'react';
 interface DropdownProps extends ComponentProps<'div'> {
   size: DropdownSize;
   width: number;
-  options: { title: string; onClick: () => void }[];
+  options: PopupOptions[];
   disabled: boolean;
   onClickOption: () => void;
   renderElement: JSX.Element;
 }
-
+export type PopupOptions = { title: string; onClick: () => void };
 type DropdownSize = 'large' | 'small';
 type Props = Partial<DropdownProps>;
 type WapperProps = Pick<Props, 'size' | 'disabled' | 'width'>;

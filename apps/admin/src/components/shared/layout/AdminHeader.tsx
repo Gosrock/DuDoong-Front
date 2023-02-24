@@ -1,6 +1,6 @@
-import { Header } from '@dudoong/ui';
+import { Header, Popup, PopupOptions, theme } from '@dudoong/ui';
 import { Profile } from '@dudoong/ui';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -12,17 +12,44 @@ interface AdminHeaderProps {
 
 const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
   const auth = useRecoilValue(authState);
-
+  const resetAuthState = useResetRecoilState(authState);
+  const profileOption: PopupOptions[] = [
+    {
+      title: '마이페이지',
+      onClick: () => {
+        window.location.href = '/mypage';
+      },
+    },
+    {
+      title: '로그아웃',
+      onClick: () => {
+        // resetAuthState();
+        //TODO : 쿠키에서 토큰 삭제, axios 인스턴스에서 헤더 삭제
+      },
+    },
+  ];
   const rightElement = (
-    <div css={css``}>
-      <Profile
-        image={auth.userProfile!.profileImage}
-        size={'small'}
-        name={auth.userProfile!.name}
-        subText={host}
-        alliance={alliance}
-      />
-    </div>
+    <Popup
+      width={100}
+      options={profileOption}
+      renderElement={
+        <Profile
+          image={auth.userProfile!.profileImage}
+          size={'small'}
+          name={auth.userProfile!.name}
+          subText={host}
+          alliance={alliance}
+          css={css`
+            padding-right: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            &:hover {
+              background-color: ${theme.palette.gray_100};
+            }
+          `}
+        />
+      }
+    />
   );
   return (
     <HeaderWrapper>

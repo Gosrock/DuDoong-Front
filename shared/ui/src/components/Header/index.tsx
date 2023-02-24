@@ -20,10 +20,6 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
             onClick={() =>
               (window.location.href = `${window.location.origin}/`)
             }
-            css={css`
-              &:hover {
-              }
-            `}
           >
             <Logo />
           </button>

@@ -14,9 +14,9 @@ import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
 import { AuthApi, OauthLoginResponse } from '@dudoong/utils';
 import { authState } from '@store/auth';
 import cookies from 'next-cookies';
-import HeaderLayout from '@components/shared/Layout/HeaderLayout';
 import { setCredentials } from '@lib/utils/setCredentials';
 import { getCookie } from 'cookies-next';
+import Layout from '@components/shared/Layout';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -48,10 +48,10 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
           <Hydrate state={pageProps.dehydratedState}>
             <Global styles={globalStyle} />
-            <HeaderLayout>
+            <Layout>
               <Component {...pageProps} />
               <GlobalOverlay />
-            </HeaderLayout>
+            </Layout>
           </Hydrate>
         </QueryClientProvider>
       </RecoilRoot>

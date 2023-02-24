@@ -1,6 +1,6 @@
 import { OauthLoginResponse } from '@dudoong/utils';
 import { axiosPrivate } from '@lib/apis/axios';
-import { setCookie } from 'cookies-next';
+import { removeCookies, setCookie } from 'cookies-next';
 
 export const setCredentials = (refresh: OauthLoginResponse) => {
   axiosPrivate.defaults.headers.common[
@@ -14,4 +14,10 @@ export const setCredentials = (refresh: OauthLoginResponse) => {
   setCookie('refreshToken', refresh.refreshToken, {
     maxAge: refresh.refreshTokenAge,
   });
+};
+
+export const resetCrendentials = () => {
+  axiosPrivate.defaults.headers.common['Authorization'] = ``;
+  removeCookies('accessToken');
+  removeCookies('refreshToken');
 };
