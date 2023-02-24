@@ -125,3 +125,43 @@ export interface OrderListResponse {
   itemName: string;
   totalQuantity: number;
 }
+/**
+ * 결제 아이디로 티켓 조회
+ */
+
+export interface OrderTicketResponse {
+  tickets: IssuedTicketInfo[];
+  eventProfile: EventProfile;
+}
+
+export interface IssuedTicketInfo {
+  issuedTicketId: number;
+  issuedTicketNo: string;
+  uuid: string;
+  ticketName: string;
+  ticketPrice: string;
+  createdAt: string;
+  enteredAt: string;
+  issuedTicketStatus: IssuedTicketStatus;
+  optionPrice: string;
+  userInfo: IssuedTicketUserInfo;
+}
+
+export interface IssuedTicketUserInfo {
+  userId: number;
+  userName: string;
+  phoneNumber: string;
+}
+
+export interface eventProfile {
+  eventId: number;
+  posterImage: string;
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
+  placeName: string;
+  status: EventStatus;
+}
+
+export type IssuedTicketStatus = '입장 완료' | '입장 전' | '취소 티켓';

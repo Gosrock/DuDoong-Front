@@ -3,6 +3,7 @@ import { axiosPrivate } from '../axios';
 import type {
   GetEventTicketItemsResponse,
   GetTicketItemOptionsResponse,
+  RetrievedIssuedTicketDetailResponse,
 } from './ticketType';
 
 export const TicketApi = {
@@ -20,6 +21,13 @@ export const TicketApi = {
     const response = await axiosPrivate.get(
       `/events/${eventId}/ticketItems/${ticketItemId}/options`,
     );
+    return response.data.data;
+  },
+
+  GET_ISSUEDTICKETS: async (
+    issuedTicketId: number,
+  ): Promise<RetrievedIssuedTicketDetailResponse> => {
+    const response = await axiosPrivate.get(`/issuedTickets/${issuedTicketId}`);
     return response.data.data;
   },
 };

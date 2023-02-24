@@ -6,6 +6,7 @@ import type {
   CreateOrderResponse,
   OrderListResponse,
   OrderResponse,
+  OrderTicketResponse,
 } from './orderType';
 
 export const OrderApi = {
@@ -17,10 +18,10 @@ export const OrderApi = {
   },
 
   CONFIRM_ORDER:
-    (orderId: string) =>
+    (order_uuid: string) =>
     async (payload: ConfirmOrderRequest): Promise<OrderResponse> => {
       const response = await axiosPrivate.post(
-        `/orders/${orderId}/confirm`,
+        `/orders/${order_uuid}/confirm`,
         payload,
       );
       return response.data.data;
@@ -36,6 +37,13 @@ export const OrderApi = {
   },
   GET_RECENT_ORDER: async (): Promise<OrderListResponse> => {
     const response = await axiosPrivate.get(`/orders/recent`);
+    return response.data.data;
+  },
+
+  GET_ORDERS_TICKETS: async (
+    order_uuid: string,
+  ): Promise<OrderTicketResponse> => {
+    const response = await axiosPrivate.get(`orders/${order_uuid}/tickets`);
     return response.data.data;
   },
 };
