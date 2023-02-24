@@ -1,7 +1,21 @@
 import styled from '@emotion/styled';
-import { theme, ListHeader, Input, Divider, Spacing } from '@dudoong/ui';
+import {
+  theme,
+  ListHeader,
+  Input,
+  Divider,
+  Spacing,
+  FlexBox,
+  SelectButton,
+} from '@dudoong/ui';
+import { OptionItemProps } from '@lib/apis/option/optionType';
+import { useState } from 'react';
 
-const OptionPreview = () => {
+const OptionPreview = ({ name, description, type }: OptionItemProps) => {
+  const [answer, setAnswer] = useState<string>('Y');
+  const handleClickSelect = (key: 'Y' | 'N') => {
+    setAnswer(key);
+  };
   return (
     <div>
       <ListHeader
@@ -13,16 +27,45 @@ const OptionPreview = () => {
         <ListHeader
           padding={[0, 12, 0, 0]}
           gap={12}
-          title={'1. 주관식 설문 예시'}
+          title={name === '' ? '1. 옵션 이름' : `1. ${name}`}
           size="listHeader_18"
-          description={'티켓 구매자의 학번을 입력해주세요'}
+          description={
+            description === ''
+              ? '설문의 설명이 들어가는 공간입니다.'
+              : description
+          }
         />
         <Divider line={true} />
         <Spacing size={6} />
-        <Input
-          disabled={false}
-          placeholder="최대 100글자까지 쓸 수 있어요"
-        ></Input>
+        {type === '주관식' ? (
+          <>
+            <Input
+              disabled={false}
+              placeholder="최대 100글자까지 쓸 수 있어요"
+            ></Input>
+          </>
+        ) : (
+          <>
+            <FlexBox gap={10}>
+              <SelectButton
+                text={'네'}
+                fullWidth={false}
+                isSelected={answer === 'Y'}
+                onClick={() => {
+                  handleClickSelect('Y');
+                }}
+              />
+              <SelectButton
+                text={'아니오'}
+                fullWidth={false}
+                isSelected={answer === 'N'}
+                onClick={() => {
+                  handleClickSelect('N');
+                }}
+              />
+            </FlexBox>
+          </>
+        )}
       </Wrapper>
     </div>
   );

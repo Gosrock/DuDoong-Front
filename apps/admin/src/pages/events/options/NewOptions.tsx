@@ -23,14 +23,16 @@ import { Controller } from 'react-hook-form';
 
 const NewOptions = () => {
   const navigate = useNavigate();
-  const [optionType, setOptionType] = useState<OptionGroupType>();
+  const [optionType, setOptionType] = useState<OptionGroupType>('주관식');
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
+  const [optionName, setOptionName] = useState<string>('');
+  const [optionDescrip, setOptionDescrip] = useState<string>('');
   const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
     eventId,
   ]);
-  const { register, handleSubmit, watch, control, formState } = useForm({
+  const { register, handleSubmit, control, formState } = useForm({
     mode: 'onChange',
   });
   const { openOverlay, closeOverlay } = useGlobalOverlay();
@@ -110,6 +112,7 @@ const NewOptions = () => {
             size={'listHeader_18'}
           />
           <Input
+            value={optionName}
             disabled={false}
             maxLength={20}
             placeholder="최대 20글자까지 쓸 수 있어요"
@@ -119,6 +122,7 @@ const NewOptions = () => {
                 value: 20,
                 message: '20글자를 초과하였습니다.',
               },
+              onChange: (e) => setOptionName(e.target.value),
             })}
           />
           <Spacing size={32} />
@@ -131,6 +135,7 @@ const NewOptions = () => {
           <Input
             disabled={false}
             maxLength={50}
+            value={optionDescrip}
             placeholder="최대 50글자까지 쓸 수 있어요"
             {...register('description', {
               required: true,
@@ -138,6 +143,7 @@ const NewOptions = () => {
                 value: 50,
                 message: '50글자를 초과하였습니다.',
               },
+              onChange: (e) => setOptionDescrip(e.target.value),
             })}
           />
           <Spacing size={32} />
@@ -174,26 +180,39 @@ const NewOptions = () => {
             )}
           />
           <Spacing size={32} />
-          <ListHeader
-            padding={[32, 0, 12, 0]}
-            title={`'예' 응답에 가격 인상하기`}
-            description={
-              '옵션에 따른 추가금액이 있다면 티켓의 가격을 인상할 수 있어요.'
-            }
-            size={'listHeader_18'}
-          />
-          <Input
-            type="number"
-            disabled={optionType === 'Y/N' ? false : true}
-            maxLength={5}
-            placeholder="0"
-            {...register('additionalPrice', {
-              required: false,
-              valueAsNumber: true,
-            })}
-          />
+          <div>
+            {optionType === 'Y/N' ? (
+              <>
+                <ListHeader
+                  padding={[32, 0, 12, 0]}
+                  title={`'네' 응답에 가격 인상하기`}
+                  description={
+                    '옵션에 따른 추가금액이 있다면 옵션의 가격을 추가해주세요.'
+                  }
+                  size={'listHeader_18'}
+                />
+                <Input
+                  type="number"
+                  disabled={optionType === 'Y/N' ? false : true}
+                  maxLength={5}
+                  placeholder="0"
+                  {...register('additionalPrice', {
+                    required: false,
+                    valueAsNumber: true,
+                    value: 0,
+                  })}
+                />
+              </>
+            ) : (
+              <div></div>
+            )}
+          </div>
         </FlexBox>
-        <OptionPreview />
+        <OptionPreview
+          name={optionName}
+          description={optionDescrip}
+          type={optionType}
+        />
       </ContentGrid>
     </div>
   );

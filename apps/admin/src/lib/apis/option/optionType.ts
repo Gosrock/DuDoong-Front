@@ -1,7 +1,11 @@
 
+export interface OptionItemProps {
+    name: string;
+    description: string;
+    type: OptionGroupType;
+}
 
-
-export type OptionGroupType = 'Y/N' | '주관식';
+export type OptionGroupType =  'Y/N' | '주관식';
 
 
 export interface Option {
@@ -14,7 +18,7 @@ export interface Option {
 export interface CreateOptionRequest {
     type: OptionGroupType;
     name: string;
-    descrition: string;
+    description: string;
     additionalPrice?: number;
 }
 
