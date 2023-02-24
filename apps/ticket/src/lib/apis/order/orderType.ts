@@ -1,11 +1,15 @@
-import { OptionAnswer } from '../cart/cartType';
-import { TicketType } from '../ticket/ticketType';
+import { EventStatus } from '@dudoong/utils';
+import type { OptionAnswer } from '../cart/cartType';
+import type { ApproveType } from '../ticket/ticketType';
 
 export interface CreateOrderRequest {
   couponId: number | null;
   cartId: number;
 }
 
+/**
+ * POST /v1/orders/ (주문 생성)
+ */
 export interface CreateOrderResponse {
   orderId: string;
   orderName: string;
@@ -14,7 +18,7 @@ export interface CreateOrderResponse {
   amount: string;
   isNeedPayment: boolean;
   orderMethod: OrderMethod;
-  ticketType: TicketType;
+  approveType: ApproveType;
 }
 
 export interface ConfirmOrderRequest {
@@ -22,14 +26,18 @@ export interface ConfirmOrderRequest {
   amount: number;
 }
 
+/**
+ * POST confirm (결제확인하기)
+ */
 export interface OrderResponse {
   paymentInfo: OrderPaymentResponse;
   tickets: OrderLineTicketResponse;
   refundInfo: RefundInfo;
+  eventProfile: EventProfile;
   orderUuid: string;
   orderId: number;
   orderMethod: OrderMethod;
-  ticketType: TicketType;
+  approveType: ApproveType;
 }
 
 /**
@@ -58,6 +66,7 @@ export interface OrderLineTicketResponse {
   orderLinePrice: string;
   purchaseQuantity: number;
   answers: OptionAnswer;
+  eachOptionPrice: string;
 }
 
 /**
@@ -66,6 +75,20 @@ export interface OrderLineTicketResponse {
 interface RefundInfo {
   endAt: string;
   available: boolean;
+}
+
+/**
+ * 이벤트 프로필 정보
+ */
+interface EventProfile {
+  eventId: number;
+  posterImage: string;
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
+  placeName: string;
+  status: EventStatus;
 }
 
 export type OrderMethod = '승인 방식' | '결제 방식';
@@ -80,3 +103,44 @@ export type OrderStatus =
   | ' 환불 완료'
   | ' 취소된 결제'
   | ' 결제 실패';
+
+/**
+ * 결제 아이디로 티켓 조회
+ */
+
+export interface OrderTicketResponse {
+  tickets: IssuedTicketInfo[];
+  eventProfile: EventProfile;
+}
+
+export interface IssuedTicketInfo {
+  issuedTicketId: number;
+  issuedTicketNo: string;
+  uuid: string;
+  ticketName: string;
+  ticketPrice: string;
+  createdAt: string;
+  enteredAt: string;
+  issuedTicketStatus: IssuedTicketStatus;
+  optionPrice: string;
+  userInfo: IssuedTicketUserInfo;
+}
+
+export interface IssuedTicketUserInfo {
+  userId: number;
+  userName: string;
+  phoneNumber: string;
+}
+
+export interface eventProfile {
+  eventId: number;
+  posterImage: string;
+  name: string;
+  startAt: string;
+  endAt: string;
+  runTime: number;
+  placeName: string;
+  status: EventStatus;
+}
+
+export type IssuedTicketStatus = '입장 완료' | '입장 전' | '취소 티켓';

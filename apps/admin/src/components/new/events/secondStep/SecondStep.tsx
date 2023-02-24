@@ -1,4 +1,3 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import {
   FlexBox,
   ListHeader,
@@ -8,11 +7,12 @@ import {
   TimePicker,
   Spacing,
   Button,
+  BorderBox,
 } from '@dudoong/ui';
 import { useInputs } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import TimeButton from './TimeButton';
-import { CreateEventRequest } from '@lib/apis/event/eventType';
+import type { CreateEventRequest } from '@lib/apis/event/eventType';
 import { useRef } from 'react';
 import { useState } from 'react';
 import useEvents from '@lib/hooks/useEvents';

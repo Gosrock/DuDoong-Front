@@ -1,5 +1,10 @@
-import { OptionGroupType } from '../cart/cartType';
+import { EventStatus } from '@dudoong/utils';
+import type { OptionGroupType } from '../cart/cartType';
+import { IssuedTicketInfo } from '../order/orderType';
 
+/*
+ * GET /v1/events/{eventId}/ticketItems 해당 이벤트의 티켓 조회
+ */
 export interface GetEventTicketItemsResponse {
   ticketItems: TicketItemResponse[];
 }
@@ -35,4 +40,22 @@ export interface OptionResponse {
   optionId: number;
   answer: string;
   additionalPrice: string;
+}
+
+export interface RetrievedIssuedTicketDetailResponse {
+  issuedTicketInfo: IssuedTicketInfo;
+  eventInfo: EventInfo;
+}
+
+export interface EventInfo {
+  eventName: string;
+  posterImage: string;
+  content: string;
+  startAt: string;
+  endAt: string;
+  latitude: number;
+  longitude: number;
+  placeName: string;
+  placeAddress: string;
+  eventStatus: EventStatus;
 }

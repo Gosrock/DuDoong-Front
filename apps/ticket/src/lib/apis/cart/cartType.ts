@@ -1,3 +1,5 @@
+import { ApproveType, PayType } from '../ticket/ticketType';
+
 export interface AddCartRequest {
   items: AddCartLineDto[];
 }
@@ -21,6 +23,9 @@ export interface AddCartResponse {
   cartId: number;
   totalQuantity: number;
   isNeedPayment: boolean;
+  approveType: ApproveType;
+  ticketPayType: PayType;
+  accountNumber?: string;
 }
 
 export interface CartItemResponse {

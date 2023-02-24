@@ -3,16 +3,28 @@ import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { overlayState } from '@store/globalOverlay';
 import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
+import Approve from './content/Approve';
 import DeleteEvent from './content/DeleteEvent';
+import Invitation from './content/Invitation';
+import PaidTicket from './content/PaidTicket';
 import Pay from './content/Pay';
 import PostEvent from './content/PostEvent';
 import Register from './content/Register';
+import Saved from './content/Saved';
+import SaveTicket from './content/SaveTicket';
+import TableViewDetail from './content/TableDetailView';
 
 export type GlobalSheetContentKey =
   | 'register'
   | 'deleteEvent'
   | 'postEvent'
-  | 'pay';
+  | 'pay'
+  | 'paidTicket'
+  | 'approve'
+  | 'saveTicket'
+  | 'tableViewDetail'
+  | 'saved'
+  | 'invitation';
 
 export type GlobalSheetContentType = {
   [key in GlobalSheetContentKey]: ReactNode;
@@ -23,6 +35,12 @@ const globalSheetContent = {
   deleteEvent: DeleteEvent,
   postEvent: PostEvent,
   pay: Pay,
+  paidTicket: PaidTicket,
+  approve: Approve,
+  saveTicket: SaveTicket,
+  tableViewDetail: TableViewDetail,
+  saved: Saved,
+  invitation: Invitation,
 };
 
 const GlobalOverlay = () => {

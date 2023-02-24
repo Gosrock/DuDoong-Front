@@ -55,6 +55,7 @@ interface TimeButtonWrapperProps {
 
 const TimeButtonWrapper = styled(FlexBox)<TimeButtonWrapperProps>`
   height: 48px;
+  width: 100px;
   padding: ${({ type }) => (type === 'reset' ? '12px 16.5px' : '12px 11px')};
   background-color: ${({ type }) => TAG_BUTTON_COLOR[type].default};
   border-radius: 10px;

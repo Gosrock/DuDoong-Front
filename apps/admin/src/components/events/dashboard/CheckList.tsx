@@ -1,5 +1,5 @@
-import { ListHeader, Spacing } from '@dudoong/ui';
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
+import { ListHeader, Spacing, BorderBox } from '@dudoong/ui';
+
 import ListContents from './ListContents';
 
 const CheckList = ({ check }: { check: boolean[] | null }) => {

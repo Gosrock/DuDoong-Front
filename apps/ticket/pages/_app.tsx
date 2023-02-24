@@ -14,9 +14,9 @@ import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
 import { AuthApi, OauthLoginResponse } from '@dudoong/utils';
 import { authState } from '@store/auth';
 import cookies from 'next-cookies';
-import HeaderLayout from '@components/shared/Layout/HeaderLayout';
 import { setCredentials } from '@lib/utils/setCredentials';
 import { getCookie } from 'cookies-next';
+import Layout from '@components/shared/Layout';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -48,10 +48,10 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
           <ReactQueryDevtools initialIsOpen={false} />
           <Hydrate state={pageProps.dehydratedState}>
             <Global styles={globalStyle} />
-            <HeaderLayout>
+            <Layout>
               <Component {...pageProps} />
               <GlobalOverlay />
-            </HeaderLayout>
+            </Layout>
           </Hydrate>
         </QueryClientProvider>
       </RecoilRoot>
@@ -61,11 +61,13 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
 
 MyApp.getInitialProps = async (context: AppContext) => {
   console.log('getInitialProps');
-  const { ctx, Component } = context;
+  const { ctx, Component, router } = context;
   const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};
   let loginData: OauthLoginResponse | null;
+
   try {
+    //정적생성페이지(이벤트상세)에서는 리프레쉬로직 돌지 않음
     if (ctx.req) {
       const response = await AuthApi.REFRESH(refreshToken!);
       loginData = response;

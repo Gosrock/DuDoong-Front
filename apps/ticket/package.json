@@ -14,8 +14,6 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@next/font": "13.0.7",
-    "@tanstack/react-query": "^4.20.4",
-    "@tanstack/react-query-devtools": "^4.20.4",
     "@toast-ui/react-editor": "^3.2.2",
     "@tosspayments/payment-widget-sdk": "^0.5.2",
     "@types/node": "18.11.16",
@@ -26,10 +24,12 @@
     "next": "13.0.7",
     "next-cookies": "^2.0.3",
     "next-transpile-modules": "^10.0.0",
+    "qr-code-styling": "^1.6.0-rc.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-spring-bottom-sheet": "^3.4.1",
     "recoil": "^0.7.6",
+    "swiper": "^9.0.5",
     "typescript": "4.9.4"
   },
   "devDependencies": {

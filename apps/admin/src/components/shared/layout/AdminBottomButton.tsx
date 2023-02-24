@@ -79,7 +79,7 @@ const AdminBottomButton = () => {
     return null;
   } else {
     return (
-      <Wrapper size={[20, 24]}>
+      <Wrapper size={[16, 24]}>
         <div>
           <FlexBox align={'center'} justify={'flex-end'} gap={12}>
             {buttons}
@@ -122,7 +122,7 @@ const Wrapper = styled(Padding)`
   bottom: 0px;
   left: 252px;
   width: calc(100vw - 252px);
-  height: 96px;
+  height: 88px;
   border-top: 1px solid ${({ theme }) => theme.palette.gray_200};
   background-color: ${({ theme }) => theme.palette.gray_100};
   animation: ${buttonMov} 0.4s ease-out;

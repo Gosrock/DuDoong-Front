@@ -1,6 +1,6 @@
 import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import {
+import type {
   CreateEventRequest,
   CreateEventResponse,
   EventChecklistResponse,
@@ -12,6 +12,7 @@ import {
   imageFileExtensionType,
   ImageUrlResponse,
   UpdateEventDetailRequest,
+  BasicEventRequest,
 } from './eventType';
 
 const EventApi = {
@@ -49,6 +50,11 @@ const EventApi = {
     eventId: string,
   ): Promise<DashBoardStatisticResponse> => {
     const response = await axiosPrivate.get(`events/${eventId}/statistics`);
+    return response.data.data;
+  },
+
+  PATCH_EVENT_DELETE: async (eventId: string): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(`events/${eventId}/delete`);
     return response.data.data;
   },
 
@@ -92,6 +98,16 @@ const EventApi = {
   }): Promise<EventResponse> => {
     const response = await axiosPrivate.patch(
       `/events/${eventId}/details`,
+      payload,
+    );
+    return response.data.data;
+  },
+  PATCH_EVENT_BASIC: async (
+    payload: BasicEventRequest,
+    eventId: string,
+  ): Promise<EventResponse> => {
+    const response = await axiosPrivate.patch(
+      `events/${eventId}/basic`,
       payload,
     );
     return response.data.data;

@@ -1,7 +1,7 @@
 import { ListHeader, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import {
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import type {
   UpdateEventDetailRequest,
   ImageUrlResponse,
 } from '@lib/apis/event/eventType';
@@ -19,6 +19,7 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 import uml from '@toast-ui/editor-plugin-uml';
 import { HookCallback } from '@toast-ui/editor/types/editor';
+import '@toast-ui/editor/dist/i18n/ko-kr';
 
 interface EventDetailInfoProps {
   content: string;
@@ -31,6 +32,7 @@ const EventDetailInfo = ({
   setForm,
   eventId,
 }: EventDetailInfoProps) => {
+  const [curContent, setCurContent] = useState<string>('');
   const toolbarItems = [
     ['heading', 'bold', 'italic', 'strike'],
     ['hr', 'quote'],
@@ -40,6 +42,11 @@ const EventDetailInfo = ({
     ['scrollSync'],
   ];
   const editorRef = useRef<Editor>(null);
+
+  useEffect(() => {
+    setCurContent(content);
+    if (editorRef.current) editorRef.current!.getInstance().setHTML(content);
+  }, [content]);
 
   // presigned 발급 api
   const postEventImageMutation = useMutation(EventApi.POST_EVENT_IMAGE, {
@@ -82,18 +89,12 @@ const EventDetailInfo = ({
     console.log(editorRef.current!.getInstance().getHTML());
   };
 
-  useEffect(() => {
-    if (editorRef.current && content) {
-      editorRef.current.getInstance().setHTML(content);
-    }
-  }, [content]);
-
   return (
     <div>
       <ListHeader
         title={'공연 상세 내용'}
         size={'listHeader_18'}
-        padding={[32, 0, 12, 0]}
+        padding={[56, 0, 12, 0]}
         description={<TitleDescription />}
       />
       <EditorWrapper>
@@ -101,12 +102,15 @@ const EventDetailInfo = ({
           ref={editorRef}
           onChange={onChange}
           placeholder="공연 상세 내용을 입력해주세요."
-          previewStyle="tab" // 미리보기 스타일 지정
-          // hideModeSwitch={true} // 모드 바꾸기 스위치 숨기기 여부
+          previewStyle="vertical" // 미리보기 스타일 지정
+          initialValue={curContent}
+          hideModeSwitch={true} // 모드 바꾸기 스위치 숨기기 여부
           previewHighlight={true}
-          height="398px" // 에디터 창 높이
+          height="500px" // 에디터 창 높이
           initialEditType="wysiwyg" // 초기 입력모드 설정
           toolbarItems={toolbarItems}
+          useCommandShortcut={false}
+          language="ko-KR"
           autofocus
           hooks={{
             addImageBlobHook: uploadImageHandler,

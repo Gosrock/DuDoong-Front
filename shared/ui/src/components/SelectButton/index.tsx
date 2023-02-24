@@ -34,4 +34,10 @@ const Wrapper = styled.button<Props>`
   border: 1px solid ${({ theme }) => theme.palette.main_400};
   border-radius: 12px;
   ${({ theme }) => theme.typo.P_Button_16_SB}
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.palette.gray_200}!important;
+    color: ${({ theme }) => theme.palette.white} !important;
+    border: none !important;
+  }
 `;

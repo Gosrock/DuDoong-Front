@@ -14,6 +14,7 @@ export * from './MenuBar';
 export * from './MenuItem';
 export * from './Modal';
 export * from './NavBar';
+export * from './Popup';
 export * from './PopupDropdown';
 export * from './ProfileDropdown';
 export * from './Profile/Profile';

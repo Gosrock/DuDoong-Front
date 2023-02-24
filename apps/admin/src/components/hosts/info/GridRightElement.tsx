@@ -1,12 +1,12 @@
 import { ListHeader, Spacing, Input, FlexBox } from '@dudoong/ui';
-import { UpdateHostRequest } from '@lib/apis/host/hostType';
-import { ChangeEvent } from 'react';
+import { InputFormType } from '@pages/hosts/Info';
+import { UseFormRegister, FieldValues } from 'react-hook-form';
 
-interface GridRightElementProps extends UpdateHostRequest {
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+interface GridRightElementProps {
+  register: UseFormRegister<InputFormType>;
 }
 
-const GridRightElement = ({ onChange, ...props }: GridRightElementProps) => {
+const GridRightElement = ({ register }: GridRightElementProps) => {
   return (
     <div>
       <ListHeader
@@ -15,10 +15,10 @@ const GridRightElement = ({ onChange, ...props }: GridRightElementProps) => {
         padding={[32, 0, 12, 0]}
       />
       <Input
-        name="introduce"
-        onChange={onChange}
+        {...register('introduce', {
+          required: true,
+        })}
         placeholder={'최대 N글자까지 쓸 수 있어요.'}
-        value={props.introduce}
       />
       <Spacing size={40} />
       <FlexBox align={'center'} gap={10}>
@@ -29,10 +29,11 @@ const GridRightElement = ({ onChange, ...props }: GridRightElementProps) => {
             padding={[32, 0, 12, 0]}
           />
           <Input
-            name="contactNumber"
-            onChange={onChange}
+            {...register('contactNumber', {
+              required: true,
+              pattern: /^\d{3}-\d{3,4}-\d{4}$/,
+            })}
             placeholder={'011-2391-9745'}
-            value={props.contactNumber}
           />
         </div>
         <div>
@@ -42,10 +43,12 @@ const GridRightElement = ({ onChange, ...props }: GridRightElementProps) => {
             padding={[32, 0, 12, 0]}
           />
           <Input
-            name="contactEmail"
-            onChange={onChange}
+            {...register('contactEmail', {
+              required: true,
+              pattern:
+                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+            })}
             placeholder={'email@aaa.bbb'}
-            value={props.contactEmail}
           />
         </div>
       </FlexBox>

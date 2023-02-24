@@ -1,5 +1,4 @@
 import { ListHeader } from '@dudoong/ui';
-import ContentGrid from '@components/shared/layout/ContentGrid';
 import { useEffect, useState } from 'react';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import EventDetailInfo from '@components/events/detail/EventDetailInfo';
@@ -7,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 import { useMutation } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
-import {
+import type {
   EventResponse,
   ImageUrlResponse,
   UpdateEventDetailRequest,
@@ -16,6 +15,7 @@ import {
 import { queryClient } from '../../main';
 import EventImage from '@components/events/detail/EventImage';
 import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 const Detail = () => {
   const eventId = useLocation().pathname.split('/')[2];
@@ -27,6 +27,7 @@ const Detail = () => {
     posterImageKey: '',
     content: '',
   });
+  const { openOverlay } = useGlobalOverlay();
 
   const { setButtonInfo } = useBottomButton({
     type: 'save',
@@ -36,6 +37,7 @@ const Detail = () => {
   // 이벤트 디테일 api
   const eventDetail = queryClient.getQueryData([
     'eventDetail',
+    eventId,
   ]) as EventDetailResponse;
 
   useEffect(() => {
@@ -73,6 +75,9 @@ const Detail = () => {
       eventId: eventId,
       payload: { ...form, posterImageKey: imageInfo.key },
     });
+    openOverlay({
+      content: 'saved',
+    });
   };
 
   useEffect(() => {
@@ -81,26 +86,20 @@ const Detail = () => {
       firstDisable: checkButtonDisable(form, imageInfo),
     });
   }, [form, imageInfo]);
-  // console.log(imageInfo);
 
   return (
     <>
       <ListHeader
-        title={'호스트 정보'}
+        title={'공연 이미지･상세'}
         size={'listHeader_24'}
         padding={[32, 0, 40, 0]}
       />
-      <ContentGrid>
-        <EventDetailInfo
-          setForm={setForm}
-          content={form.content}
-          eventId={eventId}
-        />
-        <EventImage
-          imageKey={form.posterImageKey}
-          setImageInfo={setImageInfo}
-        />
-      </ContentGrid>
+      <EventImage imageKey={form.posterImageKey} setImageInfo={setImageInfo} />
+      <EventDetailInfo
+        setForm={setForm}
+        content={form.content}
+        eventId={eventId}
+      />
     </>
   );
 };

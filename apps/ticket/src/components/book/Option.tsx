@@ -6,7 +6,6 @@ import {
   FullScreen,
   NavBar,
   Spacing,
-  Spinner,
   SyncLoader,
 } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';

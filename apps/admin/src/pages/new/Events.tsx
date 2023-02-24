@@ -13,7 +13,6 @@ const Events = () => {
   if (location.state) {
     hostId = location.state.hostId;
   }
-  console.log(hostId);
 
   // 잘못된 url
   useEffect(() => {

@@ -84,7 +84,11 @@ export const Button = ({
       {...props}
     >
       {isLoading ? (
-        <Spinner color={TEXT_COLOR.normal[varient]} />
+        <Spinner
+          css={css`
+            color: ${TEXT_COLOR.normal[varient]};
+          `}
+        />
       ) : (
         <Text typo={'P_Header_16_SB'}>{children}</Text>
       )}

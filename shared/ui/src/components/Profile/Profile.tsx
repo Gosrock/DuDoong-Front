@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { ComponentProps } from 'react';
 import { ListRow } from '../../layout';
 import { TextType } from '../../theme';
 import { Text } from '../Text';
 import { ProfileImage } from './ProfileImage';
 
-export interface ProfileProps {
+export interface ProfileProps extends ComponentProps<'div'> {
   size: ProfileSizeKey;
   image?: string;
   name: string;
@@ -39,7 +40,7 @@ const PROFILE_SIZE: ProfileSizeType = {
   small: {
     imageSize: 36,
     name: {
-      typo: 'P_Text_14_M',
+      typo: 'G_Side_14_M',
       color: 'black',
     },
     sub: {
@@ -55,9 +56,11 @@ export const Profile = ({
   name,
   subText,
   alliance = false,
+  ...props
 }: ProfileProps) => {
   return (
     <ListRow
+      {...props}
       textGap={0}
       leftImage={
         <ProfileImage

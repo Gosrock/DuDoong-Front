@@ -35,7 +35,7 @@ const Wrapper = styled(FlexBox)`
   }
   top: 0;
   background-color: ${({ theme }) => theme.palette.white};
-  z-index: 10;
+  z-index: 3;
 
   & > button {
     width: 40px;

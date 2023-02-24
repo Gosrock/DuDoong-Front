@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { FullScreen, SyncLoader } from '@dudoong/ui';
-import { css } from '@emotion/react';
 import useRefresh from '@lib/hooks/auth/useRefresh';
+import { getCookie } from '@lib/utils/cookie';
 
 const Refresh = () => {
-  const refreshToken = localStorage.getItem('refreshToken');
+  const refreshToken = getCookie('refreshToken');
   const { refreshMutation, state, setState } = useRefresh();
 
   useEffect(() => {
