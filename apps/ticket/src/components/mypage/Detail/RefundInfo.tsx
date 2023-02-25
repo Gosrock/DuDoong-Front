@@ -10,20 +10,13 @@ import {
 } from '@dudoong/ui';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { parseDate } from '@dudoong/utils';
-import { css } from '@emotion/react';
+
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';
-import {
-  OrderPaymentResponse,
-  OrderResponse,
-  RefundInfo,
-} from '@lib/apis/order/orderType';
+import { RefundInfo } from '@lib/apis/order/orderType';
 import useOverlay from '@lib/hooks/useOverlay';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { BottomSheet } from 'react-spring-bottom-sheet';
-import Ticket from '../Ticket';
 import InfoItem from './InfoItem';
 
 const RefundInfo = ({ refund }: { refund: RefundInfo }) => {
@@ -31,15 +24,15 @@ const RefundInfo = ({ refund }: { refund: RefundInfo }) => {
   const {
     query: { orderId },
     push,
-    isReady,
   } = useRouter();
   const { setToast } = useToastify();
   const ticketRefundMutation = useMutation(OrderApi.POST_REFUND, {
-    onSuccess: (data: OrderResponse) => {
+    onSuccess: () => {
       push('/history');
       setToast({ comment: '티켓이 정상적으로 취소되었습니다.' });
       closeOverlay();
     },
+
     onError: (error: any) => {
       const comment = error.response.data.reason;
       setToast({ comment: comment });

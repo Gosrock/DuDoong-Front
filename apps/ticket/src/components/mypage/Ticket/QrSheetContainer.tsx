@@ -1,4 +1,5 @@
 import { Text } from '@dudoong/ui';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 import styled from '@emotion/styled';
 import {
   IssuedTicketInfo,
@@ -7,6 +8,7 @@ import {
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
 import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
 const GRADIENT_COLOR: Record<IssuedTicketStatus, string[]> = {
   '입장 전': ['#6B36DC', '#92F5CE'],
@@ -21,6 +23,14 @@ const QrSheetContainer = ({ ticket }: { ticket: IssuedTicketInfo }) => {
     () => TicketApi.GET_ISSUEDTICKETS(ticket.issuedTicketId),
     { refetchInterval: 1000 },
   );
+
+  const { setToast } = useToastify();
+
+  useEffect(() => {
+    if (ticket.issuedTicketStatus === '입장 완료') {
+      setToast({ comment: '입장이 완료되었어요!' });
+    }
+  }, [data?.issuedTicketInfo.issuedTicketStatus, ticket.issuedTicketStatus]);
 
   return (
     <Wrapper>
