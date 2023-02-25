@@ -64,6 +64,7 @@ const Ticket = () => {
             >
               <Shortcuts text="모바일 티켓 안내" />
             </a>
+            <Spacing size={10} />
           </>
         ) : (
           <LoaderWrapper>
