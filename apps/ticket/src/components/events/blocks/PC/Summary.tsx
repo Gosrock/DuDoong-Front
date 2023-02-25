@@ -1,16 +1,12 @@
 import { EventDetailResponse, parseDate } from '@dudoong/utils';
 import styled from '@emotion/styled';
-import Image from 'next/image';
 
 const Summary = ({ detail }: { detail: EventDetailResponse }) => {
   return (
     <Wrapper>
-      <Image
-        src={detail.posterImage}
-        alt={detail.name}
-        width={204}
-        height={287}
-      />
+      <Poster>
+        <img src={detail.posterImage} alt={detail.name} />
+      </Poster>
       <Content>
         <div>
           <div>
@@ -60,6 +56,14 @@ const Wrapper = styled.div`
   border-top: 2px solid black;
 
   img {
+    object-fit: cover;
+  }
+`;
+
+const Poster = styled.div`
+  img {
+    width: 204px;
+    height: 287px;
     object-fit: cover;
   }
 `;

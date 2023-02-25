@@ -1,6 +1,6 @@
 import { ListHeader, Spacing, Input, FlexBox } from '@dudoong/ui';
 import { InputFormType } from '@pages/hosts/Info';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 
 interface GridRightElementProps {
   register: UseFormRegister<InputFormType>;

@@ -45,10 +45,7 @@ const Home = () => {
             />
           }
         />
-        <EventList>
-          {/* <EventLink {...event1} /> */}
-          {infiniteListElement}
-        </EventList>
+        <EventList>{infiniteListElement}</EventList>
       </main>
       <Spacing size={170} />
       <section>
