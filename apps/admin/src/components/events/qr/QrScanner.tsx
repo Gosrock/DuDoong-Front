@@ -62,7 +62,7 @@ const QrScanner = ({ newView }: QrScannerProps) => {
 
   return (
     <QrCodeReader
-      delay={500}
+      delay={1000}
       onScan={handleScan}
       onError={() => {}}
       facingMode="user"
