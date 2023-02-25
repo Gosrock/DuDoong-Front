@@ -108,7 +108,7 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
         onClick={handleSubmit(makeEventHandler)}
         disabled={buttonDisable}
       >
-        다음
+        공연 생성하기
       </Button>
     </>
   );

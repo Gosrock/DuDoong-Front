@@ -27,7 +27,7 @@ const FirstStep = () => {
         }}
         disabled={selectedHostId === null}
       >
-        호스트 만들기
+        다음
       </Button>
     </>
   );
