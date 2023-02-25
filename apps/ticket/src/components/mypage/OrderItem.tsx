@@ -12,6 +12,7 @@ import styled from '@emotion/styled';
 import { OrderListResponse, StageType } from '@lib/apis/order/orderType';
 
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 type TagColorType = {
   [key in StageType]: TagColorKey;
@@ -26,8 +27,9 @@ const TAG_COLOR: TagColorType = {
 };
 
 const OrderItem = (prop: OrderListResponse) => {
+  const router = useRouter();
   return (
-    <Wrapper>
+    <Wrapper onClick={() => router.push(`/history/${prop.orderUuid}`)}>
       <Image
         src={prop.eventProfile.posterImage}
         alt=""
@@ -68,6 +70,8 @@ const Wrapper = styled.div`
 
   display: flex;
   justify-content: space-between;
+
+  cursor: pointer;
 
   .poster {
     width: 120px;
