@@ -10,6 +10,7 @@ import { useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
 import { removeCookies } from 'cookies-next';
 import { resetCrendentials } from '@lib/utils/setCredentials';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 export interface HeaderLayoutProps {
   children: ReactNode;
   name?: string;
@@ -24,6 +25,7 @@ export const HeaderLayout = ({
   handleLogin,
 }: HeaderLayoutProps) => {
   const { push } = useRouter();
+  const { Toast } = useToastify();
   const resetAuthState = useResetRecoilState(authState);
   const profileOption: PopupOptions[] = [
     {
@@ -73,6 +75,7 @@ export const HeaderLayout = ({
       <Content>
         <div>{children}</div>
       </Content>
+      <Toast />
     </Wrapper>
   );
 };

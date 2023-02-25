@@ -7,9 +7,15 @@ import Link from 'next/link';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import QrSheetContainer from './QrSheetContainer';
 
-const TicketItem = ({ ticket }: { ticket: IssuedTicketInfo }) => {
+const TicketItem = ({
+  ticket,
+  orderUuid,
+}: {
+  ticket: IssuedTicketInfo;
+  orderUuid: string;
+}) => {
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
-
+  console.log(ticket);
   return (
     <Wrapper>
       <Padding size={[0, 36]}>
@@ -18,7 +24,7 @@ const TicketItem = ({ ticket }: { ticket: IssuedTicketInfo }) => {
         </Text>
       </Padding>
       <ButtonSet varient="horizontal" padding={[20, 24]}>
-        <Link href={`/history/${ticket.uuid}`}>
+        <Link href={`/history/${orderUuid}`}>
           <Button varient="tertiary" fullWidth>
             예매 상세
           </Button>

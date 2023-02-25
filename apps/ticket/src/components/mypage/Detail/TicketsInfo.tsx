@@ -1,44 +1,38 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { ListHeader, Spacing } from '@dudoong/ui';
+import { OrderLineTicketResponse } from '@lib/apis/order/orderType';
 import { Pagination } from 'swiper';
-import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import TicketItem from './TicketItem';
 
-const TicketList = ({
-  tickets,
-  orderUuid,
-}: {
-  tickets: IssuedTicketInfo[];
-  orderUuid: string;
-}) => {
-  console.log(tickets);
+import OrderedTicket from './OrderedTicket';
+
+const TicketsInfo = ({ tickets }: { tickets: OrderLineTicketResponse[] }) => {
   const pagination = {
     clickable: true,
     renderBullet: (_index: number, className: string) => {
       return '<span class="' + className + '"></span>';
     },
   };
+
   const swiperParams = {
-    spaceBetween: -18,
     centeredSlides: true,
 
     modules: [Pagination],
     pagination: pagination,
-    autoplay: {
-      delay: 5000000,
-      disableOnInteraction: false,
-    },
+
     initialSlide: 0,
   };
 
   return (
     <>
+      <ListHeader title="예매정보" size="listHeader_18" />
       <Swiper {...swiperParams}>
-        {tickets.map((ticket: IssuedTicketInfo, idx: number) => {
+        {tickets.map((ticket: OrderLineTicketResponse, idx: number) => {
           return (
             <SwiperSlide key={idx}>
-              <TicketItem ticket={ticket} orderUuid={orderUuid} />
+              <OrderedTicket ticket={ticket} />
+              <Spacing size={48} color="gray_100" />
             </SwiperSlide>
           );
         })}
@@ -47,4 +41,4 @@ const TicketList = ({
   );
 };
 
-export default TicketList;
+export default TicketsInfo;

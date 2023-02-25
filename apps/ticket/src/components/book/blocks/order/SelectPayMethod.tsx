@@ -1,5 +1,6 @@
 import TextListRow from '@components/shared/TextListRow';
 import { FlexBox, SyncLoader, TagButton } from '@dudoong/ui';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { css } from '@emotion/react';
 import { AccountInfo } from '@lib/apis/cart/cartType';
 import type { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
@@ -13,8 +14,10 @@ const SelectPayMethod = ({
   isDudoong: boolean;
   account?: AccountInfo;
 }) => {
+  const { setToast } = useToastify();
   const handleCopyAccount = () => {
     navigator.clipboard.writeText(account?.accountNumber || '');
+    setToast({ comment: '계좌번호가 복사되었어요!' });
   };
 
   if (isDudoong) {

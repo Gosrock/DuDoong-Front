@@ -7,6 +7,7 @@ import {
   RoundBlock,
   TagButton,
 } from '@dudoong/ui';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { AccountInfo } from '@lib/apis/cart/cartType';
 import useOrderMutation from './useOrderMutation';
 
@@ -18,11 +19,13 @@ const AccountInfoSection = ({
   orderPayload: { couponId: null; cartId: number };
 }) => {
   const { dudoongMutate } = useOrderMutation();
+  const { setToast } = useToastify();
   const handleDudoongOrder = () => {
     dudoongMutate(orderPayload);
   };
   const handleCopyAccount = () => {
     navigator.clipboard.writeText(accountInfo?.accountNumber);
+    setToast({ comment: '계좌번호가 복사되었어요!' });
   };
 
   return (
