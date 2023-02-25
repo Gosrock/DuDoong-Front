@@ -1,4 +1,3 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import {
   FlexBox,
   ListHeader,
@@ -8,63 +7,46 @@ import {
   TimePicker,
   Spacing,
   Button,
+  BorderBox,
 } from '@dudoong/ui';
-import { useInputs } from '@dudoong/utils';
 import styled from '@emotion/styled';
-import TimeButton from './TimeButton';
-import { CreateEventRequest } from '@lib/apis/event/eventType';
-import { useRef } from 'react';
-import { useState } from 'react';
+import type { CreateEventRequest } from '@lib/apis/event/eventType';
+import { useEffect, useState } from 'react';
 import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
+import { useForm, FormState } from 'react-hook-form';
 
 interface SecondStepProps {
   hostId: number;
 }
 
+interface InputType {
+  name: string;
+  runTime: number;
+}
+
 const SecondStep = ({ hostId }: SecondStepProps) => {
-  const runTimeRef = useRef<HTMLInputElement>(null);
-  const [runTime, setRunTime] = useState<number | null>(null);
   const [startAt, setStartAt] = useState<Date | null>(null);
   const [startAtTime, setStartAtTime] = useState<Date | null>(null);
-  const [form, onChange] = useInputs<CreateEventRequest>({
-    hostId: hostId,
-    name: '',
-    startAt: '',
-    runTime: 0,
+  const [buttonDisable, setButtonDisable] = useState<boolean>(true);
+  const { register, handleSubmit, formState } = useForm<InputType>({
+    mode: 'onChange',
   });
   const { postEventMutation } = useEvents();
 
-  const makeEventHandler = () => {
-    if (startAt && startAtTime && runTime) {
+  useEffect(() => {
+    setButtonDisable(checkDisable(startAt, startAtTime, formState));
+  }, [formState.isValid, startAt, startAtTime]);
+
+  const makeEventHandler = (data: InputType) => {
+    if (startAt && startAtTime) {
       const payload = {
-        ...form,
-        runTime: runTime,
+        ...data,
+        hostId: hostId,
         startAt: timeFormatter(startAt, startAtTime),
       } as CreateEventRequest;
 
       postEventMutation.mutate(payload);
-    }
-  };
-
-  const changeRunTimeHandler = (change: number) => {
-    if (runTimeRef.current) {
-      if (change === 0) {
-        // 초기화
-        runTimeRef.current.value = '0';
-        setRunTime(0);
-      }
-      if (runTimeRef.current.value) {
-        // 시간 입력이 되어있을 때
-        const curValue = Number(runTimeRef.current.value);
-        runTimeRef.current.value =
-          curValue + change < 0 ? '0' : `${curValue + change}`;
-        setRunTime(Number(runTimeRef.current.value));
-      } else {
-        // 시간 입력이 안되어있을 때
-        runTimeRef.current.value = change < 0 ? '0' : `${change}`;
-        setRunTime(Number(runTimeRef.current.value));
-      }
     }
   };
 
@@ -84,74 +66,50 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
           padding={[32, 0, 12, 0]}
         />
         <Input
-          maxLength={25}
+          {...register('name', {
+            required: true,
+            pattern: /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{1,25}$/,
+          })}
           placeholder={'최대 25글자까지 쓸 수 있어요.'}
-          name="name"
-          onChange={onChange}
+          maxLength={25}
         />
-        <FlexBox align={'flex-start'} gap={32}>
-          <FlexBox align={'start'} direction={'column'} gap={12}>
-            <ListHeader
-              title={'공연 날짜와 시간을 입력해주세요'}
-              size={'listHeader_18'}
-              padding={[32, 0, 12, 0]}
+        <FlexBox align={'start'} direction={'column'} gap={12}>
+          <ListHeader
+            title={'공연 날짜와 시간을 입력해주세요'}
+            size={'listHeader_18'}
+            padding={[32, 0, 12, 0]}
+          />
+          <PickerWrapper align={'center'} gap={17}>
+            <DatePicker
+              placeholder="Select Date"
+              onChange={setStartAt}
+              width={240}
             />
-            <PickerWrapper align={'center'} gap={10} width={330}>
-              <DatePicker placeholder="Select Date" onChange={setStartAt} />
-              <TimePicker placeholder="Select Time" onChange={setStartAtTime} />
-            </PickerWrapper>
-          </FlexBox>
-          <FlexBox align={'start'} direction={'column'} gap={12}>
-            <ListHeader
-              title={'공연 시간을 입력해주세요'}
-              size={'listHeader_18'}
-              padding={[32, 0, 12, 0]}
+            <TimePicker
+              placeholder="Select Time"
+              onChange={setStartAtTime}
+              width={240}
             />
-            <PickerWrapper align={'center'} gap={10} width={385}>
-              <Input
-                type="number"
-                placeholder={'단위 : 분'}
-                name="runTime"
-                onChange={(e) => {
-                  setRunTime(Number(e.target.value));
-                }}
-                width={154}
-                ref={runTimeRef}
-              />
-              <TimeButton
-                type={'modify'}
-                text={'-10분'}
-                onClick={() => {
-                  changeRunTimeHandler(-10);
-                }}
-              />
-              <TimeButton
-                type={'modify'}
-                text={'+30분'}
-                onClick={(event) => {
-                  event.preventDefault();
-                  changeRunTimeHandler(30);
-                }}
-              />
-              <TimeButton
-                type={'reset'}
-                text={'초기화'}
-                onClick={() => {
-                  changeRunTimeHandler(0);
-                }}
-              />
-            </PickerWrapper>
-          </FlexBox>
+            <Input
+              placeholder={'러닝타임 (단위: 분)'}
+              {...register('runTime', {
+                required: true,
+                pattern: /^[0-9]+$/,
+                min: 1,
+              })}
+              width={240}
+            />
+          </PickerWrapper>
         </FlexBox>
       </BorderBox>
       <Spacing size={100} />
       <Button
         varient="primary"
         fullWidth={true}
-        onClick={makeEventHandler}
-        disabled={checkDisable(startAt, startAtTime, runTime, form.name)}
+        onClick={handleSubmit(makeEventHandler)}
+        disabled={buttonDisable}
       >
-        다음
+        공연 생성하기
       </Button>
     </>
   );
@@ -177,20 +135,18 @@ const SubTitle = () => {
 const checkDisable = (
   date: Date | null,
   time: Date | null,
-  runTime: number | null,
-  name: string,
+  formState: FormState<InputType>,
 ) => {
-  if (!date || !time || !runTime || name === '') return true;
+  console.log(date, time);
+  // 미입력
+  if (!date || !time || !formState.isValid) return true;
+  // 날짜가 현재 이전인 경우
+  if (date < new Date() && time < new Date()) return true;
   return false;
 };
 
 // ----------------------------------------------------------------
 
-interface PickerWrapperProps {
-  width: number;
-}
-
-const PickerWrapper = styled(FlexBox)<PickerWrapperProps>`
-  width: ${({ width }) => `${width}px`};
+const PickerWrapper = styled(FlexBox)`
   height: 48px;
 `;

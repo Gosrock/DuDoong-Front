@@ -1,4 +1,5 @@
 import { InfiniteResponse } from '@dudoong/utils';
+import { EventProfileResponse } from '../event/eventType';
 
 export type PageResponseHostProfileResponse =
   InfiniteResponse<HostProfileResponse>;
@@ -52,6 +53,7 @@ export interface HostUser {
   profileImage: string;
   createdAt: string;
   role: RoleType;
+  active: boolean;
 }
 
 export interface UpdateHostRequest {
@@ -62,9 +64,36 @@ export interface UpdateHostRequest {
 }
 
 export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';
+export type status = ' 준비중' | '진행중' | '정산중' | '지난공연 ';
 
 export interface ImageUrlResponse {
   presignedUrl: string;
   key: string;
   url: string;
+}
+
+export interface SlackRequest {
+  slackUrl: string;
+}
+export interface HostEventResponse {
+  content: EventProfileResponse[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  hasNextPage: boolean;
+}
+
+export interface UserProfile {
+  userId: number;
+  userName: string;
+  email: string;
+  profileImage: string;
+}
+
+export type InviteHostRoleType = 'MANAGER' | 'GUEST';
+
+export interface InviteHostRequest {
+  email: string;
+  role: InviteHostRoleType;
 }

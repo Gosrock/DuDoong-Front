@@ -1,21 +1,28 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
-import { FlexBox, PaddingSize, Spacing, Text } from '@dudoong/ui';
+import { BorderBox, FlexBox, PaddingSize, Spacing, Text } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import EventApi from '@lib/apis/event/EventApi';
-import { EventProfileResponse } from '@lib/apis/event/eventType';
+import type { EventProfileResponse } from '@lib/apis/event/eventType';
 import HostApi from '@lib/apis/host/HostApi';
-import { HostProfileResponse } from '@lib/apis/host/hostType';
+import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import { PageType } from '@pages/common/Home';
 import EventItem from './EventItem';
 import HostLink from './HostLink';
 import { ReactComponent as DoongDoong } from '@assets/teduri.svg';
+import { ComponentProps } from 'react';
 
 interface ListProps {
   page: PageType;
 }
 
-const ADMIN_HOME_MAP = {
+const ADMIN_HOME_MAP: Record<
+  PageType,
+  {
+    padding: PaddingSize;
+    apiFunction: (args: any) => Promise<any>;
+    item: (props: ComponentProps<any>) => JSX.Element;
+  }
+> = {
   event: {
     padding: [16, 16],
     apiFunction: EventApi.GET_EVENTS,
@@ -31,7 +38,7 @@ const ADMIN_HOME_MAP = {
 const List = ({ page }: ListProps) => {
   const { infiniteListElement, isEmpty } = useInfiniteQueries<
     EventProfileResponse | HostProfileResponse
-  >(page, ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
+  >([page], ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
 
   if (isEmpty) {
     return (

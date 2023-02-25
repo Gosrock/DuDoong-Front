@@ -2,18 +2,17 @@ import CheckList from '@components/events/dashboard/CheckList';
 import { ListHeader } from '@dudoong/ui';
 import EventInfo from '@components/events/dashboard/EventInfo';
 import useBottomButton from '@lib/hooks/useBottomButton';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
+import type {
   EventChecklistResponse,
   EventDetailResponse,
   EventResponse,
 } from '@lib/apis/event/eventType';
 import { useEffect, useState } from 'react';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
-import { queryClient } from '../../main';
-import { useMutation } from '@tanstack/react-query';
+
 import { AdminBottomButtonTypeKey } from '@components/shared/layout/AdminBottomButton';
 import Warning from '@components/events/dashboard/Warning';
 
@@ -29,24 +28,25 @@ const Dashboard = () => {
   const { openOverlay, closeOverlay } = useGlobalOverlay();
 
   // 이벤트 디테일 api
-  const eventDetail = queryClient.getQueryData([
+  const queryClient = useQueryClient();
+  const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
-  ]) as EventDetailResponse;
+    eventId,
+  ]);
 
   // 이벤트 등록 api
   const patchEventOpenMutation = useMutation(EventApi.PATCH_EVENT_OPEN, {
     onSuccess: (data: EventResponse) => {
       console.log('PATCH_EVENT_OPEN : ', data);
-      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
     },
   });
 
   // 이벤트 삭제 api
-  const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_STATUS, {
+  const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_DELETE, {
     onSuccess: (data: EventResponse) => {
-      console.log('PATCH_EVENT_Delete : ', data);
-      queryClient.invalidateQueries({ queryKey: ['eventDetail'] });
+      console.log('PATCH_EVENT_DELETE : ', data);
       closeOverlay();
       navigate('/');
     },
@@ -54,7 +54,7 @@ const Dashboard = () => {
 
   // 이벤트 체크리스트 api
   const { data } = useQuery(
-    ['eventCheckList'],
+    ['eventCheckList', eventId],
     () => EventApi.GET_EVENT_CHECKLIST(eventId),
     {
       onSuccess: (data: EventChecklistResponse) => {
@@ -68,10 +68,7 @@ const Dashboard = () => {
   };
 
   const eventDeleteHandler = () => {
-    patchEventDeleteMutation.mutate({
-      eventId: eventId,
-      payload: { status: 'CLOSED' },
-    });
+    patchEventDeleteMutation.mutate(eventId);
   };
 
   const eventPayHandler = () => {
@@ -89,8 +86,7 @@ const Dashboard = () => {
               eventDeleteHandler: eventDeleteHandler,
             },
           }),
-        firstDisable:
-          eventDetail && eventDetail.status === '지난공연' ? true : false,
+        firstDisable: false,
         secondHandler: () =>
           openOverlay({
             content: 'postEvent',
@@ -111,7 +107,9 @@ const Dashboard = () => {
             },
           }),
         firstDisable:
-          eventDetail && eventDetail.status === '지난공연' ? true : false,
+          eventDetail && eventDetail.status === ('진행중' || '정산중')
+            ? true
+            : false,
       });
       changeButtonType('deleteEvent');
     } else if (buttonType === 'pay') {
@@ -134,7 +132,7 @@ const Dashboard = () => {
       <ListHeader
         title={eventDetail ? eventDetail.name : '호스트'}
         size={'listHeader_24'}
-        padding={[50, 0, 48, 0]}
+        padding={[32, 0, 40, 0]}
       />
       {eventDetail && eventDetail.status !== '준비중' ? (
         <EventInfo eventId={eventId} setButtonType={setButtonType} />

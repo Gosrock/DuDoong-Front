@@ -1,5 +1,5 @@
 import { axiosPrivate } from '../axios';
-import { AddCartRequest, AddCartResponse } from './cartType';
+import type { AddCartRequest, AddCartResponse } from './cartType';
 
 export const CartApi = {
   ADD_CARTLINE: async (payload: AddCartRequest): Promise<AddCartResponse> => {
@@ -8,7 +8,6 @@ export const CartApi = {
   },
 
   RECENT_CARTLINE: async (): Promise<AddCartResponse> => {
-    console.log(axiosPrivate.defaults.headers);
     const response = await axiosPrivate.get('/carts/recent');
     return response.data.data;
   },

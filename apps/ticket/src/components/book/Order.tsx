@@ -3,17 +3,15 @@ import {
   Button,
   ButtonSet,
   Divider,
-  FlexBox,
   Footer,
   ListHeader,
   NavBar,
   Spacing,
-  SyncLoader,
   Text,
   theme,
 } from '@dudoong/ui';
 import { CartApi } from '@lib/apis/cart/CartApi';
-import { AddCartResponse } from '@lib/apis/cart/cartType';
+import type { AddCartResponse } from '@lib/apis/cart/cartType';
 import DDHead from '@components/shared/Layout/NextHead';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -26,18 +24,34 @@ import useOrderMutation from './blocks/order/useOrderMutation';
 import useTossPayments from './blocks/order/useTossPayments';
 import Info from './blocks/order/Info';
 import { css } from '@emotion/react';
+import SelectPayMethod from './blocks/order/SelectPayMethod';
+import useOverlay from '@lib/hooks/useOverlay';
+import OverlayBox from '@components/shared/overlay/OverlayBox';
+import AccountInfoSection from './blocks/order/AccountInfoSection';
+import { useState } from 'react';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
-  const { instance } = useTossPayments(data.totalPrice);
+
+  const [coupon] = useState(null);
+  const isDudoong = data.ticketPayType === '두둥티켓';
+  const isNeedTossPayment = data.ticketPayType === '유료티켓';
+  const { instance } = useTossPayments(data.totalPrice, isNeedTossPayment);
   const { orderMutate } = useOrderMutation(instance);
   const skipSelectOption = data.items[0].answers.length === 0;
+  const { isOpen, openOverlay, closeOverlay } = useOverlay();
 
   const handleNavBarButton = () => {
     // 옵션 선택이 생략되었을땐 바로 상세페이지로 뒤로가기
     return skipSelectOption
       ? router.replace(`/events/${router.query.eventId}`)
       : router.back();
+  };
+
+  const handleOrder = () => {
+    isDudoong
+      ? openOverlay()
+      : orderMutate({ couponId: coupon, cartId: data.cartId });
   };
 
   return (
@@ -48,7 +62,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         {/* 헤더 */}
         <BookHeader
           title="결제하기"
-          description={['고스락 제 23회 정기공연', '일반티켓', 3]}
+          description={[data.eventProfile.name, data.title, data.totalQuantity]}
         />
         <Divider />
         {/* 티켓옵션 프리뷰 */}
@@ -69,16 +83,11 @@ const Order = ({ data }: { data: AddCartResponse }) => {
           <>
             <Divider />
             <ListHeader size="listHeader_18" title={'결제정보'} />
-            {instance ? (
-              <>
-                <div id="payment-method" />
-                <div id="agreement" />
-              </>
-            ) : (
-              <FlexBox align={'center'} css={{ marginTop: '30px' }}>
-                <SyncLoader />
-              </FlexBox>
-            )}
+            <SelectPayMethod
+              instance={instance}
+              isDudoong={isDudoong}
+              account={data.accountInfo}
+            />
           </>
         )}
         {/* 판매정보 */}
@@ -101,12 +110,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
           <Text typo="P_Text_12_R" color="gray_500">
             위 내용을 확인하였으며 결제에 동의합니다.
           </Text>
-          <Button
-            fullWidth
-            onClick={() => {
-              orderMutate({ couponId: null, cartId: data.cartId });
-            }}
-          >
+          <Button fullWidth onClick={handleOrder}>
             {data.totalPrice} 결제하기
           </Button>
         </ButtonSet>
@@ -116,6 +120,12 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         </section>
         <Spacing size={120} color={'gray_200'} />
       </Main>
+      <OverlayBox open={isOpen} onDismiss={closeOverlay}>
+        <AccountInfoSection
+          accountInfo={data.accountInfo}
+          orderPayload={{ couponId: coupon, cartId: data.cartId }}
+        />
+      </OverlayBox>
     </>
   );
 };

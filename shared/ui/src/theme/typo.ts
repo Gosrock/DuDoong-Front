@@ -113,6 +113,12 @@ export const typo = {
     font-size: ${calcRem(20)};
     line-height: 100%;
   `,
+  G_Header_18_M: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 400;
+    font-size: ${calcRem(18)};
+    line-height: 150%;
+  `,
   P_Header_20_B: css`
     font-family: 'Pretendard';
     font-weight: 700;
@@ -168,6 +174,12 @@ export const typo = {
     font-size: ${calcRem(16)};
     line-height: 150%;
   `,
+  P_Text_15_M: css`
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: ${calcRem(15)};
+    line-height: 150%;
+  `,
   P_Text_14_M: css`
     font-family: 'Pretendard';
     font-weight: 500;
@@ -178,6 +190,12 @@ export const typo = {
     font-family: 'Pretendard';
     font-weight: 400;
     font-size: ${calcRem(14)};
+    line-height: 150%;
+  `,
+  P_Text_12_SB: css`
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: ${calcRem(12)};
     line-height: 150%;
   `,
   P_Text_12_M: css`

@@ -1,7 +1,7 @@
 import { isEqualObject } from '@dudoong/utils';
 import { CartApi } from '@lib/apis/cart/CartApi';
-import { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
-import { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
+import type { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
+import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';

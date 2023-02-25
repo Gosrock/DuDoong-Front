@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
-type TagColorKey = 'main' | 'mono' | 'red';
+export type TagColorKey = 'main' | 'mono' | 'red';
+
 type TagColorType = {
   [key in TagColorKey]: {
     background: KeyOfPalette;
@@ -44,11 +45,12 @@ export interface TagProps {
   text: string;
   color: TagColorKey;
   size: TagSizeKey;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export const Tag = ({ text, color, size }: TagProps) => {
+export const Tag = ({ text, color, size, onClick }: TagProps) => {
   return (
-    <Wrapper color={color} size={size}>
+    <Wrapper color={color} size={size} onClick={onClick}>
       {text}
     </Wrapper>
   );

@@ -18,7 +18,7 @@ export interface ListHeaderProps {
   gap?: number;
 }
 
-type ListHeaderVariantKey =
+export type ListHeaderVariantKey =
   | 'listHeader_18'
   | 'listHeader_20'
   | 'listHeader_24'

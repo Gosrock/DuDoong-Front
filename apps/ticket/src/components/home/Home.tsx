@@ -1,25 +1,51 @@
-import { Footer, media, Spacing } from '@dudoong/ui';
+import { Footer, Input, media, Search, Spacing, theme } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import HomeHeader from './blocks/HomeHeader';
 import styled from '@emotion/styled';
-import EventLink, { EventLinkProps } from './blocks/EventLink';
-
-const event1: EventLinkProps = {
-  eventId: 1,
-  eventName: '고스락 제 22회 정기공연',
-  date: '2023.02.05',
-  posterImage: '',
-};
+import EventLink from './blocks/EventLink';
+import { useInfiniteQueries } from '@dudoong/utils';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { EventApi } from '@lib/apis/events/EventApi';
+import { css } from '@emotion/react';
+import { useDebouncedCallback } from 'use-debounce';
 
 const Home = () => {
+  const [keyword, setKeyword] = useState<string>('');
+  const { infiniteListElement } = useInfiniteQueries(
+    ['events', keyword],
+    ({ pageParam = 0 }) =>
+      EventApi.GET_EVENTS_SEARCH({ keyword, pageParam, size: 12 }),
+    EventLink,
+  );
+
+  const onChangeKeyword = useDebouncedCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setKeyword(e.target.value),
+    400,
+  );
+
+  useEffect(() => {
+    console.log(keyword);
+  }, [keyword]);
+
   return (
     <>
       <DDHead title="두둥! | 홈" />
       <main>
         <HomeHeader />
-        <EventList>
-          <EventLink {...event1} />
-        </EventList>
+        <Input
+          onChange={onChangeKeyword}
+          height={60}
+          styles={InputStyle}
+          placeholder={'검색어를 입력해주세요'}
+          rightIcon={
+            <Search
+              onClick={() => {
+                console.log('adsf');
+              }}
+            />
+          }
+        />
+        <EventList>{infiniteListElement}</EventList>
       </main>
       <Spacing size={170} />
       <section>
@@ -36,10 +62,21 @@ const EventList = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 80px 40px;
   padding: 0 24px;
-  margin: 0 auto;
+  margin: 145px auto 0 auto;
   max-width: 936px;
 
   ${media.mobile} {
     grid-template-columns: repeat(2, 1fr);
   }
+`;
+const InputStyle = css`
+  border-radius: 16px;
+  border: 1px solid black;
+  background-color: ${theme.palette.gray_100};
+  color: ${theme.palette.black};
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 415px;
+  margin: 50px auto 0 auto;
 `;

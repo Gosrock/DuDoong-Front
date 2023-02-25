@@ -1,3 +1,6 @@
+import { eventProfile } from '../order/orderType';
+import { ApproveType, PayType } from '../ticket/ticketType';
+
 export interface AddCartRequest {
   items: AddCartLineDto[];
 }
@@ -21,8 +24,17 @@ export interface AddCartResponse {
   cartId: number;
   totalQuantity: number;
   isNeedPayment: boolean;
+  approveType: ApproveType;
+  ticketPayType: PayType;
+  accountInfo: AccountInfo;
+  eventProfile: eventProfile;
 }
 
+export interface AccountInfo {
+  bankName: string;
+  accountNumber: string;
+  accountHolder: string;
+}
 export interface CartItemResponse {
   name: string;
   answers: OptionAnswer[];

@@ -1,48 +1,56 @@
 import { Text } from '@dudoong/ui';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import Image from 'next/image';
+import { EventResponse } from '@lib/apis/events/eventType';
 import Link from 'next/link';
 
-export interface EventLinkProps {
-  eventName: string;
-  date: string;
-  eventId: number;
-  posterImage: string;
-}
-
-const EventLink = ({
-  eventName,
-  date,
-  eventId,
-  posterImage,
-}: EventLinkProps) => {
+const EventLink = (props: EventResponse) => {
   return (
-    <Wrapper href={`events/${eventId}`}>
-      <Image
-        src={'/sangsang.png'}
-        alt=""
-        className="poster"
-        width={204}
-        height={287}
-      />
-      <Text typo="P_Text_14_R" color="gray_400" as="p">
-        {date}
+    <Link href={`events/${props.eventId}`}>
+      <Poster>
+        <img src={props.posterImage} alt="" className="poster" />
+      </Poster>
+      <Text
+        typo="P_Text_14_R"
+        color="gray_400"
+        as="p"
+        css={css`
+          padding-top: 10px;
+        `}
+      >
+        {props.startAt}
       </Text>
-      <Text typo="P_Header_18_SB" color="black" as="p">
-        {eventName}
+      <Text
+        typo="P_Header_18_SB"
+        color="black"
+        as="p"
+        css={css`
+          padding-top: 3px;
+        `}
+      >
+        {props.name}
       </Text>
-    </Wrapper>
+    </Link>
   );
 };
 
 export default EventLink;
 
-const Wrapper = styled(Link)`
-  .poster {
+const Poster = styled.div`
+  position: relative;
+  padding-top: 141.4%;
+  overflow: hidden;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     background: ${({ theme }) => theme.palette.gray_300};
     border-radius: 12px;
     margin-bottom: 10px;
+    object-fit: cover;
   }
 `;

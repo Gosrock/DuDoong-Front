@@ -1,6 +1,12 @@
-import { Button, theme, Text, Spacing, FlexBox, TextProps } from '@dudoong/ui';
+import {
+  Button,
+  Text,
+  Spacing,
+  FlexBox,
+  TextProps,
+  BorderBox,
+} from '@dudoong/ui';
 import { FlexBoxProps } from '@dudoong/ui';
-import BorderBox from './BorderBox';
 import { css } from '@emotion/react';
 import Logo from '../assets/logo/Logo';
 import Keyboard from '../assets/image/Keyboard';

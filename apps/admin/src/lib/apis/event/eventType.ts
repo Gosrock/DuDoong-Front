@@ -1,4 +1,4 @@
-import { InfiniteResponse } from '@dudoong/utils';
+import { EventStatus } from '@dudoong/utils';
 import { IncomingHttpHeaders } from 'http';
 
 export interface EventProfileResponse {
@@ -10,16 +10,14 @@ export interface EventProfileResponse {
   startAt: string;
   endAt: string;
   placeName: string;
-  status: StatusType;
+  status: EventStatus;
 }
-
-type StatusType = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface EventDetailResponse {
   name: string;
   startAt: string;
-  runtime: number;
-  status: StatusType;
+  runTime: number;
+  status: EventStatus;
   host: HostInfo;
   place: EventPlace;
   posterImage: string;
@@ -50,8 +48,6 @@ export interface CreateEventRequest {
   startAt: string;
   runTime: number;
 }
-
-export type EventStatus = '준비중' | '진행중' | '정산중' | '지난공연';
 
 export interface CreateEventResponse {
   eventId: number;
@@ -121,8 +117,37 @@ export interface EventResponse {
   };
 }
 
+export interface BasicEventRequest {
+  name: string;
+  startAt: string;
+  runTime: number;
+  placeName: string | undefined;
+  placeAddress: string | undefined;
+  longitude: number;
+  latitude: number;
+}
+
 type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
 
 export interface UpdateEventStatusRequest {
-  status: EventStatusType;
+  status: EventStatus;
 }
+
+export interface IssuedTicket {
+  issuedTicketId: number;
+  issuedTicketNo: string;
+  uuid: string;
+  ticketName: string;
+  ticketPrice: string;
+  createdAt: string;
+  enteredAt: string;
+  issuedTicketStatus: IssuedTicketStatusType;
+  optionPrice: string;
+  userInfo: {
+    userId: number;
+    userName: string;
+    phoneNumber: string;
+  };
+}
+
+type IssuedTicketStatusType = '입장 완료' | '입장 전' | '취소 티켓';

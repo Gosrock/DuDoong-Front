@@ -1,7 +1,6 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import HostButtons from './HostButtons';
 import NewHost from './NewHost';
-import { Spacing, Button } from '@dudoong/ui';
+import { Spacing, Button, BorderBox } from '@dudoong/ui';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +27,7 @@ const FirstStep = () => {
         }}
         disabled={selectedHostId === null}
       >
-        호스트 만들기
+        다음
       </Button>
     </>
   );

@@ -1,10 +1,16 @@
 import EventApi from '@lib/apis/event/EventApi';
-import { CreateEventResponse } from '@lib/apis/event/eventType';
+import type {
+  BasicEventRequest,
+  EventResponse,
+  CreateEventResponse,
+} from '@lib/apis/event/eventType';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const useEvents = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const eventId = pathname.split('/')[2];
 
   const postEventMutation = useMutation(EventApi.POST_EVENT, {
     onSuccess: (data: CreateEventResponse) => {
@@ -12,12 +18,19 @@ const useEvents = () => {
       console.log('postEventMutation : ', data);
       navigate(`/events/${curId}/info`);
     },
-    onError: () => {
-      console.log('error');
-    },
   });
 
-  return { postEventMutation };
+  const changeEventMutation = useMutation(
+    (payload: BasicEventRequest) =>
+      EventApi.PATCH_EVENT_BASIC(payload, eventId),
+    {
+      onSuccess: (data: EventResponse) => {
+        console.log('success');
+        console.log(data);
+      },
+    },
+  );
+  return { postEventMutation, changeEventMutation };
 };
 
 export default useEvents;

@@ -24,6 +24,7 @@ export const ProfileImage = ({
           ${imageUrl &&
           css`
             background-image: url(${imageUrl});
+            background-size: cover;
           `}
         `}
       />

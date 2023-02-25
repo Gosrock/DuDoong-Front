@@ -1,6 +1,12 @@
-import BorderBox from '@dudoong/ui/src/layout/BorderBox';
 import { css } from '@emotion/react';
-import { FlexBox, Spacing, Text, PeopleFill, theme } from '@dudoong/ui';
+import {
+  FlexBox,
+  Spacing,
+  Text,
+  PeopleFill,
+  theme,
+  BorderBox,
+} from '@dudoong/ui';
 import styled from '@emotion/styled';
 
 const TicketRatio = ({

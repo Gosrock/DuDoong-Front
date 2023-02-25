@@ -7,9 +7,10 @@ interface HostButtonProps
     | 'hostId'
     | 'name'
     | 'introduce'
-    | 'profileImageUrl'
+    | 'profileImage'
     | 'role'
     | 'selectedHostId'
+    | 'active'
   > {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
