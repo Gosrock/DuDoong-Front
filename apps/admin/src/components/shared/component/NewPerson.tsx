@@ -35,13 +35,13 @@ type NewPersonSizeType = {
 
 const NEW_PERSON_SIZE_SET: NewPersonSizeType = {
   lg: {
-    textTypo: ['G_Header_18_M', 'P_Text_16_R'],
+    textTypo: ['P_Text_18_M', 'P_Text_16_R'],
     imageTextGap: 16,
     padding: [16, 16],
     imageSize: 60,
   },
   sm: {
-    textTypo: ['G_Side_15_M', 'P_Text_14_R'],
+    textTypo: ['P_Text_15_M', 'P_Text_14_R'],
     imageTextGap: 26,
     padding: [5, 5],
     imageSize: 50,

@@ -1,6 +1,6 @@
 import { ListHeader, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import type {
   UpdateEventDetailRequest,
   ImageUrlResponse,
@@ -27,6 +27,8 @@ interface EventDetailInfoProps {
   eventId: string;
 }
 
+let isInitialized = false;
+
 const EventDetailInfo = ({
   content,
   setForm,
@@ -41,6 +43,13 @@ const EventDetailInfo = ({
     ['scrollSync'],
   ];
   const editorRef = useRef<Editor>(null);
+
+  useEffect(() => {
+    if (editorRef.current && !isInitialized && content !== '') {
+      isInitialized = true;
+      editorRef.current.getInstance().setHTML(content);
+    }
+  }, [content]);
 
   // presigned 발급 api
   const postEventImageMutation = useMutation(EventApi.POST_EVENT_IMAGE, {
@@ -92,33 +101,30 @@ const EventDetailInfo = ({
         description={<TitleDescription />}
       />
       <EditorWrapper>
-        {content && (
-          <Editor
-            ref={editorRef}
-            onChange={onChange}
-            placeholder="공연 상세 내용을 입력해주세요."
-            previewStyle="vertical" // 미리보기 스타일 지정
-            initialValue={content}
-            hideModeSwitch={true} // 모드 바꾸기 스위치 숨기기 여부
-            previewHighlight={true}
-            height="500px" // 에디터 창 높이
-            initialEditType="wysiwyg" // 초기 입력모드 설정
-            toolbarItems={toolbarItems}
-            useCommandShortcut={false}
-            language="ko-KR"
-            autofocus
-            hooks={{
-              addImageBlobHook: uploadImageHandler,
-            }}
-            plugins={[
-              chart,
-              codeSyntaxHighlight,
-              colorSyntax,
-              tableMergedCell,
-              uml,
-            ]}
-          />
-        )}
+        <Editor
+          ref={editorRef}
+          onChange={onChange}
+          placeholder="공연 상세 내용을 입력해주세요."
+          previewStyle="vertical" // 미리보기 스타일 지정
+          hideModeSwitch={true} // 모드 바꾸기 스위치 숨기기 여부
+          previewHighlight={true}
+          height="500px" // 에디터 창 높이
+          initialEditType="wysiwyg" // 초기 입력모드 설정
+          toolbarItems={toolbarItems}
+          useCommandShortcut={false}
+          language="ko-KR"
+          autofocus
+          hooks={{
+            addImageBlobHook: uploadImageHandler,
+          }}
+          plugins={[
+            chart,
+            codeSyntaxHighlight,
+            colorSyntax,
+            tableMergedCell,
+            uml,
+          ]}
+        />
       </EditorWrapper>
     </div>
   );

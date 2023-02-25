@@ -8,6 +8,7 @@ import { Spacing } from '@dudoong/ui';
 import { useRecoilValue } from 'recoil';
 import { bottomButtonState } from '@store/bottomButton';
 import { keyframes, css } from '@emotion/react';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 
 interface AdminMenuLayoutProps {
   title: string;
@@ -20,6 +21,7 @@ export const AdminMenuLayout = ({
   host,
   alliance,
 }: AdminMenuLayoutProps) => {
+  const { Toast } = useToastify();
   const { isActive } = useRecoilValue(bottomButtonState);
   const fullWidth = useLocation().pathname.split('/')[3] === 'guests';
   console.log(fullWidth);
@@ -30,12 +32,13 @@ export const AdminMenuLayout = ({
         <AdminMenu title={title} />
         <OutletWrapper isButtonActive={isActive} fullWidth={fullWidth}>
           <div>
-            <Breadcrumb />
+            <Breadcrumb name={title} />
             <Outlet />
             {isActive && <Spacing size={55} />}
           </div>
         </OutletWrapper>
         <AdminBottomButton />
+        <Toast />
       </BottomWrapper>
     </LayoutWrapper>
   );

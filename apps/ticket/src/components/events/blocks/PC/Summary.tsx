@@ -58,6 +58,10 @@ const Wrapper = styled.div`
   padding-top: 20px;
   margin-top: 12px;
   border-top: 2px solid black;
+
+  img {
+    object-fit: cover;
+  }
 `;
 
 const Content = styled.div`

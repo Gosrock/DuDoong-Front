@@ -4,29 +4,39 @@ import ContentGrid from '@components/shared/layout/ContentGrid';
 import { ListHeader } from '@dudoong/ui';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import { useEffect } from 'react';
-import { useInputs } from '@dudoong/utils';
 import type {
   HostDetailResponse,
   ImageUrlResponse,
   UpdateHostRequest,
 } from '@lib/apis/host/hostType';
 import { useLocation } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import HostApi from '@lib/apis/host/HostApi';
 import { useMutation } from '@tanstack/react-query';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
+import { queryClient } from '../../main';
+import { useForm, FormState, FieldValues } from 'react-hook-form';
+import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
+
+export type InputFormType = Pick<
+  UpdateHostRequest,
+  'introduce' | 'contactNumber' | 'contactEmail'
+>;
 
 const Info = () => {
   const hostId = useLocation().pathname.split('/')[2];
+  const { openOverlay } = useGlobalOverlay();
   const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(
     'host',
     hostId,
   );
-  const [form, onChange, , initForm] = useInputs<UpdateHostRequest>({
-    profileImageKey: '',
-    introduce: '',
-    contactNumber: '',
-    contactEmail: '',
+  const { register, handleSubmit, reset, formState } = useForm<InputFormType>({
+    mode: 'onChange',
+    defaultValues: {
+      introduce: '',
+      contactNumber: '',
+      contactEmail: '',
+    },
   });
   const { setButtonInfo } = useBottomButton({
     type: 'save',
@@ -40,52 +50,56 @@ const Info = () => {
     },
   });
 
-  // TODO : useQuery 치우고 getQueryData. 프리사인드url은 따로받아오자
-  const { data, status } = useQuery(
-    ['hostDetail', hostId],
-    () => HostApi.GET_HOST_DETAIL(hostId),
-    {
-      onSuccess: (data: HostDetailResponse) => {
-        if (data.profileImage) {
-          setImageInfo((prev) => {
-            return {
-              ...prev,
-              presignedUrl: '',
-              key: getKeyFromUrl(data.profileImage),
-            };
-          });
-        }
-        initForm({
-          profileImageKey: '',
-          introduce: data.introduce !== null ? data.introduce : '',
-          contactNumber: data.contactNumber !== null ? data.contactNumber : '',
-          contactEmail: data.contactEmail !== null ? data.contactEmail : '',
+  // 호스트 디테일 api
+  const hostDetail = queryClient.getQueryData<HostDetailResponse>([
+    'hostDetail',
+    hostId,
+  ]);
+
+  useEffect(() => {
+    if (hostDetail) {
+      if (hostDetail.profileImage) {
+        setImageInfo((prev) => {
+          return {
+            ...prev,
+            presignedUrl: '',
+            key: getKeyFromUrl(hostDetail.profileImage),
+          };
         });
-        console.log('GET_HOST_DETAIL : ', data);
-      },
-    },
-  );
+      }
+      reset({ ...hostDetail });
+    }
+  }, [hostDetail]);
 
   // 하단부 버튼
-  const buttonClickHandler = () => {
+  const buttonClickHandler = (data: InputFormType) => {
     // 이미지 post
     if (imageInfo.image) {
       console.log('upload image');
       uploadImageToS3();
     }
     // 호스트 정보 post
-    postEventMutation.mutate({
-      hostId: hostId,
-      payload: { ...form, profileImageKey: imageInfo.key },
-    });
-    console.log('click button', form, imageInfo);
+    postEventMutation.mutate(
+      {
+        hostId: hostId,
+        payload: { ...data, profileImageKey: imageInfo.key },
+      },
+      {
+        onSuccess: () => {
+          openOverlay({
+            content: 'saved',
+          });
+        },
+      },
+    );
+    console.log('click button', data, imageInfo);
   };
   useEffect(() => {
     setButtonInfo({
-      firstHandler: buttonClickHandler,
-      firstDisable: checkButtonDisable(form, imageInfo),
+      firstHandler: handleSubmit(buttonClickHandler),
+      firstDisable: checkButtonDisable(formState, imageInfo),
     });
-  }, [form, imageInfo]);
+  }, [formState.isValid, imageInfo]);
 
   return (
     <>
@@ -96,11 +110,11 @@ const Info = () => {
       />
       <ContentGrid>
         <GridLeftElement
-          hostName={status === 'success' ? data!.name : ''}
-          imageurl={status === 'success' ? data!.profileImage : null}
+          hostName={hostDetail ? hostDetail!.name : ''}
+          imageurl={hostDetail ? hostDetail!.profileImage : null}
           setImageInfo={setImageInfo}
         />
-        <GridRightElement onChange={onChange} {...form} />
+        <GridRightElement register={register} />
       </ContentGrid>
     </>
   );
@@ -108,20 +122,9 @@ const Info = () => {
 export default Info;
 
 const checkButtonDisable = (
-  props: UpdateHostRequest,
+  formState: FormState<FieldValues>,
   imageInfo: Pick<ImageUrlResponse, 'presignedUrl' | 'key'>,
 ) => {
-  if (
-    props.contactEmail === '' ||
-    props.contactNumber === '' ||
-    props.introduce === '' ||
-    imageInfo.key === ''
-  )
-    return true;
+  if (!formState.isValid || imageInfo.key === '') return true;
   return false;
-};
-
-const getKeyFromUrl = (url: string) => {
-  const fragments = url.split('/');
-  return `${fragments[3]}/${fragments[4]}/${fragments[5]}/${fragments[6]}`;
 };

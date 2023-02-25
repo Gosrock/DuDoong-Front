@@ -43,7 +43,7 @@ const HOST_URL_SET: HostUrlSetType = {
   alliance: '제휴 관련',
 };
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ name }: { name: string }) => {
   const location = useLocation();
   const urlDetails = location.pathname.substr(1).split('/');
   let detailUrl,
@@ -52,6 +52,9 @@ const Breadcrumb = () => {
     detailUrl = EVENT_URL_SET[urlDetails[2] as EventUrlSetTypeKey];
     if (urlDetails.length > 3) {
       newUrl = EVENT_URL_SET[`${urlDetails[2]}new` as EventUrlSetTypeKey];
+    }
+    if (urlDetails[2] == 'qr' && urlDetails.length > 3) {
+      newUrl = 'QR 확인';
     }
   } else {
     detailUrl = HOST_URL_SET[urlDetails[2] as HostUrlSetTypeKey];
@@ -65,7 +68,9 @@ const Breadcrumb = () => {
       <Spacing size={55} />
       <FlexBox align={'center'} justify={'flex-start'}>
         <Text typo="P_Text_14_M" color="main_500">
-          {newUrl ? `${detailUrl} / ${newUrl}` : detailUrl}
+          {newUrl
+            ? `${name} / ${detailUrl} / ${newUrl}`
+            : `${name} / ${detailUrl}`}
         </Text>
       </FlexBox>
     </>

@@ -14,9 +14,6 @@ const Slack = () => {
     onSuccess: () => {
       console.log('success');
     },
-    onError: () => {
-      console.log('error');
-    },
   });
 
   const handleSlack = (e: React.FormEvent<HTMLFormElement>) => {

@@ -32,6 +32,7 @@ export const Text = ({
 };
 
 const StyledText = styled.span<{ typoKey: KeyOfTypo; colorKey?: KeyOfPalette }>`
+  white-space: pre-wrap;
   ${({ typoKey, theme }) => theme.typo[typoKey]}
   ${({ colorKey, theme }) =>
     colorKey &&

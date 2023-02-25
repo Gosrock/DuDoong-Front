@@ -10,8 +10,26 @@ import Refresh from './components/shared/auth/Refresh';
 import NewRouter from '@pages/new';
 import AdminNoMenuLayout from '@components/shared/layout/AdminNoMenuLayout';
 import Home from '@pages/common/Home';
+import { useQueryClient } from '@tanstack/react-query';
+import useApiError from '@lib/hooks/useApiError';
 
 function App() {
+  const { handleError } = useApiError();
+  const queryClient = useQueryClient();
+
+  queryClient.setDefaultOptions({
+    queries: {
+      onError: (error: any) => {
+        handleError(error);
+      },
+    },
+    mutations: {
+      onError: (error: any) => {
+        handleError(error);
+      },
+    },
+  });
+
   return (
     <Routes>
       <Route element={<Refresh />}>
