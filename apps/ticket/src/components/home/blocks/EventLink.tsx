@@ -1,4 +1,5 @@
 import { Text } from '@dudoong/ui';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { EventResponse } from '@lib/apis/events/eventType';
 import Link from 'next/link';
@@ -9,10 +10,24 @@ const EventLink = (props: EventResponse) => {
       <Poster>
         <img src={props.posterImage} alt="" className="poster" />
       </Poster>
-      <Text typo="P_Text_14_R" color="gray_400" as="p">
+      <Text
+        typo="P_Text_14_R"
+        color="gray_400"
+        as="p"
+        css={css`
+          padding-top: 10px;
+        `}
+      >
         {props.startAt}
       </Text>
-      <Text typo="P_Header_18_SB" color="black" as="p">
+      <Text
+        typo="P_Header_18_SB"
+        color="black"
+        as="p"
+        css={css`
+          padding-top: 3px;
+        `}
+      >
         {props.name}
       </Text>
     </Link>
