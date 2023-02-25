@@ -6,7 +6,7 @@ const Toast = () => {
   return (
     <CustomToast
       position="bottom-center" // default : top-right
-      autoClose={2000} // default : 5000
+      autoClose={3500} // default : 5000
       closeButton={true}
       newestOnTop
       limit={5}

@@ -23,10 +23,6 @@ const QrScanner = ({ newView }: QrScannerProps) => {
         console.log('PATCH_EVENT_ISSUEDTICKET : ', data);
         setToast({ type: 'success', comment: '입장이 완료되었습니다.' });
       },
-      onError: (error: any) => {
-        const comment = error.response.data.reason;
-        setToast({ comment: comment });
-      },
     },
   );
 

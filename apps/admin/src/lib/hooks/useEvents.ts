@@ -18,9 +18,6 @@ const useEvents = () => {
       console.log('postEventMutation : ', data);
       navigate(`/events/${curId}/info`);
     },
-    onError: () => {
-      console.log('error');
-    },
   });
 
   const changeEventMutation = useMutation(
@@ -30,9 +27,6 @@ const useEvents = () => {
       onSuccess: (data: EventResponse) => {
         console.log('success');
         console.log(data);
-      },
-      onError: () => {
-        console.log('error');
       },
     },
   );
