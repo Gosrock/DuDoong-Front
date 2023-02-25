@@ -27,7 +27,7 @@ import { css } from '@emotion/react';
 import SelectPayMethod from './blocks/order/SelectPayMethod';
 import useOverlay from '@lib/hooks/useOverlay';
 import OverlayBox from '@components/shared/overlay/OverlayBox';
-import AccountInfo from './blocks/order/AccountInfo';
+import AccountInfoSection from './blocks/order/AccountInfoSection';
 import { useState } from 'react';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
@@ -86,7 +86,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             <SelectPayMethod
               instance={instance}
               isDudoong={isDudoong}
-              account={data.accountNumber}
+              account={data.accountInfo}
             />
           </>
         )}
@@ -121,8 +121,8 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <Spacing size={120} color={'gray_200'} />
       </Main>
       <OverlayBox open={isOpen} onDismiss={closeOverlay}>
-        <AccountInfo
-          accountNumber={data.accountNumber}
+        <AccountInfoSection
+          accountInfo={data.accountInfo}
           orderPayload={{ couponId: coupon, cartId: data.cartId }}
         />
       </OverlayBox>

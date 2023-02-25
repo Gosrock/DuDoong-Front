@@ -25,9 +25,14 @@ export interface AddCartResponse {
   isNeedPayment: boolean;
   approveType: ApproveType;
   ticketPayType: PayType;
-  accountNumber?: string;
+  accountInfo: AccountInfo;
 }
 
+export interface AccountInfo {
+  bankName: string;
+  accountNumber: string;
+  accountHolder: string;
+}
 export interface CartItemResponse {
   name: string;
   answers: OptionAnswer[];

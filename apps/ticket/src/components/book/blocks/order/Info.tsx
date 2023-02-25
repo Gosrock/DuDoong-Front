@@ -24,6 +24,7 @@ const Info = () => {
           </Content>
         }
         title={'유의사항'}
+        contentHeight={166}
       />
       <Accordion
         textColor={'gray_400'}
@@ -55,6 +56,7 @@ const Info = () => {
             </>
           </Content>
         }
+        contentHeight={243}
         title={'환불규정'}
       />
     </>
