@@ -1,4 +1,4 @@
-import HostsEvents from '@components/hosts/HostsEvents';
+import HostsEvents from '@components/hosts/events/HostsEvents';
 import { ListHeader, Spacing } from '@dudoong/ui';
 
 const Events = () => {

@@ -1,10 +1,13 @@
-import TempQrButtonSet from '@components/events/qr/TempQrButtonSet';
+import { useState } from 'react';
+import NormalQrScreen from '@components/events/qr/NormalQrScreen';
+import FullQrScreen from '@components/events/qr/FullQrScreen';
 
 const Qr = () => {
-  return (
-    <>
-      <TempQrButtonSet />
-    </>
+  const [newView, setNewView] = useState<boolean>(false);
+  return newView ? (
+    <FullQrScreen setNewView={setNewView} />
+  ) : (
+    <NormalQrScreen setNewView={setNewView} />
   );
 };
 export default Qr;

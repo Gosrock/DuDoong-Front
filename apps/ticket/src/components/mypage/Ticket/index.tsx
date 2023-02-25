@@ -1,14 +1,7 @@
 import Main from '@components/shared/Layout/Main';
 import DDHead from '@components/shared/Layout/NextHead';
 import Shortcuts from '@components/shared/Shortcuts';
-import {
-  Divider,
-  ListHeader,
-  NavBar,
-  Spacing,
-  SyncLoader,
-  Text,
-} from '@dudoong/ui';
+import { Divider, ListHeader, NavBar, Spacing, SyncLoader } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';

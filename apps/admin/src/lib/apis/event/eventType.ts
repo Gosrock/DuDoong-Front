@@ -121,8 +121,8 @@ export interface BasicEventRequest {
   name: string;
   startAt: string;
   runTime: number;
-  placeName: string;
-  placeAddress: string;
+  placeName: string | undefined;
+  placeAddress: string | undefined;
   longitude: number;
   latitude: number;
 }
@@ -132,3 +132,22 @@ type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
 export interface UpdateEventStatusRequest {
   status: EventStatus;
 }
+
+export interface IssuedTicket {
+  issuedTicketId: number;
+  issuedTicketNo: string;
+  uuid: string;
+  ticketName: string;
+  ticketPrice: string;
+  createdAt: string;
+  enteredAt: string;
+  issuedTicketStatus: IssuedTicketStatusType;
+  optionPrice: string;
+  userInfo: {
+    userId: number;
+    userName: string;
+    phoneNumber: string;
+  };
+}
+
+type IssuedTicketStatusType = '입장 완료' | '입장 전' | '취소 티켓';

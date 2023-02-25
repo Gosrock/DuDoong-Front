@@ -16,6 +16,7 @@ import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 import { queryClient } from '../../main';
 import { useForm, FormState, FieldValues } from 'react-hook-form';
 import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 export type InputFormType = Pick<
   UpdateHostRequest,
@@ -24,6 +25,7 @@ export type InputFormType = Pick<
 
 const Info = () => {
   const hostId = useLocation().pathname.split('/')[2];
+  const { openOverlay } = useGlobalOverlay();
   const { imageInfo, setImageInfo, uploadImageToS3 } = usePresignedUrl(
     'host',
     hostId,
@@ -77,10 +79,19 @@ const Info = () => {
       uploadImageToS3();
     }
     // 호스트 정보 post
-    postEventMutation.mutate({
-      hostId: hostId,
-      payload: { ...data, profileImageKey: imageInfo.key },
-    });
+    postEventMutation.mutate(
+      {
+        hostId: hostId,
+        payload: { ...data, profileImageKey: imageInfo.key },
+      },
+      {
+        onSuccess: () => {
+          openOverlay({
+            content: 'saved',
+          });
+        },
+      },
+    );
     console.log('click button', data, imageInfo);
   };
   useEffect(() => {

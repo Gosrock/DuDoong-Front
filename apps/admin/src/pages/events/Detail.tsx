@@ -71,13 +71,19 @@ const Detail = () => {
       uploadImageToS3();
     }
     // 호스트 정보 post
-    patchEventDetailMutation.mutate({
-      eventId: eventId,
-      payload: { ...form, posterImageKey: imageInfo.key },
-    });
-    openOverlay({
-      content: 'saved',
-    });
+    patchEventDetailMutation.mutate(
+      {
+        eventId: eventId,
+        payload: { ...form, posterImageKey: imageInfo.key },
+      },
+      {
+        onSuccess: () => {
+          openOverlay({
+            content: 'saved',
+          });
+        },
+      },
+    );
   };
 
   useEffect(() => {
