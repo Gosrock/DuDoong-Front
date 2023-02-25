@@ -58,7 +58,7 @@ const OptionList = ({ optionItems }: OptionListProps) => {
                         <OptionItemContainer key={item.optionGroupId}>
                           <OptionItem
                             name={item.name}
-                            subText={`필수응답 · ${item.type}`}
+                            subText={`${item.type}`}
                             OptionGroupId={item.optionGroupId}
                           />
                         </OptionItemContainer>

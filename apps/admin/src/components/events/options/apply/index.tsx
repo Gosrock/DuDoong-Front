@@ -16,14 +16,15 @@ const ApplyOption = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
   const queryClient = useQueryClient();
+  const { openOverlay, closeOverlay } = useGlobalOverlay();
   const { data, isSuccess } = useQuery(['optionGroups', eventId], () =>
     OptionApi.GET_ALL_OPTION(eventId),
   );
-  const { openOverlay, closeOverlay } = useGlobalOverlay();
+
   const onDragEnd = ({ draggableId, destination }: DropResult) => {
     const dragElementId = draggableId;
     const isApply = dragElementId.split('-')[0] === 'eventOption';
-    console.log(draggableId, destination);
+
     if (isApply && destination) {
       const ticketItemId = destination.droppableId;
       //옵선 적용
