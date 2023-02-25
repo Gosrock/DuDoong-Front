@@ -1,22 +1,14 @@
-import NewOption from '@components/events/tickets/tickets/NewOption';
 import { Spacing, ListHeader, FlexBox, Text } from '@dudoong/ui';
 import { useLocation } from 'react-router-dom';
 import ContentGrid from '@components/shared/layout/ContentGrid';
-import OptionList from '@components/events/tickets/ticketoptions/options/OptionList';
 import { useQuery } from '@tanstack/react-query';
 import OptionApi from '@lib/apis/option/OptionApi';
-import TicketListOption from '@components/events/tickets/ticketoptions/options/TicketListOption';
-import TicketApi from '@lib/apis/ticket/TicketApi';
+import NewOption from '@components/events/options/create/NewOption';
+import ApplyOption from '@components/events/options/apply';
 
 const Options = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
-
-  const { data } = useQuery(['AllOption', eventId], () =>
-    OptionApi.GET_ALL_OPTION(eventId),
-  );
-
-  console.log(data);
 
   return (
     <>
@@ -40,8 +32,7 @@ const Options = () => {
       <NewOption eventId={eventId} />
       <Spacing size={36} />
       <ContentGrid>
-        <OptionList optionItems={data ? data.optionGroups : null} />
-        <TicketListOption />
+        <ApplyOption />
       </ContentGrid>
 
       <Spacing size={72} />

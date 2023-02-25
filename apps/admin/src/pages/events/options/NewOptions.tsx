@@ -7,14 +7,12 @@ import {
   SelectButton,
 } from '@dudoong/ui';
 import ContentGrid from '@components/shared/layout/ContentGrid';
-import OptionPreview from '@components/events/tickets/ticketoptions/form/OptionPreview';
+import OptionPreview from '@components/events/options/create/OptionPreview';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useForm } from 'react-hook-form';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { queryClient } from '../../../main';
-import { EventDetailResponse } from '@dudoong/utils/src/apis/event/eventType';
 import { useMutation } from '@tanstack/react-query';
 import OptionApi from '@lib/apis/option/OptionApi';
 import { AllOptionResponse } from '@lib/apis/option/optionType';

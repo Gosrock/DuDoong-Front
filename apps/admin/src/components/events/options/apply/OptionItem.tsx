@@ -1,8 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import OptionApi from '@lib/apis/option/OptionApi';
-import { AllOptionGroupResponse } from '@lib/apis/option/optionType';
-import { queryClient } from '../../../../../main';
 import { FlexBox, ListRow, TagButton, Padding } from '@dudoong/ui';
 
 export interface OptionItemProps {
@@ -14,15 +12,18 @@ export interface OptionItemProps {
 const OptionItem = ({ name, subText, OptionGroupId }: OptionItemProps) => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
-  const patchOptionDeleteMutation = useMutation(OptionApi.PATCH_OPTION_DELETE, {
-    onSuccess: (data: AllOptionGroupResponse) => {
-      console.log('DELETE_OPTION: ', data);
-      queryClient.invalidateQueries({ queryKey: ['AllOption', eventId] });
+  const queryClient = useQueryClient();
+  const { mutate: optionDeleteMutate } = useMutation(
+    OptionApi.PATCH_OPTION_DELETE,
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({ queryKey: ['AllOption', eventId] });
+      },
     },
-  });
+  );
 
   const handleRemoveClick = () => {
-    patchOptionDeleteMutation.mutate({
+    optionDeleteMutate({
       eventId: eventId,
       optionGroupId: OptionGroupId,
     });

@@ -1,49 +1,51 @@
+export type OptionGroupType = '객관식' | 'Y/N' | '주관식';
 
-
-export interface OptionItemProps {
-    name: string;
-    description: string;
-    type: OptionGroupType;
+export interface CreateTicketOptionRequest {
+  type: OptionGroupType;
+  name: string;
+  description: string;
+  additionalPrice?: number;
+}
+export interface ApplyTicketOptionRequest {
+  optionGroupId: number;
+}
+/**
+ * 티켓 상품에 달린 옵션들
+ */
+export interface GetTicketItemOptionsResponse {
+  optionGroups: OptionGroupResponse[];
 }
 
-export type OptionGroupType =  undefined | 'Y/N' | '주관식';
-
-
-export interface Option {
-    optionId: number;
-    answer: string;
-    additionalPrice?: number;
+export interface OptionGroupResponse {
+  optionGroupId: number;
+  type: OptionGroupType;
+  name: string;
+  description: string;
+  options: OptionResponse[];
 }
 
-export interface CreateOptionRequest {
-    type: OptionGroupType;
-    name: string;
-    description: string;
-    additionalPrice?: number;
+export interface OptionResponse {
+  optionId: number;
+  answer: string;
+  additionalPrice: string;
 }
 
-export interface AllOptionGroupResponse {
-    optionGroups: AllOptionResponse[]
+/**
+ * 이벤트에 속하는 옵션들
+ */
+export interface GetEventOptionsResponse {
+  optionGroups: OptionGroupResponse[];
 }
 
-export interface OptionGroupIdRequest{
-    optionGroupId: number;
+/**
+ * 해당 이벤트에 속하는 티켓상품들에 속하는 옵션들
+ */
+export interface GetAppliedOptionGroupsResponse {
+  appliedOptionGroups: AppliedOptionGroupsResponse[];
 }
 
-export interface AppliedOptionListResponse{
-    appliedOptionGroups: AppliedOptionGroupResponse[];
-}
-
-export interface AppliedOptionGroupResponse {
-    ticketItemId: number;
-    ticketName: string;
-    optionGroups: AllOptionResponse;
-}
-
-export interface AllOptionResponse {
-    optionGroupId: number;
-    type: OptionGroupType;
-    name: string;
-    description: string;
-    options: Option[];
+export interface AppliedOptionGroupsResponse {
+  ticketItemId: number;
+  ticketName: string;
+  optionGroups: OptionGroupResponse[];
 }
