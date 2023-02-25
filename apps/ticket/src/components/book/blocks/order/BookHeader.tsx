@@ -17,9 +17,8 @@ const BookHeader = ({ title, description }: BookHeaderProps) => {
       size={'listHeader_20'}
       description={
         <Text typo="P_Text_16_M" color="gray_500">
-          {description[0]}
+          {description[0]}{' '}
           <span css={{ color: `${theme.palette.main_500}` }}>
-            {' '}
             {description[1]} 총 {description[2]}매
           </span>
         </Text>

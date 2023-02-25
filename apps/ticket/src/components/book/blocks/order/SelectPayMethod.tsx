@@ -1,6 +1,7 @@
 import TextListRow from '@components/shared/TextListRow';
 import { FlexBox, SyncLoader, TagButton } from '@dudoong/ui';
 import { css } from '@emotion/react';
+import { AccountInfo } from '@lib/apis/cart/cartType';
 import type { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
 
 const SelectPayMethod = ({
@@ -10,30 +11,30 @@ const SelectPayMethod = ({
 }: {
   instance: PaymentWidgetInstance | null;
   isDudoong: boolean;
-  account?: string;
+  account?: AccountInfo;
 }) => {
-  const [bank, number] = account?.split(' ') || ['', ''];
   const handleCopyAccount = () => {
-    navigator.clipboard.writeText(number || '');
+    navigator.clipboard.writeText(account?.accountNumber || '');
   };
 
   if (isDudoong) {
     return (
       <>
-        <TextListRow left="입금 계좌번호" right={account || ''} />
         <TextListRow
-          left=""
+          left="입금 계좌"
+          right={`(입금자명) ${account?.accountHolder}`}
+        />
+        <TextListRow
+          left={`${account?.bankName} ${account?.accountNumber}`}
           right={
             <TagButton
               text="계좌 복사"
-              color="primary"
+              color="secondary"
               size="md"
               onClick={handleCopyAccount}
             />
           }
-          css={css`
-            padding-top: 0px;
-          `}
+          css={css``}
         />
       </>
     );

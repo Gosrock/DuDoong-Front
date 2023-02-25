@@ -14,7 +14,7 @@ import type { CreateEventRequest } from '@lib/apis/event/eventType';
 import { useEffect, useState } from 'react';
 import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
-import { useForm, FormState, FieldValues } from 'react-hook-form';
+import { useForm, FormState } from 'react-hook-form';
 
 interface SecondStepProps {
   hostId: number;
