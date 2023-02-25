@@ -39,11 +39,18 @@ export const OrderApi = {
     const response = await axiosPrivate.get(`/orders/recent`);
     return response.data.data;
   },
-
+  GET_ORDERS_DETAIL: async (order_uuid: string): Promise<OrderResponse> => {
+    const response = await axiosPrivate.get(`orders/${order_uuid}/`);
+    return response.data.data;
+  },
   GET_ORDERS_TICKETS: async (
     order_uuid: string,
   ): Promise<OrderTicketResponse> => {
     const response = await axiosPrivate.get(`orders/${order_uuid}/tickets`);
+    return response.data.data;
+  },
+  POST_REFUND: async (order_uuid: string): Promise<OrderResponse> => {
+    const response = await axiosPrivate.post(`orders/${order_uuid}/refund`);
     return response.data.data;
   },
 };

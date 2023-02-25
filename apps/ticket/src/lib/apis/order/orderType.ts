@@ -31,13 +31,12 @@ export interface ConfirmOrderRequest {
  */
 export interface OrderResponse {
   paymentInfo: OrderPaymentResponse;
-  tickets: OrderLineTicketResponse;
+  tickets: OrderLineTicketResponse[];
   refundInfo: RefundInfo;
   eventProfile: EventProfile;
   orderUuid: string;
   orderId: number;
   orderMethod: OrderMethod;
-  approveType: ApproveType;
 }
 
 /**
@@ -65,16 +64,16 @@ export interface OrderLineTicketResponse {
   userName: string;
   orderLinePrice: string;
   purchaseQuantity: number;
-  answers: OptionAnswer;
+  answers: OptionAnswer[];
   eachOptionPrice: string;
 }
 
 /**
  * 예매취소 정보
  */
-interface RefundInfo {
+export interface RefundInfo {
   endAt: string;
-  available: boolean;
+  availAble: boolean;
 }
 
 /**
@@ -165,3 +164,5 @@ export interface eventProfile {
 }
 
 export type IssuedTicketStatus = '입장 완료' | '입장 전' | '취소 티켓';
+
+export type OrderMethodType = '승인 방식' | '결제 방식';
