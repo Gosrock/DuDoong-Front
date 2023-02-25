@@ -62,7 +62,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         {/* 헤더 */}
         <BookHeader
           title="결제하기"
-          description={['adfs', data.title, data.totalQuantity]}
+          description={[data.eventProfile.name, data.title, data.totalQuantity]}
         />
         <Divider />
         {/* 티켓옵션 프리뷰 */}
