@@ -1,4 +1,4 @@
-import { MenuBar, Spacing } from '@dudoong/ui';
+import { media, MenuBar, Spacing } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';
@@ -27,11 +27,13 @@ const OrderList = (
 
   return (
     <>
-      <MenuBar
-        menus={['예매확인/취소', '지난 관람내역']}
-        curActiveMenu={menu}
-        setCurActiveMenu={setMenu}
-      />
+      <MenuWrapper>
+        <MenuBar
+          menus={['예매확인/취소', '지난 관람내역']}
+          curActiveMenu={menu}
+          setCurActiveMenu={setMenu}
+        />
+      </MenuWrapper>
 
       {isEmpty && (
         <>
@@ -47,6 +49,17 @@ const OrderList = (
     </>
   );
 };
+
+const MenuWrapper = styled.div`
+  position: sticky;
+  position: -webkit-sticky;
+  ${media.pc} {
+    position: sticky;
+  }
+  top: 48px;
+  z-index: 3;
+  background-color: ${({ theme }) => theme.palette.white};
+`;
 
 const Wrapper = styled.div`
   display: flex;
