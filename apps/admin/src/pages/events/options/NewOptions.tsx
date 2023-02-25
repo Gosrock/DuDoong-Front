@@ -15,7 +15,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import OptionApi from '@lib/apis/option/OptionApi';
-import { AllOptionResponse } from '@lib/apis/option/optionType';
 import { OptionGroupType } from '@lib/apis/option/optionType';
 import { Controller } from 'react-hook-form';
 
@@ -37,7 +36,7 @@ const NewOptions = () => {
 
   //티켓 생성 api
   const postOptionCreationMutation = useMutation(OptionApi.POST_OPTION, {
-    onSuccess: (data: AllOptionResponse) => {
+    onSuccess: (data) => {
       console.log('POST_OPTION: ', data);
       openOverlay({
         content: 'saveOption',

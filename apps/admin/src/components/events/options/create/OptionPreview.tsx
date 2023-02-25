@@ -8,10 +8,18 @@ import {
   FlexBox,
   SelectButton,
 } from '@dudoong/ui';
-import { OptionItemProps } from '@lib/apis/option/optionType';
 import { useState } from 'react';
+import { OptionGroupType } from '@lib/apis/option/optionType';
 
-const OptionPreview = ({ name, description, type }: OptionItemProps) => {
+const OptionPreview = ({
+  name,
+  description,
+  type,
+}: {
+  name: string;
+  description: string;
+  type?: OptionGroupType;
+}) => {
   const [answer, setAnswer] = useState<string>('Y');
   const handleClickSelect = (key: 'Y' | 'N') => {
     setAnswer(key);
