@@ -35,7 +35,7 @@ const QrScanner = ({ newView }: QrScannerProps) => {
       console.log('scan ticket : ', result);
       patchEventIssuedTicket.mutate({
         eventId: eventId,
-        issuedTicketId: result,
+        uuid: result,
       });
     }
   };

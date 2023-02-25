@@ -116,14 +116,14 @@ const EventApi = {
   },
 
   PATCH_EVENT_ISSUEDTICKET: async ({
-    issuedTicketId,
+    uuid,
     eventId,
   }: {
-    issuedTicketId: string;
+    uuid: string;
     eventId: string;
   }): Promise<IssuedTicket> => {
     const response = await axiosPrivate.patch(
-      `events/${eventId}/issuedTickets/${issuedTicketId}`,
+      `events/${eventId}/issuedTickets/${uuid}`,
     );
     return response.data.data;
   },
