@@ -1,9 +1,9 @@
-import { Input, ListHeader, Modal, Padding, Spacing } from '@dudoong/ui';
+import { Input, ListHeader, Search, Spacing, TagButton } from '@dudoong/ui';
 import { BasicEventRequest } from '@lib/apis/event/eventType';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import ModalSearch from './ModalSearch';
 
@@ -20,8 +20,9 @@ interface place {
 const MapPage = (props: any) => {
   const [lat, setLat] = useState<number | null>();
   const [lng, setLng] = useState<number | null>();
-  const [placeName, setPlaceName] = useState<string | null>();
-  const [placeAddress, setPlaceAddress] = useState<string | null>();
+  const [placeName, setPlaceName] = useState<string | undefined>();
+  const [placeAddress, setPlaceAddress] = useState<string | undefined>();
+  const [detailAddress, setDetailAddress] = useState<string | undefined>();
   const [markers, setMarkers] = useState<any>();
   const [map, setMap] = useState<any>();
   const [address, setAddress] = useState<string | undefined>('');
@@ -49,6 +50,8 @@ const MapPage = (props: any) => {
           lng: Number(props.place.longitude),
         },
       });
+      setPlaceName(props.place.placeName);
+      setDetailAddress(props.place.placeAddress);
     }
   }, [props?.place]);
 
@@ -65,8 +68,8 @@ const MapPage = (props: any) => {
         name: props.name,
         startAt: timeFormatter(props.startDate, props.startTime),
         runTime: props.runtime,
-        placeName: curMarker.content,
-        placeAddress: curMarker.placeAddress,
+        placeName: placeName,
+        placeAddress: detailAddress,
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
       };
@@ -102,10 +105,14 @@ const MapPage = (props: any) => {
     setAddress(e.target.value);
   };
 
+  const handleName = (e: any) => {
+    e.preventDefault();
+  };
+
   const handleMap = () => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
-    if (ps) {
+    if (ps && address !== '') {
       ps.keywordSearch(address, (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
           // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -129,8 +136,6 @@ const MapPage = (props: any) => {
             );
           }
           setMarkers(markers);
-          console.log(markers);
-          console.log(_pagination);
           setPagination(_pagination);
           //여기서 lat,lngset해주면될듯?
 
@@ -147,7 +152,6 @@ const MapPage = (props: any) => {
     setMarker(markers);
     setLat(Number(markers.position.lat));
     setLng(Number(markers.position.lng));
-    setPlaceName(markers.content);
 
     bounds.extend(
       new kakao.maps.LatLng(
@@ -167,24 +171,47 @@ const MapPage = (props: any) => {
     <>
       <div>
         <ListHeader
-          padding={[32, 24, 12, 0]}
+          padding={[32, 0, 10, 0]}
           size={'listHeader_18'}
           title={'공연 장소'}
+          rightElement={
+            <TagButton
+              size="md"
+              color="primary"
+              text="주소 찾기"
+              onClick={() => setIsOpen(true)}
+            />
+          }
         ></ListHeader>
-        <form>
+
+        <form onSubmit={handleName}>
           <Input
             width={398}
-            placeholder="검색하세요"
-            value={curMarker.content !== null ? curMarker.content : ''}
-            onClick={() => setIsOpen(true)}
-            readOnly
+            placeholder="공연장 이름을 적어주세요"
+            value={placeName ? placeName : ''}
+            onChange={(e: { target: { value: string } }) =>
+              setPlaceName(e.target.value)
+            }
+          ></Input>
+          <ListHeader
+            padding={[32, 24, 12, 0]}
+            size={'listHeader_18'}
+            title={'상세주소'}
+            description={placeAddress ? placeAddress : ''}
+          ></ListHeader>
+          <Input
+            placeholder="중요! 상세주소를 그대로 적어주세요!"
+            value={detailAddress ? detailAddress : ''}
+            onChange={(e: { target: { value: string } }) =>
+              setDetailAddress(e.target.value)
+            }
           ></Input>
         </form>
         <Spacing size={12} />
         <Map // 로드뷰를 표시할 Container
           center={{
-            lat: 37.55097092681401,
-            lng: 126.92364650757898,
+            lat: curMarker.position.lat,
+            lng: curMarker.position.lng,
           }}
           style={{ width: '398px', height: '292px', borderRadius: '8px' }}
           level={4}

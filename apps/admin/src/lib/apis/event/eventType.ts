@@ -121,8 +121,8 @@ export interface BasicEventRequest {
   name: string;
   startAt: string;
   runTime: number;
-  placeName: string;
-  placeAddress: string;
+  placeName: string | undefined;
+  placeAddress: string | undefined;
   longitude: number;
   latitude: number;
 }
