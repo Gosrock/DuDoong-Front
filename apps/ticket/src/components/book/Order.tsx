@@ -35,7 +35,8 @@ const Order = ({ data }: { data: AddCartResponse }) => {
 
   const [coupon] = useState(null);
   const isDudoong = data.ticketPayType === '두둥티켓';
-  const { instance } = useTossPayments(data.totalPrice, isDudoong);
+  const isNeedTossPayment = data.ticketPayType === '유료티켓';
+  const { instance } = useTossPayments(data.totalPrice, isNeedTossPayment);
   const { orderMutate } = useOrderMutation(instance);
   const skipSelectOption = data.items[0].answers.length === 0;
   const { isOpen, openOverlay, closeOverlay } = useOverlay();

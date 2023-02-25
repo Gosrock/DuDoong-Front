@@ -71,6 +71,7 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
             pattern: /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{1,25}$/,
           })}
           placeholder={'최대 25글자까지 쓸 수 있어요.'}
+          maxLength={25}
         />
         <FlexBox align={'start'} direction={'column'} gap={12}>
           <ListHeader
