@@ -1,5 +1,6 @@
 import Main from '@components/shared/Layout/Main';
 import DDHead from '@components/shared/Layout/NextHead';
+import Shortcuts from '@components/shared/Shortcuts';
 import {
   Divider,
   ListHeader,
@@ -14,6 +15,7 @@ import { OrderApi } from '@lib/apis/order/OrderApi';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+
 import TicketList from './TicketList';
 
 const Ticket = () => {
@@ -51,6 +53,17 @@ const Ticket = () => {
             <TicketList tickets={data.tickets} />
             <Spacing size={20} />
             <Divider />
+            <Shortcuts
+              text="공연정보"
+              url={`/events/${data.eventProfile.eventId}`}
+            />
+            <a
+              target="_blank"
+              href="https://dudoong.notion.site/5103784d9d8946b5b48062811dcfe81c"
+              rel="noreferrer"
+            >
+              <Shortcuts text="모바일 티켓 안내" />
+            </a>
           </>
         ) : (
           <LoaderWrapper>

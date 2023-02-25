@@ -29,7 +29,7 @@ const TAG_COLOR: TagColorType = {
 const OrderItem = (prop: OrderListResponse) => {
   const router = useRouter();
   return (
-    <Wrapper onClick={() => router.push(`/history/${prop.orderUuid}`)}>
+    <Wrapper onClick={() => router.push(`/ticket/${prop.orderUuid}`)}>
       <Image
         src={prop.eventProfile.posterImage}
         alt=""
