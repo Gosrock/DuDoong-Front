@@ -11,8 +11,8 @@ const EventLink = (props: EventResponse) => {
         src={props.posterImage}
         alt=""
         className="poster"
-        width={204}
-        height={287}
+        width={210}
+        height={297}
       />
       <Text typo="P_Text_14_R" color="gray_400" as="p">
         {props.startAt}
@@ -29,9 +29,9 @@ export default EventLink;
 const Wrapper = styled(Link)`
   .poster {
     width: 100%;
-    height: auto;
     background: ${({ theme }) => theme.palette.gray_300};
     border-radius: 12px;
     margin-bottom: 10px;
+    object-fit: cover;
   }
 `;
