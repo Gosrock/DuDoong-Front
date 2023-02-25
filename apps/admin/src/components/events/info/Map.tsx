@@ -6,6 +6,7 @@ import timeFormatter from '@lib/utils/timeFormatter';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import ModalSearch from './ModalSearch';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 
 interface place {
   content: string;
@@ -18,6 +19,7 @@ interface place {
 }
 
 const MapPage = (props: any) => {
+  const { openOverlay } = useGlobalOverlay();
   const [lat, setLat] = useState<number | null>();
   const [lng, setLng] = useState<number | null>();
   const [placeName, setPlaceName] = useState<string | null>();
@@ -71,7 +73,13 @@ const MapPage = (props: any) => {
         latitude: Number(curMarker.position.lat),
       };
       console.log(payload);
-      changeEventMutation.mutate(payload);
+      changeEventMutation.mutate(payload, {
+        onSuccess: () => {
+          openOverlay({
+            content: 'saved',
+          });
+        },
+      });
     }
   };
 
