@@ -112,7 +112,7 @@ const MapPage = (props: any) => {
   const handleMap = () => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
-    if (ps) {
+    if (ps && address !== '') {
       ps.keywordSearch(address, (data, status, _pagination) => {
         if (status === kakao.maps.services.Status.OK) {
           // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -136,8 +136,6 @@ const MapPage = (props: any) => {
             );
           }
           setMarkers(markers);
-          console.log(markers);
-          console.log(_pagination);
           setPagination(_pagination);
           //여기서 lat,lngset해주면될듯?
 
@@ -169,7 +167,6 @@ const MapPage = (props: any) => {
     handleMap();
   }, [map]);
 
-  console.log(address);
   return (
     <>
       <div>
@@ -191,7 +188,7 @@ const MapPage = (props: any) => {
           <Input
             width={398}
             placeholder="공연장 이름을 적어주세요"
-            value={placeName}
+            value={placeName ? placeName : ''}
             onChange={(e: { target: { value: string } }) =>
               setPlaceName(e.target.value)
             }
@@ -204,7 +201,7 @@ const MapPage = (props: any) => {
           ></ListHeader>
           <Input
             placeholder="중요! 상세주소를 그대로 적어주세요!"
-            value={detailAddress}
+            value={detailAddress ? detailAddress : ''}
             onChange={(e: { target: { value: string } }) =>
               setDetailAddress(e.target.value)
             }
