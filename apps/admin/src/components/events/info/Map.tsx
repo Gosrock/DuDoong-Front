@@ -200,9 +200,10 @@ const MapPage = (props: any) => {
             padding={[32, 24, 12, 0]}
             size={'listHeader_18'}
             title={'상세주소'}
+            description={placeAddress ? placeAddress : ''}
           ></ListHeader>
           <Input
-            placeholder="공연장 주소를 적어주세요"
+            placeholder="중요! 상세주소를 그대로 적어주세요!"
             value={detailAddress}
             onChange={(e: { target: { value: string } }) =>
               setDetailAddress(e.target.value)
