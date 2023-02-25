@@ -73,6 +73,13 @@ const Wrapper = styled.div`
 
   cursor: pointer;
 
+  transform: scale(1);
+  transition: all 0.1s ease-out;
+
+  :active {
+    transform: scale(0.99);
+  }
+
   .poster {
     width: 120px;
     height: 100%;
