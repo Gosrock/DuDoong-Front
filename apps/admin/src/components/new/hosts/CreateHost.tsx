@@ -38,9 +38,6 @@ const CreateHost = () => {
         navigate(`/hosts/${curId}/info`);
       }
     },
-    onError: () => {
-      console.log('error');
-    },
   });
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
