@@ -1,5 +1,6 @@
-import {CreateOptionRequest , AllOptionResponse, AllOptionGroupResponse} from './optionType';
+import {CreateOptionRequest , AllOptionResponse, AllOptionGroupResponse, AppliedOptionListResponse, AppliedOptionGroupResponse} from './optionType';
 import { axiosPrivate } from '../axios';
+import { OptionGroupIdRequest } from './optionType';
 
 
 const OptionApi = {
@@ -38,8 +39,62 @@ const OptionApi = {
             `events/${eventId}/ticketOptions/${optionGroupId}`,
         );
         return response.data.data;
+    },
+
+    GET_TICKET_OPTION: async({
+        eventId,
+        ticketItemId,
+    }: {
+        eventId: string;
+        ticketItemId: number;
+    }): Promise<AllOptionGroupResponse> => {
+        const response = await axiosPrivate.get(
+            `events/${eventId}/ticketItems/${ticketItemId}/options`,
+        );
+        return response.data.data;
+    },
+
+    PATCH_APPLY_OPTION: async({
+        eventId,
+        ticketItemId,
+        payload,
+    }: {
+        eventId: string;
+        ticketItemId: number;
+        payload: OptionGroupIdRequest;
+    }): Promise<AllOptionGroupResponse> => {
+        const response = await axiosPrivate.patch(
+            `events/${eventId}/ticketItems/${ticketItemId}/option`,
+            payload
+        );
+        return response.data.data
+    },
+
+    PATCH_CANCEL_OPTION: async({
+        eventId,
+        ticketItemId,
+        payload,
+    }: {
+        eventId: string;
+        ticketItemId: number;
+        payload: OptionGroupIdRequest;
+    }): Promise<AllOptionGroupResponse> => {
+        const response = await axiosPrivate.patch(
+            `events/${eventId}/ticketItems/${ticketItemId}/option/cancel`,
+            payload
+        );
+        return response.data.data
+},
+
+    GET_TICKET_OPTION_EACH: async(
+        eventId: string
+        ) : Promise<AppliedOptionListResponse> => {
+        const response = await axiosPrivate.get(
+            `events/${eventId}/ticketItems/appliedOptionGroups`
+        );
+        return response.data.data
     }
-}
+};
 
 export default OptionApi;
 

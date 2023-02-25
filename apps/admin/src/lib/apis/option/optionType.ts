@@ -1,4 +1,5 @@
 
+
 export interface OptionItemProps {
     name: string;
     description: string;
@@ -23,6 +24,20 @@ export interface CreateOptionRequest {
 
 export interface AllOptionGroupResponse {
     optionGroups: AllOptionResponse[]
+}
+
+export interface OptionGroupIdRequest{
+    optionGroupId: number;
+}
+
+export interface AppliedOptionListResponse{
+    appliedOptionGroups: AppliedOptionGroupResponse[];
+}
+
+export interface AppliedOptionGroupResponse {
+    ticketItemId: number;
+    ticketName: string;
+    optionGroups: AllOptionResponse;
 }
 
 export interface AllOptionResponse {

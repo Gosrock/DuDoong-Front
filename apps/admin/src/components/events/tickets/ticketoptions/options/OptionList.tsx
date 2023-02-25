@@ -9,13 +9,41 @@ import {
 } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import OptionItem from './OptionItem';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import OptionApi from '@lib/apis/option/OptionApi';
+import { AllOptionGroupResponse } from '@lib/apis/option/optionType';
+import { useMutation } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
+import { resetServerContext } from 'react-beautiful-dnd';
+import { queryClient } from '../../../../../main';
 
 const OptionList = ({
   optionItems,
 }: {
   optionItems: AllOptionResponse[] | null;
 }) => {
-  console.log(optionItems);
+  const { pathname } = useLocation();
+  const eventId = pathname.split('/')[2];
+  const patchOptionApplyMutation = useMutation(OptionApi.PATCH_APPLY_OPTION, {
+    onSuccess: (data: AllOptionGroupResponse) => {
+      console.log('OPTION_APPLY:', data);
+      queryClient.invalidateQueries({ queryKey: ['AppliedTicket', eventId] });
+    },
+  });
+  const onDragEnd = (result: any) => {
+    const { source, destination } = result;
+    console.log('destination : ' + destination);
+    const optionGroupId = parseInt(result.draggableId);
+    patchOptionApplyMutation.mutate({
+      eventId: eventId,
+      ticketItemId: 72,
+      payload: {
+        optionGroupId: optionGroupId,
+      },
+    });
+  };
+  resetServerContext();
+
   if (!optionItems?.length) {
     return (
       <div>
@@ -36,19 +64,39 @@ const OptionList = ({
             <ListHeader padding={0} size="listHeader_18" title="옵션 목록" />
             <Spacing size={42} />
           </div>
-
-          {optionItems?.map((item: AllOptionResponse) => (
-            <>
-              <Wrapper key={item.optionGroupId}>
-                <OptionItem
-                  name={item.name}
-                  subText={`필수응답 · ${item.type}`}
-                  OptionGroupId={item.optionGroupId}
-                />
-              </Wrapper>
-              <Spacing size={16} />
-            </>
-          ))}
+          <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+            <Droppable droppableId="options">
+              {(provided) => (
+                <section {...provided.droppableProps} ref={provided.innerRef}>
+                  {optionItems?.map((item: AllOptionResponse, index: any) => (
+                    <Draggable
+                      key={item.optionGroupId}
+                      draggableId={item.optionGroupId.toString()}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <Wrapper key={item.optionGroupId}>
+                            <OptionItem
+                              name={item.name}
+                              subText={`필수응답 · ${item.type}`}
+                              OptionGroupId={item.optionGroupId}
+                            />
+                          </Wrapper>
+                          <Spacing size={16} />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </section>
+              )}
+            </Droppable>
+          </DragDropContext>
         </FlexBox>
       </>
     );

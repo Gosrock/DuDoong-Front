@@ -13,15 +13,26 @@ import TicketItem from '../../tickets/TicketItem';
 import TicketApi from '@lib/apis/ticket/TicketApi';
 import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
+import OptionDropArea from '../form/OptionDropArea';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import {
+  AllOptionResponse,
+  AppliedOptionGroupResponse,
+} from '@lib/apis/option/optionType';
+import { useState } from 'react';
+import OptionApi from '@lib/apis/option/OptionApi';
 
 const TicketListOption = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
-  const { data } = useQuery(['ticketDetail', eventId], () =>
-    TicketApi.GET_TICKET_DETAIL(eventId),
+  const { data } = useQuery(['AppliedTicket', eventId], () =>
+    OptionApi.GET_TICKET_OPTION_EACH(eventId),
   );
-  const ticketItems = data ? data.ticketItems : null;
 
+  const ticketItems = data ? data.appliedOptionGroups : null;
+
+  console.log(ticketItems);
+  console.log(data);
   if (!ticketItems?.length) {
     return <div></div>;
   } else {
@@ -30,17 +41,15 @@ const TicketListOption = () => {
         <ListHeader padding={0} size="listHeader_18" title="티켓 목록" />
         <Spacing size={42} />
 
-        {ticketItems?.map((item: TicketDetailResponse) => (
-          <>
+        {ticketItems?.map((item: AppliedOptionGroupResponse) => (
+          <div key={item?.ticketItemId}>
             <Wrapper key={item.ticketItemId}>
               <Text typo={'P_Header_16_SB'}>{item.ticketName}</Text>
               <Divider line={true} />
-              <RoundBlock background="gray_200" padding={10} radius={15}>
-                Drag
-              </RoundBlock>
+              <OptionDropArea ticketItemId={item.ticketItemId} />
             </Wrapper>
             <Spacing size={16} />
-          </>
+          </div>
         ))}
       </div>
     );

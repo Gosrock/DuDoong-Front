@@ -43,7 +43,7 @@ const Options = () => {
         <OptionList optionItems={data ? data.optionGroups : null} />
         <TicketListOption />
       </ContentGrid>
-      {/* <TicketList ticketItems={data ? data.ticketItems : null} /> */}
+
       <Spacing size={72} />
     </>
   );
