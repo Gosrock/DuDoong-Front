@@ -5,7 +5,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import TicketItem from './TicketItem';
 
-const TicketList = ({ tickets }: { tickets: IssuedTicketInfo[] }) => {
+const TicketList = ({
+  tickets,
+  orderUuid,
+}: {
+  tickets: IssuedTicketInfo[];
+  orderUuid: string;
+}) => {
   console.log(tickets);
   const pagination = {
     clickable: true,
@@ -32,7 +38,7 @@ const TicketList = ({ tickets }: { tickets: IssuedTicketInfo[] }) => {
         {tickets.map((ticket: IssuedTicketInfo, idx: number) => {
           return (
             <SwiperSlide key={idx}>
-              <TicketItem ticket={ticket} />
+              <TicketItem ticket={ticket} orderUuid={orderUuid} />
             </SwiperSlide>
           );
         })}

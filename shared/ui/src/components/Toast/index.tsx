@@ -6,10 +6,10 @@ const Toast = () => {
   return (
     <CustomToast
       position="bottom-center" // default : top-right
-      autoClose={2000} // default : 5000
+      autoClose={3500} // default : 5000
       closeButton={true}
       newestOnTop
-      limit={1}
+      limit={5}
       hideProgressBar // 유지 시간 바 비활성화
     />
   );

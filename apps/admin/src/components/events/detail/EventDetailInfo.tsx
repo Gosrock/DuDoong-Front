@@ -27,12 +27,13 @@ interface EventDetailInfoProps {
   eventId: string;
 }
 
+let isInitialized = false;
+
 const EventDetailInfo = ({
   content,
   setForm,
   eventId,
 }: EventDetailInfoProps) => {
-  const [curContent, setCurContent] = useState<string>('');
   const toolbarItems = [
     ['heading', 'bold', 'italic', 'strike'],
     ['hr', 'quote'],
@@ -44,8 +45,10 @@ const EventDetailInfo = ({
   const editorRef = useRef<Editor>(null);
 
   useEffect(() => {
-    setCurContent(content);
-    if (editorRef.current) editorRef.current!.getInstance().setHTML(content);
+    if (editorRef.current && !isInitialized && content !== '') {
+      isInitialized = true;
+      editorRef.current.getInstance().setHTML(content);
+    }
   }, [content]);
 
   // presigned 발급 api
@@ -103,7 +106,6 @@ const EventDetailInfo = ({
           onChange={onChange}
           placeholder="공연 상세 내용을 입력해주세요."
           previewStyle="vertical" // 미리보기 스타일 지정
-          initialValue={curContent}
           hideModeSwitch={true} // 모드 바꾸기 스위치 숨기기 여부
           previewHighlight={true}
           height="500px" // 에디터 창 높이

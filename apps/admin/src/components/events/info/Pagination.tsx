@@ -26,18 +26,16 @@ const Pagination = (pagination: any) => {
           <Left />
         </button>
         {arr.map((num) => (
-          <>
-            <Mini cur={current} num={num}>
-              <button onClick={() => setChange(num)}>
-                <Text
-                  typo={'P_Text_16_M'}
-                  color={current === num ? 'white' : 'black'}
-                >
-                  {num}
-                </Text>
-              </button>
-            </Mini>
-          </>
+          <Mini cur={current} num={num} key={num}>
+            <button onClick={() => setChange(num)}>
+              <Text
+                typo={'P_Text_16_M'}
+                color={current === num ? 'white' : 'black'}
+              >
+                {num}
+              </Text>
+            </button>
+          </Mini>
         ))}
         <button onClick={() => pagination.pagination.nextPage()}>
           <Right />

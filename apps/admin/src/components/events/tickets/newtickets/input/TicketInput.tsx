@@ -13,7 +13,7 @@ import { forwardRef } from 'react';
 
 export interface TicketInputProps extends InputProps {
   title: string;
-  description: string;
+  description?: string;
   placeholder: string;
   titleTypo?: ListHeaderVariantKey;
   descriptionTypo?: KeyOfTypo;

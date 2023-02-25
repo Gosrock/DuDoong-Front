@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
-type TagColorKey = 'main' | 'mono' | 'red';
+export type TagColorKey = 'main' | 'mono' | 'red';
+
 type TagColorType = {
   [key in TagColorKey]: {
     background: KeyOfPalette;
