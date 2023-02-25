@@ -9,7 +9,7 @@ const Toast = () => {
       autoClose={2000} // default : 5000
       closeButton={true}
       newestOnTop
-      limit={1}
+      limit={5}
       hideProgressBar // 유지 시간 바 비활성화
     />
   );
