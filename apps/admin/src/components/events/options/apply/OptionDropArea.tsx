@@ -1,6 +1,6 @@
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
-import { theme, Text, Padding, Spacing, FlexBox } from '@dudoong/ui';
+import { theme, Text, Padding, FlexBox } from '@dudoong/ui';
 import { OptionGroupResponse } from '@lib/apis/option/optionType';
 import { ReactNode } from 'react';
 import { css } from '@emotion/react';
@@ -98,7 +98,7 @@ const BlankOption = ({
   return (
     <RoundWrapper isEditable={isEditable}>
       <Padding size={[40, 38]}>
-        <Text typo="P_Header_16_M" color="gray_300">
+        <Text typo="P_Text_16_M" color="gray_300">
           {isEditable
             ? '추가할 옵션을 드래그 앤 드롭 해주세요.'
             : '이미 판매된 티켓의 옵션은 수정할 수 없어요.'}
