@@ -1,3 +1,5 @@
+import { OptionGroupType } from "../option/optionType";
+
 export interface GetOrdersRequest {
   orderStage: 'APPROVE_WAITING' | 'CONFIRMED';
   searchType?: 'PHONE' | 'NAME';
@@ -136,4 +138,4 @@ export interface OptionAnswer {
   answer: string;
   additionalPrice: string;
 }
-export type OptionGroupType = 'Y/N' | '객관식' | '주관식';
+
