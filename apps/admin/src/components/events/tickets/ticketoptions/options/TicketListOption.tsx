@@ -25,6 +25,7 @@ import OptionApi from '@lib/apis/option/OptionApi';
 const TicketListOption = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
+
   const { data } = useQuery(['AppliedTicket', eventId], () =>
     OptionApi.GET_TICKET_OPTION_EACH(eventId),
   );
@@ -38,6 +39,7 @@ const TicketListOption = () => {
   } else {
     return (
       <div>
+        <Spacing size={36} />
         <ListHeader padding={0} size="listHeader_18" title="티켓 목록" />
         <Spacing size={42} />
 

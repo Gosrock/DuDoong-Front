@@ -38,7 +38,7 @@ const Options = () => {
       />
       <Spacing size={36} />
       <NewOption eventId={eventId} />
-      <Spacing size={72} />
+      <Spacing size={36} />
       <ContentGrid>
         <OptionList optionItems={data ? data.optionGroups : null} />
         <TicketListOption />

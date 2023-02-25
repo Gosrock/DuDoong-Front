@@ -14,6 +14,7 @@ import { queryClient } from '../../../../../main';
 const OptionDropArea = ({ ticketItemId }: { ticketItemId: number }) => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
+
   const { data } = useQuery(['ticketOptionList', eventId, ticketItemId], () =>
     OptionApi.GET_TICKET_OPTION({ eventId, ticketItemId }),
   );
@@ -29,13 +30,13 @@ const OptionDropArea = ({ ticketItemId }: { ticketItemId: number }) => {
     const { source, destination } = result;
     console.log('destination : ' + destination);
     const optionGroupId = parseInt(result.draggableId);
-    patchOpionCancleMutation.mutate({
+    /*     patchOpionCancleMutation.mutate({
       eventId: eventId,
       ticketItemId: 72,
       payload: {
         optionGroupId: optionGroupId,
       },
-    });
+    }); */
   };
   console.log('티켓 옵션' + data);
   if (data === undefined || data.optionGroups.length === 0)

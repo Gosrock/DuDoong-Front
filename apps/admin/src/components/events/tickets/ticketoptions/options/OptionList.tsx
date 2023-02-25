@@ -24,23 +24,25 @@ const OptionList = ({
 }) => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
+
   const patchOptionApplyMutation = useMutation(OptionApi.PATCH_APPLY_OPTION, {
     onSuccess: (data: AllOptionGroupResponse) => {
       console.log('OPTION_APPLY:', data);
       queryClient.invalidateQueries({ queryKey: ['AppliedTicket', eventId] });
     },
   });
+
   const onDragEnd = (result: any) => {
     const { source, destination } = result;
     console.log('destination : ' + destination);
     const optionGroupId = parseInt(result.draggableId);
-    patchOptionApplyMutation.mutate({
+    /*  patchOptionApplyMutation.mutate({
       eventId: eventId,
       ticketItemId: 72,
       payload: {
         optionGroupId: optionGroupId,
       },
-    });
+    }); */
   };
   resetServerContext();
 
@@ -49,16 +51,16 @@ const OptionList = ({
       <div>
         <ListHeader padding={0} size="listHeader_18" title="옵션 목록" />
         <Spacing size={42} />
-        <Wrapper>
+        <OptionItemContainer>
           <Padding size={[24, 12, 24, 12]}>
             <Text typo="P_Header_16_SB">옵션을 먼저 생성해주세요!</Text>
           </Padding>
-        </Wrapper>
+        </OptionItemContainer>
       </div>
     );
   } else {
     return (
-      <>
+      <Wrapper>
         <FlexBox direction="column" align="flex-start">
           <div>
             <ListHeader padding={0} size="listHeader_18" title="옵션 목록" />
@@ -80,13 +82,13 @@ const OptionList = ({
                           {...provided.dragHandleProps}
                           ref={provided.innerRef}
                         >
-                          <Wrapper key={item.optionGroupId}>
+                          <OptionItemContainer key={item.optionGroupId}>
                             <OptionItem
                               name={item.name}
                               subText={`필수응답 · ${item.type}`}
                               OptionGroupId={item.optionGroupId}
                             />
-                          </Wrapper>
+                          </OptionItemContainer>
                           <Spacing size={16} />
                         </div>
                       )}
@@ -98,7 +100,7 @@ const OptionList = ({
             </Droppable>
           </DragDropContext>
         </FlexBox>
-      </>
+      </Wrapper>
     );
   }
 };
@@ -106,6 +108,15 @@ const OptionList = ({
 export default OptionList;
 
 const Wrapper = styled.div`
+  & > div {
+    position: sticky;
+    position: -webkit-sticky;
+    margin-top: 44px;
+    top: 36px;
+  }
+`;
+
+const OptionItemContainer = styled.div`
   width: 400px;
   height: auto;
   box-sizing: border-box;
