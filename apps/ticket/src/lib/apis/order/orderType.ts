@@ -131,6 +131,8 @@ export interface OrderListResponse {
 export interface OrderTicketResponse {
   tickets: IssuedTicketInfo[];
   eventProfile: EventProfile;
+  orderUuid: string;
+  orderNo: string;
 }
 
 export interface IssuedTicketInfo {

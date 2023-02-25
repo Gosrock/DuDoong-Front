@@ -45,7 +45,11 @@ const RefundInfo = ({ refund }: { refund: RefundInfo }) => {
       <ListHeader title="예매취소" size="listHeader_18" />
       <InfoItem
         item="취소기한"
-        value={`${parseDate(refund.endAt)[0]} ${parseDate(refund.endAt)[1]}`}
+        value={
+          typeof refund.endAt === 'string'
+            ? `${parseDate(refund.endAt)[0]} ${parseDate(refund.endAt)[1]}`
+            : ''
+        }
         color="gray_400"
       />
       <Padding size={[10, 24, 30, 24]}>
