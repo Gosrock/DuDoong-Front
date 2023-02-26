@@ -90,7 +90,7 @@ const Detail = () => {
       firstHandler: buttonClickHandler,
       firstDisable: checkButtonDisable(form, imageInfo),
     });
-  }, [form, imageInfo]);
+  }, [form, imageInfo.key]);
 
   return (
     <>
