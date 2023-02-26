@@ -4,6 +4,8 @@ import AdminHeader from './AdminHeader';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import AdminBottomButton from './AdminBottomButton';
 import { useLocation } from 'react-router-dom';
+import { keyframes, css } from '@emotion/react';
+import { Spacing } from '@dudoong/ui';
 
 const AdminNoMenuLayout = () => {
   const { Toast } = useToastify();
@@ -11,9 +13,10 @@ const AdminNoMenuLayout = () => {
   return (
     <Wrapper>
       <AdminHeader host="" alliance={false} />
-      <BottomWrapper>
+      <BottomWrapper isButtonActive={isNew}>
         <OutletWrapper>
           <Outlet />
+          {isNew && <Spacing size={55} />}
         </OutletWrapper>
         {isNew && <AdminBottomButton fullwidth={1} />}
         <Toast />
@@ -31,9 +34,28 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.gray_100};
 `;
 
-const BottomWrapper = styled.div`
+interface BottomWrapperProps {
+  isButtonActive: boolean;
+}
+
+const wrapperSize = keyframes`
+  0% {
+    height: 100%;
+  }
+  100% {
+    height: calc(100% - 88px);
+  }
+`;
+
+const BottomWrapper = styled.div<BottomWrapperProps>`
   overflow-y: scroll;
-  height: 100%;
+  height: ${({ isButtonActive }) =>
+    isButtonActive ? 'calc(100% - 88px)' : '100%'};
+  ${({ isButtonActive }) =>
+    isButtonActive &&
+    css`
+      animation: ${wrapperSize} 0.4s ease-out;
+    `}
   padding-left: 14px;
 `;
 

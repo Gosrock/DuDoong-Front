@@ -11,7 +11,7 @@ const useRefresh = () => {
   const [cookies, setCookie] = useCookies();
   const { mutate: refreshMutate, status } = useMutation(AuthApi.REFRESH, {
     onSuccess: (data) => {
-      console.log(data);
+      console.log(data.accessToken);
       axiosPrivate.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${data.accessToken}`;

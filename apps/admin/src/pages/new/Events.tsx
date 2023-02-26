@@ -50,7 +50,6 @@ const Events = () => {
       ) : (
         <SecondStep hostId={hostId} setButtonInfo={setButtonInfo} />
       )}
-      <Spacing size={72} />
     </>
   );
 };
