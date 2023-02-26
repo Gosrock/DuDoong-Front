@@ -12,7 +12,6 @@ import { PurchaseLimit } from '../input/PurchaseLimit';
 import { StockInfo } from '../input/StockInfo';
 import { TicketFormProps } from './TicketForm';
 import { Text } from '@dudoong/ui';
-import BankDropdown from '../input/BankDropdown';
 
 const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
   return (
@@ -21,7 +20,7 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
         <ListHeader
           padding={0}
           size={'listHeader_18'}
-          title={'게좌번호 입력'}
+          title={'계좌번호 입력'}
           description={
             <Text typo={'P_Text_16_M'} color="gray_400">
               {'계좌정보를 적어주세요. (ex. 신한 김두둥 110-1234-5678)'}

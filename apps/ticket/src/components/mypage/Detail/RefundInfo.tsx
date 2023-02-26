@@ -48,7 +48,7 @@ const RefundInfo = ({ refund }: { refund: RefundInfo }) => {
         value={
           typeof refund.endAt === 'string'
             ? `${parseDate(refund.endAt)[0]} ${parseDate(refund.endAt)[1]}`
-            : ''
+            : '승인 대기중'
         }
         color="gray_400"
       />
