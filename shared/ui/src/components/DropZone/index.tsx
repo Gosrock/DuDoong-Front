@@ -23,7 +23,7 @@ const PosterText = () => {
   return (
     <FlexBox align={'center'} direction={'column'} gap={0}>
       <Text typo={'P_Text_16_M'} color={'gray_400'}>
-        여기에 이미지를 드래그앤 드랍 또는 클릭해서
+        여기에 이미지를 드래그 앤 드롭 또는 클릭해서
         <br />
       </Text>
       <Text typo={'P_Text_16_M'} color={'gray_400'}>
