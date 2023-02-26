@@ -12,12 +12,15 @@ import {
 import styled from '@emotion/styled';
 import type { CreateEventRequest } from '@lib/apis/event/eventType';
 import { useEffect, useState } from 'react';
-import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
 import { useForm, FormState } from 'react-hook-form';
-
+import { useMutation } from '@tanstack/react-query';
+import { CreateEventResponse } from '@lib/apis/event/eventType';
+import EventApi from '@lib/apis/event/EventApi';
+import { useNavigate } from 'react-router-dom';
 interface SecondStepProps {
   hostId: number;
+  setButtonInfo: (props: any) => void;
 }
 
 interface InputType {
@@ -25,18 +28,19 @@ interface InputType {
   runTime: number;
 }
 
-const SecondStep = ({ hostId }: SecondStepProps) => {
+const SecondStep = ({ hostId, setButtonInfo }: SecondStepProps) => {
   const [startAt, setStartAt] = useState<Date | null>(null);
   const [startAtTime, setStartAtTime] = useState<Date | null>(null);
-  const [buttonDisable, setButtonDisable] = useState<boolean>(true);
   const { register, handleSubmit, formState } = useForm<InputType>({
     mode: 'onChange',
   });
-  const { postEventMutation } = useEvents();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    setButtonDisable(checkDisable(startAt, startAtTime, formState));
-  }, [formState.isValid, startAt, startAtTime]);
+  const postEventMutation = useMutation(EventApi.POST_EVENT, {
+    onSuccess: (data: CreateEventResponse) => {
+      console.log('postEventMutation : ', data);
+    },
+  });
 
   const makeEventHandler = (data: InputType) => {
     if (startAt && startAtTime) {
@@ -46,9 +50,20 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
         startAt: timeFormatter(startAt, startAtTime),
       } as CreateEventRequest;
 
-      postEventMutation.mutate(payload);
+      postEventMutation.mutate(payload, {
+        onSuccess: (data: CreateEventResponse) => {
+          navigate(`/events/${data.eventId}/info`, { replace: true });
+        },
+      });
     }
   };
+
+  useEffect(() => {
+    setButtonInfo({
+      firstHandler: handleSubmit(makeEventHandler),
+      firstDisable: checkDisable(startAt, startAtTime, formState),
+    });
+  }, [formState.isValid, startAt, startAtTime]);
 
   return (
     <>
@@ -102,15 +117,6 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
           </PickerWrapper>
         </FlexBox>
       </BorderBox>
-      <Spacing size={100} />
-      <Button
-        varient="primary"
-        fullWidth={true}
-        onClick={handleSubmit(makeEventHandler)}
-        disabled={buttonDisable}
-      >
-        공연 생성하기
-      </Button>
     </>
   );
 };
@@ -137,10 +143,11 @@ const checkDisable = (
   time: Date | null,
   formState: FormState<InputType>,
 ) => {
-  console.log(date, time);
   // 미입력
   if (!date || !time || !formState.isValid) return true;
   // 날짜가 현재 이전인 경우
+  if (date < new Date()) return true;
+  // 날짜 시간 모두가 현재 이전인 경우
   if (date < new Date() && time < new Date()) return true;
   return false;
 };

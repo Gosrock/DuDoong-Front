@@ -4,7 +4,7 @@ import useBottomButton from '@lib/hooks/useBottomButton';
 import EventDetailInfo from '@components/events/detail/EventDetailInfo';
 import { useLocation } from 'react-router-dom';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import EventApi from '@lib/apis/event/EventApi';
 import type {
   EventResponse,
@@ -12,7 +12,6 @@ import type {
   UpdateEventDetailRequest,
   EventDetailResponse,
 } from '@lib/apis/event/eventType';
-import { queryClient } from '../../main';
 import EventImage from '@components/events/detail/EventImage';
 import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
@@ -33,7 +32,7 @@ const Detail = () => {
     type: 'save',
     isActive: true,
   });
-
+  const queryClient = useQueryClient();
   // 이벤트 디테일 api
   const eventDetail = queryClient.getQueryData([
     'eventDetail',
@@ -91,7 +90,7 @@ const Detail = () => {
       firstHandler: buttonClickHandler,
       firstDisable: checkButtonDisable(form, imageInfo),
     });
-  }, [form, imageInfo]);
+  }, [form, imageInfo.key]);
 
   return (
     <>

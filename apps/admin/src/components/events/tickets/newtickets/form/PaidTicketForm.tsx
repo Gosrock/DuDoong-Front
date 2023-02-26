@@ -1,5 +1,5 @@
 import TicketInput from '@components/events/tickets/newtickets/input/TicketInput';
-import { FlexBox, Spacing } from '@dudoong/ui';
+import { FlexBox, Spacing, Text } from '@dudoong/ui';
 import { PurchaseLimit } from '../input/PurchaseLimit';
 import { StockInfo } from '../input/StockInfo';
 import { TicketFormProps } from './TicketForm';
@@ -14,6 +14,11 @@ const PaidTicketForm = ({ register, control }: TicketFormProps) => {
           title="티켓 가격"
           description="1000원 이상부터 가능해요."
           descriptionTypo="P_Text_14_M"
+          rightIcon={
+            <Text typo="P_Text_16_M" color="gray_400">
+              원
+            </Text>
+          }
           placeholder="0"
           {...register('price', {
             required: true,

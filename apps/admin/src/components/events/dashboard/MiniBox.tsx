@@ -24,7 +24,7 @@ const MiniBox = ({
         {icon}
         <Spacing size={2} />
         <Text typo={'P_Header_20_B'} color={'gray_500'}>
-          {count}장
+          {count ? `${count}장` : '0장'}
         </Text>
         <Spacing size={4} />
         <Text typo={'P_Text_14_R'} color={'gray_500'}>

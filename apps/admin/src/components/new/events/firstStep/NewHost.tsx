@@ -8,6 +8,7 @@ const NewHost = () => {
       state: {
         returnUrl: '/new/events/2',
       },
+      replace: true,
     });
   };
 

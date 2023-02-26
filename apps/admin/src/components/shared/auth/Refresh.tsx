@@ -3,24 +3,32 @@ import { useEffect } from 'react';
 import { FullScreen, SyncLoader } from '@dudoong/ui';
 import useRefresh from '@lib/hooks/auth/useRefresh';
 import { getCookie } from '@lib/utils/cookie';
+import { useRecoilValue } from 'recoil';
+import { authState } from '@store/auth';
 
 const Refresh = () => {
   const refreshToken = getCookie('refreshToken');
-  const { refreshMutation, state, setState } = useRefresh();
-
+  const { refreshMutate, status } = useRefresh();
+  const auth = useRecoilValue(authState);
   useEffect(() => {
-    refreshToken ? refreshMutation.mutate(refreshToken) : setState('failed');
+    console.log('쿠키에 있는거', refreshToken);
+    refreshMutate(refreshToken);
   }, []);
 
-  if (state === 'loading') {
+  useEffect(() => {
+    console.log(auth.isAuthenticated);
+  }, [auth]);
+
+  if (status === 'success' && auth.isAuthenticated === true) {
+    return <Outlet />;
+  } else if (status === 'error') {
+    return <Navigate replace to="/login" />;
+  } else
     return (
       <FullScreen verticalCenter>
         <SyncLoader />
       </FullScreen>
     );
-  } else if (state === 'failed') {
-    return <Navigate replace to="/login" />;
-  } else return <Outlet />;
 };
 
 export default Refresh;

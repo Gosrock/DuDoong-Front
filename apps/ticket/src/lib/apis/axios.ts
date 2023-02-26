@@ -12,3 +12,10 @@ axiosPrivate.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export const AuthAPi = {
+  OAUTH_LOGOUT: async (): Promise<null> => {
+    const response = await axiosPrivate.post(`/auth/logout`);
+    return response.data.data;
+  },
+};
