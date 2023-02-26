@@ -6,6 +6,7 @@ import Host from '@assets/landing/host.svg';
 import EventMobile from '@assets/landing/eventMobile.svg';
 import AlertMobile from '@assets/landing/alertMobile.svg';
 import { css } from '@emotion/react';
+import { ComponentProps } from 'react';
 const FeatureSection = () => {
   return (
     <Wrapper>
@@ -38,17 +39,23 @@ const FeatureSection = () => {
             margin-top: 200px;
           `}
         >
-          <ContentText
-            tag="공연 홍보 및 안내"
-            title={`두둥을 통해\n공연을 홍보하세요!`}
-            description={`이벤트 관리에서 에디터를 활용해서\n여러분들의 공연을 소개해 보세요!`}
-          />
           <Event
             css={css`
               width: 497px;
             `}
             className="image-pc"
           />
+          <ContentText
+            tag="공연 홍보 및 안내"
+            title={`두둥을 통해\n공연을 홍보하세요!`}
+            description={`이벤트 관리에서 에디터를 활용해서\n여러분들의 공연을 소개해 보세요!`}
+            css={css`
+              ${media.pc} {
+                padding-right: 28px;
+              }
+            `}
+          />
+
           <EventMobile
             className="image-mobile"
             css={css`
@@ -84,14 +91,14 @@ const FeatureSection = () => {
   );
 };
 
-interface ContentProps {
+interface ContentProps extends ComponentProps<'div'> {
   tag: string;
   title: string;
   description: string;
 }
-const ContentText = ({ tag, title, description }: ContentProps) => {
+const ContentText = ({ tag, title, description, ...props }: ContentProps) => {
   return (
-    <ContentTextWrapper>
+    <ContentTextWrapper {...props}>
       <p>{tag}</p>
       <h3>{title}</h3>
       <div>{description}</div>
