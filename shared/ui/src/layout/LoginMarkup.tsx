@@ -5,6 +5,8 @@ import {
   FlexBox,
   TextProps,
   BorderBox,
+  media,
+  FullScreen,
 } from '@dudoong/ui';
 import { FlexBoxProps } from '@dudoong/ui';
 import { css } from '@emotion/react';
@@ -21,55 +23,101 @@ interface LoginMarkupProps {
 const LoginMarkup = ({ onKakao }: LoginMarkupProps) => {
   return (
     <>
-      <Wrapper align={'center'} justify={'center'}>
-        <KeyboardItem />
-        <DoongDoongsItem />
-        <DotsItem1 />
-        <DotsItem2 />
-        <BorderBox
-          padding={[120, 60]}
-          css={css`
-            width: 595px;
-            height: 584px;
-            z-index: 1;
-          `}
-        >
-          <FlexBox align={'center'} justify={'center'} direction={'column'}>
-            <Logo width={254} height={67} />
-            <Spacing size={12} />
-            <Text typo={'P_Header_24_B'}>DUDOONG YOUR CONCERT LIFE</Text>
-            <Spacing size={89} />
-            <Button fullWidth varient="kakao" onClick={onKakao}>
-              카카오로 로그인하기
-            </Button>
-            <Spacing size={32} />
-            <CustomText
-              typo={'P_Text_16_R'}
-              color={'gray_400'}
-              onClick={() => {
-                window.open('https://dudoong.com/meta/term', '_blank');
-              }}
-            >
-              두둥 서비스 약관
-            </CustomText>
-            <Spacing size={19} />
-            <CustomText
-              typo={'P_Text_16_R'}
-              color={'gray_400'}
-              onClick={() => {
-                window.open('https://dudoong.com/meta/privacy', '_blank');
-              }}
-            >
-              두둥 개인정보 처리방침
-            </CustomText>
-          </FlexBox>
-        </BorderBox>
-      </Wrapper>
+      <PC>
+        <Wrapper align={'center'} justify={'center'}>
+          <KeyboardItem />
+          <DoongDoongsItem />
+          <DotsItem1 />
+          <DotsItem2 />
+          <BorderBox
+            padding={[120, 60]}
+            css={css`
+              width: 595px;
+              height: 584px;
+              z-index: 1;
+            `}
+          >
+            <FlexBox align={'center'} justify={'center'} direction={'column'}>
+              <Logo width={254} height={67} />
+              <Spacing size={12} />
+              <Text typo={'P_Header_24_B'}>DUDOONG YOUR CONCERT LIFE</Text>
+              <Spacing size={89} />
+              <Button fullWidth varient="kakao" onClick={onKakao}>
+                카카오로 로그인하기
+              </Button>
+              <Spacing size={32} />
+              <CustomText
+                typo={'P_Text_16_R'}
+                color={'gray_400'}
+                onClick={() => {
+                  window.open('https://dudoong.com/meta/term', '_blank');
+                }}
+              >
+                두둥 서비스 약관
+              </CustomText>
+              <Spacing size={19} />
+              <CustomText
+                typo={'P_Text_16_R'}
+                color={'gray_400'}
+                onClick={() => {
+                  window.open('https://dudoong.com/meta/privacy', '_blank');
+                }}
+              >
+                두둥 개인정보 처리방침
+              </CustomText>
+            </FlexBox>
+          </BorderBox>
+        </Wrapper>
+      </PC>
+      <Mobile>
+        <FlexBox align={'center'} justify={'center'} direction={'column'}>
+          <Logo width={203} height={54} />
+          <Spacing size={12} />
+          <Text typo={'P_Header_24_B'}>YOUR CONCERT LIFE</Text>
+          <Spacing size={89} />
+          <Button fullWidth varient="kakao" onClick={onKakao}>
+            카카오로 로그인하기
+          </Button>
+          <Spacing size={32} />
+          <CustomText
+            typo={'P_Text_16_R'}
+            color={'gray_400'}
+            onClick={() => {
+              window.open('https://dudoong.com/meta/term', '_blank');
+            }}
+          >
+            두둥 서비스 약관
+          </CustomText>
+          <Spacing size={19} />
+          <CustomText
+            typo={'P_Text_16_R'}
+            color={'gray_400'}
+            onClick={() => {
+              window.open('https://dudoong.com/meta/privacy', '_blank');
+            }}
+          >
+            두둥 개인정보 처리방침
+          </CustomText>
+        </FlexBox>
+      </Mobile>
     </>
   );
 };
 
 export default LoginMarkup;
+
+const PC = styled.div`
+  ${media.mobile} {
+    display: none;
+  }
+`;
+
+const Mobile = styled(FullScreen)`
+  & > div {
+    height: 100%;
+    padding: 0 48px;
+  }
+`;
 
 const Wrapper = styled((props: FlexBoxProps) => <FlexBox {...props} />)`
   width: 100%;
