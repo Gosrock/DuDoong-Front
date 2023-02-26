@@ -6,21 +6,23 @@ import { getCookie } from '@lib/utils/cookie';
 
 const Refresh = () => {
   const refreshToken = getCookie('refreshToken');
-  const { refreshMutation, state, setState } = useRefresh();
+  const { refreshMutate, status } = useRefresh();
 
   useEffect(() => {
-    refreshToken ? refreshMutation.mutate(refreshToken) : setState('failed');
+    console.log('쿠키에 있는거', refreshToken);
+    refreshMutate(refreshToken);
   }, []);
 
-  if (state === 'loading') {
+  if (status === 'success') {
+    return <Outlet />;
+  } else if (status === 'error') {
+    return <Navigate replace to="/login" />;
+  } else
     return (
       <FullScreen verticalCenter>
         <SyncLoader />
       </FullScreen>
     );
-  } else if (state === 'failed') {
-    return <Navigate replace to="/login" />;
-  } else return <Outlet />;
 };
 
 export default Refresh;
