@@ -58,6 +58,9 @@ const EventList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 80px 40px;
+  ${media.mobile} {
+    grid-gap: 32px 32px;
+  }
   margin: 145px auto 0 auto;
   max-width: 936px;
 
