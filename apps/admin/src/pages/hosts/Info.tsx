@@ -42,7 +42,6 @@ const Info = () => {
     type: 'save',
     isActive: true,
   });
-  const queryClient = useQueryClient();
 
   // profile 수정 api
   const postEventMutation = useMutation(HostApi.PATCH_HOST_PROFILE, {

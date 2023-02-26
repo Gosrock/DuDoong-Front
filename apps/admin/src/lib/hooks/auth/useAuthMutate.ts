@@ -64,6 +64,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   });
 
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
+    // console.log(loginData.refreshToken, 'login');
     axiosPrivate.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${loginData.accessToken}`;
