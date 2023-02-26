@@ -99,7 +99,7 @@ const Wrapper = styled.main`
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { eventId: '1' } }],
+    paths: [],
     fallback: 'blocking',
   };
 };

@@ -1,6 +1,7 @@
 import Main from '@components/shared/Layout/Main';
 import DDHead from '@components/shared/Layout/NextHead';
-import { MenuBar, NavBar } from '@dudoong/ui';
+import { media, MenuBar, NavBar } from '@dudoong/ui';
+import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -21,3 +22,14 @@ const MyCoupon = () => {
 };
 
 export default MyCoupon;
+
+const MenuWrapper = styled.div`
+  position: sticky;
+  position: -webkit-sticky;
+  ${media.pc} {
+    position: sticky;
+  }
+  top: 48px;
+  z-index: 3;
+  background-color: ${({ theme }) => theme.palette.white};
+`;

@@ -1,10 +1,18 @@
 import TicketInput from '@components/events/tickets/newtickets/input/TicketInput';
-import { FlexBox, Input, ListHeader, Spacing } from '@dudoong/ui';
+import {
+  FlexBox,
+  Input,
+  ListHeader,
+  Popup,
+  PopupDropdown,
+  Spacing,
+} from '@dudoong/ui';
 import { Approval } from '../input/Approval';
 import { PurchaseLimit } from '../input/PurchaseLimit';
 import { StockInfo } from '../input/StockInfo';
 import { TicketFormProps } from './TicketForm';
 import { Text } from '@dudoong/ui';
+import BankDropdown from '../input/BankDropdown';
 
 const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
   return (
@@ -22,6 +30,7 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
         />
         <Spacing size={12} />
         <FlexBox align="flex-start" gap={18}>
+          {/* <BankDropdown /> */}
           <Input
             placeholder="은행명"
             {...register('bankName', {

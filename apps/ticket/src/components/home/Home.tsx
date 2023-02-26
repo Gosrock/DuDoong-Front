@@ -23,10 +23,6 @@ const Home = () => {
     400,
   );
 
-  useEffect(() => {
-    console.log(keyword);
-  }, [keyword]);
-
   return (
     <>
       <DDHead title="두둥! | 홈" />
@@ -37,13 +33,7 @@ const Home = () => {
           height={60}
           styles={InputStyle}
           placeholder={'검색어를 입력해주세요'}
-          rightIcon={
-            <Search
-              onClick={() => {
-                console.log('adsf');
-              }}
-            />
-          }
+          rightIcon={<Search />}
         />
         <EventList>{infiniteListElement}</EventList>
       </main>
