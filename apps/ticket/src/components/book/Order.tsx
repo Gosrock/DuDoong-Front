@@ -124,6 +124,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <AccountInfoSection
           accountInfo={data.accountInfo}
           orderPayload={{ couponId: coupon, cartId: data.cartId }}
+          closeOverlay={closeOverlay}
         />
       </OverlayBox>
     </>

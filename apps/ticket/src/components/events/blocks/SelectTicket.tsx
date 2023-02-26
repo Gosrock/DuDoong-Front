@@ -69,6 +69,7 @@ const SelectTicket = ({ items, eventName }: TicketsProps) => {
           ) : (
             <Counter
               count={form.quantity}
+              limit={selectedTicket.purchaseLimit}
               onClickPlus={() => handleCounter(true)}
               onClickMinus={() => handleCounter(false)}
             />

@@ -14,9 +14,11 @@ import useOrderMutation from './useOrderMutation';
 const AccountInfoSection = ({
   accountInfo,
   orderPayload,
+  closeOverlay,
 }: {
   accountInfo: AccountInfo;
   orderPayload: { couponId: null; cartId: number };
+  closeOverlay: () => void;
 }) => {
   const { dudoongMutate } = useOrderMutation();
   const { setToast } = useToastify();
@@ -35,7 +37,7 @@ const AccountInfoSection = ({
         <RoundBlock background="gray_100" padding={0}>
           <ListRow
             text={`${accountInfo.bankName} ${accountInfo.accountNumber}`}
-            subText={`(입금자명) ${accountInfo.accountHolder}`}
+            subText={`(예금주) ${accountInfo.accountHolder}`}
             textTypo={['P_Text_16_M', 'P_Text_14_M']}
             textColor={['black', 'gray_500']}
             rightElement={
@@ -51,7 +53,7 @@ const AccountInfoSection = ({
         </RoundBlock>
       </Padding>
       <ButtonSet varient="horizontal">
-        <Button fullWidth varient="tertiary">
+        <Button fullWidth varient="tertiary" onClick={closeOverlay}>
           다음에 할래요
         </Button>
         <Button fullWidth onClick={handleDudoongOrder}>
