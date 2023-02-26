@@ -13,8 +13,6 @@ import { HTMLAttributes, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { authState } from '@store/auth';
 import { useRecoilState } from 'recoil';
-import { getCookie } from 'cookies-next';
-import { setCredentials } from '@lib/utils/setCredentials';
 import { useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 
