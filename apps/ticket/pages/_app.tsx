@@ -17,6 +17,7 @@ import cookies from 'next-cookies';
 import { setCredentials } from '@lib/utils/setCredentials';
 import { getCookie } from 'cookies-next';
 import Layout from '@components/shared/Layout';
+import Head from 'next/head';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -42,20 +43,28 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <ThemeProvider theme={theme}>
-      <RecoilRoot initializeState={initializer}>
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <Hydrate state={pageProps.dehydratedState}>
-            <Global styles={globalStyle} />
-            <Layout>
-              <Component {...pageProps} />
-              <GlobalOverlay />
-            </Layout>
-          </Hydrate>
-        </QueryClientProvider>
-      </RecoilRoot>
-    </ThemeProvider>
+    <>
+      <Head>
+        <meta
+          name="viewport"
+          content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
+        />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <RecoilRoot initializeState={initializer}>
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <Hydrate state={pageProps.dehydratedState}>
+              <Global styles={globalStyle} />
+              <Layout>
+                <Component {...pageProps} />
+                <GlobalOverlay />
+              </Layout>
+            </Hydrate>
+          </QueryClientProvider>
+        </RecoilRoot>
+      </ThemeProvider>
+    </>
   );
 }
 
