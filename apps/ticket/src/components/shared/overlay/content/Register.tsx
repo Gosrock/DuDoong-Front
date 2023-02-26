@@ -1,5 +1,6 @@
-import { Button, ButtonSet, ListHeader, Text, theme } from '@dudoong/ui';
+import { Button, ButtonSet, ListHeader, media, Text, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 interface RegisterProps {
   name: string;
@@ -8,7 +9,7 @@ interface RegisterProps {
 
 const Register = ({ name, onMainActionClick }: RegisterProps) => {
   return (
-    <>
+    <Wrapper>
       <ListHeader
         size="listHeader_20"
         title={
@@ -37,8 +38,10 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
           약관 동의하고 시작하기
         </Button>
       </ButtonSet>
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div``;
 
 export default Register;
