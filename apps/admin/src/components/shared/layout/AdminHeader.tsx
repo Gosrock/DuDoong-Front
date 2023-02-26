@@ -5,7 +5,8 @@ import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { useCookies } from 'react-cookie';
-import { axiosPrivate } from '@lib/apis/axios';
+import { AuthAPi, axiosPrivate } from '@lib/apis/axios';
+import { useMutation } from '@tanstack/react-query';
 
 interface AdminHeaderProps {
   host: string;
@@ -15,6 +16,15 @@ interface AdminHeaderProps {
 const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
   const auth = useRecoilValue(authState);
   const resetAuthState = useResetRecoilState(authState);
+
+  const { mutate: logoutMutate } = useMutation(AuthAPi.OAUTH_LOGOUT, {
+    onSuccess: () => {
+      axiosPrivate.defaults.headers.common['Authorization'] = ``;
+      removeCookie('refreshToken', { path: '/' });
+      resetAuthState();
+      window.location.href = '/admin/';
+    },
+  });
   const [, , removeCookie] = useCookies(['refreshToken']);
 
   const profileOption: PopupOptions[] = [
@@ -26,12 +36,7 @@ const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
     },
     {
       title: '로그아웃',
-      onClick: () => {
-        axiosPrivate.defaults.headers.common['Authorization'] = ``;
-        removeCookie('refreshToken', { path: '/' });
-        resetAuthState();
-        window.location.href = '/';
-      },
+      onClick: logoutMutate,
     },
   ];
   const rightElement = (

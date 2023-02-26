@@ -1,9 +1,8 @@
 import { Divider, FlexBox, ListRow, Tag, TagButton } from '@dudoong/ui';
 import TicketApi from '@lib/apis/ticket/TicketApi';
 import { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
-import { queryClient } from '../../../../main';
 
 export interface TicketItemProps {
   text: string;
@@ -24,7 +23,7 @@ const TicketItem = ({
 }: TicketItemProps) => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
-
+  const queryClient = useQueryClient();
   //티켓 삭제 api
   const patchTicketDeleteMutation = useMutation(TicketApi.PATCH_TICKET_DELETE, {
     onSuccess: (data: GetTicketDetailResponse) => {

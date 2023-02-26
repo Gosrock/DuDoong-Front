@@ -4,6 +4,10 @@ import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import TicketItem from './TicketItem';
+import styled from '@emotion/styled';
+import { Button, ButtonSet, Padding } from '@dudoong/ui';
+import Link from 'next/link';
+import { css } from '@emotion/react';
 
 const TicketList = ({
   tickets,
@@ -35,13 +39,33 @@ const TicketList = ({
   return (
     <>
       <Swiper {...swiperParams}>
-        {tickets.map((ticket: IssuedTicketInfo, idx: number) => {
-          return (
-            <SwiperSlide key={idx}>
-              <TicketItem ticket={ticket} orderUuid={orderUuid} />
-            </SwiperSlide>
-          );
-        })}
+        {tickets.length === 0 ? (
+          <ButtonSet varient="horizontal" padding={[20, 24]}>
+            <Link
+              href={`/history/${orderUuid}`}
+              css={css`
+                width: 100%;
+              `}
+            >
+              <Button varient="tertiary" fullWidth>
+                예매 상세
+              </Button>
+            </Link>
+            <Button varient="tertiary" fullWidth disabled>
+              승인 대기중
+            </Button>
+          </ButtonSet>
+        ) : (
+          <>
+            {tickets.map((ticket: IssuedTicketInfo, idx: number) => {
+              return (
+                <SwiperSlide key={idx}>
+                  <TicketItem ticket={ticket} orderUuid={orderUuid} />
+                </SwiperSlide>
+              );
+            })}
+          </>
+        )}
       </Swiper>
     </>
   );

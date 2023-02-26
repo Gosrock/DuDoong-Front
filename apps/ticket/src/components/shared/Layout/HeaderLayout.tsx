@@ -1,16 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Header, Popup, PopupOptions } from '@dudoong/ui/src/components';
 import { Profile } from '@dudoong/ui/src/components/Profile/Profile';
 import { media, theme } from '@dudoong/ui/src/theme';
 import { useRouter } from 'next/router';
-import { useResetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
-import { removeCookies } from 'cookies-next';
 import { resetCrendentials } from '@lib/utils/setCredentials';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
+import { useMutation } from '@tanstack/react-query';
+import { AuthAPi } from '@lib/apis/axios';
 export interface HeaderLayoutProps {
   children: ReactNode;
   name?: string;
@@ -27,6 +28,14 @@ export const HeaderLayout = ({
   const { push } = useRouter();
   const { Toast } = useToastify();
   const resetAuthState = useResetRecoilState(authState);
+
+  const { mutate: logoutMutate } = useMutation(AuthAPi.OAUTH_LOGOUT, {
+    onSuccess: () => {
+      resetAuthState();
+      resetCrendentials();
+    },
+  });
+
   const profileOption: PopupOptions[] = [
     {
       title: '마이페이지',
@@ -36,11 +45,7 @@ export const HeaderLayout = ({
     },
     {
       title: '로그아웃',
-      onClick: () => {
-        resetAuthState();
-        resetCrendentials();
-        removeCookies('refreshToken');
-      },
+      onClick: logoutMutate,
     },
   ];
   return (

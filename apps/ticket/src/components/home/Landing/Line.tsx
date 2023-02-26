@@ -28,9 +28,10 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.main_500};
   height: 66px;
 
-  font-family: 'jost';
+  font-family: 'Jost', sans-serif;
   font-style: italic;
   font-size: 33px;
+  font-weight: 400;
   color: ${({ theme }) => theme.palette.white};
   letter-spacing: 0.1em;
 

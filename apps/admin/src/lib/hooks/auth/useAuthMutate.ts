@@ -10,13 +10,12 @@ import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-// import { useCookies } from 'react-cookie';
-import { setCookie } from '@lib/utils/cookie';
+import { useCookies } from 'react-cookie';
 
 const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const { openOverlay, closeOverlay } = useGlobalOverlay();
   const [auth, setAuth] = useRecoilState(authState);
-  // const [, setCookie] = useCookies(['refreshToken']);
+  const [cookies, setCookie] = useCookies();
   const navigate = useNavigate();
 
   // 카카오 회원정보 가져오기
@@ -69,11 +68,23 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
     axiosPrivate.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${loginData.accessToken}`;
-    setCookie('refreshToken', loginData.refreshToken, {
-      maxAge: loginData.refreshTokenAge,
-    });
-    setAuth((prev) => {
-      return { ...prev, isAuthenticated: true, ...loginData };
+    console.log('로그인성공', loginData.accessToken, loginData.refreshToken);
+    if (import.meta.env.DEV) {
+      setCookie('refreshToken', loginData.refreshToken, {
+        maxAge: loginData.refreshTokenAge,
+        path: '/',
+      });
+      setCookie('accessToken', loginData.accessToken, {
+        maxAge: loginData.refreshTokenAge,
+        path: '/',
+      });
+      console.log('세팅확인', cookies.accessToken, cookies.refreshToken);
+    }
+    setAuth({
+      isAuthenticated: true,
+      callbackUrl: '/',
+      userProfile: loginData.userProfile,
+      accessToken: loginData.accessToken,
     });
   };
 

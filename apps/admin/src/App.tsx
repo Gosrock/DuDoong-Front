@@ -12,6 +12,7 @@ import AdminNoMenuLayout from '@components/shared/layout/AdminNoMenuLayout';
 import Home from '@pages/common/Home';
 import { useQueryClient } from '@tanstack/react-query';
 import useApiError from '@lib/hooks/useApiError';
+import RequireAuth from '@components/shared/auth/RequireAuth';
 
 function App() {
   const { handleError } = useApiError();
@@ -19,11 +20,13 @@ function App() {
 
   queryClient.setDefaultOptions({
     queries: {
+      retry: false,
       onError: (error: any) => {
         handleError(error);
       },
     },
     mutations: {
+      retry: false,
       onError: (error: any) => {
         handleError(error);
       },
@@ -32,7 +35,7 @@ function App() {
 
   return (
     <Routes>
-      <Route element={<Refresh />}>
+      <Route element={<RequireAuth />}>
         <Route element={<AdminNoMenuLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/new/*" element={<NewRouter />} />

@@ -30,7 +30,7 @@ export const Counter = ({
     }
   };
   const handleMinusClick = () => {
-    if (ticketNum === 0) return;
+    if (ticketNum === 1) return;
     setTicketNum(ticketNum - 1);
     onClickMinus();
   };
@@ -48,7 +48,7 @@ export const Counter = ({
             height: '24px',
             paddingTop: '3px',
             fill: `${
-              ticketNum === 0 ? theme.palette.gray_300 : theme.palette.gray_500
+              ticketNum === 1 ? theme.palette.gray_300 : theme.palette.gray_500
             }`,
             cursor: `${ticketNum === 0 ? `default` : `pointer`}`,
           }}

@@ -1,8 +1,8 @@
 import List from '@components/home/List';
 import { Button, ButtonSet, FlexBox, ListHeader, Spacing } from '@dudoong/ui';
 import { authState } from '@store/auth';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 export type PageType = 'host' | 'event';
@@ -11,6 +11,14 @@ const Home = () => {
   const auth = useRecoilValue(authState);
   const [select, setSelect] = useState<PageType>('host');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setSelect(location.state.select);
+    }
+  }, []);
+
   const handleClickHost = () => {
     setSelect('host');
   };

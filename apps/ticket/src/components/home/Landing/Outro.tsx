@@ -60,7 +60,7 @@ const Wrapper = styled.div`
     line-height: 1.2;
     margin-top: 60px;
     ${media.mobile} {
-      font-size: 24px;
+      font-size: 20px;
     }
   }
   p {
@@ -68,10 +68,11 @@ const Wrapper = styled.div`
     font-weight: 500;
     text-align: center;
     font-size: 24px;
-    color: ${({ theme }) => theme.palette.gray_400};
+    color: ${({ theme }) => theme.palette.gray_500};
     margin-top: 20px;
     ${media.mobile} {
       font-size: 14px;
+      font-weight: 400;
     }
   }
 
@@ -86,6 +87,7 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.typo.G_Header_24_B};
     box-sizing: border-box;
     line-height: 1;
+    color: ${({ theme }) => theme.palette.black};
 
     ${media.mobile} {
       font-size: 16px;

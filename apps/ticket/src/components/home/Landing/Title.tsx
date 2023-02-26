@@ -55,9 +55,7 @@ const Wrapper = styled.div`
     width: 104px;
 
     ${media.mobile} {
-      top: 30px;
-      transform: translate3d(-140px, 0, 0);
-      width: 59px;
+      display: none;
     }
   }
   .star {

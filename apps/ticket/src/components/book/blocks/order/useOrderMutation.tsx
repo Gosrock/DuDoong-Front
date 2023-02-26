@@ -8,21 +8,37 @@ const useOrderMutation = (instance?: PaymentWidgetInstance | null) => {
   const router = useRouter();
   const { mutate: orderMutate } = useMutation(OrderApi.CREATE_ORDER, {
     onSuccess: (data) => {
-      const payload = {
-        orderId: data.orderId,
-        orderName: data.orderName,
-        successUrl: `${DOMAIN}/pay/confirm`,
-        failUrl: `${DOMAIN}/pay/fail`,
-        customerEmail: data.customerEmail,
-        customerName: data.customerName,
-      };
-      instance && instance.requestPayment(payload);
+      console.log(data);
+      if (data.isNeedPayment) {
+        const payload = {
+          orderId: data.orderId,
+          orderName: data.orderName,
+          successUrl: `${DOMAIN}/pay/confirm`,
+          failUrl: `${DOMAIN}/pay/fail`,
+          customerEmail: data.customerEmail,
+          customerName: data.customerName,
+        };
+        instance && instance.requestPayment(payload);
+      } else if (data.approveType === '선착순') {
+        //무료 선착순
+        console.log(data, '무료선착순 주문');
+        freeOrderMutate(data.orderId);
+      } else {
+        router.push(`/pay/success?order=${data.orderId}`, '/pay/success');
+      }
+    },
+  });
+
+  const { mutate: freeOrderMutate } = useMutation(OrderApi.POST_ORDER_FREE, {
+    onSuccess: (data) => {
+      console.log(data, '무료선착순 주문 응답');
+      router.push(`/pay/success?order=${data.orderUuid}`, '/pay/success');
     },
   });
 
   const { mutate: dudoongMutate } = useMutation(OrderApi.CREATE_ORDER, {
     onSuccess: (data) => {
-      router.replace(`/pay/success?order=${data.orderId}`, '/pay/success');
+      router.push(`/pay/success?order=${data.orderId}`, '/pay/success');
     },
   });
 

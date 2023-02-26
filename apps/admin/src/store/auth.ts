@@ -1,4 +1,3 @@
-import { getCookie } from '@lib/utils/cookie';
 import { atom } from 'recoil';
 
 export interface AuthStateType {
@@ -16,20 +15,24 @@ const initialState: AuthStateType = {
   isAuthenticated: false,
   callbackUrl: '/',
   accessToken: '',
-  userProfile: null,
+  userProfile: {
+    id: 0,
+    profileImage: '',
+    name: '',
+  },
 };
 
-const getTokenFromCookie = (): AuthStateType => {
-  const refreshToken = getCookie('refreshToken') || '';
+/* const getTokenFromCookie = (): AuthStateType => {
+  const refreshToken = getCookie('refreshToken') || null;
   if (refreshToken) {
     return {
       ...initialState,
       isAuthenticated: true,
     };
   } else return { ...initialState };
-};
+}; */
 
 export const authState = atom<AuthStateType>({
   key: 'authState',
-  default: getTokenFromCookie(),
+  default: initialState,
 });

@@ -75,9 +75,11 @@ const Wrapper = styled.div`
 
   transform: scale(1);
   transition: all 0.1s ease-out;
+  filter: drop-shadow(3px 4px 7px rgba(0, 0, 0, 0.15));
 
   :active {
     transform: scale(0.99);
+    filter: none;
   }
 
   .poster {

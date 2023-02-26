@@ -53,7 +53,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
       ? orderMutate({ couponId: coupon, cartId: data.cartId })
       : openOverlay();
   };
-
+  console.log(data);
   return (
     <>
       <DDHead title="두둥!" />
@@ -120,13 +120,15 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         </section>
         <Spacing size={120} color={'gray_200'} />
       </Main>
-      <OverlayBox open={isOpen} onDismiss={closeOverlay}>
-        <AccountInfoSection
-          accountInfo={data.accountInfo}
-          orderPayload={{ couponId: coupon, cartId: data.cartId }}
-          closeOverlay={closeOverlay}
-        />
-      </OverlayBox>
+      {isDudoong && (
+        <OverlayBox open={isOpen} onDismiss={closeOverlay}>
+          <AccountInfoSection
+            accountInfo={data.accountInfo}
+            orderPayload={{ couponId: coupon, cartId: data.cartId }}
+            closeOverlay={closeOverlay}
+          />
+        </OverlayBox>
+      )}
     </>
   );
 };
