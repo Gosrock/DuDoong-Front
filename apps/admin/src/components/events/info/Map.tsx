@@ -240,6 +240,7 @@ const MapPage = (props: any) => {
               markers={markers !== undefined ? markers : undefined}
               handleChange={handleChange}
               setInfos={setInfos}
+              setPlaceAddress={setPlaceAddress}
               pagination={pagination !== undefined ? pagination : undefined}
             />
           )}
