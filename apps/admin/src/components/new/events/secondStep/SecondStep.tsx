@@ -145,11 +145,20 @@ const checkDisable = (
 ) => {
   // 미입력
   if (!date || !time || !formState.isValid) return true;
-  // 날짜가 현재 이전인 경우
-  if (date < new Date()) return true;
-  // 날짜 시간 모두가 현재 이전인 경우
-  if (date < new Date() && time < new Date()) return true;
+  const inputDate = dateTimeConverter(date, time);
+  // // 날짜가 현재 이전인 경우
+  if (inputDate < new Date()) return true;
   return false;
+};
+
+const dateTimeConverter = (date: Date, time: Date) => {
+  const today = new Date();
+  const todayDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+  return new Date(date.getTime() + time.getTime() - todayDate.getTime());
 };
 
 // ----------------------------------------------------------------
