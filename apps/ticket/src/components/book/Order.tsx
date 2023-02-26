@@ -53,7 +53,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
       ? openOverlay()
       : orderMutate({ couponId: coupon, cartId: data.cartId });
   };
-
+  console.log(data);
   return (
     <>
       <DDHead title="두둥!" />

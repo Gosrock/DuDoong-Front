@@ -2,11 +2,12 @@ import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { overlayState } from '@store/globalOverlay';
 import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
+import Error from './content/Error';
 import Login from './content/Login';
 import Register from './content/Register';
 import OverlayBox from './OverlayBox';
 
-export type GlobalSheetContentKey = 'login' | 'register';
+export type GlobalSheetContentKey = 'login' | 'register' | 'error';
 
 export type GlobalSheetContentType = {
   [key in GlobalSheetContentKey]: ReactNode;
@@ -18,9 +19,10 @@ export interface OverlayBoxProps {
   children: ReactNode;
 }
 
-const globalSheetContent = {
+const globalSheetContent: Record<GlobalSheetContentKey, any> = {
   login: Login,
   register: Register,
+  error: Error,
 };
 
 const GlobalOverlay = () => {
