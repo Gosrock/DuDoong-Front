@@ -23,6 +23,7 @@ const FirstStep = () => {
             state: {
               hostId: selectedHostId,
             },
+            replace: true,
           });
         }}
         disabled={selectedHostId === null}

@@ -33,9 +33,10 @@ const CreateHost = () => {
           state: {
             hostId: curId,
           },
+          replace: true,
         });
       } else {
-        navigate(`/hosts/${curId}/info`);
+        navigate(`/hosts/${curId}/info`, { replace: true });
       }
     },
   });

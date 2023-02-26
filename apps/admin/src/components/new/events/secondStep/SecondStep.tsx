@@ -12,9 +12,12 @@ import {
 import styled from '@emotion/styled';
 import type { CreateEventRequest } from '@lib/apis/event/eventType';
 import { useEffect, useState } from 'react';
-import useEvents from '@lib/hooks/useEvents';
 import timeFormatter from '@lib/utils/timeFormatter';
 import { useForm, FormState } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { CreateEventResponse } from '@lib/apis/event/eventType';
+import EventApi from '@lib/apis/event/EventApi';
+import { useNavigate } from 'react-router-dom';
 
 interface SecondStepProps {
   hostId: number;
@@ -32,7 +35,13 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
   const { register, handleSubmit, formState } = useForm<InputType>({
     mode: 'onChange',
   });
-  const { postEventMutation } = useEvents();
+  const navigate = useNavigate();
+
+  const postEventMutation = useMutation(EventApi.POST_EVENT, {
+    onSuccess: (data: CreateEventResponse) => {
+      console.log('postEventMutation : ', data);
+    },
+  });
 
   useEffect(() => {
     setButtonDisable(checkDisable(startAt, startAtTime, formState));
@@ -46,7 +55,11 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
         startAt: timeFormatter(startAt, startAtTime),
       } as CreateEventRequest;
 
-      postEventMutation.mutate(payload);
+      postEventMutation.mutate(payload, {
+        onSuccess: (data: CreateEventResponse) => {
+          navigate(`/events/${data.eventId}/info`, { replace: true });
+        },
+      });
     }
   };
 
@@ -137,12 +150,11 @@ const checkDisable = (
   time: Date | null,
   formState: FormState<InputType>,
 ) => {
-  console.log(date, time);
   // 미입력
   if (!date || !time || !formState.isValid) return true;
   // 날짜가 현재 이전인 경우
   if (date < new Date()) return true;
-  // 날짜가 현재 이전인 경우
+  // 날짜 시간 모두가 현재 이전인 경우
   if (date < new Date() && time < new Date()) return true;
   return false;
 };
