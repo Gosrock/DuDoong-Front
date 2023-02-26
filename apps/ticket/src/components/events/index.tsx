@@ -34,7 +34,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
 
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const fetchRefresh = async (token: string) => {
       try {
         const data = await AuthApi.REFRESH(token);
@@ -54,7 +54,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
       const refreshToken = getCookie('refreshToken') as string;
       refreshToken && fetchRefresh(refreshToken);
     }
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -105,6 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         detail,
+        revalidate: 1,
       },
     };
   } catch (error: any) {
