@@ -25,7 +25,7 @@ const SelectPayMethod = ({
       <>
         <TextListRow
           left="입금 계좌"
-          right={`(입금자명) ${account?.accountHolder}`}
+          right={`(예금주) ${account?.accountHolder}`}
         />
         <TextListRow
           left={`${account?.bankName} ${account?.accountNumber}`}
