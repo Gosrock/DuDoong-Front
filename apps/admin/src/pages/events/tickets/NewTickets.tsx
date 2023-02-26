@@ -9,16 +9,16 @@ import { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
 
 import useBottomButton from '@lib/hooks/useBottomButton';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { queryClient } from '../../../main';
 
 const NewTickets = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
+  const queryClient = useQueryClient();
   const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
     eventId,
