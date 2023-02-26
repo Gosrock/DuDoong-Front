@@ -14,6 +14,10 @@ export default function Document() {
           type="text/javascript"
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c08b495df2ecbc09bd453fb53701551&libraries=services,clusterer"
         ></script>
+        <meta
+          name="viewport"
+          content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
+        />
       </Head>
       <body>
         <Main />
