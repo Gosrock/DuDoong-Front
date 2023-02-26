@@ -94,7 +94,7 @@ const AdminMenu = ({ title }: { title: string }) => {
           </div>
         );
       })}
-      <Version>qa-2</Version>
+      <Version>qa-3</Version>
     </MenuWrapper>
   );
 };
