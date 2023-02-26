@@ -5,7 +5,6 @@ import {
   FlexBox,
   TextProps,
   BorderBox,
-  media,
   FullScreen,
 } from '@dudoong/ui';
 import { FlexBoxProps } from '@dudoong/ui';
@@ -15,6 +14,7 @@ import Keyboard from '../assets/image/Keyboard';
 import DoongDoongs from '../assets/image/DoongDoongs';
 import Dots from '../assets/image/Dots';
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 
 interface LoginMarkupProps {
   onKakao: () => void;
@@ -107,14 +107,17 @@ const LoginMarkup = ({ onKakao }: LoginMarkupProps) => {
 export default LoginMarkup;
 
 const PC = styled.div`
-  ${media.mobile} {
+  @media (max-width: 767px) {
     display: none;
   }
 `;
 
-const Mobile = styled(FullScreen)`
+const Mobile = styled.div`
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 150px);
   & > div {
-    height: 100%;
+    width: 100%;
     padding: 0 48px;
   }
 `;
