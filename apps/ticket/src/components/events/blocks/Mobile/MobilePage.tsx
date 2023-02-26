@@ -115,7 +115,13 @@ const MobilePage = ({
       <Spacing size={60} />
       <Footer />
       <Spacing size={120} color={'gray_200'} />
-      <ButtonSet bottomFixed backGradient>
+      <ButtonSet
+        bottomFixed
+        backGradient
+        css={css`
+          z-index: 5;
+        `}
+      >
         <Remote openTicketOverlay={openTicketOverlay} eventName={detail.name} />
       </ButtonSet>
     </Wrapper>

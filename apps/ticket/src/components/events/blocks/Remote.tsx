@@ -1,4 +1,4 @@
-import { Button } from '@dudoong/ui';
+import { Button, Modal } from '@dudoong/ui';
 import Talk from '@assets/talk.svg';
 import styled from '@emotion/styled';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
@@ -43,9 +43,9 @@ const Remote = ({ openTicketOverlay, eventName }: RemoteProps) => {
           예매하기
         </Button>
       </Wrapper>
-      <OverlayBox open={isOpen} onDismiss={closeTalkOverlay}>
+      <Modal open={isOpen} onDismiss={closeTalkOverlay}>
         <TalkOverlay eventName={eventName} onClose={closeTalkOverlay} />
-      </OverlayBox>
+      </Modal>
     </>
   );
 };
