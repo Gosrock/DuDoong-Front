@@ -106,7 +106,13 @@ const SecondStep = ({ hostId, setButtonInfo }: SecondStepProps) => {
               width={240}
             />
             <Input
-              placeholder={'러닝타임 (단위: 분)'}
+              placeholder={'러닝타임'}
+              rightIcon={
+                <Text typo="P_Text_16_M" color="gray_500">
+                  분
+                </Text>
+              }
+              type="number"
               {...register('runTime', {
                 required: true,
                 pattern: /^[0-9]+$/,

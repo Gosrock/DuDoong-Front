@@ -9,8 +9,14 @@ import {
 import { ReactComponent as Recommendation } from '@assets/recommendation.svg';
 
 import styled from '@emotion/styled';
-import { Control, Controller, FieldValues } from 'react-hook-form';
-import { payType } from '@lib/apis/ticket/ticketType';
+import {
+  Control,
+  Controller,
+  FieldValues,
+  UseFormReset,
+  UseFormSetValue,
+} from 'react-hook-form';
+import { CreateTicketRequest, payType } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useNavigate } from 'react-router-dom';
@@ -29,10 +35,14 @@ const TicketSelect = ({
   partner,
   control,
   hostId,
+  reset,
+  setValue,
 }: {
   partner: boolean | null;
   control: Control<FieldValues, any>;
   hostId: number | null;
+  reset: UseFormReset<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
 }) => {
   const [payType, setPayType] = useState<payType>();
   const [payInfo, setPayInfo] = useState<string>(
@@ -49,6 +59,21 @@ const TicketSelect = ({
     ) {
       setPayInfo(PAY_INFO[payType]);
     }
+    reset({
+      ticketName: '',
+      description: '',
+      price: '',
+      approveType: {
+        if(payType: payType) {
+          payType === '유료티켓' ? '선착순' : '승인';
+        },
+      },
+      purchaseLimit: '',
+      supplyCount: '',
+      quantity: '',
+      isQuantityPublic: true,
+      payType: payType,
+    });
   }, [payType]);
 
   return (

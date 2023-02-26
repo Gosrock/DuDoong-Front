@@ -1,5 +1,5 @@
 import TicketInput from '@components/events/tickets/newtickets/input/TicketInput';
-import { FlexBox, Spacing } from '@dudoong/ui';
+import { FlexBox, Spacing, Text } from '@dudoong/ui';
 import { Approval } from '../input/Approval';
 import { PurchaseLimit } from '../input/PurchaseLimit';
 import { StockInfo } from '../input/StockInfo';
@@ -14,6 +14,11 @@ const FreeTicketForm = ({ register, control }: TicketFormProps) => {
         min="1"
         title="발행매수"
         description="최대 1000장까지 발행 가능해요."
+        rightIcon={
+          <Text typo="P_Text_16_M" color="gray_400">
+            장
+          </Text>
+        }
         placeholder="0"
         {...register('supplyCount', {
           required: true,
