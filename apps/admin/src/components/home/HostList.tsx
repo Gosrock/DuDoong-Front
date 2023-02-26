@@ -98,6 +98,7 @@ const HostList = ({ page }: ListProps) => {
                   {...invite}
                   isNew={true}
                   key={invite.hostId}
+                  disabled={true}
                 ></HostItem>
                 <Divider
                   line={true}
