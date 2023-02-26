@@ -2,14 +2,21 @@ import { useLocation } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import OptionApi from '@lib/apis/option/OptionApi';
 import { FlexBox, ListRow, TagButton, Padding } from '@dudoong/ui';
+import { useEffect } from 'react';
 
 export interface OptionItemProps {
   name: string;
   subText: string;
   OptionGroupId: number;
+  soldOptionGroupId: number[];
 }
 
-const OptionItem = ({ name, subText, OptionGroupId }: OptionItemProps) => {
+const OptionItem = ({
+  name,
+  subText,
+  OptionGroupId,
+  soldOptionGroupId,
+}: OptionItemProps) => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
   const queryClient = useQueryClient();
@@ -42,6 +49,7 @@ const OptionItem = ({ name, subText, OptionGroupId }: OptionItemProps) => {
           <TagButton
             text="삭제"
             color="warn"
+            disabled={soldOptionGroupId.includes(OptionGroupId) ? true : false}
             size="lg"
             onClick={handleRemoveClick}
           />

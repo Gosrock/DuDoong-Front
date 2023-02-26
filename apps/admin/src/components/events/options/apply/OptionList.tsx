@@ -11,6 +11,8 @@ import OptionItem from './OptionItem';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import type { OptionGroupResponse } from '@lib/apis/option/optionType';
 import { DudoongOne } from '@assets/stickers';
+import { useRecoilState } from 'recoil';
+import { soldOptionState } from '@store/soldOption';
 
 interface OptionListProps {
   optionItems: OptionGroupResponse[];
@@ -18,19 +20,24 @@ interface OptionListProps {
 
 const OptionList = ({ optionItems }: OptionListProps) => {
   console.log(optionItems);
+  const [soldOptions, setSoldOptions] = useRecoilState(soldOptionState);
+
   if (!optionItems?.length) {
     return (
       <Wrapper>
         <div>
           <ListHeader padding={0} size="listHeader_18" title="옵션 목록" />
           <Spacing size={42} />
-
-          <DudoongOne />
-          <Padding size={[24, 124.5, 24, 124.5]}>
-            <Text typo="Text_16" color="gray_500">
-              두둥! 옵션을 생성해주세요.
-            </Text>
-          </Padding>
+          <div>
+            <FlexBox justify={'center'} direction={'column'}>
+              <DudoongOne />
+              <Padding size={[24, 80, 24, 80]}>
+                <Text typo="Text_16" color="gray_500">
+                  두둥! 티켓 옵션을 먼저 생성해주세요.
+                </Text>
+              </Padding>
+            </FlexBox>
+          </div>
           {/* <Padding size={[24, 12, 24, 12]}>
               <Text typo="P_Header_16_SB">옵션을 먼저 생성해주세요!</Text>
             </Padding> */}
@@ -66,6 +73,7 @@ const OptionList = ({ optionItems }: OptionListProps) => {
                             name={item.name}
                             subText={`${item.type}`}
                             OptionGroupId={item.optionGroupId}
+                            soldOptionGroupId={soldOptions}
                           />
                         </OptionItemContainer>
                         <Spacing size={16} />
