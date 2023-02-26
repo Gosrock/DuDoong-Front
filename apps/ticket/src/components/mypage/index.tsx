@@ -6,10 +6,12 @@ import {
   Padding,
   Profile,
   Spacing,
+  TagButton,
+  theme,
 } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import { authState } from '@store/auth';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useResetRecoilState } from 'recoil';
 import OrderItem from './OrderItem';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import Shortcuts from '@components/shared/Shortcuts';
@@ -17,16 +19,17 @@ import Main from '@components/shared/Layout/Main';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { resetCrendentials } from '@lib/utils/setCredentials';
-import { removeCookies } from 'cookies-next';
 import { GetServerSideProps } from 'next';
-import { AuthApi, UserApi } from '@dudoong/utils';
 
-const Mypage = () => {
-  const { userProfile } = useRecoilValue(authState);
+import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
+import { UserInfo } from '@lib/apis/user/userType';
+import { UserApi } from '@lib/apis/user/UserApi';
+import styled from '@emotion/styled';
+
+const Mypage = ({ info }: { info: UserInfo }) => {
   const resetAuthState = useResetRecoilState(authState);
   const router = useRouter();
-  console.log('');
-  const { data } = useQuery(['recentOrderDetail'], () =>
+  const { isLoading, data } = useQuery(['recentOrderDetail'], () =>
     OrderApi.GET_RECENT_ORDER(),
   );
 
@@ -38,15 +41,31 @@ const Mypage = () => {
       <Padding size={[20, 24]}>
         <Profile
           size="big"
-          image={userProfile?.profileImage}
-          name={userProfile?.name || ''}
-          subText={'010-7554-6670'}
+          image={info?.profileImage}
+          name={info?.userName || ''}
+          subText={info?.phoneNumber}
         />
       </Padding>
       <Divider />
       <Spacing size={20} />
       <Padding size={[10, 24, 10, 24]}>
-        <FlexBox>{data ? <OrderItem {...data} /> : <></>}</FlexBox>
+        <FlexBox>
+          {isLoading ? (
+            <SkeletonBox />
+          ) : data ? (
+            <OrderItem {...data} />
+          ) : (
+            <SkeletonBox>
+              아직 예매한 티켓이 없어요.
+              <TagButton
+                text="공연 둘러보기"
+                color="primary"
+                size="lg"
+                onClick={() => router.push('/home')}
+              />
+            </SkeletonBox>
+          )}
+        </FlexBox>
       </Padding>
 
       <ListHeader title={'바로가기'} size={'listHeader_20'} />
@@ -73,13 +92,39 @@ const Mypage = () => {
 
 export default Mypage;
 
+const SkeletonBox = styled.div`
+  background-color: ${theme.palette.white};
+  border-radius: 12px;
+  border: 1px solid ${theme.palette.black};
+  filter: drop-shadow(3px 4px 7px rgba(0, 0, 0, 0.15));
+
+  width: 100%;
+  max-width: 440px;
+  height: 166px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  ${theme.typo.P_Text_16_R};
+`;
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
+  console.log(cookies);
 
-  const detail = await UserApi.GET_MY_INFO;
-  return {
-    props: {
-      detail,
-    },
-  };
+  try {
+    setSsrAxiosHeader(cookies);
+    const info: UserInfo = await UserApi.GET_MY_INFO();
+    if (info) return { props: { info } };
+    else return { redirect: { destination: '/home', permanent: false } };
+  } catch (err: any) {
+    return {
+      redirect: {
+        destination: `/home`,
+        permanent: false,
+      },
+    };
+  }
 };
