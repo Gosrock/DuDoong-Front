@@ -33,6 +33,19 @@ const Wrapper = styled.div`
   height: 500px;
   padding: 20px 8px 0px 24px;
 
+  ::-webkit-scrollbar-thumb {
+    border: solid transparent;
+    background-clip: padding-box;
+    border-radius: 7px;
+    box-shadow: rgb(0 0 0 / 11%) 0px 0px 100px inset;
+  }
+  :-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+
   ${media.mobile} {
     height: calc(var(--vh) * 100 - 168px);
     padding: 20px 16px 0px 16px;
