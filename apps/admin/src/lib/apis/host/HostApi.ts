@@ -16,7 +16,7 @@ import type {
 const HostApi = {
   GET_HOSTS: async ({
     pageParam = 0,
-    size = 10,
+    size = 100,
     sort = 'desc',
   }: InfiniteRequest): Promise<InfiniteResponse<HostProfileResponse>> => {
     const response = await axiosPrivate.get(
@@ -109,6 +109,11 @@ const HostApi = {
       `/hosts/${hostId}/invite`,
       payload,
     );
+    return response.data.data;
+  },
+
+  POST_HOST_JOIN: async (hostId: string): Promise<HostDetailResponse> => {
+    const response = await axiosPrivate.post(`/hosts/${hostId}/join`);
     return response.data.data;
   },
 };

@@ -1,6 +1,10 @@
-import { KeyOfTypo, ListRow, Text, theme } from '@dudoong/ui';
+import { Button, FlexBox, KeyOfTypo, ListRow, Text, theme } from '@dudoong/ui';
 import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import { useMutation } from '@tanstack/react-query';
+import HostApi from '@lib/apis/host/HostApi';
+import { useLocation } from 'react-router-dom';
 
 export type HostItemTypeKey = 'lg' | 'sm';
 
@@ -39,6 +43,18 @@ const HostItem = ({
   selectedHostId = null,
   ...props
 }: HostItemProps) => {
+  const acceptInvite = (hostId: number) => {
+    const { mutate } = useMutation(
+      (hostId: string) => HostApi.POST_HOST_JOIN(String(hostId)),
+      {
+        onSuccess: () => {
+          console.log('success');
+        },
+      },
+    );
+    mutate;
+  };
+
   return (
     <Content
       isselected={selectedHostId === props.hostId ? 1 : 0}
@@ -50,12 +66,27 @@ const HostItem = ({
       textColor={['black', 'gray_400']}
       imageTextGap={type === 'sm' ? 26 : 16}
       rightElement={
-        <Text
-          typo="P_Text_16_SB"
-          color={props.active ? 'main_500' : 'sub_mint'}
-        >
-          {props.active ? props.role : '대기중'}
-        </Text>
+        props.active ? (
+          <Text
+            typo="P_Text_16_SB"
+            color={props.active ? 'main_500' : 'sub_mint'}
+          >
+            {props.active ? props.role : '대기중'}
+          </Text>
+        ) : (
+          <FlexBox align={'flex-start'} gap={26}>
+            <Text typo="P_Text_16_SB" color={'red_300'}>
+              무시
+            </Text>
+            <Text
+              typo="P_Text_16_SB"
+              color={'main_500'}
+              onClick={() => acceptInvite(props.hostId)}
+            >
+              수락
+            </Text>
+          </FlexBox>
+        )
       }
     />
   );
