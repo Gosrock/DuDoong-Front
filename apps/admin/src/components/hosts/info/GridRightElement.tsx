@@ -1,6 +1,6 @@
 import { ListHeader, Spacing, Input, FlexBox } from '@dudoong/ui';
 import { InputFormType } from '@pages/hosts/Info';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 
 interface GridRightElementProps {
   register: UseFormRegister<InputFormType>;
@@ -18,7 +18,8 @@ const GridRightElement = ({ register }: GridRightElementProps) => {
         {...register('introduce', {
           required: true,
         })}
-        placeholder={'최대 N글자까지 쓸 수 있어요.'}
+        placeholder={'최대 50글자까지 쓸 수 있어요.'}
+        maxLength={50}
       />
       <Spacing size={40} />
       <FlexBox align={'center'} gap={10}>

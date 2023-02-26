@@ -12,7 +12,7 @@ export interface TossPaymentWidgets {
 
 const useTossPayments = (
   totalPrice: string,
-  isDuddong: boolean,
+  isNeedTossPayment: boolean,
 ): TossPaymentWidgets => {
   const [widgetInstance, setWidgetInstance] =
     useState<PaymentWidgetInstance | null>(null);
@@ -25,7 +25,7 @@ const useTossPayments = (
   };
 
   useEffect(() => {
-    if (!isDuddong) {
+    if (isNeedTossPayment) {
       if (!widgetInstance) {
         initWidget();
       } else {

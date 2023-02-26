@@ -96,7 +96,7 @@ export const globalStyle = css`
     }
   }
 
-  ::-webkit-scrollbar-thumb {
+  /*   ::-webkit-scrollbar-thumb {
     border: solid transparent;
     background-clip: padding-box;
     border-radius: 7px;
@@ -107,7 +107,7 @@ export const globalStyle = css`
   }
   ::-webkit-scrollbar {
     width: 14px;
-  }
+  } */
 
   :root {
     --main-width: 600px;

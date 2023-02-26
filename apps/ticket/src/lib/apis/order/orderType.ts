@@ -31,13 +31,12 @@ export interface ConfirmOrderRequest {
  */
 export interface OrderResponse {
   paymentInfo: OrderPaymentResponse;
-  tickets: OrderLineTicketResponse;
+  tickets: OrderLineTicketResponse[];
   refundInfo: RefundInfo;
   eventProfile: EventProfile;
   orderUuid: string;
   orderId: number;
   orderMethod: OrderMethod;
-  approveType: ApproveType;
 }
 
 /**
@@ -65,16 +64,16 @@ export interface OrderLineTicketResponse {
   userName: string;
   orderLinePrice: string;
   purchaseQuantity: number;
-  answers: OptionAnswer;
+  answers: OptionAnswer[];
   eachOptionPrice: string;
 }
 
 /**
  * 예매취소 정보
  */
-interface RefundInfo {
+export interface RefundInfo {
   endAt: string;
-  available: boolean;
+  availAble: boolean;
 }
 
 /**
@@ -104,6 +103,27 @@ export type OrderStatus =
   | ' 취소된 결제'
   | ' 결제 실패';
 
+export type StageType =
+  | '승인대기'
+  | '입장완료'
+  | '관람예정'
+  | '입장중'
+  | '취소됨';
+
+/**
+ * 예매 목록
+ * OrderBiefElement
+ */
+export interface OrderListResponse {
+  refundInfo: RefundInfo;
+  eventProfile: EventProfile;
+  orderUuid: string;
+  orderNo: string;
+  stage: StageType;
+  orderStatus: OrderStatus;
+  itemName: string;
+  totalQuantity: number;
+}
 /**
  * 결제 아이디로 티켓 조회
  */
@@ -111,6 +131,8 @@ export type OrderStatus =
 export interface OrderTicketResponse {
   tickets: IssuedTicketInfo[];
   eventProfile: EventProfile;
+  orderUuid: string;
+  orderNo: string;
 }
 
 export interface IssuedTicketInfo {
@@ -144,3 +166,5 @@ export interface eventProfile {
 }
 
 export type IssuedTicketStatus = '입장 완료' | '입장 전' | '취소 티켓';
+
+export type OrderMethodType = '승인 방식' | '결제 방식';

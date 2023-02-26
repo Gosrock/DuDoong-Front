@@ -1,3 +1,4 @@
+import { eventProfile } from '../order/orderType';
 import { ApproveType, PayType } from '../ticket/ticketType';
 
 export interface AddCartRequest {
@@ -25,9 +26,15 @@ export interface AddCartResponse {
   isNeedPayment: boolean;
   approveType: ApproveType;
   ticketPayType: PayType;
-  accountNumber?: string;
+  accountInfo: AccountInfo;
+  eventProfile: eventProfile;
 }
 
+export interface AccountInfo {
+  bankName: string;
+  accountNumber: string;
+  accountHolder: string;
+}
 export interface CartItemResponse {
   name: string;
   answers: OptionAnswer[];

@@ -33,6 +33,7 @@ const useRefresh = () => {
       setState('succeed');
     },
     onError: () => {
+      console.log('mutation fail');
       setState('failed');
     },
   });

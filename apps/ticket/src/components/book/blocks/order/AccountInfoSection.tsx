@@ -7,22 +7,25 @@ import {
   RoundBlock,
   TagButton,
 } from '@dudoong/ui';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
+import { AccountInfo } from '@lib/apis/cart/cartType';
 import useOrderMutation from './useOrderMutation';
 
-const AccountInfo = ({
-  accountNumber,
+const AccountInfoSection = ({
+  accountInfo,
   orderPayload,
 }: {
-  accountNumber?: string;
+  accountInfo: AccountInfo;
   orderPayload: { couponId: null; cartId: number };
 }) => {
-  const [bank, account] = accountNumber?.split(' ') || ['', ''];
   const { dudoongMutate } = useOrderMutation();
+  const { setToast } = useToastify();
   const handleDudoongOrder = () => {
     dudoongMutate(orderPayload);
   };
   const handleCopyAccount = () => {
-    navigator.clipboard.writeText(account);
+    navigator.clipboard.writeText(accountInfo?.accountNumber);
+    setToast({ comment: '계좌번호가 복사되었어요!' });
   };
 
   return (
@@ -31,8 +34,8 @@ const AccountInfo = ({
       <Padding size={[0, 20, 0, 20]}>
         <RoundBlock background="gray_100" padding={0}>
           <ListRow
-            text={account}
-            subText={bank}
+            text={`${accountInfo.bankName} ${accountInfo.accountNumber}`}
+            subText={`(입금자명) ${accountInfo.accountHolder}`}
             textTypo={['P_Text_16_M', 'P_Text_14_M']}
             textColor={['black', 'gray_500']}
             rightElement={
@@ -58,4 +61,4 @@ const AccountInfo = ({
     </>
   );
 };
-export default AccountInfo;
+export default AccountInfoSection;
