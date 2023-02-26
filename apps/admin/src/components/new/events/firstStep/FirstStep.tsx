@@ -31,7 +31,6 @@ const FirstStep = ({ setButtonInfo }: FirstStepProps) => {
         <NewHost />
         <HostButtons hostId={selectedHostId} setHostId={setSelectedHostId} />
       </BorderBox>
-      <Spacing size={100} />
     </>
   );
 };
