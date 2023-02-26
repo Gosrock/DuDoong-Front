@@ -86,11 +86,11 @@ const MapPage = (props: any) => {
     }
   };
 
-  const buttonHandler = [props, curMarker];
+  const buttonHandler = [detailAddress, placeName, curMarker];
   useEffect(() => {
     setButtonInfo({
       firstHandler: changeEventHandler,
-      firstDisable: checkButtonDisable(buttonHandler),
+      firstDisable: checkButtonDisable(detailAddress, placeName),
     });
   }, [buttonHandler]);
 
@@ -175,6 +175,9 @@ const MapPage = (props: any) => {
     handleMap();
   }, [map]);
 
+  console.log(placeName);
+  console.log(detailAddress);
+
   return (
     <>
       <div>
@@ -252,7 +255,16 @@ const MapPage = (props: any) => {
 
 export default MapPage;
 
-const checkButtonDisable = (props: any) => {
-  if (props.content === null) return true;
+const checkButtonDisable = (
+  detailAddress: string | undefined,
+  placeName: string | undefined,
+) => {
+  if (
+    detailAddress === null ||
+    placeName === null ||
+    detailAddress === '' ||
+    placeName === ''
+  )
+    return true;
   return false;
 };
