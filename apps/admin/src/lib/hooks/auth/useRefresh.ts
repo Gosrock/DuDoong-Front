@@ -4,11 +4,11 @@ import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
 import { AuthApi } from '@dudoong/utils';
 import { axiosPrivate } from '@lib/apis/axios';
-import { setCookie } from '@lib/utils/cookie';
+import { useCookies } from 'react-cookie';
 
 const useRefresh = () => {
   const setAuth = useSetRecoilState(authState);
-
+  const [cookies, setCookie] = useCookies();
   const { mutate: refreshMutate, status } = useMutation(AuthApi.REFRESH, {
     onSuccess: (data) => {
       console.log(data);
@@ -21,9 +21,12 @@ const useRefresh = () => {
         isAuthenticated: true,
         callbackUrl: '/',
       });
-      setCookie('refreshToken', data.refreshToken, {
-        maxAge: data.refreshTokenAge,
-      });
+      if (import.meta.env.DEV) {
+        setCookie('refreshToken', data.refreshToken, {
+          maxAge: data.refreshTokenAge,
+          path: '/',
+        });
+      }
       console.log('받아온거', data.refreshToken);
     },
   });
