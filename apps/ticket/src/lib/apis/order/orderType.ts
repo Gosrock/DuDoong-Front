@@ -35,7 +35,7 @@ export interface OrderResponse {
   refundInfo: RefundInfo;
   eventProfile: EventProfile;
   orderUuid: string;
-  orderId: number;
+  orderNo: string;
   orderMethod: OrderMethod;
 }
 

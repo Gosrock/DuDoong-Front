@@ -22,7 +22,7 @@ const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
       axiosPrivate.defaults.headers.common['Authorization'] = ``;
       removeCookie('refreshToken', { path: '/' });
       resetAuthState();
-      window.location.href = '/';
+      window.location.href = '/admin/';
     },
   });
   const [, , removeCookie] = useCookies(['refreshToken']);

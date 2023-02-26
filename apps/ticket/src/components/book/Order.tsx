@@ -49,11 +49,11 @@ const Order = ({ data }: { data: AddCartResponse }) => {
   };
 
   const handleOrder = () => {
-    isNeedTossPayment
-      ? orderMutate({ couponId: coupon, cartId: data.cartId })
-      : openOverlay();
+    isDudoong
+      ? openOverlay()
+      : orderMutate({ couponId: coupon, cartId: data.cartId });
   };
-
+  console.log(data);
   return (
     <>
       <DDHead title="두둥!" />
