@@ -34,6 +34,22 @@ function App() {
   });
 
   return (
+    // <Routes>
+    //   <Route element={<RequireAuth />}>
+    //     <Route element={<AdminNoMenuLayout />}>
+    //       <Route path="/" element={<Home />} />
+    //       <Route path="/new/*" element={<NewRouter />} />
+    //     </Route>
+    //     <Route path="/hosts/:hostId/*" element={<HostsRouter />} />
+    //     <Route path="/events/:eventId/*" element={<EventsRouter />} />
+    //   </Route>
+    //   <Route element={<RefuseAuth />}>
+    //     <Route path="/login" element={<Login />} />
+    //   </Route>
+    //   <Route path="/404" element={<NotFound />} />
+    //   <Route path="/kakao/callback" element={<Callback />} />
+    //   <Route path="*" element={<Navigate to="/404" />} />
+    // </Routes>
     <Routes>
       <Route element={<RequireAuth />}>
         <Route element={<AdminNoMenuLayout />}>
