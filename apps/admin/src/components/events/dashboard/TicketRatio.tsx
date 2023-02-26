@@ -31,7 +31,8 @@ const TicketRatio = ({
         <FlexBox align={'center'} gap={27}>
           <div>
             <Text typo={'P_Text_16_SB'} color={'gray_500'}>
-              {checked}장<br />
+              {checked ? `${checked}장` : '0장'}
+              <br />
             </Text>
             <Spacing size={2} />
             <Text typo={'P_Text_12_R'} color={'gray_500'}>
@@ -40,7 +41,8 @@ const TicketRatio = ({
           </div>
           <div>
             <Text typo={'P_Text_16_SB'} color={'gray_500'}>
-              {notChecked}장<br />
+              {notChecked ? `${notChecked}장` : '0장'}
+              <br />
             </Text>
             <Spacing size={2} />
             <Text typo={'P_Text_12_R'} color={'gray_500'}>
