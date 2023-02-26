@@ -2,10 +2,12 @@ import styled from '@emotion/styled';
 import { Outlet } from 'react-router-dom';
 import AdminHeader from './AdminHeader';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
+import AdminBottomButton from './AdminBottomButton';
+import { useLocation } from 'react-router-dom';
 
 const AdminNoMenuLayout = () => {
   const { Toast } = useToastify();
-
+  const isNew = useLocation().pathname.split('/')[1] === 'new';
   return (
     <Wrapper>
       <AdminHeader host="" alliance={false} />
@@ -13,6 +15,7 @@ const AdminNoMenuLayout = () => {
         <OutletWrapper>
           <Outlet />
         </OutletWrapper>
+        {isNew && <AdminBottomButton fullwidth={1} />}
         <Toast />
       </BottomWrapper>
     </Wrapper>
