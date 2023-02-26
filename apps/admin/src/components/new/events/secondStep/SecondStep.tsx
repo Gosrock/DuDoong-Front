@@ -18,9 +18,9 @@ import { useMutation } from '@tanstack/react-query';
 import { CreateEventResponse } from '@lib/apis/event/eventType';
 import EventApi from '@lib/apis/event/EventApi';
 import { useNavigate } from 'react-router-dom';
-
 interface SecondStepProps {
   hostId: number;
+  setButtonInfo: (props: any) => void;
 }
 
 interface InputType {
@@ -28,10 +28,9 @@ interface InputType {
   runTime: number;
 }
 
-const SecondStep = ({ hostId }: SecondStepProps) => {
+const SecondStep = ({ hostId, setButtonInfo }: SecondStepProps) => {
   const [startAt, setStartAt] = useState<Date | null>(null);
   const [startAtTime, setStartAtTime] = useState<Date | null>(null);
-  const [buttonDisable, setButtonDisable] = useState<boolean>(true);
   const { register, handleSubmit, formState } = useForm<InputType>({
     mode: 'onChange',
   });
@@ -42,10 +41,6 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
       console.log('postEventMutation : ', data);
     },
   });
-
-  useEffect(() => {
-    setButtonDisable(checkDisable(startAt, startAtTime, formState));
-  }, [formState.isValid, startAt, startAtTime]);
 
   const makeEventHandler = (data: InputType) => {
     if (startAt && startAtTime) {
@@ -62,6 +57,13 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
       });
     }
   };
+
+  useEffect(() => {
+    setButtonInfo({
+      firstHandler: handleSubmit(makeEventHandler),
+      firstDisable: checkDisable(startAt, startAtTime, formState),
+    });
+  }, [formState.isValid, startAt, startAtTime]);
 
   return (
     <>
@@ -115,15 +117,6 @@ const SecondStep = ({ hostId }: SecondStepProps) => {
           </PickerWrapper>
         </FlexBox>
       </BorderBox>
-      <Spacing size={100} />
-      <Button
-        varient="primary"
-        fullWidth={true}
-        onClick={handleSubmit(makeEventHandler)}
-        disabled={buttonDisable}
-      >
-        공연 생성하기
-      </Button>
     </>
   );
 };
