@@ -60,6 +60,11 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
           title="티켓 가격"
           description="송금 받을 티켓 가격을 써주세요."
           descriptionTypo="P_Text_14_M"
+          rightIcon={
+            <Text typo="P_Text_16_M" color="gray_400">
+              원
+            </Text>
+          }
           placeholder="0"
           {...register('price', {
             required: true,
