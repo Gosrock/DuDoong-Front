@@ -1,7 +1,7 @@
 name: Admin-staging
 on:
   push:
-    branches: [qa]
+    branches: [dev]
     # Publish semver tags as releases.
     tags: ['v*.*.*']
 
