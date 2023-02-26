@@ -141,6 +141,8 @@ const checkDisable = (
   // 미입력
   if (!date || !time || !formState.isValid) return true;
   // 날짜가 현재 이전인 경우
+  if (date < new Date()) return true;
+  // 날짜가 현재 이전인 경우
   if (date < new Date() && time < new Date()) return true;
   return false;
 };
