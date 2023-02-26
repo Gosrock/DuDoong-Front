@@ -11,7 +11,7 @@ import {
 } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { SyntheticEvent, useState } from 'react';
+import { Dispatch, SetStateAction, SyntheticEvent, useState } from 'react';
 import ModalTip from './ModalTip';
 import Pagination from './Pagination';
 
@@ -37,6 +37,7 @@ interface ModalSearchProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleMap: () => void;
   pagination: any;
+  setPlaceAddress: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const ModalSearch = ({
@@ -48,6 +49,7 @@ const ModalSearch = ({
   setIsOpen,
   handleMap,
   pagination,
+  setPlaceAddress,
 }: ModalSearchProps) => {
   const ps = new kakao.maps.services.Places();
   const [pageCount, setTotalPage] = useState<number>();
@@ -64,6 +66,11 @@ const ModalSearch = ({
   function displayPagination(pagination: any) {
     setTotalPage(pagination?.last);
   }
+
+  const handleChanges = (marker: place) => {
+    setInfos(marker);
+    setPlaceAddress(marker?.placeAddress);
+  };
 
   return (
     <>
@@ -117,7 +124,7 @@ const ModalSearch = ({
                     {markers?.map((marker: place) => (
                       <AddressItem
                         key={`marker-${marker?.content}-${marker?.position?.lat},${marker?.position?.lng}`}
-                        onClick={() => setInfos(marker)}
+                        onClick={() => handleChanges(marker)}
                       >
                         <ListRow
                           padding={[0, 12]}

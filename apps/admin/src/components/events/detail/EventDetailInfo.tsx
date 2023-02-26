@@ -27,8 +27,6 @@ interface EventDetailInfoProps {
   eventId: string;
 }
 
-let isInitialized = false;
-
 const EventDetailInfo = ({
   content,
   setForm,
@@ -43,13 +41,14 @@ const EventDetailInfo = ({
     ['scrollSync'],
   ];
   const editorRef = useRef<Editor>(null);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
   useEffect(() => {
     if (editorRef.current && !isInitialized && content !== '') {
-      isInitialized = true;
+      setIsInitialized(true);
       editorRef.current.getInstance().setHTML(content);
     }
-  }, [content]);
+  }, []);
 
   // presigned 발급 api
   const postEventImageMutation = useMutation(EventApi.POST_EVENT_IMAGE, {
