@@ -23,9 +23,10 @@ const NewTickets = () => {
     'eventDetail',
     eventId,
   ]);
-  const { register, handleSubmit, watch, control, formState } = useForm({
-    mode: 'onChange',
-  });
+  const { register, handleSubmit, watch, control, formState, reset, setValue } =
+    useForm({
+      mode: 'onChange',
+    });
   const { openOverlay, closeOverlay } = useGlobalOverlay();
   const { setButtonInfo, hideButtons } = useBottomButton({
     type: 'save',
@@ -109,6 +110,8 @@ const NewTickets = () => {
             partner={eventDetail?.host.partner || null}
             control={control}
             hostId={eventDetail?.host.hostId || null}
+            reset={reset}
+            setValue={setValue}
           />
           <Spacing size={80} />
           <TicketInput

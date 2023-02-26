@@ -28,6 +28,7 @@
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^6.6.1",
     "recoil": "^0.7.6",
+    "universal-cookie": "^4.0.4",
     "vite-plugin-svgr": "^2.4.0"
   },
   "devDependencies": {

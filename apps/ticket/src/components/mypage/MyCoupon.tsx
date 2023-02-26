@@ -1,9 +1,10 @@
 import Main from '@components/shared/Layout/Main';
 import DDHead from '@components/shared/Layout/NextHead';
-import { media, MenuBar, NavBar } from '@dudoong/ui';
+import { media, MenuBar, NavBar, Spacing } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import NoData from './NoData';
 
 const MyCoupon = () => {
   const [menu, setMenu] = useState<number>(0);
@@ -17,6 +18,8 @@ const MyCoupon = () => {
         curActiveMenu={menu}
         setCurActiveMenu={setMenu}
       />
+      <Spacing size={182} />
+      <NoData text="쿠폰이 없습니다." />
     </Main>
   );
 };

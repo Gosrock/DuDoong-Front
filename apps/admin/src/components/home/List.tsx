@@ -4,12 +4,12 @@ import { css } from '@emotion/react';
 import EventApi from '@lib/apis/event/EventApi';
 import type { EventProfileResponse } from '@lib/apis/event/eventType';
 import HostApi from '@lib/apis/host/HostApi';
-import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import { PageType } from '@pages/common/Home';
 import EventItem from './EventItem';
 import HostLink from './HostLink';
 import { ReactComponent as DoongDoong } from '@assets/teduri.svg';
 import { ComponentProps } from 'react';
+import HostList from './HostList';
 
 interface ListProps {
   page: PageType;
@@ -36,23 +36,14 @@ const ADMIN_HOME_MAP: Record<
 };
 
 const List = ({ page }: ListProps) => {
-  const { infiniteListElement, isEmpty } = useInfiniteQueries<
-    EventProfileResponse | HostProfileResponse
-  >([page], ADMIN_HOME_MAP[page].apiFunction, ADMIN_HOME_MAP[page].item);
-
-  if (isEmpty) {
-    return (
-      <>
-        <Spacing size={70} />
-        <FlexBox direction={'column'} align="center" gap={48}>
-          <DoongDoong />
-          <Text typo="P_Text_16_M" color="gray_500">
-            두둥! 아무것도 없어요.
-          </Text>
-        </FlexBox>
-      </>
+  const { infiniteListElement, isEmpty } =
+    useInfiniteQueries<EventProfileResponse>(
+      ['event'],
+      ADMIN_HOME_MAP['event'].apiFunction,
+      ADMIN_HOME_MAP['event'].item,
     );
-  } else {
+
+  if (page === 'event' && !isEmpty) {
     return (
       <>
         <BorderBox
@@ -65,7 +56,22 @@ const List = ({ page }: ListProps) => {
         >
           {infiniteListElement}
         </BorderBox>
+
         <Spacing size={38} />
+      </>
+    );
+  } else if (page === 'host') {
+    return <HostList page="host"></HostList>;
+  } else {
+    return (
+      <>
+        <Spacing size={70} />
+        <FlexBox direction={'column'} align="center" gap={48}>
+          <DoongDoong />
+          <Text typo="P_Text_16_M" color="gray_500">
+            두둥! 아무것도 없어요.
+          </Text>
+        </FlexBox>
       </>
     );
   }

@@ -1,4 +1,4 @@
-import { FlexBox, Text } from '@dudoong/ui';
+import { FlexBox, media, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { ComponentProps, useEffect, useRef } from 'react';
@@ -37,7 +37,11 @@ const TalkOverlay = ({ eventName, onClose }: TalkProps) => {
 
 export default TalkOverlay;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  ${media.mobile} {
+    width: 100vw;
+  }
+`;
 const Header = styled(FlexBox)`
   height: 48px;
   padding-inline: 80px;
