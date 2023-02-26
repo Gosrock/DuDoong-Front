@@ -116,6 +116,11 @@ const HostApi = {
     const response = await axiosPrivate.post(`/hosts/${hostId}/join`);
     return response.data.data;
   },
+
+  POST_HOST_REJECT: async (hostId: string): Promise<HostDetailResponse> => {
+    const response = await axiosPrivate.post(`/hosts/${hostId}/reject`);
+    return response.data.data;
+  },
 };
 
 export default HostApi;

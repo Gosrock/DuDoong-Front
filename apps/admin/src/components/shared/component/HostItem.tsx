@@ -1,10 +1,8 @@
-import { Button, FlexBox, KeyOfTypo, ListRow, Text, theme } from '@dudoong/ui';
+import { FlexBox, KeyOfTypo, ListRow, Text, theme } from '@dudoong/ui';
 import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import HostApi from '@lib/apis/host/HostApi';
-import { useLocation } from 'react-router-dom';
 
 export type HostItemTypeKey = 'lg' | 'sm';
 
@@ -36,6 +34,7 @@ export interface HostItemProps
   > {
   type?: HostItemTypeKey;
   selectedHostId?: number | null;
+  isNew?: boolean;
 }
 
 const HostItem = ({
@@ -43,16 +42,24 @@ const HostItem = ({
   selectedHostId = null,
   ...props
 }: HostItemProps) => {
+  const queryClient = useQueryClient();
+  const { mutate: accept } = useMutation(HostApi.POST_HOST_JOIN, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+  const { mutate: reject } = useMutation(HostApi.POST_HOST_REJECT, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+
   const acceptInvite = (hostId: number) => {
-    const { mutate } = useMutation(
-      (hostId: string) => HostApi.POST_HOST_JOIN(String(hostId)),
-      {
-        onSuccess: () => {
-          console.log('success');
-        },
-      },
-    );
-    mutate;
+    accept(String(hostId));
+  };
+  const rejectInvite = (hostId: number) => {
+    reject(String(hostId));
+    queryClient.invalidateQueries();
   };
 
   return (
@@ -66,16 +73,13 @@ const HostItem = ({
       textColor={['black', 'gray_400']}
       imageTextGap={type === 'sm' ? 26 : 16}
       rightElement={
-        props.active ? (
-          <Text
-            typo="P_Text_16_SB"
-            color={props.active ? 'main_500' : 'sub_mint'}
-          >
-            {props.active ? props.role : '대기중'}
-          </Text>
-        ) : (
+        !props.active && props.isNew ? (
           <FlexBox align={'flex-start'} gap={26}>
-            <Text typo="P_Text_16_SB" color={'red_300'}>
+            <Text
+              typo="P_Text_16_SB"
+              color={'red_300'}
+              onClick={() => rejectInvite(props.hostId)}
+            >
               무시
             </Text>
             <Text
@@ -86,6 +90,13 @@ const HostItem = ({
               수락
             </Text>
           </FlexBox>
+        ) : (
+          <Text
+            typo="P_Text_16_SB"
+            color={props.active ? 'main_500' : 'sub_mint'}
+          >
+            {props.active ? props.role : '대기중'}
+          </Text>
         )
       }
     />
