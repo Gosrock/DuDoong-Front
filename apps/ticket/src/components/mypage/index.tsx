@@ -18,6 +18,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { resetCrendentials } from '@lib/utils/setCredentials';
 import { removeCookies } from 'cookies-next';
+import { GetServerSideProps } from 'next';
+import { AuthApi, UserApi } from '@dudoong/utils';
 
 const Mypage = () => {
   const { userProfile } = useRecoilValue(authState);
@@ -71,3 +73,14 @@ const Mypage = () => {
 };
 
 export default Mypage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { cookies } = context.req;
+
+  const detail = await UserApi.GET_MY_INFO;
+  return {
+    props: {
+      detail,
+    },
+  };
+};
