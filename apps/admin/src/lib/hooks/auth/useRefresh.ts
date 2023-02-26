@@ -7,16 +7,11 @@ import { axiosPrivate } from '@lib/apis/axios';
 import { setCookie } from '@lib/utils/cookie';
 
 const useRefresh = () => {
-  const [state, setState] = useState<'loading' | 'succeed' | 'failed'>(
-    'loading',
-  );
   const setAuth = useSetRecoilState(authState);
 
-  const refreshMutation = useMutation(AuthApi.REFRESH, {
-    onMutate: () => {
-      setState('loading');
-    },
+  const { mutate: refreshMutate, status } = useMutation(AuthApi.REFRESH, {
     onSuccess: (data) => {
+      console.log(data);
       axiosPrivate.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${data.accessToken}`;
@@ -29,16 +24,11 @@ const useRefresh = () => {
       setCookie('refreshToken', data.refreshToken, {
         maxAge: data.refreshTokenAge,
       });
-      console.log(data.accessToken);
-      setState('succeed');
-    },
-    onError: () => {
-      console.log('mutation fail');
-      setState('failed');
+      console.log('받아온거', data.refreshToken);
     },
   });
 
-  return { refreshMutation, state, setState };
+  return { refreshMutate, status };
 };
 
 export default useRefresh;

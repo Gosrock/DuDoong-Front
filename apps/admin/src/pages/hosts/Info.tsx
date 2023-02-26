@@ -11,9 +11,8 @@ import type {
 } from '@lib/apis/host/hostType';
 import { useLocation } from 'react-router-dom';
 import HostApi from '@lib/apis/host/HostApi';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
-import { queryClient } from '../../main';
 import { useForm, FormState, FieldValues } from 'react-hook-form';
 import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
@@ -30,6 +29,7 @@ const Info = () => {
     'host',
     hostId,
   );
+  const queryClient = useQueryClient();
   const { register, handleSubmit, reset, formState } = useForm<InputFormType>({
     mode: 'onChange',
     defaultValues: {
