@@ -38,7 +38,7 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
             })}
           />
           <Input
-            placeholder="입금자명"
+            placeholder="예금주"
             {...register('accountHolder', {
               required: true,
             })}
