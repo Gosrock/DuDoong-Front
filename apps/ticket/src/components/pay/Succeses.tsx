@@ -29,9 +29,9 @@ const Success = () => {
             </Button>
             <Button
               varient="secondary"
-              onClick={() => router.replace(`/history/${orderUuid}`)}
+              onClick={() => router.replace(`/ticket/${orderUuid}`)}
             >
-              예매내역
+              모바일 티켓
             </Button>
           </ButtonSet>
           <Spacing size={40} />
