@@ -117,6 +117,12 @@ const checkButtonDisable = (
   props: UpdateEventDetailRequest,
   imageInfo: Pick<ImageUrlResponse, 'presignedUrl' | 'key'>,
 ) => {
-  if (props.content === '' || imageInfo.key === '') return true;
+  if (
+    props.content === '' || // 초기 설정 값
+    props.content === null || // 상세 정보를 입력한 적 없을 경우
+    props.content === '<p><br></p>' || // 입력한거 모두 지웠을 때, 기본 html 값
+    imageInfo.key === ''
+  )
+    return true;
   return false;
 };
