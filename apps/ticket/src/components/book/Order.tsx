@@ -49,9 +49,9 @@ const Order = ({ data }: { data: AddCartResponse }) => {
   };
 
   const handleOrder = () => {
-    isDudoong
-      ? openOverlay()
-      : orderMutate({ couponId: coupon, cartId: data.cartId });
+    isNeedTossPayment
+      ? orderMutate({ couponId: coupon, cartId: data.cartId })
+      : openOverlay();
   };
 
   return (
