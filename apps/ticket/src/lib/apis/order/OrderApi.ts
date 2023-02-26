@@ -17,7 +17,7 @@ export const OrderApi = {
     return response.data.data;
   },
 
-  POST_ORDER_FREE: async (order_uuid: string): Promise<CreateOrderResponse> => {
+  POST_ORDER_FREE: async (order_uuid: string): Promise<OrderResponse> => {
     const response = await axiosPrivate.post(`/orders/${order_uuid}/free`);
     return response.data.data;
   },

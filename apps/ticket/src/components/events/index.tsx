@@ -13,8 +13,6 @@ import { HTMLAttributes, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { authState } from '@store/auth';
 import { useRecoilState } from 'recoil';
-import { getCookie } from 'cookies-next';
-import { setCredentials } from '@lib/utils/setCredentials';
 import { useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 
@@ -34,7 +32,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
 
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const fetchRefresh = async (token: string) => {
       try {
         const data = await AuthApi.REFRESH(token);
@@ -54,7 +52,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
       const refreshToken = getCookie('refreshToken') as string;
       refreshToken && fetchRefresh(refreshToken);
     }
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -100,10 +98,20 @@ const Wrapper = styled.main`
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { eventId } = context.params as unknown as { eventId: string };
 
-  const detail = await EventApi.GET_EVENT_DETAIL(eventId);
-  return {
-    props: {
-      detail,
-    },
-  };
+  try {
+    const detail = await EventApi.GET_EVENT_DETAIL(eventId);
+    return {
+      props: {
+        detail,
+        revalidate: 1,
+      },
+    };
+  } catch (error: any) {
+    return {
+      redirect: {
+        destination: `/home`,
+        permanent: false,
+      },
+    };
+  }
 };

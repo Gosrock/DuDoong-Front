@@ -2,6 +2,7 @@ import { isEqualObject } from '@dudoong/utils';
 import { CartApi } from '@lib/apis/cart/CartApi';
 import type { AddCartOptionAnswer } from '@lib/apis/cart/cartType';
 import type { OptionGroupResponse } from '@lib/apis/ticket/ticketType';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -37,7 +38,7 @@ const useOptionForm = (
   const router = useRouter();
   const [totalForm, setTotalForm] = useState<ItemOptionsType[]>(initForm);
   const [complete, setComplete] = useState<boolean>(false);
-
+  const { openGlobalOverlay } = useGlobalOverlay();
   const { mutate, status } = useMutation(CartApi.ADD_CARTLINE, {
     onSuccess: (data) => {
       router.push(
@@ -47,6 +48,10 @@ const useOptionForm = (
         },
         `/events/${eventId}/book/order`,
       );
+    },
+    onError: (error: any) => {
+      const comment = error.response.data.reason;
+      openGlobalOverlay({ content: 'error', props: { text: comment } });
     },
   });
 

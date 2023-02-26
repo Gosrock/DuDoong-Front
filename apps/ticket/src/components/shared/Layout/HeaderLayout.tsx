@@ -8,7 +8,6 @@ import { media, theme } from '@dudoong/ui/src/theme';
 import { useRouter } from 'next/router';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
-import { removeCookies } from 'cookies-next';
 import { resetCrendentials } from '@lib/utils/setCredentials';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { useMutation } from '@tanstack/react-query';
@@ -29,17 +28,13 @@ export const HeaderLayout = ({
   const { push } = useRouter();
   const { Toast } = useToastify();
   const resetAuthState = useResetRecoilState(authState);
-  const auth = useRecoilState(authState);
+
   const { mutate: logoutMutate } = useMutation(AuthAPi.OAUTH_LOGOUT, {
     onSuccess: () => {
       resetAuthState();
       resetCrendentials();
     },
   });
-
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
 
   const profileOption: PopupOptions[] = [
     {
