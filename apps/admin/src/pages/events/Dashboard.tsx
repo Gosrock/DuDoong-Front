@@ -47,8 +47,14 @@ const Dashboard = () => {
   const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_DELETE, {
     onSuccess: (data: EventResponse) => {
       console.log('PATCH_EVENT_DELETE : ', data);
+      queryClient.removeQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
-      navigate('/');
+      navigate('/', {
+        replace: true,
+        state: {
+          select: 'event',
+        },
+      });
     },
   });
 
