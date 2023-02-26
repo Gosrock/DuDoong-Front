@@ -46,9 +46,12 @@ const EventDetailInfo = ({
   useEffect(() => {
     if (editorRef.current && !isInitialized && content !== '') {
       setIsInitialized(true);
-      editorRef.current.getInstance().setHTML(content);
+      if (content) {
+        editorRef.current.getInstance().setHTML(content);
+        console.log(content, 'init');
+      }
     }
-  }, []);
+  }, [content]);
 
   // presigned 발급 api
   const postEventImageMutation = useMutation(EventApi.POST_EVENT_IMAGE, {

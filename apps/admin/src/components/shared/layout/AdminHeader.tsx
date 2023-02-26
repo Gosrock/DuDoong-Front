@@ -5,6 +5,7 @@ import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { useCookies } from 'react-cookie';
+import { axiosPrivate } from '@lib/apis/axios';
 
 interface AdminHeaderProps {
   host: string;
@@ -26,6 +27,7 @@ const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
     {
       title: '로그아웃',
       onClick: () => {
+        axiosPrivate.defaults.headers.common['Authorization'] = ``;
         removeCookie('refreshToken', { path: '/' });
         resetAuthState();
         window.location.href = '/';
