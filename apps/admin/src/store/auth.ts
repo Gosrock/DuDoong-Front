@@ -15,7 +15,11 @@ const initialState: AuthStateType = {
   isAuthenticated: false,
   callbackUrl: '/',
   accessToken: '',
-  userProfile: null,
+  userProfile: {
+    id: 0,
+    profileImage: '',
+    name: '',
+  },
 };
 
 /* const getTokenFromCookie = (): AuthStateType => {
