@@ -1,4 +1,4 @@
-import { Accordion, ListRow, Tag, theme } from '@dudoong/ui';
+import { Accordion, ListRow, Spacing, Tag, theme } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { OptionAnswer } from '@lib/apis/cart/cartType';
@@ -51,6 +51,7 @@ const OrderedTicket = ({ ticket }: { ticket: OrderLineTicketResponse }) => {
             : ``
         }
       />
+      {ticket.answers.length ? <Spacing size={48} color="gray_100" /> : <></>}
     </div>
   );
 };

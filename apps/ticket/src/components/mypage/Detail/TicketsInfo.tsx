@@ -32,7 +32,6 @@ const TicketsInfo = ({ tickets }: { tickets: OrderLineTicketResponse[] }) => {
           return (
             <SwiperSlide key={idx}>
               <OrderedTicket ticket={ticket} />
-              <Spacing size={48} color="gray_100" />
             </SwiperSlide>
           );
         })}
