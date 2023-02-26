@@ -23,7 +23,7 @@ const Mypage = () => {
   const { userProfile } = useRecoilValue(authState);
   const resetAuthState = useResetRecoilState(authState);
   const router = useRouter();
-
+  console.log('');
   const { data } = useQuery(['recentOrderDetail'], () =>
     OrderApi.GET_RECENT_ORDER(),
   );
@@ -59,7 +59,6 @@ const Mypage = () => {
         onClick={() => {
           resetAuthState();
           resetCrendentials();
-          removeCookies('refreshToken');
           router.push('/home');
         }}
       />

@@ -15,6 +15,7 @@ import HostApi from '@lib/apis/host/HostApi';
 import { css } from '@emotion/react';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import useBottomButton from '@lib/hooks/useBottomButton';
 
 const CreateHost = () => {
   const navigate = useNavigate();
@@ -22,12 +23,9 @@ const CreateHost = () => {
   const { register, handleSubmit, watch, setValue, formState } = useForm({
     mode: 'onChange',
   });
-  const [disabled, setDisabled] = useState<boolean>(true);
-
-  const [form, onChange] = useInputs<CreateHostRequest>({
-    name: '',
-    contactEmail: '',
-    contactNumber: '',
+  const { setButtonInfo } = useBottomButton({
+    type: 'save',
+    isActive: true,
   });
 
   const returnUrl = location.state ? location.state.returnUrl : null;
@@ -39,16 +37,13 @@ const CreateHost = () => {
           state: {
             hostId: curId,
           },
+          replace: true,
         });
       } else {
-        navigate(`/hosts/${curId}/info`);
+        navigate(`/hosts/${curId}/info`, { replace: true });
       }
     },
   });
-
-  useEffect(() => {
-    formState.isValid ? setDisabled(false) : setDisabled(true);
-  }, [formState.isValid]);
 
   useEffect(() => {
     if (watch('contactNumber').length === 10) {
@@ -68,13 +63,20 @@ const CreateHost = () => {
   }, [watch('contactNumber')]);
 
   const onSubmit = (data: any) => {
-    console.log(form);
-    mutate(form);
+    console.log(data);
+    mutate(data);
   };
 
   const onError = (error: any) => {
     console.log('error', error);
   };
+
+  useEffect(() => {
+    setButtonInfo({
+      firstHandler: handleSubmit(onSubmit, onError),
+      firstDisable: !formState.isValid,
+    });
+  }, [formState.isValid]);
 
   return (
     <div onSubmit={handleSubmit(onSubmit, onError)}>
@@ -127,7 +129,7 @@ const CreateHost = () => {
                   value: 15,
                   message: '*15글자를 초과하였습니다.',
                 },
-                pattern: /[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}/,
+                pattern: /^\d{3}-\d{3,4}-\d{4}$/,
               })}
             />
           </div>
@@ -146,7 +148,7 @@ const CreateHost = () => {
               {...register('contactEmail', {
                 required: true,
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                  value: /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/,
                   message: '*이메일 형식이 아닙니다',
                 },
               })}
@@ -154,15 +156,6 @@ const CreateHost = () => {
           </div>
         </FlexBox>
       </BorderBox>
-      <Spacing size={100} />
-      <Button
-        varient="primary"
-        fullWidth={true}
-        disabled={disabled}
-        onClick={handleSubmit(onSubmit, onError)}
-      >
-        호스트 만들기
-      </Button>
     </div>
   );
 };

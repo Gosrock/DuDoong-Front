@@ -49,9 +49,9 @@ const Order = ({ data }: { data: AddCartResponse }) => {
   };
 
   const handleOrder = () => {
-    isNeedTossPayment
-      ? orderMutate({ couponId: coupon, cartId: data.cartId })
-      : openOverlay();
+    isDudoong
+      ? openOverlay()
+      : orderMutate({ couponId: coupon, cartId: data.cartId });
   };
 
   return (
@@ -120,13 +120,15 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         </section>
         <Spacing size={120} color={'gray_200'} />
       </Main>
-      <OverlayBox open={isOpen} onDismiss={closeOverlay}>
-        <AccountInfoSection
-          accountInfo={data.accountInfo}
-          orderPayload={{ couponId: coupon, cartId: data.cartId }}
-          closeOverlay={closeOverlay}
-        />
-      </OverlayBox>
+      {isDudoong && (
+        <OverlayBox open={isOpen} onDismiss={closeOverlay}>
+          <AccountInfoSection
+            accountInfo={data.accountInfo}
+            orderPayload={{ couponId: coupon, cartId: data.cartId }}
+            closeOverlay={closeOverlay}
+          />
+        </OverlayBox>
+      )}
     </>
   );
 };
