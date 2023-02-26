@@ -13,10 +13,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useInputs } from '@dudoong/utils';
 import HostApi from '@lib/apis/host/HostApi';
 import { css } from '@emotion/react';
+import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 
 const CreateHost = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { register, handleSubmit, watch, setValue, formState } = useForm({
+    mode: 'onChange',
+  });
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   const [form, onChange] = useInputs<CreateHostRequest>({
     name: '',
@@ -41,14 +47,38 @@ const CreateHost = () => {
     },
   });
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  useEffect(() => {
+    formState.isValid ? setDisabled(false) : setDisabled(true);
+  }, [formState.isValid]);
+
+  useEffect(() => {
+    if (watch('contactNumber').length === 10) {
+      setValue(
+        'contactNumber',
+        watch('contactNumber').replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'),
+      );
+    }
+    if (watch('contactNumber').length === 13) {
+      setValue(
+        'contactNumber',
+        watch('contactNumber')
+          .replace(/-/g, '')
+          .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'),
+      );
+    }
+  }, [watch('contactNumber')]);
+
+  const onSubmit = (data: any) => {
     console.log(form);
     mutate(form);
   };
 
+  const onError = (error: any) => {
+    console.log('error', error);
+  };
+
   return (
-    <>
+    <div onSubmit={handleSubmit(onSubmit, onError)}>
       <BorderBox padding={[36, 60, 52, 60]}>
         <ListHeader
           title={'호스트 이름'}
@@ -60,11 +90,15 @@ const CreateHost = () => {
           padding={[32, 0, 12, 0]}
         ></ListHeader>
         <Input
-          name="name"
-          maxLength={15}
-          onChange={onChange}
           autoFocus
           placeholder="최대 15자까지 쓸 수 있어요."
+          {...register('name', {
+            required: true,
+            maxLength: {
+              value: 15,
+              message: '*15글자를 초과하였습니다.',
+            },
+          })}
         />
         <Spacing size={14} />
         <ListHeader
@@ -86,10 +120,16 @@ const CreateHost = () => {
               padding={[32, 0, 12, 0]}
             ></ListHeader>
             <Input
-              type="tel"
               placeholder={'010-XXXX-XXXX'}
-              name="contactNumber"
-              onChange={onChange}
+              {...register('contactNumber', {
+                required: true,
+
+                maxLength: {
+                  value: 15,
+                  message: '*15글자를 초과하였습니다.',
+                },
+                pattern: /[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}/,
+              })}
             />
           </div>
           <div
@@ -104,17 +144,27 @@ const CreateHost = () => {
             ></ListHeader>
             <Input
               placeholder={'ex)email@aaa.bbb'}
-              name="contactEmail"
-              onChange={onChange}
+              {...register('contactEmail', {
+                required: true,
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+                  message: '*이메일 형식이 아닙니다',
+                },
+              })}
             />
           </div>
         </FlexBox>
       </BorderBox>
       <Spacing size={100} />
-      <Button varient="primary" fullWidth={true} onClick={handleSubmit}>
+      <Button
+        varient="primary"
+        fullWidth={true}
+        disabled={disabled}
+        onClick={handleSubmit(onSubmit, onError)}
+      >
         호스트 만들기
       </Button>
-    </>
+    </div>
   );
 };
 export default CreateHost;

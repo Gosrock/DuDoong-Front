@@ -188,6 +188,11 @@ const NewOptions = () => {
                   type="number"
                   disabled={optionType === 'Y/N' ? false : true}
                   maxLength={5}
+                  rightIcon={
+                    <Text typo="P_Text_16_M" color="gray_400">
+                      원
+                    </Text>
+                  }
                   placeholder="0"
                   {...register('additionalPrice', {
                     required: false,

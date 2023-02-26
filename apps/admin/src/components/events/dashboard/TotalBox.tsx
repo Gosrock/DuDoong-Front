@@ -16,7 +16,7 @@ const TotalBox = ({ total }: { total: string }) => {
           판매금액
         </Text>
         <Text typo={'P_Header_20_B'} color={'main_500'}>
-          {total}
+          {total ? total : '0원'}
         </Text>
       </FlexBox>
     </BorderBox>
