@@ -11,7 +11,7 @@ import type {
 } from '@lib/apis/host/hostType';
 import { useLocation } from 'react-router-dom';
 import HostApi from '@lib/apis/host/HostApi';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
 import { queryClient } from '../../main';
 import { useForm, FormState, FieldValues } from 'react-hook-form';
@@ -42,6 +42,7 @@ const Info = () => {
     type: 'save',
     isActive: true,
   });
+  const queryClient = useQueryClient();
 
   // profile 수정 api
   const postEventMutation = useMutation(HostApi.PATCH_HOST_PROFILE, {
@@ -55,6 +56,7 @@ const Info = () => {
     'hostDetail',
     hostId,
   ]);
+  console.log(hostDetail);
 
   useEffect(() => {
     if (hostDetail) {
@@ -86,6 +88,7 @@ const Info = () => {
       },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries(['hostDetail', hostId]);
           openOverlay({
             content: 'saved',
           });
