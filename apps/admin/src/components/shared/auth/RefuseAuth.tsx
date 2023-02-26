@@ -8,7 +8,7 @@ const RefuseAuth = () => {
   if (auth.isAuthenticated) {
     return <Navigate replace to="/" />;
   }
-  // 둘 다 없으면 로그인
+  // 둘 다 없으면 로그인 */
   return <Outlet />;
 };
 
