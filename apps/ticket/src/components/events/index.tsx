@@ -100,10 +100,19 @@ const Wrapper = styled.main`
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { eventId } = context.params as unknown as { eventId: string };
 
-  const detail = await EventApi.GET_EVENT_DETAIL(eventId);
-  return {
-    props: {
-      detail,
-    },
-  };
+  try {
+    const detail = await EventApi.GET_EVENT_DETAIL(eventId);
+    return {
+      props: {
+        detail,
+      },
+    };
+  } catch (error: any) {
+    return {
+      redirect: {
+        destination: `/home`,
+        permanent: false,
+      },
+    };
+  }
 };
