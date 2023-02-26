@@ -68,11 +68,12 @@ const TicketSelect = ({
           payType === '유료티켓' ? '선착순' : '승인';
         },
       },
-      purchaseLimit: '',
+      purchaseLimit: 1,
       supplyCount: '',
       quantity: '',
       isQuantityPublic: true,
       payType: payType,
+      name: '',
     });
   }, [payType]);
 
