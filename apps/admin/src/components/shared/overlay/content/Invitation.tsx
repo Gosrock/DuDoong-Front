@@ -24,11 +24,11 @@ import useToastify from '@dudoong/ui/src/lib/useToastify';
 interface PostEventProps {
   closeOverlay: () => void;
 }
-type memberTypes = '일반멤버' | '매니저';
+type memberTypes = '게스트' | '매니저';
 
 const Invitation = ({ closeOverlay }: PostEventProps) => {
   const hostId = useLocation().pathname.split('/')[2];
-  const [memberType, setMemberType] = useState<memberTypes>('일반멤버');
+  const [memberType, setMemberType] = useState<memberTypes>('게스트');
   const [buttonDisable, setButtonDisable] = useState<boolean>(true);
   const { setToast } = useToastify();
   const { register, handleSubmit, formState } = useForm({
@@ -125,7 +125,7 @@ const Invitation = ({ closeOverlay }: PostEventProps) => {
 export default Invitation;
 
 interface RoleSelectorProps {
-  memberType: '일반멤버' | '매니저';
+  memberType: '게스트' | '매니저';
   setMemberType: React.Dispatch<React.SetStateAction<memberTypes>>;
 }
 
@@ -140,15 +140,15 @@ const RoleSelector = ({ memberType, setMemberType }: RoleSelectorProps) => {
       <Popup
         renderElement={
           <SearchOptionDropdown>
-            {memberType === '일반멤버' ? '일반멤버' : '매니저'}
+            {memberType === '게스트' ? '게스트' : '매니저'}
             <ChevronDown width={16} height={16} />
           </SearchOptionDropdown>
         }
         options={[
           {
-            title: '일반멤버',
+            title: '게스트',
             onClick: () => {
-              setMemberType('일반멤버');
+              setMemberType('게스트');
             },
           },
           {

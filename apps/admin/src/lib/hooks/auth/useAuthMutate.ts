@@ -46,7 +46,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   // 로그인
   const oauthKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
     onSuccess: (data: OauthLoginResponse) => {
-      console.log(data.refreshToken, 'login');
       onSuccessLogin(data);
       navigate(auth.callbackUrl);
     },
@@ -66,6 +65,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   });
 
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
+    // console.log(loginData.refreshToken, 'login');
     axiosPrivate.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${loginData.accessToken}`;
