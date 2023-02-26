@@ -51,7 +51,7 @@ function App() {
     //   <Route path="*" element={<Navigate to="/404" />} />
     // </Routes>
     <Routes>
-      <Route element={<Refresh />}>
+      <Route element={<RequireAuth />}>
         <Route element={<AdminNoMenuLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/new/*" element={<NewRouter />} />

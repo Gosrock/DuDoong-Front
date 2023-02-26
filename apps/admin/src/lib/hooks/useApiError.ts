@@ -85,6 +85,8 @@ const useApiError = () => {
       // authentication error
       case 401:
       case 403:
+        // console.log(status);
+        // authenticationErrorHandler();
         navigate('/login');
         break;
       default:
