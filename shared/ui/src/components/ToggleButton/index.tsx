@@ -52,8 +52,7 @@ const ToggleBtn = styled.button<{ toggle: boolean }>`
   transition: all 0.2s ease-in-out;
 
   &:disabled {
-    background-color: ${({ theme, toggle }) =>
-      !toggle ? theme.palette.gray_300 : theme.palette.sub_mint};
+    opacity: 0.2;
     cursor: default;
   }
 `;

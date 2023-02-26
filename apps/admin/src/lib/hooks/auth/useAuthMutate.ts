@@ -69,9 +69,11 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
       'Authorization'
     ] = `Bearer ${loginData.accessToken}`;
     console.log('로그인성공', loginData.refreshToken);
-    setCookie('refreshToken', loginData.refreshToken, {
-      maxAge: loginData.refreshTokenAge,
-    });
+    if (import.meta.env.DEV) {
+      setCookie('refreshToken', loginData.refreshToken, {
+        maxAge: loginData.refreshTokenAge,
+      });
+    }
     console.log('세팅확인', cookies.refreshToken);
     setAuth({
       isAuthenticated: true,

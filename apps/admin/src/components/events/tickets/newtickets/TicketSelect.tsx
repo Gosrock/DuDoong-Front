@@ -11,9 +11,19 @@ import { ReactComponent as Recommendation } from '@assets/recommendation.svg';
 import styled from '@emotion/styled';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { payType } from '@lib/apis/ticket/ticketType';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useNavigate } from 'react-router-dom';
+
+type payInfoType = {
+  [key in payType]: string;
+};
+
+const PAY_INFO: payInfoType = {
+  두둥티켓: '계좌송금 옵션을 통해 수수료 없이 티켓값을 받을 수 있어요.',
+  무료티켓: '금액을 받지 않는 무료티켓이에요.',
+  유료티켓: '두둥의 결제 서비스를 통해 편하게 티켓값을 받을 수 있어요.',
+};
 
 const TicketSelect = ({
   partner,
@@ -25,8 +35,21 @@ const TicketSelect = ({
   hostId: number | null;
 }) => {
   const [payType, setPayType] = useState<payType>();
+  const [payInfo, setPayInfo] = useState<string>(
+    '새로 생성할 티켓의 종류를 선택해주세요.',
+  );
   const { openOverlay, closeOverlay } = useGlobalOverlay();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      payType === '두둥티켓' ||
+      payType === '무료티켓' ||
+      payType === '유료티켓'
+    ) {
+      setPayInfo(PAY_INFO[payType]);
+    }
+  }, [payType]);
 
   return (
     <Wrapper>
@@ -56,7 +79,7 @@ const TicketSelect = ({
         }
         description={
           <Text typo="P_Text_16_M" color="gray_400">
-            새로 생성할 티켓의 종류를 선택해주세요.
+            {payInfo}
           </Text>
         }
       />
@@ -111,6 +134,7 @@ const TicketSelect = ({
     </Wrapper>
   );
 };
+
 export default TicketSelect;
 
 const Wrapper = styled.div`
