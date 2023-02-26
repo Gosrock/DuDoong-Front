@@ -10,6 +10,7 @@ import styled from '@emotion/styled';
 import OptionItem from './OptionItem';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import type { OptionGroupResponse } from '@lib/apis/option/optionType';
+import { DudoongOne } from '@assets/stickers';
 
 interface OptionListProps {
   optionItems: OptionGroupResponse[];
@@ -23,11 +24,16 @@ const OptionList = ({ optionItems }: OptionListProps) => {
         <div>
           <ListHeader padding={0} size="listHeader_18" title="옵션 목록" />
           <Spacing size={42} />
-          <OptionItemContainer>
-            <Padding size={[24, 12, 24, 12]}>
+
+          <DudoongOne />
+          <Padding size={[24, 124.5, 24, 124.5]}>
+            <Text typo="Text_16" color="gray_500">
+              두둥! 옵션을 생성해주세요.
+            </Text>
+          </Padding>
+          {/* <Padding size={[24, 12, 24, 12]}>
               <Text typo="P_Header_16_SB">옵션을 먼저 생성해주세요!</Text>
-            </Padding>
-          </OptionItemContainer>
+            </Padding> */}
         </div>
       </Wrapper>
     );
