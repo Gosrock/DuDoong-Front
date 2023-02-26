@@ -76,6 +76,11 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
           title="발행매수"
           description="최대 1000장까지 발행 가능해요."
           descriptionTypo="P_Text_14_M"
+          rightIcon={
+            <Text typo="P_Text_16_M" color="gray_400">
+              장
+            </Text>
+          }
           placeholder="0"
           {...register('supplyCount', {
             required: true,
