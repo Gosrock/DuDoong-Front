@@ -24,7 +24,7 @@ const SaveOption = ({ saveOptionHandler }: SaveOptionProps) => {
       />
       <Divider line={true} height={24} />
       <Text typo="P_Text_16_R" color="gray_500">
-        새 옵션이 저장되었어요요.
+        새 옵션이 저장되었어요.
         <br />
         저장된 옵션은 옵션 적용 페이지에서 확인할 수 있어요!
       </Text>
