@@ -46,6 +46,7 @@ export interface IssuedTicketAdminTableElement {
   orderNo: string;
   uuid: string;
   ticketName: string;
+  payType: payType;
   ticketPrice: string;
   createdAt: string;
   enteredAt: string;

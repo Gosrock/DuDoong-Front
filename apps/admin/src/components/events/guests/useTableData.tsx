@@ -19,6 +19,12 @@ const useTableData = () => {
   const issuedTicketColumns: ColumnsType<unknown> = [
     { title: '티켓 번호', dataIndex: 'ticketNo', key: 'ticketNo', width: 100 },
     {
+      title: '티켓 종류',
+      dataIndex: 'ticketType',
+      key: 'ticketType',
+      width: 100,
+    },
+    {
       title: '티켓 이름',
       dataIndex: 'ticketName',
       key: 'ticketName',
@@ -60,6 +66,7 @@ const useTableData = () => {
       return {
         key: row.uuid,
         ticketNo: row.issuedTicketNo,
+        ticketType: row.payType,
         ticketName: row.ticketName,
         userName: row.userInfo.userName,
         email: row.userInfo.email,
