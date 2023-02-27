@@ -1,4 +1,4 @@
-import { DomainErrorSetType } from '../common/DomainErrorSetType';
+import { DomainErrorSetType } from '../../common/DomainErrorSetType';
 import ticketItem400 from './ticketItem400';
 import ticketItem404 from './ticketItem404';
 

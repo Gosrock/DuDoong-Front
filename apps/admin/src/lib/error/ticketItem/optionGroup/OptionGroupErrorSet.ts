@@ -1,4 +1,4 @@
-import { DomainErrorSetType } from '../common/DomainErrorSetType';
+import { DomainErrorSetType } from '../../common/DomainErrorSetType';
 import optionGroup400 from './optionGroup400';
 import optionGroup404 from './optionGroup404';
 

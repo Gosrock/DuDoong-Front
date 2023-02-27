@@ -1,4 +1,4 @@
-import { DomainErrorSetType } from '../common/DomainErrorSetType';
+import { DomainErrorSetType } from '../../common/DomainErrorSetType';
 import itemOptionGroup400 from './itemOptionGroup400';
 
 const ItemOptionGroupErrorSet: DomainErrorSetType = {
