@@ -52,6 +52,7 @@ export default Home;
 const Wrapper = styled.div`
   padding: 0 24px;
   overflow-x: hidden;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8fa 100%);
 `;
 
 const EventList = styled.div`

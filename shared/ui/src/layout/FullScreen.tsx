@@ -27,12 +27,13 @@ export const FullScreen = ({
         height: ${height}px;
         width: 100%;
         overflow: hidden;
+        box-sizing: border-box;
         ${verticalCenter &&
         css`
           display: flex;
           align-items: center;
           justify-content: center;
-        `}
+        `};
       `}
       {...props}
     >
