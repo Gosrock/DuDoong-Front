@@ -111,6 +111,8 @@ export const globalStyle = css`
 
   :root {
     --main-width: 600px;
+    --toastify-color-info: #9568f6;
+    --toastify-color-error: #ff5461;
   }
   .swiper-pagination-bullet {
     background-color: #e3e4e8;

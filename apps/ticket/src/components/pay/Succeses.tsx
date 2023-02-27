@@ -10,6 +10,7 @@ import {
 } from '@dudoong/ui';
 import { useRouter } from 'next/router';
 import Keyboard from '@assets/keyboard.svg';
+import { css } from '@emotion/react';
 
 const Success = () => {
   const router = useRouter();
@@ -18,16 +19,26 @@ const Success = () => {
   return (
     <Main>
       <FullScreen verticalCenter>
-        <FlexBox align={'center'} direction={'column'}>
+        <FlexBox align={'center'} direction={'column'} fullWidth>
           <Keyboard />
           <Padding size={24}>
             <Text typo="P_Text_16_M">예매가 완료되었습니다!</Text>
           </Padding>
-          <ButtonSet varient="horizontal">
-            <Button varient="tertiary" onClick={() => router.replace('/')}>
+          <ButtonSet
+            varient="horizontal"
+            css={css`
+              width: 100%;
+            `}
+          >
+            <Button
+              fullWidth
+              varient="tertiary"
+              onClick={() => router.replace('/')}
+            >
               홈으로
             </Button>
             <Button
+              fullWidth
               varient="secondary"
               onClick={() => router.replace(`/ticket/${orderUuid}`)}
             >

@@ -98,6 +98,7 @@ const EventDetailInfo = ({
     <div>
       <ListHeader
         title={'공연 상세 내용'}
+        required={true}
         size={'listHeader_18'}
         padding={[56, 0, 12, 0]}
         description={<TitleDescription />}

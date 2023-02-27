@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   svg {
     text-align: center;
     width: 428px;
-    z-index: 2;
+    z-index: 1;
     padding-right: 20px;
   }
   .line {

@@ -17,6 +17,7 @@ import { useMutation } from '@tanstack/react-query';
 import OptionApi from '@lib/apis/option/OptionApi';
 import { OptionGroupType } from '@lib/apis/option/optionType';
 import { Controller } from 'react-hook-form';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 
 const NewOptions = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const NewOptions = () => {
   const eventId = pathname.split('/')[2];
   const [optionName, setOptionName] = useState<string>('');
   const [optionDescrip, setOptionDescrip] = useState<string>('');
+  const { setToast } = useToastify();
   const { register, handleSubmit, control, formState } = useForm({
     mode: 'onChange',
   });
@@ -48,6 +50,10 @@ const NewOptions = () => {
           },
         },
       });
+    },
+    onError: (error: any) => {
+      const comment = error.response.data.reason;
+      setToast({ type: 'error', comment: comment });
     },
   });
 
@@ -100,6 +106,7 @@ const NewOptions = () => {
       <ContentGrid>
         <FlexBox direction="column" align="flex-start">
           <ListHeader
+            required={true}
             padding={[32, 0, 12, 0]}
             title={'옵션 이름'}
             size={'listHeader_18'}
@@ -120,6 +127,7 @@ const NewOptions = () => {
           />
           <Spacing size={32} />
           <ListHeader
+            required={true}
             padding={[32, 0, 12, 0]}
             title={'옵션 설명'}
             description={'옵션에 대한 상세한 설명을 써주세요'}
@@ -141,6 +149,7 @@ const NewOptions = () => {
           />
           <Spacing size={32} />
           <ListHeader
+            required={true}
             padding={[32, 0, 12, 0]}
             title={'옵션 응답 형식'}
             size={'listHeader_18'}
