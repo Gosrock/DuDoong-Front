@@ -26,7 +26,7 @@ const ApplyOption = () => {
   const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
     const dragElementId = draggableId;
     const isApply = dragElementId.split('-')[0] === 'eventOption';
-    if (destination == null) {
+    if (isApply && destination == null) {
       return;
     } else {
       if (source.droppableId === destination?.droppableId) {
