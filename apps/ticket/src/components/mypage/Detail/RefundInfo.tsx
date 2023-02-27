@@ -46,8 +46,8 @@ const RefundInfo = ({ refund }: { refund: RefundInfo }) => {
       <InfoItem
         item="취소기한"
         value={
-          typeof refund.endAt === 'string'
-            ? `${parseDate(refund.endAt)[0]} ${parseDate(refund.endAt)[1]}`
+          typeof refund.startAt === 'string'
+            ? `${parseDate(refund.startAt)[0]} ${parseDate(refund.startAt)[1]}`
             : '승인 대기중'
         }
         color="gray_400"

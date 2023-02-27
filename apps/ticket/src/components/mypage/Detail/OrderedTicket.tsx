@@ -12,9 +12,9 @@ const OrderedTicket = ({ ticket }: { ticket: OrderLineTicketResponse }) => {
         <Accordion
           title={ticket.ticketName}
           rightElement={
-            ticket.orderLinePrice !== '0원' ? (
+            ticket.eachOptionPrice !== '0원' ? (
               <Tag
-                text={`각 티켓당 +${ticket.orderLinePrice}`}
+                text={`각 티켓당 +${ticket.eachOptionPrice}`}
                 color="main"
                 size="md"
               />
