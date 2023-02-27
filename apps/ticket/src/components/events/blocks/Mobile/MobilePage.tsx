@@ -39,12 +39,14 @@ const MobilePage = ({
       <NavBar label={detail.name} backHandler={() => router.push('/home')} />
       <Spacing size={48} />
       <Poster>
-        <Image
-          src={detail.posterImage}
-          alt={detail.name}
-          width={204}
-          height={287}
-        />
+        <div>
+          <img
+            src={detail.posterImage}
+            alt={detail.name}
+            width={204}
+            height={287}
+          />
+        </div>
       </Poster>
       <Title
         size="listHeader_28"
@@ -90,6 +92,7 @@ const MobilePage = ({
                 지도보기
               </Text>
             }
+            contentHeight={305}
           />
         </Block>
         <Block>
@@ -132,7 +135,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 const Title = styled(ListHeader)``;
-const Poster = styled.div`
+/* const Poster = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -142,9 +145,32 @@ const Poster = styled.div`
   & > img {
     width: 100%;
     max-width: 300px;
-    height: auto;
+    height: 10%;
     box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
+  }
+`; */
+
+const Poster = styled.div`
+  padding: 24px 60px;
+  div {
+    position: relative;
+    padding-top: 141.4%;
+    overflow: hidden;
+    box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: ${({ theme }) => theme.palette.gray_300};
+    margin-bottom: 10px;
+    object-fit: cover;
   }
 `;
 
