@@ -36,7 +36,7 @@ const MobilePage = ({
 
   return (
     <Wrapper {...props}>
-      <NavBar label={detail.name} backHandler={() => router.back()} />
+      <NavBar label={detail.name} backHandler={() => router.push('/home')} />
       <Spacing size={48} />
       <Poster>
         <Image

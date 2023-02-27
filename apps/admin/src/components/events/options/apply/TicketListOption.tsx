@@ -40,6 +40,7 @@ const TicketListOption = () => {
       const newSoldOption = new Set([...soldOption, ...(soldOptions || [])]);
       setSoldOptions([...newSoldOption]);
     }
+    console.log(data?.appliedOptionGroups);
   }, [isSuccess]);
 
   return (

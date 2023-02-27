@@ -8,6 +8,7 @@ import {
   TagButton,
 } from '@dudoong/ui';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
+import { checkName } from '@dudoong/utils';
 import { AccountInfo } from '@lib/apis/cart/cartType';
 import useOrderMutation from './useOrderMutation';
 
@@ -15,12 +16,14 @@ const AccountInfoSection = ({
   accountInfo,
   orderPayload,
   closeOverlay,
+  name,
 }: {
   accountInfo: AccountInfo;
   orderPayload: { couponId: null; cartId: number };
   closeOverlay: () => void;
+  name: string;
 }) => {
-  const { dudoongMutate } = useOrderMutation();
+  const { dudoongMutate } = useOrderMutation(null, closeOverlay);
   const { setToast } = useToastify();
   const handleDudoongOrder = () => {
     dudoongMutate(orderPayload);
@@ -32,7 +35,11 @@ const AccountInfoSection = ({
 
   return (
     <>
-      <ListHeader size="listHeader_18" title={'입금 계좌 확인'} />
+      <ListHeader
+        size="listHeader_18"
+        title={'입금 계좌 확인'}
+        description={`입금자명이 카카오 닉네임과 다르면 관리자 승인이 어려울 수 있어요. (입금자명: ${name})`}
+      />
       <Padding size={[0, 20, 0, 20]}>
         <RoundBlock background="gray_100" padding={0}>
           <ListRow

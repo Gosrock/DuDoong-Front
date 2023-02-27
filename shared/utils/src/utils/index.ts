@@ -3,3 +3,4 @@ export * from './loginFc';
 export * from './isEqualObject';
 export * from './parseDate';
 export * from './getTimeForToday';
+export * from './checkName';

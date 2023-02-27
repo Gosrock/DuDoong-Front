@@ -1,11 +1,16 @@
 import { DOMAIN } from '@dudoong/utils';
 import { OrderApi } from '@lib/apis/order/OrderApi';
+import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useMutation } from '@tanstack/react-query';
 import { PaymentWidgetInstance } from '@tosspayments/payment-widget-sdk';
 import { useRouter } from 'next/router';
 
-const useOrderMutation = (instance?: PaymentWidgetInstance | null) => {
+const useOrderMutation = (
+  instance?: PaymentWidgetInstance | null,
+  closeDudoongOverlay?: () => void,
+) => {
   const router = useRouter();
+  const { openGlobalOverlay } = useGlobalOverlay();
   const { mutate: orderMutate } = useMutation(OrderApi.CREATE_ORDER, {
     onSuccess: (data) => {
       console.log(data);
@@ -24,21 +29,37 @@ const useOrderMutation = (instance?: PaymentWidgetInstance | null) => {
         console.log(data, '무료선착순 주문');
         freeOrderMutate(data.orderId);
       } else {
-        router.push(`/pay/success?order=${data.orderId}`, '/pay/success');
+        //무료 승인
+        router.replace(`/pay/success?order=${data.orderId}`, '/pay/success');
       }
+    },
+    onError: (error: any) => {
+      const comment = error.response.data.reason;
+      setTimeout(
+        () => openGlobalOverlay({ content: 'error', props: { text: comment } }),
+        200,
+      );
     },
   });
 
   const { mutate: freeOrderMutate } = useMutation(OrderApi.POST_ORDER_FREE, {
     onSuccess: (data) => {
       console.log(data, '무료선착순 주문 응답');
-      router.push(`/pay/success?order=${data.orderUuid}`, '/pay/success');
+      router.replace(`/pay/success?order=${data.orderUuid}`, '/pay/success');
     },
   });
 
   const { mutate: dudoongMutate } = useMutation(OrderApi.CREATE_ORDER, {
     onSuccess: (data) => {
-      router.push(`/pay/success?order=${data.orderId}`, '/pay/success');
+      router.replace(`/pay/success?order=${data.orderId}`, '/pay/success');
+    },
+    onError: (error: any) => {
+      closeDudoongOverlay?.();
+      const comment = error.response.data.reason;
+      setTimeout(
+        () => openGlobalOverlay({ content: 'error', props: { text: comment } }),
+        200,
+      );
     },
   });
 

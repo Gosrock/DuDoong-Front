@@ -38,6 +38,7 @@ const TalkOverlay = ({ eventName, onClose }: TalkProps) => {
 export default TalkOverlay;
 
 const Wrapper = styled.div`
+  width: 375px;
   ${media.mobile} {
     width: 100vw;
   }

@@ -9,6 +9,7 @@ export interface FlexBoxProps extends HTMLAttributes<HTMLDivElement> {
   direction?: CSSProperties['flexDirection'];
   gap?: CSSProperties['gap'];
   children: ReactNode;
+  fullWidth?: boolean;
 }
 
 export type flexboxPropsKey = 'align' | 'justify' | 'direction' | 'gap';
@@ -25,6 +26,7 @@ export const FlexBox = ({
   direction = 'row',
   gap = 0,
   children,
+  fullWidth,
   ...props
 }: FlexBoxProps) => {
   return (
@@ -35,6 +37,7 @@ export const FlexBox = ({
         justify-content: ${justify};
         flex-direction: ${direction};
         gap: ${gap}px;
+        width: ${fullWidth ? `100%` : `auto`};
       `}
       {...props}
     >

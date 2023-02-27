@@ -41,16 +41,16 @@ const TAG_SIZE: TagSizeType = {
   lg: { typo: 'P_Text_14_M', padding: '7.5px 20px', radius: 8 },
 };
 
-export interface TagProps {
+export interface TagProps extends React.ComponentProps<'div'> {
   text: string;
   color: TagColorKey;
   size: TagSizeKey;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export const Tag = ({ text, color, size, onClick }: TagProps) => {
+export const Tag = ({ text, color, size, onClick, ...props }: TagProps) => {
   return (
-    <Wrapper color={color} size={size} onClick={onClick}>
+    <Wrapper color={color} size={size} onClick={onClick} {...props}>
       {text}
     </Wrapper>
   );

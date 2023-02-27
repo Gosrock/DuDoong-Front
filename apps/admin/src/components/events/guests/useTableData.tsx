@@ -18,6 +18,12 @@ interface TableMapValue {
 const useTableData = () => {
   const issuedTicketColumns: ColumnsType<unknown> = [
     { title: '티켓 번호', dataIndex: 'ticketNo', key: 'ticketNo', width: 100 },
+    {
+      title: '티켓 이름',
+      dataIndex: 'ticketName',
+      key: 'ticketName',
+      width: 250,
+    },
     { title: '이름', dataIndex: 'userName', key: 'userName', width: 100 },
     { title: '이메일', dataIndex: 'email', key: 'email', width: 270 },
     {
@@ -54,6 +60,7 @@ const useTableData = () => {
       return {
         key: row.uuid,
         ticketNo: row.issuedTicketNo,
+        ticketName: row.ticketName,
         userName: row.userInfo.userName,
         email: row.userInfo.email,
         phoneNumber: row.userInfo.phoneNumber,
@@ -62,7 +69,7 @@ const useTableData = () => {
           parseDate(row.createdAt)[1]
         }`,
         issuedTicketStatus: row.issuedTicketStatus,
-        issuedTicketTime: row.enteredAt
+        enteredAt: row.enteredAt
           ? `${parseDate(row.enteredAt)[0]} ${parseDate(row.enteredAt)[1]}`
           : '--',
       };
@@ -220,7 +227,7 @@ const useTableData = () => {
           searchType: searchString ? searchType : undefined,
           searchString,
         }),
-      scroll: 1220,
+      scroll: 1470,
     },
     approveWaiting: {
       columns: approveWaitingColumns,
