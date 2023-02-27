@@ -26,33 +26,37 @@ const ApplyOption = () => {
   const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
     const dragElementId = draggableId;
     const isApply = dragElementId.split('-')[0] === 'eventOption';
-    if (source.droppableId === destination?.droppableId) {
+    if (destination == null) {
       return;
-    }
-
-    if (isApply && destination) {
-      const ticketItemId = destination.droppableId;
-      //옵선 적용
-      applyOptionMutate({
-        eventId,
-        ticketItemId,
-        payload: { optionGroupId: parseInt(dragElementId.split('-')[1]) },
-      });
     } else {
-      //옵션 적용 취소
-      const [, ticketItemId, optionGroupId] = dragElementId.split('-');
-      openOverlay({
-        content: 'cancelOption',
-        props: {
-          closeOverlay,
-          cancelOptionHandler: () =>
-            cancelOptionMutate({
-              eventId,
-              ticketItemId,
-              payload: { optionGroupId: parseInt(optionGroupId) },
-            }),
-        },
-      });
+      if (source.droppableId === destination?.droppableId) {
+        return;
+      }
+
+      if (isApply && destination) {
+        const ticketItemId = destination.droppableId;
+        //옵선 적용
+        applyOptionMutate({
+          eventId,
+          ticketItemId,
+          payload: { optionGroupId: parseInt(dragElementId.split('-')[1]) },
+        });
+      } else {
+        //옵션 적용 취소
+        const [, ticketItemId, optionGroupId] = dragElementId.split('-');
+        openOverlay({
+          content: 'cancelOption',
+          props: {
+            closeOverlay,
+            cancelOptionHandler: () =>
+              cancelOptionMutate({
+                eventId,
+                ticketItemId,
+                payload: { optionGroupId: parseInt(optionGroupId) },
+              }),
+          },
+        });
+      }
     }
   };
 
