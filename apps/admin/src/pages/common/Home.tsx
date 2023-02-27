@@ -86,8 +86,10 @@ const Home = () => {
               size="lg"
               text="두둥 노션 바로가기"
               onClick={() =>
-                (window.location.href =
-                  'https://dudoong.notion.site/dudoong/c4999331a2aa47299e1c6821a7dee9af')
+                window.open(
+                  'https://dudoong.notion.site/dudoong/c4999331a2aa47299e1c6821a7dee9af',
+                  '_blank',
+                )
               }
             />
           }
