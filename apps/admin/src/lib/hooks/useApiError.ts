@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ErrorSet, { ErrorSetTypeKey } from '@lib/error/common/ErrorSet';
 import { DomainErrorSetTypeKey } from '@lib/error/common/DomainErrorSetType';
+import { notificationToAdmin } from '@lib/error/common/commonComment';
 
 export interface TCustomErrorResponse {
   success: boolean;
@@ -14,6 +15,23 @@ export interface TCustomErrorResponse {
   path: string;
 }
 
+const ErrorSort = [
+  'Event',
+  'USER',
+  'HOST',
+  'Order',
+  'Ticket_Item',
+  'Option_Group',
+  'Option',
+  'Item_Option_Group',
+  'IssuedTicket',
+  'AUTH',
+  'GLOBAL',
+  'FILE',
+  'AOP',
+  'Redisson',
+];
+
 const useApiError = () => {
   const { setToast } = useToastify();
   const navigate = useNavigate();
@@ -22,10 +40,13 @@ const useApiError = () => {
     const errorResponse = axiosError.response?.data as TCustomErrorResponse;
     const { errorSort, status, errorIndex } = codeSpliter(errorResponse);
     console.log(errorSort, status, errorIndex);
-    const comments = ErrorSet[errorSort][status as DomainErrorSetTypeKey];
 
-    if (comments) {
-      const comment = comments[errorIndex];
+    if (ErrorSort.includes(errorSort)) {
+      const comments = ErrorSet[errorSort][status as DomainErrorSetTypeKey];
+      let comment = notificationToAdmin;
+      if (comments) {
+        comment = comments[errorIndex];
+      }
       switch (status) {
         // BadRequestException | ValidationError
         case 400:
