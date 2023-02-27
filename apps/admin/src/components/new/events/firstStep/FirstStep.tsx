@@ -29,7 +29,11 @@ const FirstStep = ({ setButtonInfo }: FirstStepProps) => {
     <>
       <BorderBox padding={[36, 60]}>
         <NewHost />
-        <HostButtons hostId={selectedHostId} setHostId={setSelectedHostId} />
+        <HostButtons
+          key={selectedHostId}
+          hostId={selectedHostId}
+          setHostId={setSelectedHostId}
+        ></HostButtons>
       </BorderBox>
     </>
   );
