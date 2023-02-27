@@ -6,12 +6,14 @@ import { useLocation } from 'react-router-dom';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import QrReader from 'react-qr-reader';
 import { css } from '@emotion/react';
+import { ViewType } from '@pages/events/Qr';
 
 interface QrScannerProps {
   newView: boolean;
+  cam?: ViewType;
 }
 
-const QrScanner = ({ newView }: QrScannerProps) => {
+const QrScanner = ({ newView, cam = 'user' }: QrScannerProps) => {
   const eventId = useLocation().pathname.split('/')[2];
   const { setToast } = useToastify();
 
@@ -56,12 +58,13 @@ const QrScanner = ({ newView }: QrScannerProps) => {
         overflow: 'hidden',
       };
 
+  console.log(cam);
   return (
     <QrCodeReader
       delay={1000}
       onScan={handleScan}
       onError={() => {}}
-      facingMode="user"
+      facingMode={cam}
       style={qrReaderStyle}
       newView={newView}
     />
