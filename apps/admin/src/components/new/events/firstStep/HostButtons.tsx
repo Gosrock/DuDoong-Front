@@ -35,13 +35,17 @@ const HostButtons = ({ hostId, setHostId }: HostProfilesProps) => {
   const realList = hostList?.filter(
     (invite: HostProfileResponse) => invite.active !== false,
   );
-  if (isSuccess) {
+  if (realList || isSuccess) {
     return (
-      realList &&
-      realList.map((invite: HostProfileResponse) => (
-        <div key={invite.hostId}>{HostProfileContainer(invite)}</div>
-      ))
+      <>
+        {realList &&
+          realList.map((invite: HostProfileResponse) => (
+            <div key={invite.hostId}>{HostProfileContainer(invite)}</div>
+          ))}
+      </>
     );
+  } else {
+    return null;
   }
 };
 
