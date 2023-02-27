@@ -24,7 +24,8 @@ const useOrderMutation = (instance?: PaymentWidgetInstance | null) => {
         console.log(data, '무료선착순 주문');
         freeOrderMutate(data.orderId);
       } else {
-        router.push(`/pay/success?order=${data.orderId}`, '/pay/success');
+        //무료 승인
+        router.replace(`/pay/success?order=${data.orderId}`, '/pay/success');
       }
     },
   });
@@ -32,13 +33,13 @@ const useOrderMutation = (instance?: PaymentWidgetInstance | null) => {
   const { mutate: freeOrderMutate } = useMutation(OrderApi.POST_ORDER_FREE, {
     onSuccess: (data) => {
       console.log(data, '무료선착순 주문 응답');
-      router.push(`/pay/success?order=${data.orderUuid}`, '/pay/success');
+      router.replace(`/pay/success?order=${data.orderUuid}`, '/pay/success');
     },
   });
 
   const { mutate: dudoongMutate } = useMutation(OrderApi.CREATE_ORDER, {
     onSuccess: (data) => {
-      router.push(`/pay/success?order=${data.orderId}`, '/pay/success');
+      router.replace(`/pay/success?order=${data.orderId}`, '/pay/success');
     },
   });
 
