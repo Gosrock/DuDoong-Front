@@ -20,15 +20,16 @@ import MobileHeader from './MobileHeader';
 import HeaderProfileElement from './HeaderProfileElement';
 import Shortcuts from '../Shortcuts';
 import { ListRow } from '@dudoong/ui';
-import { css } from '@emotion/react';
-import { typo } from '@dudoong/ui/src/theme/typo';
 
 const navigatorMap = {
   '/': [
     { title: '공연 만들기', url: '/admin/' },
     { title: '공연 둘러보기', url: '/home' },
   ],
-  '/home': [{ title: '공연 만들기', url: '/admin' }],
+  '/home': [
+    { title: '공연 만들기', url: '/admin' },
+    { title: '서비스 소개', url: '/' },
+  ],
 };
 
 export const HeaderLayout = ({ children }: PropsWithChildren) => {
@@ -36,10 +37,6 @@ export const HeaderLayout = ({ children }: PropsWithChildren) => {
   const { userProfile, isAuthenticated } = useRecoilValue(authState);
   const { Toast } = useToastify();
   const resetAuthState = useResetRecoilState(authState);
-  const [toggleHamburger, setToggleHamburger] = useState<boolean>(false);
-  const onToggle = () => {
-    setToggleHamburger((prev) => !prev);
-  };
   const { setToast } = useToastify();
   const { mutate: logoutMutate } = useMutation(AuthAPi.OAUTH_LOGOUT, {
     onSuccess: () => {
@@ -93,35 +90,46 @@ export const HeaderLayout = ({ children }: PropsWithChildren) => {
         )}
       </PcHeader>
       {/* 모바일화면 헤더 */}
-      <MobileHeader>
-        {isAuthenticated ? (
-          <>
-            <ListRow
-              leftImage={
-                <ProfileImage
-                  imageUrl={userProfile!.profileImage}
-                  size={48}
-                  alliance={false}
-                />
-              }
-              text={userProfile!.name}
-              padding={[8, 20]}
-              imageTextGap={12}
-            />
+      {(asPath === '/' || asPath === '/home') && (
+        <MobileHeader>
+          {isAuthenticated ? (
+            <>
+              <ListRow
+                leftImage={
+                  <ProfileImage
+                    imageUrl={userProfile!.profileImage}
+                    size={48}
+                    alliance={false}
+                  />
+                }
+                text={userProfile!.name}
+                padding={[8, 20]}
+                imageTextGap={12}
+              />
 
-            <Divider line padding={24} height={12} />
-            <Shortcuts url="/mypage" text="마이페이지" />
-            <Shortcuts onClick={logoutMutate} text="로그아웃" />
-          </>
-        ) : (
-          <Shortcuts onClick={handleLogin} text="로그인" />
-        )}
-        <Divider line padding={24} height={12} />
-        {(asPath === '/' || asPath === '/home') &&
-          navigatorMap[asPath].map((link) => (
-            <Shortcuts url={link.url} key={link.title} text={link.title} />
-          ))}
-      </MobileHeader>
+              <Divider line padding={24} height={12} />
+              <Shortcuts url="/mypage" text="마이페이지" padding={[12, 24]} />
+              <Shortcuts
+                onClick={logoutMutate}
+                text="로그아웃"
+                padding={[12, 24]}
+              />
+            </>
+          ) : (
+            <Shortcuts onClick={handleLogin} text="로그인" padding={[12, 24]} />
+          )}
+          <Divider line padding={24} height={12} />
+          {(asPath === '/' || asPath === '/home') &&
+            navigatorMap[asPath].map((link) => (
+              <Shortcuts
+                url={link.url}
+                key={link.title}
+                text={link.title}
+                padding={[12, 24]}
+              />
+            ))}
+        </MobileHeader>
+      )}
       {/* 서비스 콘텐츠 */}
       <Content>
         <div>{children}</div>

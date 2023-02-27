@@ -22,7 +22,7 @@ const MobileHeader = ({ children }: PropsWithChildren) => {
       <HamburgerMenu
         toggle={toggle}
         onClick={onToggle}
-        height={isAuthenticated ? 268 : 128}
+        height={isAuthenticated ? 292 : 160}
       >
         {children}
       </HamburgerMenu>
@@ -56,7 +56,7 @@ const HamburgerMenu = styled.div<{ toggle: boolean; height: number }>`
   ${({ theme, toggle }) =>
     toggle &&
     css`
-      box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.07);
+      box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.05);
       border-bottom: 1px solid ${theme.palette.gray_200};
       border-radius: 0 0 16px 16px;
     `};
