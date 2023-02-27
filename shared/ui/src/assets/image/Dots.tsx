@@ -2,42 +2,42 @@ const Dots = () => {
   return (
     <>
       <svg
-        width="198"
-        height="191"
-        viewBox="0 0 198 191"
+        width="170"
+        height="163"
+        viewBox="0 0 170 163"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle cx="2.75" cy="2.75" r="2.75" fill="#6B36DC" />
-        <circle cx="41.25" cy="2.75" r="2.75" fill="#6B36DC" />
-        <circle cx="79.75" cy="2.75" r="2.75" fill="#6B36DC" />
-        <circle cx="118.25" cy="2.75" r="2.75" fill="#6B36DC" />
-        <circle cx="156.75" cy="2.75" r="2.75" fill="#6B36DC" />
-        <circle cx="195.25" cy="2.75" r="2.75" fill="#6B36DC" />
-        <circle cx="2.75" cy="48.9502" r="2.75" fill="#6B36DC" />
-        <circle cx="41.25" cy="48.9502" r="2.75" fill="#6B36DC" />
-        <circle cx="79.75" cy="48.9502" r="2.75" fill="#6B36DC" />
-        <circle cx="118.25" cy="48.9502" r="2.75" fill="#6B36DC" />
-        <circle cx="156.75" cy="48.9502" r="2.75" fill="#6B36DC" />
-        <circle cx="195.25" cy="48.9502" r="2.75" fill="#6B36DC" />
-        <circle cx="2.75" cy="95.1501" r="2.75" fill="#6B36DC" />
-        <circle cx="41.25" cy="95.1501" r="2.75" fill="#6B36DC" />
-        <circle cx="79.75" cy="95.1501" r="2.75" fill="#6B36DC" />
-        <circle cx="118.25" cy="95.1501" r="2.75" fill="#6B36DC" />
-        <circle cx="156.75" cy="95.1501" r="2.75" fill="#6B36DC" />
-        <circle cx="195.25" cy="95.1501" r="2.75" fill="#6B36DC" />
-        <circle cx="2.75" cy="141.35" r="2.75" fill="#6B36DC" />
-        <circle cx="41.25" cy="141.35" r="2.75" fill="#6B36DC" />
-        <circle cx="79.75" cy="141.35" r="2.75" fill="#6B36DC" />
-        <circle cx="118.25" cy="141.35" r="2.75" fill="#6B36DC" />
-        <circle cx="156.75" cy="141.35" r="2.75" fill="#6B36DC" />
-        <circle cx="195.25" cy="141.35" r="2.75" fill="#6B36DC" />
-        <circle cx="2.75" cy="187.55" r="2.75" fill="#6B36DC" />
-        <circle cx="41.25" cy="187.55" r="2.75" fill="#6B36DC" />
-        <circle cx="79.75" cy="187.55" r="2.75" fill="#6B36DC" />
-        <circle cx="118.25" cy="187.55" r="2.75" fill="#6B36DC" />
-        <circle cx="156.75" cy="187.55" r="2.75" fill="#6B36DC" />
-        <circle cx="195.25" cy="187.55" r="2.75" fill="#6B36DC" />
+        <circle cx="2.92157" cy="2.34722" r="2.34722" fill="#6B36DC" />
+        <circle cx="35.7826" cy="2.34722" r="2.34722" fill="#6B36DC" />
+        <circle cx="68.6437" cy="2.34722" r="2.34722" fill="#6B36DC" />
+        <circle cx="101.505" cy="2.34722" r="2.34722" fill="#6B36DC" />
+        <circle cx="134.366" cy="2.34722" r="2.34722" fill="#6B36DC" />
+        <circle cx="167.227" cy="2.34722" r="2.34722" fill="#6B36DC" />
+        <circle cx="2.92157" cy="41.7808" r="2.34722" fill="#6B36DC" />
+        <circle cx="35.7826" cy="41.7808" r="2.34722" fill="#6B36DC" />
+        <circle cx="68.6437" cy="41.7808" r="2.34722" fill="#6B36DC" />
+        <circle cx="101.505" cy="41.7808" r="2.34722" fill="#6B36DC" />
+        <circle cx="134.366" cy="41.7808" r="2.34722" fill="#6B36DC" />
+        <circle cx="167.227" cy="41.7808" r="2.34722" fill="#6B36DC" />
+        <circle cx="2.92157" cy="81.2139" r="2.34722" fill="#6B36DC" />
+        <circle cx="35.7826" cy="81.2139" r="2.34722" fill="#6B36DC" />
+        <circle cx="68.6437" cy="81.2139" r="2.34722" fill="#6B36DC" />
+        <circle cx="101.505" cy="81.2139" r="2.34722" fill="#6B36DC" />
+        <circle cx="134.366" cy="81.2139" r="2.34722" fill="#6B36DC" />
+        <circle cx="167.227" cy="81.2139" r="2.34722" fill="#6B36DC" />
+        <circle cx="2.92157" cy="120.648" r="2.34722" fill="#6B36DC" />
+        <circle cx="35.7826" cy="120.648" r="2.34722" fill="#6B36DC" />
+        <circle cx="68.6437" cy="120.648" r="2.34722" fill="#6B36DC" />
+        <circle cx="101.505" cy="120.648" r="2.34722" fill="#6B36DC" />
+        <circle cx="134.366" cy="120.648" r="2.34722" fill="#6B36DC" />
+        <circle cx="167.227" cy="120.648" r="2.34722" fill="#6B36DC" />
+        <circle cx="2.92157" cy="160.081" r="2.34722" fill="#6B36DC" />
+        <circle cx="35.7826" cy="160.081" r="2.34722" fill="#6B36DC" />
+        <circle cx="68.6437" cy="160.081" r="2.34722" fill="#6B36DC" />
+        <circle cx="101.505" cy="160.081" r="2.34722" fill="#6B36DC" />
+        <circle cx="134.366" cy="160.081" r="2.34722" fill="#6B36DC" />
+        <circle cx="167.227" cy="160.081" r="2.34722" fill="#6B36DC" />
       </svg>
     </>
   );
