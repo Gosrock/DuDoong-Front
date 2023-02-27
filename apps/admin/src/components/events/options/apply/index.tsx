@@ -2,7 +2,7 @@ import ContentGrid from '@components/shared/layout/ContentGrid';
 import OptionApi from '@lib/apis/option/OptionApi';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   DragDropContext,
   DropResult,
@@ -11,6 +11,8 @@ import {
 import { useLocation } from 'react-router-dom';
 import OptionList from './OptionList';
 import TicketListOption from './TicketListOption';
+import { useRecoilState } from 'recoil';
+import { soldOptionState } from '@store/soldOption';
 
 const ApplyOption = () => {
   const { pathname } = useLocation();
