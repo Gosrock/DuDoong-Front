@@ -23,7 +23,7 @@ const AccountInfoSection = ({
   closeOverlay: () => void;
   name: string;
 }) => {
-  const { dudoongMutate } = useOrderMutation();
+  const { dudoongMutate } = useOrderMutation(null, closeOverlay);
   const { setToast } = useToastify();
   const handleDudoongOrder = () => {
     dudoongMutate(orderPayload);

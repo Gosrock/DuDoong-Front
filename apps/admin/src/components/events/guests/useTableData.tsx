@@ -62,7 +62,7 @@ const useTableData = () => {
           parseDate(row.createdAt)[1]
         }`,
         issuedTicketStatus: row.issuedTicketStatus,
-        issuedTicketTime: row.enteredAt
+        enteredAt: row.enteredAt
           ? `${parseDate(row.enteredAt)[0]} ${parseDate(row.enteredAt)[1]}`
           : '--',
       };
