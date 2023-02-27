@@ -40,6 +40,8 @@ const RequireAuth = () => {
       } catch (error) {
         setStatus('failed');
       }
+    } else {
+      setStatus('failed');
     }
   }, [accessToken]);
 
