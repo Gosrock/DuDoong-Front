@@ -21,7 +21,7 @@ const OptionItem = ({ name, subText, OptionGroupId }: OptionItemProps) => {
     OptionApi.PATCH_OPTION_DELETE,
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries({ queryKey: ['AllOption', eventId] });
+        queryClient.invalidateQueries({ queryKey: ['optionGroups', eventId] });
       },
     },
   );
