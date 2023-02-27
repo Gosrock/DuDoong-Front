@@ -1,6 +1,6 @@
-import { OrderAdminTableElement } from '@lib/apis/order/orderType';
+import type { OrderAdminTableElement } from '@lib/apis/order/orderType';
 import { ColumnsType } from 'antd/es/table';
-import { IssuedTicketAdminTableElement } from '@lib/apis/ticket/ticketType';
+import type { IssuedTicketAdminTableElement } from '@lib/apis/ticket/ticketType';
 import { parseDate } from '@dudoong/utils';
 import TableOption from './TableOption';
 import TicketApi from '@lib/apis/ticket/TicketApi';

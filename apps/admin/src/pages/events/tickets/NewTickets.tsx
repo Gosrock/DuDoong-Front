@@ -5,7 +5,7 @@ import ContentGrid from '@components/shared/layout/ContentGrid';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
 import { EventDetailResponse } from '@dudoong/utils/src/apis/event/eventType';
 import TicketApi from '@lib/apis/ticket/TicketApi';
-import { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
+import type { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
 
 import useBottomButton from '@lib/hooks/useBottomButton';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
@@ -36,7 +36,6 @@ const NewTickets = () => {
   //티켓 생성 api
   const postTicketCreateMutation = useMutation(TicketApi.POST_TICKET, {
     onSuccess: (data: GetTicketDetailResponse) => {
-      console.log('POST_TICKET: ', data);
       openOverlay({
         content: 'saveTicket',
         props: {
@@ -79,9 +78,7 @@ const NewTickets = () => {
     });
   };
 
-  const onError = (error: any) => {
-    console.log('error', error);
-  };
+  const onError = (error: any) => {};
 
   return (
     <div onSubmit={handleSubmit(onSubmit, onError)}>

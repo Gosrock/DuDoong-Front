@@ -13,7 +13,7 @@ import { parseDate } from '@dudoong/utils';
 
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';
-import { RefundInfo } from '@lib/apis/order/orderType';
+import type { RefundInfo } from '@lib/apis/order/orderType';
 import useOverlay from '@lib/hooks/useOverlay';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';

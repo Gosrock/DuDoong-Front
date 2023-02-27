@@ -4,8 +4,7 @@ import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import TicketItem from './TicketItem';
-import styled from '@emotion/styled';
-import { Button, ButtonSet, Padding } from '@dudoong/ui';
+import { Button, ButtonSet } from '@dudoong/ui';
 import Link from 'next/link';
 import { css } from '@emotion/react';
 
@@ -16,7 +15,6 @@ const TicketList = ({
   tickets: IssuedTicketInfo[];
   orderUuid: string;
 }) => {
-  console.log(tickets);
   const pagination = {
     clickable: true,
     renderBullet: (_index: number, className: string) => {

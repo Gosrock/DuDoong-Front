@@ -37,9 +37,7 @@ const SecondStep = ({ hostId, setButtonInfo }: SecondStepProps) => {
   const navigate = useNavigate();
 
   const postEventMutation = useMutation(EventApi.POST_EVENT, {
-    onSuccess: (data: CreateEventResponse) => {
-      console.log('postEventMutation : ', data);
-    },
+    onSuccess: (data: CreateEventResponse) => {},
   });
 
   const makeEventHandler = (data: InputType) => {

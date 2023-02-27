@@ -1,6 +1,6 @@
 import { FlexBox, ListRow, Padding, Text } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
-import { eventProfile } from '@lib/apis/order/orderType';
+import type { eventProfile } from '@lib/apis/order/orderType';
 import Image from 'next/image';
 
 const DetailEventInfo = ({ event }: { event: eventProfile }) => {

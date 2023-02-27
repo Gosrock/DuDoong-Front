@@ -27,7 +27,6 @@ export const DatePicker = (props: DatePickerProps) => {
   const [startDate, setStartDate] = useState<Date | null>(curDate);
 
   useEffect(() => {
-    console.log(curDate);
     setStartDate(curDate);
   }, [curDate]);
 

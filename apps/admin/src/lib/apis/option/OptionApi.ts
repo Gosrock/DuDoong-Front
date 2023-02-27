@@ -21,7 +21,6 @@ const OptionApi = {
     eventId: string;
     payload: CreateTicketOptionRequest;
   }): Promise<OptionGroupResponse> => {
-    console.log(payload);
     const response = await axiosPrivate.post(
       `events/${eventId}/ticketOptions`,
       payload,

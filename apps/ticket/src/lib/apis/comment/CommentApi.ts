@@ -13,7 +13,6 @@ export const CommentApi = {
     size = 10,
     sort = 'asc',
   }: InfiniteRequest): Promise<InfiniteResponse<RetrieveCommentResponse>> => {
-    console.log();
     const response = await axiosPrivate.get(
       `/events/${id}/comments?page=${pageParam}&size=${size}&sort=${sort}`,
     );

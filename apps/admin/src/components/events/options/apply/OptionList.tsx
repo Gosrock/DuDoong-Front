@@ -11,16 +11,12 @@ import OptionItem from './OptionItem';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import type { OptionGroupResponse } from '@lib/apis/option/optionType';
 import { DudoongOne } from '@assets/stickers';
-import { useRecoilState } from 'recoil';
-import { soldOptionState } from '@store/soldOption';
 
 interface OptionListProps {
   optionItems: OptionGroupResponse[];
 }
 
 const OptionList = ({ optionItems }: OptionListProps) => {
-  console.log(optionItems);
-
   if (!optionItems?.length) {
     return (
       <Wrapper>
