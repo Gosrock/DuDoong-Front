@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { PropsWithChildren, ReactNode, useState } from 'react';
+import { PropsWithChildren } from 'react';
 import {
   Divider,
   Header,
@@ -23,11 +23,11 @@ import { ListRow } from '@dudoong/ui';
 
 const navigatorMap = {
   '/': [
-    { title: '공연 만들기', url: '/admin/' },
+    { title: '공연 준비하기', url: '/admin/' },
     { title: '공연 둘러보기', url: '/home' },
   ],
   '/home': [
-    { title: '공연 만들기', url: '/admin' },
+    { title: '공연 준비하기', url: '/admin' },
     { title: '서비스 소개', url: '/' },
   ],
 };

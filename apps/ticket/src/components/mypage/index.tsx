@@ -99,7 +99,7 @@ const Mypage = ({ info }: { info: UserInfo }) => {
       <Shortcuts text="내 예매내역" url="/history" />
       <Shortcuts text="내 쿠폰함" url="/history/mycoupon" />
       <Divider />
-      <Shortcuts text="공연 만들기" url="/admin" />
+      <Shortcuts text="공연 준비하기" url="/admin" />
       <Divider />
       <Shortcuts
         text="로그아웃"
