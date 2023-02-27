@@ -107,6 +107,7 @@ const Info = () => {
     <>
       <ListHeader
         title={'호스트 정보'}
+        description={'모든 항목을 입력해야 저장할 수 있어요.'}
         size={'listHeader_24'}
         padding={[32, 0, 40, 0]}
       />

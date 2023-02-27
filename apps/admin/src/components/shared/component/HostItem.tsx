@@ -3,6 +3,7 @@ import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import styled from '@emotion/styled';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import HostApi from '@lib/apis/host/HostApi';
+import { css } from '@emotion/react';
 
 export type HostItemTypeKey = 'lg' | 'sm';
 
@@ -35,11 +36,13 @@ export interface HostItemProps
   type?: HostItemTypeKey;
   selectedHostId?: number | null;
   isNew?: boolean;
+  disabled?: boolean;
 }
 
 const HostItem = ({
   type = 'lg',
   selectedHostId = null,
+  disabled = false,
   ...props
 }: HostItemProps) => {
   const queryClient = useQueryClient();
@@ -64,6 +67,7 @@ const HostItem = ({
 
   return (
     <Content
+      disabled={disabled}
       isselected={selectedHostId === props.hostId ? 1 : 0}
       padding={HOST_ITEM_SET[type].padding}
       leftImage={<HostItemImage type={type} imageSrc={props.profileImage} />}
@@ -79,6 +83,9 @@ const HostItem = ({
               typo="P_Text_16_SB"
               color={'red_300'}
               onClick={() => rejectInvite(props.hostId)}
+              css={css`
+                cursor: pointer;
+              `}
             >
               무시
             </Text>
@@ -86,6 +93,9 @@ const HostItem = ({
               typo="P_Text_16_SB"
               color={'main_500'}
               onClick={() => acceptInvite(props.hostId)}
+              css={css`
+                cursor: pointer;
+              `}
             >
               수락
             </Text>
@@ -107,14 +117,16 @@ export default HostItem;
 
 interface ContentProps {
   isselected: 1 | 0;
+  disabled: boolean;
 }
 
 const Content = styled(ListRow)<ContentProps>`
   cursor: pointer;
   border-radius: 12px;
   &:hover {
-    background-color: ${({ isselected }) =>
-      !isselected && theme.palette.gray_100};
+    background-color: ${({ isselected, disabled }) =>
+      !disabled && !isselected && theme.palette.gray_100};
+    cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   }
   background-color: ${({ isselected }) => isselected && theme.palette.gray_200};
 `;
