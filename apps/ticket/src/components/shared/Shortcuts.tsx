@@ -1,4 +1,4 @@
-import { KeyOfPalette, ListRow } from '@dudoong/ui';
+import { KeyOfPalette, ListRow, PaddingSize } from '@dudoong/ui';
 import Chevron from '@assets/chevron.svg';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -8,6 +8,7 @@ interface ShortcutsProps {
   textColor?: KeyOfPalette;
   url?: string;
   onClick?: () => void;
+  padding?: PaddingSize;
 }
 
 const Shortcuts = ({
@@ -15,10 +16,12 @@ const Shortcuts = ({
   textColor = 'gray_500',
   url,
   onClick,
+  padding,
 }: ShortcutsProps) => {
   const router = useRouter();
   return (
     <StyledListRow
+      padding={padding}
       text={text}
       textColor={textColor}
       rightElement={<Chevron />}

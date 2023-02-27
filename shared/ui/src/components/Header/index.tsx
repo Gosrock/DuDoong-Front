@@ -18,7 +18,7 @@ export const Header = ({ rightElement, title }: HeaderProps) => {
         <FlexBox justify={'space-between'} align={'center'}>
           <button
             onClick={() =>
-              (window.location.href = `${window.location.origin}/`)
+              (window.location.href = `${window.location.origin}/home`)
             }
           >
             <Logo />

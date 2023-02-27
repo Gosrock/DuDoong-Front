@@ -28,7 +28,7 @@ const QrSheetContainer = ({ ticket }: { ticket: IssuedTicketInfo }) => {
 
   useEffect(() => {
     if (ticket.issuedTicketStatus === '입장 완료') {
-      setToast({ comment: '입장이 완료되었어요!' });
+      setToast({ comment: '입장이 완료되었어요!', type: 'info' });
     }
   }, [data?.issuedTicketInfo.issuedTicketStatus, ticket.issuedTicketStatus]);
 

@@ -1,40 +1,54 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ReactNode, useEffect } from 'react';
-import { Header, Popup, PopupOptions } from '@dudoong/ui/src/components';
-import { Profile } from '@dudoong/ui/src/components/Profile/Profile';
-import { media, theme } from '@dudoong/ui/src/theme';
+import { PropsWithChildren, ReactNode, useState } from 'react';
+import {
+  Divider,
+  Header,
+  PopupOptions,
+  ProfileImage,
+} from '@dudoong/ui/src/components';
+import { media } from '@dudoong/ui/src/theme';
 import { useRouter } from 'next/router';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
 import { resetCrendentials } from '@lib/utils/setCredentials';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { useMutation } from '@tanstack/react-query';
 import { AuthAPi } from '@lib/apis/axios';
-export interface HeaderLayoutProps {
-  children: ReactNode;
-  name?: string;
-  image?: string;
-  handleLogin: () => void;
-}
+import Link from 'next/link';
+import MobileHeader from './MobileHeader';
+import HeaderProfileElement from './HeaderProfileElement';
+import Shortcuts from '../Shortcuts';
+import { ListRow } from '@dudoong/ui';
 
-export const HeaderLayout = ({
-  children,
-  name,
-  image,
-  handleLogin,
-}: HeaderLayoutProps) => {
-  const { push } = useRouter();
+const navigatorMap = {
+  '/': [
+    { title: '공연 만들기', url: '/admin/' },
+    { title: '공연 둘러보기', url: '/home' },
+  ],
+  '/home': [
+    { title: '공연 만들기', url: '/admin' },
+    { title: '서비스 소개', url: '/' },
+  ],
+};
+
+export const HeaderLayout = ({ children }: PropsWithChildren) => {
+  const { push, asPath } = useRouter();
+  const { userProfile, isAuthenticated } = useRecoilValue(authState);
   const { Toast } = useToastify();
   const resetAuthState = useResetRecoilState(authState);
-
+  const { setToast } = useToastify();
   const { mutate: logoutMutate } = useMutation(AuthAPi.OAUTH_LOGOUT, {
     onSuccess: () => {
       resetAuthState();
       resetCrendentials();
+      setToast({ comment: '로그아웃되었어요', type: 'success' });
     },
   });
+
+  const handleLogin = () => {
+    push(`/login?redirect=${window.location.pathname}`, `/login`);
+  };
 
   const profileOption: PopupOptions[] = [
     {
@@ -48,38 +62,79 @@ export const HeaderLayout = ({
       onClick: logoutMutate,
     },
   ];
+
   return (
     <Wrapper>
-      <Header
-        rightElement={
-          name ? (
-            <Popup
-              width={100}
-              options={profileOption}
-              renderElement={
-                <Profile
-                  size={'small'}
-                  name={name}
-                  image={image}
-                  css={css`
-                    cursor: pointer;
-                    border-radius: 8px;
-                    padding-right: 8px;
-                    &:hover {
-                      background-color: ${theme.palette.gray_100};
-                    }
-                  `}
-                />
-              }
+      {/* PC화면 헤더 */}
+      <PcHeader>
+        <Header
+          rightElement={
+            <HeaderProfileElement
+              name={userProfile?.name}
+              profileOption={profileOption}
+              image={userProfile?.profileImage}
+              handleLogin={handleLogin}
             />
+          }
+        />
+        {(asPath === '/' || asPath === '/home') && (
+          <Navigator>
+            <>
+              {navigatorMap[asPath].map((link) => (
+                <Link href={link.url} key={link.title}>
+                  {link.title}
+                </Link>
+              ))}
+            </>
+          </Navigator>
+        )}
+      </PcHeader>
+      {/* 모바일화면 헤더 */}
+      {(asPath === '/' || asPath === '/home') && (
+        <MobileHeader>
+          {isAuthenticated ? (
+            <>
+              <ListRow
+                leftImage={
+                  <ProfileImage
+                    imageUrl={userProfile!.profileImage}
+                    size={48}
+                    alliance={false}
+                  />
+                }
+                text={userProfile!.name}
+                padding={[8, 20]}
+                imageTextGap={12}
+              />
+
+              <Divider line padding={24} height={12} />
+              <Shortcuts url="/mypage" text="마이페이지" padding={[12, 24]} />
+              <Shortcuts
+                onClick={logoutMutate}
+                text="로그아웃"
+                padding={[12, 24]}
+              />
+            </>
           ) : (
-            <LoginButton onClick={handleLogin}>로그인</LoginButton>
-          )
-        }
-      />
+            <Shortcuts onClick={handleLogin} text="로그인" padding={[12, 24]} />
+          )}
+          <Divider line padding={24} height={12} />
+          {(asPath === '/' || asPath === '/home') &&
+            navigatorMap[asPath].map((link) => (
+              <Shortcuts
+                url={link.url}
+                key={link.title}
+                text={link.title}
+                padding={[12, 24]}
+              />
+            ))}
+        </MobileHeader>
+      )}
+      {/* 서비스 콘텐츠 */}
       <Content>
         <div>{children}</div>
       </Content>
+      {/* 글로벌 토스트 */}
       <Toast />
     </Wrapper>
   );
@@ -87,10 +142,11 @@ export const HeaderLayout = ({
 
 const Wrapper = styled.div`
   position: relative;
+`;
+
+const PcHeader = styled.div`
   ${media.mobile} {
-    & > div:first-of-type {
-      display: none;
-    }
+    display: none;
   }
 `;
 
@@ -111,11 +167,23 @@ const Content = styled.div`
   }
 `;
 
-const LoginButton = styled.button`
-  height: 40px;
-  width: 80px;
-  border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.palette.black};
-  ${({ theme }) => theme.typo.Text_16}
-  line-height:100%;
+const Navigator = styled.div`
+  ${media.mobile} {
+    display: none;
+  }
+  position: absolute;
+  top: 12px;
+  ${({ theme }) => theme.typo.G_Side_15_M}
+  display: flex;
+  gap: 36px;
+  right: 180px;
+
+  & > a {
+    padding: 8px 10px;
+    border-radius: 12px;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.palette.gray_100};
+    }
+  }
 `;

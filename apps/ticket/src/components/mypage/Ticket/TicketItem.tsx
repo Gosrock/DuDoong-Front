@@ -29,8 +29,15 @@ const TicketItem = ({
             예매 상세
           </Button>
         </Link>
-        <Button fullWidth varient="secondary" onClick={openOverlay}>
-          QR코드 보기
+        <Button
+          fullWidth
+          varient="secondary"
+          onClick={openOverlay}
+          disabled={ticket.issuedTicketStatus === '취소 티켓'}
+        >
+          {ticket.issuedTicketStatus === '취소 티켓'
+            ? '취소된 티켓'
+            : 'QR코드 보기'}
         </Button>
       </ButtonSet>
 
