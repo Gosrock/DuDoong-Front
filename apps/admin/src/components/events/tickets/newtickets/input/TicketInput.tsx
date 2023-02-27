@@ -42,6 +42,7 @@ const TicketInput = forwardRef<HTMLInputElement, TicketInputProps>(
     return (
       <FlexBox direction="column" align="flex-start" style={{ width: '100%' }}>
         <ListHeader
+          required={true}
           padding={0}
           size={titleTypo}
           title={title}

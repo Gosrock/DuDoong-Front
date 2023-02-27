@@ -18,6 +18,7 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
     <FlexBox direction="column" align="flex-start" justify="flex-start">
       <FlexBox direction="column" align="flex-start" style={{ width: '100%' }}>
         <ListHeader
+          required={true}
           padding={0}
           size={'listHeader_18'}
           title={'계좌번호 입력'}
