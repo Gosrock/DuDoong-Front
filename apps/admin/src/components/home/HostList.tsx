@@ -94,12 +94,7 @@ const HostList = ({ page }: ListProps) => {
             <Divider line={true} />
             {newInvite?.map((invite: HostProfileResponse) => (
               <>
-                <HostItem
-                  {...invite}
-                  isNew={true}
-                  key={invite.hostId}
-                  disabled={true}
-                ></HostItem>
+                <HostItem {...invite} isNew={true} disabled={true} />
                 <Divider
                   line={true}
                   css={css`

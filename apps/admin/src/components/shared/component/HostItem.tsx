@@ -53,7 +53,7 @@ const HostItem = ({
   });
   const { mutate: reject } = useMutation(HostApi.POST_HOST_REJECT, {
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(['hostList']);
     },
   });
 
@@ -62,7 +62,7 @@ const HostItem = ({
   };
   const rejectInvite = (hostId: number) => {
     reject(String(hostId));
-    queryClient.invalidateQueries();
+    queryClient.invalidateQueries(['hostList']);
   };
 
   return (

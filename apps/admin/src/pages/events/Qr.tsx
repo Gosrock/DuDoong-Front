@@ -16,7 +16,7 @@ const Qr = () => {
     cam: 'user',
   });
   return viewInfo.fullScreen ? (
-    <FullQrScreen setViewInfo={setViewInfo} />
+    <FullQrScreen viewInfo={viewInfo} setViewInfo={setViewInfo} />
   ) : (
     <NormalQrScreen setViewInfo={setViewInfo} />
   );

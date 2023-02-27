@@ -90,7 +90,7 @@ const MapPage = (props: any) => {
   useEffect(() => {
     setButtonInfo({
       firstHandler: changeEventHandler,
-      firstDisable: checkButtonDisable(detailAddress, placeName),
+      firstDisable: checkButtonDisable(detailAddress, placeName, curMarker),
     });
   }, [buttonHandler]);
 
@@ -177,6 +177,7 @@ const MapPage = (props: any) => {
 
   console.log(placeName);
   console.log(detailAddress);
+  console.log(curMarker.position.lat);
 
   return (
     <>
@@ -185,6 +186,7 @@ const MapPage = (props: any) => {
           padding={[32, 0, 10, 0]}
           size={'listHeader_18'}
           title={'공연 장소'}
+          required={true}
           rightElement={
             <TagButton
               size="md"
@@ -209,6 +211,7 @@ const MapPage = (props: any) => {
             size={'listHeader_18'}
             title={'상세주소'}
             description={placeAddress ? placeAddress : ''}
+            required={true}
           ></ListHeader>
           <Input
             placeholder="중요! 상세주소를 그대로 적어주세요!"
@@ -258,12 +261,15 @@ export default MapPage;
 const checkButtonDisable = (
   detailAddress: string | undefined,
   placeName: string | undefined,
+  curMarker: place,
 ) => {
   if (
     detailAddress === null ||
     placeName === null ||
     detailAddress === '' ||
-    placeName === ''
+    placeName === '' ||
+    curMarker.position.lat === 0 ||
+    curMarker.position.lng === 0
   )
     return true;
   return false;

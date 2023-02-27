@@ -39,9 +39,16 @@ const LeftSide = () => {
     setPlace(data?.place);
     if (data?.startAt != null) {
       const DateTime = data?.startAt.split(' ');
+      if (DateTime[0].length <= 10) {
+        DateTime[0] = DateTime[0].replace(/\./g, '-');
+        data.startAt = data?.startAt.replace(/\./g, '-');
+      }
+      console.log(data.startAt);
       const curDate = new Date(`${DateTime[0]}`);
       const curTime = new Date(data?.startAt);
       setStartAtTime(curTime);
+      console.log(curTime);
+      console.log(data?.startAt);
       setStartAt(curDate);
     }
   }, [data?.runTime, data?.place]);

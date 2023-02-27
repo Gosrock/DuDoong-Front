@@ -127,8 +127,6 @@ export interface BasicEventRequest {
   latitude: number;
 }
 
-type EventStatusType = 'CLOSED' | 'CALCULATING' | 'OPEN' | 'PREPARING';
-
 export interface UpdateEventStatusRequest {
   status: EventStatus;
 }
@@ -138,6 +136,7 @@ export interface IssuedTicket {
   issuedTicketNo: string;
   uuid: string;
   ticketName: string;
+  payType: '두둥티켓' | '무료티켓' | '유료티켓';
   ticketPrice: string;
   createdAt: string;
   enteredAt: string;

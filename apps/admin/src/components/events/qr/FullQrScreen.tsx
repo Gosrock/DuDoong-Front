@@ -5,8 +5,10 @@ import QrScanner from '@components/events/qr/QrScanner';
 import { ViewInfoType } from '@pages/events/Qr';
 
 const FullQrScreen = ({
+  viewInfo,
   setViewInfo,
 }: {
+  viewInfo: ViewInfoType;
   setViewInfo: React.Dispatch<React.SetStateAction<ViewInfoType>>;
 }) => {
   return (
@@ -14,7 +16,7 @@ const FullQrScreen = ({
       <ScannerWrapper>
         <Scanner />
       </ScannerWrapper>
-      <QrScanner newView={true} />
+      <QrScanner cam={viewInfo.cam} newView={true} />
       <CustomButton
         onClick={() => {
           setViewInfo((prev: ViewInfoType) => {
