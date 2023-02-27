@@ -1,8 +1,8 @@
-const ticketItem400 = {
+const itemOptionGroup400 = {
   '1': '이미 적용된 옵션입니다.', // "이미 적용된 옵션입니다.",
   '2': '옵션 변경이 불가능한 상태입니다.', // "옵션 변경이 불가능한 상태입니다.",
   '3': '적용되지 않은 옵션입니다.', // "적용되지 않은 옵션입니다.",
   '4': '유료 옵션을 적용할 수 없습니다.', // "유료 옵션을 적용할 수 없습니다.",
 };
 
-export default ticketItem400;
+export default itemOptionGroup400;
