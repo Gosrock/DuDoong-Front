@@ -27,7 +27,7 @@ const AccountInfoSection = ({
   };
   const handleCopyAccount = () => {
     navigator.clipboard.writeText(accountInfo?.accountNumber);
-    setToast({ comment: '계좌번호가 복사되었어요!' });
+    setToast({ comment: '계좌번호가 복사되었어요!', type: 'info' });
   };
 
   return (

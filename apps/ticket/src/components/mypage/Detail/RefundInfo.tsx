@@ -113,7 +113,7 @@ const RefundConfirmation = ({
   onCancel: () => void;
 }) => {
   return (
-    <Padding>
+    <>
       <ListHeader
         title="예매를 취소할까요?"
         description="언제든 다시 예매할 수 있어요."
@@ -128,6 +128,6 @@ const RefundConfirmation = ({
           아니요
         </Button>
       </ButtonSet>
-    </Padding>
+    </>
   );
 };
