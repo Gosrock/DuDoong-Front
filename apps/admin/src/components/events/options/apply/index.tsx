@@ -69,7 +69,7 @@ const ApplyOption = () => {
       },
       onError: (error: any) => {
         const comment = error.response.data.reason;
-        setToast({ comment: comment });
+        setToast({ comment: comment, type: 'error' });
         closeOverlay();
       },
     },

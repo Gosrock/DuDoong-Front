@@ -95,7 +95,7 @@ const Wrapper = styled.div`
   & > div {
     position: sticky;
     position: -webkit-sticky;
-    margin-top: 44px;
+    margin-top: 38px;
     top: 36px;
   }
 `;
