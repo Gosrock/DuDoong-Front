@@ -2,10 +2,8 @@ import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { useCallback } from 'react';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import useRefresh from './auth/useRefresh';
-import { getCookie, removeCookie } from '@lib/utils/cookie';
-// import { useCookies } from 'react-cookie';
-import { useQueryClient } from '@tanstack/react-query';
+import ErrorSet, { ErrorSetTypeKey } from '@lib/error/common/ErrorSet';
+import { DomainErrorSetTypeKey } from '@lib/error/common/DomainErrorSetType';
 
 export interface TCustomErrorResponse {
   success: boolean;
@@ -19,79 +17,37 @@ export interface TCustomErrorResponse {
 const useApiError = () => {
   const { setToast } = useToastify();
   const navigate = useNavigate();
-  const { refreshMutate } = useRefresh();
-  // const [cookies, ,] = useCookies();
-  const queryClient = useQueryClient();
-
-  const authenticationErrorHandler = () => {
-    // const refreshToken = cookies.refreshToken;
-    const refreshToken = getCookie('refreshToken');
-    if (refreshToken) {
-      refreshMutate(refreshToken, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['host']);
-          navigate('/');
-        },
-        onError: () => {
-          // setToast({ comment: '다시 로그인 해주세요!' });
-          // removeCookie('refreshToken');
-          // removeCookie('accessToken');
-          // navigate('/login');
-        },
-      });
-    } else {
-      navigate('/login');
-    }
-  };
 
   const handleError = useCallback((axiosError: AxiosError) => {
     const errorResponse = axiosError.response?.data as TCustomErrorResponse;
-    const { status, reason, code } = errorResponse;
-    // if (code === 'AUTH_403_1') {
-    //   console.log();
-    //   removeCookie('refreshToken');
-    //   removeCookie('accessToken');
-    //   console.log(
-    //     '세팅확인',
-    //     getCookie('accessToken'),
-    //     getCookie('refreshToken'),
-    //   );
-    //   setToast({ comment: '다시 로그인 해주세요!' });
-    // } else {
-    //   switch (status) {
-    //     // BadRequestException | ValidationError
-    //     case 400:
-    //     case 404:
-    //     case 500:
-    //       setToast({ comment: reason });
-    //       break;
-    //     // authentication error
-    //     case 401:
-    //     case 403:
-    //       authenticationErrorHandler();
-    //       break;
-    //     default:
-    //       setToast({ comment: reason });
-    //       break;
-    //   }
-    // }
-    switch (status) {
-      // BadRequestException | ValidationError
-      case 400:
-      case 404:
-      case 500:
-        setToast({ comment: reason });
-        break;
-      // authentication error
-      case 401:
-      case 403:
-        // console.log(status);
-        // authenticationErrorHandler();
-        navigate('/login');
-        break;
-      default:
-        setToast({ comment: reason });
-        break;
+    const { status, code } = errorResponse;
+    const codeInfo = code.split('_'); // Event, 400, 1
+    const comments =
+      ErrorSet[codeInfo[0] as ErrorSetTypeKey][status as DomainErrorSetTypeKey];
+
+    if (comments) {
+      const comment = comments[codeInfo[2]];
+      switch (status) {
+        // BadRequestException | ValidationError
+        case 400:
+        case 404:
+        case 500:
+          setToast({ comment: comment });
+          break;
+        // authentication error
+        case 401:
+        case 403:
+          navigate('/login');
+          break;
+        default:
+          setToast({ comment: comment });
+          break;
+      }
+    } else {
+      setToast({
+        comment:
+          '예상치 못한 서버 오류가 발생했어요. 오류가 반복되면 앱을 종료하고 다시 실행해주세요.',
+      });
     }
   }, []);
   return { handleError } as const;
