@@ -6,7 +6,6 @@ import HostsRouter from '@pages/hosts';
 import Login from './pages/common/Login';
 import RefuseAuth from './components/shared/auth/RefuseAuth';
 import Callback from '@pages/kakao/Callback';
-import Refresh from './components/shared/auth/Refresh';
 import NewRouter from '@pages/new';
 import AdminNoMenuLayout from '@components/shared/layout/AdminNoMenuLayout';
 import Home from '@pages/common/Home';
