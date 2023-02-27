@@ -17,6 +17,7 @@ import { useMutation } from '@tanstack/react-query';
 import OptionApi from '@lib/apis/option/OptionApi';
 import { OptionGroupType } from '@lib/apis/option/optionType';
 import { Controller } from 'react-hook-form';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 
 const NewOptions = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const NewOptions = () => {
   const eventId = pathname.split('/')[2];
   const [optionName, setOptionName] = useState<string>('');
   const [optionDescrip, setOptionDescrip] = useState<string>('');
+  const { setToast } = useToastify();
   const { register, handleSubmit, control, formState } = useForm({
     mode: 'onChange',
   });
@@ -48,6 +50,10 @@ const NewOptions = () => {
           },
         },
       });
+    },
+    onError: (error: any) => {
+      const comment = error.response.data.reason;
+      setToast({ type: 'error', comment: comment });
     },
   });
 
