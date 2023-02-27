@@ -2,7 +2,7 @@ import ContentGrid from '@components/shared/layout/ContentGrid';
 import OptionApi from '@lib/apis/option/OptionApi';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   DragDropContext,
   DropResult,
@@ -11,45 +11,52 @@ import {
 import { useLocation } from 'react-router-dom';
 import OptionList from './OptionList';
 import TicketListOption from './TicketListOption';
-import { useRecoilState } from 'recoil';
-import { soldOptionState } from '@store/soldOption';
+import useToastify from '@dudoong/ui/src/lib/useToastify';
 
 const ApplyOption = () => {
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
   const queryClient = useQueryClient();
+  const { setToast } = useToastify();
   const { openOverlay, closeOverlay } = useGlobalOverlay();
   const { data, isSuccess } = useQuery(['optionGroups', eventId], () =>
     OptionApi.GET_ALL_OPTION(eventId),
   );
 
-  const onDragEnd = ({ draggableId, destination }: DropResult) => {
+  const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
     const dragElementId = draggableId;
     const isApply = dragElementId.split('-')[0] === 'eventOption';
-
-    if (isApply && destination) {
-      const ticketItemId = destination.droppableId;
-      //옵선 적용
-      applyOptionMutate({
-        eventId,
-        ticketItemId,
-        payload: { optionGroupId: parseInt(dragElementId.split('-')[1]) },
-      });
+    if (isApply && destination == null) {
+      return;
     } else {
-      //옵션 적용 취소
-      const [, ticketItemId, optionGroupId] = dragElementId.split('-');
-      openOverlay({
-        content: 'cancelOption',
-        props: {
-          closeOverlay,
-          cancelOptionHandler: () =>
-            cancelOptionMutate({
-              eventId,
-              ticketItemId,
-              payload: { optionGroupId: parseInt(optionGroupId) },
-            }),
-        },
-      });
+      if (source.droppableId === destination?.droppableId) {
+        return;
+      }
+
+      if (isApply && destination) {
+        const ticketItemId = destination.droppableId;
+        //옵선 적용
+        applyOptionMutate({
+          eventId,
+          ticketItemId,
+          payload: { optionGroupId: parseInt(dragElementId.split('-')[1]) },
+        });
+      } else {
+        //옵션 적용 취소
+        const [, ticketItemId, optionGroupId] = dragElementId.split('-');
+        openOverlay({
+          content: 'cancelOption',
+          props: {
+            closeOverlay,
+            cancelOptionHandler: () =>
+              cancelOptionMutate({
+                eventId,
+                ticketItemId,
+                payload: { optionGroupId: parseInt(optionGroupId) },
+              }),
+          },
+        });
+      }
     }
   };
 
@@ -63,6 +70,11 @@ const ApplyOption = () => {
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries({ queryKey: ['AppliedTicket', eventId] });
+      },
+      onError: (error: any) => {
+        const comment = error.response.data.reason;
+        setToast({ comment: comment, type: 'error' });
+        closeOverlay();
       },
     },
   );
