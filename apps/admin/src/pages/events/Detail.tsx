@@ -77,6 +77,7 @@ const Detail = () => {
       },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries(['eventDetail', eventId]);
           openOverlay({
             content: 'saved',
           });
