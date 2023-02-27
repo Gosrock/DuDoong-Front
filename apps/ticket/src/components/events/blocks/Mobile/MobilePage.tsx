@@ -119,7 +119,7 @@ const MobilePage = ({
         bottomFixed
         backGradient
         css={css`
-          z-index: 5;
+          z-index: 3;
         `}
       >
         <Remote openTicketOverlay={openTicketOverlay} eventName={detail.name} />
