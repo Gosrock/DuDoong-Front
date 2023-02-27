@@ -37,7 +37,6 @@ const Dashboard = () => {
   // 이벤트 등록 api
   const patchEventOpenMutation = useMutation(EventApi.PATCH_EVENT_OPEN, {
     onSuccess: (data: EventResponse) => {
-      console.log('PATCH_EVENT_OPEN : ', data);
       queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
     },
@@ -46,7 +45,6 @@ const Dashboard = () => {
   // 이벤트 삭제 api
   const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_DELETE, {
     onSuccess: (data: EventResponse) => {
-      console.log('PATCH_EVENT_DELETE : ', data);
       queryClient.removeQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
       navigate('/', {

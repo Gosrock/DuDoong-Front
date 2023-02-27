@@ -2,7 +2,7 @@ import { Accordion, ListRow, Spacing, Tag, theme } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import { OptionAnswer } from '@lib/apis/cart/cartType';
-import { OrderLineTicketResponse } from '@lib/apis/order/orderType';
+import type { OrderLineTicketResponse } from '@lib/apis/order/orderType';
 import InfoItem from './InfoItem';
 
 const OrderedTicket = ({ ticket }: { ticket: OrderLineTicketResponse }) => {

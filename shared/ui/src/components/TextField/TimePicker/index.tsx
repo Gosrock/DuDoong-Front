@@ -20,7 +20,6 @@ export const TimePicker = (props: DatePickerProps) => {
   const [startTime, setStartTime] = useState<Date | null>(curTime);
 
   useEffect(() => {
-    console.log(curTime);
     setStartTime(curTime);
   }, [curTime]);
 

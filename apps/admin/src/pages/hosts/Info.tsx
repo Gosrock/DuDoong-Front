@@ -46,7 +46,7 @@ const Info = () => {
   // profile 수정 api
   const postEventMutation = useMutation(HostApi.PATCH_HOST_PROFILE, {
     onSuccess: (data: HostDetailResponse) => {
-      console.log('postHostProfileMutation : ', data);
+      //console.log('postHostProfileMutation : ', data);
     },
   });
 
@@ -55,7 +55,6 @@ const Info = () => {
     'hostDetail',
     hostId,
   ]);
-  console.log(hostDetail);
 
   useEffect(() => {
     if (hostDetail) {
@@ -76,7 +75,6 @@ const Info = () => {
   const buttonClickHandler = (data: InputFormType) => {
     // 이미지 post
     if (imageInfo.image) {
-      console.log('upload image');
       uploadImageToS3();
     }
     // 호스트 정보 post
@@ -94,7 +92,6 @@ const Info = () => {
         },
       },
     );
-    console.log('click button', data, imageInfo);
   };
   useEffect(() => {
     setButtonInfo({

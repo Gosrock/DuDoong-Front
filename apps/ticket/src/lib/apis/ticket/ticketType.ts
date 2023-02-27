@@ -1,6 +1,6 @@
 import { EventStatus } from '@dudoong/utils';
 import type { OptionGroupType } from '../cart/cartType';
-import { IssuedTicketInfo } from '../order/orderType';
+import type { IssuedTicketInfo } from '../order/orderType';
 
 /*
  * GET /v1/events/{eventId}/ticketItems 해당 이벤트의 티켓 조회

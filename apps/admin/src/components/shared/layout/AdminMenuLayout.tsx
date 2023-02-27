@@ -24,7 +24,7 @@ export const AdminMenuLayout = ({
   const { Toast } = useToastify();
   const { isActive } = useRecoilValue(bottomButtonState);
   const fullWidth = useLocation().pathname.split('/')[3] === 'guests';
-  console.log(fullWidth);
+
   return (
     <LayoutWrapper>
       <AdminHeader host={host} alliance={alliance} />

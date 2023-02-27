@@ -69,7 +69,6 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
 }
 
 MyApp.getInitialProps = async (context: AppContext) => {
-  console.log('getInitialProps');
   const { ctx, Component, router } = context;
   const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};

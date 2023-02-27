@@ -27,7 +27,6 @@ const usePresignedUrl = (type: presignedUrlType, id: string) => {
       setImageInfo((prev) => {
         return { ...prev, presignedUrl: data.presignedUrl, key: data.key };
       });
-      console.log('postHostImageMutation : ', data);
     },
   });
 
@@ -36,7 +35,6 @@ const usePresignedUrl = (type: presignedUrlType, id: string) => {
       setImageInfo((prev) => {
         return { ...prev, presignedUrl: data.presignedUrl, key: data.key };
       });
-      console.log('postHostImageMutation : ', data);
     },
   });
 

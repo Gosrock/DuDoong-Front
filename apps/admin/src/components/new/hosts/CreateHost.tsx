@@ -63,13 +63,10 @@ const CreateHost = () => {
   }, [watch('contactNumber')]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
     mutate(data);
   };
 
-  const onError = (error: any) => {
-    console.log('error', error);
-  };
+  const onError = (error: any) => {};
 
   useEffect(() => {
     setButtonInfo({

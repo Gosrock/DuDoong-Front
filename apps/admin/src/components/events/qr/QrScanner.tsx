@@ -22,7 +22,7 @@ const QrScanner = ({ newView, cam = 'user' }: QrScannerProps) => {
     EventApi.PATCH_EVENT_ISSUEDTICKET,
     {
       onSuccess: (data: IssuedTicket) => {
-        console.log('PATCH_EVENT_ISSUEDTICKET : ', data);
+        //console.log('PATCH_EVENT_ISSUEDTICKET : ', data);
         setToast({ type: 'success', comment: '입장이 완료되었습니다.' });
       },
     },
@@ -30,7 +30,6 @@ const QrScanner = ({ newView, cam = 'user' }: QrScannerProps) => {
 
   const handleScan = (result: any) => {
     if (result) {
-      console.log('scan ticket : ', result);
       patchEventIssuedTicket.mutate({
         eventId: eventId,
         uuid: result,
@@ -58,7 +57,6 @@ const QrScanner = ({ newView, cam = 'user' }: QrScannerProps) => {
         overflow: 'hidden',
       };
 
-  console.log(cam);
   return (
     <QrCodeReader
       delay={1000}

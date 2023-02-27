@@ -1,5 +1,5 @@
 import { axiosPrivate } from '../axios';
-import {
+import type {
   GetOrdersRequest,
   OrderResponse,
   PageResponseOrderAdminTableElement,

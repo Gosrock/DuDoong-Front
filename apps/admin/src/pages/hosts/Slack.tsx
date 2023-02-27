@@ -12,13 +12,13 @@ const Slack = () => {
   const [form, onChange] = useInputs<SlackRequest>({ slackUrl: '' });
   const { mutate } = useMutation(() => HostApi.PATCH_HOST_SLACK(hostId, form), {
     onSuccess: () => {
-      console.log('success');
+      //console.log('success');
     },
   });
 
   const handleSlack = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(typeof e);
+
     mutate();
   };
 

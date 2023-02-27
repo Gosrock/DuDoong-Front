@@ -17,7 +17,6 @@ const HostButtons = ({ hostId, setHostId }: HostProfilesProps) => {
     const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
       event.preventDefault();
       setHostId(props.hostId);
-      console.log(props.hostId);
     };
     return (
       <HostButton

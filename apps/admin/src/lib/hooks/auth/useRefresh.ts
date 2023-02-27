@@ -4,18 +4,12 @@ import { useMutation } from '@tanstack/react-query';
 import { AuthApi } from '@dudoong/utils';
 import { axiosPrivate } from '@lib/apis/axios';
 // import { useCookies } from 'react-cookie';
-import { setCookie, getCookie, removeCookie } from '@lib/utils/cookie';
-import { useNavigate } from 'react-router-dom';
-import useToastify from '@dudoong/ui/src/lib/useToastify';
+import { setCookie, removeCookie } from '@lib/utils/cookie';
 
 const useRefresh = () => {
   const setAuth = useSetRecoilState(authState);
-  const navigate = useNavigate();
-  const { setToast } = useToastify();
-  // const [cookies, setCookie, removeCookie] = useCookies();
   const { mutate: refreshMutate, status } = useMutation(AuthApi.REFRESH, {
     onSuccess: (data) => {
-      console.log(data.accessToken);
       axiosPrivate.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${data.accessToken}`;
@@ -36,14 +30,7 @@ const useRefresh = () => {
           maxAge: data.accessTokenAge,
           path: '/',
         });
-        // console.log('세팅확인', cookies.accessToken, cookies.refreshToken);
       }
-      console.log(
-        '세팅확인',
-        getCookie('accessToken'),
-        getCookie('refreshToken'),
-      );
-      console.log('받아온거', data.accessToken, data.refreshToken);
     },
     retry: false,
   });
