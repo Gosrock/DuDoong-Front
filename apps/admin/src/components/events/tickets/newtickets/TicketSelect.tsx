@@ -36,7 +36,6 @@ const TicketSelect = ({
   control,
   hostId,
   reset,
-  setValue,
 }: {
   partner: boolean | null;
   control: Control<FieldValues, any>;

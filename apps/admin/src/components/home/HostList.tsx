@@ -61,7 +61,7 @@ const HostList = ({ page }: ListProps) => {
         <FlexBox direction={'column'} align="center" gap={48}>
           <DoongDoong />
           <Text typo="P_Text_16_M" color="gray_500">
-            두둥! 아무것도 없어요. aa
+            두둥! 아무것도 없어요.
           </Text>
         </FlexBox>
       </>
