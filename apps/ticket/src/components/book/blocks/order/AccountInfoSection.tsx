@@ -20,7 +20,7 @@ const AccountInfoSection = ({
   orderPayload: { couponId: null; cartId: number };
   closeOverlay: () => void;
 }) => {
-  const { dudoongMutate } = useOrderMutation();
+  const { dudoongMutate } = useOrderMutation(null, closeOverlay);
   const { setToast } = useToastify();
   const handleDudoongOrder = () => {
     dudoongMutate(orderPayload);
