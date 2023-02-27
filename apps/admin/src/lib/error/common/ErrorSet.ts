@@ -1,7 +1,8 @@
 import EventErrorSet from '../event/EventErrorSet';
+import UserErrorSet from '../user/UserErrorSet';
 import { DomainErrorSetType } from './DomainErrorSetType';
 
-export type ErrorSetTypeKey = 'Event';
+export type ErrorSetTypeKey = 'Event' | 'USER';
 
 export type ErrorSetType = {
   [key in ErrorSetTypeKey]: DomainErrorSetType;
@@ -9,6 +10,7 @@ export type ErrorSetType = {
 
 const ErrorSet: ErrorSetType = {
   Event: EventErrorSet,
+  USER: UserErrorSet,
 };
 
 export default ErrorSet;
