@@ -77,6 +77,7 @@ const SecondStep = ({ hostId, setButtonInfo }: SecondStepProps) => {
         />
         <ListHeader
           title={'공연 이름을 입력해주세요'}
+          required={true}
           size={'listHeader_18'}
           padding={[32, 0, 12, 0]}
         />
@@ -91,6 +92,7 @@ const SecondStep = ({ hostId, setButtonInfo }: SecondStepProps) => {
         <FlexBox align={'start'} direction={'column'} gap={12}>
           <ListHeader
             title={'공연 날짜와 시간을 입력해주세요'}
+            required={true}
             size={'listHeader_18'}
             padding={[32, 0, 12, 0]}
           />
