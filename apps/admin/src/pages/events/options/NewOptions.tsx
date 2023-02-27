@@ -100,6 +100,7 @@ const NewOptions = () => {
       <ContentGrid>
         <FlexBox direction="column" align="flex-start">
           <ListHeader
+            required={true}
             padding={[32, 0, 12, 0]}
             title={'옵션 이름'}
             size={'listHeader_18'}
@@ -120,6 +121,7 @@ const NewOptions = () => {
           />
           <Spacing size={32} />
           <ListHeader
+            required={true}
             padding={[32, 0, 12, 0]}
             title={'옵션 설명'}
             description={'옵션에 대한 상세한 설명을 써주세요'}
@@ -141,6 +143,7 @@ const NewOptions = () => {
           />
           <Spacing size={32} />
           <ListHeader
+            required={true}
             padding={[32, 0, 12, 0]}
             title={'옵션 응답 형식'}
             size={'listHeader_18'}
