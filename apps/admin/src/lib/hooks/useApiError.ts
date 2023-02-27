@@ -20,13 +20,12 @@ const useApiError = () => {
 
   const handleError = useCallback((axiosError: AxiosError) => {
     const errorResponse = axiosError.response?.data as TCustomErrorResponse;
-    const { status, code } = errorResponse;
-    const codeInfo = code.split('_'); // Event, 400, 1
-    const comments =
-      ErrorSet[codeInfo[0] as ErrorSetTypeKey][status as DomainErrorSetTypeKey];
+    const { errorSort, status, errorIndex } = codeSpliter(errorResponse);
+    console.log(errorSort, status, errorIndex);
+    const comments = ErrorSet[errorSort][status as DomainErrorSetTypeKey];
 
     if (comments) {
-      const comment = comments[codeInfo[2]];
+      const comment = comments[errorIndex];
       switch (status) {
         // BadRequestException | ValidationError
         case 400:
@@ -54,3 +53,13 @@ const useApiError = () => {
 };
 
 export default useApiError;
+
+const codeSpliter = (errorResponse: TCustomErrorResponse) => {
+  const { status, code } = errorResponse;
+  const codeInfo = code.split('_'); // Event, ... , 400, 1
+  const errorSort = codeInfo
+    .slice(0, codeInfo.length - 2)
+    .join('_') as ErrorSetTypeKey;
+  const errorIndex = codeInfo[codeInfo.length - 1];
+  return { errorSort, status, errorIndex };
+};
