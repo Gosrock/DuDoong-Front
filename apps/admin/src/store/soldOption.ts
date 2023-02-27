@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
-export const soldOptionState = atom<number[]>({
-    key: 'soldOptions',
-    default : [],
-})
+export const soldOptionState = atom<number[] | null>({
+  key: 'soldOptions',
+  default: null,
+});

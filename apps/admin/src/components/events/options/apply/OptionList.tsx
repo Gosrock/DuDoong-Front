@@ -20,7 +20,6 @@ interface OptionListProps {
 
 const OptionList = ({ optionItems }: OptionListProps) => {
   console.log(optionItems);
-  const [soldOptions, setSoldOptions] = useRecoilState(soldOptionState);
 
   if (!optionItems?.length) {
     return (
@@ -73,7 +72,6 @@ const OptionList = ({ optionItems }: OptionListProps) => {
                             name={item.name}
                             subText={`${item.type}`}
                             OptionGroupId={item.optionGroupId}
-                            soldOptionGroupId={soldOptions}
                           />
                         </OptionItemContainer>
                         <Spacing size={16} />

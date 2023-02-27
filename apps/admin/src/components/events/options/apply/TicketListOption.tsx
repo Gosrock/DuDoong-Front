@@ -37,10 +37,10 @@ const TicketListOption = () => {
           .flat(),
       );
       const soldOption = [...parsingOption] as number[];
-      const newSoldOption = new Set([...soldOption, ...soldOptions]);
+      const newSoldOption = new Set([...soldOption, ...(soldOptions || [])]);
       setSoldOptions([...newSoldOption]);
     }
-  }, []);
+  }, [isSuccess]);
 
   return (
     <Wrapper>
