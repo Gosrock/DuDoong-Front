@@ -4,7 +4,6 @@ import {
   Divider,
   FlexBox,
   ListHeader,
-  media,
   NavBar,
   Padding,
   Profile,
@@ -14,12 +13,12 @@ import {
 } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import { authState } from '@store/auth';
-import { useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import OrderItem from './OrderItem';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import Shortcuts from '@components/shared/Shortcuts';
 import Main from '@components/shared/Layout/Main';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { resetCrendentials } from '@lib/utils/setCredentials';
 import { GetServerSideProps } from 'next';
@@ -32,9 +31,10 @@ import OverlayBox from '@components/shared/overlay/OverlayBox';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import useOverlay from '@lib/hooks/useOverlay';
 import { AuthAPi } from '@lib/apis/axios';
-import { css } from '@emotion/react';
+import { useEffect } from 'react';
 
 const Mypage = ({ info }: { info: UserInfo }) => {
+  const { userProfile } = useRecoilValue(authState);
   const resetAuthState = useResetRecoilState(authState);
   const { setToast } = useToastify();
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
@@ -43,6 +43,12 @@ const Mypage = ({ info }: { info: UserInfo }) => {
     OrderApi.GET_RECENT_ORDER(),
   );
 
+  useEffect(() => {
+    if (!userProfile?.id) {
+      router.push('/home');
+    }
+  }, [userProfile]);
+
   const { mutate } = useMutation(AuthAPi.OAUTH_DELETE, {
     onSuccess: () => {
       router.push('/');
@@ -50,6 +56,7 @@ const Mypage = ({ info }: { info: UserInfo }) => {
       resetAuthState();
       resetCrendentials();
       closeOverlay();
+      router.replace(router.asPath);
     },
 
     onError: (error: any) => {
@@ -170,6 +177,7 @@ const WithdrawConfirmation = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
+
   console.log(cookies);
 
   try {
