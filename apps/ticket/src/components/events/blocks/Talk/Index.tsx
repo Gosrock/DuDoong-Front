@@ -17,10 +17,6 @@ const TalkOverlay = ({ eventName, onClose }: TalkProps) => {
     query: { eventId },
   } = useRouter();
 
-  useEffect(() => {
-    console.log(listRef.current);
-  }, [listRef]);
-
   return (
     <Wrapper>
       <Header>

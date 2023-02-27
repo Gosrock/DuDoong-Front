@@ -10,14 +10,10 @@ const Refresh = () => {
   const refreshToken = getCookie('refreshToken');
   const { refreshMutate, status } = useRefresh();
   const auth = useRecoilValue(authState);
-  useEffect(() => {
-    console.log('쿠키에 있는거', refreshToken);
-    refreshMutate(refreshToken);
-  }, []);
 
   useEffect(() => {
-    console.log(auth.isAuthenticated);
-  }, [auth]);
+    refreshMutate(refreshToken);
+  }, []);
 
   if (status === 'success' && auth.isAuthenticated === true) {
     return <Outlet />;

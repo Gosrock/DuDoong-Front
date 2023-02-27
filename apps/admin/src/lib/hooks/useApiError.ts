@@ -39,7 +39,6 @@ const useApiError = () => {
   const handleError = useCallback((axiosError: AxiosError) => {
     const errorResponse = axiosError.response?.data as TCustomErrorResponse;
     const { errorSort, status, errorIndex } = codeSpliter(errorResponse);
-    console.log(errorSort, status, errorIndex);
 
     if (ErrorSort.includes(errorSort)) {
       const comments = ErrorSet[errorSort][status as DomainErrorSetTypeKey];

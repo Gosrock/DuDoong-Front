@@ -75,7 +75,6 @@ const MapPage = (props: any) => {
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
       };
-      console.log(payload);
       changeEventMutation.mutate(payload, {
         onSuccess: () => {
           openOverlay({
@@ -99,7 +98,6 @@ const MapPage = (props: any) => {
 
     const coord = new kakao.maps.LatLng(Number(lat), Number(lng));
     const callback = function (result: any, status: string) {
-      console.log(result);
       if (status === kakao.maps.services.Status.OK) {
         setRoadAddress(result[0].road_address.address_name);
         setPlaceAddress(result[0].address.address_name);
@@ -174,10 +172,6 @@ const MapPage = (props: any) => {
   useEffect(() => {
     handleMap();
   }, [map]);
-
-  console.log(placeName);
-  console.log(detailAddress);
-  console.log(curMarker.position.lat);
 
   return (
     <>

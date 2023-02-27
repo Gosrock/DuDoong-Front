@@ -1,7 +1,7 @@
 import { Button, ButtonSet, Padding, Text } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { IssuedTicketInfo } from '@lib/apis/order/orderType';
+import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
 import useOverlay from '@lib/hooks/useOverlay';
 import Link from 'next/link';
 import { BottomSheet } from 'react-spring-bottom-sheet';
@@ -15,7 +15,7 @@ const TicketItem = ({
   orderUuid: string;
 }) => {
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
-  console.log(ticket);
+
   return (
     <Wrapper>
       <Padding size={[0, 36]}>

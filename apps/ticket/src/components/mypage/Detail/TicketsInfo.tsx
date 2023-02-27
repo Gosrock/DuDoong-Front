@@ -1,5 +1,5 @@
-import { ListHeader, Spacing } from '@dudoong/ui';
-import { OrderLineTicketResponse } from '@lib/apis/order/orderType';
+import { ListHeader } from '@dudoong/ui';
+import type { OrderLineTicketResponse } from '@lib/apis/order/orderType';
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

@@ -16,7 +16,7 @@ import {
   UseFormReset,
   UseFormSetValue,
 } from 'react-hook-form';
-import { CreateTicketRequest, payType } from '@lib/apis/ticket/ticketType';
+import type { payType } from '@lib/apis/ticket/ticketType';
 import { useEffect, useState } from 'react';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useNavigate } from 'react-router-dom';

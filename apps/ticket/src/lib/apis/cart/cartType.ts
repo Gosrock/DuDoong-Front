@@ -1,4 +1,4 @@
-import { eventProfile } from '../order/orderType';
+import type { eventProfile } from '../order/orderType';
 import { ApproveType, PayType } from '../ticket/ticketType';
 
 export interface AddCartRequest {

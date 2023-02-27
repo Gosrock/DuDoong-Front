@@ -1,7 +1,7 @@
 import { Text } from '@dudoong/ui';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import styled from '@emotion/styled';
-import {
+import type {
   IssuedTicketInfo,
   IssuedTicketStatus,
 } from '@lib/apis/order/orderType';

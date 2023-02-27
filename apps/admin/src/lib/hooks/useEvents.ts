@@ -14,10 +14,7 @@ const useEvents = () => {
     (payload: BasicEventRequest) =>
       EventApi.PATCH_EVENT_BASIC(payload, eventId),
     {
-      onSuccess: (data: EventResponse) => {
-        console.log('success');
-        console.log(data);
-      },
+      onSuccess: (data: EventResponse) => {},
     },
   );
   return { changeEventMutation };

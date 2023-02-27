@@ -1,6 +1,6 @@
-import { InfiniteRequest, InfiniteResponse } from '@dudoong/utils';
+import { InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
-import { EventResponse, getEventsRequest } from './eventType';
+import type { EventResponse, getEventsRequest } from './eventType';
 
 export const EventApi = {
   GET_EVENTS_SEARCH: async ({
@@ -8,7 +8,6 @@ export const EventApi = {
     pageParam,
     size,
   }: getEventsRequest): Promise<InfiniteResponse<EventResponse>> => {
-    console.log();
     const response = await axiosPrivate.get(
       `/events/search?keyword=${keyword}&page=${pageParam}&size=${size}`,
     );

@@ -1,7 +1,7 @@
 import { ListHeader, Spacing, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { TicketDetailResponse } from '@lib/apis/ticket/ticketType';
+import type { TicketDetailResponse } from '@lib/apis/ticket/ticketType';
 import TicketItem from './TicketItem';
 
 const TicketList = ({

@@ -1,11 +1,8 @@
-import { SyncLoader, Text } from '@dudoong/ui';
+import { SyncLoader } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import OrderApi from '@lib/apis/order/OrderApi';
-import {
-  OrderAdminTableElement,
-  OrderLineTicketResponse,
-} from '@lib/apis/order/orderType';
+import type { OrderLineTicketResponse } from '@lib/apis/order/orderType';
 import { useQuery } from '@tanstack/react-query';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
@@ -146,7 +143,7 @@ const TableViewDetail = ({ eventId, order_uuid }: TableViewDetailProps) => {
         answers: row.answers.map((answer) => answer.answer),
         additionalPrice: row.answers.map((answer) => answer.additionalPrice),
       };
-      console.log(rowData);
+
       return rowData;
     });
   };

@@ -39,7 +39,6 @@ const Invitation = ({ closeOverlay }: PostEventProps) => {
   const queryClient = useQueryClient();
   const postHostInviteMutation = useMutation(HostApi.POST_HOST_INVITE, {
     onSuccess: (data: HostDetailResponse) => {
-      console.log('POST_HOST_INVITE : ', data);
       queryClient.invalidateQueries({ queryKey: ['hostDetail', hostId] });
       closeOverlay();
     },

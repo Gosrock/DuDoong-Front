@@ -1,4 +1,4 @@
-import { IssuedTicketInfo } from '@lib/apis/order/orderType';
+import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
 import QRCodeStyling from 'qr-code-styling';
 import { useEffect, useRef } from 'react';
 

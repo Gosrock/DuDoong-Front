@@ -1,15 +1,6 @@
-import {
-  FlexBox,
-  ListHeader,
-  ListRow,
-  Spacing,
-  Tag,
-  TagColorKey,
-  Text,
-  theme,
-} from '@dudoong/ui';
+import { FlexBox, ListRow, Tag, TagColorKey, Text, theme } from '@dudoong/ui';
 import styled from '@emotion/styled';
-import { OrderListResponse, StageType } from '@lib/apis/order/orderType';
+import type { OrderListResponse, StageType } from '@lib/apis/order/orderType';
 
 import Image from 'next/image';
 import { useRouter } from 'next/router';

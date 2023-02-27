@@ -41,7 +41,6 @@ const Detail = () => {
 
   useEffect(() => {
     if (eventDetail) {
-      console.log('EVENT_DETAIL :', eventDetail);
       setForm({
         posterImageKey: getKeyFromUrl(eventDetail.posterImage),
         content: eventDetail.content,
@@ -57,16 +56,13 @@ const Detail = () => {
 
   // detail 정보 수정 api
   const patchEventDetailMutation = useMutation(EventApi.PATCH_EVENT_DETAIL, {
-    onSuccess: (data: EventResponse) => {
-      console.log('patchEventDetailMutation : ', data);
-    },
+    onSuccess: (data: EventResponse) => {},
   });
 
   // 하단부 버튼
   const buttonClickHandler = () => {
     // 이미지 post
     if (imageInfo.image) {
-      console.log('upload image');
       uploadImageToS3();
     }
     // 호스트 정보 post

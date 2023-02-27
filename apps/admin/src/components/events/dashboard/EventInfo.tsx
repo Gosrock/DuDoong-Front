@@ -28,7 +28,7 @@ const EventInfo = ({ eventId, setButtonType }: EventInfoProps) => {
         } else {
           setButtonType('deleteEvent');
         }
-        console.log('GET_EVENT_STATISTICS : ', data);
+        //console.log('GET_EVENT_STATISTICS : ', data);
       },
     },
   );

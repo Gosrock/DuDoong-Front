@@ -2,7 +2,7 @@ import { media, MenuBar, Spacing } from '@dudoong/ui';
 import { useInfiniteQueries } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';
-import { OrderListResponse } from '@lib/apis/order/orderType';
+import type { OrderListResponse } from '@lib/apis/order/orderType';
 import { ForwardedRef, forwardRef, HTMLAttributes, useState } from 'react';
 import NoData from './NoData';
 import OrderItem from './OrderItem';

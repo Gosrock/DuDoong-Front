@@ -65,11 +65,10 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   });
 
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
-    // console.log(loginData.refreshToken, 'login');
     axiosPrivate.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${loginData.accessToken}`;
-    console.log('로그인성공', loginData.accessToken, loginData.refreshToken);
+
     if (import.meta.env.DEV) {
       setCookie('refreshToken', loginData.refreshToken, {
         maxAge: loginData.refreshTokenAge,
@@ -79,13 +78,8 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
         maxAge: loginData.refreshTokenAge,
         path: '/',
       });
-      // console.log('세팅확인', cookies.accessToken, cookies.refreshToken);
     }
-    console.log(
-      '세팅확인',
-      getCookie('accessToken'),
-      getCookie('refreshToken'),
-    );
+
     setAuth({
       isAuthenticated: true,
       callbackUrl: '/',

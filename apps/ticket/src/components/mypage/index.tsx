@@ -170,7 +170,6 @@ const WithdrawConfirmation = ({
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { cookies } = context.req;
-  console.log(cookies);
 
   try {
     setSsrAxiosHeader(cookies);
