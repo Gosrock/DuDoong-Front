@@ -53,6 +53,7 @@ const GridLeftElement = ({
       <Spacing size={58} />
       <ListHeader
         title={'프로필 이미지'}
+        required={true}
         size={'listHeader_18'}
         padding={[32, 0, 12, 0]}
       />

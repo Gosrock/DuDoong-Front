@@ -144,8 +144,8 @@ const KeyboardItem = () => {
     <div
       css={css`
         position: fixed;
-        top: 0px;
-        left: 5vw;
+        top: 75px;
+        left: 1vw;
         z-index: 2;
       `}
     >
@@ -160,8 +160,8 @@ const DoongDoongsItem = () => {
       css={css`
         position: fixed;
         bottom: -3px;
-        right: 6vw;
-        z-index: 2;
+        right: 1vw;
+        z-index: 3;
       `}
     >
       <DoongDoongs />
@@ -174,8 +174,8 @@ const DotsItem1 = () => {
     <div
       css={css`
         position: fixed;
-        top: 195px;
-        left: 12vw;
+        top: 58px;
+        left: 10vw;
       `}
     >
       <Dots />
@@ -188,8 +188,9 @@ const DotsItem2 = () => {
     <div
       css={css`
         position: fixed;
-        bottom: 150px;
-        right: 11vw;
+        bottom: 122px;
+        right: 16vw;
+        z-index: 2;
       `}
     >
       <Dots />

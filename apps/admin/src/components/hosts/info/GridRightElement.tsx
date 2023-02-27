@@ -11,6 +11,7 @@ const GridRightElement = ({ register }: GridRightElementProps) => {
     <div>
       <ListHeader
         title={'간단 소개글'}
+        required={true}
         size={'listHeader_18'}
         padding={[32, 0, 12, 0]}
       />
@@ -26,6 +27,7 @@ const GridRightElement = ({ register }: GridRightElementProps) => {
         <div>
           <ListHeader
             title={'대표 연락처'}
+            required={true}
             size={'listHeader_18'}
             padding={[32, 0, 12, 0]}
           />
@@ -40,6 +42,7 @@ const GridRightElement = ({ register }: GridRightElementProps) => {
         <div>
           <ListHeader
             title={'대표 이메일'}
+            required={true}
             size={'listHeader_18'}
             padding={[32, 0, 12, 0]}
           />
