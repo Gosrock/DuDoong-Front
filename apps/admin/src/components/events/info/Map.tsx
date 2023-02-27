@@ -186,6 +186,7 @@ const MapPage = (props: any) => {
           padding={[32, 0, 10, 0]}
           size={'listHeader_18'}
           title={'공연 장소'}
+          required={true}
           rightElement={
             <TagButton
               size="md"
@@ -210,6 +211,7 @@ const MapPage = (props: any) => {
             size={'listHeader_18'}
             title={'상세주소'}
             description={placeAddress ? placeAddress : ''}
+            required={true}
           ></ListHeader>
           <Input
             placeholder="중요! 상세주소를 그대로 적어주세요!"

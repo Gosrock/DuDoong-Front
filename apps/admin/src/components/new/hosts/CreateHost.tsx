@@ -89,6 +89,7 @@ const CreateHost = () => {
           }
           descColor={'red_300'}
           padding={[32, 0, 12, 0]}
+          required={true}
         ></ListHeader>
         <Input
           autoFocus
@@ -103,6 +104,7 @@ const CreateHost = () => {
         />
         <Spacing size={14} />
         <ListHeader
+          required={true}
           title={'호스트 연락처'}
           size={'listHeader_18'}
           description={<HostContactDes />}
@@ -116,6 +118,7 @@ const CreateHost = () => {
             `}
           >
             <ListHeader
+              required={true}
               title={'대표 전화번호'}
               size={'listHeader_18'}
               padding={[32, 0, 12, 0]}
@@ -139,6 +142,7 @@ const CreateHost = () => {
             `}
           >
             <ListHeader
+              required={true}
               title={'대표 이메일'}
               size={'listHeader_18'}
               padding={[32, 0, 12, 0]}
