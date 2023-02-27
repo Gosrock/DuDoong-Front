@@ -11223,6 +11223,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hamburger-react@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "hamburger-react@npm:2.5.0"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+  checksum: 5c3835a1b271fd50f5fcc600d55d0dc296cb05c2eed5ec4bf6386c3da6f5b33a370f6ff5b81ebe97f29beb41cc37f5f5d4c5ff958507435e6561a15c8f7e3562
+  languageName: node
+  linkType: hard
+
 "hamt_plus@npm:1.0.2":
   version: 1.0.2
   resolution: "hamt_plus@npm:1.0.2"
@@ -20425,6 +20434,7 @@ __metadata:
     "@types/react-dom": 18.0.9
     axios: ^1.2.2
     cookies-next: ^2.1.1
+    hamburger-react: ^2.5.0
     next: 13.0.7
     next-cookies: ^2.0.3
     next-transpile-modules: ^10.0.0

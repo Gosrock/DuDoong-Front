@@ -44,6 +44,9 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.typo.G_Side_14_M}
     color : ${({ theme }) => theme.palette.black};
     margin-top: 123px;
+    ${media.mobile} {
+      margin-top: 48px;
+    }
   }
   h1 {
     ${({ theme }) => theme.typo.G_Header_28_B}
