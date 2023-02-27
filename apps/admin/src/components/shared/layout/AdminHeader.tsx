@@ -4,10 +4,10 @@ import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-// import { useCookies } from 'react-cookie';
-import { AuthAPi, axiosPrivate } from '@lib/apis/axios';
+import { axiosPrivate } from '@lib/apis/axios';
 import { useMutation } from '@tanstack/react-query';
 import { removeCookie } from '@lib/utils/cookie';
+import { UserApi } from '@lib/apis/user/UserApi';
 
 interface AdminHeaderProps {
   host: string;
@@ -18,7 +18,7 @@ const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
   const auth = useRecoilValue(authState);
   const resetAuthState = useResetRecoilState(authState);
 
-  const { mutate: logoutMutate } = useMutation(AuthAPi.OAUTH_LOGOUT, {
+  const { mutate: logoutMutate } = useMutation(UserApi.OAUTH_LOGOUT, {
     onSuccess: () => {
       axiosPrivate.defaults.headers.common['Authorization'] = ``;
       removeCookie('refreshToken');
@@ -27,7 +27,6 @@ const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
       window.location.href = '/admin/';
     },
   });
-  // const [, , removeCookie] = useCookies(['refreshToken']);
 
   const profileOption: PopupOptions[] = [
     {

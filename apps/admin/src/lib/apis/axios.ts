@@ -6,10 +6,3 @@ export const axiosPrivate = axios.create({
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
 });
-
-export const AuthAPi = {
-  OAUTH_LOGOUT: async (): Promise<null> => {
-    const response = await axiosPrivate.post(`/auth/logout`);
-    return response.data.data;
-  },
-};
