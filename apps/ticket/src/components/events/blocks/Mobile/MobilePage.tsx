@@ -15,7 +15,6 @@ import { parseDate } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import DetailMenu from '../DetailMenu';
 import Remote from '../Remote';
@@ -36,15 +35,12 @@ const MobilePage = ({
 
   return (
     <Wrapper {...props}>
-      <NavBar label={detail.name} backHandler={() => router.back()} />
+      <NavBar label={detail.name} backHandler={() => router.push('/home')} />
       <Spacing size={48} />
       <Poster>
-        <Image
-          src={detail.posterImage}
-          alt={detail.name}
-          width={204}
-          height={287}
-        />
+        <div>
+          <img src={detail.posterImage} alt={detail.name} />
+        </div>
       </Poster>
       <Title
         size="listHeader_28"
@@ -90,6 +86,7 @@ const MobilePage = ({
                 지도보기
               </Text>
             }
+            contentHeight={305}
           />
         </Block>
         <Block>
@@ -115,7 +112,13 @@ const MobilePage = ({
       <Spacing size={60} />
       <Footer />
       <Spacing size={120} color={'gray_200'} />
-      <ButtonSet bottomFixed backGradient>
+      <ButtonSet
+        bottomFixed
+        backGradient
+        css={css`
+          z-index: 3;
+        `}
+      >
         <Remote openTicketOverlay={openTicketOverlay} eventName={detail.name} />
       </ButtonSet>
     </Wrapper>
@@ -126,7 +129,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 const Title = styled(ListHeader)``;
-const Poster = styled.div`
+/* const Poster = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -136,9 +139,32 @@ const Poster = styled.div`
   & > img {
     width: 100%;
     max-width: 300px;
-    height: auto;
+    height: 10%;
     box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
+  }
+`; */
+
+const Poster = styled.div`
+  padding: 24px 60px;
+  div {
+    position: relative;
+    padding-top: 141.4%;
+    overflow: hidden;
+    box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: ${({ theme }) => theme.palette.gray_300};
+    margin-bottom: 10px;
+    object-fit: cover;
   }
 `;
 

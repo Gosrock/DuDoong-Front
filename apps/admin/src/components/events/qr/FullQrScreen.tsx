@@ -1,24 +1,26 @@
-import { FlexBox, ListHeader, Spacing, Button } from '@dudoong/ui';
+import { FlexBox, ListHeader, Spacing, Button, media } from '@dudoong/ui';
 import { ReactComponent as Scanner } from '@assets/scanner.svg';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import QrScanner from '@components/events/qr/QrScanner';
+import { ViewInfoType } from '@pages/events/Qr';
 
 const FullQrScreen = ({
-  setNewView,
+  viewInfo,
+  setViewInfo,
 }: {
-  setNewView: React.Dispatch<React.SetStateAction<boolean>>;
+  viewInfo: ViewInfoType;
+  setViewInfo: React.Dispatch<React.SetStateAction<ViewInfoType>>;
 }) => {
   return (
     <>
       <ScannerWrapper>
         <Scanner />
       </ScannerWrapper>
-      <QrScanner newView={true} />
+      <QrScanner cam={viewInfo.cam} newView={true} />
       <CustomButton
         onClick={() => {
-          setNewView((prev: boolean) => {
-            return !prev;
+          setViewInfo((prev: ViewInfoType) => {
+            return { ...prev, fullScreen: false };
           });
         }}
       >
@@ -35,6 +37,14 @@ const ScannerWrapper = styled(FlexBox)`
   top: calc(50vh - 225px);
   left: calc(50vw - 225px);
   z-index: 11;
+  ${media.mobile} {
+    & > svg {
+      width: 300px;
+      height: 300px;
+    }
+    top: calc(50vh - 150px);
+    left: calc(50vw - 150px);
+  }
 `;
 
 const CustomButton = styled(Button)`

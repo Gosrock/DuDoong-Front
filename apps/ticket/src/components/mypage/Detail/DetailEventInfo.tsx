@@ -1,6 +1,6 @@
 import { FlexBox, ListRow, Padding, Text } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
-import { eventProfile } from '@lib/apis/order/orderType';
+import type { eventProfile } from '@lib/apis/order/orderType';
 import Image from 'next/image';
 
 const DetailEventInfo = ({ event }: { event: eventProfile }) => {
@@ -16,6 +16,7 @@ const DetailEventInfo = ({ event }: { event: eventProfile }) => {
           alt="포스터 이미지"
         />
         <ListRow
+          padding={0}
           text={event.name}
           subText={
             <Text typo="P_Text_14_R" color="gray_400">

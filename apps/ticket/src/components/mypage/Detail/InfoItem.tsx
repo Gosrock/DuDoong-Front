@@ -20,7 +20,7 @@ const InfoItem = ({
       textColor={color}
       textTypo={typo}
       rightElement={
-        <Text typo={typo} color={color}>
+        <Text typo={typo} color={value === '승인 대기중' ? 'gray_400' : color}>
           {value}
         </Text>
       }

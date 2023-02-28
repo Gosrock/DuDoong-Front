@@ -2,14 +2,15 @@ import { Button, ButtonVarient, FlexBox, Padding } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { bottomButtonState } from '@store/bottomButton';
 import { useRecoilValue } from 'recoil';
-import { keyframes } from '@emotion/react';
+import { keyframes, css } from '@emotion/react';
 
 export type AdminBottomButtonTypeKey =
   | 'save'
   | 'pay'
   | 'deleteEvent'
   | 'postEvent'
-  | 'deletePostEvent';
+  | 'deletePostEvent'
+  | 'next';
 
 export type AdminBottomButtonType = {
   [key in AdminBottomButtonTypeKey]: {
@@ -37,9 +38,18 @@ const adminBottomButtonContent = {
     varient: 'primary',
     text: '',
   },
+  next: {
+    buttons: ['next'],
+    varient: 'primary',
+    text: '다음',
+  },
 };
 
-const AdminBottomButton = () => {
+interface AdminBottomButtonProps {
+  fullwidth?: 1 | 0;
+}
+
+const AdminBottomButton = ({ fullwidth = 0 }: AdminBottomButtonProps) => {
   const {
     type,
     firstButtonClickHandler,
@@ -79,7 +89,7 @@ const AdminBottomButton = () => {
     return null;
   } else {
     return (
-      <Wrapper size={[16, 24]}>
+      <Wrapper size={[16, 24]} fullwidth={fullwidth}>
         <div>
           <FlexBox align={'center'} justify={'flex-end'} gap={12}>
             {buttons}
@@ -117,11 +127,19 @@ const buttonMov = keyframes`
   }
 `;
 
-const Wrapper = styled(Padding)`
+const Wrapper = styled(Padding)<{ fullwidth: 1 | 0 }>`
   position: fixed;
   bottom: 0px;
-  left: 252px;
-  width: calc(100vw - 252px);
+  ${({ fullwidth }) =>
+    fullwidth
+      ? css`
+          left: 0px;
+          width: 100%;
+        `
+      : css`
+          left: 252px;
+          width: calc(100vw - 252px);
+        `}
   height: 88px;
   border-top: 1px solid ${({ theme }) => theme.palette.gray_200};
   background-color: ${({ theme }) => theme.palette.gray_100};

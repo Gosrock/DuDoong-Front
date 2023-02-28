@@ -1,5 +1,6 @@
 import { Input, Search, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
+import { SyntheticEvent } from 'react';
 
 interface SearchInputProps {
   placeholder: string;
@@ -9,6 +10,7 @@ interface SearchInputProps {
       value: string;
     };
   }) => void;
+  onInput: (props: SyntheticEvent) => void;
 }
 
 export const SearchInput = (props: SearchInputProps) => {
@@ -18,7 +20,7 @@ export const SearchInput = (props: SearchInputProps) => {
         height={60}
         placeholder={props.placeholder}
         styles={InputStyle}
-        rightIcon={<Search />}
+        rightIcon={<Search onClick={props.onInput} />}
         onChange={props.onChange}
         value={props.value}
       ></Input>

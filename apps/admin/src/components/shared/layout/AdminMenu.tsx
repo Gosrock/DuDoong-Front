@@ -94,7 +94,7 @@ const AdminMenu = ({ title }: { title: string }) => {
           </div>
         );
       })}
-      {/* <NavToHome /> */}
+      <Version></Version>
     </MenuWrapper>
   );
 };
@@ -152,4 +152,10 @@ const Wrapper = styled(FlexBox)`
     word-break: break-all;
     padding-inline: 16px;
   }
+`;
+
+const Version = styled.div`
+  position: absolute;
+  bottom: 80px;
+  left: 38px;
 `;

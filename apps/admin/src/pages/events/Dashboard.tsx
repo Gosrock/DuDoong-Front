@@ -21,14 +21,14 @@ const Dashboard = () => {
   const [buttonType, setButtonType] =
     useState<AdminBottomButtonTypeKey>('deletePostEvent');
   const navigate = useNavigate();
-  const { setButtonInfo, changeButtonType } = useBottomButton({
+  const { setButtonInfo, changeButtonType, hideButtons } = useBottomButton({
     type: 'deletePostEvent',
     isActive: true,
   });
   const { openOverlay, closeOverlay } = useGlobalOverlay();
+  const queryClient = useQueryClient();
 
   // 이벤트 디테일 api
-  const queryClient = useQueryClient();
   const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
     eventId,
@@ -37,7 +37,6 @@ const Dashboard = () => {
   // 이벤트 등록 api
   const patchEventOpenMutation = useMutation(EventApi.PATCH_EVENT_OPEN, {
     onSuccess: (data: EventResponse) => {
-      console.log('PATCH_EVENT_OPEN : ', data);
       queryClient.invalidateQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
     },
@@ -46,9 +45,14 @@ const Dashboard = () => {
   // 이벤트 삭제 api
   const patchEventDeleteMutation = useMutation(EventApi.PATCH_EVENT_DELETE, {
     onSuccess: (data: EventResponse) => {
-      console.log('PATCH_EVENT_DELETE : ', data);
+      queryClient.removeQueries({ queryKey: ['eventDetail', eventId] });
       closeOverlay();
-      navigate('/');
+      navigate('/', {
+        replace: true,
+        state: {
+          select: 'event',
+        },
+      });
     },
   });
 
@@ -71,9 +75,12 @@ const Dashboard = () => {
     patchEventDeleteMutation.mutate(eventId);
   };
 
-  const eventPayHandler = () => {
-    closeOverlay();
-  };
+  // 나중에 추가할 수도 있어서 일단 주석처리
+  // const eventPayHandler = () => {
+  //   window.open(
+  //     'https://dudoong.notion.site/dudoong/501840222fe84cc2983ff45162ff0d5b',
+  //   );
+  // };
 
   // 버튼 setting
   useEffect(() => {
@@ -113,17 +120,19 @@ const Dashboard = () => {
       });
       changeButtonType('deleteEvent');
     } else if (buttonType === 'pay') {
-      setButtonInfo({
-        firstHandler: () =>
-          openOverlay({
-            content: 'pay',
-            props: {
-              eventDeleteHandler: eventPayHandler,
-            },
-          }),
-        firstDisable: false,
-      });
-      changeButtonType('pay');
+      // 나중에 추가할 수도 있어서 일단 주석처리
+      // setButtonInfo({
+      //   firstHandler: () =>
+      //     openOverlay({
+      //       content: 'pay',
+      //       props: {
+      //         eventDeleteHandler: eventPayHandler,
+      //       },
+      //     }),
+      //   firstDisable: false,
+      // });
+      // changeButtonType('pay');
+      hideButtons();
     }
   }, [data, buttonType]);
 

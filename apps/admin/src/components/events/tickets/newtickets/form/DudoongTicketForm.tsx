@@ -12,16 +12,16 @@ import { PurchaseLimit } from '../input/PurchaseLimit';
 import { StockInfo } from '../input/StockInfo';
 import { TicketFormProps } from './TicketForm';
 import { Text } from '@dudoong/ui';
-import BankDropdown from '../input/BankDropdown';
 
 const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
   return (
     <FlexBox direction="column" align="flex-start" justify="flex-start">
       <FlexBox direction="column" align="flex-start" style={{ width: '100%' }}>
         <ListHeader
+          required={true}
           padding={0}
           size={'listHeader_18'}
-          title={'게좌번호 입력'}
+          title={'계좌번호 입력'}
           description={
             <Text typo={'P_Text_16_M'} color="gray_400">
               {'계좌정보를 적어주세요. (ex. 신한 김두둥 110-1234-5678)'}
@@ -38,7 +38,7 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
             })}
           />
           <Input
-            placeholder="입금자명"
+            placeholder="예금주"
             {...register('accountHolder', {
               required: true,
             })}
@@ -60,6 +60,11 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
           title="티켓 가격"
           description="송금 받을 티켓 가격을 써주세요."
           descriptionTypo="P_Text_14_M"
+          rightIcon={
+            <Text typo="P_Text_16_M" color="gray_400">
+              원
+            </Text>
+          }
           placeholder="0"
           {...register('price', {
             required: true,
@@ -71,6 +76,11 @@ const DudoongTicketForm = ({ register, control }: TicketFormProps) => {
           title="발행매수"
           description="최대 1000장까지 발행 가능해요."
           descriptionTypo="P_Text_14_M"
+          rightIcon={
+            <Text typo="P_Text_16_M" color="gray_400">
+              장
+            </Text>
+          }
           placeholder="0"
           {...register('supplyCount', {
             required: true,

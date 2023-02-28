@@ -39,6 +39,10 @@ const LeftSide = () => {
     setPlace(data?.place);
     if (data?.startAt != null) {
       const DateTime = data?.startAt.split(' ');
+      if (DateTime[0].length <= 10) {
+        DateTime[0] = DateTime[0].replace(/\./g, '-');
+        data.startAt = data?.startAt.replace(/\./g, '-');
+      }
       const curDate = new Date(`${DateTime[0]}`);
       const curTime = new Date(data?.startAt);
       setStartAtTime(curTime);
@@ -59,7 +63,6 @@ const LeftSide = () => {
         runTimeRef.current.value =
           curValue + change < 0 ? '0' : `${curValue + change}`;
         setRunTime(Number(runTimeRef.current.value));
-        console.log(runTimeRef.current.value);
       } else {
         // 시간 입력이 안되어있을 때
         runTimeRef.current.value = change < 0 ? '0' : `${change}`;

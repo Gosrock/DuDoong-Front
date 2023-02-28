@@ -13,7 +13,7 @@ import { parseDate } from '@dudoong/utils';
 
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';
-import { RefundInfo } from '@lib/apis/order/orderType';
+import type { RefundInfo } from '@lib/apis/order/orderType';
 import useOverlay from '@lib/hooks/useOverlay';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -46,9 +46,9 @@ const RefundInfo = ({ refund }: { refund: RefundInfo }) => {
       <InfoItem
         item="취소기한"
         value={
-          typeof refund.endAt === 'string'
-            ? `${parseDate(refund.endAt)[0]} ${parseDate(refund.endAt)[1]}`
-            : ''
+          typeof refund.startAt === 'string'
+            ? `${parseDate(refund.startAt)[0]} ${parseDate(refund.startAt)[1]}`
+            : '승인 대기중'
         }
         color="gray_400"
       />
@@ -113,7 +113,7 @@ const RefundConfirmation = ({
   onCancel: () => void;
 }) => {
   return (
-    <Padding>
+    <>
       <ListHeader
         title="예매를 취소할까요?"
         description="언제든 다시 예매할 수 있어요."
@@ -128,6 +128,6 @@ const RefundConfirmation = ({
           아니요
         </Button>
       </ButtonSet>
-    </Padding>
+    </>
   );
 };

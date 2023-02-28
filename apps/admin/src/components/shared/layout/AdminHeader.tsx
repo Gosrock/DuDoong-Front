@@ -4,7 +4,10 @@ import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { useCookies } from 'react-cookie';
+import { axiosPrivate } from '@lib/apis/axios';
+import { useMutation } from '@tanstack/react-query';
+import { removeCookie } from '@lib/utils/cookie';
+import { UserApi } from '@lib/apis/user/UserApi';
 
 interface AdminHeaderProps {
   host: string;
@@ -14,7 +17,16 @@ interface AdminHeaderProps {
 const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
   const auth = useRecoilValue(authState);
   const resetAuthState = useResetRecoilState(authState);
-  const [, , removeCookie] = useCookies(['refreshToken']);
+
+  const { mutate: logoutMutate } = useMutation(UserApi.OAUTH_LOGOUT, {
+    onSuccess: () => {
+      axiosPrivate.defaults.headers.common['Authorization'] = ``;
+      removeCookie('refreshToken');
+      removeCookie('accessToken');
+      resetAuthState();
+      window.location.href = '/admin/';
+    },
+  });
 
   const profileOption: PopupOptions[] = [
     {
@@ -25,11 +37,7 @@ const AdminHeader = ({ host, alliance }: AdminHeaderProps) => {
     },
     {
       title: '로그아웃',
-      onClick: () => {
-        removeCookie('refreshToken', { path: '/' });
-        resetAuthState();
-        window.location.href = '/';
-      },
+      onClick: logoutMutate,
     },
   ];
   const rightElement = (

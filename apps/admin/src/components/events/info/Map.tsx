@@ -75,7 +75,6 @@ const MapPage = (props: any) => {
         longitude: Number(curMarker.position.lng),
         latitude: Number(curMarker.position.lat),
       };
-      console.log(payload);
       changeEventMutation.mutate(payload, {
         onSuccess: () => {
           openOverlay({
@@ -86,11 +85,11 @@ const MapPage = (props: any) => {
     }
   };
 
-  const buttonHandler = [props, curMarker];
+  const buttonHandler = [detailAddress, placeName, curMarker];
   useEffect(() => {
     setButtonInfo({
       firstHandler: changeEventHandler,
-      firstDisable: checkButtonDisable(buttonHandler),
+      firstDisable: checkButtonDisable(detailAddress, placeName, curMarker),
     });
   }, [buttonHandler]);
 
@@ -99,7 +98,6 @@ const MapPage = (props: any) => {
 
     const coord = new kakao.maps.LatLng(Number(lat), Number(lng));
     const callback = function (result: any, status: string) {
-      console.log(result);
       if (status === kakao.maps.services.Status.OK) {
         setRoadAddress(result[0].road_address.address_name);
         setPlaceAddress(result[0].address.address_name);
@@ -182,6 +180,7 @@ const MapPage = (props: any) => {
           padding={[32, 0, 10, 0]}
           size={'listHeader_18'}
           title={'공연 장소'}
+          required={true}
           rightElement={
             <TagButton
               size="md"
@@ -206,6 +205,7 @@ const MapPage = (props: any) => {
             size={'listHeader_18'}
             title={'상세주소'}
             description={placeAddress ? placeAddress : ''}
+            required={true}
           ></ListHeader>
           <Input
             placeholder="중요! 상세주소를 그대로 적어주세요!"
@@ -252,7 +252,19 @@ const MapPage = (props: any) => {
 
 export default MapPage;
 
-const checkButtonDisable = (props: any) => {
-  if (props.content === null) return true;
+const checkButtonDisable = (
+  detailAddress: string | undefined,
+  placeName: string | undefined,
+  curMarker: place,
+) => {
+  if (
+    detailAddress === null ||
+    placeName === null ||
+    detailAddress === '' ||
+    placeName === '' ||
+    curMarker.position.lat === 0 ||
+    curMarker.position.lng === 0
+  )
+    return true;
   return false;
 };

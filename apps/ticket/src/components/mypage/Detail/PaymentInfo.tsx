@@ -1,5 +1,5 @@
 import { ListHeader } from '@dudoong/ui';
-import { OrderPaymentResponse } from '@lib/apis/order/orderType';
+import type { OrderPaymentResponse } from '@lib/apis/order/orderType';
 import InfoItem from './InfoItem';
 
 const PaymentInfo = ({ payment }: { payment: OrderPaymentResponse }) => {

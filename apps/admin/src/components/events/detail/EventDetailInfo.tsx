@@ -46,14 +46,16 @@ const EventDetailInfo = ({
   useEffect(() => {
     if (editorRef.current && !isInitialized && content !== '') {
       setIsInitialized(true);
-      editorRef.current.getInstance().setHTML(content);
+      if (content) {
+        editorRef.current.getInstance().setHTML(content);
+      }
     }
-  }, []);
+  }, [content]);
 
   // presigned 발급 api
   const postEventImageMutation = useMutation(EventApi.POST_EVENT_IMAGE, {
     onSuccess: async (data: ImageUrlResponse) => {
-      console.log('postHostImageMutation : ', data);
+      //console.log('postHostImageMutation : ', data);
     },
   });
 
@@ -66,7 +68,6 @@ const EventDetailInfo = ({
       },
       {
         onSuccess: async (data: ImageUrlResponse) => {
-          console.log('editor image upload: ', data, image);
           await axios.put(data.presignedUrl, image, {
             headers: {
               'Content-Type': image!.type,
@@ -88,13 +89,14 @@ const EventDetailInfo = ({
           content: editorRef.current!.getInstance().getHTML(),
         };
       });
-    console.log(editorRef.current!.getInstance().getHTML());
+    //console.log(editorRef.current!.getInstance().getHTML());
   };
 
   return (
     <div>
       <ListHeader
         title={'공연 상세 내용'}
+        required={true}
         size={'listHeader_18'}
         padding={[56, 0, 12, 0]}
         description={<TitleDescription />}

@@ -6,14 +6,26 @@ const Line = ({ ...props }) => {
   return (
     <Wrapper {...props}>
       <LineContainer>
-        <span>DUDOONG YOUR CONCERT LIFE</span>
-        <Star2 />
-        <span>DUDOONG YOUR CONCERT LIFE</span>
-        <Star2 />
-        <span>DUDOONG YOUR CONCERT LIFE</span>
-        <Star2 />
-        <span>DUDOONG YOUR CONCERT LIFE</span>
-        <Star2 />
+        <div>
+          <span>DUDOONG YOUR CONCERT LIFE</span>
+          <Star2 />
+        </div>
+        <div>
+          <span>DUDOONG YOUR CONCERT LIFE</span>
+          <Star2 />
+        </div>
+        <div>
+          <span>DUDOONG YOUR CONCERT LIFE</span>
+          <Star2 />
+        </div>
+        <div>
+          <span>DUDOONG YOUR CONCERT LIFE</span>
+          <Star2 />
+        </div>
+        <div>
+          <span>DUDOONG YOUR CONCERT LIFE</span>
+          <Star2 />
+        </div>
       </LineContainer>
     </Wrapper>
   );
@@ -28,9 +40,10 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.main_500};
   height: 66px;
 
-  font-family: 'jost';
+  font-family: 'Jost', sans-serif;
   font-style: italic;
   font-size: 33px;
+  font-weight: 400;
   color: ${({ theme }) => theme.palette.white};
   letter-spacing: 0.1em;
 
@@ -45,22 +58,40 @@ const Wrapper = styled.div`
   margin-top: 50px;
 `;
 const LineContainer = styled.div`
-  width: 3000px;
+  width: 3500px;
   position: absolute;
-  left: -330px;
+  left: -630px;
   display: flex;
-  gap: 12px;
   align-items: center;
   svg {
     width: 46px;
   }
 
   ${media.mobile} {
-    left: 12px;
+    left: -380px;
     svg {
-      gap: 6px;
+      margin-left: 4px;
       width: 36px;
     }
+  }
+
+  @keyframes textLoop {
+    0% {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      -webkit-transform: translate3d(100%, 0, 0);
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  & > div {
+    animation: textLoop 10s linear infinite;
+
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
   }
 `;
 

@@ -1,4 +1,4 @@
-import { Input, Search, theme } from '@dudoong/ui';
+import { Input, media, Search, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Twinkle from '@dudoong/ui/src/assets/icons/Twinkle.svg';
@@ -36,8 +36,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  padding: 0 24px;
-
   & > div {
     width: 100%;
   }
@@ -46,6 +44,9 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.typo.G_Side_14_M}
     color : ${({ theme }) => theme.palette.black};
     margin-top: 123px;
+    ${media.mobile} {
+      margin-top: 48px;
+    }
   }
   h1 {
     ${({ theme }) => theme.typo.G_Header_28_B}
@@ -62,6 +63,9 @@ const Wrapper = styled.div`
       transform: translate3d(172px, 0, 0);
       top: 188px;
     }
+    ${media.mobile} {
+      display: none;
+    }
   }
   .dots {
     position: absolute;
@@ -74,6 +78,10 @@ const Wrapper = styled.div`
     &:last-of-type {
       transform: translate3d(450px, 0, 0);
       top: 283px;
+    }
+
+    ${media.mobile} {
+      display: none;
     }
   }
 `;

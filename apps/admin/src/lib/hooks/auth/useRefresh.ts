@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
 import { AuthApi } from '@dudoong/utils';
 import { axiosPrivate } from '@lib/apis/axios';
-import { setCookie } from '@lib/utils/cookie';
+// import { useCookies } from 'react-cookie';
+import { setCookie, removeCookie } from '@lib/utils/cookie';
 
 const useRefresh = () => {
-  const [state, setState] = useState<'loading' | 'succeed' | 'failed'>(
-    'loading',
-  );
   const setAuth = useSetRecoilState(authState);
-
-  const refreshMutation = useMutation(AuthApi.REFRESH, {
-    onMutate: () => {
-      setState('loading');
-    },
+  const { mutate: refreshMutate, status } = useMutation(AuthApi.REFRESH, {
     onSuccess: (data) => {
       axiosPrivate.defaults.headers.common[
         'Authorization'
@@ -26,18 +19,23 @@ const useRefresh = () => {
         isAuthenticated: true,
         callbackUrl: '/',
       });
-      setCookie('refreshToken', data.refreshToken, {
-        maxAge: data.refreshTokenAge,
-      });
-      console.log(data.accessToken);
-      setState('succeed');
+      if (import.meta.env.DEV) {
+        removeCookie('refreshToken');
+        removeCookie('accessToken');
+        setCookie('refreshToken', data.refreshToken, {
+          maxAge: data.refreshTokenAge,
+          path: '/',
+        });
+        setCookie('accessToken', data.accessToken, {
+          maxAge: data.accessTokenAge,
+          path: '/',
+        });
+      }
     },
-    onError: () => {
-      setState('failed');
-    },
+    retry: false,
   });
 
-  return { refreshMutation, state, setState };
+  return { refreshMutate, status };
 };
 
 export default useRefresh;

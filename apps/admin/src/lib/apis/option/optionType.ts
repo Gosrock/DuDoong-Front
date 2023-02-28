@@ -1,3 +1,5 @@
+import { AccountInfo } from "../../../../../ticket/src/lib/apis/cart/cartType";
+
 export type OptionGroupType = '객관식' | 'Y/N' | '주관식';
 
 export interface CreateTicketOptionRequest {
@@ -44,8 +46,19 @@ export interface GetAppliedOptionGroupsResponse {
   appliedOptionGroups: AppliedOptionGroupsResponse[];
 }
 
+
+
 export interface AppliedOptionGroupsResponse {
   ticketItemId: number;
+  payType: string;
   ticketName: string;
+  description: string;
+  approveType: string;
+  purchaseLimit: number;
+  supplyCount: number;
+  quantity: number;
+  isQuantityPublic: boolean;
+  accountInfo: AccountInfo;
+  isSold: boolean;
   optionGroups: OptionGroupResponse[];
 }

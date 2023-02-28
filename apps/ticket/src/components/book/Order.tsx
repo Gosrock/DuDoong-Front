@@ -29,6 +29,9 @@ import useOverlay from '@lib/hooks/useOverlay';
 import OverlayBox from '@components/shared/overlay/OverlayBox';
 import AccountInfoSection from './blocks/order/AccountInfoSection';
 import { useState } from 'react';
+import { authState } from '@store/auth';
+import { useRecoilValue } from 'recoil';
+import { checkName } from '@dudoong/utils';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
@@ -40,6 +43,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
   const { orderMutate } = useOrderMutation(instance);
   const skipSelectOption = data.items[0].answers.length === 0;
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
+  const { userProfile } = useRecoilValue(authState);
 
   const handleNavBarButton = () => {
     // 옵션 선택이 생략되었을땐 바로 상세페이지로 뒤로가기
@@ -82,7 +86,15 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         {data.totalPrice !== '0원' && (
           <>
             <Divider />
-            <ListHeader size="listHeader_18" title={'결제정보'} />
+            <ListHeader
+              size="listHeader_18"
+              title={'결제정보'}
+              description={
+                isDudoong
+                  ? `입금자명은 ${checkName(userProfile!.name)} 해주세요`
+                  : ''
+              }
+            />
             <SelectPayMethod
               instance={instance}
               isDudoong={isDudoong}
@@ -120,12 +132,16 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         </section>
         <Spacing size={120} color={'gray_200'} />
       </Main>
-      <OverlayBox open={isOpen} onDismiss={closeOverlay}>
-        <AccountInfoSection
-          accountInfo={data.accountInfo}
-          orderPayload={{ couponId: coupon, cartId: data.cartId }}
-        />
-      </OverlayBox>
+      {isDudoong && (
+        <OverlayBox open={isOpen} onDismiss={closeOverlay}>
+          <AccountInfoSection
+            accountInfo={data.accountInfo}
+            orderPayload={{ couponId: coupon, cartId: data.cartId }}
+            closeOverlay={closeOverlay}
+            name={userProfile!.name}
+          />
+        </OverlayBox>
+      )}
     </>
   );
 };

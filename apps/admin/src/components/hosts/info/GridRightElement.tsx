@@ -11,6 +11,7 @@ const GridRightElement = ({ register }: GridRightElementProps) => {
     <div>
       <ListHeader
         title={'간단 소개글'}
+        required={true}
         size={'listHeader_18'}
         padding={[32, 0, 12, 0]}
       />
@@ -26,6 +27,7 @@ const GridRightElement = ({ register }: GridRightElementProps) => {
         <div>
           <ListHeader
             title={'대표 연락처'}
+            required={true}
             size={'listHeader_18'}
             padding={[32, 0, 12, 0]}
           />
@@ -40,14 +42,14 @@ const GridRightElement = ({ register }: GridRightElementProps) => {
         <div>
           <ListHeader
             title={'대표 이메일'}
+            required={true}
             size={'listHeader_18'}
             padding={[32, 0, 12, 0]}
           />
           <Input
             {...register('contactEmail', {
               required: true,
-              pattern:
-                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+              pattern: /^[A-Za-z0-9_.-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-]+/,
             })}
             placeholder={'email@aaa.bbb'}
           />
