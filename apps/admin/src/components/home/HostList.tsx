@@ -83,32 +83,32 @@ const HostList = ({ page }: ListProps) => {
             ))}
           </BorderBox>
         )}
-        <Spacing size={48} />
         {newInvite?.length !== 0 && (
-          <BorderBox padding={ADMIN_HOME_MAP[page].padding as PaddingSize}>
-            <ListHeader
-              title={'새로 들어온 초대'}
-              size={'listHeader_18'}
-              padding={[0, 0, 0, 0]}
-            />
-            <Divider line={true} />
-            {newInvite?.map((invite: HostProfileResponse) => (
-              <>
-                <HostItem {...invite} isNew={true} disabled={true} />
-                <Divider
-                  line={true}
-                  css={css`
-                    :last-of-type {
-                      display: none;
-                    }
-                  `}
-                />
-              </>
-            ))}
-          </BorderBox>
+          <>
+            <Spacing size={48} />
+            <BorderBox padding={ADMIN_HOME_MAP[page].padding as PaddingSize}>
+              <ListHeader
+                title={'새로 들어온 초대'}
+                size={'listHeader_18'}
+                padding={[0, 0, 0, 0]}
+              />
+              <Divider line={true} />
+              {newInvite?.map((invite: HostProfileResponse) => (
+                <>
+                  <HostItem {...invite} isNew={true} disabled={true} />
+                  <Divider
+                    line={true}
+                    css={css`
+                      :last-of-type {
+                        display: none;
+                      }
+                    `}
+                  />
+                </>
+              ))}
+            </BorderBox>
+          </>
         )}
-
-        <Spacing size={38} />
       </>
     );
   }
