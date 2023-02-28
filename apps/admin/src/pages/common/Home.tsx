@@ -71,6 +71,7 @@ const Home = () => {
       </FlexBox>
       <Spacing size={20} />
       <List page={select} />
+      <Spacing size={40} />
       <ServiceNotion>
         <ListHeader
           size="listHeader_18"
