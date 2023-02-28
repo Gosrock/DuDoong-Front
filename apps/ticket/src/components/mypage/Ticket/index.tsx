@@ -51,7 +51,7 @@ const Ticket = () => {
               title={data.eventProfile.name}
               size={'listHeader_20'}
               descColor={'black'}
-              description={`${parseDate(data.eventProfile.startAt)[0]}${
+              description={`${parseDate(data.eventProfile.startAt)[0]} ${
                 parseDate(data.eventProfile.startAt)[1]
               }\n${data.eventProfile.placeName}`}
             />
