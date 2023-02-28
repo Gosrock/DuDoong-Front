@@ -47,6 +47,7 @@ const Ticket = () => {
               </div>
             </Poster>
             <ListHeader
+              padding={[32, 36, 16, 36]}
               title={data.eventProfile.name}
               size={'listHeader_20'}
               descColor={'black'}
