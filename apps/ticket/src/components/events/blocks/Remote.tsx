@@ -44,7 +44,11 @@ const Remote = ({ openTicketOverlay, eventName }: RemoteProps) => {
         </Button>
       </Wrapper>
       <Modal open={isOpen} onDismiss={closeTalkOverlay}>
-        <TalkOverlay eventName={eventName} onClose={closeTalkOverlay} />
+        <TalkOverlay
+          eventName={eventName}
+          onClose={closeTalkOverlay}
+          isOpen={isOpen}
+        />
       </Modal>
     </>
   );

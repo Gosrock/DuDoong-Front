@@ -1,4 +1,6 @@
 import { ListHeader } from '@dudoong/ui';
+import { palette } from '@dudoong/ui/src/theme/palette';
+import { css } from '@emotion/react';
 import type { OrderPaymentResponse } from '@lib/apis/order/orderType';
 import InfoItem from './InfoItem';
 
@@ -16,6 +18,9 @@ const PaymentInfo = ({ payment }: { payment: OrderPaymentResponse }) => {
         value={payment.supplyAmount}
         typo="P_Header_18_SB"
         color="main_500"
+        css={css`
+          border-top: 1px solid ${palette.gray_200};
+        `}
       />
     </>
   );

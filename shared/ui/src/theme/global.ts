@@ -119,7 +119,7 @@ export const globalStyle = css`
     opacity: 1;
   }
   .swiper-pagination-bullet-active {
-    background-color: #c7c7cb;
+    background-color: #bea2fa;
   }
   a {
     color: inherit;
