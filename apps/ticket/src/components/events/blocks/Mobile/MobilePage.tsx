@@ -39,12 +39,7 @@ const MobilePage = ({
       <Spacing size={48} />
       <Poster>
         <div>
-          <img
-            src={detail.posterImage}
-            alt={detail.name}
-            width={204}
-            height={287}
-          />
+          <img src={detail.posterImage} alt={detail.name} />
         </div>
       </Poster>
       <Title
@@ -157,7 +152,7 @@ const Poster = styled.div`
     padding-top: 141.4%;
     overflow: hidden;
     box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
+    border-radius: 16px;
   }
   img {
     position: absolute;

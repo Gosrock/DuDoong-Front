@@ -55,7 +55,6 @@ const OrderedTicket = ({ ticket }: { ticket: OrderLineTicketResponse }) => {
             : '승인 대기중'
         }
       />
-      {ticket.answers.length ? <Spacing size={36} color="gray_100" /> : <></>}
     </div>
   );
 };

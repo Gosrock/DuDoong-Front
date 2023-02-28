@@ -40,7 +40,7 @@ const Success = () => {
             <Button
               fullWidth
               varient="secondary"
-              onClick={() => router.push(`/ticket/${orderUuid}`)}
+              onClick={() => router.push(`/ticket/${orderUuid}?redirect=true`)}
             >
               모바일 티켓
             </Button>
