@@ -9,6 +9,7 @@ import {
   Profile,
   Spacing,
   TagButton,
+  Text,
   theme,
 } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
@@ -32,6 +33,7 @@ import useToastify from '@dudoong/ui/src/lib/useToastify';
 import useOverlay from '@lib/hooks/useOverlay';
 import { AuthAPi } from '@lib/apis/axios';
 import { useEffect } from 'react';
+import { css } from '@emotion/react';
 
 const Mypage = ({ info }: { info: UserInfo }) => {
   const { userProfile } = useRecoilValue(authState);
@@ -87,7 +89,18 @@ const Mypage = ({ info }: { info: UserInfo }) => {
           {isLoading ? (
             <SkeletonBox />
           ) : data ? (
-            <OrderItem {...data} />
+            <FlexBox direction={'column'} fullWidth>
+              <OrderItem {...data} />
+              <Text
+                typo="P_Text_12_R"
+                color="gray_400"
+                css={css`
+                  margin-top: 12px;
+                `}
+              >
+                가장 최근에 생성한 주문이에요.
+              </Text>
+            </FlexBox>
           ) : (
             <SkeletonBox>
               아직 예매한 티켓이 없어요.
