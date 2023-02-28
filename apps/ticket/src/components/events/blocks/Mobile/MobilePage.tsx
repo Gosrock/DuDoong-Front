@@ -15,7 +15,6 @@ import { parseDate } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import DetailMenu from '../DetailMenu';
 import Remote from '../Remote';
