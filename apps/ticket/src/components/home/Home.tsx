@@ -26,7 +26,14 @@ const Home = () => {
   return (
     <>
       <Wrapper>
-        <DDHead title="두둥! | 홈" />
+        <DDHead
+          title="두둥! | 홈"
+          additional={
+            <>
+              <meta property="og:image" content="/og.png" />
+            </>
+          }
+        />
         <main>
           <HomeHeader />
           <Input

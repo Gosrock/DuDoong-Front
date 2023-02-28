@@ -144,9 +144,10 @@ const KeyboardItem = () => {
     <div
       css={css`
         position: fixed;
-        top: 75px;
-        left: 1vw;
+        top: 80px;
+        left: 4vw;
         z-index: 2;
+        width: 298px;
       `}
     >
       <Keyboard />
@@ -175,7 +176,7 @@ const DotsItem1 = () => {
       css={css`
         position: fixed;
         top: 58px;
-        left: 10vw;
+        left: 16vw;
       `}
     >
       <Dots />
@@ -190,7 +191,6 @@ const DotsItem2 = () => {
         position: fixed;
         bottom: 122px;
         right: 16vw;
-        z-index: 2;
       `}
     >
       <Dots />

@@ -5,9 +5,11 @@ import { Divider, ListHeader, NavBar, Spacing, SyncLoader } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import { OrderApi } from '@lib/apis/order/OrderApi';
+import { authState } from '@store/auth';
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import TicketList from './TicketList';
 
@@ -17,10 +19,15 @@ const Ticket = () => {
     back,
     push,
   } = useRouter();
-
+  const { isAuthenticated } = useRecoilValue(authState);
   const { data, isSuccess } = useQuery(['ticket', id], () =>
     OrderApi.GET_ORDERS_TICKETS(id as string),
   );
+
+  useEffect(() => {
+    !isAuthenticated && push('/home');
+  }, [isAuthenticated]);
+
   return (
     <>
       <DDHead title="두둥!" />
@@ -61,7 +68,7 @@ const Ticket = () => {
             >
               <Shortcuts text="모바일 티켓 안내" />
             </a>
-            <Spacing size={10} />
+            <Spacing size={32} />
           </>
         ) : (
           <LoaderWrapper>

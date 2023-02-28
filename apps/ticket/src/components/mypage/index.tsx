@@ -9,6 +9,7 @@ import {
   Profile,
   Spacing,
   TagButton,
+  Text,
   theme,
 } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
@@ -32,6 +33,7 @@ import useToastify from '@dudoong/ui/src/lib/useToastify';
 import useOverlay from '@lib/hooks/useOverlay';
 import { AuthAPi } from '@lib/apis/axios';
 import { useEffect } from 'react';
+import { css } from '@emotion/react';
 
 const Mypage = ({ info }: { info: UserInfo }) => {
   const { userProfile } = useRecoilValue(authState);
@@ -44,6 +46,7 @@ const Mypage = ({ info }: { info: UserInfo }) => {
   );
 
   useEffect(() => {
+    console.log(userProfile);
     if (!userProfile?.id) {
       router.push('/home');
     }
@@ -86,7 +89,18 @@ const Mypage = ({ info }: { info: UserInfo }) => {
           {isLoading ? (
             <SkeletonBox />
           ) : data ? (
-            <OrderItem {...data} />
+            <FlexBox direction={'column'} fullWidth>
+              <OrderItem {...data} />
+              <Text
+                typo="P_Text_12_R"
+                color="gray_400"
+                css={css`
+                  margin-top: 12px;
+                `}
+              >
+                가장 최근에 생성한 주문이에요.
+              </Text>
+            </FlexBox>
           ) : (
             <SkeletonBox>
               아직 예매한 티켓이 없어요.
@@ -118,7 +132,7 @@ const Mypage = ({ info }: { info: UserInfo }) => {
       />
       <Divider />
       <Shortcuts text="회원탈퇴" textColor="red_300" onClick={openOverlay} />
-      <Spacing size={234} />
+      <Spacing size={60} />
 
       <OverlayBox open={isOpen} onDismiss={closeOverlay}>
         <WithdrawConfirmation onDismiss={closeOverlay} onCancel={mutate} />
@@ -155,7 +169,7 @@ const WithdrawConfirmation = ({
   onCancel: () => void;
 }) => {
   return (
-    <Padding>
+    <>
       <ListHeader
         title="회원 탈퇴를 진행하시겠어요?"
         description="티켓을 예매한 상태이거나, 호스트로 관리 중인 공연이 있다면
@@ -171,7 +185,7 @@ const WithdrawConfirmation = ({
           아니요
         </Button>
       </ButtonSet>
-    </Padding>
+    </>
   );
 };
 
