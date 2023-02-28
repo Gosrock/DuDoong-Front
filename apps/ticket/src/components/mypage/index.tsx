@@ -44,6 +44,7 @@ const Mypage = ({ info }: { info: UserInfo }) => {
   );
 
   useEffect(() => {
+    console.log(userProfile);
     if (!userProfile?.id) {
       router.push('/home');
     }
@@ -118,7 +119,7 @@ const Mypage = ({ info }: { info: UserInfo }) => {
       />
       <Divider />
       <Shortcuts text="회원탈퇴" textColor="red_300" onClick={openOverlay} />
-      <Spacing size={234} />
+      <Spacing size={60} />
 
       <OverlayBox open={isOpen} onDismiss={closeOverlay}>
         <WithdrawConfirmation onDismiss={closeOverlay} onCancel={mutate} />
@@ -155,7 +156,7 @@ const WithdrawConfirmation = ({
   onCancel: () => void;
 }) => {
   return (
-    <Padding>
+    <>
       <ListHeader
         title="회원 탈퇴를 진행하시겠어요?"
         description="티켓을 예매한 상태이거나, 호스트로 관리 중인 공연이 있다면
@@ -171,7 +172,7 @@ const WithdrawConfirmation = ({
           아니요
         </Button>
       </ButtonSet>
-    </Padding>
+    </>
   );
 };
 
