@@ -54,13 +54,11 @@ const Wrapper = styled.div`
   padding-top: 20px;
   margin-top: 12px;
   border-top: 2px solid black;
-
-  img {
-    object-fit: cover;
-  }
 `;
 
 const Poster = styled.div`
+  box-shadow: 0px 0px 10px 7px rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
   img {
     width: 204px;
     height: 287px;
