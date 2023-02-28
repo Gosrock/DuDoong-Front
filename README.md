@@ -76,7 +76,7 @@
 ## 7. 참여자
 <table>
     <tr align="center">
-        <td><B>Leader • Front-end • UI/UX<B></td>
+        <td><B>Lead•FE•UI/UX<B></td>
         <td><B>Front-end<B></td>
         <td><B>Front-end<B></td>
         <td><B>Front-end<B></td>
