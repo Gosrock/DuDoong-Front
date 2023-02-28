@@ -7,22 +7,26 @@ import { useRouter } from 'next/router';
 import { ForwardedRef, forwardRef, HTMLAttributes } from 'react';
 import TalkBubble from './TalkBubble';
 
+interface TalkListProps extends React.ComponentProps<'div'> {
+  isOpen: boolean;
+}
+
 const TalkList = (
-  props: HTMLAttributes<HTMLDivElement>,
+  { isOpen }: TalkListProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
   const router = useRouter();
   const { eventId } = router.query as { eventId: string };
-  const { infiniteListElement, isEmpty } =
-    useInfiniteQueries<RetrieveCommentResponse>(
-      ['talk', eventId],
-      ({ pageParam = 0 }) =>
-        CommentApi.GET_COMMENTS({
-          id: eventId,
-          pageParam,
-        }),
-      TalkBubble,
-    );
+  const { infiniteListElement } = useInfiniteQueries<RetrieveCommentResponse>(
+    ['talk', eventId],
+    ({ pageParam = 0 }) =>
+      CommentApi.GET_COMMENTS({
+        id: eventId,
+        pageParam,
+      }),
+    TalkBubble,
+    { refetchInterval: 2000, enabled: isOpen },
+  );
 
   useScreenHeight();
 

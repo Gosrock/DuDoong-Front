@@ -1,7 +1,7 @@
 import { FlexBox, media, Text } from '@dudoong/ui';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import { ComponentProps, useEffect, useRef } from 'react';
+import { ComponentProps, useRef } from 'react';
 import XLg from '@assets/close.svg';
 import TalkInput from './TalkInput';
 import TalkList from './TalkList';
@@ -9,9 +9,10 @@ import TalkList from './TalkList';
 interface TalkProps extends ComponentProps<'div'> {
   eventName: string;
   onClose: () => void;
+  isOpen: boolean;
 }
 
-const TalkOverlay = ({ eventName, onClose }: TalkProps) => {
+const TalkOverlay = ({ eventName, onClose, isOpen }: TalkProps) => {
   const listRef = useRef<HTMLDivElement>(null);
   const {
     query: { eventId },
@@ -25,7 +26,7 @@ const TalkOverlay = ({ eventName, onClose }: TalkProps) => {
         </Text>
         <Close onClick={onClose} />
       </Header>
-      <TalkList ref={listRef} />
+      <TalkList ref={listRef} isOpen={isOpen} />
       <TalkInput eventId={eventId as string} listRef={listRef} />
     </Wrapper>
   );
