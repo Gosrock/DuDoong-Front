@@ -56,8 +56,6 @@ const List = ({ page }: ListProps) => {
         >
           {infiniteListElement}
         </BorderBox>
-
-        <Spacing size={38} />
       </>
     );
   } else if (page === 'host') {
