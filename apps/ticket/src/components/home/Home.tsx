@@ -25,19 +25,28 @@ const Home = () => {
 
   return (
     <>
-      <DDHead title="두둥! | 홈" />
-      <main>
-        <HomeHeader />
-        <Input
-          onChange={onChangeKeyword}
-          height={60}
-          styles={InputStyle}
-          placeholder={'검색어를 입력해주세요'}
-          rightIcon={<Search />}
+      <Wrapper>
+        <DDHead
+          title="두둥! | 홈"
+          additional={
+            <>
+              <meta property="og:image" content="/og.png" />
+            </>
+          }
         />
-        <EventList>{infiniteListElement}</EventList>
-      </main>
-      <Spacing size={170} />
+        <main>
+          <HomeHeader />
+          <Input
+            onChange={onChangeKeyword}
+            height={60}
+            styles={InputStyle}
+            placeholder={'검색어를 입력해주세요'}
+            rightIcon={<Search />}
+          />
+          <EventList>{infiniteListElement}</EventList>
+        </main>
+        <Spacing size={170} />
+      </Wrapper>
       <section>
         <Footer />
       </section>
@@ -47,11 +56,19 @@ const Home = () => {
 
 export default Home;
 
+const Wrapper = styled.div`
+  padding: 0 24px;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8fa 100%);
+`;
+
 const EventList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 80px 40px;
-  padding: 0 24px;
+  ${media.mobile} {
+    grid-gap: 32px 32px;
+  }
   margin: 145px auto 0 auto;
   max-width: 936px;
 

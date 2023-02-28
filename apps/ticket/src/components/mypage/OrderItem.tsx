@@ -1,15 +1,7 @@
-import {
-  FlexBox,
-  ListHeader,
-  ListRow,
-  Spacing,
-  Tag,
-  TagColorKey,
-  Text,
-  theme,
-} from '@dudoong/ui';
+import { FlexBox, ListRow, Tag, TagColorKey, Text, theme } from '@dudoong/ui';
+import { parseDate } from '@dudoong/utils';
 import styled from '@emotion/styled';
-import { OrderListResponse, StageType } from '@lib/apis/order/orderType';
+import type { OrderListResponse, StageType } from '@lib/apis/order/orderType';
 
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -28,6 +20,7 @@ const TAG_COLOR: TagColorType = {
 
 const OrderItem = (prop: OrderListResponse) => {
   const router = useRouter();
+  const [date, time] = parseDate(prop.eventProfile.startAt, true);
   return (
     <Wrapper onClick={() => router.push(`/ticket/${prop.orderUuid}`)}>
       <Image
@@ -45,7 +38,7 @@ const OrderItem = (prop: OrderListResponse) => {
           </Text>
         </FlexBox>
         <ListRow
-          text={prop.eventProfile.startAt}
+          text={`${date} ${time}`}
           textTypo={'P_Text_12_M'}
           subText={`${prop.itemName} ${prop.totalQuantity}매 | 주문번호 ${prop.orderNo}`}
           padding={0}
@@ -75,9 +68,11 @@ const Wrapper = styled.div`
 
   transform: scale(1);
   transition: all 0.1s ease-out;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.12);
 
   :active {
     transform: scale(0.99);
+    box-shadow: none;
   }
 
   .poster {

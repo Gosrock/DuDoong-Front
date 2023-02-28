@@ -1,7 +1,7 @@
 import { Button, ButtonSet, Padding, Text } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { IssuedTicketInfo } from '@lib/apis/order/orderType';
+import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
 import useOverlay from '@lib/hooks/useOverlay';
 import Link from 'next/link';
 import { BottomSheet } from 'react-spring-bottom-sheet';
@@ -15,7 +15,7 @@ const TicketItem = ({
   orderUuid: string;
 }) => {
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
-  console.log(ticket);
+
   return (
     <Wrapper>
       <Padding size={[0, 36]}>
@@ -29,8 +29,15 @@ const TicketItem = ({
             예매 상세
           </Button>
         </Link>
-        <Button fullWidth varient="secondary" onClick={openOverlay}>
-          QR코드 보기
+        <Button
+          fullWidth
+          varient="secondary"
+          onClick={openOverlay}
+          disabled={ticket.issuedTicketStatus === '취소 티켓'}
+        >
+          {ticket.issuedTicketStatus === '취소 티켓'
+            ? '취소된 티켓'
+            : 'QR코드 보기'}
         </Button>
       </ButtonSet>
 

@@ -87,6 +87,7 @@ const ModalSearch = ({
                 placeholder="예)와우산로 94"
                 value={address}
                 onChange={handleChange}
+                onInput={onInput}
               ></SearchInput>
             </form>
             <Spacing size={16} />

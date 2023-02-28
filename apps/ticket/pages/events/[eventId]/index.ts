@@ -1,1 +1,1 @@
-export { default, getStaticPaths, getStaticProps } from '@components/events';
+export { default, getServerSideProps } from '@components/events';

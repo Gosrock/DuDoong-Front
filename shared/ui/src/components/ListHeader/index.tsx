@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Padding, FlexBox } from '../../layout';
 import { Text } from '../Text';
-import { TextType } from '../../theme';
+import { TextType, theme } from '../../theme';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 import { PaddingSize } from '../../layout';
 import { ReactNode } from 'react';
@@ -16,6 +16,7 @@ export interface ListHeaderProps {
   padding?: PaddingSize;
   rightElement?: ReactNode;
   gap?: number;
+  required?: boolean;
 }
 
 export type ListHeaderVariantKey =
@@ -93,6 +94,7 @@ export const ListHeader = ({
   padding = LIST_HEADER_VARIANT[size].padding,
   rightElement = <></>,
   gap,
+  required = false,
   ...props
 }: ListHeaderProps) => {
   return (
@@ -111,12 +113,22 @@ export const ListHeader = ({
             min-height: 24px; // md tag 넣었을때 문제 안생기도록
           `}
         >
-          <Text
-            typo={LIST_HEADER_VARIANT[size].textProp.typo}
-            color={LIST_HEADER_VARIANT[size].textProp.color}
-          >
-            {title}
-          </Text>
+          <FlexBox gap={4}>
+            <Text
+              typo={LIST_HEADER_VARIANT[size].textProp.typo}
+              color={LIST_HEADER_VARIANT[size].textProp.color}
+            >
+              {title}
+            </Text>
+            {required && (
+              <Text
+                typo={LIST_HEADER_VARIANT[size].textProp.typo}
+                color={'red_200'}
+              >
+                *
+              </Text>
+            )}
+          </FlexBox>
           {rightElement}
         </FlexBox>
         {description && (

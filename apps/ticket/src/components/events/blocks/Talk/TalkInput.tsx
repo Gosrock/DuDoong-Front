@@ -56,6 +56,7 @@ const TalkInput = ({
   return (
     <Wrapper>
       <TextArea
+        maxLength={150}
         placeholder="맨 앞에 ‘#별명’을 붙이면 익명으로 남길 수 있어요. 별명은 최대 10자, 내용은 150자까지 가능해요."
         value={value}
         onChange={onChange}

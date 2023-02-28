@@ -2,7 +2,6 @@ import DDHead from '@components/shared/Layout/NextHead';
 import useOverlay from '@lib/hooks/useOverlay';
 import { media } from '@dudoong/ui';
 import { AuthApi, EventApi, EventDetailResponse } from '@dudoong/utils';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import SelectTicket from './blocks/SelectTicket';
 import { useRouter } from 'next/router';
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
@@ -14,9 +13,8 @@ import { HTMLAttributes, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { authState } from '@store/auth';
 import { useRecoilState } from 'recoil';
-import { getCookie } from 'cookies-next';
-import { setCredentials } from '@lib/utils/setCredentials';
 import { useQuery } from '@tanstack/react-query';
+import { GetServerSideProps } from 'next';
 
 export interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
   detail: EventDetailResponse;
@@ -34,7 +32,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
 
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const fetchRefresh = async (token: string) => {
       try {
         const data = await AuthApi.REFRESH(token);
@@ -54,7 +52,7 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
       const refreshToken = getCookie('refreshToken') as string;
       refreshToken && fetchRefresh(refreshToken);
     }
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -97,20 +95,23 @@ const Wrapper = styled.main`
   }
 `;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { eventId } = context.params as unknown as { eventId: string };
 
-  const detail = await EventApi.GET_EVENT_DETAIL(eventId);
-  return {
-    props: {
-      detail,
-    },
-  };
+  try {
+    const detail = await EventApi.GET_EVENT_DETAIL(eventId);
+    return {
+      props: {
+        detail,
+        revalidate: 1,
+      },
+    };
+  } catch (error: any) {
+    return {
+      redirect: {
+        destination: `/home`,
+        permanent: false,
+      },
+    };
+  }
 };

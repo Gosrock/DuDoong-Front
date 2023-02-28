@@ -6347,6 +6347,7 @@ __metadata:
     react-router-dom: ^6.6.1
     recoil: ^0.7.6
     typescript: ^4.9.3
+    universal-cookie: ^4.0.4
     vite: ^4.0.0
     vite-plugin-svgr: ^2.4.0
   languageName: unknown
@@ -11219,6 +11220,15 @@ __metadata:
   dependencies:
     duplexer: ^0.1.2
   checksum: 2df97f359696ad154fc171dcb55bc883fe6e833bca7a65e457b9358f3cb6312405ed70a8da24a77c1baac0639906cd52358dc0ce2ec1a937eaa631b934c94194
+  languageName: node
+  linkType: hard
+
+"hamburger-react@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "hamburger-react@npm:2.5.0"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+  checksum: 5c3835a1b271fd50f5fcc600d55d0dc296cb05c2eed5ec4bf6386c3da6f5b33a370f6ff5b81ebe97f29beb41cc37f5f5d4c5ff958507435e6561a15c8f7e3562
   languageName: node
   linkType: hard
 
@@ -20424,6 +20434,7 @@ __metadata:
     "@types/react-dom": 18.0.9
     axios: ^1.2.2
     cookies-next: ^2.1.1
+    hamburger-react: ^2.5.0
     next: 13.0.7
     next-cookies: ^2.0.3
     next-transpile-modules: ^10.0.0
@@ -20960,7 +20971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"universal-cookie@npm:^4.0.0, universal-cookie@npm:^4.0.2":
+"universal-cookie@npm:^4.0.0, universal-cookie@npm:^4.0.2, universal-cookie@npm:^4.0.4":
   version: 4.0.4
   resolution: "universal-cookie@npm:4.0.4"
   dependencies:

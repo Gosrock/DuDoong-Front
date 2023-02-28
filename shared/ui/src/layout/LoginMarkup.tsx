@@ -5,7 +5,6 @@ import {
   FlexBox,
   TextProps,
   BorderBox,
-  FullScreen,
 } from '@dudoong/ui';
 import { FlexBoxProps } from '@dudoong/ui';
 import { css } from '@emotion/react';
@@ -14,7 +13,6 @@ import Keyboard from '../assets/image/Keyboard';
 import DoongDoongs from '../assets/image/DoongDoongs';
 import Dots from '../assets/image/Dots';
 import styled from '@emotion/styled';
-import { useEffect } from 'react';
 
 interface LoginMarkupProps {
   onKakao: () => void;
@@ -120,6 +118,10 @@ const Mobile = styled.div`
     width: 100%;
     padding: 0 48px;
   }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const Wrapper = styled((props: FlexBoxProps) => <FlexBox {...props} />)`
@@ -142,9 +144,10 @@ const KeyboardItem = () => {
     <div
       css={css`
         position: fixed;
-        top: 0px;
-        left: 5vw;
+        top: 80px;
+        left: 4vw;
         z-index: 2;
+        width: 298px;
       `}
     >
       <Keyboard />
@@ -158,8 +161,8 @@ const DoongDoongsItem = () => {
       css={css`
         position: fixed;
         bottom: -3px;
-        right: 6vw;
-        z-index: 2;
+        right: 1vw;
+        z-index: 3;
       `}
     >
       <DoongDoongs />
@@ -172,8 +175,8 @@ const DotsItem1 = () => {
     <div
       css={css`
         position: fixed;
-        top: 195px;
-        left: 12vw;
+        top: 58px;
+        left: 16vw;
       `}
     >
       <Dots />
@@ -186,8 +189,8 @@ const DotsItem2 = () => {
     <div
       css={css`
         position: fixed;
-        bottom: 150px;
-        right: 11vw;
+        bottom: 122px;
+        right: 16vw;
       `}
     >
       <Dots />

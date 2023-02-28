@@ -5,27 +5,28 @@ import ContentGrid from '@components/shared/layout/ContentGrid';
 import { FlexBox, ListHeader, Spacing, Text } from '@dudoong/ui';
 import { EventDetailResponse } from '@dudoong/utils/src/apis/event/eventType';
 import TicketApi from '@lib/apis/ticket/TicketApi';
-import { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
+import type { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
 
 import useBottomButton from '@lib/hooks/useBottomButton';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { queryClient } from '../../../main';
 
 const NewTickets = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const eventId = pathname.split('/')[2];
+  const queryClient = useQueryClient();
   const eventDetail = queryClient.getQueryData<EventDetailResponse>([
     'eventDetail',
     eventId,
   ]);
-  const { register, handleSubmit, watch, control, formState } = useForm({
-    mode: 'onChange',
-  });
+  const { register, handleSubmit, watch, control, formState, reset, setValue } =
+    useForm({
+      mode: 'onChange',
+    });
   const { openOverlay, closeOverlay } = useGlobalOverlay();
   const { setButtonInfo, hideButtons } = useBottomButton({
     type: 'save',
@@ -35,7 +36,6 @@ const NewTickets = () => {
   //티켓 생성 api
   const postTicketCreateMutation = useMutation(TicketApi.POST_TICKET, {
     onSuccess: (data: GetTicketDetailResponse) => {
-      console.log('POST_TICKET: ', data);
       openOverlay({
         content: 'saveTicket',
         props: {
@@ -78,9 +78,7 @@ const NewTickets = () => {
     });
   };
 
-  const onError = (error: any) => {
-    console.log('error', error);
-  };
+  const onError = (error: any) => {};
 
   return (
     <div onSubmit={handleSubmit(onSubmit, onError)}>
@@ -109,6 +107,8 @@ const NewTickets = () => {
             partner={eventDetail?.host.partner || null}
             control={control}
             hostId={eventDetail?.host.hostId || null}
+            reset={reset}
+            setValue={setValue}
           />
           <Spacing size={80} />
           <TicketInput

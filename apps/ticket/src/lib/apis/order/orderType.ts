@@ -35,7 +35,7 @@ export interface OrderResponse {
   refundInfo: RefundInfo;
   eventProfile: EventProfile;
   orderUuid: string;
-  orderId: number;
+  orderNo: string;
   orderMethod: OrderMethod;
 }
 
@@ -72,7 +72,7 @@ export interface OrderLineTicketResponse {
  * 예매취소 정보
  */
 export interface RefundInfo {
-  endAt: string;
+  startAt: string;
   availAble: boolean;
 }
 

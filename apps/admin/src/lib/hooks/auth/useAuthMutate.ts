@@ -10,12 +10,13 @@ import { authState } from '@store/auth';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
+import { getCookie, setCookie } from '@lib/utils/cookie';
 
 const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const { openOverlay, closeOverlay } = useGlobalOverlay();
   const [auth, setAuth] = useRecoilState(authState);
-  const [, setCookie] = useCookies(['refreshToken']);
+  // const [cookies, setCookie] = useCookies();
   const navigate = useNavigate();
 
   // 카카오 회원정보 가져오기
@@ -36,9 +37,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   // 회원가입
   const oauthKakaoRegisterMutation = useMutation(AuthApi.OAUTH_REGISTER, {
     onSuccess: (data: OauthLoginResponse) => {
-      setCookie('refreshToken', data.refreshToken, {
-        maxAge: data.refreshTokenAge,
-      });
       onSuccessLogin(data);
       closeOverlay();
       navigate(auth.callbackUrl);
@@ -48,9 +46,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   // 로그인
   const oauthKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
     onSuccess: (data: OauthLoginResponse) => {
-      setCookie('refreshToken', data.refreshToken, {
-        maxAge: data.refreshTokenAge,
-      });
       onSuccessLogin(data);
       navigate(auth.callbackUrl);
     },
@@ -73,7 +68,24 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
     axiosPrivate.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${loginData.accessToken}`;
-    setAuth({ ...auth, isAuthenticated: true, ...loginData });
+
+    if (import.meta.env.DEV) {
+      setCookie('refreshToken', loginData.refreshToken, {
+        maxAge: loginData.refreshTokenAge,
+        path: '/',
+      });
+      setCookie('accessToken', loginData.accessToken, {
+        maxAge: loginData.refreshTokenAge,
+        path: '/',
+      });
+    }
+
+    setAuth({
+      isAuthenticated: true,
+      callbackUrl: '/',
+      userProfile: loginData.userProfile,
+      accessToken: loginData.accessToken,
+    });
   };
 
   return { oauthValidMutation, oauthKakaoLoginMutation };

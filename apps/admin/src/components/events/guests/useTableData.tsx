@@ -1,6 +1,6 @@
-import { OrderAdminTableElement } from '@lib/apis/order/orderType';
+import type { OrderAdminTableElement } from '@lib/apis/order/orderType';
 import { ColumnsType } from 'antd/es/table';
-import { IssuedTicketAdminTableElement } from '@lib/apis/ticket/ticketType';
+import type { IssuedTicketAdminTableElement } from '@lib/apis/ticket/ticketType';
 import { parseDate } from '@dudoong/utils';
 import TableOption from './TableOption';
 import TicketApi from '@lib/apis/ticket/TicketApi';
@@ -18,6 +18,18 @@ interface TableMapValue {
 const useTableData = () => {
   const issuedTicketColumns: ColumnsType<unknown> = [
     { title: '티켓 번호', dataIndex: 'ticketNo', key: 'ticketNo', width: 100 },
+    {
+      title: '티켓 종류',
+      dataIndex: 'ticketType',
+      key: 'ticketType',
+      width: 100,
+    },
+    {
+      title: '티켓 이름',
+      dataIndex: 'ticketName',
+      key: 'ticketName',
+      width: 250,
+    },
     { title: '이름', dataIndex: 'userName', key: 'userName', width: 100 },
     { title: '이메일', dataIndex: 'email', key: 'email', width: 270 },
     {
@@ -54,6 +66,8 @@ const useTableData = () => {
       return {
         key: row.uuid,
         ticketNo: row.issuedTicketNo,
+        ticketType: row.payType,
+        ticketName: row.ticketName,
         userName: row.userInfo.userName,
         email: row.userInfo.email,
         phoneNumber: row.userInfo.phoneNumber,
@@ -62,7 +76,7 @@ const useTableData = () => {
           parseDate(row.createdAt)[1]
         }`,
         issuedTicketStatus: row.issuedTicketStatus,
-        issuedTicketTime: row.enteredAt
+        enteredAt: row.enteredAt
           ? `${parseDate(row.enteredAt)[0]} ${parseDate(row.enteredAt)[1]}`
           : '--',
       };
@@ -220,7 +234,7 @@ const useTableData = () => {
           searchType: searchString ? searchType : undefined,
           searchString,
         }),
-      scroll: 1220,
+      scroll: 1470,
     },
     approveWaiting: {
       columns: approveWaitingColumns,

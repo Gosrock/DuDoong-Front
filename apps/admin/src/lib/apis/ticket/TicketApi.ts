@@ -1,5 +1,5 @@
 import { axiosPrivate } from '../axios';
-import {
+import type {
   CreateTicketRequest,
   GetIssuedTicketRequest,
   GetTicketDetailResponse,

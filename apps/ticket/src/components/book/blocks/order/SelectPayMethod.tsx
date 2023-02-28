@@ -17,7 +17,7 @@ const SelectPayMethod = ({
   const { setToast } = useToastify();
   const handleCopyAccount = () => {
     navigator.clipboard.writeText(account?.accountNumber || '');
-    setToast({ comment: '계좌번호가 복사되었어요!' });
+    setToast({ comment: '계좌번호가 복사되었어요!', type: 'info' });
   };
 
   if (isDudoong) {
@@ -25,7 +25,7 @@ const SelectPayMethod = ({
       <>
         <TextListRow
           left="입금 계좌"
-          right={`(입금자명) ${account?.accountHolder}`}
+          right={`(예금주) ${account?.accountHolder}`}
         />
         <TextListRow
           left={`${account?.bankName} ${account?.accountNumber}`}

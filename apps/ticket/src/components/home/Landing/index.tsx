@@ -9,7 +9,14 @@ import { css } from '@emotion/react';
 const Landing = () => {
   return (
     <>
-      <DDHead title="두둥!" />
+      <DDHead
+        title="두둥!"
+        additional={
+          <>
+            <meta property="og:image" content="/og.png" />
+          </>
+        }
+      />
       <main
         css={css`
           overflow-x: hidden;

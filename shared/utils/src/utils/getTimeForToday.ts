@@ -1,6 +1,17 @@
-const getTimeForToday = (date: string) => {
+const getTimeForToday = (arg: string) => {
   const today = new Date();
-  const timeValue = new Date(date);
+
+  const [date, time] = arg.split(' ');
+
+  const splitedDate = date.split('.');
+  const splitedTime = time.split(':');
+  const timeValue = new Date(
+    parseInt(splitedDate[0]),
+    parseInt(splitedDate[1]) - 1,
+    parseInt(splitedDate[2]),
+    parseInt(splitedTime[0]),
+    parseInt(splitedTime[1]),
+  );
 
   const betweenTime = Math.floor(
     (today.getTime() - timeValue.getTime()) / 1000 / 60,

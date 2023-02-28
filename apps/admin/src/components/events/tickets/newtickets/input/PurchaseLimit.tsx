@@ -4,7 +4,7 @@ import { Control, Controller, FieldValues } from 'react-hook-form';
 export const PurchaseLimit = ({
   control,
 }: {
-  control: Control<FieldValues, any>;
+  control: Control<FieldValues, number>;
 }) => {
   return (
     <FlexBox align="center" justify="space-between" style={{ width: '100%' }}>

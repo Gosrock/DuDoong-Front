@@ -103,7 +103,7 @@ const DropdownOptionsContainer = styled.div<{
   width: number;
 }>`
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   width: ${({ width }) => width}px;
   ${({ theme, size }) =>
     size === 'large'

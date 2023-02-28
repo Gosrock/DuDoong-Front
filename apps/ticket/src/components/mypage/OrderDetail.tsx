@@ -28,6 +28,7 @@ const OrderDetail = () => {
       {data ? (
         <>
           <DetailEventInfo event={data.eventProfile} />
+          <Divider />
           <TicketsInfo tickets={data.tickets} />
           <Divider />
           <PaymentInfo payment={data.paymentInfo} />

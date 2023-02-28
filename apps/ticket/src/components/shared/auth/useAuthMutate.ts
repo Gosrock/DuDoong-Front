@@ -62,7 +62,6 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   });
 
   const onSuccessLogin = (loginData: OauthLoginResponse) => {
-    console.log(loginData);
     setAuth({ ...auth, isAuthenticated: true, ...loginData });
     setCredentials(loginData);
   };

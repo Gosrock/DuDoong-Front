@@ -11,9 +11,8 @@ import type {
 } from '@lib/apis/host/hostType';
 import { useLocation } from 'react-router-dom';
 import HostApi from '@lib/apis/host/HostApi';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import usePresignedUrl from '@lib/hooks/usePresignedUrl';
-import { queryClient } from '../../main';
 import { useForm, FormState, FieldValues } from 'react-hook-form';
 import getKeyFromUrl from '@lib/utils/getKeyFromUrl';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
@@ -30,6 +29,7 @@ const Info = () => {
     'host',
     hostId,
   );
+  const queryClient = useQueryClient();
   const { register, handleSubmit, reset, formState } = useForm<InputFormType>({
     mode: 'onChange',
     defaultValues: {
@@ -46,7 +46,7 @@ const Info = () => {
   // profile 수정 api
   const postEventMutation = useMutation(HostApi.PATCH_HOST_PROFILE, {
     onSuccess: (data: HostDetailResponse) => {
-      console.log('postHostProfileMutation : ', data);
+      //console.log('postHostProfileMutation : ', data);
     },
   });
 
@@ -75,7 +75,6 @@ const Info = () => {
   const buttonClickHandler = (data: InputFormType) => {
     // 이미지 post
     if (imageInfo.image) {
-      console.log('upload image');
       uploadImageToS3();
     }
     // 호스트 정보 post
@@ -86,13 +85,13 @@ const Info = () => {
       },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries(['hostDetail', hostId]);
           openOverlay({
             content: 'saved',
           });
         },
       },
     );
-    console.log('click button', data, imageInfo);
   };
   useEffect(() => {
     setButtonInfo({
@@ -105,6 +104,7 @@ const Info = () => {
     <>
       <ListHeader
         title={'호스트 정보'}
+        description={'모든 항목을 입력해야 저장할 수 있어요.'}
         size={'listHeader_24'}
         padding={[32, 0, 40, 0]}
       />

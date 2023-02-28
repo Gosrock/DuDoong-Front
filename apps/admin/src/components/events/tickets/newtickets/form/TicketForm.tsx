@@ -1,10 +1,9 @@
-import { payType } from '@lib/apis/ticket/ticketType';
+import type { payType } from '@lib/apis/ticket/ticketType';
 import { Control, FieldValues, UseFormRegister } from 'react-hook-form';
 import DudoongTicketForm from './DudoongTicketForm';
 import FreeTicketForm from './FreeTicketForm';
 import PaidTicketForm from './PaidTicketForm';
 import styled from '@emotion/styled';
-import React from 'react';
 
 export interface TicketFormProps {
   select?: payType;

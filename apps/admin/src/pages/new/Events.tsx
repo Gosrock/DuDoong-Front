@@ -3,25 +3,33 @@ import SecondStep from '@components/new/events/secondStep/SecondStep';
 import { Spacing, ListHeader } from '@dudoong/ui';
 import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import useBottomButton from '@lib/hooks/useBottomButton';
 
 const Events = () => {
   const { step } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const { setButtonInfo, changeButtonType } = useBottomButton({
+    type: 'next',
+    isActive: true,
+  });
 
   let hostId = 0;
   if (location.state) {
     hostId = location.state.hostId;
   }
 
-  // 잘못된 url
   useEffect(() => {
+    // 잘못된 url
     if (step !== '1' && step !== '2') navigate('/404');
   }, []);
 
-  // hostId 없이 step 2에 접근한 경우
   useEffect(() => {
+    // hostId 없이 step 2에 접근한 경우
     if (step === '2' && !hostId) navigate('/');
+    // 버튼 타입
+    if (step === '1') changeButtonType('next');
+    else changeButtonType('save');
   }, [step]);
 
   return (
@@ -37,8 +45,11 @@ const Events = () => {
         padding={[32, 0, 20, 0]}
       />
       <Spacing size={20} />
-      {step === '1' ? <FirstStep /> : <SecondStep hostId={hostId} />}
-      <Spacing size={72} />
+      {step === '1' ? (
+        <FirstStep setButtonInfo={setButtonInfo} />
+      ) : (
+        <SecondStep hostId={hostId} setButtonInfo={setButtonInfo} />
+      )}
     </>
   );
 };
