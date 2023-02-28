@@ -33,14 +33,14 @@ const Success = () => {
             <Button
               fullWidth
               varient="tertiary"
-              onClick={() => router.replace('/')}
+              onClick={() => router.push('/')}
             >
               홈으로
             </Button>
             <Button
               fullWidth
               varient="secondary"
-              onClick={() => router.replace(`/ticket/${orderUuid}`)}
+              onClick={() => router.push(`/ticket/${orderUuid}?redirect=true`)}
             >
               모바일 티켓
             </Button>

@@ -13,8 +13,9 @@ import TicketList from './TicketList';
 
 const Ticket = () => {
   const {
-    query: { id },
+    query: { id, redirect },
     back,
+    push,
   } = useRouter();
 
   const { data, isSuccess } = useQuery(['ticket', id], () =>
@@ -24,16 +25,19 @@ const Ticket = () => {
     <>
       <DDHead title="두둥!" />
       <Main>
-        <NavBar label="모바일 티켓" backHandler={back} />
+        <NavBar
+          label="모바일 티켓"
+          backHandler={redirect === 'true' ? () => push('/home') : back}
+        />
         {isSuccess ? (
           <>
             <Poster>
-              <Image
-                src={data?.eventProfile.posterImage}
-                alt={data?.eventProfile.name}
-                width={204}
-                height={287}
-              />
+              <div>
+                <img
+                  src={data.eventProfile.posterImage}
+                  alt={data.eventProfile.name}
+                />
+              </div>
             </Poster>
             <ListHeader
               title={data.eventProfile.name}
@@ -69,18 +73,25 @@ const Ticket = () => {
   );
 };
 const Poster = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 24px 60px;
-
-  & > img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
+  div {
+    position: relative;
+    padding-top: 141.4%;
+    overflow: hidden;
     box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: ${({ theme }) => theme.palette.gray_300};
+    margin-bottom: 10px;
+    object-fit: cover;
   }
 `;
 
