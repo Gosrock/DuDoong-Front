@@ -19,18 +19,24 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
           </Text>
         }
         description={
-          <Text
-            css={css`
-              color: ${theme.palette.gray_500};
-              text-decoration: underline;
-              &:hover {
-                color: ${theme.palette.gray_400};
-              }
-            `}
-            typo="Text_14"
+          <a
+            href="https://dudoong.com/meta/term"
+            target="_blank"
+            rel="noreferrer"
           >
-            두둥 서비스 약관
-          </Text>
+            <Text
+              css={css`
+                color: ${theme.palette.gray_500};
+                text-decoration: underline;
+                &:hover {
+                  color: ${theme.palette.gray_400};
+                }
+              `}
+              typo="Text_14"
+            >
+              두둥 서비스 약관
+            </Text>
+          </a>
         }
       />
       <ButtonSet varient="mono" padding={[20, 24]}>

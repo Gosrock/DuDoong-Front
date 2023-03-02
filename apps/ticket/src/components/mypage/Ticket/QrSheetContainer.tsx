@@ -20,7 +20,7 @@ const QrSheetContainer = ({ ticket }: { ticket: IssuedTicketInfo }) => {
   const QrCode = dynamic(() => import('./QrCode'), { ssr: false });
   const { data } = useQuery(
     ['tickets', ticket.uuid, 'pulling'],
-    () => TicketApi.GET_ISSUEDTICKETS(ticket.issuedTicketId),
+    () => TicketApi.GET_ISSUEDTICKETS(ticket.uuid),
     { refetchInterval: 1000 },
   );
 
