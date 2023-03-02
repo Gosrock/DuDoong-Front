@@ -102,7 +102,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const parsedState: SelectedTicketState = JSON.parse(
       selectedTicketState as string,
     );
+    // 쿠키 없으면 리프레시
     setSsrAxiosHeader(context.req.cookies);
+
     const options = await TicketApi.GET_TICKETITEM_OPTIONS(
       parsedState.eventId,
       parsedState.itemId,

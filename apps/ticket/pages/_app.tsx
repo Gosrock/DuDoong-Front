@@ -18,17 +18,22 @@ import { setCredentials } from '@lib/utils/setCredentials';
 import { getCookie } from 'cookies-next';
 import Layout from '@components/shared/Layout';
 import Head from 'next/head';
+import useApiError from '@lib/hooks/useError';
+import { access } from 'fs';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
 }
 
 function MyApp({ Component, pageProps, loginData }: MyAppProps) {
+  const { handleError } = useApiError();
+
   const initializer = ({ set }: MutableSnapshot) => {
     if (loginData) {
       const auth = {
         userProfile: loginData.userProfile,
         accessToken: loginData.accessToken,
+        refreshToken: loginData.refreshToken,
         isAuthenticated: true,
         callbackUrl: (getCookie('redirectUrl') as string) || '/',
       };
@@ -40,7 +45,15 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
     loginData && setCredentials(loginData);
   }, [loginData]);
 
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: { onError: handleError, retry: true },
+          mutations: { onError: handleError },
+        },
+      }),
+  );
 
   return (
     <>
@@ -73,9 +86,8 @@ MyApp.getInitialProps = async (context: AppContext) => {
   const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};
   let loginData: OauthLoginResponse | null;
-
+  console.log(ctx.req);
   try {
-    //정적생성페이지(이벤트상세)에서는 리프레쉬로직 돌지 않음
     if (ctx.req) {
       const response = await AuthApi.REFRESH(refreshToken!);
       loginData = response;
@@ -83,7 +95,9 @@ MyApp.getInitialProps = async (context: AppContext) => {
         'set-cookie',
         `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,
       );
-    } else throw new Error('isClient');
+    } else {
+      loginData = null;
+    }
   } catch (err: any) {
     loginData = null;
   }

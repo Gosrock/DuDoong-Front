@@ -5,6 +5,7 @@ export interface AuthStateType {
   isAuthenticated: boolean;
   callbackUrl: string;
   accessToken: string;
+  refreshToken: string;
   userProfile: {
     id: number;
     profileImage: string;
@@ -16,6 +17,7 @@ const initialState: AuthStateType = {
   isAuthenticated: false,
   callbackUrl: (getCookie('redirectUrl') as string) || '/',
   accessToken: '',
+  refreshToken: '',
   userProfile: null,
 };
 
