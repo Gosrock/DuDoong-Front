@@ -25,9 +25,9 @@ export const TicketApi = {
   },
 
   GET_ISSUEDTICKETS: async (
-    issuedTicketId: number,
+    uuid: string,
   ): Promise<RetrievedIssuedTicketDetailResponse> => {
-    const response = await axiosPrivate.get(`/issuedTickets/${issuedTicketId}`);
+    const response = await axiosPrivate.get(`/issuedTickets/${uuid}`);
     return response.data.data;
   },
 };
