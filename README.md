@@ -50,6 +50,8 @@
 ## 3. Dudoong.com
 - [Storybook](https://gosrock.github.io/DuDoong-Front)
 - <b>[랜딩페이지](https://dudoong.com)</b>
+- [호스트 어드민 페이지](https://dudoong.com/admin)
+- [서비스 소개 노션](https://dudoong.notion.site/c4999331a2aa47299e1c6821a7dee9af)
 
 <div>
 <img src="https://user-images.githubusercontent.com/55226431/221772278-78452025-d9df-4676-90e7-ca6d4033ed7e.gif"  width="100%" >
