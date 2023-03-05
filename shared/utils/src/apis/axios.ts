@@ -7,7 +7,7 @@ export const BASE_URL = `${
       : window.location.origin === 'http://localhost:5173'
       ? 'https://staging.dudoong.com/api/v1'
       : `${window.location.origin}/api/v1`
-    : 'https://dudoong.com/api/v1'
+    : 'https://staging.dudoong.com/api/v1'
 }`;
 
 export const DOMAIN = `${
@@ -17,5 +17,4 @@ export const DOMAIN = `${
 export const axiosPublic = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
-  withCredentials: true,
 });

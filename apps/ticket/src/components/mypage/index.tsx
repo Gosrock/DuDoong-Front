@@ -198,9 +198,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (info) return { props: { info } };
     else return { redirect: { destination: '/home', permanent: false } };
   } catch (err: any) {
+    console.log(err.response);
     return {
       redirect: {
-        destination: `/home`,
+        destination: `/login/expired?redirect=mypage`,
         permanent: false,
       },
     };

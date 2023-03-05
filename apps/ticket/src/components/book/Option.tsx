@@ -115,20 +115,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e: any) {
-    /* 
     const { status } = e.response.data;
 
     //토큰 만료일때 -> 재로그인 페이지로
     if (status === 401 || status === 403) {
+      const redirecdtURi = encodeURIComponent(
+        `/events/${context.params!.eventId}`,
+      );
       return {
         redirect: {
-          destination: `/login/expired?redirect=/events/${
-            context.params!.eventId
-          }`,
+          destination: `/login/expired?redirect=${redirecdtURi}`,
           permanent: false,
         },
       };
-    } */
+    }
     return {
       // 새로고침 등으로 query 데이터가 없을땐 이벤트 상세로 리다이렉트
       redirect: {

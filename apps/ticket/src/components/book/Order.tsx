@@ -158,8 +158,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       const data = await CartApi.RECENT_CARTLINE();
       if (data) return { props: { data } };
       else return { redirect: { destination: '/', permanent: false } };
-    } catch (err: any) {
+    } catch (e: any) {
       //TODO : 로그인 후 리다이렉트 url QA때 토큰 이리저리 해보면서 확인
+      const { status } = e.response.data;
+
+      //토큰 만료일때 -> 재로그인 페이지로
+      if (status === 401 || status === 403) {
+        const redirectURi = encodeURIComponent(
+          `/events/${context.params!.eventId}`,
+        );
+        return {
+          redirect: {
+            destination: `/login/expired?redirect=${redirectURi}`,
+            permanent: false,
+          },
+        };
+      }
+
       const redirectUrl = `events/${eventId}`;
       return {
         redirect: {
