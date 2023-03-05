@@ -36,7 +36,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
     onSuccess: (data: OauthLoginResponse) => {
       onSuccessLogin(data);
       closeGlobalOverlay();
-      router.replace(auth.callbackUrl);
+      router.replace(`/${auth.callbackUrl}`);
     },
   });
 
@@ -44,7 +44,7 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
   const ouathKakaoLoginMutation = useMutation(AuthApi.OAUTH_LOGIN, {
     onSuccess: (data: OauthLoginResponse) => {
       onSuccessLogin(data);
-      router.replace(auth.callbackUrl);
+      router.replace(`/${auth.callbackUrl}`);
     },
   });
 
