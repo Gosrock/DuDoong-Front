@@ -17,6 +17,7 @@ import useTicketSelect from '../utils/useTicketSelect';
 interface TicketsProps {
   items: TicketItemResponse[];
   eventName: string;
+  isOutdated: boolean;
 }
 
 export type SelectedTicketState = {
@@ -27,7 +28,7 @@ export type SelectedTicketState = {
   quantity: number;
 };
 
-const SelectTicket = ({ items, eventName }: TicketsProps) => {
+const SelectTicket = ({ items, eventName, isOutdated }: TicketsProps) => {
   const {
     form,
     selectedTicket,

@@ -40,10 +40,11 @@ export const Dropdown = ({
       content={options.map((option) => (
         <button
           key={option.id}
+          disabled={option.disabled}
           css={css`
             width: 100%;
             cursor: pointer;
-            &:hover {
+            &:hover:not(:disabled) {
               background-color: ${theme.palette.gray_100};
             }
           `}
@@ -67,11 +68,17 @@ const DropdownOptionRow = ({ option }: { option: DropdownOption }) => {
       padding={[16, 24]}
       text={title}
       textTypo="P_Text_16_R"
-      textColor={disabled ? 'gray_400' : 'gray_500'}
+      textColor={disabled ? 'gray_300' : 'gray_500'}
       rightElement={
-        <Text typo="P_Text_16_R" color="gray_400">
-          {description}
-        </Text>
+        disabled ? (
+          <Text typo="P_Text_16_R" color="gray_300">
+            {description}
+          </Text>
+        ) : (
+          <Text typo="P_Text_16_R" color="gray_400">
+            {description}
+          </Text>
+        )
       }
     />
   );

@@ -29,7 +29,6 @@ const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
   const { data: tickets } = useQuery(['tickets', eventId], () =>
     TicketApi.GET_TICKETITEMS(eventId as string),
   );
-
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
 
   /*   useEffect(() => {
@@ -100,6 +99,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   try {
     const detail = await EventApi.GET_EVENT_DETAIL(eventId);
+    console.log(detail.status);
     return {
       props: {
         detail,
