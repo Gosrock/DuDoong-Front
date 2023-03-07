@@ -36,10 +36,10 @@ const SelectTicket = ({ items, eventName }: TicketsProps) => {
     setOption,
     handleCounter,
   } = useTicketSelect(items);
-  const router = useRouter();
+  const { query } = useRouter();
 
   const data: SelectedTicketState = {
-    eventId: router.query.eventId as string,
+    eventId: query.eventId as string,
     eventName: eventName,
     ticketName: selectedTicket.ticketName,
     itemId: form.ticketItemId,
@@ -82,10 +82,10 @@ const SelectTicket = ({ items, eventName }: TicketsProps) => {
             width: 100%;
           `}
           href={{
-            pathname: `${router.asPath}/book/option`,
+            pathname: `/events/${query.eventId}/book/option`,
             query: { selectedTicketState: JSON.stringify(data) },
           }}
-          as={`${router.asPath}/book/option`}
+          as={`/events/${query.eventId}/book/option`}
         >
           <Button fullWidth>예매하기</Button>
         </Link>
