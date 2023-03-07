@@ -46,7 +46,7 @@ const Remote = ({ openTicketOverlay, eventName, isOutdated }: RemoteProps) => {
           onClick={handleClickBooking}
           disabled={isOutdated}
         >
-          예매하기
+          {isOutdated ? '지난 공연' : '예매하기'}
         </Button>
       </Wrapper>
       <Modal open={isOpen} onDismiss={closeTalkOverlay}>
