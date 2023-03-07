@@ -1,4 +1,4 @@
-import { Text } from '@dudoong/ui';
+import { Tag, Text } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { EventResponse } from '@lib/apis/events/eventType';
@@ -9,6 +9,9 @@ const EventLink = (props: EventResponse) => {
     <Link href={`events/${props.eventId}`}>
       <Poster>
         <img src={props.posterImage} alt="" className="poster" />
+        {props.status === '지난공연' && (
+          <Tag size="md" color="mono" text="지난 공연" className="tag" />
+        )}
       </Poster>
       <Text
         typo="P_Text_14_R"
@@ -54,4 +57,11 @@ const Poster = styled.div`
   }
   box-shadow: 0px 0px 10px 7px rgba(0, 0, 0, 0.01);
   border-radius: 12px;
+
+  .tag {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.05);
+  }
 `;

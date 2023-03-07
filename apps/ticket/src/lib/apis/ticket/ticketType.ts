@@ -1,5 +1,5 @@
 import { EventStatus } from '@dudoong/utils';
-import type { OptionGroupType } from '../cart/cartType';
+import type { AccountInfo, OptionGroupType } from '../cart/cartType';
 import type { IssuedTicketInfo } from '../order/orderType';
 
 /*
@@ -20,6 +20,9 @@ export interface TicketItemResponse {
   supplyCount: number;
   quantity: number;
   isQuantityPublic: boolean;
+  accountInfo: AccountInfo;
+  isSold: boolean;
+  isQuantityLeft: boolean;
 }
 export type PayType = '두둥티켓' | '무료티켓' | '유료티켓';
 export type ApproveType = '선착순' | '승인';
