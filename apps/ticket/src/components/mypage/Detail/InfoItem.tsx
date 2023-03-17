@@ -1,7 +1,8 @@
 import { KeyOfPalette, KeyOfTypo, ListRow, Text, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
+import { ComponentProps } from 'react';
 
-interface InfoItem {
+interface InfoItem extends ComponentProps<'div'> {
   item: string;
   value?: string;
   color?: KeyOfPalette;
@@ -13,9 +14,11 @@ const InfoItem = ({
   value,
   color = 'gray_500',
   typo = 'P_Text_16_R',
+  ...props
 }: InfoItem) => {
   return (
     <ListRow
+      {...props}
       text={item}
       textColor={color}
       textTypo={typo}

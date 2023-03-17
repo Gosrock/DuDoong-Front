@@ -40,7 +40,7 @@ const OrderedTicket = ({ ticket }: { ticket: OrderLineTicketResponse }) => {
           ))}
         />
       ) : (
-        <InfoItem key={ticket.ticketNos} item="관리자 티켓" />
+        <InfoItem key={ticket.ticketNos} item={ticket.ticketName} />
       )}
       <InfoItem item="예매번호" value={ticket.orderNo} />
       <InfoItem item="티켓번호" value={ticket.ticketNos || '승인 대기중'} />

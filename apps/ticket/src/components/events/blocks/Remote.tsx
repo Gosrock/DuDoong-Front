@@ -12,9 +12,10 @@ import TalkOverlay from './Talk/Index';
 interface RemoteProps {
   openTicketOverlay: () => void;
   eventName: string;
+  isOutdated: boolean;
 }
 
-const Remote = ({ openTicketOverlay, eventName }: RemoteProps) => {
+const Remote = ({ openTicketOverlay, eventName, isOutdated }: RemoteProps) => {
   const router = useRouter();
   const auth = useRecoilValue(authState);
   const { openGlobalOverlay } = useGlobalOverlay();
@@ -39,12 +40,21 @@ const Remote = ({ openTicketOverlay, eventName }: RemoteProps) => {
         <Button varient="tertiary" width={56} onClick={openTalkOverlay}>
           <Talk />
         </Button>
-        <Button varient="primary" fullWidth onClick={handleClickBooking}>
-          예매하기
+        <Button
+          varient="primary"
+          fullWidth
+          onClick={handleClickBooking}
+          disabled={isOutdated}
+        >
+          {isOutdated ? '지난 공연' : '예매하기'}
         </Button>
       </Wrapper>
       <Modal open={isOpen} onDismiss={closeTalkOverlay}>
-        <TalkOverlay eventName={eventName} onClose={closeTalkOverlay} />
+        <TalkOverlay
+          eventName={eventName}
+          onClose={closeTalkOverlay}
+          isOpen={isOpen}
+        />
       </Modal>
     </>
   );

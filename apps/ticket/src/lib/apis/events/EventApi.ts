@@ -1,4 +1,4 @@
-import { InfiniteResponse } from '@dudoong/utils';
+import { axiosPublic, InfiniteResponse } from '@dudoong/utils';
 import { axiosPrivate } from '../axios';
 import type { EventResponse, getEventsRequest } from './eventType';
 
@@ -8,7 +8,7 @@ export const EventApi = {
     pageParam,
     size,
   }: getEventsRequest): Promise<InfiniteResponse<EventResponse>> => {
-    const response = await axiosPrivate.get(
+    const response = await axiosPublic.get(
       `/events/search?keyword=${keyword}&page=${pageParam}&size=${size}`,
     );
     return response.data.data;

@@ -1,4 +1,4 @@
-import { Popup } from '@dudoong/ui';
+import { Popup, PopupOptions } from '@dudoong/ui';
 import { ReactComponent as ThreeDot } from '@assets/moreVert.svg';
 import { css } from '@emotion/react';
 import type { OrderAdminTableElement } from '@lib/apis/order/orderType';
@@ -15,13 +15,13 @@ const TableOption = ({
   tableType: TableType;
 }) => {
   const eventId = useLocation().pathname.split('/')[2];
-  const { mutate } = useGuestMutation();
-  const { openOverlay } = useGlobalOverlay();
+  const { cancelMutate, approveMutate } = useGuestMutation();
+  const { openOverlay, closeOverlay } = useGlobalOverlay();
   const approveWaitingOptions = [
     {
       title: '승인하기',
       onClick: () => {
-        mutate({ eventId, order_uuid: data.orderUuid });
+        approveMutate({ eventId, order_uuid: data.orderUuid });
       },
     },
 
@@ -35,7 +35,7 @@ const TableOption = ({
       },
     },
   ];
-  const confirmOptions = [
+  const confirmOptions: PopupOptions[] = [
     {
       title: '자세히 보기',
       onClick: () => {
@@ -44,6 +44,22 @@ const TableOption = ({
           props: { eventId, order_uuid: data.orderUuid },
         });
       },
+    },
+    {
+      title: '주문 취소',
+      onClick: () => {
+        openOverlay({
+          content: 'cancelOrder',
+          props: {
+            closeOverlay,
+            cancelOrderHandler: () => {
+              cancelMutate({ eventId, order_uuid: data.orderUuid });
+              closeOverlay();
+            },
+          },
+        });
+      },
+      disabled: data.orderStatus === '취소된 결제',
     },
   ];
 

@@ -12,7 +12,7 @@ const getTicketItemObjects = (items: TicketItemResponse[]) => {
     return {
       title: item.ticketName,
       id: item.ticketItemId,
-      disabled: item.quantity === 0,
+      disabled: !item.isQuantityLeft,
       description: `${item.price}${
         item.approveType === '승인' ? ' (승인 후 발매)' : ''
       }`,

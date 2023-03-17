@@ -45,19 +45,22 @@
 </div>
 </div>
 
-<br/>
+<br/><br/>
 
 ## 3. Dudoong.com
-- [Storybook](https://gosrock.github.io/Dudoong-Front)
+- [Storybook](https://gosrock.github.io/DuDoong-Front)
 - <b>[랜딩페이지](https://dudoong.com)</b>
+- [호스트 어드민 페이지](https://dudoong.com/admin)
+- [서비스 소개 노션](https://dudoong.notion.site/c4999331a2aa47299e1c6821a7dee9af)
 
 <div>
 <img src="https://user-images.githubusercontent.com/55226431/221772278-78452025-d9df-4676-90e7-ca6d4033ed7e.gif"  width="100%" >
 </div>
 
-<br>
+<br/><br/>
 
-## 6. 프로젝트 구조
+## 4. 프로젝트 구조
+yarn workspaces를 이용한 모노레포 구조입니다.
 
 ```bash
 ├── .github #액션 워크플로우 세팅
@@ -73,7 +76,42 @@
 
 <br/>
 
-## 7. 참여자
+### 시작하기
+
+
+1. 의존성을 설치합니다.
+```
+yarn install
+```
+<br/>
+
+2. `apps` 디렉토리 내부에 있는 서비스별로 env 환경변수를 설정해야 합니다.
+외부 api 관련 키들을 환경변수로 관리하고 있습니다.
+
+<br/>
+
+3. 다음과 같이 각 서비스들을 개발환경에서 실행할 수 있습니다.
+
+```
+yarn ticket
+yarn admin
+```
+
+<br/><br/>
+
+## 5. 개발 과정
+지속적으로 작성중에 있습니다.
+
+- [모두를 위한 공연 라이프 - 기획과 디자인](https://9yujinsite-mrk32xx06-9yujin.vercel.app/devlog/dudoong/idea-220309)
+- [프론트엔드 모노레포 구축 삽질기 (1)](https://www.9yujin.site/devlog/frontend/monorepo-230103)
+- [프론트엔드 모노레포 구축 삽질기 (1)](https://www.9yujin.site/devlog/frontend/monorepo-230108)
+- [프론트엔드 모노레포 구축 삽질기 (1)](https://www.9yujin.site/devlog/frontend/monorepo-230118)
+- [서버 사이드 렌더링(SSR)과 cookie 로그인 정보 다루기](https://www.9yujin.site/devlog/frontend/ssr-230122)
+
+
+<br/><br/>
+
+## 6. 참여자
 <table>
     <tr align="center">
         <td><B>Lead•FE•UI/UX<B></td>

@@ -5,9 +5,7 @@ import { OrderApi } from '@lib/apis/order/OrderApi';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import DetailEventInfo from './Detail/DetailEventInfo';
-import Tickets from './Detail/TicketsInfo';
 import PaymentInfo from './Detail/PaymentInfo';
-import CancelTicket from './Detail/RefundInfo';
 import TicketsInfo from './Detail/TicketsInfo';
 import RefundInfo from './Detail/RefundInfo';
 

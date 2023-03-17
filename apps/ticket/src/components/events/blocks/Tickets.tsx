@@ -18,8 +18,16 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
             subText={`${item.price} ∙ ${item.payType} ∙ 인당 ${item.purchaseLimit}매 제한`}
             textGap={0}
             rightElement={
-              item.isQuantityPublic && (
-                <Tag size="md" text={`${item.quantity}매 남음`} color="main" />
+              item.isQuantityLeft ? (
+                item.isQuantityPublic && (
+                  <Tag
+                    size="md"
+                    text={`${item.quantity}매 남음`}
+                    color="main"
+                  />
+                )
+              ) : (
+                <Tag size="md" text={`매진`} color="mono" />
               )
             }
           />

@@ -16,6 +16,9 @@ const PcPage = ({
   const MdViewer = dynamic(() => import('../../blocks/MdViewer'), {
     ssr: false,
   });
+  const isOutdated = detail.status === '지난공연';
+  console.log(detail.status);
+
   return (
     <div {...props}>
       <Spacing size={100} />
@@ -37,6 +40,7 @@ const PcPage = ({
           <Remote
             openTicketOverlay={openTicketOverlay}
             eventName={detail.name}
+            isOutdated={isOutdated}
           />
         </RightSticky>
       </Container>

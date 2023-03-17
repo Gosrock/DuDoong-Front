@@ -32,6 +32,7 @@ const MobilePage = ({
   const MdViewer = dynamic(() => import('../../blocks/MdViewer'), {
     ssr: false,
   });
+  const isOutdated = detail.status === '지난공연';
 
   return (
     <Wrapper {...props}>
@@ -119,7 +120,11 @@ const MobilePage = ({
           z-index: 3;
         `}
       >
-        <Remote openTicketOverlay={openTicketOverlay} eventName={detail.name} />
+        <Remote
+          openTicketOverlay={openTicketOverlay}
+          eventName={detail.name}
+          isOutdated={isOutdated}
+        />
       </ButtonSet>
     </Wrapper>
   );

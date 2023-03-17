@@ -18,6 +18,9 @@ import { setCredentials } from '@lib/utils/setCredentials';
 import { getCookie } from 'cookies-next';
 import Layout from '@components/shared/Layout';
 import Head from 'next/head';
+import { UserApi } from '@lib/apis/user/UserApi';
+import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
+import { axiosPrivate } from '@lib/apis/axios';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -77,14 +80,18 @@ MyApp.getInitialProps = async (context: AppContext) => {
   try {
     //정적생성페이지(이벤트상세)에서는 리프레쉬로직 돌지 않음
     if (ctx.req) {
-      const response = await AuthApi.REFRESH(refreshToken!);
+      const cookie = ctx.req.headers.cookie;
+      axiosPrivate.defaults.headers.Cookie = cookie || '';
+      const response = await UserApi.REFRESH();
       loginData = response;
+
       ctx.res?.setHeader(
         'set-cookie',
         `refreshToken=${response.refreshToken}; path=/; max-age=${response.refreshTokenAge}`,
       );
     } else throw new Error('isClient');
   } catch (err: any) {
+    //console.log(err.response);
     loginData = null;
   }
 

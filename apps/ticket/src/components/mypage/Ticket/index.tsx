@@ -47,14 +47,19 @@ const Ticket = () => {
               </div>
             </Poster>
             <ListHeader
+              padding={[32, 36, 16, 36]}
               title={data.eventProfile.name}
               size={'listHeader_20'}
               descColor={'black'}
-              description={`${parseDate(data.eventProfile.startAt)[0]}${
+              description={`${parseDate(data.eventProfile.startAt)[0]} ${
                 parseDate(data.eventProfile.startAt)[1]
               }\n${data.eventProfile.placeName}`}
             />
-            <TicketList tickets={data.tickets} orderUuid={data.orderUuid} />
+            <TicketList
+              tickets={data.tickets}
+              orderUuid={data.orderUuid}
+              title={data.eventProfile.name}
+            />
             <Spacing size={20} />
             <Divider />
             <Shortcuts

@@ -30,9 +30,18 @@ const OrderApi = {
   POST_ORDER_APPROVE: async ({
     eventId,
     order_uuid,
-  }: PatchOrderApproveRequest) => {
+  }: PatchOrderApproveRequest): Promise<OrderResponse> => {
     const response = await axiosPrivate.post(
       `/events/${eventId}/orders/${order_uuid}/approve`,
+    );
+    return response.data.data;
+  },
+  POST_ORDER_CANCEL: async ({
+    eventId,
+    order_uuid,
+  }: PatchOrderApproveRequest): Promise<OrderResponse> => {
+    const response = await axiosPrivate.post(
+      `/events/${eventId}/orders/${order_uuid}/cancel`,
     );
     return response.data.data;
   },
