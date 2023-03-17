@@ -1,4 +1,7 @@
-import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
+import type {
+  IssuedTicketInfo,
+  IssuedTicketStatus,
+} from '@lib/apis/order/orderType';
 import QRCodeStyling from 'qr-code-styling';
 import { useEffect, useRef } from 'react';
 
@@ -19,7 +22,13 @@ const qrCode = new QRCodeStyling({
   },
 });
 
-const Qrcode = ({ ticket }: { ticket: IssuedTicketInfo }) => {
+const Qrcode = ({
+  ticket,
+  status,
+}: {
+  ticket: IssuedTicketInfo;
+  status: IssuedTicketStatus;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,7 +39,14 @@ const Qrcode = ({ ticket }: { ticket: IssuedTicketInfo }) => {
     qrCode.update({
       data: ticket.uuid,
     });
-  }, []);
+    if (status !== '입장 전') {
+      qrCode.update({
+        cornersDotOptions: { color: '#e3e4e8' },
+        cornersSquareOptions: { color: '#e3e4e8' },
+        dotsOptions: { color: '#e3e4e8' },
+      });
+    }
+  }, [ticket]);
 
   return <div ref={ref} />;
 };
