@@ -10,7 +10,11 @@ interface DropdownProps extends ComponentProps<'div'> {
   onClickOption: () => void;
   renderElement: JSX.Element;
 }
-export type PopupOptions = { title: string; onClick: () => void };
+export type PopupOptions = {
+  title: string;
+  onClick: () => void;
+  disabled?: boolean;
+};
 type DropdownSize = 'large' | 'small';
 type Props = Partial<DropdownProps>;
 type WapperProps = Pick<Props, 'size' | 'disabled' | 'width'>;
@@ -86,6 +90,7 @@ function DropdownOptions(props: DropdownOptionsProps) {
             option.onClick();
             onClickOption && onClickOption();
           }}
+          disabled={option.disabled || false}
         >
           {option.title}
         </DropdownTable>
@@ -125,8 +130,21 @@ const DropdownOptionsContainer = styled.div<{
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 `;
 
-const DropdownTable = styled.div<{ size: DropdownSize }>`
+const DropdownTable = styled.button<{ size: DropdownSize; disabled: boolean }>`
   cursor: pointer;
+  width: 100%;
+  text-align: left;
+  ${({ theme, disabled }) =>
+    disabled
+      ? css`
+          color: ${theme.palette.gray_400};
+        `
+      : css`
+          &:hover {
+            background-color: ${theme.palette.gray_100};
+          }
+        `}
+
   ${({ theme, size }) =>
     size === 'large'
       ? css`
@@ -137,9 +155,7 @@ const DropdownTable = styled.div<{ size: DropdownSize }>`
           ${theme.typo.P_Text_14_M}
           padding : 8px 16px;
         `}
-  &:hover {
-    background-color: ${({ theme }) => theme.palette.gray_100};
-  }
+  
 
   &:first-of-type {
     border-top-left-radius: 8px;
