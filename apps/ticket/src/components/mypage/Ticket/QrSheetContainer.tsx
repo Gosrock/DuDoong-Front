@@ -8,7 +8,7 @@ import type {
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
 import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Bbanzzaks from '@assets/bbanzzaks-qr.svg';
 import Bbanzzak from '@assets/bbanzzak-qr.svg';
 
@@ -26,6 +26,9 @@ const QrSheetContainer = ({
   title: string;
 }) => {
   const QrCode = dynamic(() => import('./QrCode'), { ssr: false });
+  const [isToastReady, setIsToastReady] = useState<boolean>(
+    ticket.issuedTicketStatus === '입장 전',
+  );
   const { data } = useQuery(
     ['tickets', ticket.uuid, 'pulling'],
     () => TicketApi.GET_ISSUEDTICKETS(ticket.uuid),
@@ -35,10 +38,14 @@ const QrSheetContainer = ({
   const { setToast } = useToastify();
 
   useEffect(() => {
-    if (ticket.issuedTicketStatus === '입장 완료') {
-      setToast({ comment: '입장이 완료되었어요!', type: 'info' });
+    console.log(isToastReady);
+    if (isToastReady) {
+      if (data?.issuedTicketInfo.issuedTicketStatus === '입장 완료') {
+        setToast({ comment: '입장이 완료되었어요!', type: 'info' });
+        setIsToastReady(false);
+      }
     }
-  }, [data?.issuedTicketInfo.issuedTicketStatus, ticket.issuedTicketStatus]);
+  }, [data?.issuedTicketInfo.issuedTicketStatus]);
 
   return (
     <Wrapper>
@@ -46,7 +53,9 @@ const QrSheetContainer = ({
       <Text typo="P_Header_20_B" color="black" className={'title'}>
         {title}
       </Text>
-      <QrWrapper status={ticket.issuedTicketStatus === '입장 전'}>
+      <QrWrapper
+        status={data?.issuedTicketInfo.issuedTicketStatus === '입장 전'}
+      >
         <QrContainer>
           {/* <StatusIndicator
             status={
