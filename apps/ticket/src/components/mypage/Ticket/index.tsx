@@ -55,7 +55,11 @@ const Ticket = () => {
                 parseDate(data.eventProfile.startAt)[1]
               }\n${data.eventProfile.placeName}`}
             />
-            <TicketList tickets={data.tickets} orderUuid={data.orderUuid} />
+            <TicketList
+              tickets={data.tickets}
+              orderUuid={data.orderUuid}
+              title={data.eventProfile.name}
+            />
             <Spacing size={20} />
             <Divider />
             <Shortcuts

@@ -11,9 +11,11 @@ import { css } from '@emotion/react';
 const TicketList = ({
   tickets,
   orderUuid,
+  title,
 }: {
   tickets: IssuedTicketInfo[];
   orderUuid: string;
+  title: string;
 }) => {
   const pagination = {
     clickable: true,
@@ -58,7 +60,11 @@ const TicketList = ({
             {tickets.map((ticket: IssuedTicketInfo, idx: number) => {
               return (
                 <SwiperSlide key={idx}>
-                  <TicketItem ticket={ticket} orderUuid={orderUuid} />
+                  <TicketItem
+                    ticket={ticket}
+                    orderUuid={orderUuid}
+                    title={title}
+                  />
                 </SwiperSlide>
               );
             })}

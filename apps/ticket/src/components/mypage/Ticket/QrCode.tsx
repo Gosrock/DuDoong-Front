@@ -3,9 +3,9 @@ import QRCodeStyling from 'qr-code-styling';
 import { useEffect, useRef } from 'react';
 
 const qrCode = new QRCodeStyling({
-  width: 250,
-  height: 250,
-  margin: 8,
+  width: 178,
+  height: 178,
+  margin: 0,
   dotsOptions: {
     color: 'black',
     type: 'rounded',
@@ -13,7 +13,7 @@ const qrCode = new QRCodeStyling({
   cornersSquareOptions: {
     type: 'extra-rounded',
   },
-  backgroundOptions: { color: '#f8f8fa' },
+  backgroundOptions: { color: '#ffffff' },
   imageOptions: {
     crossOrigin: 'anonymous',
   },
