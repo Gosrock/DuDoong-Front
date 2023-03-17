@@ -63,7 +63,14 @@ const QrSheetContainer = ({
               ticket.issuedTicketStatus
             }
           /> */}
-          <QrCode ticket={ticket} />
+          <QrCode
+            ticket={ticket}
+            status={
+              data
+                ? data.issuedTicketInfo.issuedTicketStatus
+                : ticket.issuedTicketStatus
+            }
+          />
           <Bbanzzaks className="bbanzzaks" />
           <Bbanzzak className="bbanzzak" />
         </QrContainer>
