@@ -14,7 +14,7 @@ const NoEventPage = () => {
         <DudoongOne />
         <Padding size={[24, 124.5, 24, 124.5]}>
           <Text typo="Text_16" color="gray_500">
-            두둥!아무것도 없네요
+            두둥! 아무것도 없어요
           </Text>
         </Padding>
         <Padding size={[20, 24, 20, 24]}>
