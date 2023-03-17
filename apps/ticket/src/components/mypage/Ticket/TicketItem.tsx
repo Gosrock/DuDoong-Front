@@ -10,9 +10,11 @@ import QrSheetContainer from './QrSheetContainer';
 const TicketItem = ({
   ticket,
   orderUuid,
+  title,
 }: {
   ticket: IssuedTicketInfo;
   orderUuid: string;
+  title: string;
 }) => {
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
 
@@ -55,7 +57,7 @@ const TicketItem = ({
           }
         `}
       >
-        <QrSheetContainer ticket={ticket} />
+        <QrSheetContainer ticket={ticket} title={title} />
       </BottomSheet>
     </Wrapper>
   );
