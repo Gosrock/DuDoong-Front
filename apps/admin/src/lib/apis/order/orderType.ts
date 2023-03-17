@@ -1,4 +1,4 @@
-import { OptionGroupType } from "../option/optionType";
+import { OptionGroupType } from '../option/optionType';
 
 export interface GetOrdersRequest {
   orderStage: 'APPROVE_WAITING' | 'CONFIRMED';
@@ -48,13 +48,13 @@ interface RefundInfo {
 export type OrderStatus =
   | '주문 생성상태'
   | '결제 대기중'
-  | ' 승인 대기중'
-  | ' 결제 시간 만료'
-  | ' 결제 완료'
-  | ' 승인 완료'
-  | ' 환불 완료'
-  | ' 취소된 결제'
-  | ' 결제 실패';
+  | '승인 대기중'
+  | '결제 시간 만료'
+  | '결제 완료'
+  | '승인 완료'
+  | '환불 완료'
+  | '취소된 결제'
+  | '결제 실패';
 
 //-------------
 
@@ -138,4 +138,3 @@ export interface OptionAnswer {
   answer: string;
   additionalPrice: string;
 }
-
