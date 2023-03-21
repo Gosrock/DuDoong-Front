@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import styled from '@emotion/styled';
-=======
->>>>>>> eef4e65b5683dec980933a1cb14c806f2bdb6c77
 import type {
   IssuedTicketInfo,
   IssuedTicketStatus,
