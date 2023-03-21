@@ -21,6 +21,8 @@ import Head from 'next/head';
 import { UserApi } from '@lib/apis/user/UserApi';
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
 import { axiosPrivate } from '@lib/apis/axios';
+import Script from 'next/script';
+import { GA_TRACKING_ID } from '@lib/utils/gtag';
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;
@@ -53,6 +55,25 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
           content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
         />
       </Head>
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
       <ThemeProvider theme={theme}>
         <RecoilRoot initializeState={initializer}>
           <QueryClientProvider client={queryClient}>
