@@ -61,9 +61,9 @@ const TicketItem = ({
         `}
       >
         <QrSheetContainer ticket={ticket} title={title} />
-        <BlankPage onClick={() => push(`qr?uuid=${ticket.uuid}`)}>
+        {/* <BlankPage onClick={() => push(`qr?uuid=${ticket.uuid}`)}>
           새 창 열기
-        </BlankPage>
+        </BlankPage> */}
       </BottomSheet>
     </Wrapper>
   );
