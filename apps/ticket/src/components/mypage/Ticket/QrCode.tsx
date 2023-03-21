@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import type {
   IssuedTicketInfo,
   IssuedTicketStatus,
@@ -33,6 +34,7 @@ const Qrcode = ({
 
   useEffect(() => {
     if (ref.current) qrCode.append(ref.current);
+    console.log(ticket.uuid);
   }, []);
 
   useEffect(() => {
@@ -48,7 +50,35 @@ const Qrcode = ({
     }
   }, [ticket]);
 
-  return <div ref={ref} />;
-};
+  const handleReload = () => {
+    qrCode.update({ data: ticket.uuid });
+    console.log('새로고침 정보', ticket.uuid);
+  };
 
+  return (
+    <Wrapper>
+      <div ref={ref} />
+      <Reload onClick={handleReload}>QR 새로고침</Reload>
+    </Wrapper>
+  );
+};
+const Wrapper = styled.div`
+  position: relative;
+`;
+const Reload = styled.div`
+  position: absolute;
+  margin: 0 auto;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: -44px;
+
+  ${({ theme }) => theme.typo.P_Text_12_M}
+  color : ${({ theme }) => theme.palette.gray_400};
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`;
 export default Qrcode;
