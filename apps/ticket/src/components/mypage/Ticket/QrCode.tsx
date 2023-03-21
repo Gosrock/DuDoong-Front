@@ -3,6 +3,8 @@ import type {
   IssuedTicketInfo,
   IssuedTicketStatus,
 } from '@lib/apis/order/orderType';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 import QRCodeStyling from 'qr-code-styling';
 import { useEffect, useRef } from 'react';
 
@@ -24,22 +26,23 @@ const qrCode = new QRCodeStyling({
 });
 
 const Qrcode = ({
-  ticket,
+  uuid,
   status,
 }: {
-  ticket: IssuedTicketInfo;
+  uuid: string;
   status: IssuedTicketStatus;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (ref.current) qrCode.append(ref.current);
-    console.log(ticket.uuid);
+    console.log(uuid);
   }, []);
 
   useEffect(() => {
     qrCode.update({
-      data: ticket.uuid,
+      data: uuid,
     });
     if (status !== '입장 전') {
       qrCode.update({
@@ -48,19 +51,13 @@ const Qrcode = ({
         dotsOptions: { color: '#e3e4e8' },
       });
     }
-  }, [ticket]);
+  }, [uuid, status]);
 
   const handleReload = () => {
-    qrCode.update({ data: ticket.uuid });
-    console.log('새로고침 정보', ticket.uuid);
+    router.push(`qr?uuid=${uuid}`, 'qr');
   };
 
-  return (
-    <Wrapper>
-      <div ref={ref} />
-      <Reload onClick={handleReload}>QR 새로고침</Reload>
-    </Wrapper>
-  );
+  return <div ref={ref} />;
 };
 const Wrapper = styled.div`
   position: relative;

@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import type { IssuedTicketInfo } from '@lib/apis/order/orderType';
 import useOverlay from '@lib/hooks/useOverlay';
 import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import QrSheetContainer from './QrSheetContainer';
 
@@ -17,6 +18,7 @@ const TicketItem = ({
   title: string;
 }) => {
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
+  const { push } = useRouter();
 
   return (
     <Wrapper>
@@ -48,6 +50,7 @@ const TicketItem = ({
         open={isOpen}
         onDismiss={closeOverlay}
         css={css`
+          position: relative;
           & > div > * {
             // 스크롤바 생기는 현상 잡기
             overflow: hidden;
@@ -58,6 +61,9 @@ const TicketItem = ({
         `}
       >
         <QrSheetContainer ticket={ticket} title={title} />
+        <BlankPage onClick={() => push(`qr?uuid=${ticket.uuid}`)}>
+          새 창 열기
+        </BlankPage>
       </BottomSheet>
     </Wrapper>
   );
@@ -68,6 +74,25 @@ const Wrapper = styled.div`
   a {
     width: 100%;
   }
+`;
+
+const BlankPage = styled.button`
+  ${({ theme }) => theme.typo.P_Text_14_M}
+  color : ${({ theme }) => theme.palette.gray_400};
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  bottom: 58px;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  animation: 1s forwards fadeIn ease-out;
 `;
 
 export default TicketItem;
