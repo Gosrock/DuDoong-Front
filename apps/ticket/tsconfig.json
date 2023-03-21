@@ -25,7 +25,8 @@
       "@lib/*": ["src/lib/*"],
       "@store/*": ["src/store/*"],
       "@assets/*": ["src/assets/*"]
-    }
+    },
+    "types": ["@types/gtag.js"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "../../**/*.d.ts"],
   "exclude": ["node_modules"]

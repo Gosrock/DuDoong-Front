@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.10.5",
-    "@svgr/webpack": "^6.5.1"
+    "@svgr/webpack": "^6.5.1",
+    "@types/gtag.js": "^0.0.12"
   }
 }

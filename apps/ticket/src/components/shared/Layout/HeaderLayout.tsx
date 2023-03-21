@@ -142,6 +142,7 @@ export const HeaderLayout = ({ children }: PropsWithChildren) => {
 
 const Wrapper = styled.div`
   position: relative;
+  background-color: ${({ theme }) => theme.palette.white};
 `;
 
 const PcHeader = styled.div`

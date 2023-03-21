@@ -30,7 +30,7 @@ const QrSheetContainer = ({
     ticket.issuedTicketStatus === '입장 전',
   );
   const { data } = useQuery(
-    ['tickets', ticket.uuid, 'pulling'],
+    ['ticket', ticket.uuid, 'pulling'],
     () => TicketApi.GET_ISSUEDTICKETS(ticket.uuid),
     { refetchInterval: 1000 },
   );
@@ -64,7 +64,7 @@ const QrSheetContainer = ({
             }
           /> */}
           <QrCode
-            ticket={ticket}
+            uuid={ticket.uuid}
             status={
               data
                 ? data.issuedTicketInfo.issuedTicketStatus
