@@ -103,9 +103,9 @@ yarn admin
 지속적으로 작성중에 있습니다.
 
 - [모두를 위한 공연 라이프 - 기획과 디자인](https://9yujinsite-mrk32xx06-9yujin.vercel.app/devlog/dudoong/idea-220309)
-- [프론트엔드 모노레포 구축 삽질기 (1)](https://www.9yujin.site/devlog/frontend/monorepo-230103)
-- [프론트엔드 모노레포 구축 삽질기 (1)](https://www.9yujin.site/devlog/frontend/monorepo-230108)
-- [프론트엔드 모노레포 구축 삽질기 (1)](https://www.9yujin.site/devlog/frontend/monorepo-230118)
+- [프론트엔드 모노레포 구축 삽질기 (1) - 도입 이유, yarn workspaces, berry](https://www.9yujin.site/devlog/frontend/monorepo-230103)
+- [프론트엔드 모노레포 구축 삽질기 (2) - 프로젝트 세팅 with Next.js, Vite, storybook, emotion](https://www.9yujin.site/devlog/frontend/monorepo-230108)
+- [프론트엔드 모노레포 구축 삽질기 (3) - CICD 배포, Docker, Github Actions](https://www.9yujin.site/devlog/frontend/monorepo-230118)
 - [서버 사이드 렌더링(SSR)과 cookie 로그인 정보 다루기](https://www.9yujin.site/devlog/frontend/ssr-230122)
 
 
