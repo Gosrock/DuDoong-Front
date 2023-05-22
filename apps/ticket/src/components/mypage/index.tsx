@@ -46,7 +46,6 @@ const Mypage = ({ info }: { info: UserInfo }) => {
   );
 
   useEffect(() => {
-    console.log(userProfile);
     if (!userProfile?.id) {
       router.push('/home');
     }

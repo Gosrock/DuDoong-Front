@@ -36,6 +36,15 @@ const OrderApi = {
     );
     return response.data.data;
   },
+  POST_ORDER_REFUSE: async ({
+    eventId,
+    order_uuid,
+  }: PatchOrderApproveRequest): Promise<OrderResponse> => {
+    const response = await axiosPrivate.post(
+      `/events/${eventId}/orders/${order_uuid}/refuse`,
+    );
+    return response.data.data;
+  },
   POST_ORDER_CANCEL: async ({
     eventId,
     order_uuid,

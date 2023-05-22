@@ -15,6 +15,7 @@ const TAG_COLOR: TagColorType = {
   입장완료: 'main',
   관람예정: 'main',
   입장중: 'main',
+  지난공연: 'mono',
   취소됨: 'mono',
 };
 

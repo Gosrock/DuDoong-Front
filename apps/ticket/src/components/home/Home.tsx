@@ -8,10 +8,11 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { EventApi } from '@lib/apis/events/EventApi';
 import { css } from '@emotion/react';
 import { useDebouncedCallback } from 'use-debounce';
+import { EventResponse } from '@lib/apis/events/eventType';
 
 const Home = () => {
   const [keyword, setKeyword] = useState<string>('');
-  const { infiniteListElement } = useInfiniteQueries(
+  const { infiniteListElement } = useInfiniteQueries<EventResponse>(
     ['events', keyword],
     ({ pageParam = 0 }) =>
       EventApi.GET_EVENTS_SEARCH({ keyword, pageParam, size: 12 }),

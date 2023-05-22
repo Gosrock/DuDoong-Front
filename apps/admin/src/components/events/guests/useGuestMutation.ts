@@ -16,8 +16,13 @@ const useGuestMutation = () => {
       queryClient.invalidateQueries(['events', eventId, 'confirmed']);
     },
   });
+  const { mutate: refuseMutate } = useMutation(OrderApi.POST_ORDER_REFUSE, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['events', eventId, 'approveWaiting']);
+    },
+  });
 
-  return { approveMutate, cancelMutate };
+  return { approveMutate, cancelMutate, refuseMutate };
 };
 
 export default useGuestMutation;

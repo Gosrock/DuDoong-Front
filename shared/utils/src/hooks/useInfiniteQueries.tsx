@@ -3,6 +3,7 @@ import {
   useInfiniteQuery,
   UseInfiniteQueryOptions,
 } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -12,16 +13,16 @@ export const useInfiniteQueries = <T,>(
   ListItem: (props: any) => JSX.Element,
   options?: UseInfiniteQueryOptions<
     InfiniteResponse<T>,
-    any,
-    any,
-    any,
+    AxiosError,
+    InfiniteResponse<T>,
+    InfiniteResponse<T>,
     QueryKey
   >,
 ) => {
   const [ref, inView] = useInView();
   const { data, fetchNextPage } = useInfiniteQuery<
     InfiniteResponse<T>,
-    unknown
+    AxiosError
   >(queryKey, apiFunction, {
     getNextPageParam: (lastPage) => lastPage.page + 1,
     ...options,
