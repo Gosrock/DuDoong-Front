@@ -15,13 +15,19 @@ const TableOption = ({
   tableType: TableType;
 }) => {
   const eventId = useLocation().pathname.split('/')[2];
-  const { cancelMutate, approveMutate } = useGuestMutation();
+  const { cancelMutate, approveMutate, refuseMutate } = useGuestMutation();
   const { openOverlay, closeOverlay } = useGlobalOverlay();
   const approveWaitingOptions: PopupOptions[] = [
     {
       title: '승인하기',
       onClick: () => {
         approveMutate({ eventId, order_uuid: data.orderUuid });
+      },
+    },
+    {
+      title: '거절하기',
+      onClick: () => {
+        refuseMutate({ eventId, order_uuid: data.orderUuid });
       },
     },
 
