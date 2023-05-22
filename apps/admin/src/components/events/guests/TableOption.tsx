@@ -17,7 +17,7 @@ const TableOption = ({
   const eventId = useLocation().pathname.split('/')[2];
   const { cancelMutate, approveMutate } = useGuestMutation();
   const { openOverlay, closeOverlay } = useGlobalOverlay();
-  const approveWaitingOptions = [
+  const approveWaitingOptions: PopupOptions[] = [
     {
       title: '승인하기',
       onClick: () => {
