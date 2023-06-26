@@ -2,6 +2,7 @@ import { Divider } from '@dudoong/ui';
 import { Link } from 'react-router-dom';
 import type { HostProfileResponse } from '@lib/apis/host/hostType';
 import HostItem from '@components/shared/component/HostItem';
+import React from 'react';
 
 const HostLink = (props: HostProfileResponse) => {
   return (
@@ -14,4 +15,4 @@ const HostLink = (props: HostProfileResponse) => {
   );
 };
 
-export default HostLink;
+export default React.memo(HostLink);
