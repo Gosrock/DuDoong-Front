@@ -2,6 +2,7 @@ import { Divider, FlexBox, Tag, Text, theme } from '@dudoong/ui';
 import { parseDate } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import type { EventProfileResponse } from '@lib/apis/event/eventType';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const EventItem = (props: EventProfileResponse) => {
@@ -44,7 +45,7 @@ const EventItem = (props: EventProfileResponse) => {
   );
 };
 
-export default EventItem;
+export default React.memo(EventItem);
 
 const EventProfileImage = ({ imageSrc }: { imageSrc: string }) => {
   return (
