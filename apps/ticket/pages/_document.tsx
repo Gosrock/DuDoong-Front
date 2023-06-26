@@ -11,6 +11,11 @@ export default function Document() {
           href="https://asset.dudoong.com/common/fonts/dudoong-fonts.css"
           crossOrigin="anonymous"
         />
+        <link
+          rel="stylesheet"
+          href="https://asset.dudoong.com/common/fonts/dudoong-fonts.css"
+          crossOrigin="anonymous"
+        />
         <script
           type="text/javascript"
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c08b495df2ecbc09bd453fb53701551&libraries=services,clusterer"
