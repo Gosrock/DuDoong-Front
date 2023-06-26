@@ -4,7 +4,7 @@ import { media } from './theme';
 
 export const globalStyle = css`
   ${emotionReset}
-
+  /* 
   @font-face {
     font-family: 'Pretendard';
     font-style: normal;
@@ -83,7 +83,7 @@ export const globalStyle = css`
       url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.ttf')
         format('truetype');
     font-display: optional;
-  }
+  } */
   body {
     font-family: 'Pretendard', Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',

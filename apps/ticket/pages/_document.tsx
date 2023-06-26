@@ -4,16 +4,13 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* <link rel="preconnect" href="https://fonts.googleapis.com" /> */}
-        {/* <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
+        <link rel="preconnect" href="https://asset.dudoong.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Jost:ital@1&display=swap"
           rel="stylesheet"
-        /> */}
+          as="style"
+          href="https://asset.dudoong.com/common/fonts/dudoong-fonts.css"
+          crossOrigin="anonymous"
+        />
         <script
           type="text/javascript"
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c08b495df2ecbc09bd453fb53701551&libraries=services,clusterer"
