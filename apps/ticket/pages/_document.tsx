@@ -4,8 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* <link rel="preconnect" href="https://asset.dudoong.com" /> */}
-        <link
+        {/* <link
           rel="preload"
           as="style"
           href="https://asset.dudoong.com/common/fonts/dudoong-fonts.css"
@@ -15,7 +14,12 @@ export default function Document() {
           rel="stylesheet"
           href="https://asset.dudoong.com/common/fonts/dudoong-fonts.css"
           crossOrigin="anonymous"
-        />
+        /> */}
+        <link
+          rel="stylesheet preload"
+          href="https://asset.dudoong.com/common/fonts/dudoong-fonts-swap.css"
+          as="style"
+        ></link>
         <script
           type="text/javascript"
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c08b495df2ecbc09bd453fb53701551&libraries=services,clusterer"
