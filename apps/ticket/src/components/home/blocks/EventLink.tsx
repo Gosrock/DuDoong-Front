@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { EventResponse } from '@lib/apis/events/eventType';
 import Link from 'next/link';
+import React from 'react';
 
 const EventLink = (props: EventResponse) => {
   return (
@@ -37,7 +38,7 @@ const EventLink = (props: EventResponse) => {
   );
 };
 
-export default EventLink;
+export default React.memo(EventLink);
 
 const Poster = styled.div`
   position: relative;

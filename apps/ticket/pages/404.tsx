@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 
 function NotFound() {
   const router = useRouter();
-  useLayoutEffect(() => {
+  useEffect(() => {
     router.replace('/home');
   }, []);
   return null;

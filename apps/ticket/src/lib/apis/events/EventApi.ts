@@ -1,5 +1,4 @@
 import { axiosPublic, InfiniteResponse } from '@dudoong/utils';
-import { axiosPrivate } from '../axios';
 import type { EventResponse, getEventsRequest } from './eventType';
 
 export const EventApi = {

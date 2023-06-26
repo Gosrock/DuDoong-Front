@@ -4,7 +4,7 @@ import HomeHeader from './blocks/HomeHeader';
 import styled from '@emotion/styled';
 import EventLink from './blocks/EventLink';
 import { useInfiniteQueries } from '@dudoong/utils';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { EventApi } from '@lib/apis/events/EventApi';
 import { css } from '@emotion/react';
 import { useDebouncedCallback } from 'use-debounce';

@@ -15,7 +15,7 @@ import { PageType } from '@pages/common/Home';
 import EventItem from './EventItem';
 import HostLink from './HostLink';
 import { ReactComponent as DoongDoong } from '@assets/teduri.svg';
-import { ComponentProps } from 'react';
+import { ComponentProps, MemoExoticComponent } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import HostItem from '@components/shared/component/HostItem';
 
@@ -28,7 +28,7 @@ const ADMIN_HOME_MAP: Record<
   {
     padding: PaddingSize;
     apiFunction: (args: any) => Promise<any>;
-    item: (props: ComponentProps<any>) => JSX.Element;
+    item: MemoExoticComponent<any>;
   }
 > = {
   event: {

@@ -5,12 +5,13 @@ import { media } from './theme';
 export const globalStyle = css`
   ${emotionReset}
 
-  @font-face {
+  /* @font-face {
     font-family: 'Gmarket Sans';
     font-style: normal;
     font-weight: 700;
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff')
       format('woff');
+    font-display: optional;
   }
   @font-face {
     font-family: 'Gmarket Sans';
@@ -18,6 +19,7 @@ export const globalStyle = css`
     font-weight: 500;
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
       format('woff');
+    font-display: optional;
   }
   @font-face {
     font-family: 'Gmarket Sans';
@@ -25,14 +27,16 @@ export const globalStyle = css`
     font-weight: 300;
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff')
       format('woff');
-  }
+    font-display: optional;
+  } */
 
-  @font-face {
+  /* @font-face {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
       format('woff');
+    font-display: optional;
   }
   @font-face {
     font-family: 'Pretendard';
@@ -40,6 +44,7 @@ export const globalStyle = css`
     font-weight: 600;
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff')
       format('woff');
+    font-display: optional;
   }
 
   @font-face {
@@ -48,6 +53,7 @@ export const globalStyle = css`
     font-weight: 500;
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff')
       format('woff');
+    font-display: optional;
   }
   @font-face {
     font-family: 'Pretendard';
@@ -55,8 +61,53 @@ export const globalStyle = css`
     font-weight: 400;
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
       format('woff');
+    font-display: optional;
+  } */
+  @font-face {
+    font-family: 'GmarketSans';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.eot?#iefix')
+        format('embedded-opentype'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff2')
+        format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff')
+        format('woff'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.ttf')
+        format('truetype');
+    font-display: swap;
   }
-
+  @font-face {
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot?#iefix')
+        format('embedded-opentype'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2')
+        format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff')
+        format('woff'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.ttf')
+        format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot?#iefix')
+        format('embedded-opentype'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2')
+        format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff')
+        format('woff'),
+      url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.ttf')
+        format('truetype');
+    font-display: swap;
+  }
   body {
     font-family: 'Pretendard', Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
