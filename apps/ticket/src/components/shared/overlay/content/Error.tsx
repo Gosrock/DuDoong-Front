@@ -6,7 +6,6 @@ import {
   Spacing,
   Text,
 } from '@dudoong/ui';
-import { loginFc } from '@dudoong/utils';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { useRouter } from 'next/router';
 

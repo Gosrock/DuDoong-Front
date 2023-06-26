@@ -10,6 +10,8 @@ export const BASE_URL = `${
     : 'https://dudoong.com/api/v1'
 }`;
 
+//export const BASE_URL = `https://dudoong.com/api/v1`;
+
 export const DOMAIN = `${
   typeof window !== 'undefined' ? window.location.origin : 'https://dudoong.com'
 }`;
