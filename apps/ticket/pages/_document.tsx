@@ -4,9 +4,9 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="preconnect" href="https://asset.dudoong.com" />
+        {/* <link rel="preconnect" href="https://asset.dudoong.com" /> */}
         <link
-          rel="stylesheet"
+          rel="preload"
           as="style"
           href="https://asset.dudoong.com/common/fonts/dudoong-fonts.css"
           crossOrigin="anonymous"
