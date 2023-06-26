@@ -4,14 +4,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link
-          rel="preload"
-          as="style"
-          crossOrigin="anonymous"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css"
-        />
-        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" /> */}
+        {/* <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="true"
