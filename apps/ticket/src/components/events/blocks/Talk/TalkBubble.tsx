@@ -2,7 +2,7 @@ import getTimeForToday from '@dudoong/utils/src/utils/getTimeForToday';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { RetrieveCommentResponse } from '@lib/apis/comment/commentType';
-import { ComponentProps } from 'react';
+import React from 'react';
 
 const TalkBubble = ({ commentInfo, isMine }: RetrieveCommentResponse) => {
   return (
@@ -73,4 +73,4 @@ const Head = styled.div<{ isMine: boolean }>`
   }
 `;
 
-export default TalkBubble;
+export default React.memo(TalkBubble);

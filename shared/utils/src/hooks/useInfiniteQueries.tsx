@@ -4,13 +4,13 @@ import {
   UseInfiniteQueryOptions,
 } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import { useEffect } from 'react';
+import { MemoExoticComponent, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 export const useInfiniteQueries = <T,>(
   queryKey: QueryKey,
   apiFunction: (payload: any) => Promise<InfiniteResponse<T>>,
-  ListItem: (props: any) => JSX.Element,
+  ListItem: MemoExoticComponent<any>,
   options?: UseInfiniteQueryOptions<
     InfiniteResponse<T>,
     AxiosError,

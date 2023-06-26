@@ -1,6 +1,5 @@
 import { FullScreen, SyncLoader } from '@dudoong/ui';
 import { AuthApi, OauthTokenResponse } from '@dudoong/utils';
-import { css } from '@emotion/react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';

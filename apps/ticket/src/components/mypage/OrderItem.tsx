@@ -5,6 +5,7 @@ import type { OrderListResponse, StageType } from '@lib/apis/order/orderType';
 
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 type TagColorType = {
   [key in StageType]: TagColorKey;
@@ -49,7 +50,7 @@ const OrderItem = (prop: OrderListResponse) => {
   );
 };
 
-export default OrderItem;
+export default React.memo(OrderItem);
 
 const Wrapper = styled.div`
   background-color: ${theme.palette.white};

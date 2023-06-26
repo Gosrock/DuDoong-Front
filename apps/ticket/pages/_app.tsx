@@ -11,15 +11,13 @@ import { useEffect, useState } from 'react';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import 'react-spring-bottom-sheet/dist/style.css';
 import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
-import { AuthApi, OauthLoginResponse } from '@dudoong/utils';
+import { OauthLoginResponse } from '@dudoong/utils';
 import { authState } from '@store/auth';
-import cookies from 'next-cookies';
 import { setCredentials } from '@lib/utils/setCredentials';
 import { getCookie } from 'cookies-next';
 import Layout from '@components/shared/Layout';
 import Head from 'next/head';
 import { UserApi } from '@lib/apis/user/UserApi';
-import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
 import { axiosPrivate } from '@lib/apis/axios';
 import Script from 'next/script';
 import { GA_TRACKING_ID } from '@lib/utils/gtag';
@@ -93,8 +91,8 @@ function MyApp({ Component, pageProps, loginData }: MyAppProps) {
 }
 
 MyApp.getInitialProps = async (context: AppContext) => {
-  const { ctx, Component, router } = context;
-  const refreshToken = cookies(ctx).refreshToken;
+  const { ctx, Component } = context;
+  //const refreshToken = cookies(ctx).refreshToken;
   let pageProps = {};
   let loginData: OauthLoginResponse | null;
 

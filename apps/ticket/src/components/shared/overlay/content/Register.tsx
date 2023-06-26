@@ -1,4 +1,4 @@
-import { Button, ButtonSet, ListHeader, media, Text, theme } from '@dudoong/ui';
+import { Button, ButtonSet, ListHeader, Text, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
