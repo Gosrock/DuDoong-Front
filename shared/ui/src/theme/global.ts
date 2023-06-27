@@ -84,6 +84,38 @@ export const globalStyle = css`
         format('truetype');
     font-display: optional;
   } */
+
+  @font-face {
+    font-family: 'Gmarket Sans';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://asset.dudoong.com/common/fonts/GmarketSansLight.woff2')
+        format('woff2'),
+      url('https://asset.dudoong.com/common/fonts/GmarketSansLight.woff')
+        format('woff');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gmarket Sans';
+    font-weight: 500;
+    font-style: normal;
+
+    src: url('https://asset.dudoong.com/common/fonts/GmarketSansMedium.woff2')
+        format('woff2'),
+      url('https://asset.dudoong.com/common/fonts/GmarketSansMedium.woff')
+        format('woff');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Gmarket Sans';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://asset.dudoong.com/common/fonts/GmarketSansBold.woff2')
+        format('woff2'),
+      url('https://asset.dudoong.com/common/fonts/GmarketSansBold.woff')
+        format('woff');
+    font-display: swap;
+  }
   body {
     font-family: 'Pretendard', Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
