@@ -1,0 +1,73 @@
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://asset.dudoong.com/common/fonts/Pretendard-Bold.subset.woff2')
+      format('woff2'),
+    url('https://asset.dudoong.com/common/fonts/Pretendard-Bold.subset.woff')
+      format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  src: url('https://asset.dudoong.com/common/fonts/Pretendard-SemiBold.subset.woff2')
+      format('woff2'),
+    url('https://asset.dudoong.com/common/fonts/Pretendard-SemiBold.subset.woff')
+      format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://asset.dudoong.com/common/fonts/Pretendard-Medium.subset.woff2')
+      format('woff2'),
+    url('https://asset.dudoong.com/common/fonts/Pretendard-Medium.subset.woff')
+      format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://asset.dudoong.com/common/fonts/Pretendard-Regular.subset.woff2')
+      format('woff2'),
+    url('https://asset.dudoong.com/common/fonts/Pretendard-Regular.subset.woff')
+      format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-weight: 300;
+  font-style: normal;
+  src: url('https://asset.dudoong.com/common/fonts/GmarketSansLight.woff2')
+      format('woff2'),
+    url('https://asset.dudoong.com/common/fonts/GmarketSansLight.woff')
+      format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-weight: 500;
+  font-style: normal;
+
+  src: url('https://asset.dudoong.com/common/fonts/GmarketSansMedium.woff2')
+      format('woff2'),
+    url('https://asset.dudoong.com/common/fonts/GmarketSansMedium.woff')
+      format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://asset.dudoong.com/common/fonts/GmarketSansBold.woff2')
+      format('woff2'),
+    url('https://asset.dudoong.com/common/fonts/GmarketSansBold.woff')
+      format('woff');
+  font-display: swap;
+}
