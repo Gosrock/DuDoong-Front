@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
@@ -6,7 +6,7 @@
       format('woff2'),
     url('https://asset.dudoong.com/common/fonts/Pretendard-Bold.subset.woff')
       format('woff');
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: 'Pretendard';
@@ -16,7 +16,7 @@
       format('woff2'),
     url('https://asset.dudoong.com/common/fonts/Pretendard-SemiBold.subset.woff')
       format('woff');
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
@@ -27,7 +27,7 @@
       format('woff2'),
     url('https://asset.dudoong.com/common/fonts/Pretendard-Medium.subset.woff')
       format('woff');
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: 'Pretendard';
@@ -37,7 +37,7 @@
       format('woff2'),
     url('https://asset.dudoong.com/common/fonts/Pretendard-Regular.subset.woff')
       format('woff');
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
@@ -48,7 +48,7 @@
       format('woff2'),
     url('https://asset.dudoong.com/common/fonts/GmarketSansLight.woff')
       format('woff');
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: 'Gmarket Sans';
@@ -59,7 +59,7 @@
       format('woff2'),
     url('https://asset.dudoong.com/common/fonts/GmarketSansMedium.woff')
       format('woff');
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: 'Gmarket Sans';
@@ -69,5 +69,6 @@
       format('woff2'),
     url('https://asset.dudoong.com/common/fonts/GmarketSansBold.woff')
       format('woff');
-  font-display: swap;
+  font-display: optional;
 }
+ */
