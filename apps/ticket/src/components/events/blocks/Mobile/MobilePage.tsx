@@ -20,6 +20,7 @@ import DetailMenu from '../DetailMenu';
 import Remote from '../Remote';
 import Tickets from '../Tickets';
 import MobileMap from './MobileMap';
+import Image from 'next/image';
 
 const MobilePage = ({
   tickets,
@@ -39,8 +40,13 @@ const MobilePage = ({
       <NavBar label={detail.name} backHandler={() => router.push('/home')} />
       <Spacing size={48} />
       <Poster>
-        <div>
-          <img src={detail.posterImage} alt={detail.name} />
+        <div className="poster-container">
+          <Image
+            src={detail.posterImage}
+            alt={detail.name}
+            fill={true}
+            priority={true}
+          />
         </div>
       </Poster>
       <Title
@@ -151,8 +157,8 @@ const Title = styled(ListHeader)``;
 `; */
 
 const Poster = styled.div`
-  padding: 24px 60px;
-  div {
+  margin: 24px 60px;
+  .poster-container {
     position: relative;
     padding-top: 141.4%;
     overflow: hidden;
@@ -160,15 +166,7 @@ const Poster = styled.div`
     border-radius: 16px;
   }
   img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
     background: ${({ theme }) => theme.palette.gray_300};
-    margin-bottom: 10px;
     object-fit: cover;
   }
 `;
