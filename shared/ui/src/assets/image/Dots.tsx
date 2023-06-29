@@ -1,4 +1,4 @@
-const Dots = () => {
+const Dots = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <>
       <svg
@@ -7,6 +7,7 @@ const Dots = () => {
         viewBox="0 0 170 163"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className={props.className}
       >
         <circle cx="2.92157" cy="2.34722" r="2.34722" fill="#6B36DC" />
         <circle cx="35.7826" cy="2.34722" r="2.34722" fill="#6B36DC" />

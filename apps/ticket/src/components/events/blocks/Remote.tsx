@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil';
 import { authState } from '@store/auth';
 import { useRouter } from 'next/router';
 import useOverlay from '@lib/hooks/useOverlay';
-import OverlayBox from '@components/shared/overlay/OverlayBox';
 import TalkOverlay from './Talk/Index';
 
 interface RemoteProps {

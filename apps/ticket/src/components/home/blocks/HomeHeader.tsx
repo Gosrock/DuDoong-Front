@@ -1,8 +1,8 @@
-import { Input, media, Search, theme } from '@dudoong/ui';
+import { media } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import Twinkle from '@dudoong/ui/src/assets/icons/Twinkle.svg';
-import Dots from '@dudoong/ui/src/assets/image/dots.svg';
+import Dots from '@dudoong/ui/src/assets/image/Dots';
 const HomeHeader = () => {
   return (
     <Wrapper>
