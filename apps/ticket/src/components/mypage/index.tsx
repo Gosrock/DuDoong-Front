@@ -19,11 +19,10 @@ import OrderItem from './OrderItem';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import Shortcuts from '@components/shared/Shortcuts';
 import Main from '@components/shared/Layout/Main';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { resetCrendentials } from '@lib/utils/setCredentials';
 import { GetServerSideProps } from 'next';
-
 import { setSsrAxiosHeader } from '@lib/utils/setSsrAxiosHeader';
 import { UserInfo } from '@lib/apis/user/userType';
 import { UserApi } from '@lib/apis/user/UserApi';

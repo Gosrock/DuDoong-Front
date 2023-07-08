@@ -13,8 +13,9 @@ const EventLink = (props: EventResponse) => {
       <Wrapper>
         <Poster status={props.status}>
           <Image
-            src={props.posterImage || ''}
+            src={props.posterImage || '/no-poster.png'}
             fill={true}
+            sizes="(max-width: 768px) 50vw, 25vw"
             alt={`${props.name}`}
             className="poster"
           />
@@ -51,7 +52,7 @@ export default React.memo(EventLink);
 
 const Wrapper = styled.div`
   transform: translateY(0px);
-  transition: box-shadow 0.15s ease-in 0s, transform 0.15s ease-in 0s;
+  transition: transform 0.15s ease-in 0s;
   &:hover {
     transform: translateY(-4px);
   }
@@ -71,7 +72,8 @@ const Poster = styled.div<{ status: EventStatus }>`
         filter: brightness(60%);
       `}
   }
-  box-shadow: 0px 0px 10px 7px rgba(0, 0, 0, 0.01);
+  transition: box-shadow 0.15s ease-in 0s;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 16px 0px;
   border-radius: 12px;
 
   .tag {
