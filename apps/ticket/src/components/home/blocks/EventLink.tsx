@@ -3,20 +3,23 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { EventResponse } from '@lib/apis/events/eventType';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { EventStatus } from '@dudoong/utils';
 
 const EventLink = (props: EventResponse) => {
+  const [img, setImg] = useState(props.posterImage);
+
   return (
     <Link href={`events/${props.eventId}`}>
       <Wrapper>
         <Poster status={props.status}>
           <Image
-            src={props.posterImage || '/no-poster.png'}
+            src={img}
             fill={true}
             sizes="(max-width: 768px) 50vw, 25vw"
             alt={`${props.name}`}
+            onError={() => setImg(`/no-poster.png`)}
             className="poster"
           />
           {props.status === '지난공연' && (
