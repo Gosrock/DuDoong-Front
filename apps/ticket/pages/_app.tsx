@@ -10,7 +10,8 @@ import type { AppProps, AppContext } from 'next/app';
 import { useEffect, useState } from 'react';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import 'react-spring-bottom-sheet/dist/style.css';
-import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
+import dynamic from 'next/dynamic';
+//import GlobalOverlay from '@components/shared/overlay/GlobalOverlay';
 import { OauthLoginResponse } from '@dudoong/utils';
 import { authState } from '@store/auth';
 import { setCredentials } from '@lib/utils/setCredentials';
@@ -21,6 +22,11 @@ import { UserApi } from '@lib/apis/user/UserApi';
 import { axiosPrivate } from '@lib/apis/axios';
 import Script from 'next/script';
 import { GA_TRACKING_ID } from '@lib/utils/gtag';
+
+const GlobalOverlay = dynamic(
+  () => import('@components/shared/overlay/GlobalOverlay'),
+  { ssr: false },
+);
 
 interface MyAppProps extends AppProps {
   loginData: OauthLoginResponse | null;

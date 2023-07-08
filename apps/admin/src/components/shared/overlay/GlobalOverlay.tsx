@@ -1,8 +1,8 @@
 import { Modal } from '@dudoong/ui';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { overlayState } from '@store/globalOverlay';
-import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
+
 import Approve from './content/Approve';
 import DeleteEvent from './content/DeleteEvent';
 import Invitation from './content/Invitation';
