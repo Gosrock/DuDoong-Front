@@ -3,19 +3,23 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { EventResponse } from '@lib/apis/events/eventType';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { EventStatus } from '@dudoong/utils';
 
 const EventLink = (props: EventResponse) => {
   const [img, setImg] = useState(props.posterImage);
 
+  useEffect(() => {
+    setImg(props.posterImage);
+  }, [props.posterImage]);
+
   return (
     <Link href={`events/${props.eventId}`}>
       <Wrapper>
         <Poster status={props.status}>
           <Image
-            src={img}
+            src={img || ''}
             fill={true}
             sizes="(max-width: 768px) 50vw, 25vw"
             alt={`${props.name}`}
