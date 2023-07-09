@@ -1,7 +1,7 @@
 import DDHead from '@components/shared/Layout/NextHead';
 import useOverlay from '@lib/hooks/useOverlay';
 import { media } from '@dudoong/ui';
-import { AuthApi, EventApi, EventDetailResponse } from '@dudoong/utils';
+import { EventApi, EventDetailResponse } from '@dudoong/utils';
 import SelectTicket from './blocks/SelectTicket';
 import { useRouter } from 'next/router';
 import { TicketApi } from '@lib/apis/ticket/TicketApi';
@@ -9,10 +9,8 @@ import OverlayBox from '@components/shared/overlay/OverlayBox';
 import PcPage from './blocks/PC/PcPage';
 import MobilePage from './blocks/Mobile/MobilePage';
 import type { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
-import { HTMLAttributes, useEffect } from 'react';
+import { HTMLAttributes } from 'react';
 import styled from '@emotion/styled';
-import { authState } from '@store/auth';
-import { useRecoilState } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 
@@ -25,33 +23,10 @@ export interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
 const EventDetail = ({ detail }: { detail: EventDetailResponse }) => {
   const router = useRouter();
   const { eventId } = router.query;
-  const [auth, setAuth] = useRecoilState(authState);
   const { data: tickets } = useQuery(['tickets', eventId], () =>
     TicketApi.GET_TICKETITEMS(eventId as string),
   );
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
-
-  /*   useEffect(() => {
-    const fetchRefresh = async (token: string) => {
-      try {
-        const data = await AuthApi.REFRESH(token);
-        const auth = {
-          userProfile: data.userProfile,
-          accessToken: data.accessToken,
-          isAuthenticated: true,
-          callbackUrl: (getCookie('redirectUrl') as string) || '/',
-        };
-        setCredentials(data);
-        setAuth(auth);
-      } catch (err: any) {
-        console.error(err);
-      }
-    };
-    if (!auth.isAuthenticated) {
-      const refreshToken = getCookie('refreshToken') as string;
-      refreshToken && fetchRefresh(refreshToken);
-    }
-  }, []); */
 
   return (
     <>
