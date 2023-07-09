@@ -1,13 +1,21 @@
 import { EventDetailResponse, parseDate } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const Summary = ({ detail }: { detail: EventDetailResponse }) => {
+  const [img, setImg] = useState(detail.posterImage);
+
+  useEffect(() => {
+    setImg(detail.posterImage);
+  }, [detail.posterImage]);
+
   return (
     <Wrapper>
       <Poster>
         <Image
-          src={detail.posterImage}
+          src={img}
+          onError={() => setImg('/no-poster.png')}
           alt={detail.name}
           width={203}
           height={287}

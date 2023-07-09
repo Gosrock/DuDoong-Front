@@ -21,6 +21,7 @@ import Remote from '../Remote';
 import Tickets from '../Tickets';
 import MobileMap from './MobileMap';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 const MobilePage = ({
   tickets,
@@ -35,6 +36,12 @@ const MobilePage = ({
   });
   const isOutdated = detail.status === '지난공연';
 
+  const [img, setImg] = useState(detail.posterImage);
+
+  useEffect(() => {
+    setImg(detail.posterImage);
+  }, [detail.posterImage]);
+
   return (
     <Wrapper {...props}>
       <NavBar label={detail.name} backHandler={() => router.push('/home')} />
@@ -42,7 +49,8 @@ const MobilePage = ({
       <Poster>
         <div className="poster-container">
           <Image
-            src={detail.posterImage}
+            src={img}
+            onError={() => setImg('no-poster.png')}
             alt={detail.name}
             fill={true}
             priority={true}
