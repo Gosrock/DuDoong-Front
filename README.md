@@ -108,7 +108,7 @@ yarn admin
 - [프론트엔드 모노레포 구축 삽질기 (3) - CICD 배포, Docker, Github Actions](https://9yujin.tistory.com/102?category=1013884)
 - [서버 사이드 렌더링(SSR)과 cookie 로그인 정보 다루기](https://www.9yujin.site/devlog/frontend/ssr-230122)
 - [선언적인 코드 작성하기](https://9yujin.tistory.com/109)
-
+-[웹 성능 최적화](https://9yujin.tistory.com/116)
 
 <br/><br/>
 
