@@ -20,7 +20,7 @@ export const useInfiniteQueries = <T,>(
   >,
 ) => {
   const [ref, inView] = useInView();
-  const { data, fetchNextPage } = useInfiniteQuery<
+  const { data, fetchNextPage, isLoading } = useInfiniteQuery<
     InfiniteResponse<T>,
     AxiosError
   >(queryKey, apiFunction, {
@@ -36,6 +36,10 @@ export const useInfiniteQueries = <T,>(
     if (hasNext && inView) fetchNextPage();
   }, [inView]);
 
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
+
   const listElement = data?.pages.map(({ content }) =>
     content.map((item, idx) => <ListItem {...item} key={`item-${idx}`} />),
   );
@@ -49,11 +53,12 @@ export const useInfiniteQueries = <T,>(
     infiniteListElement: (
       <>
         {listElement}
-        {observer}
+        {!isLoading && observer}
       </>
     ),
     isEmpty,
-  };
+    isLoading,
+  } as const;
 };
 
 export interface InfiniteResponse<T> {

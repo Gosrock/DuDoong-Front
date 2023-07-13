@@ -9,10 +9,11 @@ import { EventApi } from '@lib/apis/events/EventApi';
 import { css } from '@emotion/react';
 import { useDebouncedCallback } from 'use-debounce';
 import { EventResponse } from '@lib/apis/events/eventType';
+import SkeletonEvent from './blocks/SkeletonEvent';
 
 const Home = () => {
   const [keyword, setKeyword] = useState<string>('');
-  const { infiniteListElement } = useInfiniteQueries<EventResponse>(
+  const { infiniteListElement, isLoading } = useInfiniteQueries<EventResponse>(
     ['events', keyword],
     ({ pageParam = 0 }) =>
       EventApi.GET_EVENTS_SEARCH({ keyword, pageParam, size: 12 }),
@@ -44,7 +45,11 @@ const Home = () => {
             placeholder={'검색어를 입력해주세요'}
             rightIcon={<Search />}
           />
-          <EventList>{infiniteListElement}</EventList>
+          <EventList>
+            {infiniteListElement}
+            {isLoading &&
+              Array.from({ length: 6 }, (_, i) => <SkeletonEvent key={i} />)}
+          </EventList>
         </main>
         <Spacing size={170} />
       </Wrapper>

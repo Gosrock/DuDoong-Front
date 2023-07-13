@@ -85,7 +85,7 @@ export const globalStyle = css`
     font-display: optional;
   } */
 
-  @font-face {
+  /* @font-face {
     font-family: 'Gmarket Sans';
     font-weight: 300;
     font-style: normal;
@@ -115,7 +115,7 @@ export const globalStyle = css`
       url('https://asset.dudoong.com/common/fonts/GmarketSansBold.woff')
         format('woff');
     font-display: swap;
-  }
+  } */
   body {
     font-family: 'Pretendard', Pretendard, -apple-system, BlinkMacSystemFont,
       system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',

@@ -25,6 +25,7 @@ const EventLink = (props: EventResponse) => {
             alt={`${props.name}`}
             onError={() => setImg(`/no-poster.png`)}
             className="poster"
+            priority
           />
           {props.status === '지난공연' && (
             <Tag size="md" color="mono" text="지난 공연" className="tag" />
@@ -70,7 +71,7 @@ const Poster = styled.div<{ status: EventStatus }>`
   padding-top: 141.4%;
   overflow: hidden;
   img {
-    background: ${({ theme }) => theme.palette.gray_300};
+    background: rgba(165, 165, 165, 0.3);
 
     object-fit: cover;
     ${({ status }) =>

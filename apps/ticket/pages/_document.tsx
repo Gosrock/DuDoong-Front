@@ -17,8 +17,15 @@ export default function Document() {
         ></link> */}
         <link
           rel="stylesheet preconnect"
+          type="text/css"
           crossOrigin="anonymous"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          crossOrigin="anonymous"
+          href="https://cdn.jsdelivr.net/gh/leetaewook/gmarket-sans-dynamic-subset/GmarketSans.css"
         />
         <script
           type="text/javascript"
