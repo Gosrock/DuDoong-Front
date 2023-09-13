@@ -32,6 +32,7 @@ module.exports = withBundleAnalyzer(
       },
       images: {
         domains: ['asset.dudoong.com'],
+        minimumCacheTTL: 86400,
       },
       rewrites: async () => [
         {
