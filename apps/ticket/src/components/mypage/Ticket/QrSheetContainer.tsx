@@ -54,7 +54,11 @@ const QrSheetContainer = ({
         {title}
       </Text>
       <QrWrapper
-        status={data?.issuedTicketInfo.issuedTicketStatus === '입장 전'}
+        status={
+          data
+            ? data.issuedTicketInfo.issuedTicketStatus === '입장 전'
+            : ticket.issuedTicketStatus === '입장 전'
+        }
       >
         <QrContainer>
           {/* <StatusIndicator

@@ -45,6 +45,7 @@ const Qrcode = ({
     qrCode.update({
       data: uuid,
     });
+
     if (status !== '입장 전') {
       qrCode.update({
         cornersDotOptions: { color: '#e3e4e8' },
@@ -52,6 +53,13 @@ const Qrcode = ({
         dotsOptions: { color: '#e3e4e8' },
       });
     }
+
+    return () =>
+      qrCode.update({
+        cornersDotOptions: { color: 'black' },
+        cornersSquareOptions: { color: 'black' },
+        dotsOptions: { color: 'black' },
+      });
   }, [uuid, status]);
 
   const handleReload = () => {
