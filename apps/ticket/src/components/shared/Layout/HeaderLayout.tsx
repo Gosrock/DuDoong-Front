@@ -143,6 +143,10 @@ export const HeaderLayout = ({ children }: PropsWithChildren) => {
 const Wrapper = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.palette.white};
+
+  ${media.pc} {
+    min-width: 1280px;
+  }
 `;
 
 const PcHeader = styled.div`

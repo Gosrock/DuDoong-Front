@@ -138,6 +138,12 @@ export const typo = {
     line-height: 120%;
   `,
   // Text
+  G_Text_22_M: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 500;
+    font-size: ${calcRem(22)};
+    line-height: 150%;
+  `,
   G_Text_18_M: css`
     font-family: 'Gmarket Sans';
     font-weight: 500;

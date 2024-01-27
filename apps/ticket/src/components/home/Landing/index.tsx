@@ -1,17 +1,14 @@
 import { Footer } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
-import Title from './Title';
-//import IntroSection from './IntroSection';
-//import FeatureSection from './FeatureSection';
-//import TicketSection from './TicketSection';
-//import OutroSection from './Outro';
 import { css } from '@emotion/react';
 import dynamic from 'next/dynamic';
+import Media from '@components/shared/Media';
+import { Title } from './title';
 
-const IntroSection = dynamic(() => import('./IntroSection'));
+/* const IntroSection = dynamic(() => import('./IntroSection'));
 const FeatureSection = dynamic(() => import('./FeatureSection'));
 const TicketSection = dynamic(() => import('./TicketSection'));
-const OutroSection = dynamic(() => import('./Outro'));
+const OutroSection = dynamic(() => import('./Outro')); */
 
 const Landing = () => {
   return (
@@ -29,11 +26,17 @@ const Landing = () => {
           overflow-x: hidden;
         `}
       >
-        <Title />
+        <Media.Mobile>
+          <Title.Mobile />
+        </Media.Mobile>
+        <Media.PC>
+          <Title.PC />
+        </Media.PC>
+        {/*         <Title />
         <IntroSection />
         <FeatureSection />
         <TicketSection />
-        <OutroSection />
+        <OutroSection /> */}
       </main>
       <section>
         <Footer />
