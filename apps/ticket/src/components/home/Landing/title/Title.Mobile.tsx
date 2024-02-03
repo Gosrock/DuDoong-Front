@@ -2,7 +2,7 @@ import { Spacing, Text } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import Logo from '@assets/landing-renewal/title-logo.svg';
 import TitleIllustMobile from '@assets/landing-renewal/title-illust-mobile.svg';
-import { backgroundBlackStyle } from '.';
+import { backgroundBlackStyle } from '../backgroundBlackStyle';
 
 export const TitleMobile = () => {
   return (

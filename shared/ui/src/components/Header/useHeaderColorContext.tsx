@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+} from 'react';
 
 export type ThemeType = 'black' | 'white';
 export interface HeaderColorContextType {
@@ -24,7 +30,7 @@ export const useHeaderColorContext = (): HeaderColorContextType => {
 export const HeaderColorProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<ThemeType>('white');
 
-  const setHeaderColor = (value: ThemeType) => setTheme(value);
+  const setHeaderColor = useCallback((value: ThemeType) => setTheme(value), []);
 
   return (
     <headerColorContext.Provider value={{ theme, setHeaderColor }}>

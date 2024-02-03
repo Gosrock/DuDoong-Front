@@ -161,7 +161,7 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.white};
 
   ${media.pc} {
-    min-width: 1280px;
+    min-width: 1200px;
   }
 `;
 

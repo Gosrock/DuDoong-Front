@@ -83,6 +83,18 @@ export const typo = {
   `,
   // ------------------------------- new font -------------------------------
   // Header
+  G_Header_36_B: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 700;
+    font-size: ${calcRem(36)};
+    line-height: 120%;
+  `,
+  G_Header_45_B: css`
+    font-family: 'Gmarket Sans';
+    font-weight: 700;
+    font-size: ${calcRem(45)};
+    line-height: 120%;
+  `,
   G_Header_28_B: css`
     font-family: 'Gmarket Sans';
     font-weight: 700;
@@ -148,6 +160,12 @@ export const typo = {
     font-family: 'Gmarket Sans';
     font-weight: 500;
     font-size: ${calcRem(18)};
+    line-height: 150%;
+  `,
+  P_Text_22_M: css`
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: ${calcRem(22)};
     line-height: 150%;
   `,
   P_Text_18_SB: css`

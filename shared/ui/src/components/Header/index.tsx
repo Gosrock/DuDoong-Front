@@ -57,4 +57,16 @@ const Wrapper = styled(FlexBox)<{ colortheme?: ThemeType }>`
   box-sizing: border-box;
   background-color: ${({ colortheme, theme }) =>
     colortheme === 'black' ? theme.palette.black : theme.palette.white};
+
+  transition: color 0.2s;
+  -webkit-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+
+  & * {
+    transition: color 0.2s;
+    -webkit-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+  }
 `;

@@ -1,23 +1,21 @@
 import { Footer, useHeaderColorContext } from '@dudoong/ui';
 import DDHead from '@components/shared/Layout/NextHead';
 import { css } from '@emotion/react';
-import dynamic from 'next/dynamic';
 import Media from '@components/shared/Media';
 import { Title } from './title';
 import { ImpressionArea } from '@toss/impression-area';
 import { useEffect } from 'react';
-
-/* const IntroSection = dynamic(() => import('./IntroSection'));
-const FeatureSection = dynamic(() => import('./FeatureSection'));
-const TicketSection = dynamic(() => import('./TicketSection'));
-const OutroSection = dynamic(() => import('./Outro')); */
+import { Intro } from './intro';
+import { Feature } from './feature';
+import { Special } from './special';
+import { Outro } from './outro';
 
 const Landing = () => {
   const { setHeaderColor } = useHeaderColorContext();
 
   useEffect(() => {
-    setHeaderColor?.('black');
-  }, [setHeaderColor]);
+    setHeaderColor('black');
+  }, []);
 
   return (
     <>
@@ -36,31 +34,41 @@ const Landing = () => {
       >
         <Media.Mobile>
           <ImpressionArea
-            onImpressionStart={() => {
-              setHeaderColor?.('black');
-            }}
-            onImpressionEnd={() => setHeaderColor?.('white')}
+            onImpressionStart={() => setHeaderColor('black')}
+            onImpressionEnd={() => setHeaderColor('white')}
           >
             <Title.Mobile />
+            <Intro.Mobile />
           </ImpressionArea>
-          <ImpressionArea
-            onImpressionStart={() => {
-              setHeaderColor?.('white');
-            }}
-          >
-            <div css={css({ height: 500 })}></div>
+          <ImpressionArea onImpressionEnd={() => setHeaderColor('black')}>
+            <Feature.Mobile />
+          </ImpressionArea>
+          <ImpressionArea onImpressionEnd={() => setHeaderColor('white')}>
+            <Special.Mobile />
+          </ImpressionArea>
+          <ImpressionArea>
+            <Outro />
           </ImpressionArea>
         </Media.Mobile>
+
         <Media.PC>
-          <ImpressionArea onImpressionEnd={() => setHeaderColor?.('white')}>
+          <ImpressionArea
+            onImpressionStart={() => setHeaderColor('black')}
+            onImpressionEnd={() => setHeaderColor('white')}
+          >
             <Title.PC />
           </ImpressionArea>
+          <ImpressionArea onImpressionEnd={() => setHeaderColor('black')}>
+            <Intro.PC />
+            <Feature.PC />
+          </ImpressionArea>
+          <ImpressionArea onImpressionEnd={() => setHeaderColor('white')}>
+            <Special.PC />
+          </ImpressionArea>
+          <ImpressionArea>
+            <Outro />
+          </ImpressionArea>
         </Media.PC>
-        {/*         <Title />
-        <IntroSection />
-        <FeatureSection />
-        <TicketSection />
-        <OutroSection /> */}
       </main>
       <section>
         <Footer />
