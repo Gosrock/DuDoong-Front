@@ -1,4 +1,10 @@
-import { Popup, PopupOptions, Profile } from '@dudoong/ui';
+import {
+  Popup,
+  PopupOptions,
+  Profile,
+  ThemeType,
+  useHeaderColorContext,
+} from '@dudoong/ui';
 import { palette } from '@dudoong/ui/src/theme/palette';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -11,6 +17,8 @@ interface HeaderProfileElement {
 }
 const HeaderProfileElement = (props: HeaderProfileElement) => {
   const { name, profileOption, image, handleLogin } = props;
+  const { theme } = useHeaderColorContext();
+
   return (
     <>
       {name ? (
@@ -34,18 +42,24 @@ const HeaderProfileElement = (props: HeaderProfileElement) => {
           }
         />
       ) : (
-        <LoginButton onClick={handleLogin}>로그인</LoginButton>
+        <LoginButton onClick={handleLogin} colortheme={theme}>
+          로그인
+        </LoginButton>
       )}
     </>
   );
 };
-const LoginButton = styled.button`
+const LoginButton = styled.button<{ colortheme?: ThemeType }>`
   height: 40px;
   width: 80px;
   border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.palette.black};
+  border: 1px solid
+    ${({ theme, colortheme }) =>
+      colortheme === 'black' ? theme.palette.white : theme.palette.black};
   ${({ theme }) => theme.typo.Text_16}
-  line-height:100%;
+  color: ${({ theme, colortheme }) =>
+    colortheme === 'black' ? theme.palette.white : theme.palette.black};
+  line-height: 100%;
 `;
 
 export default HeaderProfileElement;

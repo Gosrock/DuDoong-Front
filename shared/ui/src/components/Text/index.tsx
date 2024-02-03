@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { HTMLAttributes } from 'react';
+import { ComponentProps, HTMLAttributes } from 'react';
 import { KeyOfPalette, KeyOfTypo } from '../../theme';
 
-export interface TextProps extends HTMLAttributes<HTMLSpanElement> {
+export interface TextProps extends ComponentProps<'span'> {
   as?: 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
   typo: KeyOfTypo;
   color?: KeyOfPalette;

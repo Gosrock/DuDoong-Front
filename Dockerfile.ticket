@@ -8,8 +8,7 @@ COPY package.json ./
 COPY yarn.lock ./
 # Installs all node packages
 # RUN npm ci 
-RUN npm install yarn --global --force
-RUN yarn install --immutable --immutable-cache --check-cache
+RUN yarn set version 3.3.0
 
 
 # Copies everything over to Docker environment
