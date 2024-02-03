@@ -1,3 +1,4 @@
+import { HeaderColorProvider } from '@dudoong/ui';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { HeaderLayout } from './HeaderLayout';
@@ -12,9 +13,9 @@ const Layout = ({ children }: HeaderLayoutProps) => {
     return <>{children}</>;
   } else {
     return (
-      <>
+      <HeaderColorProvider>
         <HeaderLayout>{children}</HeaderLayout>
-      </>
+      </HeaderColorProvider>
     );
   }
 };

@@ -1,4 +1,4 @@
-import { KeyOfPalette, ListRow, PaddingSize } from '@dudoong/ui';
+import { KeyOfPalette, ListRow, PaddingSize, ThemeType } from '@dudoong/ui';
 import Chevron from '@assets/chevron.svg';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -19,6 +19,7 @@ const Shortcuts = ({
   padding,
 }: ShortcutsProps) => {
   const router = useRouter();
+
   return (
     <StyledListRow
       padding={padding}
@@ -34,7 +35,6 @@ export default Shortcuts;
 
 const StyledListRow = styled(ListRow)`
   cursor: pointer;
-
   transform: scale(1);
   transition: all 0.1s ease-out;
 

@@ -1,4 +1,4 @@
-import { media } from '@dudoong/ui';
+import { media, palette, ThemeType, useHeaderColorContext } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { authState } from '@store/auth';
@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 
 const MobileHeader = ({ children }: PropsWithChildren) => {
   const buttonRef = useRef<HTMLDivElement>(null);
+  const { theme } = useHeaderColorContext();
   const { isAuthenticated } = useRecoilValue(authState);
   const [toggle, setToggle] = useState<boolean>(false);
   const onToggle = () => {
@@ -15,9 +16,15 @@ const MobileHeader = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper colortheme={theme}>
       <div ref={buttonRef}>
-        <Hamburger size={24} toggled={toggle} toggle={onToggle} rounded />
+        <Hamburger
+          size={24}
+          toggled={toggle}
+          toggle={onToggle}
+          color={theme === 'black' ? palette.white : undefined}
+          rounded
+        />
       </div>
       <HamburgerMenu
         toggle={toggle}
@@ -31,12 +38,13 @@ const MobileHeader = ({ children }: PropsWithChildren) => {
 };
 export default MobileHeader;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ colortheme: ThemeType }>`
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 2;
-  background-color: ${({ theme }) => theme.palette.white};
+  background-color: ${({ theme, colortheme }) =>
+    colortheme === 'black' ? theme.palette.black : theme.palette.white};
   & > div:first-of-type {
     width: 100%;
     padding: 12px;
@@ -49,7 +57,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const HamburgerMenu = styled.div<{ toggle: boolean; height: number }>`
+const HamburgerMenu = styled.div<{
+  toggle: boolean;
+  height: number;
+}>`
   height: ${({ toggle, height }) => (toggle ? height : 0)}px;
   transition: all 0.1s ease-in-out;
   overflow: hidden;
