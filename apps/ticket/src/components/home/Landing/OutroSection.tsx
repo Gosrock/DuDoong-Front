@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Outro from '@assets/landing/outro.svg';
-import { Button, media } from '@dudoong/ui';
+import { media } from '@dudoong/ui';
+
 const OutroSection = () => {
   return (
     <Wrapper>

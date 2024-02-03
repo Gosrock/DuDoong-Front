@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import { HTMLAttributes, ReactNode } from 'react';
 
-interface PaddingProps extends HTMLAttributes<HTMLDivElement> {
+export interface PaddingProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   size?: PaddingSize;
   fill?: boolean;
