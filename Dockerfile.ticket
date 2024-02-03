@@ -8,7 +8,7 @@ COPY package.json ./
 COPY yarn.lock ./
 # Installs all node packages
 # RUN npm ci 
-RUN npm install yarn --global --force
+RUN npm install yarn@3.3.0 --global --force
 RUN yarn set version berry
 RUN yarn install --immutable --immutable-cache --check-cache
 
