@@ -47,6 +47,7 @@ const buttonStyle = css`
   border-radius: 12px;
   border: 2px solid ${palette.black};
   background-color: ${palette.point_mint};
+  color: ${palette.black};
   z-index: 2;
 
   &:active {
