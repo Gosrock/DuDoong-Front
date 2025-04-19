@@ -33,6 +33,7 @@ import useOverlay from '@lib/hooks/useOverlay';
 import { AuthAPi } from '@lib/apis/axios';
 import { useEffect } from 'react';
 import { css } from '@emotion/react';
+import KakaoAdFit from '@components/shared/KakaoAdfit';
 
 const Mypage = ({ info }: { info: UserInfo }) => {
   const { userProfile } = useRecoilValue(authState);
@@ -118,6 +119,7 @@ const Mypage = ({ info }: { info: UserInfo }) => {
       <Shortcuts text="내 예매내역" url="/history" />
       <Shortcuts text="내 쿠폰함" url="/history/mycoupon" />
       <Divider />
+      <KakaoAdFit />
       <Shortcuts text="공연 준비하기" url="/admin" />
       <Divider />
       <Shortcuts
