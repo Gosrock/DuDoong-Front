@@ -22,6 +22,7 @@ import Tickets from '../Tickets';
 import MobileMap from './MobileMap';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import KakaoAdFit from '@components/shared/KakaoAdfit';
 
 const MobilePage = ({
   tickets,
@@ -122,9 +123,10 @@ const MobilePage = ({
         </Block>
       </Container>
       <Divider />
+      <KakaoAdFit />
       <DetailMenu content={detail.content} MdViewer={MdViewer} />
-
       <Spacing size={60} />
+
       <Footer />
       <Spacing size={120} color={'gray_200'} />
       <ButtonSet

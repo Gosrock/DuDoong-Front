@@ -44,7 +44,8 @@ const PcPage = ({
           />
         </RightSticky>
       </Container>
-      <Spacing size={120} />
+      <Spacing size={80} />
+      <Spacing size={40} />
       <section>
         <Footer />
       </section>
