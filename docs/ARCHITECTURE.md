@@ -216,7 +216,7 @@ callbackUrl로 리다이렉트
 | `AuthApi.OAUTH_TOKEN` | GET | `/auth/oauth/kakao?code={code}` | 인가코드 → idToken 교환 | 양쪽 앱 |
 | `AuthApi.OAUTH_VALID` | GET | `/auth/oauth/kakao/register/valid?id_token={idToken}` | 기존 회원 여부 확인 | 양쪽 앱 |
 | `AuthApi.OAUTH_INFO` | POST | `/auth/oauth/kakao/info?access_token={accessToken}` | 카카오 프로필 정보 조회 | 양쪽 앱 |
-| `AuthApi.OAUTH_REGISTER` | POST | `/auth/oauth/kakao/register?id_token={idToken}` | 신규 회원가입 | 양쪽 앱 |
+| `AuthApi.OAUTH_REGISTER` | POST | `/auth/oauth/kakao/register?id_token={idToken}` | 신규 회원가입 (body: `OauthInfoResponse` 프로필 데이터) | 양쪽 앱 |
 | `AuthApi.OAUTH_LOGIN` | POST | `/auth/oauth/kakao/login?id_token={idToken}` | 기존 회원 로그인 | 양쪽 앱 |
 | `EventApi.GET_EVENT_DETAIL` | GET | `/events/{eventId}` | 이벤트 상세 조회 (공개) | Ticket |
 
@@ -252,7 +252,7 @@ callbackUrl로 리다이렉트
 
 | API | 메서드 | 엔드포인트 | 설명 |
 |-----|--------|-----------|------|
-| `CommentApi.GET_COMMENTS` | GET | `/events/{id}/comments?page={}&size={}&sort={}` | 이벤트 댓글 목록 (무한 스크롤) |
+| `CommentApi.GET_COMMENTS` | GET | `/events/{eventId}/comments?page={}&size={}&sort={}` | 이벤트 댓글 목록 (무한 스크롤) |
 | `CommentApi.POST_COMMENTS` | POST | `/events/{eventId}/comments` | 댓글 작성 |
 
 **티켓 (Ticket)**
@@ -268,7 +268,7 @@ callbackUrl로 리다이렉트
 | API | 메서드 | 엔드포인트 | 설명 |
 |-----|--------|-----------|------|
 | `UserApi.GET_MY_INFO` | GET | `/users/me` | 내 정보 조회 |
-| `UserApi.REFRESH` | POST | `/auth/token/refresh` | 토큰 갱신 (SSR용, 쿠키 기반) |
+| `UserApi.REFRESH` | POST | `/auth/token/refresh?token={refreshToken}` | 토큰 갱신 (`axiosPrivate` 사용, SSR `getInitialProps`에서 호출) |
 
 **인증 (Ticket 전용 — `apps/ticket/src/lib/apis/axios.ts`)**
 
@@ -306,7 +306,7 @@ callbackUrl로 리다이렉트
 | `HostApi.PATCH_HOST_PROFILE` | PATCH | `/hosts/{hostId}/profile` | 호스트 프로필 수정 |
 | `HostApi.POST_HOST_IMAGE` | POST | `/hosts/{hostId}/images?imageFileExtension={}` | 호스트 이미지 업로드 URL 발급 |
 | `HostApi.PATCH_HOST_SLACK` | PATCH | `/hosts/{hostId}/slack` | Slack 웹훅 설정 |
-| `HostApi.GET_HOST_EVENTS` | GET | `/hosts/{hostId}/events` | 호스트의 이벤트 목록 |
+| `HostApi.GET_HOST_EVENTS` | GET | `/hosts/{hostId}/events` | 호스트의 이벤트 목록 (참고: 페이지네이션 파라미터 선언되어 있으나 실제 요청에 미포함) |
 | `HostApi.GET_HOST_INVITE_USER` | GET | `/hosts/{hostId}/invite/users?email={}` | 초대할 유저 검색 |
 | `HostApi.POST_HOST_INVITE` | POST | `/hosts/{hostId}/invite` | 멤버 초대 |
 | `HostApi.POST_HOST_JOIN` | POST | `/hosts/{hostId}/join` | 초대 수락 |
@@ -328,7 +328,7 @@ callbackUrl로 리다이렉트
 |-----|--------|-----------|------|
 | `TicketApi.GET_TICKET_DETAIL` | GET | `/events/{eventId}/ticketItems/admin` | 티켓 아이템 목록 (관리자용) |
 | `TicketApi.POST_TICKET` | POST | `/events/{eventId}/ticketItems` | 티켓 아이템 생성 |
-| `TicketApi.PATCH_TICKET_DELETE` | PATCH | `/events/{eventId}/ticketItems/{ticketItemId}` | 티켓 아이템 삭제 |
+| `TicketApi.PATCH_TICKET_DELETE` | PATCH | `/events/{eventId}/ticketItems/{ticketItemId}` | 티켓 아이템 soft delete (응답: 업데이트된 전체 티켓 목록) |
 | `TicketApi.GET_ISSUEDTICKETS` | GET | `/events/{eventId}/issuedTickets?page={}&searchString={}&searchType={}&size={}` | 발급 티켓 목록 (검색 포함) |
 
 **티켓 옵션 (Option)**

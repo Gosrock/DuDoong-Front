@@ -10,7 +10,7 @@
 | 상태 관리 | Recoil 0.7 | Recoil 0.7 | - |
 | 서버 상태 | TanStack React Query v4 | TanStack React Query v4 | `useInfiniteQueries` 훅 |
 | 스타일링 | Emotion (CSS-in-JS) | Emotion + Ant Design 5 | `@dudoong/ui` 테마 |
-| HTTP | Axios 1.2 | Axios (via `@dudoong/utils`) | `axiosPublic` |
+| HTTP | Axios 1.2 | Axios (자체 `axiosPrivate`; `BASE_URL`은 `@dudoong/utils`) | `axiosPublic` |
 | 인증 | Kakao OAuth + JWT | Kakao OAuth + JWT | `AuthApi` |
 | 결제 | Toss Payments Widget SDK | - | - |
 | 패키지 매니저 | Yarn 3 (Berry) | - | - |
