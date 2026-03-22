@@ -120,8 +120,11 @@ MyApp.getInitialProps = async (context: AppContext) => {
       );
     } else throw new Error('isClient');
   } catch (err: any) {
-    //console.log(err.response);
     loginData = null;
+    ctx.res?.setHeader('set-cookie', [
+      'refreshToken=; path=/; max-age=0',
+      'accessToken=; path=/; max-age=0',
+    ]);
   }
 
   if (Component.getInitialProps) {

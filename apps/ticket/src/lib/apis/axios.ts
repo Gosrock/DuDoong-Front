@@ -5,7 +5,7 @@ import axios, {
   AxiosRequestConfig,
   isAxiosError,
 } from 'axios';
-import { getCookie, setCookie } from 'cookies-next';
+import { getCookie, setCookie, removeCookies } from 'cookies-next';
 import { UserApi } from './user/UserApi';
 
 export const axiosPrivate = axios.create({
@@ -22,28 +22,38 @@ axiosPrivate.interceptors.response.use(
     const origin = error.config as AxiosRequestConfig;
 
     if (status === 401) {
-      const refreshToken = getCookie('refreshToken');
-      const refresh = await AuthApi.REFRESH(String(refreshToken));
+      try {
+        const refreshToken = getCookie('refreshToken');
+        const refresh = await AuthApi.REFRESH(String(refreshToken));
 
-      const cookieString = `refreshToken=${refresh.refreshToken}; path=/; max-age=${refresh.refreshTokenAge}; secure=true; SameSite=None;`;
-      axiosPrivate.defaults.headers.Cookie = cookieString;
-      (origin.headers as AxiosHeaders).set('set-cookie', cookieString);
-      setCookie('refreshToken', refresh.refreshToken, {
-        maxAge: refresh.refreshTokenAge,
-        sameSite: 'none',
-        secure: true,
-        path: '/',
-      });
+        const cookieString = `refreshToken=${refresh.refreshToken}; path=/; max-age=${refresh.refreshTokenAge}; secure=true; SameSite=None;`;
+        axiosPrivate.defaults.headers.Cookie = cookieString;
+        (origin.headers as AxiosHeaders).set('set-cookie', cookieString);
+        setCookie('refreshToken', refresh.refreshToken, {
+          maxAge: refresh.refreshTokenAge,
+          sameSite: 'none',
+          secure: true,
+          path: '/',
+        });
 
-      axiosPrivate.defaults.headers.common[
-        'Authorization'
-      ] = `Bearer ${refresh.accessToken}`;
-      (origin.headers as AxiosHeaders).set(
-        'Authorization',
-        `Bearer ${refresh.accessToken}`,
-      );
+        axiosPrivate.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${refresh.accessToken}`;
+        (origin.headers as AxiosHeaders).set(
+          'Authorization',
+          `Bearer ${refresh.accessToken}`,
+        );
 
-      return axios(origin);
+        return axios(origin);
+      } catch {
+        axiosPrivate.defaults.headers.common['Authorization'] = '';
+        removeCookies('accessToken');
+        removeCookies('refreshToken');
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
+        return Promise.reject(error);
+      }
     }
     return Promise.reject(error);
   },
