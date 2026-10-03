@@ -4,3 +4,4 @@ export * from './isEqualObject';
 export * from './parseDate';
 export * from './getTimeForToday';
 export * from './checkName';
+export * from './ticketLimit';

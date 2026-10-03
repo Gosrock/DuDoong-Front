@@ -1,4 +1,5 @@
 import { Divider, FlexBox, ListRow, Tag, TagButton } from '@dudoong/ui';
+import { isUnlimitedTicketCount } from '@dudoong/utils';
 import TicketApi from '@lib/apis/ticket/TicketApi';
 import type { GetTicketDetailResponse } from '@lib/apis/ticket/ticketType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -48,7 +49,15 @@ const TicketItem = ({
           padding={[12, 0]}
         />
         <FlexBox align="center" justify="space-between" gap={20}>
-          <Tag text={`재고 ${stock}/${quantity}`} color="main" size="lg" />
+          <Tag
+            text={
+              isUnlimitedTicketCount(quantity)
+                ? `판매 ${quantity - stock}매 · 수량 무제한`
+                : `재고 ${stock}/${quantity}`
+            }
+            color="main"
+            size="lg"
+          />
           <TagButton
             text="삭제"
             color="warn"
