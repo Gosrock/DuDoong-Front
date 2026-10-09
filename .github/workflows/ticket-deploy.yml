@@ -25,6 +25,14 @@ jobs:
         with:
           ref: ${{ github.event.inputs.ref || github.ref }}
 
+      # 수동 재빌드(옛 태그)는 소스만 태그 것을 쓰고 Dockerfile 은 이 워크플로를 실행한 커밋의 것을 쓴다 (#336)
+      # 옛 Dockerfile 은 빌드 도구가 바뀌어 지금은 실패할 수 있다 (예: Admin-v1.1.2 의 전역 yarn 설치)
+      - name: Use current Dockerfile for manual rebuild
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          git fetch --depth=1 origin ${{ github.sha }}
+          git checkout FETCH_HEAD -- Dockerfile.ticket
+
       # 도커 이미지에 env 파일 포함
       - name: Create .env file
         run: |
