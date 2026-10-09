@@ -9,7 +9,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # 서버가 모두 ARM(t4g)이라 arm64 이미지만 필요하다. QEMU 에뮬레이션 대신 ARM 러너에서 네이티브로 빌드한다 (#339)
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,9 +31,6 @@ jobs:
             {{version}}
             {{major}}.{{minor}}
 
-      # arm64 크로스 빌드를 위한 QEMU 에뮬레이터 셋업
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
       # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -48,7 +46,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.ticket
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}

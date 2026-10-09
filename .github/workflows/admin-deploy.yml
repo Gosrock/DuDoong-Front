@@ -55,7 +55,8 @@ jobs:
           fi
           echo ::set-output name=VERSION::$RELEASE_VERSION_WITHOUT_V
 
-      # arm64 크로스 빌드를 위한 QEMU 에뮬레이터 셋업
+      # 런타임(nginx) 스테이지의 arm64 RUN 단계를 x86 러너에서 실행하기 위한 QEMU 에뮬레이터 셋업
+      # (빌더는 BUILDPLATFORM 네이티브라 에뮬레이션 구간은 rm 한 줄뿐이다)
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       # 도커 빌드 관련 셋업
@@ -73,6 +74,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.admin
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           push: true
           tags: david0218/dudoong-admin:${{ steps.get_version.outputs.VERSION }}
