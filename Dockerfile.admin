@@ -1,4 +1,6 @@
-FROM node:18-alpine AS builder
+# 빌더는 빌드 머신 플랫폼(amd64)에서 네이티브로 실행한다.
+# 산출물(apps/admin/dist)은 플랫폼과 무관한 정적 파일이고, 런타임(nginx)은 대상 플랫폼 이미지를 쓴다.
+FROM --platform=$BUILDPLATFORM node:18-alpine AS builder
 # set working directory
 WORKDIR /app
 # install app dependencies
