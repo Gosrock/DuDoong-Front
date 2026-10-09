@@ -6,6 +6,15 @@ on:
     # Publish semver tags as releases.
     tags:
       - Admin-v*.*.*
+  # 이미 배포된 버전을 같은 소스로 다시 빌드할 때 사용 (예: ref=Admin-v1.1.2, version=1.1.2)
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: '빌드할 git 태그 (예: Admin-v1.1.2)'
+        required: true
+      version:
+        description: '푸시할 이미지 태그 (예: 1.1.2)'
+        required: true
 
 jobs:
   build:
@@ -13,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
 
       # 도커 이미지에 env 파일 포함
       - name: Create .env file
@@ -22,10 +33,23 @@ jobs:
       # 도커 메타데이터 가져오기
       - name: Get the version
         id: get_version
+        env:
+          INPUT_VERSION: ${{ github.event.inputs.version }}
         run: |
-          RELEASE_VERSION_WITHOUT_V="$(cut -d'v' -f2 <<< ${GITHUB_REF#refs/*/})"
+          if [ -n "$INPUT_VERSION" ]; then
+            RELEASE_VERSION_WITHOUT_V="$INPUT_VERSION"
+          else
+            RELEASE_VERSION_WITHOUT_V="$(cut -d'v' -f2 <<< ${GITHUB_REF#refs/*/})"
+          fi
+          if ! [[ "$RELEASE_VERSION_WITHOUT_V" =~ ^[0-9A-Za-z._-]+$ ]]; then
+            echo "잘못된 이미지 태그: $RELEASE_VERSION_WITHOUT_V" >&2
+            exit 1
+          fi
           echo ::set-output name=VERSION::$RELEASE_VERSION_WITHOUT_V
 
+      # arm64 크로스 빌드를 위한 QEMU 에뮬레이터 셋업
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
       # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -41,6 +65,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.admin
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: david0218/dudoong-admin:${{ steps.get_version.outputs.VERSION }}

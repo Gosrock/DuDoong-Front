@@ -4,6 +4,8 @@ on:
     branches: [dev]
     # Publish semver tags as releases.
     tags: ['v*.*.*']
+  # dev 브랜치에서 수동 실행 시 :dev 이미지를 다시 빌드
+  workflow_dispatch:
 
 jobs:
   build:
@@ -28,6 +30,9 @@ jobs:
             {{version}}
             {{major}}.{{minor}}
 
+      # arm64 크로스 빌드를 위한 QEMU 에뮬레이터 셋업
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
       # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -43,7 +48,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.admin
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
