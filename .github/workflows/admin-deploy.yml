@@ -13,47 +13,72 @@ on:
         description: '빌드할 git 태그 (예: Admin-v1.1.2)'
         required: true
       version:
-        description: '푸시할 이미지 태그 (예: 1.1.2)'
-        required: true
+        description: '푸시할 이미지 태그 (비우면 ref 에서 추출, 예: 1.1.2). 지정하면 ref 의 버전과 같아야 한다'
+        required: false
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # 빌드할 태그와 이미지 버전을 먼저 확정한다.
+      # 수동 실행 시 ref 는 Admin-vX.Y.Z 태그만 허용하고 refs/tags/ 로 고정해 브랜치·포크 PR ref(refs/pull/...) 빌드를 막는다.
+      # version 은 ref 에서 뽑은 버전과 같아야 한다 (latest·dev 등 다른 이미지 태그 덮어쓰기 방지).
+      - name: Get the version
+        id: get_version
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_REF: ${{ github.event.inputs.ref }}
+          INPUT_VERSION: ${{ github.event.inputs.version }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            TAG="$INPUT_REF"
+          else
+            TAG="${GITHUB_REF#refs/tags/}"
+          fi
+          TAG_RE='^Admin-v([0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?)$'
+          if ! [[ "$TAG" =~ $TAG_RE ]]; then
+            echo "잘못된 태그 형식(Admin-vX.Y.Z 필요): $TAG" >&2
+            exit 1
+          fi
+          RELEASE_VERSION_WITHOUT_V="${BASH_REMATCH[1]}"
+          if [ -n "$INPUT_VERSION" ] && [ "$INPUT_VERSION" != "$RELEASE_VERSION_WITHOUT_V" ]; then
+            echo "version($INPUT_VERSION)이 ref 의 버전($RELEASE_VERSION_WITHOUT_V)과 다름" >&2
+            exit 1
+          fi
+          if ! [[ "$RELEASE_VERSION_WITHOUT_V" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
+            echo "잘못된 이미지 태그: $RELEASE_VERSION_WITHOUT_V" >&2
+            exit 1
+          fi
+          echo "REF=refs/tags/$TAG" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$RELEASE_VERSION_WITHOUT_V" >> "$GITHUB_OUTPUT"
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.ref || github.ref }}
+          ref: ${{ steps.get_version.outputs.REF }}
+          persist-credentials: false
 
       # 수동 재빌드(옛 태그)는 소스만 태그 것을 쓰고 Dockerfile 은 이 워크플로를 실행한 커밋의 것을 쓴다 (#336)
       # 옛 Dockerfile 은 빌드 도구가 바뀌어 지금은 실패할 수 있다 (예: Admin-v1.1.2 의 전역 yarn 설치)
       - name: Use current Dockerfile for manual rebuild
         if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          WORKFLOW_SHA: ${{ github.sha }}
         run: |
-          git fetch --depth=1 origin ${{ github.sha }}
+          git fetch --depth=1 origin "$WORKFLOW_SHA"
           git checkout FETCH_HEAD -- Dockerfile.admin
 
       # 도커 이미지에 env 파일 포함
+      # 시크릿은 스크립트 본문에 직접 보간하지 않고 env 로 넘긴다 (따옴표·$ 등이 셸로 해석되지 않게)
       - name: Create .env file
+        env:
+          ENV_VARS: ${{ secrets.ENV_VARS_ADMIN }}
         run: |
           touch .env
-          echo "${{ secrets.ENV_VARS_ADMIN }}" >> apps/admin/.env
-      # 도커 메타데이터 가져오기
-      - name: Get the version
-        id: get_version
-        env:
-          INPUT_VERSION: ${{ github.event.inputs.version }}
-        run: |
-          if [ -n "$INPUT_VERSION" ]; then
-            RELEASE_VERSION_WITHOUT_V="$INPUT_VERSION"
-          else
-            RELEASE_VERSION_WITHOUT_V="$(cut -d'v' -f2 <<< ${GITHUB_REF#refs/*/})"
-          fi
-          if ! [[ "$RELEASE_VERSION_WITHOUT_V" =~ ^[0-9A-Za-z._-]+$ ]]; then
-            echo "잘못된 이미지 태그: $RELEASE_VERSION_WITHOUT_V" >&2
-            exit 1
-          fi
-          echo ::set-output name=VERSION::$RELEASE_VERSION_WITHOUT_V
+          printf '%s\n' "$ENV_VARS" > apps/admin/.env
 
       # 런타임(nginx) 스테이지의 arm64 RUN 단계를 x86 러너에서 실행하기 위한 QEMU 에뮬레이터 셋업
       # (빌더는 BUILDPLATFORM 네이티브라 에뮬레이션 구간은 rm 한 줄뿐이다)

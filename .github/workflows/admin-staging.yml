@@ -7,28 +7,38 @@ on:
   # dev 브랜치에서 수동 실행 시 :dev 이미지를 다시 빌드
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       # 도커 이미지에 env 파일 포함
+      # 시크릿은 스크립트 본문에 직접 보간하지 않고 env 로 넘긴다 (따옴표·$ 등이 셸로 해석되지 않게)
       - name: Create .env file
+        env:
+          ENV_VARS: ${{ secrets.ENV_VARS_ADMIN }}
         run: |
           touch .env
-          echo "${{ secrets.ENV_VARS_ADMIN }}" >> apps/admin/.env
+          printf '%s\n' "$ENV_VARS" > apps/admin/.env
 
       # 도커 메타데이터 가져오기
       - name: Docker meta
         id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v1
+        uses: docker/metadata-action@v5
         with:
           images: david0218/dudoong-admin
-          tag-semver: |
-            {{version}}
-            {{major}}.{{minor}}
+          # 기존 ghaction-docker-meta@v1 과 같은 태그: 브랜치 push/수동 실행 → 브랜치명(:dev), v*.*.* 태그 → 버전·major.minor(+latest)
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       # 런타임(nginx) 스테이지의 arm64 RUN 단계를 x86 러너에서 실행하기 위한 QEMU 에뮬레이터 셋업
       # (빌더는 BUILDPLATFORM 네이티브라 에뮬레이션 구간은 rm 한 줄뿐이다)

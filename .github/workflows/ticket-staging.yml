@@ -7,6 +7,9 @@ on:
   # dev 브랜치에서 수동 실행 시 :dev 이미지를 다시 빌드
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     # 서버가 모두 ARM(t4g)이라 arm64 이미지만 필요하다. QEMU 에뮬레이션 대신 ARM 러너에서 네이티브로 빌드한다 (#339)
@@ -14,22 +17,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       # 도커 이미지에 env 파일 포함
+      # 시크릿은 스크립트 본문에 직접 보간하지 않고 env 로 넘긴다 (따옴표·$ 등이 셸로 해석되지 않게)
       - name: Create .env file
+        env:
+          ENV_VARS: ${{ secrets.ENV_VARS_TICKET }}
         run: |
           touch .env
-          echo "${{ secrets.ENV_VARS_TICKET }}" >> apps/ticket/.env
+          printf '%s\n' "$ENV_VARS" > apps/ticket/.env
 
       # 도커 메타데이터 가져오기
       - name: Docker meta
         id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v1
+        uses: docker/metadata-action@v5
         with:
           images: david0218/dudoong-ticket
-          tag-semver: |
-            {{version}}
-            {{major}}.{{minor}}
+          # 기존 ghaction-docker-meta@v1 과 같은 태그: 브랜치 push/수동 실행 → 브랜치명(:dev), v*.*.* 태그 → 버전·major.minor(+latest)
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
