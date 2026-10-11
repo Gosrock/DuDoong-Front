@@ -1,4 +1,5 @@
 import { ListHeader, Spacing, theme } from '@dudoong/ui';
+import { isUnlimitedTicketCount } from '@dudoong/utils';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { TicketDetailResponse } from '@lib/apis/ticket/ticketType';
@@ -30,7 +31,11 @@ const TicketList = ({
                 text={item.ticketName}
                 subText={`${item.price} · ${
                   item.approveType === '승인' ? '승인 후 발매' : '선착순'
-                } · 1인당 ${item.purchaseLimit}매`}
+                }${
+                  isUnlimitedTicketCount(item.purchaseLimit)
+                    ? ''
+                    : ` · 1인당 ${item.purchaseLimit}매`
+                }`}
                 quantity={item.supplyCount}
                 stock={item.quantity}
                 isSold={item.quantity !== item.supplyCount}

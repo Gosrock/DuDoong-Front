@@ -1,4 +1,5 @@
 import { Divider, ListRow, Tag } from '@dudoong/ui';
+import { isUnlimitedTicketCount } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import type { GetEventTicketItemsResponse } from '@lib/apis/ticket/ticketType';
 import { HTMLAttributes } from 'react';
@@ -15,7 +16,11 @@ const Tickets = ({ tickets, ...props }: TicketsProps) => {
           <ListRow
             padding={[12, 0]}
             text={item.ticketName}
-            subText={`${item.price} ∙ ${item.payType} ∙ 인당 ${item.purchaseLimit}매 제한`}
+            subText={`${item.price} ∙ ${item.payType}${
+              isUnlimitedTicketCount(item.purchaseLimit)
+                ? ''
+                : ` ∙ 인당 ${item.purchaseLimit}매 제한`
+            }`}
             textGap={0}
             rightElement={
               item.isQuantityLeft ? (
