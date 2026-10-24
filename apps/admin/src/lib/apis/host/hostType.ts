@@ -1,4 +1,4 @@
-import { InfiniteResponse } from '@dudoong/utils';
+import { BusinessInfo, InfiniteResponse } from '@dudoong/utils';
 import { EventProfileResponse } from '../event/eventType';
 
 export type PageResponseHostProfileResponse =
@@ -43,6 +43,7 @@ export interface HostDetailResponse {
   masterUser: HostUser;
   hostUsers: HostUser[];
   slackUrl: string;
+  businessInfo?: BusinessInfo | null;
 }
 
 export interface HostUser {
@@ -61,6 +62,8 @@ export interface UpdateHostRequest {
   introduce: string;
   contactNumber: string;
   contactEmail: string;
+  businessType: 'INDIVIDUAL' | 'BUSINESS';
+  businessInfo: BusinessInfo | null;
 }
 
 export type imageFileExtensionType = 'JPEG' | 'PNG' | 'JPG';

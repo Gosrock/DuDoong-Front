@@ -24,6 +24,12 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import KakaoAdFit from '@components/shared/KakaoAdfit';
 import IntermediaryNotice from '../IntermediaryNotice';
+import SellerInfo from '../SellerInfo';
+
+const MobileSellerInfo = styled(SellerInfo)`
+  margin-top: 12px;
+  ${({ theme }) => theme.typo.P_Text_14_M}
+`;
 
 const MobileIntermediaryNotice = styled(IntermediaryNotice)`
   margin-top: 16px;
@@ -127,6 +133,9 @@ const MobilePage = ({
               </Text>
             }
           />
+          {detail.host.businessInfo && (
+            <MobileSellerInfo businessInfo={detail.host.businessInfo} />
+          )}
           <MobileIntermediaryNotice />
         </Block>
       </Container>

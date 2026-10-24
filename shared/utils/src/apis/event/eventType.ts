@@ -32,4 +32,13 @@ export interface HostInfo {
   contactEmail: string;
   contactNumber: string;
   partner: boolean;
+  /** 사업자 호스트의 판매자 정보. 개인 호스트는 null, 백엔드 반영 전에는 undefined */
+  businessInfo?: BusinessInfo | null;
+}
+
+export interface BusinessInfo {
+  businessName: string;
+  representativeName: string;
+  registrationNumber: string;
+  address: string;
 }
