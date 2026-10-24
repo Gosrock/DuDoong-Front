@@ -1,6 +1,7 @@
 import { Button, ButtonSet, ListHeader, Text, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
 interface RegisterProps {
   name: string;
@@ -8,6 +9,8 @@ interface RegisterProps {
 }
 
 const Register = ({ name, onMainActionClick }: RegisterProps) => {
+  const [isOver14, setIsOver14] = useState(false);
+
   return (
     <Wrapper>
       <ListHeader
@@ -39,8 +42,23 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
           </a>
         }
       />
+      <AgeCheckLabel>
+        <input
+          type="checkbox"
+          checked={isOver14}
+          onChange={(e) => setIsOver14(e.target.checked)}
+        />
+        <Text typo="Text_14" color="black">
+          [필수] 만 14세 이상입니다
+        </Text>
+      </AgeCheckLabel>
       <ButtonSet varient="mono" padding={[20, 24]}>
-        <Button varient="kakao" onClick={onMainActionClick} fullWidth>
+        <Button
+          varient="kakao"
+          onClick={onMainActionClick}
+          disabled={!isOver14}
+          fullWidth
+        >
           약관 동의하고 시작하기
         </Button>
       </ButtonSet>
@@ -49,5 +67,20 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
 };
 
 const Wrapper = styled.div``;
+
+const AgeCheckLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 24px 0;
+  cursor: pointer;
+  input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: ${({ theme }) => theme.palette.main_500};
+    cursor: pointer;
+  }
+`;
 
 export default Register;
