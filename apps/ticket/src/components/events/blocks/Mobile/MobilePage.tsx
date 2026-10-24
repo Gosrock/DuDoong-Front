@@ -23,6 +23,13 @@ import MobileMap from './MobileMap';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import KakaoAdFit from '@components/shared/KakaoAdfit';
+import IntermediaryNotice from '../IntermediaryNotice';
+
+const MobileIntermediaryNotice = styled(IntermediaryNotice)`
+  margin-top: 16px;
+  ${({ theme }) => theme.typo.P_Text_12_R}
+  color: ${({ theme }) => theme.palette.gray_400};
+`;
 
 const MobilePage = ({
   tickets,
@@ -120,6 +127,7 @@ const MobilePage = ({
               </Text>
             }
           />
+          <MobileIntermediaryNotice />
         </Block>
       </Container>
       <Divider />

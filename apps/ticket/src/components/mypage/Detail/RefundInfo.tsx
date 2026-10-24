@@ -32,10 +32,14 @@ const RefundInfo = ({
   refund,
   eventId,
   isDudoongTicket,
+  isFree,
+  isPendingApproval,
 }: {
   refund: RefundInfo;
   eventId: number;
   isDudoongTicket: boolean;
+  isFree: boolean;
+  isPendingApproval: boolean;
 }) => {
   const { isOpen, openOverlay, closeOverlay } = useOverlay();
   const {
@@ -48,7 +52,7 @@ const RefundInfo = ({
       push('/history');
       setToast({
         comment: isDudoongTicket
-          ? '예매가 취소되었어요. 공연 관계자에게 연락해 환불을 요청해주세요.'
+          ? '예매가 취소되었어요. 호스트에게 연락해 환불을 요청해주세요.'
           : '티켓이 정상적으로 취소되었습니다.',
       });
       closeOverlay();
@@ -79,15 +83,31 @@ const RefundInfo = ({
             <li>취소기한 이전까지 수수료 없이 취소 가능합니다.</li>
             <li>공연 입장확인이 된 티켓이 있을경우 취소가 불가합니다.</li>
             <li>
-              두둥티켓은 공연 관계자(호스트) 계좌로 입금한 티켓이라, 예매를
-              취소해도 자동으로 환불되지 않습니다.
+              두둥티켓은 호스트 계좌로 입금한 티켓이라, 예매를 취소해도 자동으로
+              환불되지 않습니다.
             </li>
             <li>
-              환불 방법 : 예매취소 후 공연 관계자에게 연락해 환불받을 계좌를
-              알려주세요. 연락처는{' '}
+              환불 방법 : 예매취소 후 호스트에게 연락해 환불받을 계좌를
+              알려주세요. 호스트는 지체 없이 환불해야 하며, 연락처는{' '}
               <Link href={`/events/${eventId}`}>공연 상세 페이지</Link>에서
               확인할 수 있습니다.
             </li>
+            {isPendingApproval && (
+              <li>
+                입금 후 승인 전에는 앱에서 취소할 수 없습니다. 승인이 늦어지거나
+                취소를 원하면 호스트에게 연락해 주세요.
+              </li>
+            )}
+            <li>
+              호스트와 연락이 되지 않거나 환불이 늦어지면 두둥 카카오톡 채널로
+              알려주세요.
+            </li>
+          </ul>
+        ) : isFree ? (
+          <ul>
+            <li>취소기한 이전까지 취소할 수 있습니다.</li>
+            <li>공연 입장확인이 된 티켓이 있을경우 취소가 불가합니다.</li>
+            <li>취소 방법 : 티켓 예매 상세내역 {'>'} 예매취소</li>
           </ul>
         ) : (
           <ul>
@@ -166,11 +186,10 @@ const RefundConfirmation = ({
           title="취소 후 직접 환불을 요청해야 해요"
           description={
             <Text typo="P_Text_16_M" color="gray_400">
-              두둥티켓은 공연 관계자(호스트) 계좌로 입금한 티켓이라 자동으로
-              환불되지 않아요. 예매를 취소한 뒤 공연 관계자에게 연락해 환불받을
-              계좌를 알려주세요.
+              두둥티켓은 호스트 계좌로 입금한 티켓이라 자동으로 환불되지 않아요.
+              예매를 취소한 뒤 호스트에게 연락해 환불받을 계좌를 알려주세요.
               <HostContactLink href={`/events/${eventId}`} onClick={onDismiss}>
-                공연 관계자 연락처 확인하기
+                호스트 연락처 확인하기
               </HostContactLink>
             </Text>
           }
