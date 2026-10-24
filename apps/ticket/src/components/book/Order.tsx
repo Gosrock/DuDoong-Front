@@ -113,7 +113,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
           `}
         >
           <ListHeader size="listHeader_18" title={'판매정보'} />
-          <Info />
+          <Info isDudoong={isDudoong} />
           <Spacing size={60} />
         </div>
 
