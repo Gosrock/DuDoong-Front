@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import IntermediaryNotice from '../IntermediaryNotice';
+import SellerInfo from '../SellerInfo';
 
 const Summary = ({ detail }: { detail: EventDetailResponse }) => {
   const [img, setImg] = useState(detail.posterImage);
@@ -44,11 +45,14 @@ const Summary = ({ detail }: { detail: EventDetailResponse }) => {
           </div>
           <div>
             <p>호스트</p>
-            <p>
+            <div>
               {detail.host.name}
               <br />
               <span>{detail.host.contactNumber}</span>
-            </p>
+              {detail.host.businessInfo && (
+                <SellerInfo businessInfo={detail.host.businessInfo} />
+              )}
+            </div>
           </div>
         </div>
         <div>

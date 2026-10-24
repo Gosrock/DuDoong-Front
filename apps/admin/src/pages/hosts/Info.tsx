@@ -2,6 +2,7 @@ import GridLeftElement from '@components/hosts/info/GridLeftElement';
 import GridRightElement from '@components/hosts/info/GridRightElement';
 import ContentGrid from '@components/shared/layout/ContentGrid';
 import { ListHeader } from '@dudoong/ui';
+import { formatRegistrationNumber } from '@dudoong/utils';
 import useBottomButton from '@lib/hooks/useBottomButton';
 import { useEffect } from 'react';
 import type {
@@ -20,7 +21,13 @@ import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 export type InputFormType = Pick<
   UpdateHostRequest,
   'introduce' | 'contactNumber' | 'contactEmail'
->;
+> & {
+  isBusiness: boolean;
+  businessName: string;
+  representativeName: string;
+  registrationNumber: string;
+  businessAddress: string;
+};
 
 const Info = () => {
   const hostId = useLocation().pathname.split('/')[2];
@@ -30,14 +37,20 @@ const Info = () => {
     hostId,
   );
   const queryClient = useQueryClient();
-  const { register, handleSubmit, reset, formState } = useForm<InputFormType>({
-    mode: 'onChange',
-    defaultValues: {
-      introduce: '',
-      contactNumber: '',
-      contactEmail: '',
-    },
-  });
+  const { register, handleSubmit, reset, formState, watch, setValue } =
+    useForm<InputFormType>({
+      mode: 'onChange',
+      defaultValues: {
+        introduce: '',
+        contactNumber: '',
+        contactEmail: '',
+        isBusiness: false,
+        businessName: '',
+        representativeName: '',
+        registrationNumber: '',
+        businessAddress: '',
+      },
+    });
   const { setButtonInfo } = useBottomButton({
     type: 'save',
     isActive: true,
@@ -67,12 +80,29 @@ const Info = () => {
           };
         });
       }
-      reset({ ...hostDetail });
+      const { businessInfo } = hostDetail;
+      reset({
+        ...hostDetail,
+        isBusiness: !!businessInfo,
+        businessName: businessInfo?.businessName ?? '',
+        representativeName: businessInfo?.representativeName ?? '',
+        registrationNumber: formatRegistrationNumber(
+          businessInfo?.registrationNumber ?? '',
+        ),
+        businessAddress: businessInfo?.address ?? '',
+      });
     }
   }, [hostDetail]);
 
   // 하단부 버튼
-  const buttonClickHandler = (data: InputFormType) => {
+  const buttonClickHandler = ({
+    isBusiness,
+    businessName,
+    representativeName,
+    registrationNumber,
+    businessAddress,
+    ...data
+  }: InputFormType) => {
     // 이미지 post
     if (imageInfo.image) {
       uploadImageToS3();
@@ -81,7 +111,19 @@ const Info = () => {
     postEventMutation.mutate(
       {
         hostId: hostId,
-        payload: { ...data, profileImageKey: imageInfo.key },
+        payload: {
+          ...data,
+          profileImageKey: imageInfo.key,
+          businessType: isBusiness ? 'BUSINESS' : 'INDIVIDUAL',
+          businessInfo: isBusiness
+            ? {
+                businessName: businessName.trim(),
+                representativeName: representativeName.trim(),
+                registrationNumber: registrationNumber.replace(/\D/g, ''),
+                address: businessAddress.trim(),
+              }
+            : null,
+        },
       },
       {
         onSuccess: () => {
@@ -114,7 +156,12 @@ const Info = () => {
           imageurl={hostDetail ? hostDetail!.profileImage : null}
           setImageInfo={setImageInfo}
         />
-        <GridRightElement register={register} />
+        <GridRightElement
+          register={register}
+          watch={watch}
+          setValue={setValue}
+          errors={formState.errors}
+        />
       </ContentGrid>
     </>
   );
