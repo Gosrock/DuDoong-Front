@@ -6,6 +6,7 @@ import {
   ListHeader,
   Padding,
   Spacing,
+  Text,
   theme,
 } from '@dudoong/ui';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
@@ -160,7 +161,7 @@ const RefundConfirmation = ({
         <ListHeader
           title="취소 후 직접 환불을 요청해야 해요"
           description={
-            <>
+            <Text typo="P_Text_16_M" color="gray_400">
               두둥티켓은 공연 관계자 계좌로 입금한 티켓이라 자동으로 환불되지
               않아요. 예매를 취소한 뒤 공연 관계자에게 연락해 환불받을 계좌를
               알려주세요.
@@ -168,7 +169,7 @@ const RefundConfirmation = ({
               <HostContactLink href={`/events/${eventId}`}>
                 공연 관계자 연락처 확인하기
               </HostContactLink>
-            </>
+            </Text>
           }
           size="listHeader_18"
           gap={20}
