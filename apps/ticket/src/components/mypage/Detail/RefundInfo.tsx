@@ -22,7 +22,7 @@ import { useRouter } from 'next/router';
 import InfoItem from './InfoItem';
 
 const HostContactLink = styled(Link)`
-  display: inline-block;
+  display: block;
   margin-top: 8px;
   text-decoration: underline;
   color: ${theme.palette.main_500};
@@ -46,7 +46,11 @@ const RefundInfo = ({
   const ticketRefundMutation = useMutation(OrderApi.POST_REFUND, {
     onSuccess: () => {
       push('/history');
-      setToast({ comment: '티켓이 정상적으로 취소되었습니다.' });
+      setToast({
+        comment: isDudoongTicket
+          ? '예매가 취소되었어요. 공연 관계자에게 연락해 환불을 요청해주세요.'
+          : '티켓이 정상적으로 취소되었습니다.',
+      });
       closeOverlay();
     },
 
@@ -75,8 +79,8 @@ const RefundInfo = ({
             <li>취소기한 이전까지 수수료 없이 취소 가능합니다.</li>
             <li>공연 입장확인이 된 티켓이 있을경우 취소가 불가합니다.</li>
             <li>
-              두둥티켓은 공연 관계자 계좌로 입금한 티켓이라, 예매를 취소해도
-              자동으로 환불되지 않습니다.
+              두둥티켓은 공연 관계자(호스트) 계좌로 입금한 티켓이라, 예매를
+              취소해도 자동으로 환불되지 않습니다.
             </li>
             <li>
               환불 방법 : 예매취소 후 공연 관계자에게 연락해 환불받을 계좌를
@@ -162,11 +166,10 @@ const RefundConfirmation = ({
           title="취소 후 직접 환불을 요청해야 해요"
           description={
             <Text typo="P_Text_16_M" color="gray_400">
-              두둥티켓은 공연 관계자 계좌로 입금한 티켓이라 자동으로 환불되지
-              않아요. 예매를 취소한 뒤 공연 관계자에게 연락해 환불받을 계좌를
-              알려주세요.
-              <br />
-              <HostContactLink href={`/events/${eventId}`}>
+              두둥티켓은 공연 관계자(호스트) 계좌로 입금한 티켓이라 자동으로
+              환불되지 않아요. 예매를 취소한 뒤 공연 관계자에게 연락해 환불받을
+              계좌를 알려주세요.
+              <HostContactLink href={`/events/${eventId}`} onClick={onDismiss}>
                 공연 관계자 연락처 확인하기
               </HostContactLink>
             </Text>
