@@ -32,11 +32,14 @@ import { useState } from 'react';
 import { authState } from '@store/auth';
 import { useRecoilValue } from 'recoil';
 import { checkName } from '@dudoong/utils';
+import { AGREEMENT_VERSION } from '@lib/constants/agreement';
+import HostProvisionConsent from './blocks/order/HostProvisionConsent';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
 
   const [coupon] = useState(null);
+  const [hostProvisionAgreed, setHostProvisionAgreed] = useState(false);
   const isDudoong = data.ticketPayType === '두둥티켓';
   const isNeedTossPayment = data.ticketPayType === '유료티켓';
   const { instance } = useTossPayments(data.totalPrice, isNeedTossPayment);
@@ -52,10 +55,15 @@ const Order = ({ data }: { data: AddCartResponse }) => {
       : router.back();
   };
 
+  const orderPayload = {
+    couponId: coupon,
+    cartId: data.cartId,
+    hostProvisionAgreed: true,
+    agreementVersion: AGREEMENT_VERSION,
+  };
+
   const handleOrder = () => {
-    isDudoong
-      ? openOverlay()
-      : orderMutate({ couponId: coupon, cartId: data.cartId });
+    isDudoong ? openOverlay() : orderMutate(orderPayload);
   };
 
   return (
@@ -122,6 +130,12 @@ const Order = ({ data }: { data: AddCartResponse }) => {
 
         {/* 다음으로 버튼 */}
         <ButtonSet bottomFixed backGradient varient="vertical">
+          <HostProvisionConsent
+            eventName={data.eventProfile.name}
+            isDudoong={isDudoong}
+            checked={hostProvisionAgreed}
+            onChange={setHostProvisionAgreed}
+          />
           <Text
             typo="P_Text_12_R"
             color="gray_500"
@@ -133,7 +147,11 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             책임은 호스트에게 있습니다.
             <br />위 내용을 확인하였으며 결제에 동의합니다.
           </Text>
-          <Button fullWidth onClick={handleOrder}>
+          <Button
+            fullWidth
+            onClick={handleOrder}
+            disabled={!hostProvisionAgreed}
+          >
             {data.totalPrice} 결제하기
           </Button>
         </ButtonSet>
@@ -147,7 +165,7 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <OverlayBox open={isOpen} onDismiss={closeOverlay}>
           <AccountInfoSection
             accountInfo={data.accountInfo}
-            orderPayload={{ couponId: coupon, cartId: data.cartId }}
+            orderPayload={orderPayload}
             closeOverlay={closeOverlay}
             name={userProfile!.name}
           />

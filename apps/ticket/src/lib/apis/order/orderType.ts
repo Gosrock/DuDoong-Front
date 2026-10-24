@@ -5,6 +5,9 @@ import type { ApproveType } from '../ticket/ticketType';
 export interface CreateOrderRequest {
   couponId: number | null;
   cartId: number;
+  hostProvisionAgreed: boolean;
+  dudoongTicketNoticeConfirmed?: boolean;
+  agreementVersion: string;
 }
 
 /**
