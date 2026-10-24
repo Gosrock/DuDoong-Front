@@ -1,4 +1,4 @@
-name: Build & Docker Push - Ticket
+name: Build & Push (ECR) - Ticket
 on:
   push:
     # branches: [dev]
@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write # GitHub OIDC → ECR push 역할
 
 jobs:
   build:
@@ -84,13 +85,18 @@ jobs:
       # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      # 내 도커허브 로그인
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
+      # Docker Hub(공개) 대신 ECR 비공개 저장소 (Gosrock/DuDoong-Deploy#59). 장기 키 없이 OIDC 역할로
+      # 역할은 이 리포의 Ticket-v*·Admin-v* 태그와 dev 브랜치 job 만 맡을 수 있다
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # 도커이미지 빌드하고 허브로 푸쉬
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/dudoong-github-ecr-front
+          aws-region: ap-northeast-2
+          mask-aws-account-id: true
+      - name: login to ecr
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      # 도커이미지 빌드하고 ECR 로 푸쉬
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
@@ -98,4 +104,4 @@ jobs:
           file: ./Dockerfile.ticket
           platforms: linux/arm64
           push: true
-          tags: david0218/dudoong-ticket:${{ steps.get_version.outputs.VERSION }}
+          tags: ${{ steps.ecr.outputs.registry }}/dudoong-ticket:${{ steps.get_version.outputs.VERSION }}
