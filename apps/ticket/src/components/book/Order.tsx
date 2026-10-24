@@ -122,12 +122,16 @@ const Order = ({ data }: { data: AddCartResponse }) => {
 
         {/* 다음으로 버튼 */}
         <ButtonSet bottomFixed backGradient varient="vertical">
-          <Text typo="P_Text_12_R" color="gray_500">
+          <Text
+            typo="P_Text_12_R"
+            color="gray_500"
+            css={css`
+              text-align: center;
+            `}
+          >
             두둥은 통신판매중개자로서 공연의 당사자가 아니며, 공연에 관한 의무와
             책임은 호스트에게 있습니다.
-          </Text>
-          <Text typo="P_Text_12_R" color="gray_500">
-            위 내용을 확인하였으며 결제에 동의합니다.
+            <br />위 내용을 확인하였으며 결제에 동의합니다.
           </Text>
           <Button fullWidth onClick={handleOrder}>
             {data.totalPrice} 결제하기
