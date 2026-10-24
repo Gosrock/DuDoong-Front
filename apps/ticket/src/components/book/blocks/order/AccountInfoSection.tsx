@@ -9,6 +9,7 @@ import {
 } from '@dudoong/ui';
 import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { checkName } from '@dudoong/utils';
+import styled from '@emotion/styled';
 import { AccountInfo } from '@lib/apis/cart/cartType';
 import useOrderMutation from './useOrderMutation';
 
@@ -58,6 +59,19 @@ const AccountInfoSection = ({
             textGap={0}
           />
         </RoundBlock>
+        <DudoongTicketConsent>
+          <li>
+            두둥티켓 대금은 호스트에게 직접 지급되며, 두둥은 대금을 받지
+            않습니다.
+          </li>
+          <li>
+            예매를 취소해도 자동으로 환불되지 않으며, 환불은 호스트가 직접
+            합니다.
+          </li>
+          <li>
+            &apos;입금했어요&apos;를 누르면 위 내용에 동의한 것으로 봅니다.
+          </li>
+        </DudoongTicketConsent>
       </Padding>
       <ButtonSet varient="horizontal">
         <Button fullWidth varient="tertiary" onClick={closeOverlay}>
@@ -71,3 +85,11 @@ const AccountInfoSection = ({
   );
 };
 export default AccountInfoSection;
+
+const DudoongTicketConsent = styled.ul`
+  margin-top: 12px;
+  padding-left: 18px;
+  list-style: disc;
+  ${({ theme }) => theme.typo.P_Text_12_R}
+  color: ${({ theme }) => theme.palette.gray_500};
+`;
