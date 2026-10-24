@@ -61,7 +61,7 @@ const NewTickets = () => {
         });
   }, [formState.isValid]);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = ({ refundAgree, ...data }: any) => {
     postTicketCreateMutation.mutate({
       eventId: eventId,
       payload: {
