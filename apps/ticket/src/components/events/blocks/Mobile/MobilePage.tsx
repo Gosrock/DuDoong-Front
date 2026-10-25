@@ -58,7 +58,7 @@ const MobilePage = ({
         <div className="poster-container">
           <Image
             src={img}
-            onError={() => setImg('no-poster.png')}
+            onError={() => setImg('/no-poster.png')}
             alt={detail.name}
             fill={true}
             priority={true}
