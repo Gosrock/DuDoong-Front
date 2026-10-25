@@ -6,6 +6,7 @@ WORKDIR /app
 # COPY package-lock.json ./
 COPY package.json ./
 COPY yarn.lock ./
+RUN corepack enable yarn && yarn -v
 # Installs all node packages
 # RUN npm ci 
 RUN yarn set version 3.3.0

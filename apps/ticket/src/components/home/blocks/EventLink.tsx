@@ -21,7 +21,7 @@ const EventLink = (props: EventResponse) => {
           <Image
             src={img || ''}
             fill={true}
-            sizes="(max-width: 768px) 50vw, 25vw"
+            sizes="400px"
             alt={`${props.name}`}
             onError={() => setImg(`/no-poster.png`)}
             className="poster"

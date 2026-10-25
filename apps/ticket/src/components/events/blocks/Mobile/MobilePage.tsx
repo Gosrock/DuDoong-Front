@@ -22,6 +22,14 @@ import Tickets from '../Tickets';
 import MobileMap from './MobileMap';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import KakaoAdFit from '@components/shared/KakaoAdfit';
+import IntermediaryNotice from '../IntermediaryNotice';
+
+const MobileIntermediaryNotice = styled(IntermediaryNotice)`
+  margin-top: 16px;
+  ${({ theme }) => theme.typo.P_Text_12_R}
+  color: ${({ theme }) => theme.palette.gray_400};
+`;
 
 const MobilePage = ({
   tickets,
@@ -50,7 +58,7 @@ const MobilePage = ({
         <div className="poster-container">
           <Image
             src={img}
-            onError={() => setImg('no-poster.png')}
+            onError={() => setImg('/no-poster.png')}
             alt={detail.name}
             fill={true}
             priority={true}
@@ -119,12 +127,14 @@ const MobilePage = ({
               </Text>
             }
           />
+          <MobileIntermediaryNotice />
         </Block>
       </Container>
       <Divider />
+      <KakaoAdFit />
       <DetailMenu content={detail.content} MdViewer={MdViewer} />
-
       <Spacing size={60} />
+
       <Footer />
       <Spacing size={120} color={'gray_200'} />
       <ButtonSet

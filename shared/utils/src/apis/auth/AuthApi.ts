@@ -38,7 +38,12 @@ export const AuthApi = {
     payload,
   }: {
     idToken: string;
-    payload: OauthInfoResponse;
+    payload: OauthInfoResponse & {
+      marketingAgree?: boolean;
+      ageOver14Confirmed?: boolean;
+      termsAgreed?: boolean;
+      agreementVersion?: string;
+    };
   }): Promise<OauthLoginResponse> => {
     const response = await axiosPublic.post(
       `/auth/oauth/kakao/register?id_token=${idToken}`,

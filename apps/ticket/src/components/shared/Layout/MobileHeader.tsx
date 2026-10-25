@@ -6,6 +6,7 @@ import Hamburger from 'hamburger-react';
 import { useRouter } from 'next/router';
 import { PropsWithChildren, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import Media from '../Media';
 
 const MobileHeader = ({ children }: PropsWithChildren) => {
   const { asPath } = useRouter();
@@ -62,7 +63,9 @@ const MobileHeader = ({ children }: PropsWithChildren) => {
           {children}
         </div>
       </div>
-      <Spacing size={72} />
+      <Media.Mobile>
+        <Spacing size={72} />
+      </Media.Mobile>
     </>
   );
 };
