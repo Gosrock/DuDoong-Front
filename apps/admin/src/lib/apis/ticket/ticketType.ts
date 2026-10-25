@@ -29,6 +29,8 @@ export interface CreateTicketRequest {
   supplyCount: number;
   quantity: number;
   isQuantityPublic: boolean;
+  refundObligationAgreed?: boolean;
+  agreementVersion?: string;
 }
 
 export interface PageResponseIssuedTicketAdminTableElement {

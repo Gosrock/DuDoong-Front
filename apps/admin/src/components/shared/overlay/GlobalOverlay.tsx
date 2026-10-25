@@ -16,6 +16,7 @@ import TableViewDetail from './content/TableDetailView';
 import SaveOption from './content/SaveOption';
 import CancelOption from './content/CancelOption';
 import CancelOrder from './content/CancelOrder';
+import RefuseOrder from './content/RefuseOrder';
 
 export type GlobalSheetContentKey =
   | 'register'
@@ -30,7 +31,8 @@ export type GlobalSheetContentKey =
   | 'saved'
   | 'invitation'
   | 'cancelOption'
-  | 'cancelOrder';
+  | 'cancelOrder'
+  | 'refuseOrder';
 
 const globalSheetContent: Record<GlobalSheetContentKey, any> = {
   register: Register,
@@ -46,6 +48,7 @@ const globalSheetContent: Record<GlobalSheetContentKey, any> = {
   invitation: Invitation,
   cancelOption: CancelOption,
   cancelOrder: CancelOrder,
+  refuseOrder: RefuseOrder,
 };
 
 const GlobalOverlay = () => {

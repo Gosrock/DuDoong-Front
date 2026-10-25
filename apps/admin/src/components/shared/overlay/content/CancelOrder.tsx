@@ -13,11 +13,13 @@ import styled from '@emotion/styled';
 interface CancelOrderProps {
   closeOverlay: () => void;
   cancelOrderHandler: () => void;
+  isDudoongTicket?: boolean;
 }
 
 const CancelOrder = ({
   closeOverlay,
   cancelOrderHandler,
+  isDudoongTicket = false,
 }: CancelOrderProps) => {
   return (
     <Wrapper>
@@ -30,6 +32,15 @@ const CancelOrder = ({
       <Text typo="P_Text_16_R" color="gray_500">
         주문을 취소한 이후에는 되돌릴 수 없어요
       </Text>
+      {isDudoongTicket && (
+        <>
+          <Spacing size={12} />
+          <Text typo="P_Text_16_R" color="red_300">
+            두둥티켓은 호스트 계좌로 받은 금액이라 자동으로 환불되지 않아요.
+            구매자에게 지체 없이 직접 환불해 주세요
+          </Text>
+        </>
+      )}
       <Spacing size={36} />
       <FlexBox align={'center'} justify={'end'} gap={10}>
         <Button
