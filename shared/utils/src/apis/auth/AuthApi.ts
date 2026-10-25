@@ -39,6 +39,7 @@ export const AuthApi = {
   }: {
     idToken: string;
     payload: OauthInfoResponse & {
+      marketingAgree?: boolean;
       ageOver14Confirmed?: boolean;
       agreementVersion?: string;
     };

@@ -16,6 +16,7 @@ import DDHead from '@components/shared/Layout/NextHead';
 import { authState } from '@store/auth';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import OrderItem from './OrderItem';
+import MarketingSetting from './MarketingSetting';
 import { OrderApi } from '@lib/apis/order/OrderApi';
 import Shortcuts from '@components/shared/Shortcuts';
 import Main from '@components/shared/Layout/Main';
@@ -118,6 +119,9 @@ const Mypage = ({ info }: { info: UserInfo }) => {
 
       <Shortcuts text="내 예매내역" url="/history" />
       <Shortcuts text="내 쿠폰함" url="/history/mycoupon" />
+      <Divider />
+      <ListHeader title={'알림 설정'} size={'listHeader_20'} />
+      <MarketingSetting initialAgree={info?.marketingAgree ?? false} />
       <Divider />
       <KakaoAdFit />
       <Shortcuts text="공연 준비하기" url="/admin" />

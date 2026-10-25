@@ -1,15 +1,20 @@
 import { Button, ButtonSet, ListHeader, Text, theme } from '@dudoong/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
+
+export interface RegisterAgreements {
+  marketingAgree: boolean;
+}
 
 interface RegisterProps {
   name: string;
-  onMainActionClick: () => void;
+  onMainActionClick: (agreements: RegisterAgreements) => void;
 }
 
 const Register = ({ name, onMainActionClick }: RegisterProps) => {
   const [isOver14, setIsOver14] = useState(false);
+  const [marketingAgree, setMarketingAgree] = useState(false);
 
   return (
     <Wrapper>
@@ -42,20 +47,22 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
           </a>
         }
       />
-      <AgeCheckLabel>
-        <input
-          type="checkbox"
-          checked={isOver14}
-          onChange={(e) => setIsOver14(e.target.checked)}
-        />
-        <Text typo="Text_14" color="black">
+      <CheckList>
+        <CheckRow checked={isOver14} onChange={setIsOver14}>
           [필수] 만 14세 이상입니다
-        </Text>
-      </AgeCheckLabel>
+        </CheckRow>
+        <CheckRow
+          checked={marketingAgree}
+          onChange={setMarketingAgree}
+          description="새 공연 소식과 이벤트 혜택을 보내드려요. 마이페이지에서 언제든 끌 수 있어요."
+        >
+          [선택] 이벤트·혜택 정보 수신 동의
+        </CheckRow>
+      </CheckList>
       <ButtonSet varient="mono" padding={[20, 24]}>
         <Button
           varient="kakao"
-          onClick={onMainActionClick}
+          onClick={() => onMainActionClick({ marketingAgree })}
           disabled={!isOver14}
           fullWidth
         >
@@ -66,15 +73,61 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
   );
 };
 
+const CheckRow = ({
+  checked,
+  onChange,
+  description,
+  children,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  description?: string;
+  children: ReactNode;
+}) => (
+  <CheckLabel>
+    <input
+      type="checkbox"
+      checked={checked}
+      onChange={(e) => onChange(e.target.checked)}
+    />
+    <div>
+      <Text typo="Text_14" color="black">
+        {children}
+      </Text>
+      {description && (
+        <Text
+          as="p"
+          typo="P_Text_12_R"
+          color="gray_400"
+          css={css`
+            margin-top: 2px;
+          `}
+        >
+          {description}
+        </Text>
+      )}
+    </div>
+  </CheckLabel>
+);
+
+export default Register;
+
 const Wrapper = styled.div``;
 
-const AgeCheckLabel = styled.label`
+const CheckList = styled.div`
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
   padding: 8px 24px 0;
+`;
+
+const CheckLabel = styled.label`
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   cursor: pointer;
   input {
+    flex-shrink: 0;
     width: 20px;
     height: 20px;
     margin: 0;
@@ -82,5 +135,3 @@ const AgeCheckLabel = styled.label`
     cursor: pointer;
   }
 `;
-
-export default Register;

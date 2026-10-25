@@ -8,6 +8,11 @@ export const UserApi = {
     return response.data.data;
   },
 
+  TOGGLE_MARKETING_AGREE: async (): Promise<UserInfo> => {
+    const response = await axiosPrivate.patch(`/users/me/marketing`);
+    return response.data.data;
+  },
+
   REFRESH: async (refreshToken?: string): Promise<OauthLoginResponse> => {
     const tokenParam = refreshToken ? `?token=${refreshToken}` : '';
     const response = await axiosPrivate.post(
