@@ -11,6 +11,7 @@ import useToastify from '@dudoong/ui/src/lib/useToastify';
 import { checkName } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import { AccountInfo } from '@lib/apis/cart/cartType';
+import type { CreateOrderRequest } from '@lib/apis/order/orderType';
 import useOrderMutation from './useOrderMutation';
 
 const AccountInfoSection = ({
@@ -20,14 +21,14 @@ const AccountInfoSection = ({
   name,
 }: {
   accountInfo: AccountInfo;
-  orderPayload: { couponId: null; cartId: number };
+  orderPayload: CreateOrderRequest;
   closeOverlay: () => void;
   name: string;
 }) => {
   const { dudoongMutate } = useOrderMutation(null, closeOverlay);
   const { setToast } = useToastify();
   const handleDudoongOrder = () => {
-    dudoongMutate(orderPayload);
+    dudoongMutate({ ...orderPayload, dudoongTicketNoticeConfirmed: true });
   };
   const handleCopyAccount = () => {
     navigator.clipboard.writeText(accountInfo?.accountNumber);
