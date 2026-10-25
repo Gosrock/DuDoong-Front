@@ -7,9 +7,10 @@ import { useState } from 'react';
 
 const formatToday = () => {
   const today = new Date();
-  return `${today.getFullYear()}년 ${
-    today.getMonth() + 1
-  }월 ${today.getDate()}일`;
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${today.getFullYear()}.${pad(today.getMonth() + 1)}.${pad(
+    today.getDate(),
+  )}`;
 };
 
 const MarketingSetting = ({ initialAgree }: { initialAgree: boolean }) => {
@@ -23,14 +24,19 @@ const MarketingSetting = ({ initialAgree }: { initialAgree: boolean }) => {
       setAgree(info.marketingAgree);
       // 정보통신망법 제50조⑧: 수신 동의·철회 처리 결과(전송자, 일자, 처리 내용) 통지
       setToast({
-        comment: `${formatToday()} 두둥 마케팅 정보 수신을 ${
-          info.marketingAgree ? '동의했어요' : '거부했어요'
-        }.`,
+        comment: `${
+          info.marketingAgree
+            ? '마케팅 정보 수신에 동의했어요'
+            : '마케팅 정보 수신을 거부했어요'
+        } (${formatToday()}, 두둥)`,
+        type: 'success',
       });
     },
     onError: () => {
       setResetKey((key) => key + 1);
-      setToast({ comment: '설정을 바꾸지 못했어요. 잠시 후 다시 시도해주세요.' });
+      setToast({
+        comment: '설정을 바꾸지 못했어요. 잠시 후 다시 시도해주세요.',
+      });
     },
   });
 
