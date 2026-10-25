@@ -164,14 +164,19 @@ const Order = ({ data }: { data: AddCartResponse }) => {
           >
             두둥은 통신판매중개자로서 공연의 당사자가 아니며, 공연에 관한 의무와
             책임은 호스트에게 있습니다.
-            <br />위 내용을 확인하였으며 결제에 동의합니다.
+            <br />위 내용을 확인하였으며 {isNeedTossPayment ? '결제' : '예매'}에
+            동의합니다.
           </Text>
           <Button
             fullWidth
             onClick={handleOrder}
             disabled={!hostProvisionAgreed}
           >
-            {data.totalPrice} 결제하기
+            {isNeedTossPayment
+              ? `${data.totalPrice} 결제하기`
+              : isDudoong
+              ? `${data.totalPrice} 예매하기`
+              : '예매하기'}
           </Button>
         </ButtonSet>
 

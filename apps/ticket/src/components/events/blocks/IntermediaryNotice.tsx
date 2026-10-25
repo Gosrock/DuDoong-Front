@@ -7,7 +7,8 @@ const IntermediaryNotice = (props: HTMLAttributes<HTMLParagraphElement>) => {
     <Wrapper {...props}>
       두둥은 통신판매중개자로서 공연의 당사자가 아니며, 공연의 내용과 진행은
       호스트가 책임집니다. 두둥티켓(호스트 계좌 입금) 대금의 환불도 호스트가
-      직접 합니다. 취소·환불 규정은 &apos;판매정보&apos;와{' '}
+      직접 하며, 호스트가 공연 상세에 안내한 환불 기준이 우선합니다. 취소·환불
+      규정은 &apos;판매정보&apos;와{' '}
       <a href="https://dudoong.com/meta/term" target="_blank" rel="noreferrer">
         이용약관
       </a>
