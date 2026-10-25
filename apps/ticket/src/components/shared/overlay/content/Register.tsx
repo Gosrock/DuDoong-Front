@@ -48,6 +48,17 @@ const Register = ({ name, onMainActionClick }: RegisterProps) => {
         }
       />
       <CheckList>
+        <CheckRow
+          checked={isOver14 && marketingAgree}
+          onChange={(checked) => {
+            setIsOver14(checked);
+            setMarketingAgree(checked);
+          }}
+          bold
+        >
+          전체 동의
+        </CheckRow>
+        <AllDivider />
         <CheckRow checked={isOver14} onChange={setIsOver14}>
           [필수] 만 14세 이상입니다
         </CheckRow>
@@ -77,11 +88,13 @@ const CheckRow = ({
   checked,
   onChange,
   description,
+  bold = false,
   children,
 }: {
   checked: boolean;
   onChange: (checked: boolean) => void;
   description?: string;
+  bold?: boolean;
   children: ReactNode;
 }) => (
   <CheckLabel>
@@ -91,7 +104,7 @@ const CheckRow = ({
       onChange={(e) => onChange(e.target.checked)}
     />
     <div>
-      <Text typo="Text_14" color="black">
+      <Text typo={bold ? 'Text_16_SB' : 'Text_14'} color="black">
         {children}
       </Text>
       {description && (
@@ -119,6 +132,12 @@ const CheckList = styled.div`
   flex-direction: column;
   gap: 12px;
   padding: 8px 24px 0;
+`;
+
+const AllDivider = styled.hr`
+  margin: 0;
+  border: none;
+  border-top: 1px solid ${({ theme }) => theme.palette.gray_200};
 `;
 
 const CheckLabel = styled.label`
