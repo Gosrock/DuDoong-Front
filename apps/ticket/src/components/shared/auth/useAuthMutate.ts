@@ -25,12 +25,16 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
         content: 'register',
         props: {
           name: data.name,
-          onMainActionClick: ({ marketingAgree }: RegisterAgreements) => {
+          onMainActionClick: ({
+            termsAgreed,
+            marketingAgree,
+          }: RegisterAgreements) => {
             ouathKakaoRegisterMutation.mutate({
               idToken,
               payload: {
                 ...data,
                 marketingAgree,
+                termsAgreed,
                 ageOver14Confirmed: true,
                 agreementVersion: AGREEMENT_VERSION,
               },
