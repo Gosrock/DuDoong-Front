@@ -31,6 +31,9 @@ export const Footer = () => {
           대표 : 이찬진 | TEL : 0507-0177-0711 | Email : support@dudoong.com
           <br />
           사업자 번호 : 469-21-01595 | 통신판매업 신고번호 : 2022-서울강서-3669
+          <br />
+          두둥은 통신판매중개자로서 공연의 당사자가 아니며, 공연의 개최·내용
+          등에 관한 의무와 책임은 각 공연의 호스트에게 있습니다.
         </p>
         <div id="footer-bottom">
           <p>© Dudoong. 2023 All rights reserved. </p>

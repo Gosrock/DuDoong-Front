@@ -28,15 +28,32 @@ import SelectPayMethod from './blocks/order/SelectPayMethod';
 import useOverlay from '@lib/hooks/useOverlay';
 import OverlayBox from '@components/shared/overlay/OverlayBox';
 import AccountInfoSection from './blocks/order/AccountInfoSection';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { authState } from '@store/auth';
 import { useRecoilValue } from 'recoil';
 import { checkName } from '@dudoong/utils';
+import { AGREEMENT_VERSION } from '@lib/constants/agreement';
+import HostProvisionConsent from './blocks/order/HostProvisionConsent';
+
+const BOTTOM_BAR_ID = 'order-bottom-bar';
 
 const Order = ({ data }: { data: AddCartResponse }) => {
   const router = useRouter();
 
   const [coupon] = useState(null);
+  const [hostProvisionAgreed, setHostProvisionAgreed] = useState(false);
+  // 하단 고정 바(동의 상세 펼침에 따라 높이가 변함)에 본문이 가려지지 않도록 높이를 측정한다
+  const [bottomBarHeight, setBottomBarHeight] = useState(0);
+
+  useEffect(() => {
+    const bar = document.getElementById(BOTTOM_BAR_ID);
+    if (!bar) return;
+    const observer = new ResizeObserver(() =>
+      setBottomBarHeight(bar.offsetHeight),
+    );
+    observer.observe(bar);
+    return () => observer.disconnect();
+  }, []);
   const isDudoong = data.ticketPayType === '두둥티켓';
   const isNeedTossPayment = data.ticketPayType === '유료티켓';
   const { instance } = useTossPayments(data.totalPrice, isNeedTossPayment);
@@ -52,10 +69,15 @@ const Order = ({ data }: { data: AddCartResponse }) => {
       : router.back();
   };
 
+  const orderPayload = {
+    couponId: coupon,
+    cartId: data.cartId,
+    hostProvisionAgreed: true,
+    agreementVersion: AGREEMENT_VERSION,
+  };
+
   const handleOrder = () => {
-    isDudoong
-      ? openOverlay()
-      : orderMutate({ couponId: coupon, cartId: data.cartId });
+    isDudoong ? openOverlay() : orderMutate(orderPayload);
   };
 
   return (
@@ -113,16 +135,42 @@ const Order = ({ data }: { data: AddCartResponse }) => {
           `}
         >
           <ListHeader size="listHeader_18" title={'판매정보'} />
-          <Info />
+          <Info
+            isDudoong={isDudoong && data.totalPrice !== '0원'}
+            isFree={data.totalPrice === '0원'}
+          />
           <Spacing size={60} />
         </div>
 
         {/* 다음으로 버튼 */}
-        <ButtonSet bottomFixed backGradient varient="vertical">
-          <Text typo="P_Text_12_R" color="gray_500">
-            위 내용을 확인하였으며 결제에 동의합니다.
+        <ButtonSet
+          id={BOTTOM_BAR_ID}
+          bottomFixed
+          backGradient
+          varient="vertical"
+        >
+          <HostProvisionConsent
+            eventName={data.eventProfile.name}
+            isDudoong={isDudoong}
+            checked={hostProvisionAgreed}
+            onChange={setHostProvisionAgreed}
+          />
+          <Text
+            typo="P_Text_12_R"
+            color="gray_500"
+            css={css`
+              text-align: center;
+            `}
+          >
+            두둥은 통신판매중개자로서 공연의 당사자가 아니며, 공연에 관한 의무와
+            책임은 호스트에게 있습니다.
+            <br />위 내용을 확인하였으며 결제에 동의합니다.
           </Text>
-          <Button fullWidth onClick={handleOrder}>
+          <Button
+            fullWidth
+            onClick={handleOrder}
+            disabled={!hostProvisionAgreed}
+          >
             {data.totalPrice} 결제하기
           </Button>
         </ButtonSet>
@@ -130,13 +178,13 @@ const Order = ({ data }: { data: AddCartResponse }) => {
         <section>
           <Footer />
         </section>
-        <Spacing size={120} color={'gray_200'} />
+        <Spacing size={bottomBarHeight + 20} color={'gray_200'} />
       </Main>
       {isDudoong && (
         <OverlayBox open={isOpen} onDismiss={closeOverlay}>
           <AccountInfoSection
             accountInfo={data.accountInfo}
-            orderPayload={{ couponId: coupon, cartId: data.cartId }}
+            orderPayload={orderPayload}
             closeOverlay={closeOverlay}
             name={userProfile!.name}
           />
