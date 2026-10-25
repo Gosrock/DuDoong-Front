@@ -172,7 +172,11 @@ const Order = ({ data }: { data: AddCartResponse }) => {
             onClick={handleOrder}
             disabled={!hostProvisionAgreed}
           >
-            {isNeedTossPayment ? `${data.totalPrice} 결제하기` : '예매하기'}
+            {isNeedTossPayment
+              ? `${data.totalPrice} 결제하기`
+              : isDudoong
+              ? `${data.totalPrice} 예매하기`
+              : '예매하기'}
           </Button>
         </ButtonSet>
 
