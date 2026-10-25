@@ -39,8 +39,8 @@ export const AuthApi = {
   }: {
     idToken: string;
     payload: OauthInfoResponse & {
-      ageOver14Confirmed: boolean;
-      agreementVersion: string;
+      ageOver14Confirmed?: boolean;
+      agreementVersion?: string;
     };
   }): Promise<OauthLoginResponse> => {
     const response = await axiosPublic.post(
