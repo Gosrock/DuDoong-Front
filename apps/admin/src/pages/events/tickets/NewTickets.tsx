@@ -61,7 +61,11 @@ const NewTickets = () => {
         });
   }, [formState.isValid]);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = ({ refundAgree, ...data }: any) => {
+    // 두둥티켓 환불 의무 동의 기록 (선택 필드)
+    const refundAgreement = refundAgree
+      ? { refundObligationAgreed: true, agreementVersion: '2026-10' }
+      : {};
     postTicketCreateMutation.mutate({
       eventId: eventId,
       payload: {
@@ -74,6 +78,7 @@ const NewTickets = () => {
             : '선착순',
         description: '',
         price: data.price || 0,
+        ...refundAgreement,
       },
     });
   };
