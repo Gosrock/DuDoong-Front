@@ -31,6 +31,8 @@ module.exports = withBundleAnalyzer(
         return config;
       },
       images: {
+        // Next 13 이미지 최적화(/_next/image)는 원격 코드 실행 취약점이 있어 끈다. 원본 이미지를 그대로 쓴다 (#375)
+        unoptimized: true,
         imageSizes: [32, 64, 128, 256, 384],
         deviceSizes: [750, 1920],
         domains: ['asset.dudoong.com'],
