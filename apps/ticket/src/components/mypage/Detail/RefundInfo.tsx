@@ -92,6 +92,11 @@ const RefundInfo = ({
               <Link href={`/events/${eventId}`}>공연 상세 페이지</Link>에서
               확인할 수 있습니다.
             </li>
+            <li>
+              호스트가 공연 상세에 별도의 환불 기준(예: 공연 당일 환불 불가)을
+              안내했다면 환불은 그 기준을 따르므로, 취소해도 환불이 제한될 수
+              있습니다.
+            </li>
             {isPendingApproval && (
               <li>
                 입금 후 승인 전에는 앱에서 취소할 수 없습니다. 승인이 늦어지거나
@@ -188,6 +193,8 @@ const RefundConfirmation = ({
             <Text typo="P_Text_16_M" color="gray_400">
               두둥티켓은 호스트 계좌로 입금한 티켓이라 자동으로 환불되지 않아요.
               예매를 취소한 뒤 호스트에게 연락해 환불받을 계좌를 알려주세요.
+              호스트가 공연 상세에 별도 환불 기준을 안내했다면 그 기준에 따라
+              환불이 제한될 수 있어요.
               <HostContactLink href={`/events/${eventId}`} onClick={onDismiss}>
                 호스트 연락처 확인하기
               </HostContactLink>
