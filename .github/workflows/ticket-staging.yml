@@ -2,48 +2,53 @@ name: Ticket-staging
 on:
   push:
     branches: [dev]
-    # Publish semver tags as releases.
-    tags: ['v*.*.*']
+  # dev 브랜치에서 수동 실행 시 :dev 이미지를 다시 빌드 (다른 브랜치에서는 ECR 역할을 못 받는다)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # GitHub OIDC → ECR push 역할
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # 서버가 모두 ARM(t4g)이라 arm64 이미지만 필요하다. QEMU 에뮬레이션 대신 ARM 러너에서 네이티브로 빌드한다 (#339)
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       # 도커 이미지에 env 파일 포함
+      # 시크릿은 스크립트 본문에 직접 보간하지 않고 env 로 넘긴다 (따옴표·$ 등이 셸로 해석되지 않게)
       - name: Create .env file
+        env:
+          ENV_VARS: ${{ secrets.ENV_VARS_TICKET }}
         run: |
           touch .env
-          echo "${{ secrets.ENV_VARS_TICKET }}" >> apps/ticket/.env
-
-      # 도커 메타데이터 가져오기
-      - name: Docker meta
-        id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v1
-        with:
-          images: david0218/dudoong-ticket
-          tag-semver: |
-            {{version}}
-            {{major}}.{{minor}}
+          printf '%s\n' "$ENV_VARS" > apps/ticket/.env
 
       # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      # 내 도커허브 로그인
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
+      # Docker Hub(공개) 대신 ECR 비공개 저장소 (Gosrock/DuDoong-Deploy#59). 장기 키 없이 OIDC 역할로
+      # 역할은 이 리포의 Ticket-v*·Admin-v* 태그와 dev 브랜치 job 만 맡을 수 있다
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # 도커이미지 빌드하고 허브로 푸쉬
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/dudoong-github-ecr-front
+          aws-region: ap-northeast-2
+          mask-aws-account-id: true
+      - name: login to ecr
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      # 도커이미지 빌드하고 ECR 로 푸쉬
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile.ticket
-          platforms: linux/amd64
+          platforms: linux/arm64
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          # 스테이징은 :dev 하나만 덮어쓴다 (ECR 은 dev 만 덮어쓰기 허용. 버전 이미지는 *-deploy.yml 이 만든다)
+          tags: ${{ steps.ecr.outputs.registry }}/dudoong-ticket:dev

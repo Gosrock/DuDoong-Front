@@ -2,6 +2,7 @@ import { EventDetailResponse, parseDate } from '@dudoong/utils';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import IntermediaryNotice from '../IntermediaryNotice';
 
 const Summary = ({ detail }: { detail: EventDetailResponse }) => {
   const [img, setImg] = useState(detail.posterImage);
@@ -51,9 +52,7 @@ const Summary = ({ detail }: { detail: EventDetailResponse }) => {
           </div>
         </div>
         <div>
-          본 공연은 두둥서비스를 이용하여 온라인 예매를 실시하고 있으며,
-          예매하신 티켓의 취소/환불/배송에 관련된 사항은 두둥스튜디오의 약관을
-          참고하여 주세요.
+          <IntermediaryNotice />
         </div>
       </Content>
     </Wrapper>

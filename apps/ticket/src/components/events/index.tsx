@@ -71,9 +71,12 @@ const Wrapper = styled.main`
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { eventId } = context.params as unknown as { eventId: string };
+  // 로그인 쿠키가 있으면 같이 보내 호스트 연락처 원문을 받는다 (#360).
+  // 공용 axios 기본 헤더를 바꾸면 동시 요청끼리 토큰이 섞이므로 이 요청에만 넣는다
+  const { accessToken } = context.req.cookies;
 
   try {
-    const detail = await EventApi.GET_EVENT_DETAIL(eventId);
+    const detail = await EventApi.GET_EVENT_DETAIL(eventId, accessToken);
     console.log(detail.status);
     return {
       props: {

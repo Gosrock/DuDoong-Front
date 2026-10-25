@@ -4,6 +4,8 @@ import {
   OauthLoginResponse,
   OauthTokenResponse,
 } from '@dudoong/utils';
+import { RegisterAgreements } from '@components/shared/overlay/content/Register';
+import { AGREEMENT_VERSION } from '@lib/constants/agreement';
 import useGlobalOverlay from '@lib/hooks/useGlobalOverlay';
 import { setCredentials } from '@lib/utils/setCredentials';
 import { authState } from '@store/auth';
@@ -23,8 +25,20 @@ const useAuthMutate = ({ idToken, accessToken }: OauthTokenResponse) => {
         content: 'register',
         props: {
           name: data.name,
-          onMainActionClick: () => {
-            ouathKakaoRegisterMutation.mutate({ idToken, payload: data });
+          onMainActionClick: ({
+            termsAgreed,
+            marketingAgree,
+          }: RegisterAgreements) => {
+            ouathKakaoRegisterMutation.mutate({
+              idToken,
+              payload: {
+                ...data,
+                marketingAgree,
+                termsAgreed,
+                ageOver14Confirmed: true,
+                agreementVersion: AGREEMENT_VERSION,
+              },
+            });
           },
         },
       });

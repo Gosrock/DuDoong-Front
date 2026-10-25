@@ -31,8 +31,10 @@ module.exports = withBundleAnalyzer(
         return config;
       },
       images: {
+        imageSizes: [32, 64, 128, 256, 384],
+        deviceSizes: [750, 1920],
         domains: ['asset.dudoong.com'],
-        minimumCacheTTL: 5184000,
+        minimumCacheTTL: 31536000,
       },
       rewrites: async () => [
         {

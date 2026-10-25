@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import Image from 'next/image';
 import TicketList from './TicketList';
+import KakaoAdFit from '@components/shared/KakaoAdfit';
 
 const Ticket = () => {
   const {
@@ -64,6 +65,7 @@ const Ticket = () => {
             />
             <Spacing size={20} />
             <Divider />
+            <KakaoAdFit />
             <Shortcuts
               text="공연정보"
               url={`/events/${data.eventProfile.eventId}`}
