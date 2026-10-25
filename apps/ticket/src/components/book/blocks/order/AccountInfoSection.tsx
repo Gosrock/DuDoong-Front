@@ -70,6 +70,10 @@ const AccountInfoSection = ({
             합니다.
           </li>
           <li>
+            호스트가 공연 상세에 별도 환불 기준(예: 공연 당일 환불 불가)을
+            안내했다면, 직접 취소할 때의 환불은 그 기준이 우선합니다.
+          </li>
+          <li>
             &apos;입금했어요&apos;를 누르면 위 내용에 동의한 것으로 봅니다.
           </li>
         </DudoongTicketConsent>
