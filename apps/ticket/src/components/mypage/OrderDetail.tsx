@@ -2,6 +2,10 @@ import Main from '@components/shared/Layout/Main';
 import DDHead from '@components/shared/Layout/NextHead';
 import { Divider, NavBar } from '@dudoong/ui';
 import { OrderApi } from '@lib/apis/order/OrderApi';
+import {
+  isDudoongTicketOrder,
+  isFreeOrder,
+} from '@lib/utils/isDudoongTicketOrder';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import DetailEventInfo from './Detail/DetailEventInfo';
@@ -31,7 +35,16 @@ const OrderDetail = () => {
           <Divider />
           <PaymentInfo payment={data.paymentInfo} />
           <Divider />
-          <RefundInfo refund={data.refundInfo} />
+          <RefundInfo
+            refund={data.refundInfo}
+            eventId={data.eventProfile.eventId}
+            isDudoongTicket={isDudoongTicketOrder(
+              data.orderMethod,
+              data.paymentInfo.totalAmount,
+            )}
+            isFree={isFreeOrder(data.paymentInfo.totalAmount)}
+            isPendingApproval={data.paymentInfo.orderStatus === '승인 대기중'}
+          />
         </>
       ) : (
         <></>

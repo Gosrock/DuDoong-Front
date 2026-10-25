@@ -9,6 +9,7 @@ import {
 } from '@dudoong/ui';
 import { calcMoneyType } from '@dudoong/utils';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import type { TicketItemResponse } from '@lib/apis/ticket/ticketType';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -76,6 +77,18 @@ const SelectTicket = ({ items, eventName }: TicketsProps) => {
           )
         }
       />
+      {selectedTicket.payType === '두둥티켓' && (
+        <DudoongTicketNotice>
+          <li>호스트 계좌로 입금하면, 호스트가 확인한 뒤 티켓이 발급돼요.</li>
+          <li>
+            예매를 취소해도 자동으로 환불되지 않아요. 호스트에게 연락해
+            환불받아야 해요.
+          </li>
+          <li>
+            호스트 연락처는 공연 상세의 &apos;호스트&apos;에서 볼 수 있어요.
+          </li>
+        </DudoongTicketNotice>
+      )}
       <ButtonSet padding={[20, 24]}>
         <Link
           css={css`
@@ -95,3 +108,13 @@ const SelectTicket = ({ items, eventName }: TicketsProps) => {
 };
 
 export default SelectTicket;
+
+const DudoongTicketNotice = styled.ul`
+  margin: 8px 24px 0;
+  padding: 12px 16px 12px 32px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.palette.gray_100};
+  list-style: disc;
+  ${({ theme }) => theme.typo.P_Text_14_M}
+  color: ${({ theme }) => theme.palette.gray_500};
+`;
